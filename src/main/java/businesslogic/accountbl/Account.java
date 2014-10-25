@@ -1,0 +1,55 @@
+package businesslogic.accountbl;
+
+import java.util.ArrayList;
+
+import po.AccountPO;
+import vo.AccountVO;
+
+public class Account {
+	String name;//账户名
+	double balance;//余额
+	
+	public Account() {
+		this(null, 0);
+	}
+	
+	public Account(String n) {
+		this(n,0);
+	}
+	
+	public Account(String n, double b) {
+		name = n;
+		balance = b;
+	}
+	
+	public boolean addAccount(String name) {
+		//调用数据层
+		return true;
+	}
+	
+	public boolean deleteAccount(String name) {
+		//调用数据层
+		return true;
+	}
+	
+	public boolean updateAccount(String oldname, String newname) {
+		//调用数据层
+		return true;
+	}
+	public AccountVO findAccount(String name) {
+		//调用数据层
+		return null;
+	}
+	
+	public void buildAccount() {
+		//调用商品信息
+		//调用客户信息
+		
+		ArrayList<AccountPO> acc= getAllAccountInfo();//调用账户信息
+	}
+	
+	public ArrayList<AccountPO> getAllAccountInfo() {
+		//调用数据层
+		return null;
+	}
+}
