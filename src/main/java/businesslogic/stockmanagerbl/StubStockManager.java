@@ -12,7 +12,7 @@ public class StubStockManager implements StubCommodityBlService{
 	{
 		return l;
 	}
-	public ArrayList<CommodityVo> findCommodity(String name)
+	public ArrayList<CommodityVO> findCommodity(String name)
 	{
 		return l.findCommodity(name);
 	}

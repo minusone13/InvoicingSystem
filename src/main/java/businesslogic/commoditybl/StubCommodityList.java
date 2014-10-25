@@ -2,10 +2,10 @@ package businesslogic.commoditybl;
 
 import java.util.ArrayList;
 
-import vo.CommodityVo;
+import vo.CommodityVO;
 
 public class StubCommodityList {
-	public ArrayList<CommodityVo> findCommodity(String name)
+	public ArrayList<CommodityVO> findCommodity(String name)
 	{
 		return null;
 	}
