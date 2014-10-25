@@ -1,5 +1,6 @@
 package data.commoditydata;
 
-public class CommodityData {
+import dataservice.commoditydataservice.*;
+public class CommodityData implements CommodityDataService{
 
 }

@@ -20,4 +20,5 @@ public class StubStockManager implements StubCommodityBlService{
 	{
 		return l.addPack(commodityarray, quantity, discount);
 	}
+	
 }

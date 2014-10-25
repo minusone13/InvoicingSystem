@@ -1,5 +1,5 @@
 package dataservice.commoditydataservice;
 
-public class CommodityDataService {
+public interface CommodityDataService {
 
 }
