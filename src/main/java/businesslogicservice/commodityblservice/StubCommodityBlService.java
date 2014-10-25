@@ -1,5 +1,5 @@
 package businesslogicservice.commodityblservice;
 
-public class StubCommodityBlService {
+public interface StubCommodityBlService {
 
 }
