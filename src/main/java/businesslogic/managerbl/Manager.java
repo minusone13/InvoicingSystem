@@ -3,9 +3,9 @@ package businesslogic.managerbl;
 import java.util.ArrayList;
 
 import vo.BarginStrategyVO;
+import vo.BusinessSituationVO;
 import vo.CommodityVO;
 import vo.LevelStrategyVO;
-import vo.RM;
 import vo.ReachStrategyVO;
 import vo.VO;
 import businesslogic.BillStyle;
@@ -94,7 +94,7 @@ public class Manager {
 		
 	}
 	/*需要查看经营情况*/
-	public RM showBusinessSituation (String StartTime,String LastTime){
+	public BusinessSituationVO showBusinessSituation (String StartTime,String LastTime){
 		return null;
 	
 	}
