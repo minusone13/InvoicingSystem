@@ -1,5 +1,11 @@
 package businesslogic.commoditybl;
 
-public class StubCommodity {
+import vo.*;
 
+public class StubCommodity {
+	public RM addCommodity(CommodityVO vo)
+	{
+		
+		return null;
+	}
 }
