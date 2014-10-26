@@ -8,6 +8,9 @@ public class CommodityListPO {
 	{
 		this.cats=cats;
 	}
+	public CommodityListPO()
+	{
+	}
 	public ArrayList<CommodityPO> getList()
 	{
 		return cats;
