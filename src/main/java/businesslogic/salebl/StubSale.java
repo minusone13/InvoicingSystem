@@ -26,7 +26,7 @@ public class StubSale {
 	}
 	
 	/*返回类型还是得修改下*/
-	public void addCustomer(int type,
+	public boolean addCustomer(int type,
 	String name,
 	String phonenumber,
 	String address,
@@ -34,7 +34,12 @@ public class StubSale {
 	double maxOwe,
 	double shouldPay,
 	double shouldGive,
-	String deSaler){}
+	String deSaler){
+		if(type==1)
+		return true ;
+		else 
+		return false; 
+	}
 	
 	public void getCustomerList(){}
 	
