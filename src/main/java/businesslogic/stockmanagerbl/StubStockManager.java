@@ -7,10 +7,14 @@ import businesslogicservice.commodityblservice.*;
 import vo.*;
 
 public class StubStockManager implements StubCommodityBlService{
-	StubCommodityList l;
+	StubCommodityList l=new StubCommodityList();
 	public StubCommodityList getCommodityList ()
 	{
 		return l;
+	}
+	public RM addCommodity(CommodityVO vo)
+	{
+		return l.addCommodity(vo);
 	}
 	public ArrayList<CommodityVO> findCommodity(String name)
 	{
@@ -20,6 +24,7 @@ public class StubStockManager implements StubCommodityBlService{
 	{
 		return l.addPack(commodityarray, quantity, discount);
 	}
+	
 	
 
 	
