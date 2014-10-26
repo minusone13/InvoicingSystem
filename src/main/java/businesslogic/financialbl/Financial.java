@@ -1,11 +1,11 @@
 package businesslogic.financialbl;
 
 import vo.*;
-import buisnesslogic.iquirybl.Inquiry;
 import businesslogic.accountbl.Account;
 import businesslogic.financialbillbl.CrashPayment;
 import businesslogic.financialbillbl.Payment;
 import businesslogic.financialbillbl.Receipt;
+import businesslogic.iquirybl.Inquiry;
 
 public class Financial {
 	String name;

@@ -1,4 +1,4 @@
-package buisnesslogic.iquirybl;
+package businesslogic.iquirybl;
 
 public class Inquiry {
 
