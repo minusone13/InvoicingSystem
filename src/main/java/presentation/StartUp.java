@@ -14,12 +14,12 @@ public class StartUp {
 
 	public static void main(String args[])
 	{
-
+		//财务人员的驱动程序
 		StubFinancialBlService financial = new StubFinancial();
 		FinancialBLDriver driver = new FinancialBLDriver(financial);
 		driver.drive(financial);
+		
 		new CommodityDriver(new StubStockManager());
-
 		StockManagerDriver smd=new StockManagerDriver();
 		smd.start(new StubStockManager());
 

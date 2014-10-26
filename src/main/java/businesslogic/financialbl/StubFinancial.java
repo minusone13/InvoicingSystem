@@ -52,6 +52,7 @@ public class StubFinancial implements StubFinancialBlService{
 	public void buildAccount() {
 		StubAccount a = new StubAccount();
 		a.buildAccount();
+		System.out.println("BUILD SUCCESS!");
 	}
 	
 	public ArrayList<VO> inquirySale(InquirySaleVO isv) {
