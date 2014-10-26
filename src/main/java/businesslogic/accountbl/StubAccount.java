@@ -7,19 +7,19 @@ import businesslogic.stockmanagerbl.StubStockManager;
 import po.AccountPO;
 import vo.AccountVO;
 
-public class Account {
+public class StubAccount {
 	String name;//账户名
 	double balance;//余额
 	
-	public Account() {
+	public StubAccount() {
 		this(null, 0);
 	}
 	
-	public Account(String n) {
+	public StubAccount(String n) {
 		this(n,0);
 	}
 	
-	public Account(String n, double b) {
+	public StubAccount(String n, double b) {
 		name = n;
 		balance = b;
 	}

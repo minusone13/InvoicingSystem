@@ -1,16 +1,16 @@
 package businesslogic.financialbillbl;
 
-public class Item {
+public class StubItem {
 
 	String itemName;
 	double money;
 	String remark;
 	
-	public Item() {
+	public StubItem() {
 		this(null,0.0,null);
 	}
 	
-	public Item(String itemName, double money, String remark) {
+	public StubItem(String itemName, double money, String remark) {
 		this.itemName = itemName;
 		this.money = money;
 		this.remark = remark;

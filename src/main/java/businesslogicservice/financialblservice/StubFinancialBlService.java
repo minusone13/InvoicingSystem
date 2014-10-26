@@ -1,5 +1,5 @@
 package businesslogicservice.financialblservice;
 
-public interface FinancialBlService {
+public interface StubFinancialBlService {
 
 }
