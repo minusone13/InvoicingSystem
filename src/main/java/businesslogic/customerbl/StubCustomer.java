@@ -1,6 +1,6 @@
 package businesslogic.customerbl;
 
-public class Customer {
+public class StubCustomer {
 	
 	/*int type;
 	String name;

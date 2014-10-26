@@ -1,5 +1,5 @@
 package businesslogic.salebillbl;
 
-public class PurBackSheet {
+public class StubPurBackSheet {
 		
 }
