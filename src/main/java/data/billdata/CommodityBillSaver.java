@@ -1,8 +1,10 @@
 package data.billdata;
 
-import vo.AlertBillVO;
-import vo.GiftBillVO;
-import vo.SpillsLossBillVO;
+import java.util.ArrayList;
+
+import po.AlertBillPO;
+import po.GiftBillPO;
+import po.SpillsLossBillPO;
 
 public class CommodityBillSaver {
 
@@ -11,17 +13,31 @@ public class CommodityBillSaver {
 		
 	}
 	/*保存库存赠送单*/
-	public void save(GiftBillVO sgb){
+	public void saveGiftBill(ArrayList<GiftBillPO> sgb){
 		
 	}
 	/*保存报溢报损单*/
-	public void save(SpillsLossBillVO slb){
+	public void saveSpillsLossBill(ArrayList<SpillsLossBillPO> slb){
 		
 	}
 	/*保存库存报警单*/
-	public void save(AlertBillVO sab){
+	public void saveAlertBill(ArrayList<AlertBillPO> sab){
 		
 	}
-	
+	/*获取库存赠送单*/
+	public ArrayList<GiftBillPO> getGiftBill(){
+		return null;
+		
+	}
+	/*获取报溢报损单*/
+	public ArrayList<SpillsLossBillPO> getSpillsLossBill(){
+		return null;
+		
+	}
+	/*获取库存报警单*/
+	public ArrayList<AlertBillPO> getAlertBill(){
+		return null;
+		
+	}
 	
 }

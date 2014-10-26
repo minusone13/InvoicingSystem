@@ -2,5 +2,5 @@ package businesslogic;
 
 public enum BillStyle {
 
-	DRAFT,SUBMITED,EXAMINED,OVER;
+	GiftBill,SpillsLossBill,AlertBill,PurSheet,PurBackSheet,SaleSheet,SaleBackSheet,ReceiptBill,PaymentBill,CashPaymentBill;
 }
