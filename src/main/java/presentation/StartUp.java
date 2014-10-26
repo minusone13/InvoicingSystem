@@ -1,12 +1,13 @@
 package presentation;
 
-import presentation.commodityui.CommodityDriver;
+import presentation.commodityui.*;
 import businesslogic.stockmanagerbl.StubStockManager;
 
 public class StartUp {
 
 	public static void main(String args[])
 	{
-		new CommodityDriver(new StubStockManager());
+		StockManagerDriver smd=new StockManagerDriver();
+		smd.start(new StubStockManager());
 	}
 }
