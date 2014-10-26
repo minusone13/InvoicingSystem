@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import po.CommodityListPO;
 import po.CommodityPO;
 
-public interface CommodityDataService {
+public interface StubCommodityDataService {
 	public boolean addCommodity(CommodityPO po);
 	public CommodityListPO getAll();
 	public ArrayList<CommodityPO> findCommodity(String name);

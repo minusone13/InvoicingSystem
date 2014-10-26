@@ -2,7 +2,7 @@ package businesslogic.examinebl;
 
 import java.util.ArrayList;
 
-import businesslogic.State;
+import businesslogic.StubState;
 import businesslogic.commoditybillbl.StubAlertBill;
 import businesslogic.commoditybillbl.StubGiftBill;
 import businesslogic.commoditybillbl.StubSpillsLossBill;
@@ -61,52 +61,52 @@ public class StubBillPool {
 		
 	}
 	/*需要从单据池筛选指定状态的所有赠送单*/
-	public ArrayList<StubGiftBill> getGiftBill (State st){
+	public ArrayList<StubGiftBill> getGiftBill (StubState st){
 		return null;
 		
 	}
 	/*需要从单据池筛选指定状态的所有报溢/报损单*/
-	public ArrayList<StubSpillsLossBill> getSpillsLossBill (State st){
+	public ArrayList<StubSpillsLossBill> getSpillsLossBill (StubState st){
 		return null;
 		
 	}
 	/*需要从单据池筛选指定状态的所有库存报警单*/
-	public ArrayList<StubAlertBill> getAlertBill (State st){
+	public ArrayList<StubAlertBill> getAlertBill (StubState st){
 		return null;
 		
 	}
 	/*需要从单据池筛选指定状态的所有进货单*/
-	public ArrayList<StubPurSheet> getPurSheet (State st){
+	public ArrayList<StubPurSheet> getPurSheet (StubState st){
 		return null;
 		
 	}
 	/*需要从单据池筛选指定状态的所有进货退货单*/
-	public ArrayList<StubPurBackSheet> getPurBackSheet (State st){
+	public ArrayList<StubPurBackSheet> getPurBackSheet (StubState st){
 		return null;
 		
 	}
 	/*需要从单据池筛选指定状态的所有销售单*/
-	public ArrayList<StubSaleSheet> getSaleSheet (State st){
+	public ArrayList<StubSaleSheet> getSaleSheet (StubState st){
 		return null;
 		
 	}
 	/*需要从单据池筛选指定状态的所有销售退货单*/
-	public ArrayList<StubSaleBackSheet> getSaleBackSheet (State st){
+	public ArrayList<StubSaleBackSheet> getSaleBackSheet (StubState st){
 		return null;
 		
 	}
 	/*需要从单据池筛选指定状态的所有收款单*/
-	public ArrayList<StubReceiptBill> getReceiptBill (State st){
+	public ArrayList<StubReceiptBill> getReceiptBill (StubState st){
 		return null;
 		
 	}
 	/*需要从单据池筛选指定状态的所有付款单*/
-	public ArrayList<StubPaymentBill> getPaymentBill (State st){
+	public ArrayList<StubPaymentBill> getPaymentBill (StubState st){
 		return null;
 		
 	}
 	/*需要从单据池筛选指定状态的所有现金费用单*/
-	public ArrayList<StubCashPaymentBill> getCashPaymentBill (State st){
+	public ArrayList<StubCashPaymentBill> getCashPaymentBill (StubState st){
 		return null;
 		
 	}

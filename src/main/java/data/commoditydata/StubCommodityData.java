@@ -4,7 +4,7 @@ import java.util.*;
 import po.*;
 import dataservice.commoditydataservice.*;
 
-public class CommodityData implements CommodityDataService{
+public class StubCommodityData implements StubCommodityDataService{
 	public boolean addCommodity(CommodityPO po)
 	{
 		return true;
