@@ -2,6 +2,8 @@ package businesslogic.accountbl;
 
 import java.util.ArrayList;
 
+import businesslogic.commoditybl.StubCommodityList;
+import businesslogic.stockmanagerbl.StubStockManager;
 import po.AccountPO;
 import vo.AccountVO;
 
@@ -42,9 +44,8 @@ public class Account {
 	}
 	
 	public void buildAccount() {
-		//调用商品信息
-		//调用客户信息
-		
+		StubCommodityList scl = new StubStockManager().getCommodityList();//调用商品信息
+		 //调用客户信息
 		ArrayList<AccountPO> acc= getAllAccountInfo();//调用账户信息
 	}
 	
