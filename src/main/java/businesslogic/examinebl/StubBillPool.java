@@ -95,5 +95,19 @@ public class StubBillPool {
 		return null;
 		
 	}
-	
+	/*需要从单据池筛选指定状态的所有收款单*/
+	public ArrayList<StubReceiptBill> getReceiptBill (State st){
+		return null;
+		
+	}
+	/*需要从单据池筛选指定状态的所有付款单*/
+	public ArrayList<StubPaymentBill> getPaymentBill (State st){
+		return null;
+		
+	}
+	/*需要从单据池筛选指定状态的所有现金费用单*/
+	public ArrayList<StubCashPaymentBill> getCashPaymentBill (State st){
+		return null;
+		
+	}
 }

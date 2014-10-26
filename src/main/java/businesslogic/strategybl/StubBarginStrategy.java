@@ -1,5 +1,5 @@
 package businesslogic.strategybl;
 
-public class BarginStrategy {
+public class StubBarginStrategy {
 
 }

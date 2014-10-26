@@ -9,9 +9,9 @@ import vo.LevelStrategyVO;
 import vo.ReachStrategyVO;
 import vo.VO;
 import businesslogic.BillStyle;
-import businesslogic.strategybl.BarginStrategy;
-import businesslogic.strategybl.LevelStrategy;
-import businesslogic.strategybl.ReachStrategy;
+import businesslogic.strategybl.StubBarginStrategy;
+import businesslogic.strategybl.StubLevelStrategy;
+import businesslogic.strategybl.StubReachStrategy;
 
 public class StubManager {
 
@@ -48,15 +48,15 @@ public class StubManager {
 		return null;
 	}
 	/*需要删除一条客户分层策略*/
-	public void Remove (LevelStrategy ls){
+	public void Remove (StubLevelStrategy ls){
 		
 	}
 	/*需要删除一条特价包策略*/
-	public void Remove (BarginStrategy bs){
+	public void Remove (StubBarginStrategy bs){
 		
 	}
 	/*需要删除一条满额促销策略*/
-	public void Remove (ReachStrategy rs){
+	public void Remove (StubReachStrategy rs){
 		
 	}
 	/*需要制定一个赠送赠品的客户分层策略*/

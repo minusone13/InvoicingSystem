@@ -1,5 +1,5 @@
 package businesslogic.strategybl;
 
-public class LevelStrategy{
+public class StubReachStrategy {
 
 }
