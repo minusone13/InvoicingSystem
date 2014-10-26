@@ -6,13 +6,13 @@ import businesslogic.State;
 import businesslogic.commoditybillbl.StubAlertBill;
 import businesslogic.commoditybillbl.StubGiftBill;
 import businesslogic.commoditybillbl.StubSpillsLossBill;
-import businesslogic.financialbillbl.CrashPayment;
-import businesslogic.financialbillbl.Payment;
-import businesslogic.financialbillbl.Receipt;
-import businesslogic.salebillbl.PurBackSheet;
-import businesslogic.salebillbl.PurSheet;
-import businesslogic.salebillbl.SaleBackSheet;
-import businesslogic.salebillbl.SaleSheet;
+import businesslogic.financialbillbl.StubCashPaymentBill;
+import businesslogic.financialbillbl.StubPaymentBill;
+import businesslogic.financialbillbl.StubReceiptBill;
+import businesslogic.salebillbl.StubPurBackSheet;
+import businesslogic.salebillbl.StubPurSheet;
+import businesslogic.salebillbl.StubSaleBackSheet;
+import businesslogic.salebillbl.StubSaleSheet;
 
 public class StubBillPool {
 
@@ -33,31 +33,31 @@ public class StubBillPool {
 		
 	}
 	/*需要向单据池中加入一张进货单*/
-	public void add (PurSheet ps){
+	public void add (StubPurSheet ps){
 		
 	}
 	/*需要向单据池中加入一张进货退货单*/
-	public void add (PurBackSheet pbs){
+	public void add (StubPurBackSheet pbs){
 		
 	}
 	/*需要向单据池中加入一张销售单*/
-	public void add (SaleSheet ss){
+	public void add (StubSaleSheet ss){
 		
 	}
 	/*需要向单据池中加入一张销售退货单*/
-	public void add (SaleBackSheet sbs){
+	public void add (StubSaleBackSheet sbs){
 		
 	}
 	/*需要向单据池中加入一张收款单*/
-	public void add (Receipt rb){
+	public void add (StubReceiptBill rb){
 		
 	}
 	/*需要向单据池中加入一张付款单*/
-	public void add (Payment pb){
+	public void add (StubPaymentBill pb){
 		
 	}
 	/*需要向单据池中加入一张现金费用单*/
-	public void add (CrashPayment cpb){
+	public void add (StubCashPaymentBill cpb){
 		
 	}
 	/*需要从单据池筛选指定状态的所有赠送单*/
@@ -76,22 +76,22 @@ public class StubBillPool {
 		
 	}
 	/*需要从单据池筛选指定状态的所有进货单*/
-	public ArrayList<PurSheet> getPurSheet (State st){
+	public ArrayList<StubPurSheet> getPurSheet (State st){
 		return null;
 		
 	}
 	/*需要从单据池筛选指定状态的所有进货退货单*/
-	public ArrayList<PurBackSheet> getPurBackSheet (State st){
+	public ArrayList<StubPurBackSheet> getPurBackSheet (State st){
 		return null;
 		
 	}
 	/*需要从单据池筛选指定状态的所有销售单*/
-	public ArrayList<SaleSheet> getSaleSheet (State st){
+	public ArrayList<StubSaleSheet> getSaleSheet (State st){
 		return null;
 		
 	}
 	/*需要从单据池筛选指定状态的所有销售退货单*/
-	public ArrayList<SaleBackSheet> getSaleBackSheet (State st){
+	public ArrayList<StubSaleBackSheet> getSaleBackSheet (State st){
 		return null;
 		
 	}
