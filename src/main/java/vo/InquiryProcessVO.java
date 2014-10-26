@@ -2,7 +2,13 @@ package vo;
 
 public class InquiryProcessVO {
 	String time;
-	String commodityName;
+	String type;
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
 	String customer;
 	String operator;
 	String stock;
@@ -12,12 +18,7 @@ public class InquiryProcessVO {
 	public void setTime(String time) {
 		this.time = time;
 	}
-	public String getCommodityName() {
-		return commodityName;
-	}
-	public void setCommodityName(String commodityName) {
-		this.commodityName = commodityName;
-	}
+	
 	public String getCustomer() {
 		return customer;
 	}

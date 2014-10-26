@@ -2,7 +2,15 @@ package po;
 
 public class AccountPO {
 	String name;
+	String newName;
 	double balance;
+	public String getNewName() {
+		return newName;
+	}
+	public void setNewName(String newName) {
+		this.newName = newName;
+	}
+	
 	public String getName() {
 		return name;
 	}
