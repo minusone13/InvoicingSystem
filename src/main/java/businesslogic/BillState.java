@@ -1,6 +1,6 @@
 package businesslogic;
 
-public enum BillStyle {
+public enum BillState {
 
 	DRAFT,SUBMITED,EXAMINED,OVER;
 }

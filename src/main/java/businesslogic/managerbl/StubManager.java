@@ -8,7 +8,7 @@ import vo.CommodityVO;
 import vo.LevelStrategyVO;
 import vo.ReachStrategyVO;
 import vo.VO;
-import businesslogic.BillStyle;
+import businesslogic.BillState;
 import businesslogic.strategybl.StubBarginStrategy;
 import businesslogic.strategybl.StubLevelStrategy;
 import businesslogic.strategybl.StubReachStrategy;
@@ -84,7 +84,7 @@ public class StubManager {
 		
 	}
 	/*需要查看经营历程*/
-	public ArrayList<VO> showBusinessProgress(String client,String operater,String warehouse,BillStyle billStyle, String StartTime,String LastTime){
+	public ArrayList<VO> showBusinessProgress(String client,String operater,String warehouse,BillState billStyle, String StartTime,String LastTime){
 		return null;
 		
 	}
