@@ -1,5 +1,5 @@
 package businesslogic;
 
-public enum StubState {
+public enum State {
 
 }
