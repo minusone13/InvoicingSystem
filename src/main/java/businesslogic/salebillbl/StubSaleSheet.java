@@ -2,9 +2,9 @@ package businesslogic.salebillbl;
 
 import java.util.ArrayList;
 
-import businesslogic.customerbl.Customer;
+import businesslogic.customerbl.StubCustomer;
 
-public class SaleSheet {
+public class StubSaleSheet {
 	/*String customer,
 	 * String saler,
 	 * ArrayList sheet,
@@ -14,7 +14,7 @@ public class SaleSheet {
 	 * double pmoney, 
 	 * String words*/
 		String id;
-		Customer customer;
+		StubCustomer customer;
 		ArrayList sheet;//销售单据，商品名，数量，单价
 		double money1;//折前总金额
 		double money2;//代金券金额

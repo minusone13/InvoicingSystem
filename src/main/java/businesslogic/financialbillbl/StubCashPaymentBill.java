@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import vo.CrashPaymentVO;
 
-public class CrashPayment {
+public class StubCashPaymentBill {
 	String billNumber;
 	String account;
 	//Operator op;

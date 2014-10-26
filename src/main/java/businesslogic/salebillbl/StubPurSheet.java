@@ -2,10 +2,10 @@ package businesslogic.salebillbl;
 
 import java.util.ArrayList;
 
-import businesslogic.customerbl.Customer;
+import businesslogic.customerbl.StubCustomer;
 
-public class PurSheet {
-		Customer customer;
+public class StubPurSheet {
+		StubCustomer customer;
 		String id;
 		String commodity;//仓库？
 		ArrayList sheet;//是不是应该是个arraylist<>?

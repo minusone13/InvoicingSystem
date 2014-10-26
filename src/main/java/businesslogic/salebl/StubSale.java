@@ -6,14 +6,14 @@ import vo.CustomerVo;
 
 //其实我突然不知道这个包存在的意思了。。
 
-public class Sale {
+public class StubSale {
 	String name;
 	String password;
-	public Sale() {
+	public StubSale() {
 		this(null,null);
 	}
 	
-	public Sale(String n, String pw) {
+	public StubSale(String n, String pw) {
 		name = n;
 		password = pw;
 	}

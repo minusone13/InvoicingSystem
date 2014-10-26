@@ -2,11 +2,11 @@ package businesslogic.salebillbl;
 
 import java.util.ArrayList;
 
-import businesslogic.customerbl.Customer;
+import businesslogic.customerbl.StubCustomer;
 
-public class SaleBackSheet {
+public class StubSaleBackSheet {
 	String id;
-	Customer customer;
+	StubCustomer customer;
 	ArrayList sheet;//销售单据，商品名，数量，单价
 	double money1;//折前总金额
 	double money2;//代金券金额
