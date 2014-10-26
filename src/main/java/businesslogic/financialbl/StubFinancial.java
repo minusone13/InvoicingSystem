@@ -8,12 +8,13 @@ import businesslogic.financialbillbl.StubCashPaymentBill;
 import businesslogic.financialbillbl.StubPaymentBill;
 import businesslogic.financialbillbl.StubReceiptBill;
 import businesslogic.iquirybl.StubInquiry;
+import businesslogicservice.financialblservice.StubFinancialBlService;
 
-public class StubFinancial {
+public class StubFinancial implements StubFinancialBlService{
 	String name;
 	String password;
 	public StubFinancial() {
-		this(null,null);
+		this(null, null);
 	}
 	
 	public StubFinancial(String n, String pw) {

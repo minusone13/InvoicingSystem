@@ -1,10 +1,10 @@
-package vo;
+package po;
 
 import java.util.ArrayList;
 
 import businesslogic.customerbl.StubCustomer;
 
-public class PurSheetVo {
+public class PurBackSheetPO {
 	StubCustomer customer;
 	String id;
 	String commodity;//仓库？
@@ -59,5 +59,4 @@ public class PurSheetVo {
 	public void setwords(String words){
 		this.words=words;
 	}
-	
 }

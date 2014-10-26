@@ -15,7 +15,7 @@ public class CommodityVO {
 	double out;
 	double lastin;
 	double lastout;
-	CommodityVO(String parent,String name,String model,double in,double out)
+	public CommodityVO(String parent,String name,String model,double in,double out)
 	{
 		this.parent=parent;
 		this.name=name;

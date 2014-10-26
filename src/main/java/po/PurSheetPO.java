@@ -1,10 +1,10 @@
-package vo;
+package po;
 
 import java.util.ArrayList;
 
 import businesslogic.customerbl.StubCustomer;
 
-public class PurSheetVo {
+public class PurSheetPO extends PO{
 	StubCustomer customer;
 	String id;
 	String commodity;//仓库？
