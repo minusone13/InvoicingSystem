@@ -16,4 +16,56 @@ public class CommodityPO {
 	double out;
 	double lastin;
 	double lastout;
+	public Type getType()
+	{
+		return t;
+	}
+	public String getParent()
+	{
+		return parent;
+	}
+	public String getName()
+	{
+		return name;
+	}
+	public int getNumber()
+	{
+		return number;
+	}
+	public double getIn()
+	{
+		return in;
+	}
+	public double getOut()
+	{
+		return out;
+	}
+	public double getLastIn()
+	{
+		return lastin;
+	}
+	public double getLastOut()
+	{
+		return lastout;
+	}
+	public void setNumber(int number)
+	{
+		this.number=number;
+	}
+	public void setLastIn(double lastin)
+	{
+		this.lastin=lastin;
+	}
+	public void setLastOut(double lastout)
+	{
+		this.lastout=lastout;
+	}
+	public void setIn(double in)
+	{
+		this.in=in;
+	}
+	public void setOut(double out)
+	{
+		this.out=out;
+	}
 }
