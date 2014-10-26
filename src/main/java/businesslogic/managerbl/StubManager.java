@@ -13,10 +13,10 @@ import businesslogic.strategybl.BarginStrategy;
 import businesslogic.strategybl.LevelStrategy;
 import businesslogic.strategybl.ReachStrategy;
 
-public class Manager {
+public class StubManager {
 
 	/*构造方法*/
-	public Manager(){
+	public StubManager(){
 		
 	}
 	/*需要查看已提交单据*/
