@@ -1,5 +1,5 @@
 package po;
 
-public class GiftBillPO {
+public class GiftBillPO extends PO{
 
 }

@@ -1,5 +1,5 @@
 package po;
 
-public class SpillsLossBillPO {
+public class SpillsLossBillPO extends PO{
 
 }

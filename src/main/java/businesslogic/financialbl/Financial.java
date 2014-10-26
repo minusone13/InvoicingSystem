@@ -1,11 +1,11 @@
 package businesslogic.financialbl;
 
 import vo.*;
-import buisnesslogic.iquirybl.Inquiry;
 import businesslogic.accountbl.Account;
-import businesslogic.financialbillbl.CrashPayment;
-import businesslogic.financialbillbl.Payment;
-import businesslogic.financialbillbl.Receipt;
+import businesslogic.financialbillbl.StubCashPaymentBill;
+import businesslogic.financialbillbl.StubPaymentBill;
+import businesslogic.financialbillbl.StubReceiptBill;
+import businesslogic.iquirybl.Inquiry;
 
 public class Financial {
 	String name;
@@ -67,18 +67,18 @@ public class Financial {
 	//}
 	
 	public boolean creatReceipt(ReceiptVO rv) {
-		Receipt r = new Receipt();
+		StubReceiptBill r = new StubReceiptBill();
 		return r.creatReceipt(rv);
 	}
 	
 	public boolean creatPayment(PaymentVO pv){
-		Payment r = new Payment();
+		StubPaymentBill r = new StubPaymentBill();
 		return r.creatPayment(pv);
 	
 	}
 	
 	public boolean creatCrashPayment(CrashPaymentVO cpv) {
-		CrashPayment r = new CrashPayment();
+		StubCashPaymentBill r = new StubCashPaymentBill();
 		return r.creatCrashPayment(cpv);
 		
 	}
