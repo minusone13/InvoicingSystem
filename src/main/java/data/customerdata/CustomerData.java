@@ -1,4 +1,4 @@
-package datas.customerdata;
+package data.customerdata;
 
 import dataservice.customerdataservice.CustomerDataService;
 
