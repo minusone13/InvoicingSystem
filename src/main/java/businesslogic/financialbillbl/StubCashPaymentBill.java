@@ -2,18 +2,32 @@ package businesslogic.financialbillbl;
 
 import java.util.ArrayList;
 
-import vo.CrashPaymentVO;
+import businesslogic.GetVOandPO;
+import businesslogic.State;
+import businesslogic.examinebl.StubBillPool;
+import po.PO;
+import vo.CashPaymentVO;
+import vo.VO;
 
-public class StubCashPaymentBill {
+public class StubCashPaymentBill implements GetVOandPO{
 	String billNumber;
 	String account;
-	//Operator op;
+	String operator;
 	double total;
-	ArrayList<Item> itemList = new ArrayList<Item>();
+	State state;
+	ArrayList<StubItem> itemList = new ArrayList<StubItem>();
 	
-	public boolean creatCrashPayment(CrashPaymentVO cpv) {
-		Item i = new Item();
-		//对信息处理，保存到数据层，返回结果
+	public boolean creatCashPayment(CashPaymentVO cpv) {
+		StubItem i = new StubItem();
+		new StubBillPool().add(new StubCashPaymentBill());
 		return true;
+	}
+	
+	public VO getVO() {
+		return new VO();
+	}
+	
+	public PO getPO() {
+		return new PO();
 	}
 }

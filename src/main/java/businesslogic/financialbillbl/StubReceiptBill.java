@@ -2,19 +2,33 @@ package businesslogic.financialbillbl;
 
 import java.util.ArrayList;
 
+import po.PO;
+import businesslogic.GetVOandPO;
+import businesslogic.State;
+import businesslogic.examinebl.StubBillPool;
 import vo.ReceiptVO;
+import vo.VO;
 
-public class StubReceiptBill {
+public class StubReceiptBill implements GetVOandPO{
 	String billNumber;
-	//Customer c;
-	//Operator op;
+	String customer ;
+	String operator;
 	double total;
-	ArrayList<TransferAccount> talist = new ArrayList<TransferAccount>();
+	State state;
+	ArrayList<StubTransferAccount> talist = new ArrayList<StubTransferAccount>();
 	
 	public boolean creatReceipt(ReceiptVO rv) {
-		TransferAccount ta = new TransferAccount();
-		//对信息处理，保存到数据层，返回结果
+		StubTransferAccount ta = new StubTransferAccount();
+		new StubBillPool().add(new StubReceiptBill());
 		return true;
+	}
+
+	public VO getVO() {
+		return null;
+	}
+
+	public PO getPO() {
+		return null;
 	}
 	
 }

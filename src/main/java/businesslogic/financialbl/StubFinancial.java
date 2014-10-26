@@ -1,20 +1,22 @@
 package businesslogic.financialbl;
 
+import java.util.ArrayList;
+
 import vo.*;
-import businesslogic.accountbl.Account;
+import businesslogic.accountbl.StubAccount;
 import businesslogic.financialbillbl.StubCashPaymentBill;
 import businesslogic.financialbillbl.StubPaymentBill;
 import businesslogic.financialbillbl.StubReceiptBill;
-import businesslogic.iquirybl.Inquiry;
+import businesslogic.iquirybl.StubInquiry;
 
-public class Financial {
+public class StubFinancial {
 	String name;
 	String password;
-	public Financial() {
+	public StubFinancial() {
 		this(null,null);
 	}
 	
-	public Financial(String n, String pw) {
+	public StubFinancial(String n, String pw) {
 		name = n;
 		password = pw;
 	}
@@ -26,45 +28,45 @@ public class Financial {
 	}
 	
 	public boolean addAccount(String name) {
-		Account a = new Account();
+		StubAccount a = new StubAccount();
 		return a.addAccount(name);	
 	}
 	
 	public boolean deleteAccount(String name) {
-		Account a = new Account();
+		StubAccount a = new StubAccount();
 		return a.deleteAccount(name);
 	}
 	
 	public AccountVO findAccount(String name) {
-		Account a = new Account();
+		StubAccount a = new StubAccount();
 		return a.findAccount(name);
 	
 	}
 	
 	public boolean updateAccount(String oldname, String newname) {
-		Account a = new Account();
+		StubAccount a = new StubAccount();
 		return a.updateAccount(oldname,newname);
 	}
 	//期初建账
 	public void buildAccount() {
-		Account a = new Account();
+		StubAccount a = new StubAccount();
 		a.buildAccount();
 	}
 	
-	//public ArrayList<SaleBillVO> inquirySale(InquirySaleVO isv) {
-		//Inquiry i = new Inquiry();
-		//i.inquirySale(isv);
-	//}
+	public ArrayList<VO> inquirySale(InquirySaleVO isv) {
+		StubInquiry i = new StubInquiry();
+		return i.inquirySale(isv);
+	}
 	
-	//public ArrayList<BillVO> inquiryProcess (InquiryProcessVO ipv) {
-			//Inquiry i = new Inquiry();
-				//i.inquirySale(ipv);
-//	}
+	public ArrayList<VO> inquiryProcess (InquiryProcessVO ipv) {
+		StubInquiry i = new StubInquiry();
+		return i.inquiryProcess(ipv);
+	}
 	
-	//public MoneyVO inquiryCondition(String time, String type) {
-		//Inquiry i = new Inquiry();
-		//i.inquiryCondition(time, type);
-	//}
+	public BusinessSituationVO inquiryCondition(String time, String type) {
+		StubInquiry i = new StubInquiry();
+		return i.inquiryCondition(time, type);
+	}
 	
 	public boolean creatReceipt(ReceiptVO rv) {
 		StubReceiptBill r = new StubReceiptBill();
@@ -77,9 +79,9 @@ public class Financial {
 	
 	}
 	
-	public boolean creatCrashPayment(CrashPaymentVO cpv) {
+	public boolean creatCashPayment(CashPaymentVO cpv) {
 		StubCashPaymentBill r = new StubCashPaymentBill();
-		return r.creatCrashPayment(cpv);
+		return r.creatCashPayment(cpv);
 		
 	}
 }
