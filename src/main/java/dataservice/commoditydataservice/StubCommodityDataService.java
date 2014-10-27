@@ -2,8 +2,7 @@ package dataservice.commoditydataservice;
 
 import java.util.ArrayList;
 
-import po.CommodityListPO;
-import po.CommodityPO;
+import po.*;
 
 public interface StubCommodityDataService {
 	public boolean addCommodity(CommodityPO po);

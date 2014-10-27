@@ -16,6 +16,18 @@ public class CommodityPO {
 	double out;
 	double lastin;
 	double lastout;
+	public CommodityPO(Type t,String parent,String name,String model,int number,double in,double out,double lastin,double lastout)
+	{
+		this.t=t;
+		this.parent=parent;
+		this.name=name;
+		this.model=model;
+		this.number=number;
+		this.in=in;
+		this.out=out;
+		this.lastin=lastin;
+		this.lastout=lastout;
+	}
 	public Type getType()
 	{
 		return t;

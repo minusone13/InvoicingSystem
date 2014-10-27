@@ -1,6 +1,8 @@
 package businesslogic.stockmanagerbl;
 
 import java.util.*;
+
+import dataservice.commoditydataservice.StubCommodityDataService;
 import businesslogic.commoditybillbl.*;
 import businesslogic.commoditybl.*;
 import businesslogicservice.commodityblservice.*;
@@ -8,6 +10,7 @@ import vo.*;
 
 public class StubStockManager implements StubCommodityBlService{
 	StubCommodityList l=new StubCommodityList();
+	static StubCommodityDataService comdata;
 	public StubCommodityList getCommodityList ()
 	{
 		return l;
@@ -25,6 +28,11 @@ public class StubStockManager implements StubCommodityBlService{
 		return l.addPack(commodityarray, quantity, discount);
 	}
 	
+	public void setdataobject(StubCommodityDataService comdata)
+	{
+		this.comdata=comdata;
+		l.setcomdata(comdata);
+	}
 	
 
 	
