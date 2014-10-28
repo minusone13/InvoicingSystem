@@ -1,7 +1,7 @@
 package presentation;
 
 
-import data.commoditydata.StubCommodityData;
+import data.commoditydata.*;
 import presentation.commodityui.CommodityDriver;
 import presentation.financialui.FinancialBLDriver;
 import businesslogic.financialbl.StubFinancial;
@@ -20,7 +20,7 @@ public class StartUp {
 		
 		//库存管理人员的启动程序 
 		StockManagerDriver smd=new StockManagerDriver();
-		smd.start(new StubStockManager(),new StubCommodityData());
+		smd.start(new StubStockManager(),new StubStockData());
 		
 	}
 }
