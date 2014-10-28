@@ -7,10 +7,10 @@ import dataservice.commoditydataservice.*;
 
 public class StubCommodityData implements StubCommodityDataService{
 	public String getID() {
-		return ID;
+		return id;
 	}
 	public void setID(String iD) {
-		ID = iD;
+		id = iD;
 	}
 	public String getParent() {
 		return parent;
@@ -60,7 +60,7 @@ public class StubCommodityData implements StubCommodityDataService{
 	public void setLastout(double lastout) {
 		this.lastout = lastout;
 	}
-	String ID;
+	String id;
 	String parent;
 	String name;
 	String model;
