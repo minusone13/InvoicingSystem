@@ -1,5 +1,7 @@
 package po;
 
+import java.util.*;
+
 
 public class CommodityPO {
 	public enum Type
@@ -27,6 +29,30 @@ public class CommodityPO {
 		this.out=out;
 		this.lastin=lastin;
 		this.lastout=lastout;
+	}
+	public CommodityPO(String parent,String name,String model,int number,double in,double out,double lastin,double lastout)
+	{
+		t=t.Commodity;
+		this.parent=parent;
+		this.name=name;
+		this.model=model;
+		this.number=number;
+		this.in=in;
+		this.out=out;
+		this.lastin=lastin;
+		this.lastout=lastout;
+	}
+	public CommodityPO(Type t,String parent,String name)
+	{
+		this.t=t;
+		this.parent=parent;
+		this.name=name;
+	}
+	public CommodityPO(String parent,String name)
+	{
+		t=t.Category;
+		this.parent=parent;
+		this.name=name;
 	}
 	public Type getType()
 	{
