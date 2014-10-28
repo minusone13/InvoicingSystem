@@ -1,15 +1,15 @@
-package data.commoditydata;
+package po;
 
 import java.util.ArrayList;
 
-public class StubPackData {
-	ArrayList<StubCommodityData> coms;
+public class PackPO {
+	ArrayList<CommodityPO> coms;
 	int quantity;
 	double price;
-	public ArrayList<StubCommodityData> getComs() {
+	public ArrayList<CommodityPO> getComs() {
 		return coms;
 	}
-	public void setComs(ArrayList<StubCommodityData> coms) {
+	public void setComs(ArrayList<CommodityPO> coms) {
 		this.coms = coms;
 	}
 	public int getQuantity() {
