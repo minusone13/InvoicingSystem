@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import po.PO;
 import businesslogic.GetVOandPO;
-import businesslogic.State;
+import businesslogic.BillState;
 import businesslogic.examinebl.StubBillPool;
 import vo.PaymentVO;
 import vo.VO;
@@ -14,7 +14,7 @@ public class StubPaymentBill implements GetVOandPO{
 	String customer;
 	String operator;
 	double total;
-	State state;
+	BillState state;
 	ArrayList<StubTransferAccount> talist = new ArrayList<StubTransferAccount>();
 	
 	public boolean creatPayment(PaymentVO pv) {

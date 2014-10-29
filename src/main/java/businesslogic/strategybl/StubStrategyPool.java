@@ -6,6 +6,9 @@ import businesslogic.commoditybl.StubCommodity;
 
 public class StubStrategyPool {
 
+	private ArrayList<StubLevelStrategy> alOfLevelStrategy;
+	private ArrayList<StubBarginStrategy> alOfBarginStrategy;
+	private ArrayList<StubReachStrategy> alOfReachStrategy;
 	/*构造函数*/
 	public StubStrategyPool(){
 		

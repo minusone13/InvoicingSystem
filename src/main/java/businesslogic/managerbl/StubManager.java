@@ -9,18 +9,27 @@ import vo.LevelStrategyVO;
 import vo.ReachStrategyVO;
 import vo.VO;
 import businesslogic.BillState;
+import businesslogic.examinebl.StubBillPool;
 import businesslogic.strategybl.StubBarginStrategy;
 import businesslogic.strategybl.StubLevelStrategy;
 import businesslogic.strategybl.StubReachStrategy;
+import businesslogic.strategybl.StubStrategyPool;
 
 public class StubManager {
 
+	private String ID;
+	private String name;
+	private StubBillPool billPool;
+	private StubStrategyPool strategyPool;
+	
 	/*构造方法*/
 	public StubManager(){
 		
 	}
 	/*需要查看已提交单据*/
 	public ArrayList<VO> getHandedBill (){
+		//搜索单据池，寻找已提交状态的单据
+		billPool.getGiftBill(BillState.SUBMITED);
 		return null;	
 	}
 	/*修改密码*/

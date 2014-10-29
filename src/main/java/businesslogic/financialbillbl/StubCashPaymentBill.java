@@ -3,7 +3,7 @@ package businesslogic.financialbillbl;
 import java.util.ArrayList;
 
 import businesslogic.GetVOandPO;
-import businesslogic.State;
+import businesslogic.BillState;
 import businesslogic.examinebl.StubBillPool;
 import po.PO;
 import vo.CashPaymentVO;
@@ -14,7 +14,7 @@ public class StubCashPaymentBill implements GetVOandPO{
 	String account;
 	String operator;
 	double total;
-	State state;
+	BillState state;
 	ArrayList<StubItem> itemList = new ArrayList<StubItem>();
 	
 	public boolean creatCashPayment(CashPaymentVO cpv) {
