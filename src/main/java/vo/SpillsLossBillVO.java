@@ -1,5 +1,5 @@
 package vo;
 
-public class SpillsLossBillVO {
+public class SpillsLossBillVO extends VO{
 
 }

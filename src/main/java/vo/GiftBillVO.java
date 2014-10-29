@@ -1,5 +1,5 @@
 package vo;
 
-public class GiftBillVO {
+public class GiftBillVO extends VO{
 
 }

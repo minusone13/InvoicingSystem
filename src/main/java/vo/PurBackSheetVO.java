@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import businesslogic.customerbl.StubCustomer;
 
-public class PurBackSheetVO {
+public class PurBackSheetVO extends VO{
 	StubCustomer customer;
 	String id;
 	String commodity;//仓库？

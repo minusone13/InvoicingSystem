@@ -1,5 +1,5 @@
 package vo;
 
-public class AlertBillVO {
+public class AlertBillVO extends VO{
 
 }

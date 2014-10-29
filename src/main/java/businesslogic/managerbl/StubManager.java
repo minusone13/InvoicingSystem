@@ -9,7 +9,17 @@ import vo.LevelStrategyVO;
 import vo.ReachStrategyVO;
 import vo.VO;
 import businesslogic.BillState;
+import businesslogic.commoditybillbl.StubAlertBill;
+import businesslogic.commoditybillbl.StubGiftBill;
+import businesslogic.commoditybillbl.StubSpillsLossBill;
 import businesslogic.examinebl.StubBillPool;
+import businesslogic.financialbillbl.StubCashPaymentBill;
+import businesslogic.financialbillbl.StubPaymentBill;
+import businesslogic.financialbillbl.StubReceiptBill;
+import businesslogic.salebillbl.StubPurBackSheet;
+import businesslogic.salebillbl.StubPurSheet;
+import businesslogic.salebillbl.StubSaleBackSheet;
+import businesslogic.salebillbl.StubSaleSheet;
 import businesslogic.strategybl.StubBarginStrategy;
 import businesslogic.strategybl.StubLevelStrategy;
 import businesslogic.strategybl.StubReachStrategy;
@@ -28,9 +38,23 @@ public class StubManager {
 	}
 	/*需要查看已提交单据*/
 	public ArrayList<VO> getHandedBill (){
+		ArrayList<VO> result=new ArrayList<VO>();
 		//搜索单据池，寻找已提交状态的单据
-		billPool.getGiftBill(BillState.SUBMITED);
-		return null;	
+		ArrayList<StubGiftBill> alOfGB=billPool.getGiftBill(BillState.SUBMITED);
+		ArrayList<StubSpillsLossBill> alOfSLB=billPool.getSpillsLossBill(BillState.SUBMITED);
+		ArrayList<StubAlertBill> alOfAB=billPool.getAlertBill(BillState.SUBMITED);
+		ArrayList<StubPurSheet> alOfPS=billPool.getPurSheet(BillState.SUBMITED);
+		ArrayList<StubPurBackSheet> alOfPBS=billPool.getPurBackSheet(BillState.SUBMITED);
+		ArrayList<StubSaleSheet> alOfSS=billPool.getSaleSheet(BillState.SUBMITED);
+		ArrayList<StubSaleBackSheet> alOfSBS=billPool.getSaleBackSheet(BillState.SUBMITED);
+		ArrayList<StubReceiptBill> alOfRB=billPool.getReceiptBill(BillState.SUBMITED);
+		ArrayList<StubPaymentBill> alOfPB=billPool.getPaymentBill(BillState.SUBMITED);
+		ArrayList<StubCashPaymentBill> alOfCPB=billPool.getCashPaymentBill(BillState.SUBMITED);
+		//进行逐个大遍历，返回符合条件单据对应的VO
+		for(StubGiftBill temp:alOfGB){
+			result.add(temp.getVO());
+		}
+		return result;	
 	}
 	/*修改密码*/
 	public void modifyPassword (String newpassword){
@@ -38,7 +62,9 @@ public class StubManager {
 	}
     /*修改单据信息*/
 	public void changeImformationOfBill(VO billvo){
-		
+		//通过新VO修改对应单据对象的信息
+		//保存单据信息
+		//保存操作
 	}
 	/*通过数组中对应的单据*/
 	public void PassBill(ArrayList<VO> billvo){
