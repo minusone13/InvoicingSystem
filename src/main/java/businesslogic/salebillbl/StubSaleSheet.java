@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import po.PO;
 import vo.VO;
+import businesslogic.BillStyle;
 import businesslogic.GetVOandPO;
 import businesslogic.customerbl.StubCustomer;
 import businesslogic.examinebl.Bill;
@@ -17,7 +18,8 @@ public class StubSaleSheet extends Bill implements GetVOandPO{
 	 * double discount,
 	 * double pmoney, 
 	 * String words*/
-		String id;
+	private String ID;
+	private BillStyle style=BillStyle.SaleSheet;
 		StubCustomer customer;
 		ArrayList sheet;//销售单据，商品名，数量，单价
 		double money1;//折前总金额

@@ -2,10 +2,13 @@ package businesslogic.commoditybillbl;
 
 import po.PO;
 import vo.VO;
+import businesslogic.BillStyle;
 import businesslogic.GetVOandPO;
 import businesslogic.examinebl.Bill;
 
 public class StubGiftBill extends Bill implements GetVOandPO{
+	private BillStyle style=BillStyle.GiftBill;
+	private String ID;
 	public VO getVO()
 	{
 		return new VO();

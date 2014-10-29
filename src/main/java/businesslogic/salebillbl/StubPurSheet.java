@@ -4,13 +4,15 @@ import java.util.ArrayList;
 
 import po.PO;
 import vo.VO;
+import businesslogic.BillStyle;
 import businesslogic.GetVOandPO;
 import businesslogic.customerbl.StubCustomer;
 import businesslogic.examinebl.Bill;
 
 public class StubPurSheet extends Bill implements GetVOandPO{
+	private BillStyle style=BillStyle.PurSheet;
 		StubCustomer customer;
-		String id;
+		private String ID;
 		String commodity;//仓库？
 		ArrayList sheet;//是不是应该是个arraylist<>?
 		double money1;//总金额

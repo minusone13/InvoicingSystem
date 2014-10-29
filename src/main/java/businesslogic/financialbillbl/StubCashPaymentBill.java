@@ -2,6 +2,7 @@ package businesslogic.financialbillbl;
 
 import java.util.ArrayList;
 
+import businesslogic.BillStyle;
 import businesslogic.GetVOandPO;
 import businesslogic.BillState;
 import businesslogic.examinebl.Bill;
@@ -11,7 +12,8 @@ import vo.CashPaymentVO;
 import vo.VO;
 
 public class StubCashPaymentBill extends Bill implements GetVOandPO{
-	String billNumber;
+	private BillStyle style=BillStyle.CashPaymentBill;
+	private String ID;
 	String account;
 	String operator;
 	double total;
