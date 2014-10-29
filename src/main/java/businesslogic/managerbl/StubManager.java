@@ -63,7 +63,31 @@ public class StubManager {
     /*修改单据信息*/
 	public void changeImformationOfBill(VO billvo){
 		//通过新VO修改对应单据对象的信息
-		//保存单据信息
+		switch(billvo.getStyle()){
+		case GiftBill:
+			
+			//保存单据信息
+			break;
+		case SpillsLossBill:
+			break;
+		case AlertBill:
+			break;
+		case PurSheet:
+			break;
+		case PurBackSheet:
+			break;
+		case SaleSheet:
+			break;
+		case SaleBackSheet:
+			break;
+		case ReceiptBill:
+			break;
+		case PaymentBill:
+			break;
+		case CashPaymentBill:
+			break;
+		}
+		
 		//保存操作
 	}
 	/*通过数组中对应的单据*/

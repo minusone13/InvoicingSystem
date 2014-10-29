@@ -4,12 +4,13 @@ import java.util.ArrayList;
 
 import businesslogic.GetVOandPO;
 import businesslogic.BillState;
+import businesslogic.examinebl.Bill;
 import businesslogic.examinebl.StubBillPool;
 import po.PO;
 import vo.CashPaymentVO;
 import vo.VO;
 
-public class StubCashPaymentBill implements GetVOandPO{
+public class StubCashPaymentBill extends Bill implements GetVOandPO{
 	String billNumber;
 	String account;
 	String operator;

@@ -5,11 +5,12 @@ import java.util.ArrayList;
 import po.PO;
 import businesslogic.GetVOandPO;
 import businesslogic.BillState;
+import businesslogic.examinebl.Bill;
 import businesslogic.examinebl.StubBillPool;
 import vo.ReceiptVO;
 import vo.VO;
 
-public class StubReceiptBill implements GetVOandPO{
+public class StubReceiptBill extends Bill implements GetVOandPO{
 	String billNumber;
 	String customer ;
 	String operator;
