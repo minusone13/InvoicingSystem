@@ -2,12 +2,12 @@ package vo;
 
 import java.util.ArrayList;
 
-import businesslogic.LevelStrategyStyle;
+import businesslogic.ReachStrategyStyle;
 import businesslogic.StrategyStyle;
 
 public class ReachStrategyVO extends VO{
 	private StrategyStyle strategystyle=StrategyStyle.ReachStrategy;
-	private LevelStrategyStyle level_strategy_style;
+	private ReachStrategyStyle reach_strategy_style;
 	
 	private double Limit;//消费金额下限
 	

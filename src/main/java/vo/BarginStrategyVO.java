@@ -7,7 +7,7 @@ import businesslogic.StrategyStyle;
 
 public class BarginStrategyVO extends VO {
 	private StrategyStyle strategystyle=StrategyStyle.BarginStrategy;
-	private LevelStrategyStyle level_strategy_style;
+	
 	
 	private ArrayList<CommodityVO> alOfCommodityVo;//特价包商品信息数组
 	private double discount;//降价金额
@@ -15,6 +15,11 @@ public class BarginStrategyVO extends VO {
 	
 	private String StartTime;//开始日期
 	private int LastTime;//策略持续时间（天）
+	/*构造方法*/
+	public BarginStrategyVO(){
+		
+	}
+	
 	public ArrayList<CommodityVO> getAlOfCommodityVo() {
 		return alOfCommodityVo;
 	}

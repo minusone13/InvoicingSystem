@@ -175,27 +175,27 @@ public class StubManager {
 		strategyPool.RemoveReachStrategy(rs.getID());
 	}
 	/*需要制定一个赠送赠品的客户分层策略*/
-	public void addGiftLevelStrategy (int level,int Limit,ArrayList<CommodityVO> alOfCommodityVo,String StartTime,int LastTime){
+	public void addGiftLevelStrategy (LevelStrategyVO lsvo){
 		
 	}
 	/*需要制定一个折让客户分层策略*/
-	public void addDiscountLevelStrategy (int level,double rate, String StartTime,int LastTime){
+	public void addDiscountLevelStrategy (LevelStrategyVO lsvo){
 		
 	}
 	/*需要制定一个赠送代金券客户分层策略*/
-	public void addCouponLevelStrategy (int level,double rate, String StartTime,int LastTime){
+	public void addCouponLevelStrategy (LevelStrategyVO lsvo){
 	
 	}
 	/*需要制定一条特价包促销策略*/
-	public void addBarginStrategy (ArrayList<CommodityVO> alOfCommodityVo,int discount,int num,String StartTime,int LastTime){
+	public void addBarginStrategy (BarginStrategyVO bsvo){
 		
 	}
 	/*需要制定一条赠送赠品的满额促销策略*/
-	public void addReachStrategy (int Limit,ArrayList< CommodityVO> alOfCommodityVo,String StartTime,int LastTime){
+	public void addGiftReachStrategy (ReachStrategyVO rsvo){
 		
 	}
 	/*需要制定一条赠送代金券的满额促销策略*/
-	public void addReachStrategy (int Limit,int rate,String StartTime,int LastTime){
+	public void addCouponReachStrategy (ReachStrategyVO rsvo){
 		
 	}
 	/*需要查看经营历程*/
