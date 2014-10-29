@@ -3,6 +3,7 @@ package businesslogic.examinebl;
 import java.util.ArrayList;
 
 import businesslogic.BillState;
+import businesslogic.BillStyle;
 import businesslogic.commoditybillbl.StubAlertBill;
 import businesslogic.commoditybillbl.StubGiftBill;
 import businesslogic.commoditybillbl.StubSpillsLossBill;
@@ -118,6 +119,10 @@ public class StubBillPool {
 	/*需要从单据池筛选指定状态的所有现金费用单*/
 	public ArrayList<StubCashPaymentBill> getCashPaymentBill (BillState st){
 		return null;
+		
+	}
+	/*实时保存池中数组对象*/
+	public void save(BillStyle st){
 		
 	}
 }
