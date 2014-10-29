@@ -2,9 +2,11 @@ package vo;
 
 import java.util.ArrayList;
 
+import businesslogic.BillStyle;
 import businesslogic.customerbl.StubCustomer;
 
 public class PurBackSheetVO extends VO{
+	private BillStyle style=BillStyle.PurBackSheet;
 	StubCustomer customer;
 	String id;
 	String commodity;//仓库？

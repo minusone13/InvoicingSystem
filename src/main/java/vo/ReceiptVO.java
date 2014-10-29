@@ -1,6 +1,9 @@
 package vo;
 
+import businesslogic.BillStyle;
+
 public class ReceiptVO extends VO{
+	private BillStyle style=BillStyle.ReceiptBill;
 	//单据编号、操作员自动生成
 		String customer;
 		double total;
