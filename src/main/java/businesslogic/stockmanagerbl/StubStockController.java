@@ -8,7 +8,8 @@ import businesslogic.commoditybl.*;
 import businesslogicservice.commodityblservice.*;
 import vo.*;
 
-public class StubStockController implements StubCommodityBlService{
+public class StubStockController implements StubCommodityBlService
+{//负责与界面及其他程序员的交互
 	StubCommodityList l=new StubCommodityList();
 	static StubCommodityDataService comdata;
 	public StubCommodityList getCommodityList ()

@@ -6,7 +6,8 @@ import businesslogic.BillStyle;
 import businesslogic.GetVOandPO;
 import businesslogic.examinebl.Bill;
 
-public class StubSpillsLossBill extends Bill implements GetVOandPO{
+public class StubSpillsLossBill extends Bill implements GetVOandPO
+{//报溢报损单，统一进入单据池管理和存储
 	private BillStyle style=BillStyle.SpillsLossBill;
 	private String ID;
 	public VO getVO()

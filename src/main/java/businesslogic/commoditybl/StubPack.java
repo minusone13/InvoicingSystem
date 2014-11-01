@@ -2,10 +2,11 @@ package businesslogic.commoditybl;
 
 import java.util.ArrayList;
 
-public class StubPack {
+public class StubPack 
+{//特价包类
 	ArrayList<StubCommodity> coms;
 	int quantity;
-	double price;
+	double price;//总价，通过total-discount得出
 	public ArrayList<StubCommodity> getComs() {
 		return coms;
 	}
