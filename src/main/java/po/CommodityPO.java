@@ -19,6 +19,7 @@ public class CommodityPO {
 	double lastin;
 	double lastout;
 	double average;
+	public CommodityPO(){}
 	public CommodityPO(Type t,String parent,String name,String model,int number,double in,double out,double lastin,double lastout,double average)
 	{
 		this.t=t;

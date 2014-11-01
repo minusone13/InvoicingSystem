@@ -34,6 +34,9 @@ public class StubStockController implements StubCommodityBlService{
 		l.setcomdata(comdata);
 	}
 	
-
+	public boolean incoming(String name, String model, int quantity, double price)
+	{
+		return l.incoming(name, model, quantity, price);
+	}
 	
 }

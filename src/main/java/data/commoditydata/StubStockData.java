@@ -18,6 +18,10 @@ public class StubStockData implements StubCommodityDataService{
 	{
 		return new ArrayList<CommodityPO>();
 	}
+	public CommodityPO findCommodity(String name, String model)
+	{
+		return new CommodityPO();
+	}
 	public boolean deleteCommodity(String name, String model)
 	{
 		return true;

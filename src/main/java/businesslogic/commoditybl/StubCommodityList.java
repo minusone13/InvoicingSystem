@@ -27,4 +27,9 @@ public class StubCommodityList {
 	{
 		this.comdata=comdata;
 	}
+	public boolean incoming(String name, String model, int quantity, double price)
+	{
+		comdata.findCommodity(name,model);
+		return true;
+	}
 }
