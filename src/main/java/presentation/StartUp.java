@@ -20,7 +20,7 @@ public class StartUp {
 		
 		//库存管理人员的启动程序 
 		StockManagerDriver smd=new StockManagerDriver();
-		smd.start(new StubStockController(),new StubStockData());
+		smd.start(new StubStockController(),new StubStockDataController());
 		
 	}
 }

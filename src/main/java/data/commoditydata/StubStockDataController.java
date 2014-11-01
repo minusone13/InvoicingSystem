@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import dataservice.commoditydataservice.*;
 import po.*;
 
-public class StubStockData implements StubCommodityDataService{
+public class StubStockDataController implements StubCommodityDataService{
 	public boolean addCommodity(CommodityPO po)
 	{
 		return true;
