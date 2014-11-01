@@ -2,7 +2,7 @@ package businesslogic.commoditybl;
 
 import java.util.ArrayList;
 
-import businesslogic.stockmanagerbl.StubStockManager;
+import businesslogic.stockmanagerbl.StubStockController;
 import dataservice.commoditydataservice.*;
 import vo.CommodityVO;
 import vo.RM;

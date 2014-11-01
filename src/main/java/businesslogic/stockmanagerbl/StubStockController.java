@@ -8,7 +8,7 @@ import businesslogic.commoditybl.*;
 import businesslogicservice.commodityblservice.*;
 import vo.*;
 
-public class StubStockManager implements StubCommodityBlService{
+public class StubStockController implements StubCommodityBlService{
 	StubCommodityList l=new StubCommodityList();
 	static StubCommodityDataService comdata;
 	public StubCommodityList getCommodityList ()

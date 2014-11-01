@@ -6,7 +6,7 @@ import data.accountdata.AccountData;
 import dataservice.accountdataservice.AccountDataService;
 import businesslogic.commoditybl.StubCommodityList;
 import businesslogic.salebl.StubSale;
-import businesslogic.stockmanagerbl.StubStockManager;
+import businesslogic.stockmanagerbl.StubStockController;
 import po.AccountPO;
 import vo.AccountVO;
 
@@ -57,7 +57,7 @@ public class StubAccount {
 	
 	public void buildAccount() {
 		String str="";
-		StubCommodityList scl = new StubStockManager().getCommodityList();//调用商品信息
+		StubCommodityList scl = new StubStockController().getCommodityList();//调用商品信息
 		new StubSale().findCustomer(str); //调用客户信息
 		ArrayList<AccountPO> acc= getAllAccountInfo();//调用账户信息
 	}
