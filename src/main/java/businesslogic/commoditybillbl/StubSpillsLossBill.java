@@ -1,6 +1,7 @@
 package businesslogic.commoditybillbl;
 
 import po.PO;
+import po.SpillsLossBillPO;
 import vo.VO;
 import businesslogic.BillStyle;
 import businesslogic.GetVOandPO;
@@ -10,6 +11,12 @@ public class StubSpillsLossBill extends Bill implements GetVOandPO
 {//报溢报损单，统一进入单据池管理和存储
 	private BillStyle style=BillStyle.SpillsLossBill;
 	private String ID;
+	enum Type
+	{
+		Spills,
+		Loss
+	}
+	Type t;
 	public VO getVO()
 	{
 		return new VO();
