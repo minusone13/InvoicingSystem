@@ -28,7 +28,15 @@ public class StubCommodityList {
 	{
 		this.comdata=comdata;
 	}
-	public boolean incoming(String name, String model, int quantity, double price)
+	public boolean checkIn(String name, String model, int quantity, double price)
+	{
+		CommodityPO po=comdata.findCommodity(name,model);
+		if(po==null)//not found
+			return false;
+		StubCommodity com=new StubCommodity(po);
+		return true;
+	}
+	public boolean checkOut(String name, String model, int quantity, double price)
 	{
 		CommodityPO po=comdata.findCommodity(name,model);
 		if(po==null)//not found
