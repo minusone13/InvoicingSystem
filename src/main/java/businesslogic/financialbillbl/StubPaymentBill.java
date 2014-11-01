@@ -3,18 +3,21 @@ package businesslogic.financialbillbl;
 import java.util.ArrayList;
 
 import po.PO;
+import businesslogic.BillStyle;
 import businesslogic.GetVOandPO;
-import businesslogic.State;
+import businesslogic.BillState;
+import businesslogic.examinebl.Bill;
 import businesslogic.examinebl.StubBillPool;
 import vo.PaymentVO;
 import vo.VO;
 
-public class StubPaymentBill implements GetVOandPO{
-	String billNumber;
+public class StubPaymentBill extends Bill implements GetVOandPO{
+	private BillStyle style=BillStyle.PaymentBill;
+	private String ID;
 	String customer;
 	String operator;
 	double total;
-	State state;
+	BillState state;
 	ArrayList<StubTransferAccount> talist = new ArrayList<StubTransferAccount>();
 	
 	public boolean creatPayment(PaymentVO pv) {

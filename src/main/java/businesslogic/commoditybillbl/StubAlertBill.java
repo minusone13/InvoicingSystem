@@ -3,8 +3,11 @@ package businesslogic.commoditybillbl;
 import vo.*;
 import po.*;
 import businesslogic.*;
+import businesslogic.examinebl.Bill;
 
-public class StubAlertBill implements GetVOandPO{
+public class StubAlertBill extends Bill implements GetVOandPO{
+	private BillStyle style=BillStyle.AlertBill;
+	private String ID;
 	public VO getVO()
 	{
 		return new VO();

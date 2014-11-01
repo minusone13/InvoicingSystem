@@ -1,6 +1,9 @@
 package vo;
 
+import businesslogic.BillStyle;
+
 public class CashPaymentVO extends VO{
+	private BillStyle style=BillStyle.CashPaymentBill;
 	//单据编号、操作员自动生成
 	
 	double total;

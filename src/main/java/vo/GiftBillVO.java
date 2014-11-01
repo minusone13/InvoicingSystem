@@ -1,5 +1,8 @@
 package vo;
 
-public class GiftBillVO {
+import businesslogic.BillStyle;
 
+public class GiftBillVO extends VO{
+
+	private BillStyle style=BillStyle.GiftBill;
 }

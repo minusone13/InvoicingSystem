@@ -2,7 +2,8 @@ package businesslogic.examinebl;
 
 import java.util.ArrayList;
 
-import businesslogic.State;
+import businesslogic.BillState;
+import businesslogic.BillStyle;
 import businesslogic.commoditybillbl.StubAlertBill;
 import businesslogic.commoditybillbl.StubGiftBill;
 import businesslogic.commoditybillbl.StubSpillsLossBill;
@@ -16,6 +17,16 @@ import businesslogic.salebillbl.StubSaleSheet;
 
 public class StubBillPool {
 
+	private ArrayList<StubGiftBill> alOfGiftBill;
+	private ArrayList<StubSpillsLossBill> alOfSpillsLossBill;
+	private ArrayList<StubAlertBill> alOfAlertBill;
+	private ArrayList<StubPurSheet> alOfPurSheet;
+	private ArrayList<StubPurBackSheet> alOfPurBackSheet;
+	private ArrayList<StubSaleSheet> alOfSaleSheet;
+	private ArrayList<StubSaleBackSheet> alOfSaleBackSheet;
+	private ArrayList<StubReceiptBill> alOfReceiptBill;
+	private ArrayList<StubPaymentBill> alOfPaymentBill;
+	private ArrayList<StubCashPaymentBill> alOfCashPaymentBill;
 	/*构造函数*/
 	public StubBillPool(){
 		
@@ -61,53 +72,57 @@ public class StubBillPool {
 		
 	}
 	/*需要从单据池筛选指定状态的所有赠送单*/
-	public ArrayList<StubGiftBill> getGiftBill (State st){
+	public ArrayList<StubGiftBill> getGiftBill (BillState st){
 		return null;
 		
 	}
 	/*需要从单据池筛选指定状态的所有报溢/报损单*/
-	public ArrayList<StubSpillsLossBill> getSpillsLossBill (State st){
+	public ArrayList<StubSpillsLossBill> getSpillsLossBill (BillState st){
 		return null;
 		
 	}
 	/*需要从单据池筛选指定状态的所有库存报警单*/
-	public ArrayList<StubAlertBill> getAlertBill (State st){
+	public ArrayList<StubAlertBill> getAlertBill (BillState st){
 		return null;
 		
 	}
 	/*需要从单据池筛选指定状态的所有进货单*/
-	public ArrayList<StubPurSheet> getPurSheet (State st){
+	public ArrayList<StubPurSheet> getPurSheet (BillState st){
 		return null;
 		
 	}
 	/*需要从单据池筛选指定状态的所有进货退货单*/
-	public ArrayList<StubPurBackSheet> getPurBackSheet (State st){
+	public ArrayList<StubPurBackSheet> getPurBackSheet (BillState st){
 		return null;
 		
 	}
 	/*需要从单据池筛选指定状态的所有销售单*/
-	public ArrayList<StubSaleSheet> getSaleSheet (State st){
+	public ArrayList<StubSaleSheet> getSaleSheet (BillState st){
 		return null;
 		
 	}
 	/*需要从单据池筛选指定状态的所有销售退货单*/
-	public ArrayList<StubSaleBackSheet> getSaleBackSheet (State st){
+	public ArrayList<StubSaleBackSheet> getSaleBackSheet (BillState st){
 		return null;
 		
 	}
 	/*需要从单据池筛选指定状态的所有收款单*/
-	public ArrayList<StubReceiptBill> getReceiptBill (State st){
+	public ArrayList<StubReceiptBill> getReceiptBill (BillState st){
 		return null;
 		
 	}
 	/*需要从单据池筛选指定状态的所有付款单*/
-	public ArrayList<StubPaymentBill> getPaymentBill (State st){
+	public ArrayList<StubPaymentBill> getPaymentBill (BillState st){
 		return null;
 		
 	}
 	/*需要从单据池筛选指定状态的所有现金费用单*/
-	public ArrayList<StubCashPaymentBill> getCashPaymentBill (State st){
+	public ArrayList<StubCashPaymentBill> getCashPaymentBill (BillState st){
 		return null;
+		
+	}
+	/*实时保存池中数组对象*/
+	public void save(BillStyle st){
 		
 	}
 }

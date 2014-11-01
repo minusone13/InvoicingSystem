@@ -2,9 +2,14 @@ package businesslogic.salebillbl;
 
 import java.util.ArrayList;
 
+import po.PO;
+import vo.VO;
+import businesslogic.BillStyle;
+import businesslogic.GetVOandPO;
 import businesslogic.customerbl.StubCustomer;
+import businesslogic.examinebl.Bill;
 
-public class StubSaleSheet {
+public class StubSaleSheet extends Bill implements GetVOandPO{
 	/*String customer,
 	 * String saler,
 	 * ArrayList sheet,
@@ -13,7 +18,8 @@ public class StubSaleSheet {
 	 * double discount,
 	 * double pmoney, 
 	 * String words*/
-		String id;
+	private String ID;
+	private BillStyle style=BillStyle.SaleSheet;
 		StubCustomer customer;
 		ArrayList sheet;//销售单据，商品名，数量，单价
 		double money1;//折前总金额
@@ -21,4 +27,12 @@ public class StubSaleSheet {
 		double disconut;//折让金额；
 		double pmoney;//最终金额
 		String words;//备注
+		public VO getVO() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+		public PO getPO() {
+			// TODO Auto-generated method stub
+			return null;
+		}
 }

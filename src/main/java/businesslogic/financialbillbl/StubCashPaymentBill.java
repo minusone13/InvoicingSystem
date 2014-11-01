@@ -2,19 +2,22 @@ package businesslogic.financialbillbl;
 
 import java.util.ArrayList;
 
+import businesslogic.BillStyle;
 import businesslogic.GetVOandPO;
-import businesslogic.State;
+import businesslogic.BillState;
+import businesslogic.examinebl.Bill;
 import businesslogic.examinebl.StubBillPool;
 import po.PO;
 import vo.CashPaymentVO;
 import vo.VO;
 
-public class StubCashPaymentBill implements GetVOandPO{
-	String billNumber;
+public class StubCashPaymentBill extends Bill implements GetVOandPO{
+	private BillStyle style=BillStyle.CashPaymentBill;
+	private String ID;
 	String account;
 	String operator;
 	double total;
-	State state;
+	BillState state;
 	ArrayList<StubItem> itemList = new ArrayList<StubItem>();
 	
 	public boolean creatCashPayment(CashPaymentVO cpv) {
