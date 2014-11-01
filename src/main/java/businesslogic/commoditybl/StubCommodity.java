@@ -15,6 +15,20 @@ public class StubCommodity {
 	double lastout;
 	double average;
 	
+	public StubCommodity(){}
+	public StubCommodity(CommodityPO po)
+	{
+		parent=po.getParent();
+		name=po.getName();
+		model=po.getModel();
+		number=po.getNumber();
+		in=po.getIn();
+		out=po.getOut();
+		lastin=po.getLastIn();
+		lastout=po.getLastOut();
+		average=po.getAverage();
+	}
+	
 	public String getParent()
 	{
 		return parent;

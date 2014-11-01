@@ -2,7 +2,8 @@ package businesslogic.commoditybl;
 
 import java.util.ArrayList;
 
-import businesslogic.stockmanagerbl.StubStockController;
+import po.*;
+import businesslogic.stockmanagerbl.*;
 import dataservice.commoditydataservice.*;
 import vo.CommodityVO;
 import vo.RM;
@@ -29,7 +30,10 @@ public class StubCommodityList {
 	}
 	public boolean incoming(String name, String model, int quantity, double price)
 	{
-		comdata.findCommodity(name,model);
+		CommodityPO po=comdata.findCommodity(name,model);
+		if(po==null)//not found
+			return false;
+		StubCommodity com=new StubCommodity(po);
 		return true;
 	}
 }
