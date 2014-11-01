@@ -67,5 +67,6 @@ public class StubCommodityData{
 	double out;
 	double lastin;
 	double lastout;
+	double average;
 	
 }

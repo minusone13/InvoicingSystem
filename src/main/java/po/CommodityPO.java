@@ -18,7 +18,8 @@ public class CommodityPO {
 	double out;
 	double lastin;
 	double lastout;
-	public CommodityPO(Type t,String parent,String name,String model,int number,double in,double out,double lastin,double lastout)
+	double average;
+	public CommodityPO(Type t,String parent,String name,String model,int number,double in,double out,double lastin,double lastout,double average)
 	{
 		this.t=t;
 		this.parent=parent;
@@ -29,8 +30,9 @@ public class CommodityPO {
 		this.out=out;
 		this.lastin=lastin;
 		this.lastout=lastout;
+		this.average=average;
 	}
-	public CommodityPO(String parent,String name,String model,int number,double in,double out,double lastin,double lastout)
+	public CommodityPO(String parent,String name,String model,int number,double in,double out,double lastin,double lastout,double average)
 	{
 		t=t.Commodity;
 		this.parent=parent;
@@ -41,6 +43,7 @@ public class CommodityPO {
 		this.out=out;
 		this.lastin=lastin;
 		this.lastout=lastout;
+		this.average=average;
 	}
 	public CommodityPO(Type t,String parent,String name)
 	{
@@ -105,5 +108,41 @@ public class CommodityPO {
 	public void setOut(double out)
 	{
 		this.out=out;
+	}
+	public Type getT() {
+		return t;
+	}
+	public void setT(Type t) {
+		this.t = t;
+	}
+	public String getModel() {
+		return model;
+	}
+	public void setModel(String model) {
+		this.model = model;
+	}
+	public double getLastin() {
+		return lastin;
+	}
+	public void setLastin(double lastin) {
+		this.lastin = lastin;
+	}
+	public double getLastout() {
+		return lastout;
+	}
+	public void setLastout(double lastout) {
+		this.lastout = lastout;
+	}
+	public double getAverage() {
+		return average;
+	}
+	public void setAverage(double average) {
+		this.average = average;
+	}
+	public void setParent(String parent) {
+		this.parent = parent;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 }

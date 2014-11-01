@@ -32,7 +32,7 @@ public class StubCategoryData {
 			for(int i=0;i<coms.size();i++)
 			{
 				StubCommodityData com=coms.get(i);
-				result.add(new CommodityPO(Type.Commodity,com.parent,com.name,com.model,com.number,com.in,com.out,com.lastin,com.lastout));
+				result.add(new CommodityPO(Type.Commodity,com.parent,com.name,com.model,com.number,com.in,com.out,com.lastin,com.lastout,com.average));
 			}
 		}
 		else if(!cats.isEmpty())

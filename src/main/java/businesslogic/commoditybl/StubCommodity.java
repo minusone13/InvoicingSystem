@@ -13,6 +13,8 @@ public class StubCommodity {
 	double out;
 	double lastin;
 	double lastout;
+	double average;
+	
 	public String getParent()
 	{
 		return parent;
@@ -64,6 +66,6 @@ public class StubCommodity {
 	
 	public CommodityPO toPO()
 	{
-		return new CommodityPO(Type.Commodity,parent,name,model,number,in,out,lastin,lastout);
+		return new CommodityPO(Type.Commodity,parent,name,model,number,in,out,lastin,lastout,average);
 	}
 }
