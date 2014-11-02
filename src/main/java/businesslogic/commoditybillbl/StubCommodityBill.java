@@ -11,15 +11,15 @@ public class StubCommodityBill
 	ArrayList<StubSpillsLossBill> sls;
 	public RM addSpillsLossBill()
 	{
-		return new RM();
+		return RM.done;
 	}
 	public RM addGiftBill()
 	{
-		return new RM();
+		return RM.done;
 	}
 	public RM addAlertBill()
 	{
-		return new RM();
+		return RM.done;
 	}
 }
 

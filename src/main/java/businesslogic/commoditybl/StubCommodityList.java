@@ -20,9 +20,12 @@ public class StubCommodityList {
 	}
 	public RM addCommodity(CommodityVO vo)
 	{
+		CommodityPO po=comdata.findCommodity(vo.getname(),vo.getmodel());
+//		if(po!=null)
+//			return RM.Type.redundance
 		StubCommodity com=new StubCommodity();
 		comdata.addCommodity(com.toPO());
-		return new RM();
+		return RM.done;
 	}
 	public void setcomdata(StubCommodityDataService comdata)
 	{
