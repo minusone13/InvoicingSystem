@@ -62,6 +62,15 @@ public class StubCategoryData implements Serializable{
 		}
 		return null;//not found
 	}
+	public StubCategoryData goThrow(String[] nameOfParent, int layer)
+	{
+		StubCategoryData cat = findSubCat(nameOfParent[layer]);
+		if(cat==null)
+			return null;//not found;
+		else if(++layer>=nameOfParent.length)
+			return cat;
+		return cat.goThrow(nameOfParent, layer);
+	}
 	public StubCommodityData findCommodity(String name,String model)
 	{
 		if(coms==null || coms.size()==0)

@@ -41,7 +41,7 @@ public class StubCommodityList implements Serializable{
 		String a[]=parent.split("\\");
 		if(!a[0].equals("1"))//default root is 1
 			return false;
-		
+		cats.get(0).findSubCat(name);
 		return true;
 	}
 }
