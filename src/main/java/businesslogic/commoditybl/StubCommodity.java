@@ -28,6 +28,15 @@ public class StubCommodity {
 		lastout=po.getLastOut();
 		average=po.getAverage();
 	}
+	public StubCommodity(CommodityVO vo)
+	{
+		parent=vo.getparent();
+		name=vo.getname();
+		model=vo.getmodel();
+		number=0;
+		in=vo.getin();
+		out=vo.getout();
+	}
 	
 	public String getParent()
 	{
