@@ -11,7 +11,7 @@ public class StubSpillsLossBill extends Bill implements GetVOandPO
 {//报溢报损单，统一进入单据池管理和存储
 	private BillStyle style=BillStyle.SpillsLossBill;
 	private String ID;
-	enum Type
+	public enum Type
 	{
 		Spills,
 		Loss
