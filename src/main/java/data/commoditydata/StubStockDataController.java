@@ -13,22 +13,29 @@ public class StubStockDataController implements StubCommodityDataService{
     {
         f = Opendoc("Stock.txt");
         
-        ObjectOutputStream oos=null;
-		try {
-			oos = new ObjectOutputStream(new FileOutputStream(f));
-		} catch (FileNotFoundException e2) {
-			// TODO Auto-generated catch block
-			e2.printStackTrace();
-		} catch (IOException e2) {
-			// TODO Auto-generated catch block
-			e2.printStackTrace();
-		}
-        try {
-			oos.writeObject(new StubCommodityList());
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+        //some initial under;
+//        ObjectOutputStream oos=null;
+//		try {
+//			oos = new ObjectOutputStream(new FileOutputStream(f));
+//		} catch (FileNotFoundException e2) {
+//			// TODO Auto-generated catch block
+//			e2.printStackTrace();
+//		} catch (IOException e2) {
+//			// TODO Auto-generated catch block
+//			e2.printStackTrace();
+//		}
+//        try {
+//			oos.writeObject(new StubCommodityList());
+//		} catch (IOException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
+//        try {
+//			oos.close();
+//		} catch (IOException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
         
         
         ObjectInputStream ois=null;
@@ -61,6 +68,32 @@ public class StubStockDataController implements StubCommodityDataService{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+        	
+        	//some initial procedure under;
+//        	l.initial();
+//        	ObjectOutputStream oos=null;
+//    		try {
+//    			oos = new ObjectOutputStream(new FileOutputStream(f));
+//    		} catch (FileNotFoundException e2) {
+//    			// TODO Auto-generated catch block
+//    			e2.printStackTrace();
+//    		} catch (IOException e2) {
+//    			// TODO Auto-generated catch block
+//    			e2.printStackTrace();
+//    		}
+//            try {
+//    			oos.writeObject(l);
+//    		} catch (IOException e1) {
+//    			// TODO Auto-generated catch block
+//    			e1.printStackTrace();
+//    		}
+//            try {
+//    			oos.close();
+//    		} catch (IOException e1) {
+//    			// TODO Auto-generated catch block
+//    			e1.printStackTrace();
+//    		}
+        	
     }
 	public boolean addCommodity(CommodityPO po)
 	{

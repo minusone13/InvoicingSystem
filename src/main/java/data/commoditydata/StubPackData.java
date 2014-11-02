@@ -1,8 +1,9 @@
 package data.commoditydata;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class StubPackData {
+public class StubPackData implements Serializable{
 	ArrayList<StubCommodityData> coms;
 	int quantity;
 	double price;

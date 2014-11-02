@@ -1,9 +1,11 @@
 package data.commoditydata;
 
+import java.io.Serializable;
 import java.util.*;
+
 import po.*;
 
-public class StubCommodityData{
+public class StubCommodityData implements Serializable{
 	public String getID() {
 		return id;
 	}

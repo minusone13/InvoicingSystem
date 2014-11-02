@@ -7,6 +7,13 @@ import po.*;
 public class StubCommodityList implements Serializable{
 	ArrayList<StubCategoryData> cats;
 	ArrayList<StubPackData> packs;
+	public boolean initial()
+	{
+		cats=new ArrayList<StubCategoryData>();
+		cats.add(new StubCategoryData("0","1"));
+		packs=new ArrayList<StubPackData>();
+		return true;
+	}
 	public boolean addCommodity(CommodityPO po)
 	{
 		String s=po.getParent();
@@ -31,6 +38,10 @@ public class StubCommodityList implements Serializable{
 	}
 	public boolean addCategory(String parent, String name)
 	{
+		String a[]=parent.split("\\");
+		if(!a[0].equals("1"))//default root is 1
+			return false;
+		
 		return true;
 	}
 }

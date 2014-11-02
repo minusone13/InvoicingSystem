@@ -1,15 +1,21 @@
 package data.commoditydata;
 
+import java.io.Serializable;
 import java.util.*;
 
 import po.*;
 import po.CommodityPO.*;
 
-public class StubCategoryData {
+public class StubCategoryData implements Serializable{
 	ArrayList<StubCategoryData> cats;
 	ArrayList<StubCommodityData> coms;
 	String parent;
 	String name;
+	public StubCategoryData(String parent,String name)
+	{
+		this.parent=parent;
+		this.name=name;
+	}
 	public boolean canAddCategory()
 	{
 		if(!coms.isEmpty())
