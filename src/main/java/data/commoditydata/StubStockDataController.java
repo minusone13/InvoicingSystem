@@ -13,22 +13,22 @@ public class StubStockDataController implements StubCommodityDataService{
     {
         f = Opendoc("Stock.txt");
         
-//        ObjectOutputStream oos=null;
-//		try {
-//			oos = new ObjectOutputStream(new FileOutputStream(f));
-//		} catch (FileNotFoundException e2) {
-//			// TODO Auto-generated catch block
-//			e2.printStackTrace();
-//		} catch (IOException e2) {
-//			// TODO Auto-generated catch block
-//			e2.printStackTrace();
-//		}
-//        try {
-//			oos.writeObject(new StubCommodityList());
-//		} catch (IOException e1) {
-//			// TODO Auto-generated catch block
-//			e1.printStackTrace();
-//		}
+        ObjectOutputStream oos=null;
+		try {
+			oos = new ObjectOutputStream(new FileOutputStream(f));
+		} catch (FileNotFoundException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		} catch (IOException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+        try {
+			oos.writeObject(new StubCommodityList());
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
         
         
         ObjectInputStream ois=null;

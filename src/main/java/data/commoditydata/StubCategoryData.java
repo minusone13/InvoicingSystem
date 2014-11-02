@@ -45,4 +45,26 @@ public class StubCategoryData {
 		}
 		return result;
 	}
+	public StubCategoryData findSubCat(String name)
+	{
+		if(cats==null || cats.size()==0)
+			return null;//does not have any sub category
+		for(int i=0;i<cats.size();i++)
+		{
+			if(cats.get(i).name==name)
+				return cats.get(i);
+		}
+		return null;//not found
+	}
+	public StubCommodityData findCommodity(String name,String model)
+	{
+		if(coms==null || coms.size()==0)
+			return null;//does not have any sub category
+		for(int i=0;i<coms.size();i++)
+		{
+			if(coms.get(i).name==name && coms.get(i).model==model)
+				return coms.get(i);
+		}
+		return null;//not found
+	}
 }
