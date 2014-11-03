@@ -7,6 +7,7 @@ import po.*;
 public class StubCommodityList implements Serializable{
 	ArrayList<StubCategoryData> cats;
 	ArrayList<StubPackData> packs;
+	StubCategoryData cat;//=cats.get(0);
 	public boolean initial()
 	{
 		cats=new ArrayList<StubCategoryData>();
@@ -18,6 +19,8 @@ public class StubCommodityList implements Serializable{
 	{
 		String s=po.getParent();
 		String a[]=s.split("\\");
+		StubCategoryData temp=cat.goThrow(a, 1);
+		temp.getComs();
 		return true;
 	}
 	public ArrayList<CommodityPO> findCommodity(String name)

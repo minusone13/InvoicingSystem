@@ -63,12 +63,13 @@ public class StubCategoryData implements Serializable{
 		return null;//not found
 	}
 	public StubCategoryData goThrow(String[] nameOfParent, int layer)
-	{
+	{//to gothrow all the parent directly to the last category
+		//this method is used when deleting or adding a commodity. and many other inner uses
 		StubCategoryData cat = findSubCat(nameOfParent[layer]);
 		if(cat==null)
 			return null;//not found;
 		else if(++layer>=nameOfParent.length)
-			return cat;
+			return cat;//递归的返回条件
 		return cat.goThrow(nameOfParent, layer);
 	}
 	public StubCommodityData findCommodity(String name,String model)
@@ -81,5 +82,29 @@ public class StubCategoryData implements Serializable{
 				return coms.get(i);
 		}
 		return null;//not found
+	}
+	public ArrayList<StubCategoryData> getCats() {
+		return cats;
+	}
+	public void setCats(ArrayList<StubCategoryData> cats) {
+		this.cats = cats;
+	}
+	public ArrayList<StubCommodityData> getComs() {
+		return coms;
+	}
+	public void setComs(ArrayList<StubCommodityData> coms) {
+		this.coms = coms;
+	}
+	public String getParent() {
+		return parent;
+	}
+	public void setParent(String parent) {
+		this.parent = parent;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 }
