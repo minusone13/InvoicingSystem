@@ -4,7 +4,7 @@ import po.*;
 import po.CommodityPO.Type;
 import vo.*;
 
-public class StubCommodity {
+public class MockCommodity {
 	String parent;//the ID of parent Category
 	String name;
 	String model;
@@ -15,8 +15,8 @@ public class StubCommodity {
 	double lastout;
 	double average;
 	
-	public StubCommodity(){}
-	public StubCommodity(CommodityPO po)
+	public MockCommodity(){}
+	public MockCommodity(CommodityPO po)
 	{
 		parent=po.getParent();
 		name=po.getName();
@@ -28,7 +28,7 @@ public class StubCommodity {
 		lastout=po.getLastOut();
 		average=po.getAverage();
 	}
-	public StubCommodity(CommodityVO vo)
+	public MockCommodity(CommodityVO vo)
 	{
 		parent=vo.getparent();
 		name=vo.getname();

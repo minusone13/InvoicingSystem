@@ -24,7 +24,7 @@ public class StubStockController implements StubCommodityBlService
 	{
 		return l.findCommodity(name);
 	}
-	public boolean addPack(ArrayList<StubCommodity> commodityarray,int quantity, double discount)
+	public boolean addPack(ArrayList<MockCommodity> commodityarray,int quantity, double discount)
 	{
 		return l.addPack(commodityarray, quantity, discount);
 	}

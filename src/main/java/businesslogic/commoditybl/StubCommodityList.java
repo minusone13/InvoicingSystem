@@ -14,7 +14,7 @@ public class StubCommodityList {
 	{
 		return null;
 	}
-	public boolean addPack(ArrayList<StubCommodity> commodityarray,int quantity, double discount)
+	public boolean addPack(ArrayList<MockCommodity> commodityarray,int quantity, double discount)
 	{
 		return true;
 	}
@@ -25,7 +25,7 @@ public class StubCommodityList {
 			return RM.redundance;
 		else
 		{
-			StubCommodity com=new StubCommodity(vo);
+			MockCommodity com=new MockCommodity(vo);
 			comdata.addCommodity(com.toPO());
 			return RM.done;
 		}
@@ -39,7 +39,7 @@ public class StubCommodityList {
 		CommodityPO po=comdata.findCommodity(name,model);
 		if(po==null)//not found
 			return false;
-		StubCommodity com=new StubCommodity(po);
+		MockCommodity com=new MockCommodity(po);
 		return true;
 	}
 	public boolean checkOut(String name, String model, int quantity, double price)
@@ -47,7 +47,7 @@ public class StubCommodityList {
 		CommodityPO po=comdata.findCommodity(name,model);
 		if(po==null)//not found
 			return false;
-		StubCommodity com=new StubCommodity(po);
+		MockCommodity com=new MockCommodity(po);
 		return true;
 	}
 }

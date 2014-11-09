@@ -4,13 +4,13 @@ import java.util.ArrayList;
 
 public class StubPack 
 {//特价包类
-	ArrayList<StubCommodity> coms;
+	ArrayList<MockCommodity> coms;
 	int quantity;
 	double price;//总价，通过total-discount得出
-	public ArrayList<StubCommodity> getComs() {
+	public ArrayList<MockCommodity> getComs() {
 		return coms;
 	}
-	public void setComs(ArrayList<StubCommodity> coms) {
+	public void setComs(ArrayList<MockCommodity> coms) {
 		this.coms = coms;
 	}
 	public int getQuantity() {

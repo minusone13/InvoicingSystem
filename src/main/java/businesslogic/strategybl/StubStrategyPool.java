@@ -3,7 +3,7 @@ package businesslogic.strategybl;
 import java.util.ArrayList;
 
 import businesslogic.StrategyStyle;
-import businesslogic.commoditybl.StubCommodity;
+import businesslogic.commoditybl.MockCommodity;
 
 public class StubStrategyPool {
 
@@ -42,7 +42,7 @@ public class StubStrategyPool {
 		
 	}
 	/*需要制定一个赠送赠品的客户分层策略*/
-	public void addLevelStrategy (int level,int Limit,ArrayList<StubCommodity> gift,String StartTime,int LastTime){
+	public void addLevelStrategy (int level,int Limit,ArrayList<MockCommodity> gift,String StartTime,int LastTime){
 		
 	}
 	/*需要制定一个折让客户分层策略*/
@@ -54,11 +54,11 @@ public class StubStrategyPool {
 		
 	}
 	/*需要制定一条特价包促销策略*/
-	public void addBarginStrategy (ArrayList<StubCommodity> bargin,int discount,int num,String StartTime,int LastTime){
+	public void addBarginStrategy (ArrayList<MockCommodity> bargin,int discount,int num,String StartTime,int LastTime){
 		
 	}
 	/*需要制定一条赠送赠品的满额促销策略*/
-	public void addReachStrategy (int Limit,ArrayList<StubCommodity> gift,String StartTime,int LastTime){
+	public void addReachStrategy (int Limit,ArrayList<MockCommodity> gift,String StartTime,int LastTime){
 		
 	}
 	/*需要制定一条赠送代金券的满额促销策略*/

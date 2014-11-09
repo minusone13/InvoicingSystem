@@ -8,9 +8,9 @@ import businesslogic.examinebl.Bill;
 
 public class StubAlertBill extends Bill implements GetVOandPO
 {//报警单对象，统一进入单据池管理和存储
-	StubCommodity com;
+	MockCommodity com;
 	int shortage;
-	public StubAlertBill(StubCommodity com, int shortage)
+	public StubAlertBill(MockCommodity com, int shortage)
 	{
 		this.com=com;
 		this.shortage=shortage;
