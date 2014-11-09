@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import vo.BarginStrategyVO;
 import vo.BusinessSituationVO;
-import vo.CommodityVO;
+import vo.MockCommodityVO;
 import vo.LevelStrategyVO;
 import vo.ReachStrategyVO;
 import vo.VO;

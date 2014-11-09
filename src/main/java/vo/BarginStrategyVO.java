@@ -9,7 +9,7 @@ public class BarginStrategyVO extends VO {
 	private StrategyStyle strategystyle=StrategyStyle.BarginStrategy;
 	
 	
-	private ArrayList<CommodityVO> alOfCommodityVo;//特价包商品信息数组
+	private ArrayList<MockCommodityVO> alOfCommodityVo;//特价包商品信息数组
 	private double discount;//降价金额
 	private int num;//特价包打包数量
 	
@@ -20,10 +20,10 @@ public class BarginStrategyVO extends VO {
 		
 	}
 	
-	public ArrayList<CommodityVO> getAlOfCommodityVo() {
+	public ArrayList<MockCommodityVO> getAlOfCommodityVo() {
 		return alOfCommodityVo;
 	}
-	public void setAlOfCommodityVo(ArrayList<CommodityVO> alOfCommodityVo) {
+	public void setAlOfCommodityVo(ArrayList<MockCommodityVO> alOfCommodityVo) {
 		this.alOfCommodityVo = alOfCommodityVo;
 	}
 	public double getDiscount() {

@@ -16,11 +16,11 @@ public class StubStockController implements StubCommodityBlService
 	{
 		return l;
 	}
-	public RM addCommodity(CommodityVO vo)
+	public RM addCommodity(MockCommodityVO vo)
 	{
 		return l.addCommodity(vo);
 	}
-	public ArrayList<CommodityVO> findCommodity(String name)
+	public ArrayList<MockCommodityVO> findCommodity(String name)
 	{
 		return l.findCommodity(name);
 	}

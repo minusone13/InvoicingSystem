@@ -2,6 +2,7 @@ package presentation;
 
 
 import data.commoditydata.*;
+import data.initial.Initial;
 import presentation.commodityui.CommodityDriver;
 import presentation.financialui.FinancialBLDriver;
 import businesslogic.financialbl.StubFinancial;
@@ -18,7 +19,9 @@ public class StartUp {
 		FinancialBLDriver driver = new FinancialBLDriver(financial);
 		driver.drive(financial);
 		
-		//库存管理人员的启动程序 
+		//库存管理人员的启动程序
+		Initial initial= new Initial();
+		initial.initialStock();
 		StockManagerDriver smd=new StockManagerDriver();
 		smd.start(new StubStockController(),new StubStockDataController());
 		

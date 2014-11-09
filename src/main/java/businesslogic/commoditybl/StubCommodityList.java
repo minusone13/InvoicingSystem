@@ -5,12 +5,12 @@ import java.util.ArrayList;
 import po.*;
 import businesslogic.stockmanagerbl.*;
 import dataservice.commoditydataservice.*;
-import vo.CommodityVO;
+import vo.MockCommodityVO;
 import vo.RM;
 
 public class StubCommodityList {
 	static StubCommodityDataService comdata;
-	public ArrayList<CommodityVO> findCommodity(String name)
+	public ArrayList<MockCommodityVO> findCommodity(String name)
 	{
 		return null;
 	}
@@ -18,7 +18,7 @@ public class StubCommodityList {
 	{
 		return true;
 	}
-	public RM addCommodity(CommodityVO vo)
+	public RM addCommodity(MockCommodityVO vo)
 	{
 		CommodityPO po=comdata.findCommodity(vo.getname(),vo.getmodel());
 		if(po!=null)

@@ -1,6 +1,6 @@
 package vo;
 
-public class CommodityVO {
+public class MockCommodityVO {
 	public enum Type
 	{
 		Category,
@@ -15,13 +15,13 @@ public class CommodityVO {
 	double out;
 	double lastin;
 	double lastout;
-	public CommodityVO(String parent,String name)
+	public MockCommodityVO(String parent,String name)
 	{
 		t=t.Category;
 		this.parent=parent;
 		this.name=name;
 	}
-	public CommodityVO(String parent,String name,String model,double in,double out)
+	public MockCommodityVO(String parent,String name,String model,double in,double out)
 	{
 		t=t.Commodity;
 		this.parent=parent;

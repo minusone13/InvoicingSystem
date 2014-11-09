@@ -28,7 +28,7 @@ public class MockCommodity {
 		lastout=po.getLastOut();
 		average=po.getAverage();
 	}
-	public MockCommodity(CommodityVO vo)
+	public MockCommodity(MockCommodityVO vo)
 	{
 		parent=vo.getparent();
 		name=vo.getname();
