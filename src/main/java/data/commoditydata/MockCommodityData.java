@@ -5,7 +5,7 @@ import java.util.*;
 
 import po.*;
 
-public class StubCommodityData implements Serializable{
+public class MockCommodityData implements Serializable{
 	public String getID() {
 		return id;
 	}

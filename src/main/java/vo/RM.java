@@ -5,5 +5,6 @@ public enum RM {
 		insufficient,
 		notfound,
 		unknownerror,
-		done
+		done,
+		treeerror
 }

@@ -8,7 +8,7 @@ import po.CommodityPO.*;
 
 public class StubCategoryData implements Serializable{
 	ArrayList<StubCategoryData> cats;
-	ArrayList<StubCommodityData> coms;
+	ArrayList<MockCommodityData> coms;
 	String parent;
 	String name;
 	public StubCategoryData(String parent,String name)
@@ -37,7 +37,7 @@ public class StubCategoryData implements Serializable{
 		{
 			for(int i=0;i<coms.size();i++)
 			{
-				StubCommodityData com=coms.get(i);
+				MockCommodityData com=coms.get(i);
 				result.add(new CommodityPO(Type.Commodity,com.parent,com.name,com.model,com.number,com.in,com.out,com.lastin,com.lastout,com.average));
 			}
 		}
@@ -72,7 +72,7 @@ public class StubCategoryData implements Serializable{
 			return cat;//递归的返回条件
 		return cat.goThrow(nameOfParent, layer);
 	}
-	public StubCommodityData findCommodity(String name,String model)
+	public MockCommodityData findCommodity(String name,String model)
 	{
 		if(coms==null || coms.size()==0)
 			return null;//does not have any sub category
@@ -89,10 +89,10 @@ public class StubCategoryData implements Serializable{
 	public void setCats(ArrayList<StubCategoryData> cats) {
 		this.cats = cats;
 	}
-	public ArrayList<StubCommodityData> getComs() {
+	public ArrayList<MockCommodityData> getComs() {
 		return coms;
 	}
-	public void setComs(ArrayList<StubCommodityData> coms) {
+	public void setComs(ArrayList<MockCommodityData> coms) {
 		this.coms = coms;
 	}
 	public String getParent() {

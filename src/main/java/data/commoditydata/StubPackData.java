@@ -4,13 +4,13 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class StubPackData implements Serializable{
-	ArrayList<StubCommodityData> coms;
+	ArrayList<MockCommodityData> coms;
 	int quantity;
 	double price;
-	public ArrayList<StubCommodityData> getComs() {
+	public ArrayList<MockCommodityData> getComs() {
 		return coms;
 	}
-	public void setComs(ArrayList<StubCommodityData> coms) {
+	public void setComs(ArrayList<MockCommodityData> coms) {
 		this.coms = coms;
 	}
 	public int getQuantity() {
