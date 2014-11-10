@@ -35,7 +35,7 @@ public class StubCommodityList {
 		this.comdata=comdata;
 	}
 	public boolean checkIn(String name, String model, int quantity, double price)
-	{
+	{//入库
 		CommodityPO po=comdata.findCommodity(name,model);
 		if(po==null)//not found
 			return false;
@@ -43,7 +43,7 @@ public class StubCommodityList {
 		return true;
 	}
 	public boolean checkOut(String name, String model, int quantity, double price)
-	{
+	{//出库
 		CommodityPO po=comdata.findCommodity(name,model);
 		if(po==null)//not found
 			return false;

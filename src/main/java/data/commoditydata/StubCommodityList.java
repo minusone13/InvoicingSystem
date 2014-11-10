@@ -7,18 +7,23 @@ import po.*;
 public class StubCommodityList implements Serializable{
 	ArrayList<StubCategoryData> cats;
 	ArrayList<StubPackData> packs;
-	StubCategoryData cat;//=cats.get(0);
+	StubCategoryData cat;
 	public boolean initial()
 	{
 		cats=new ArrayList<StubCategoryData>();
 		cats.add(new StubCategoryData("0","1"));
 		packs=new ArrayList<StubPackData>();
+		cat=cats.get(0);
 		return true;
 	}
 	public boolean addCommodity(CommodityPO po)
 	{
+		if(po.getType()!=CommodityPO.Type.Commodity)
+			return false;
 		String s=po.getParent();
 		String a[]=s.split("\\");
+		if(!a[0].equals("1"))//default root is 1
+			return false;
 		StubCategoryData temp=cat.goThrow(a, 1);
 		return temp.add(new MockCommodityData(po));
 	}
@@ -43,7 +48,8 @@ public class StubCommodityList implements Serializable{
 		String a[]=parent.split("\\");
 		if(!a[0].equals("1"))//default root is 1
 			return false;
-		cats.get(0).findSubCat(name);
+		StubCategoryData temp=cat.goThrow(a, 1);
+		temp.add(new StubCategoryData(parent,name));
 		return true;
 	}
 }

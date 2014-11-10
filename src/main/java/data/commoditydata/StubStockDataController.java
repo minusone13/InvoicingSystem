@@ -137,7 +137,7 @@ public class StubStockDataController implements StubCommodityDataService{
 		return l.addCommodity(po);
 	}
 	public CommodityListPO getAll()
-	{
+	{//this is for financial
 		return new CommodityListPO();
 	}
 	public ArrayList<CommodityPO> findCommodity(String name)
@@ -150,7 +150,7 @@ public class StubStockDataController implements StubCommodityDataService{
 	}
 	public boolean deleteCommodity(String name, String model)
 	{
-		return true;
+		return l.deleteCommodity(name, model);
 	}
 	public boolean updateCommodity(CommodityPO po)
 	{
