@@ -19,6 +19,7 @@ public class CommodityPO {
 	double lastin;
 	double lastout;
 	double average;
+	ArrayList<CommodityRecordPO> record=new ArrayList();
 	public CommodityPO(){}
 	public CommodityPO(Type t,String parent,String name,String model,int number,double in,double out,double lastin,double lastout,double average)
 	{
@@ -145,5 +146,11 @@ public class CommodityPO {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public ArrayList<CommodityRecordPO> getRecord() {
+		return record;
+	}
+	public void setRecord(ArrayList<CommodityRecordPO> record) {
+		this.record = record;
 	}
 }

@@ -70,5 +70,20 @@ public class MockCommodityData implements Serializable{
 	double lastin;
 	double lastout;
 	double average;
+	ArrayList <CommodityRecordPO> record=new ArrayList<CommodityRecordPO>();
+	public MockCommodityData(CommodityPO po)
+	{
+		id=po.getParent()+"\\"+po.getName();
+		parent=po.getParent();
+		name=po.getName();
+		model=po.getModel();
+		number=po.getNumber();
+		in=po.getIn();
+		out=po.getOut();
+		lastin=po.getLastIn();
+		lastout=po.getLastOut();
+		average=po.getAverage();
+		record=new ArrayList<CommodityRecordPO>(po.getRecord());
+	}
 	
 }

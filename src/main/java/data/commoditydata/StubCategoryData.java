@@ -83,6 +83,26 @@ public class StubCategoryData implements Serializable{
 		}
 		return null;//not found
 	}
+	public boolean add(MockCommodityData com)
+	{
+		if(canAddCommodity())
+		{
+			coms.add(com);
+			return true;
+		}
+		else
+			return false;//已有分类，不能添加商品
+	}
+	public boolean add(StubCategoryData cat)
+	{
+		if(canAddCategory())
+		{
+			cats.add(cat);
+			return true;
+		}
+		else
+			return false;//已有商品，不能添加分类
+	}
 	public ArrayList<StubCategoryData> getCats() {
 		return cats;
 	}

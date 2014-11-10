@@ -20,8 +20,7 @@ public class StubCommodityList implements Serializable{
 		String s=po.getParent();
 		String a[]=s.split("\\");
 		StubCategoryData temp=cat.goThrow(a, 1);
-		temp.getComs();
-		return true;
+		return temp.add(new MockCommodityData(po));
 	}
 	public ArrayList<CommodityPO> findCommodity(String name)
 	{

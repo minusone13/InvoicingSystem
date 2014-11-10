@@ -134,7 +134,7 @@ public class StubStockDataController implements StubCommodityDataService{
     
 	public boolean addCommodity(CommodityPO po)
 	{
-		return true;
+		return l.addCommodity(po);
 	}
 	public CommodityListPO getAll()
 	{
