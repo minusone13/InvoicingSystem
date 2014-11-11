@@ -17,7 +17,7 @@ public class StartUp {
 		//财务人员的驱动程序
 		StubFinancialBlService financial = new StubFinancial();
 		FinancialBLDriver driver = new FinancialBLDriver(financial);
-		driver.drive(financial);
+		driver.drive();
 		
 		//库存管理人员的启动程序
 		Initial initial= new Initial();

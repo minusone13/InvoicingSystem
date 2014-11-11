@@ -21,7 +21,7 @@ public class FinancialBLDriver {
 		this.fbs = fbs;
 	}
 	
-	public void drive(StubFinancialBlService fbs) {
+	public void drive() {
 		boolean result1 = fbs.updatePassword("sb");
 		if(result1==true) System.out.println("UPDATE SUCCESS!");
 		

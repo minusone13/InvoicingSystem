@@ -3,9 +3,9 @@ package data.accountdata;
 import java.util.ArrayList;
 
 import po.AccountPO;
-import dataservice.accountdataservice.AccountDataService;
+import dataservice.accountdataservice.StubAccountDataService;
 
-public class AccountData implements AccountDataService{
+public class StubAccountData implements StubAccountDataService{
 	
 	
 	public ArrayList<AccountPO> getAllAcountInfo () {
@@ -17,10 +17,12 @@ public class AccountData implements AccountDataService{
 	}
 
 	public boolean add(AccountPO a) {
+		
 		return false;
 	}
 
 	public boolean delete(AccountPO apo) {
+		
 		return false;
 	}
 

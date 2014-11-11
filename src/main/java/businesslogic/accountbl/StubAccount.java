@@ -2,8 +2,8 @@
 
 import java.util.ArrayList;
 
-import data.accountdata.AccountData;
-import dataservice.accountdataservice.AccountDataService;
+import data.accountdata.StubAccountData;
+import dataservice.accountdataservice.StubAccountDataService;
 import businesslogic.commoditybl.StubCommodityList;
 import businesslogic.salebl.StubSale;
 import businesslogic.stockmanagerbl.StubStockController;
@@ -13,7 +13,7 @@ import vo.AccountVO;
 public class StubAccount {
 	String name;//账户名
 	double balance;//余额
-	AccountDataService a = new AccountData();
+	StubAccountDataService a = new StubAccountData();
 	public StubAccount() {
 		this(null, 0);
 	}
