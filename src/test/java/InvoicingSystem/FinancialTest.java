@@ -14,7 +14,7 @@ public class FinancialTest extends TestCase{
 		
 	}
 	public void testaddAccount() {
-		boolean result2 = financial.addAccount("00001");
+		boolean result2 = financial.addAccount("周润发");
 		assertTrue(result2);
 	}
 }

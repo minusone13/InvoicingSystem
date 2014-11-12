@@ -30,9 +30,8 @@ public class StubAccount {
 	public boolean addAccount(String name) {
 		AccountPO apo = new AccountPO();
 		apo.setName(name);
-		apo.setBalance(0);
-		a.add(apo);
-		return true;
+		apo.setBalance(0);	
+		return a.add(apo);
 	}
 	
 	public boolean deleteAccount(String name) {

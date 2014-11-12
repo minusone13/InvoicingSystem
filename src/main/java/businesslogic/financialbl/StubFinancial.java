@@ -86,4 +86,8 @@ public class StubFinancial implements StubFinancialBlService{
 		return r.creatCashPayment(cpv);
 		
 	}
+	
+	public void initial() {
+		
+	}
 }
