@@ -8,7 +8,7 @@ import dataservice.commoditydataservice.*;
 import vo.MockCommodityVO;
 import vo.RM;
 
-public class StubCommodityList {
+public class StubCommodityList {//商品列表
 	static StubCommodityDataService comdata;
 	public ArrayList<MockCommodityVO> findCommodity(String name)
 	{
