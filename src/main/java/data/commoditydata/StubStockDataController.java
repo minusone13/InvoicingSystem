@@ -11,7 +11,7 @@ public class StubStockDataController implements StubCommodityDataService{
 	static File f;
 	public StubStockDataController()
 	{
-		f = Opendoc("Stock.txt");   
+		f = Opendoc("Stock.ser");   
         
         ObjectInputStream ois=null;
         	try {
@@ -47,7 +47,7 @@ public class StubStockDataController implements StubCommodityDataService{
 	
     public static void Initial()
     {
-        f = Opendoc("Stock.txt");
+        f = Opendoc("Stock.ser");
         
         //some initial under;
         ObjectOutputStream oos=null;
