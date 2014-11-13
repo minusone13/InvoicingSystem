@@ -5,8 +5,9 @@ import java.util.ArrayList;
 import po.BarginStrategyPO;
 import po.LevelStrategyPO;
 import po.ReachStrategyPO;
+import dataservice.strategydataservice.StrategySaverService;
 
-public class StrategySaver {
+public class StrategySaver implements StrategySaverService{
 
 	public void saveLevelStrategy(ArrayList<LevelStrategyPO> ls){
 	

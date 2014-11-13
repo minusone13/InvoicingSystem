@@ -5,8 +5,9 @@ import java.util.ArrayList;
 import po.AlertBillPO;
 import po.GiftBillPO;
 import po.SpillsLossBillPO;
+import dataservice.billdataservice.CommodityBillSaverService;
 
-public class CommodityBillSaver {
+public class CommodityBillSaver implements CommodityBillSaverService{
 
 	/*构造函数*/
 	public CommodityBillSaver(){
