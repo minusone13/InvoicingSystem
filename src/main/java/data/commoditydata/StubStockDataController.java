@@ -160,6 +160,18 @@ public class StubStockDataController implements StubCommodityDataService{
 	{
 		return true;
 	}
+    public static boolean save()
+    {
+        try {
+		ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(f));
+		oos.writeObject(l);
+		oos.writeObject(null);
+		oos.close();
+	} catch (IOException e1) {
+		e1.printStackTrace();
+	}
+        return true;
+    }
     public static File Opendoc(String s)
 	{//参数为需要打开的文件路径
         File f = new File(s);
