@@ -16,65 +16,65 @@ import dataservice.accountdataservice.StubAccountDataService;
 
 public class StubAccountData implements StubAccountDataService{
 	
-	
-	public ArrayList<AccountPO> getAcountList () {
-		return null;
-	}
 
 	public AccountPO find(String name) {
-		
-		return null;
+		ArrayList<AccountPO> accountList = reader();	
+		int index = traversal(accountList, name);
+		if(index==-1) return null;
+		return accountList.get(index);
 	}
 
-	public boolean add(AccountPO a) {
-		System.out.println("!!!!!!!!!!!!!!!!!!!!");
+	public boolean add(AccountPO apo) {
 		ArrayList<AccountPO> accountList = reader();
 		if(accountList == null) accountList = new ArrayList<AccountPO>();
-		accountList.add(a);
+		int index = traversal(accountList, apo.getName());
+		if(index != -1) return false;
+		else accountList.add(apo);
 		return writer(accountList);
 	}
 
 	public boolean delete(AccountPO apo) {
-		
-		return false;
+		ArrayList<AccountPO> accountList = reader();
+		int index = traversal(accountList, apo.getName());
+		AccountPO tempPO = null;
+		if(index == -1) return false;
+		tempPO = accountList.get(index);
+		if(tempPO.getBalance() == 0) {
+			accountList.remove(index);
+			return writer(accountList);
+		}
+		return false;//可能因为不存在或者余额不为0;考虑用enum
 	}
 
+
 	public boolean update(AccountPO apo) {
-		return false;
+		ArrayList<AccountPO> accountList = reader();
+		int index1 = traversal(accountList, apo.getName());
+		int index2 = traversal(accountList, apo.getNewName());
+		AccountPO tempPO = null;
+		if(index1 == -1||index2 != -1) return false;//可能老账户不存在，或者新账户已存在，考虑enum
+		tempPO = accountList.get(index1);
+		tempPO.setName(apo.getNewName());
+		return writer(accountList);
 	}
 	
+	//遍历账户列表,返回结果的下标，如果为-1说明不存在
+	private int traversal (ArrayList<AccountPO> accountList, String name) {
+		if(accountList == null)	return -1;
+		int size = accountList.size();
+		for(int i=0;i<size;i++) {//遍历所有账户
+			AccountPO temp = accountList.get(i);
+			String accName = temp.getName();
+			if(accName.equals(name))  {//如果名称相同，并且余额为0才能删除				
+					return i;				
+			}
+		}
+		return -1;
+	}
 	//读取以序列化存储的账户列表对象
 	private ArrayList<AccountPO> reader() {
 		File filename = StubStockDataController.Opendoc("account.txt");
-		//initial
-		/*
-		ObjectOutputStream oos=null;
-		try {
-			oos = new ObjectOutputStream(new FileOutputStream(filename));
-		} catch (FileNotFoundException e2) {
-			// TODO Auto-generated catch block
-			e2.printStackTrace();
-		} catch (IOException e2) {
-			// TODO Auto-generated catch block
-			e2.printStackTrace();
-		}
-        try {
-			oos.writeObject(new ArrayList<AccountPO>());
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-        try {
-			oos.close();
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-        //end of initial
-		*/
-		System.out.println("before");
 		
-		System.out.println("after");
 		ArrayList<AccountPO> accountList = null;
 		ObjectInputStream ois=null;
 		try {
@@ -110,12 +110,18 @@ public class StubAccountData implements StubAccountDataService{
 		} catch (IOException e) {
 			e.printStackTrace();
 			return false;
-		}
+		} 
 		try {
 			oos.writeObject(accountList);
 		} catch (IOException e) {
 			e.printStackTrace();
 			return false;
+		} finally {
+			try {
+				oos.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 		return true;
 	}
