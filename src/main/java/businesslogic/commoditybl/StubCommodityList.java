@@ -26,8 +26,11 @@ public class StubCommodityList {//商品列表 haha
 		else
 		{
 			MockCommodity com=new MockCommodity(vo);
-			comdata.addCommodity(com.toPO());
-			return RM.done;
+			boolean result = comdata.addCommodity(com.toPO());
+			if(result)
+				return RM.done;
+			else
+				return RM.unknownerror;
 		}
 	}
 	public void setcomdata(StubCommodityDataService comdata)
