@@ -30,23 +30,21 @@ public class StubAccount {
 	public boolean addAccount(String name) {
 		AccountPO apo = new AccountPO();
 		apo.setName(name);
-		apo.setBalance(0);
-		a.add(apo);
-		return true;
+		apo.setBalance(0);	
+		return a.add(apo);
 	}
 	
 	public boolean deleteAccount(String name) {
 		AccountPO apo = new AccountPO();
 		apo.setName(name);
-		a.delete(apo);
-		return true;
+		return a.delete(apo);
 	}
 	
 	public boolean updateAccount(String oldname, String newname) {
 		AccountPO apo = new AccountPO();
 		apo.setName(oldname);
 		apo.setNewName(newname);
-		return true;
+		return a.update(apo);
 	}
 	public AccountVO findAccount(String name) {
 		AccountPO apo = new AccountPO();

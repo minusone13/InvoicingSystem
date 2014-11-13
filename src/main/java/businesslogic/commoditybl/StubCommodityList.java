@@ -8,7 +8,7 @@ import dataservice.commoditydataservice.*;
 import vo.MockCommodityVO;
 import vo.RM;
 
-public class StubCommodityList {
+public class StubCommodityList {//商品列表 haha
 	static StubCommodityDataService comdata;
 	public ArrayList<MockCommodityVO> findCommodity(String name)
 	{
@@ -26,8 +26,11 @@ public class StubCommodityList {
 		else
 		{
 			MockCommodity com=new MockCommodity(vo);
-			comdata.addCommodity(com.toPO());
-			return RM.done;
+			boolean result = comdata.addCommodity(com.toPO());
+			if(result)
+				return RM.done;
+			else
+				return RM.unknownerror;
 		}
 	}
 	public void setcomdata(StubCommodityDataService comdata)
