@@ -8,13 +8,22 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 public class FinancialTest extends TestCase{
-	static StubFinancialBlService financial = new StubFinancial();
-	static {
-		FinancialBLDriver driver = new FinancialBLDriver(financial);
-		
-	}
-	public void testaddAccount() {
+	StubFinancialBlService financial = new StubFinancial();
+	
+	public void testaddAccount() {		
 		boolean result2 = financial.addAccount("周润发");
-		assertTrue(result2);
+		assertTrue(result2);			
 	}
+	
+	public void testdeleteAccount() {
+		boolean result3 = financial.deleteAccount("0001");
+		assertFalse(result3);
+	}
+	
+	public void testupdateAccount() {
+		boolean result5 = financial.updateAccount("周润发", "周星驰");
+		assertTrue(result5);
+	}
+	
+	
 }
