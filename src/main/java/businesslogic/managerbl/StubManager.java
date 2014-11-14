@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import vo.BarginStrategyVO;
 import vo.BusinessSituationVO;
-import vo.MockCommodityVO;
 import vo.LevelStrategyVO;
 import vo.ReachStrategyVO;
 import vo.VO;
@@ -24,8 +23,9 @@ import businesslogic.strategybl.StubBarginStrategy;
 import businesslogic.strategybl.StubLevelStrategy;
 import businesslogic.strategybl.StubReachStrategy;
 import businesslogic.strategybl.StubStrategyPool;
+import businesslogicservice.managerblservice.StubManagerBlService;
 
-public class StubManager {
+public class StubManager implements StubManagerBlService{
 
 	private String ID;
 	private String name;
