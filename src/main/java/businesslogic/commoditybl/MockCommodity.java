@@ -30,12 +30,12 @@ public class MockCommodity {
 	}
 	public MockCommodity(MockCommodityVO vo)
 	{
-		parent=vo.getparent();
-		name=vo.getname();
-		model=vo.getmodel();
+		parent=vo.getParent();
+		name=vo.getName();
+		model=vo.getModel();
 		number=0;
-		in=vo.getin();
-		out=vo.getout();
+		in=vo.getIn();
+		out=vo.getOut();
 	}
 	
 	public String getParent()

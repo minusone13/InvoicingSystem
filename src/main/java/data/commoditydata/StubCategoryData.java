@@ -5,6 +5,7 @@ import java.util.*;
 
 import po.*;
 import po.CommodityPO.*;
+import vo.RM;
 
 public class StubCategoryData implements Serializable{
 	ArrayList<StubCategoryData> cats;
@@ -65,11 +66,14 @@ public class StubCategoryData implements Serializable{
 	public StubCategoryData goThrow(String[] nameOfParent, int layer)
 	{//to gothrow all the parent directly to the last category
 		//this method is used when deleting or adding a commodity. and many other inner uses
+		if(nameOfParent.length<=layer)
+			return this;//递归返回条件
 		StubCategoryData cat = findSubCat(nameOfParent[layer]);
 		if(cat==null)
 			return null;//not found;
-		else if(++layer>=nameOfParent.length)
-			return cat;//递归的返回条件
+//		else if(++layer>=nameOfParent.length)
+//			return cat;//递归的返回条件
+		layer++;
 		return cat.goThrow(nameOfParent, layer);
 	}
 	public MockCommodityData findCommodity(String name,String model)
@@ -83,15 +87,15 @@ public class StubCategoryData implements Serializable{
 		}
 		return null;//not found
 	}
-	public boolean add(MockCommodityData com)
+	public RM add(MockCommodityData com)
 	{
 		if(canAddCommodity())
 		{
 			coms.add(com);
-			return true;
+			return RM.done;
 		}
 		else
-			return false;//已有分类，不能添加商品
+			return RM.treeerror;//已有分类，不能添加商品
 	}
 	public boolean add(StubCategoryData cat)
 	{

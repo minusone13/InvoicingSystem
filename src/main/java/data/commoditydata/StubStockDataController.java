@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import dataservice.commoditydataservice.*;
 import po.*;
+import vo.RM;
 
 public class StubStockDataController implements StubCommodityDataService{
 	static StubCommodityList l;
@@ -132,9 +133,9 @@ public class StubStockDataController implements StubCommodityDataService{
     		}
     }
     
-	public boolean addCommodity(CommodityPO po)
+	public RM addCommodity(CommodityPO po)
 	{
-		boolean result=l.addCommodity(po);
+		RM result=l.addCommodity(po);
 		save();
 		return result;
 	}
