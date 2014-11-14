@@ -7,20 +7,7 @@ import vo.BusinessSituationVO;
 import vo.LevelStrategyVO;
 import vo.ReachStrategyVO;
 import vo.VO;
-import businesslogic.BillState;
-import businesslogic.commoditybillbl.StubAlertBill;
-import businesslogic.commoditybillbl.StubGiftBill;
-import businesslogic.commoditybillbl.StubSpillsLossBill;
-import businesslogic.financialbillbl.StubCashPaymentBill;
-import businesslogic.financialbillbl.StubPaymentBill;
-import businesslogic.financialbillbl.StubReceiptBill;
-import businesslogic.salebillbl.StubPurBackSheet;
-import businesslogic.salebillbl.StubPurSheet;
-import businesslogic.salebillbl.StubSaleBackSheet;
-import businesslogic.salebillbl.StubSaleSheet;
-import businesslogic.strategybl.StubBarginStrategy;
-import businesslogic.strategybl.StubLevelStrategy;
-import businesslogic.strategybl.StubReachStrategy;
+import businesslogic.BillStyle;
 
 public interface StubManagerBlService {
 	/*需要查看已提交单据*/
@@ -56,7 +43,7 @@ public interface StubManagerBlService {
 	/*需要制定一条赠送代金券的满额促销策略*/
 	public void addCouponReachStrategy (ReachStrategyVO rsvo);
 	/*需要查看经营历程*/
-	public ArrayList<VO> showBusinessProgress(String client,String operater,String warehouse,BillState billStyle, String StartTime,String LastTime);
+	public ArrayList<VO> showBusinessProgress(String client,String operater,String warehouse,BillStyle billStyle, String StartTime,String LastTime);
 	/*需要查看销售明细*/
 	public ArrayList<VO> showSaleDetail(String client,String operater,String warehouse,String commodity, String StartTime,String LastTime);
 	/*需要查看经营情况*/

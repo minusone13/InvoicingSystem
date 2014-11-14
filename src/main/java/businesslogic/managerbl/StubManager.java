@@ -8,6 +8,7 @@ import vo.LevelStrategyVO;
 import vo.ReachStrategyVO;
 import vo.VO;
 import businesslogic.BillState;
+import businesslogic.BillStyle;
 import businesslogic.commoditybillbl.StubAlertBill;
 import businesslogic.commoditybillbl.StubGiftBill;
 import businesslogic.commoditybillbl.StubSpillsLossBill;
@@ -199,7 +200,7 @@ public class StubManager implements StubManagerBlService{
 		
 	}
 	/*需要查看经营历程*/
-	public ArrayList<VO> showBusinessProgress(String client,String operater,String warehouse,BillState billStyle, String StartTime,String LastTime){
+	public ArrayList<VO> showBusinessProgress(String client,String operater,String warehouse,BillStyle billStyle, String StartTime,String LastTime){
 		return null;
 		
 	}
