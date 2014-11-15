@@ -3,6 +3,7 @@ package businesslogic.commoditybl;
 import java.util.ArrayList;
 
 import po.*;
+import po.stockpo.CommodityPO;
 import businesslogic.stockmanagerbl.*;
 import dataservice.commoditydataservice.*;
 import vo.MockCommodityVO;

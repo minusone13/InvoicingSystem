@@ -4,86 +4,74 @@ import java.io.Serializable;
 import java.util.*;
 
 import po.*;
+import po.stockpo.CommodityPO;
 
 public class MockCommodityData implements Serializable{
+	
 	public String getID() {
-		return id;
+		return po.getId();
 	}
 	public void setID(String iD) {
-		id = iD;
+		po.setId(iD);;
 	}
 	public String getParent() {
-		return parent;
+		return po.getParent();
 	}
 	public void setParent(String parent) {
-		this.parent = parent;
+		po.setParent(parent);;
 	}
 	public String getName() {
-		return name;
+		return po.getName();
 	}
 	public void setName(String name) {
-		this.name = name;
+		po.setName(name);;
 	}
 	public String getModel() {
-		return model;
+		return po.getModel();
 	}
 	public void setModel(String model) {
-		this.model = model;
+		po.setModel(model);;
 	}
 	public int getNumber() {
-		return number;
+		return po.getNumber();
 	}
 	public void setNumber(int number) {
-		this.number = number;
+		po.setNumber(number);;
 	}
 	public double getIn() {
-		return in;
+		return po.getIn();
 	}
 	public void setIn(double in) {
-		this.in = in;
+		po.setIn(in);;
 	}
 	public double getOut() {
-		return out;
+		return po.getOut();
 	}
 	public void setOut(double out) {
-		this.out = out;
+		po.setOut(out);;
 	}
 	public double getLastin() {
-		return lastin;
+		return po.getLastin();
 	}
 	public void setLastin(double lastin) {
-		this.lastin = lastin;
+		po.setLastIn(lastin);;
 	}
 	public double getLastout() {
-		return lastout;
+		return po.getLastout();
 	}
 	public void setLastout(double lastout) {
-		this.lastout = lastout;
+		po.setLastOut(lastout);;
 	}
-	String id;
-	String parent;
-	String name;
-	String model;
-	int number;
-	double in;
-	double out;
-	double lastin;
-	double lastout;
-	double average;
-	ArrayList <CommodityRecordPO> record=new ArrayList<CommodityRecordPO>();
+	CommodityPO po;
 	public MockCommodityData(CommodityPO po)
 	{
-		id=po.getParent()+"\\"+po.getName();
-		parent=po.getParent();
-		name=po.getName();
-		model=po.getModel();
-		number=po.getNumber();
-		in=po.getIn();
-		out=po.getOut();
-		lastin=po.getLastIn();
-		lastout=po.getLastOut();
-		average=po.getAverage();
-		record=new ArrayList<CommodityRecordPO>(po.getRecord());
+		this.po=po;
+	}
+	public CommodityPO getPo() {
+		return po;
+	}
+	public void setPo(CommodityPO po) {
+		this.po = po;
 	}
 	
 }

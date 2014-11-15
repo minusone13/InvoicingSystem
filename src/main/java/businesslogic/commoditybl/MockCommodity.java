@@ -1,7 +1,7 @@
 package businesslogic.commoditybl;
 
 import po.*;
-import po.CommodityPO.Type;
+import po.stockpo.CommodityPO;
 import vo.*;
 
 public class MockCommodity {
@@ -89,6 +89,6 @@ public class MockCommodity {
 	
 	public CommodityPO toPO()
 	{
-		return new CommodityPO(Type.Commodity,parent,name,model,number,in,out,lastin,lastout,average);
+		return new CommodityPO(parent,name,model,number,in,out,lastin,lastout,average);
 	}
 }

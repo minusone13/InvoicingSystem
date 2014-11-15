@@ -10,8 +10,8 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 import po.AccountPO;
+import data.Tool;
 import data.commoditydata.StubCommodityList;
-import data.commoditydata.StubStockDataController;
 import dataservice.accountdataservice.StubAccountDataService;
 
 public class StubAccountData implements StubAccountDataService{
@@ -76,7 +76,7 @@ public class StubAccountData implements StubAccountDataService{
 	}
 	//读取以序列化存储的账户列表对象
 	private ArrayList<AccountPO> reader() {
-		File filename = StubStockDataController.Opendoc("account.txt");
+		File filename = Tool.Opendoc("account.txt");
 		
 		ArrayList<AccountPO> accountList = null;
 		ObjectInputStream ois=null;

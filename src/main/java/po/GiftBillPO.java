@@ -1,8 +1,11 @@
 package po;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class GiftBillPO extends PO{
+import po.stockpo.CommodityPO;
+
+public class GiftBillPO extends PO implements Serializable{
 	ArrayList<CommodityPO> coms;
 	int quantity;
 	double total;

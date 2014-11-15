@@ -4,6 +4,7 @@ import java.io.*;
 import java.util.*;
 
 import po.*;
+import po.stockpo.CommodityPO;
 import vo.RM;
 
 public class StubCommodityList implements Serializable{
@@ -20,10 +21,8 @@ public class StubCommodityList implements Serializable{
 		flatlist=new ArrayList<MockCommodityData>();
 		return true;
 	}
-	public RM addCommodity(CommodityPO po)
+	public RM insert(CommodityPO po)
 	{
-		if(po.getType()!=CommodityPO.Type.Commodity)
-			return RM.unknownerror;
 		String s=po.getParent();
 		String a[]=s.split("\\");
 		if(!a[0].equals("1"))//default root is 1
@@ -40,7 +39,13 @@ public class StubCommodityList implements Serializable{
 	}
 	public CommodityPO findCommodity(String name, String model)
 	{
-		return new CommodityPO();
+		for(int i=0;i<flatlist.size();i++)
+		{
+			MockCommodityData com=flatlist.get(i);
+			if(com.getName().equals(name) && com.getModel().equals(model))
+				return com.getPo();
+		}
+		return null;//not found;
 	}
 	public boolean deleteCommodity(String name, String model)
 	{

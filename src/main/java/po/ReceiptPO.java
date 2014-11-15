@@ -1,6 +1,8 @@
 package po;
 
-public class ReceiptPO extends PO{
+import java.io.Serializable;
+
+public class ReceiptPO extends PO implements Serializable{
 	
 	String customer;
 	double total;

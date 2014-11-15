@@ -5,6 +5,7 @@ public class Initial {
 	public void initialAll()
 	{
 		new InitialStock();
+		new InitialUser();
 	}
 	public void initialStock()
 	{

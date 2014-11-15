@@ -1,21 +1,19 @@
-package data.commoditydata;
+package data.userdata;
 
 import java.io.*;
-import java.util.ArrayList;
 
 import data.Tool;
-import dataservice.commoditydataservice.*;
+import dataservice.userdataservice.*;
 import po.*;
-import po.stockpo.CommodityListPO;
-import po.stockpo.CommodityPO;
-import vo.RM;
+import po.userpo.OperationRecordPO;
+import po.userpo.UserPO;
 
-public class StubStockDataController implements StubCommodityDataService{
-	static StubCommodityList l;
+public class UserDataController implements StubUserDataService{
+	static UserList l;
 	static File f;
-	public StubStockDataController()
+	public UserDataController()
 	{
-		f = Tool.Opendoc("Stock.ser");   
+		f = Tool.Opendoc(Tool.user);   
         
         ObjectInputStream ois=null;
         	try {
@@ -27,9 +25,9 @@ public class StubStockDataController implements StubCommodityDataService{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-        	StubCommodityList temp=null;
+        	UserList temp=null;
 			try {
-				temp = (StubCommodityList) ois.readObject();
+				temp = (UserList) ois.readObject();
 			} catch (ClassNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -40,7 +38,7 @@ public class StubStockDataController implements StubCommodityDataService{
         	if (temp!=null)
         		l=temp;
         	else
-        		System.out.println("对象序列化错误");
+        		System.out.println("UserList对象序列化错误");
         	try {
 				ois.close();
 			} catch (IOException e) {
@@ -49,9 +47,9 @@ public class StubStockDataController implements StubCommodityDataService{
 			}       	
 	}
 	
-    public static void Initial()
+    public static void initial()
     {
-        f = Tool.Opendoc("Stock.ser");
+        f = Tool.Opendoc(Tool.user);
         
         //some initial under;
         ObjectOutputStream oos=null;
@@ -65,7 +63,7 @@ public class StubStockDataController implements StubCommodityDataService{
 			e2.printStackTrace();
 		}
         try {
-			oos.writeObject(new StubCommodityList());
+			oos.writeObject(new UserList());
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -88,9 +86,9 @@ public class StubStockDataController implements StubCommodityDataService{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-        	StubCommodityList temp=null;
+        	UserList temp=null;
 			try {
-				temp = (StubCommodityList) ois.readObject();
+				temp = (UserList) ois.readObject();
 			} catch (ClassNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -101,7 +99,7 @@ public class StubStockDataController implements StubCommodityDataService{
         	if (temp!=null)
         		l=temp;
         	else
-        		System.out.println("对象序列化错误");
+        		System.out.println("UserList对象序列化错误");
         	try {
 				ois.close();
 			} catch (IOException e) {
@@ -136,50 +134,23 @@ public class StubStockDataController implements StubCommodityDataService{
     		}
     }
     
-	public RM addCommodity(CommodityPO po)
+	public UserPO login(String account, String password)
+	{//登陆函数，若用户名账户和密码正确，返回UserPO,里面指示了用户类型Role。登陆失败则返回NULL
+		return l.login(account, password);
+	}
+	
+	public boolean insert(UserPO po)
 	{
-		RM result=l.insert(po);
-		save();
-		return result;
+		return l.insert(po);
 	}
-	public CommodityListPO getAll()
-	{//this is for financial
-		return new CommodityListPO();
-	}
-	public ArrayList<CommodityPO> findCommodity(String name)
+	
+	public UserPO find(String account)
 	{
-		return new ArrayList<CommodityPO>();
+		return l.find(account);
 	}
-	public CommodityPO findCommodity(String name, String model)
+	
+	public boolean insert(OperationRecordPO po)
 	{
-		return new CommodityPO();
+		return l.insert(po);
 	}
-	public boolean deleteCommodity(String name, String model)
-	{
-		boolean result=l.deleteCommodity(name, model);
-		save();
-		return result;
-	}
-	public boolean updateCommodity(CommodityPO po)
-	{
-		save();
-		return true;
-	}
-	public boolean addCategory(String parent, String name)
-	{
-		save();
-		return true;
-	}
-    public static boolean save()
-    {
-        try {
-		ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(f));
-		oos.writeObject(l);
-		oos.writeObject(null);
-		oos.close();
-	} catch (IOException e1) {
-		e1.printStackTrace();
-	}
-        return true;
-    }
 }

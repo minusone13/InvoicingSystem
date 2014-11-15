@@ -1,6 +1,8 @@
 package po;
 
-public class PaymentPO extends PO{
+import java.io.Serializable;
+
+public class PaymentPO extends PO implements Serializable{
 	String customer;
 	double total;
 	String account;//账户
