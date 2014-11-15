@@ -211,8 +211,7 @@ public class StubBillPool {
 			if(temp.getState()==st){//如果单据状态符合筛选状态
 				result.add(temp);
 			}
-		}
-		
+		}	
 		return result;
 	}
 	/*实时保存池中数组对象*/

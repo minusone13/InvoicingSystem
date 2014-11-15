@@ -8,7 +8,9 @@ import businesslogic.BillState;
 import businesslogic.Role;
 import businesslogic.examinebl.Bill;
 import businesslogic.examinebl.StubBillPool;
+import po.CashPaymentPO;
 import po.PO;
+import po.ReceiptPO;
 import vo.CashPaymentVO;
 import vo.VO;
 
@@ -37,6 +39,22 @@ public class StubCashPaymentBill extends Bill implements GetVOandPO{
 	}
 	
 	public PO getPO() {
-		return new PO();
+		CashPaymentPO po = new CashPaymentPO();
+		po.setAccount(account);
+		po.setID(ID);
+		po.setItemList(itemList);
+		po.setOperator(operator);
+		po.setState(state);
+		po.setStyle(style);
+		po.setTotal(total);
+		return po;
+	}
+	public void setPO (CashPaymentPO po) {
+		ID = po.getID();
+		account = po.getAccount();
+		total = po.getTotal();
+		state = po.getState();
+		itemList = po.getItemList();
+		
 	}
 }

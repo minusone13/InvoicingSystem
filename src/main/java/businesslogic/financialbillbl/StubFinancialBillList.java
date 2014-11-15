@@ -8,8 +8,7 @@ import businesslogic.BillStyle;
 import businesslogic.examinebl.Bill;
 import businesslogic.examinebl.StubBillPool;
 
-public class StubFinancialListBill {
-	
+public class StubFinancialBillList {
 	
 	public boolean creatReceiptBill(ReceiptVO vo) {		
 		StubBillPool pool = new StubBillPool();
@@ -31,4 +30,5 @@ public class StubFinancialListBill {
 		pool.add(cash);
 		return true;
 	}
+	
 }
