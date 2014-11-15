@@ -5,9 +5,10 @@ import java.util.ArrayList;
 import po.CashPaymentPO;
 import po.PaymentPO;
 import po.ReceiptPO;
+import dataservice.billdataservice.FinancialBillSaverService;
 
 
-public class FinancialBillSaver {
+public class FinancialBillSaver implements FinancialBillSaverService{
 
 	/*构造函数*/
 	public FinancialBillSaver(){

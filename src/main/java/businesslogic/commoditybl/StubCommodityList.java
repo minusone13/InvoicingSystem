@@ -6,6 +6,7 @@ import po.*;
 import businesslogic.stockmanagerbl.*;
 import dataservice.commoditydataservice.*;
 import vo.MockCommodityVO;
+import vo.MockCommodityVO.Type;
 import vo.RM;
 
 public class StubCommodityList {//商品列表 haha
@@ -20,15 +21,21 @@ public class StubCommodityList {//商品列表 haha
 	}
 	public RM addCommodity(MockCommodityVO vo)
 	{
-		CommodityPO po=comdata.findCommodity(vo.getname(),vo.getmodel());
+		if(vo.getT()!=MockCommodityVO.Type.Commodity)
+			return RM.unknownerror;
+		CommodityPO po=comdata.findCommodity(vo.getName(),vo.getModel());
 		if(po!=null)
 			return RM.redundance;
 		else
 		{
 			MockCommodity com=new MockCommodity(vo);
-			comdata.addCommodity(com.toPO());
-			return RM.done;
+			RM result = comdata.addCommodity(com.toPO());
+			return result;
 		}
+	}
+	public RM addCategory(MockCommodityVO vo)
+	{
+		return RM.done;
 	}
 	public void setcomdata(StubCommodityDataService comdata)
 	{

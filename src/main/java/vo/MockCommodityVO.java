@@ -30,44 +30,59 @@ public class MockCommodityVO {
 		this.in=in;
 		this.out=out;
 	}
-	public String getparent()
-	{
+	public Type getT() {
+		return t;
+	}
+	public void setT(Type t) {
+		this.t = t;
+	}
+	public String getParent() {
 		return parent;
 	}
-	public String getname()
-	{
+	public void setParent(String parent) {
+		this.parent = parent;
+	}
+	public String getName() {
 		return name;
 	}
-	public String getmodel()
-	{
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getModel() {
 		return model;
 	}
-	public int getnumber()
-	{
+	public void setModel(String model) {
+		this.model = model;
+	}
+	public int getNumber() {
 		return number;
 	}
-	public double getin()
-	{
+	public void setNumber(int number) {
+		this.number = number;
+	}
+	public double getIn() {
 		return in;
 	}
-	public double getout()
-	{
+	public void setIn(double in) {
+		this.in = in;
+	}
+	public double getOut() {
 		return out;
 	}
-	public double getlastin()
-	{
+	public void setOut(double out) {
+		this.out = out;
+	}
+	public double getLastin() {
 		return lastin;
 	}
-	public double getlastout()
-	{
+	public void setLastin(double lastin) {
+		this.lastin = lastin;
+	}
+	public double getLastout() {
 		return lastout;
 	}
-	public void setlastin(double lastin)
-	{
-		this.lastin=lastin;
+	public void setLastout(double lastout) {
+		this.lastout = lastout;
 	}
-	public void setlastout(double lastout)
-	{
-		this.lastout=lastout;
-	}
+	
 }

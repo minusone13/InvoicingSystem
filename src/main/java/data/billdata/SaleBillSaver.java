@@ -6,9 +6,10 @@ import po.PurBackSheetPO;
 import po.PurSheetPO;
 import po.SaleBackSheetPO;
 import po.SaleSheetPO;
+import dataservice.billdataservice.SaleBillSaverService;
 
 
-public class SaleBillSaver {
+public class SaleBillSaver implements SaleBillSaverService{
 
 	/*构造函数*/
 	public SaleBillSaver(){

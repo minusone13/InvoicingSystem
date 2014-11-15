@@ -5,13 +5,14 @@ import java.util.ArrayList;
 
 import dataservice.commoditydataservice.*;
 import po.*;
+import vo.RM;
 
 public class StubStockDataController implements StubCommodityDataService{
 	static StubCommodityList l;
 	static File f;
 	public StubStockDataController()
 	{
-		f = Opendoc("Stock.txt");   
+		f = Opendoc("Stock.ser");   
         
         ObjectInputStream ois=null;
         	try {
@@ -47,7 +48,7 @@ public class StubStockDataController implements StubCommodityDataService{
 	
     public static void Initial()
     {
-        f = Opendoc("Stock.txt");
+        f = Opendoc("Stock.ser");
         
         //some initial under;
         ObjectOutputStream oos=null;
@@ -132,9 +133,11 @@ public class StubStockDataController implements StubCommodityDataService{
     		}
     }
     
-	public boolean addCommodity(CommodityPO po)
+	public RM addCommodity(CommodityPO po)
 	{
-		return l.addCommodity(po);
+		RM result=l.addCommodity(po);
+		save();
+		return result;
 	}
 	public CommodityListPO getAll()
 	{//this is for financial
@@ -150,16 +153,32 @@ public class StubStockDataController implements StubCommodityDataService{
 	}
 	public boolean deleteCommodity(String name, String model)
 	{
-		return l.deleteCommodity(name, model);
+		boolean result=l.deleteCommodity(name, model);
+		save();
+		return result;
 	}
 	public boolean updateCommodity(CommodityPO po)
 	{
+		save();
 		return true;
 	}
 	public boolean addCategory(String parent, String name)
 	{
+		save();
 		return true;
 	}
+    public static boolean save()
+    {
+        try {
+		ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(f));
+		oos.writeObject(l);
+		oos.writeObject(null);
+		oos.close();
+	} catch (IOException e1) {
+		e1.printStackTrace();
+	}
+        return true;
+    }
     public static File Opendoc(String s)
 	{//参数为需要打开的文件路径
         File f = new File(s);
