@@ -4,11 +4,11 @@ import java.util.ArrayList;
 
 import vo.BarginStrategyVO;
 import vo.BusinessSituationVO;
-import vo.MockCommodityVO;
 import vo.LevelStrategyVO;
 import vo.ReachStrategyVO;
 import vo.VO;
 import businesslogic.BillState;
+import businesslogic.BillStyle;
 import businesslogic.commoditybillbl.StubAlertBill;
 import businesslogic.commoditybillbl.StubGiftBill;
 import businesslogic.commoditybillbl.StubSpillsLossBill;
@@ -24,8 +24,9 @@ import businesslogic.strategybl.StubBarginStrategy;
 import businesslogic.strategybl.StubLevelStrategy;
 import businesslogic.strategybl.StubReachStrategy;
 import businesslogic.strategybl.StubStrategyPool;
+import businesslogicservice.managerblservice.StubManagerBlService;
 
-public class StubManager {
+public class StubManager implements StubManagerBlService{
 
 	private String ID;
 	private String name;
@@ -199,7 +200,7 @@ public class StubManager {
 		
 	}
 	/*需要查看经营历程*/
-	public ArrayList<VO> showBusinessProgress(String client,String operater,String warehouse,BillState billStyle, String StartTime,String LastTime){
+	public ArrayList<VO> showBusinessProgress(String client,String operater,String warehouse,BillStyle billStyle, String StartTime,String LastTime){
 		return null;
 		
 	}

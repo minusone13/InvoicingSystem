@@ -17,16 +17,18 @@ import businesslogic.salebillbl.StubSaleSheet;
 
 public class StubBillPool {
 
-	private ArrayList<StubGiftBill> alOfGiftBill;
-	private ArrayList<StubSpillsLossBill> alOfSpillsLossBill;
-	private ArrayList<StubAlertBill> alOfAlertBill;
-	private ArrayList<StubPurSheet> alOfPurSheet;
-	private ArrayList<StubPurBackSheet> alOfPurBackSheet;
-	private ArrayList<StubSaleSheet> alOfSaleSheet;
-	private ArrayList<StubSaleBackSheet> alOfSaleBackSheet;
-	private ArrayList<StubReceiptBill> alOfReceiptBill;
-	private ArrayList<StubPaymentBill> alOfPaymentBill;
-	private ArrayList<StubCashPaymentBill> alOfCashPaymentBill;
+	//暂时用新new的对象
+	//待对象序列化写好后，都用从txt读取的对象
+	private ArrayList<StubGiftBill> alOfGiftBill=new ArrayList<StubGiftBill>();
+	private ArrayList<StubSpillsLossBill> alOfSpillsLossBill=new ArrayList<StubSpillsLossBill>();
+	private ArrayList<StubAlertBill> alOfAlertBill=new ArrayList<StubAlertBill>();
+	private ArrayList<StubPurSheet> alOfPurSheet=new ArrayList<StubPurSheet>();
+	private ArrayList<StubPurBackSheet> alOfPurBackSheet=new ArrayList<StubPurBackSheet>();
+	private ArrayList<StubSaleSheet> alOfSaleSheet=new ArrayList<StubSaleSheet>();
+	private ArrayList<StubSaleBackSheet> alOfSaleBackSheet=new ArrayList<StubSaleBackSheet>();
+	private ArrayList<StubReceiptBill> alOfReceiptBill=new ArrayList<StubReceiptBill>();
+	private ArrayList<StubPaymentBill> alOfPaymentBill=new ArrayList<StubPaymentBill>();
+	private ArrayList<StubCashPaymentBill> alOfCashPaymentBill=new ArrayList<StubCashPaymentBill>();
 	/*构造函数*/
 	public StubBillPool(){
 		
