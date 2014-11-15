@@ -17,6 +17,8 @@ import businesslogic.salebillbl.StubSaleSheet;
 
 public class StubBillPool {
 
+	//暂时用新new的对象
+	//待对象序列化写好后，都用从txt读取的对象
 	private ArrayList<StubGiftBill> alOfGiftBill=new ArrayList<StubGiftBill>();
 	private ArrayList<StubSpillsLossBill> alOfSpillsLossBill=new ArrayList<StubSpillsLossBill>();
 	private ArrayList<StubAlertBill> alOfAlertBill=new ArrayList<StubAlertBill>();
