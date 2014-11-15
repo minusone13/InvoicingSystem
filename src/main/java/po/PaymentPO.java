@@ -1,28 +1,54 @@
 package po;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+
+import businesslogic.BillState;
+import businesslogic.BillStyle;
+import businesslogic.Role;
+import businesslogic.financialbillbl.StubTransferAccount;
 
 public class PaymentPO extends PO implements Serializable{
+	String ID;
+	Role operator;
 	String customer;
 	double total;
 	String account;//账户
 	double money;//转账金额
-	
-	String billNumber;
-	String operator;
-	
-	public String getBillNumber() {
-		return billNumber;
+	BillStyle style;
+	ArrayList<StubTransferAccount> transferlist;
+	public BillStyle getStyle() {
+		return style;
 	}
-	public void setBillNumber(String billNumber) {
-		this.billNumber = billNumber;
+	public void setStyle(BillStyle style) {
+		this.style = style;
 	}
-	public String getOperator() {
+	public ArrayList<StubTransferAccount> getTransferlist() {
+		return transferlist;
+	}
+	public void setTransferlist(ArrayList<StubTransferAccount> transferlist) {
+		this.transferlist = transferlist;
+	}
+	public BillState getState() {
+		return state;
+	}
+	public void setState(BillState state) {
+		this.state = state;
+	}
+	public String getID() {
+		return ID;
+	}
+	public void setID(String ID) {
+		this.ID = ID;
+	}
+	public Role getOperator() {
 		return operator;
 	}
-	public void setOperator(String operator) {
+	public void setOperator(Role operator) {
 		this.operator = operator;
 	}
+	
+	
 	public String getCustomer() {
 		return customer;
 	}

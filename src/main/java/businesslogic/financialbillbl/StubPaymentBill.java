@@ -3,6 +3,8 @@ package businesslogic.financialbillbl;
 import java.util.ArrayList;
 
 import po.PO;
+import po.PaymentPO;
+import po.ReceiptPO;
 import businesslogic.BillStyle;
 import businesslogic.GetVOandPO;
 import businesslogic.BillState;
@@ -39,6 +41,21 @@ public class StubPaymentBill extends Bill implements GetVOandPO{
 	}
 
 	public PO getPO() {
-		return null;
+		PaymentPO po = new PaymentPO();
+		po.setCustomer(customer);
+		po.setID(ID);
+		po.setOperator(operator);
+		po.setState(state);
+		po.setTotal(total);
+		po.setTransferlist(transferlist);
+		po.setStyle(style);
+		return po;
+	}
+	public void setPO (PaymentPO po) {
+		ID = po.getID();
+		customer = po.getCustomer();
+		total = po.getTotal();
+		state = po.getState();
+		transferlist = po.getTransferlist();
 	}
 }
