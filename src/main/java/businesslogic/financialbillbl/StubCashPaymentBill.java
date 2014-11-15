@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import businesslogic.BillStyle;
 import businesslogic.GetVOandPO;
 import businesslogic.BillState;
+import businesslogic.Role;
 import businesslogic.examinebl.Bill;
 import businesslogic.examinebl.StubBillPool;
 import po.PO;
@@ -15,15 +16,20 @@ public class StubCashPaymentBill extends Bill implements GetVOandPO{
 	private BillStyle style=BillStyle.CashPaymentBill;
 	private String ID;
 	String account;
-	String operator;
+	Role operator = Role.FINANTCIAL_STAFF;
 	double total;
 	BillState state;
 	ArrayList<StubItem> itemList = new ArrayList<StubItem>();
 	
-	public boolean creatCashPayment(CashPaymentVO cpv) {
-		StubItem i = new StubItem();
-		new StubBillPool().add(new StubCashPaymentBill());
-		return true;
+	public StubCashPaymentBill() {}
+	public StubCashPaymentBill(String account, double total, String[] item, double[] money, String[] remark) {
+		int length = item.length;
+		for(int i=0;i<length;i++) {
+			itemList.add(new StubItem(item[i], money[i], remark[i]));
+		}
+		this.account = account;
+		this.total = total;
+		state = BillState.DRAFT;	
 	}
 	
 	public VO getVO() {

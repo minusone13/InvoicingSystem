@@ -4,7 +4,9 @@ import java.util.ArrayList;
 
 import vo.*;
 import businesslogic.accountbl.StubAccount;
+import businesslogic.accountbl.StubAccountList;
 import businesslogic.financialbillbl.StubCashPaymentBill;
+import businesslogic.financialbillbl.StubFinancialListBill;
 import businesslogic.financialbillbl.StubPaymentBill;
 import businesslogic.financialbillbl.StubReceiptBill;
 import businesslogic.iquirybl.StubInquiry;
@@ -29,30 +31,29 @@ public class StubFinancial implements StubFinancialBlService{
 	}
 	
 	public boolean addAccount(String name) {
-		StubAccount a = new StubAccount();
-		return a.addAccount(name);	
+		StubAccountList a = new StubAccountList();
+		return a.addAccount(new StubAccount(name));	
 	}
 	
 	public boolean deleteAccount(String name) {
-		StubAccount a = new StubAccount();
-		return a.deleteAccount(name);
+		StubAccountList a = new StubAccountList();
+		return a.deleteAccount(new StubAccount(name));
 	}
 	
 	public AccountVO findAccount(String name) {
-		StubAccount a = new StubAccount();
-		return a.findAccount(name);
-	
+		StubAccountList a = new StubAccountList();
+		return a.findAccount(new StubAccount(name));
 	}
 	
 	public boolean updateAccount(String oldname, String newname) {
-		StubAccount a = new StubAccount();
-		return a.updateAccount(oldname,newname);
+		StubAccountList a = new StubAccountList();
+		return a.updateAccount(new StubAccount(oldname),newname);
 	}
 	//期初建账
 	public void buildAccount() {
-		StubAccount a = new StubAccount();
+		StubAccountList a = new StubAccountList();
 		a.buildAccount();
-		System.out.println("BUILD SUCCESS!");
+		//System.out.println("BUILD SUCCESS!");
 	}
 	
 	public ArrayList<VO> inquirySale(InquirySaleVO isv) {
@@ -71,19 +72,19 @@ public class StubFinancial implements StubFinancialBlService{
 	}
 	
 	public boolean creatReceipt(ReceiptVO rv) {
-		StubReceiptBill r = new StubReceiptBill();
-		return r.creatReceipt(rv);
+		StubFinancialListBill financialList = new StubFinancialListBill();
+		return financialList.creatReceiptBill(rv);
 	}
 	
 	public boolean creatPayment(PaymentVO pv){
-		StubPaymentBill r = new StubPaymentBill();
-		return r.creatPayment(pv);
+		StubFinancialListBill financialList = new StubFinancialListBill();
+		return financialList.creatPaymentBill(pv);
 	
 	}
 	
 	public boolean creatCashPayment(CashPaymentVO cpv) {
-		StubCashPaymentBill r = new StubCashPaymentBill();
-		return r.creatCashPayment(cpv);
+		StubFinancialListBill financialList = new StubFinancialListBill();
+		return financialList.creatCashPaymentBill(cpv);
 		
 	}
 	

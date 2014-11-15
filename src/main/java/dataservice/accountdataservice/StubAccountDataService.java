@@ -7,7 +7,7 @@ import po.AccountPO;
 
 
 public interface StubAccountDataService {
-	public AccountPO find(String name);
+	public AccountPO find(AccountPO a);
 	
 	public boolean add(AccountPO a) ;
 	
