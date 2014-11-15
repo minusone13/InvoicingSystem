@@ -2,7 +2,7 @@ package businesslogic.userbl;
 
 import java.security.*;
 
-import po.UserPO;
+import po.userpo.UserPO;
 import vo.UserVO;
 import dataservice.userdataservice.*;
 import businesslogic.Role;

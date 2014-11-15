@@ -3,6 +3,8 @@ package dataservice.commoditydataservice;
 import java.util.ArrayList;
 
 import po.*;
+import po.stockpo.CommodityListPO;
+import po.stockpo.CommodityPO;
 import vo.RM;
 
 public interface StubCommodityDataService {

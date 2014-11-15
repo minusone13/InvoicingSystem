@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.*;
 
 import po.*;
+import po.stockpo.CommodityPO;
 
 public class MockCommodityData implements Serializable{
 	

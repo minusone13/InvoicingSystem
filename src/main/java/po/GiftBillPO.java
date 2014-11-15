@@ -2,6 +2,8 @@ package po;
 
 import java.util.*;
 
+import po.stockpo.CommodityPO;
+
 public class GiftBillPO extends PO{
 	ArrayList<CommodityPO> coms;
 	int quantity;

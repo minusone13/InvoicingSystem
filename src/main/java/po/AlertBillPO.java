@@ -1,5 +1,7 @@
 package po;
 
+import po.stockpo.CommodityPO;
+
 
 public class AlertBillPO extends PO{
 	CommodityPO comPO;

@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import data.Tool;
 import dataservice.commoditydataservice.*;
 import po.*;
+import po.stockpo.CommodityListPO;
+import po.stockpo.CommodityPO;
 import vo.RM;
 
 public class StubStockDataController implements StubCommodityDataService{

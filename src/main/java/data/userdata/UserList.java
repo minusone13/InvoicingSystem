@@ -5,6 +5,8 @@ import java.util.*;
 
 import businesslogic.Role;
 import po.*;
+import po.userpo.OperationRecordPO;
+import po.userpo.UserPO;
 
 public class UserList implements Serializable{
 	ArrayList<UserPO> users;
