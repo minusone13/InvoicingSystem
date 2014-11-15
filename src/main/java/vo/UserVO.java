@@ -15,6 +15,13 @@ public class UserVO implements Cloneable{
 		this.password=password;
 		this.name=name;
 	}
+	public UserVO(Role r, String account,  String name)
+	{
+		this.r=r;
+		this.account=account;
+		password="unknown";
+		this.name=name;
+	}
 	public Role getR() {
 		return r;
 	}
@@ -43,5 +50,11 @@ public class UserVO implements Cloneable{
 			e.printStackTrace();
 		}
 		return cloned;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 }

@@ -50,4 +50,16 @@ public class UserList implements Serializable{
 		records.add(po);
 		return true;
 	}
+	
+	public boolean updatePassword(UserPO po)
+	{
+		UserPO user = find(po.getAccount());
+		if(user == null)
+			return false;
+		else
+		{
+			user.setPassword(po.getPassword());//whether it's true?
+			return true;
+		}
+	}
 }
