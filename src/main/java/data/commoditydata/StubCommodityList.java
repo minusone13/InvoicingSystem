@@ -38,7 +38,13 @@ public class StubCommodityList implements Serializable{
 	}
 	public CommodityPO findCommodity(String name, String model)
 	{
-		return new CommodityPO();
+		for(int i=0;i<flatlist.size();i++)
+		{
+			MockCommodityData com=flatlist.get(i);
+			if(com.getName().equals(name) && com.getModel().equals(model))
+				return com.getPo();
+		}
+		return null;//not found;
 	}
 	public boolean deleteCommodity(String name, String model)
 	{
