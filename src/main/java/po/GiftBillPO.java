@@ -1,5 +1,6 @@
 package po;
 
+import java.io.Serializable;
 import java.util.*;
 
 public class GiftBillPO extends PO{

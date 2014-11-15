@@ -1,10 +1,11 @@
 package po;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import businesslogic.customerbl.StubCustomer;
 
-public class PurSheetPO extends PO{
+public class PurSheetPO extends PO implements Serializable{
 	StubCustomer customer;
 	String id;
 	String commodity;//仓库？

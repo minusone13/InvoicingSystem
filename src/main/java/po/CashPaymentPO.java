@@ -1,6 +1,8 @@
 package po;
 
-public class CashPaymentPO extends PO{
+import java.io.Serializable;
+
+public class CashPaymentPO extends PO implements Serializable{
 
 	double total;
 	String account;//账户

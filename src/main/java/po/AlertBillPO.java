@@ -1,5 +1,7 @@
 package po;
 
+import java.io.Serializable;
+
 
 public class AlertBillPO extends PO{
 	CommodityPO comPO;
