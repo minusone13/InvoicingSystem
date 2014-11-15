@@ -9,12 +9,11 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
-import po.PaymentPO;
 import po.PurBackSheetPO;
 import po.PurSheetPO;
 import po.SaleBackSheetPO;
 import po.SaleSheetPO;
-import data.commoditydata.StubStockDataController;
+import data.Tool;
 import dataservice.billdataservice.SaleBillSaverService;
 
 
@@ -121,7 +120,7 @@ public class SaleBillSaver implements SaleBillSaverService{
 	}
 	/*获取进货单*/
 	public ArrayList<PurSheetPO> getPurSheet(){
-	File filename = StubStockDataController.Opendoc("PurSheetPO.txt");
+	File filename = Tool.Opendoc("PurSheetPO.txt");
 		
 		ArrayList<PurSheetPO> purbillList = null;
 		ObjectInputStream ois=null;
@@ -148,7 +147,7 @@ public class SaleBillSaver implements SaleBillSaverService{
 	}
 	/*获取进货退货单*/
 	public ArrayList<PurBackSheetPO> getPurBackSheet(){
-	File filename = StubStockDataController.Opendoc("PurBackSheetPO.txt");
+	File filename = Tool.Opendoc("PurBackSheetPO.txt");
 		
 		ArrayList<PurBackSheetPO> purbackbillList = null;
 		ObjectInputStream ois=null;
@@ -175,7 +174,7 @@ public class SaleBillSaver implements SaleBillSaverService{
 	}
 	/*获取销售单*/
 	public ArrayList<SaleSheetPO> getSaleSheet(){
-	File filename = StubStockDataController.Opendoc("SaleSheetPO.txt");
+	File filename = Tool.Opendoc("SaleSheetPO.txt");
 		
 		ArrayList<SaleSheetPO> salebillList = null;
 		ObjectInputStream ois=null;
@@ -202,7 +201,7 @@ public class SaleBillSaver implements SaleBillSaverService{
 	}
 	/*获取销售退货单*/
 	public ArrayList<SaleBackSheetPO> getSaleBackSheet(){
-	File filename = StubStockDataController.Opendoc("SaleBackSheetPO.txt");
+	File filename = Tool.Opendoc("SaleBackSheetPO.txt");
 		
 		ArrayList<SaleBackSheetPO> salebackbillList = null;
 		ObjectInputStream ois=null;

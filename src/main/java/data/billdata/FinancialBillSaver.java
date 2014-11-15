@@ -12,8 +12,7 @@ import java.util.ArrayList;
 import po.CashPaymentPO;
 import po.PaymentPO;
 import po.ReceiptPO;
-import po.SpillsLossBillPO;
-import data.commoditydata.StubStockDataController;
+import data.Tool;
 import dataservice.billdataservice.FinancialBillSaverService;
 
 
@@ -94,7 +93,7 @@ public class FinancialBillSaver implements FinancialBillSaverService{
 	}
 	/*获取付款单*/
 	public ArrayList<PaymentPO> getPayment(){
-		File filename = StubStockDataController.Opendoc("PaymentPO.txt");
+		File filename = Tool.Opendoc("PaymentPO.txt");
 		
 		ArrayList<PaymentPO> paymentbillList = null;
 		ObjectInputStream ois=null;
@@ -122,7 +121,7 @@ public class FinancialBillSaver implements FinancialBillSaverService{
 	}
 	/*获取收款单*/
 	public ArrayList<ReceiptPO> getReceipt(){
-		File filename = StubStockDataController.Opendoc("ReceiptPO.txt");
+		File filename = Tool.Opendoc("ReceiptPO.txt");
 		
 		ArrayList<ReceiptPO> receiptbillList = null;
 		ObjectInputStream ois=null;
@@ -150,7 +149,7 @@ public class FinancialBillSaver implements FinancialBillSaverService{
 	}
 	/*获取现金费用单*/
 	public ArrayList<CashPaymentPO> getCashPayment(){
-		File filename = StubStockDataController.Opendoc("CashPaymentPO.txt");
+		File filename = Tool.Opendoc("CashPaymentPO.txt");
 		
 		ArrayList<CashPaymentPO> cashpaymentbillList = null;
 		ObjectInputStream ois=null;

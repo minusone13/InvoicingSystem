@@ -1,4 +1,4 @@
-package businesslogic.salebl;
+package businesslogic.salebillbl;
 
 import java.util.ArrayList;
 
@@ -62,7 +62,6 @@ public class StubSale {
 	
 	public void CustomerManagement () {}
 	
-	public void SalePur (){}
 	
 	
 	

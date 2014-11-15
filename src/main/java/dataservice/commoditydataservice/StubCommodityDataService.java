@@ -3,9 +3,12 @@ package dataservice.commoditydataservice;
 import java.util.ArrayList;
 
 import po.*;
+import po.stockpo.CommodityListPO;
+import po.stockpo.CommodityPO;
+import vo.RM;
 
 public interface StubCommodityDataService {
-	public boolean addCommodity(CommodityPO po);
+	public RM addCommodity(CommodityPO po);
 	public CommodityListPO getAll();
 	public ArrayList<CommodityPO> findCommodity(String name);
 	public boolean deleteCommodity(String name, String model);

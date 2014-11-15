@@ -28,6 +28,10 @@ public class StubStockController implements StubCommodityBlService
 	{
 		return l.addPack(commodityarray, quantity, discount);
 	}
+	public RM addCategory(MockCommodityVO vo)
+	{
+		return l.addCategory(vo);
+	}
 	
 	public void setdataobject(StubCommodityDataService comdata)
 	{

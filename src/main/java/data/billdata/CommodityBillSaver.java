@@ -13,6 +13,7 @@ import po.AccountPO;
 import po.AlertBillPO;
 import po.GiftBillPO;
 import po.SpillsLossBillPO;
+import data.Tool;
 import data.commoditydata.StubStockDataController;
 import dataservice.billdataservice.CommodityBillSaverService;
 
@@ -93,7 +94,7 @@ public class CommodityBillSaver implements CommodityBillSaverService{
 	}
 	/*获取库存赠送单*/
 	public ArrayList<GiftBillPO> getGiftBill(){
-		File filename = StubStockDataController.Opendoc("GiftBillPO.txt");
+		File filename = Tool.Opendoc("GiftBillPO.txt");
 		
 		ArrayList<GiftBillPO> giftbillList = null;
 		ObjectInputStream ois=null;
@@ -120,7 +121,7 @@ public class CommodityBillSaver implements CommodityBillSaverService{
 	}
 	/*获取报溢报损单*/
 	public ArrayList<SpillsLossBillPO> getSpillsLossBill(){
-		File filename = StubStockDataController.Opendoc("SpillsLossBillPO.txt");
+		File filename = Tool.Opendoc("SpillsLossBillPO.txt");
 		
 		ArrayList<SpillsLossBillPO> spillsLossbillList = null;
 		ObjectInputStream ois=null;
@@ -147,7 +148,7 @@ public class CommodityBillSaver implements CommodityBillSaverService{
 	}
 	/*获取库存报警单*/
 	public ArrayList<AlertBillPO> getAlertBill(){
-		File filename = StubStockDataController.Opendoc("AlertBillPO.txt");
+		File filename = Tool.Opendoc("AlertBillPO.txt");
 		
 		ArrayList<AlertBillPO> alertbillList = null;
 		ObjectInputStream ois=null;

@@ -87,7 +87,4 @@ public class StubFinancial implements StubFinancialBlService{
 		
 	}
 	
-	public void initial() {
-		
-	}
 }

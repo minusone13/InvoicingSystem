@@ -1,15 +1,11 @@
-package po;
+package po.stockpo;
 
+import java.io.Serializable;
 import java.util.*;
 
 
-public class CommodityPO {
-	public enum Type
-	{
-		Category,
-		Commodity
-	} 
-	Type t;
+public class CommodityPO implements Serializable, Cloneable{
+	String id;
 	String parent;
 	String name;
 	String model;
@@ -21,22 +17,8 @@ public class CommodityPO {
 	double average;
 	ArrayList<CommodityRecordPO> record=new ArrayList();
 	public CommodityPO(){}
-	public CommodityPO(Type t,String parent,String name,String model,int number,double in,double out,double lastin,double lastout,double average)
-	{
-		this.t=t;
-		this.parent=parent;
-		this.name=name;
-		this.model=model;
-		this.number=number;
-		this.in=in;
-		this.out=out;
-		this.lastin=lastin;
-		this.lastout=lastout;
-		this.average=average;
-	}
 	public CommodityPO(String parent,String name,String model,int number,double in,double out,double lastin,double lastout,double average)
-	{
-		t=t.Commodity;
+	{	
 		this.parent=parent;
 		this.name=name;
 		this.model=model;
@@ -46,22 +28,22 @@ public class CommodityPO {
 		this.lastin=lastin;
 		this.lastout=lastout;
 		this.average=average;
-	}
-	public CommodityPO(Type t,String parent,String name)
-	{
-		this.t=t;
-		this.parent=parent;
-		this.name=name;
 	}
 	public CommodityPO(String parent,String name)
 	{
-		t=t.Category;
 		this.parent=parent;
 		this.name=name;
 	}
-	public Type getType()
+	public CommodityPO clone()
 	{
-		return t;
+		CommodityPO cloned = null;
+		try {
+			cloned=(CommodityPO)super.clone();
+		} catch (CloneNotSupportedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return cloned;
 	}
 	public String getParent()
 	{
@@ -111,12 +93,6 @@ public class CommodityPO {
 	{
 		this.out=out;
 	}
-	public Type getT() {
-		return t;
-	}
-	public void setT(Type t) {
-		this.t = t;
-	}
 	public String getModel() {
 		return model;
 	}
@@ -152,5 +128,11 @@ public class CommodityPO {
 	}
 	public void setRecord(ArrayList<CommodityRecordPO> record) {
 		this.record = record;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
 	}
 }

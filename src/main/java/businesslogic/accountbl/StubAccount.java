@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import data.accountdata.StubAccountData;
 import dataservice.accountdataservice.StubAccountDataService;
 import businesslogic.commoditybl.StubCommodityList;
-import businesslogic.salebl.StubSale;
+import businesslogic.salebillbl.StubSale;
 import businesslogic.stockmanagerbl.StubStockController;
 import po.AccountPO;
 import vo.AccountVO;

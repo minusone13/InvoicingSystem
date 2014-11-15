@@ -4,17 +4,18 @@ import java.io.Serializable;
 import java.util.*;
 
 import po.*;
-import po.CommodityPO.*;
+import po.stockpo.CategoryPO;
+import po.stockpo.StockPO;
+import po.stockpo.CommodityPO.*;
+import vo.RM;
 
 public class StubCategoryData implements Serializable{
 	ArrayList<StubCategoryData> cats;
 	ArrayList<MockCommodityData> coms;
-	String parent;
-	String name;
+	CategoryPO po;
 	public StubCategoryData(String parent,String name)
 	{
-		this.parent=parent;
-		this.name=name;
+		po=new CategoryPO(parent,name);
 	}
 	public boolean canAddCategory()
 	{
@@ -30,15 +31,15 @@ public class StubCategoryData implements Serializable{
 		else 
 			return true;
 	}
-	public ArrayList<CommodityPO> open()
+	public ArrayList<StockPO> open()
 	{
-		ArrayList <CommodityPO> result=new ArrayList<CommodityPO>();
+		ArrayList <StockPO> result=new ArrayList<StockPO>();
 		if(!coms.isEmpty())
 		{
 			for(int i=0;i<coms.size();i++)
 			{
 				MockCommodityData com=coms.get(i);
-				result.add(new CommodityPO(Type.Commodity,com.parent,com.name,com.model,com.number,com.in,com.out,com.lastin,com.lastout,com.average));
+				result.add(new StockPO(com.getPo().clone()));
 			}
 		}
 		else if(!cats.isEmpty())
@@ -46,9 +47,11 @@ public class StubCategoryData implements Serializable{
 			for(int i=0;i<cats.size();i++)
 			{
 				StubCategoryData cat=cats.get(i);
-				result.add(new CommodityPO(Type.Category,cat.parent,cat.name));
+				result.add(new StockPO(cat.getPo().clone()));
 			}
 		}
+		else 
+			return null;
 		return result;
 	}
 	public StubCategoryData findSubCat(String name)
@@ -57,7 +60,7 @@ public class StubCategoryData implements Serializable{
 			return null;//does not have any sub category
 		for(int i=0;i<cats.size();i++)
 		{
-			if(cats.get(i).name==name)
+			if(cats.get(i).getName()==name)
 				return cats.get(i);
 		}
 		return null;//not found
@@ -65,11 +68,14 @@ public class StubCategoryData implements Serializable{
 	public StubCategoryData goThrow(String[] nameOfParent, int layer)
 	{//to gothrow all the parent directly to the last category
 		//this method is used when deleting or adding a commodity. and many other inner uses
+		if(nameOfParent.length<=layer)
+			return this;//递归返回条件
 		StubCategoryData cat = findSubCat(nameOfParent[layer]);
 		if(cat==null)
 			return null;//not found;
-		else if(++layer>=nameOfParent.length)
-			return cat;//递归的返回条件
+//		else if(++layer>=nameOfParent.length)
+//			return cat;//递归的返回条件
+		layer++;
 		return cat.goThrow(nameOfParent, layer);
 	}
 	public MockCommodityData findCommodity(String name,String model)
@@ -78,20 +84,20 @@ public class StubCategoryData implements Serializable{
 			return null;//does not have any sub category
 		for(int i=0;i<coms.size();i++)
 		{
-			if(coms.get(i).name==name && coms.get(i).model==model)
+			if(coms.get(i).getName()==name && coms.get(i).getModel()==model)
 				return coms.get(i);
 		}
 		return null;//not found
 	}
-	public boolean add(MockCommodityData com)
+	public RM add(MockCommodityData com)
 	{
 		if(canAddCommodity())
 		{
 			coms.add(com);
-			return true;
+			return RM.done;
 		}
 		else
-			return false;//已有分类，不能添加商品
+			return RM.treeerror;//已有分类，不能添加商品
 	}
 	public boolean add(StubCategoryData cat)
 	{
@@ -116,15 +122,21 @@ public class StubCategoryData implements Serializable{
 		this.coms = coms;
 	}
 	public String getParent() {
-		return parent;
+		return po.getParent();
 	}
 	public void setParent(String parent) {
-		this.parent = parent;
+		po.setParent(parent);;
 	}
 	public String getName() {
-		return name;
+		return po.getName();
 	}
 	public void setName(String name) {
-		this.name = name;
+		po.setName(name);;
+	}
+	public CategoryPO getPo() {
+		return po;
+	}
+	public void setPo(CategoryPO po) {
+		this.po = po;
 	}
 }

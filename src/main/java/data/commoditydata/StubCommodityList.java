@@ -2,30 +2,36 @@ package data.commoditydata;
 
 import java.io.*;
 import java.util.*;
+
 import po.*;
+import po.stockpo.CommodityPO;
+import vo.RM;
 
 public class StubCommodityList implements Serializable{
 	ArrayList<StubCategoryData> cats;
 	ArrayList<StubPackData> packs;
-	StubCategoryData cat;
+	StubCategoryData cat;//=cats.get(0);
+	ArrayList <MockCommodityData> flatlist;//平铺式的商品列表，便于搜索操作。注意商品增删时候的同步操作
 	public boolean initial()
 	{
 		cats=new ArrayList<StubCategoryData>();
 		cats.add(new StubCategoryData("0","1"));
 		packs=new ArrayList<StubPackData>();
 		cat=cats.get(0);
+		flatlist=new ArrayList<MockCommodityData>();
 		return true;
 	}
-	public boolean addCommodity(CommodityPO po)
+	public RM insert(CommodityPO po)
 	{
-		if(po.getType()!=CommodityPO.Type.Commodity)
-			return false;
 		String s=po.getParent();
 		String a[]=s.split("\\");
 		if(!a[0].equals("1"))//default root is 1
-			return false;
+			return RM.unknownerror;
 		StubCategoryData temp=cat.goThrow(a, 1);
-		return temp.add(new MockCommodityData(po));
+		MockCommodityData com=new MockCommodityData(po);
+		RM result=temp.add(com);
+		flatlist.add(com);
+		return result;
 	}
 	public ArrayList<CommodityPO> findCommodity(String name)
 	{
@@ -33,7 +39,13 @@ public class StubCommodityList implements Serializable{
 	}
 	public CommodityPO findCommodity(String name, String model)
 	{
-		return new CommodityPO();
+		for(int i=0;i<flatlist.size();i++)
+		{
+			MockCommodityData com=flatlist.get(i);
+			if(com.getName().equals(name) && com.getModel().equals(model))
+				return com.getPo();
+		}
+		return null;//not found;
 	}
 	public boolean deleteCommodity(String name, String model)
 	{
@@ -49,7 +61,7 @@ public class StubCommodityList implements Serializable{
 		if(!a[0].equals("1"))//default root is 1
 			return false;
 		StubCategoryData temp=cat.goThrow(a, 1);
-		temp.add(new StubCategoryData(parent,name));
-		return true;
+		boolean result = temp.add(new StubCategoryData(parent,name));
+		return result;
 	}
 }
