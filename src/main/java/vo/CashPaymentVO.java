@@ -8,21 +8,17 @@ public class CashPaymentVO extends VO{
 	
 	double total;
 	String account;//账户
-	double money;//金额
-	String item;
-	String remark;
-	public String getItem() {
+	double[] money;//金额
+	String[] item;
+	String[] remark;
+	public String[] getItem() {
 		return item;
 	}
-	public void setItem(String item) {
-		this.item = item;
-	}
-	public String getRemark() {
+	
+	public String[] getRemark() {
 		return remark;
 	}
-	public void setRemark(String remark) {
-		this.remark = remark;
-	}
+	
 	public double getTotal() {
 		return total;
 	}
@@ -35,10 +31,8 @@ public class CashPaymentVO extends VO{
 	public void setAccount(String account) {
 		this.account = account;
 	}
-	public double getMoney() {
+	public double[] getMoney() {
 		return money;
 	}
-	public void setMoney(double money) {
-		this.money = money;
-	}
+	
 }

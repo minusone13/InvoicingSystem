@@ -17,9 +17,9 @@ import dataservice.accountdataservice.StubAccountDataService;
 public class StubAccountData implements StubAccountDataService{
 	
 
-	public AccountPO find(String name) {
+	public AccountPO find(AccountPO a) {
 		ArrayList<AccountPO> accountList = reader();	
-		int index = traversal(accountList, name);
+		int index = traversal(accountList, a.getName());
 		if(index==-1) return null;
 		return accountList.get(index);
 	}
