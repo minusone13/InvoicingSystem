@@ -30,7 +30,8 @@ public class StubAccountData implements StubAccountDataService{
 		int index = traversal(accountList, apo.getName());
 		if(index != -1) return false;
 		else accountList.add(apo);
-		return writer(accountList);
+		writer(accountList);
+		return true;
 	}
 
 	public boolean delete(AccountPO apo) {
@@ -41,7 +42,8 @@ public class StubAccountData implements StubAccountDataService{
 		tempPO = accountList.get(index);
 		if(tempPO.getBalance() == 0) {
 			accountList.remove(index);
-			return writer(accountList);
+			writer(accountList);
+			return true;
 		}
 		return false;//可能因为不存在或者余额不为0;考虑用enum
 	}
@@ -55,7 +57,8 @@ public class StubAccountData implements StubAccountDataService{
 		if(index1 == -1||index2 != -1) return false;//可能老账户不存在，或者新账户已存在，考虑enum
 		tempPO = accountList.get(index1);
 		tempPO.setName(apo.getNewName());
-		return writer(accountList);
+		writer(accountList);
+		return true;
 	}
 	
 	//遍历账户列表,返回结果的下标，如果为-1说明不存在
@@ -99,23 +102,23 @@ public class StubAccountData implements StubAccountDataService{
 	}
 	
 	//以序列化方式存储账户列表
-	private boolean writer (ArrayList<AccountPO> accountList) {
+	private void writer (ArrayList<AccountPO> accountList) {
 		String filename = "account.txt";
-		ObjectOutputStream oos=null;
+		ObjectOutputStream oos = null;
 		try {
 			oos = new ObjectOutputStream(new FileOutputStream(filename));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
-			return false;
+			
 		} catch (IOException e) {
 			e.printStackTrace();
-			return false;
+			
 		} 
 		try {
 			oos.writeObject(accountList);
 		} catch (IOException e) {
 			e.printStackTrace();
-			return false;
+			
 		} finally {
 			try {
 				oos.close();
@@ -123,7 +126,6 @@ public class StubAccountData implements StubAccountDataService{
 				e.printStackTrace();
 			}
 		}
-		return true;
 	}
 	
 	public ArrayList<AccountPO> getAllAcountInfo() {	
