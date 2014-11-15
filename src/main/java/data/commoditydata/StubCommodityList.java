@@ -20,10 +20,8 @@ public class StubCommodityList implements Serializable{
 		flatlist=new ArrayList<MockCommodityData>();
 		return true;
 	}
-	public RM addCommodity(CommodityPO po)
+	public RM insert(CommodityPO po)
 	{
-		if(po.getType()!=CommodityPO.Type.Commodity)
-			return RM.unknownerror;
 		String s=po.getParent();
 		String a[]=s.split("\\");
 		if(!a[0].equals("1"))//default root is 1

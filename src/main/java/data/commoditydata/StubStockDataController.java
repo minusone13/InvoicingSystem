@@ -135,7 +135,7 @@ public class StubStockDataController implements StubCommodityDataService{
     
 	public RM addCommodity(CommodityPO po)
 	{
-		RM result=l.addCommodity(po);
+		RM result=l.insert(po);
 		save();
 		return result;
 	}
