@@ -9,7 +9,7 @@ public interface StubCustomerBlService {
 		 * 提供了一些客户管理方面的方法
 		 * */
 	
-		public void addCustomer();
+		public boolean addCustomer(String name);
 		public RM updateCustomer(CustomerVO vo);
 		public boolean deleteCustomer(String id);
 		public CustomerVO findCustomer(String id);

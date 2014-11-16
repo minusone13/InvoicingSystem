@@ -11,7 +11,7 @@ public class salebillController implements StubSaleBillBlService{
 		salebillList salebilllist;
 		
 		// salebillsaversevvice中有getall的方法；
-		salebillController(){
+		public salebillController(){
 			System.out.println("salebillController success!");
 		}
 
@@ -40,24 +40,36 @@ public class salebillController implements StubSaleBillBlService{
 			
 		}
 
-		public PurSheetVO getPurSheet(String id) {
+		public boolean getPurSheet(String id) {
 			// TODO Auto-generated method stub
-			return null;
+			if(id=="131")
+				return true;
+			else
+				return false;
 		}
 
-		public PurBackSheetVO getPurBackSheet(String id) {
+		public boolean getPurBackSheet(String id) {
 			// TODO Auto-generated method stub
-			return null;
+			if(id=="131")
+				return true;
+			else
+				return false;
 		}
 
-		public SaleSheetVO getSaleSheet(String id) {
+		public boolean getSaleSheet(String id) {
 			// TODO Auto-generated method stub
-			return null;
+			if(id=="131")
+				return true;
+			else
+				return false;
 		}
 
-		public SaleBackSheetVO getSaleBackSheet(String id) {
+		public boolean getSaleBackSheet(String id) {
 			// TODO Auto-generated method stub
-			return null;
+			if(id=="131")
+				return true;
+			else
+				return false;
 		}
 		
 		

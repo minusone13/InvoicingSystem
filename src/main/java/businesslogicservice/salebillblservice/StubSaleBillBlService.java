@@ -23,10 +23,10 @@ public interface StubSaleBillBlService {
 		//修改单据的状态
 		public void changeState();
 		
-		public PurSheetVO getPurSheet(String id);
-		public PurBackSheetVO getPurBackSheet(String id);
-		public SaleSheetVO getSaleSheet(String id);
-		public SaleBackSheetVO getSaleBackSheet(String id);
+		public boolean getPurSheet(String id);
+		public boolean getPurBackSheet(String id);
+		public boolean getSaleSheet(String id);
+		public boolean getSaleBackSheet(String id);
 		
 		
 		

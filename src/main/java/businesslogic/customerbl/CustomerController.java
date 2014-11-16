@@ -23,7 +23,11 @@ public class CustomerController implements StubCustomerBlService{
 		return null;
 	}
 	
-	public void addCustomer() {
+	public boolean addCustomer(String name) {
+		if(name=="csc")
+			return true;
+		else
+			return false;
 		// TODO Auto-generated method stub
 		
 	}
@@ -34,8 +38,10 @@ public class CustomerController implements StubCustomerBlService{
 	}
 
 	public boolean deleteCustomer(String id) {
-		// TODO Auto-generated method stub
-		return false;
+		if(id=="131")
+			return true;
+		else
+			return false;
 	}
 
 	public CustomerVO findCustomer(String id) {
