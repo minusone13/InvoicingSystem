@@ -1,6 +1,8 @@
 package businesslogic.financialbillbl;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import po.PO;
 import po.ReceiptPO;
@@ -14,7 +16,7 @@ import vo.ReceiptVO;
 import vo.VO;
 
 public class StubReceiptBill extends Bill implements GetVOandPO{
-	private BillStyle style=BillStyle.ReceiptBill;
+	private BillStyle billstyle=BillStyle.ReceiptBill;
 	private String ID;
 	String customer;
 	Role operator = Role.FINANTCIAL_STAFF;
@@ -31,18 +33,21 @@ public class StubReceiptBill extends Bill implements GetVOandPO{
 		}
 		this.customer = customer;
 		this.total = total;
-		state = BillState.DRAFT;	
+		state = BillState.DRAFT;
+		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+		String currentTime = format.format(new Date());
+		ID = "SKD-"+currentTime;
 	}
 
 	public ReceiptVO getVO() {
 		ReceiptVO vo = new ReceiptVO();
 		vo.setCustomer(customer);
 		vo.setID(ID);
-		vo.setStyle(style);
+		vo.setBillStyle(billstyle);
 		vo.setOperator(operator);
 		vo.setTotal(total);
 		vo.setTransferlist(transferlist);
-		vo.setState(state);		
+		vo.setBillState(state);		
 		return vo;
 	}
 
@@ -54,7 +59,7 @@ public class StubReceiptBill extends Bill implements GetVOandPO{
 		po.setState(state);
 		po.setTotal(total);
 		po.setTransferlist(transferlist);
-		po.setStyle(style);
+		po.setStyle(billstyle);
 		return po;
 	}
 	public void setPO (ReceiptPO po) {

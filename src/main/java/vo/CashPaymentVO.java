@@ -8,7 +8,7 @@ import businesslogic.Role;
 import businesslogic.financialbillbl.StubItem;
 
 public class CashPaymentVO extends VO{
-	private BillStyle style=BillStyle.CashPaymentBill;
+	private BillStyle billstyle=BillStyle.CashPaymentBill;
 	//单据编号、操作员自动生成
 	String ID;
 	double total;
@@ -20,19 +20,19 @@ public class CashPaymentVO extends VO{
 	Role operator;
 	ArrayList<StubItem> itemList;
 	
-	public BillStyle getStyle() {
-		return style;
+	public BillStyle getBillStyle() {
+		return billstyle;
 	}
 
-	public void setStyle(BillStyle style) {
-		this.style = style;
+	public void setBillStyle(BillStyle style) {
+		this.billstyle = style;
 	}
 
-	public BillState getState() {
+	public BillState getBillState() {
 		return state;
 	}
 
-	public void setState(BillState state) {
+	public void setBillState(BillState state) {
 		this.state = state;
 	}
 

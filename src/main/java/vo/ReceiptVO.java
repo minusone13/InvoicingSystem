@@ -8,7 +8,7 @@ import businesslogic.Role;
 import businesslogic.financialbillbl.StubTransferAccount;
 
 public class ReceiptVO extends VO{
-	private BillStyle style=BillStyle.ReceiptBill;
+	private BillStyle billstyle=BillStyle.ReceiptBill;
 	String ID;
 	Role operator;
 	String customer;
@@ -18,10 +18,10 @@ public class ReceiptVO extends VO{
 	String[] remark;	
 	BillState state;
 	
-	public BillState getState() {
+	public BillState getBillState() {
 		return state;
 	}
-	public void setState(BillState state) {
+	public void setBillState(BillState state) {
 		this.state = state;
 	}
 
@@ -33,11 +33,11 @@ public class ReceiptVO extends VO{
 	public void setTransferlist(ArrayList<StubTransferAccount> transferlist) {
 		this.transferlist = transferlist;
 	}
-	public BillStyle getStyle() {
-		return style;
+	public BillStyle getBillStyle() {
+		return billstyle;
 	}
-	public void setStyle(BillStyle style) {
-		this.style = style;
+	public void setBillStyle(BillStyle style) {
+		this.billstyle = style;
 	}
 	public String getID() {
 		return ID;

@@ -1,6 +1,8 @@
 package businesslogic.financialbillbl;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import businesslogic.BillStyle;
 import businesslogic.GetVOandPO;
@@ -32,6 +34,9 @@ public class StubCashPaymentBill extends Bill implements GetVOandPO{
 		this.account = account;
 		this.total = total;
 		state = BillState.DRAFT;	
+		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+		String currentTime = format.format(new Date());
+		ID = "XJFYD-"+currentTime;
 	}
 	
 	public CashPaymentVO getVO() {
@@ -41,8 +46,8 @@ public class StubCashPaymentBill extends Bill implements GetVOandPO{
 		vo.setTotal(total);
 		vo.setItemList(itemList);
 		vo.setOperator(operator);
-		vo.setStyle(style);
-		vo.setState(state);		
+		vo.setBillStyle(style);
+		vo.setBillState(state);		
 		return vo;
 	}
 	
