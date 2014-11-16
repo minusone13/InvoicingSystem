@@ -36,11 +36,19 @@ public class StubPaymentBill extends Bill implements GetVOandPO{
 	}
 
 	
-	public VO getVO() {
-		return null;
+	public PaymentVO getVO() {
+		PaymentVO vo = new PaymentVO();
+		vo.setCustomer(customer);
+		vo.setID(ID);
+		vo.setTotal(total);
+		vo.setOperator(operator);
+		vo.setState(state);
+		vo.setTransferlist(transferlist);
+		vo.setStyle(style);
+		return vo;
 	}
 
-	public PO getPO() {
+	public PaymentPO getPO() {
 		PaymentPO po = new PaymentPO();
 		po.setCustomer(customer);
 		po.setID(ID);

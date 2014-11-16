@@ -1,6 +1,8 @@
 package businesslogic.commoditybillbl;
 
-import po.PO;
+import java.util.ArrayList;
+
+import po.*;
 import vo.VO;
 import businesslogic.BillStyle;
 import businesslogic.GetVOandPO;
@@ -11,7 +13,7 @@ public class StubGiftBill extends Bill implements GetVOandPO
 {//赠送单类，统一进入单据池管理和存储
 	private BillStyle style=BillStyle.GiftBill;
 	private String ID;
-	MockCommodity com;
+	ArrayList<MockCommodity> coms;
 	public VO getVO()
 	{
 		return new VO();
@@ -19,5 +21,11 @@ public class StubGiftBill extends Bill implements GetVOandPO
 	public PO getPO()
 	{
 		return new PO();
+	}
+	public void setPO(GiftBillPO po)
+	{
+		for(int i=0;i<po.getComs().size();i++)
+			coms.add(new MockCommodity(po.getComs().get(i)));
+		ID=po.getID();
 	}
 }

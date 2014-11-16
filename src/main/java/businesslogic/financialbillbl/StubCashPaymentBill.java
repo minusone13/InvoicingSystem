@@ -34,11 +34,19 @@ public class StubCashPaymentBill extends Bill implements GetVOandPO{
 		state = BillState.DRAFT;	
 	}
 	
-	public VO getVO() {
-		return new VO();
+	public CashPaymentVO getVO() {
+		CashPaymentVO vo = new CashPaymentVO();
+		vo.setAccount(account);
+		vo.setID(ID);
+		vo.setTotal(total);
+		vo.setItemList(itemList);
+		vo.setOperator(operator);
+		vo.setStyle(style);
+		vo.setState(state);		
+		return vo;
 	}
 	
-	public PO getPO() {
+	public CashPaymentPO getPO() {
 		CashPaymentPO po = new CashPaymentPO();
 		po.setAccount(account);
 		po.setID(ID);
@@ -49,12 +57,12 @@ public class StubCashPaymentBill extends Bill implements GetVOandPO{
 		po.setTotal(total);
 		return po;
 	}
+	
 	public void setPO (CashPaymentPO po) {
 		ID = po.getID();
 		account = po.getAccount();
 		total = po.getTotal();
 		state = po.getState();
-		itemList = po.getItemList();
-		
+		itemList = po.getItemList();		
 	}
 }

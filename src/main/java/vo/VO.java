@@ -1,9 +1,15 @@
 package vo;
 
+import java.util.ArrayList;
+
+import businesslogic.BillState;
 import businesslogic.BillStyle;
 import businesslogic.LevelStrategyStyle;
 import businesslogic.ReachStrategyStyle;
+import businesslogic.Role;
 import businesslogic.StrategyStyle;
+import businesslogic.financialbillbl.StubItem;
+import businesslogic.financialbillbl.StubTransferAccount;
 
 public class VO {
 	private BillStyle billstyle;//单据类型
@@ -11,7 +17,17 @@ public class VO {
 	private LevelStrategyStyle level_strategy_style;//客户分层策略种类
 	private ReachStrategyStyle reach_strategy_style;//满额促销种类
 	private String ID="0000";
-
+	double total;
+	String account;//账户
+	double[] money;//金额
+	String[] item;
+	String[] remark;
+	String[] accounts;
+	BillState state;
+	Role operator;
+	ArrayList<StubItem> itemList;		
+	String customer;
+	ArrayList<StubTransferAccount> transferlist;
 	/*获取单据类型*/
 	public BillStyle getBillStyle(){
 		return billstyle;

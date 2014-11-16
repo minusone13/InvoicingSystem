@@ -2,7 +2,7 @@ package businesslogic.userbl;
 
 import java.security.*;
 
-import po.userpo.UserPO;
+import po.userpo.*;
 import vo.UserVO;
 import dataservice.userdataservice.*;
 import businesslogic.Role;
@@ -14,19 +14,30 @@ public class User {
 		UserPO po = data.login(account, string2MD5(password));
 		if(po==null)
 			return null;
-		UserVO vo = new UserVO(po.getR(),po.getAccount(),po.getPassword(),po.getName());
+		UserVO vo = new UserVO(po.getR(),po.getAccount(),po.getName());
 		return vo;
 	}
-	//public void addRecord(Record rec)
-	public boolean signUp(String account, String password,String name,Role r)
+	public boolean signUp(UserVO vo)
 	{
-		if(data.find(account)!=null)
+		if(data.find(vo.getAccount())!=null)
 			return false;
 		else
+		{
+			data.insert(new UserPO(vo.getR(),vo.getAccount(),string2MD5(vo.getPassword()),vo.getName()));
 			return true;
+		}
 	}
 	
+	public boolean changePassword(UserVO vo)
+	{
+		boolean result = data.updatePassword(new UserPO(vo.getR(),vo.getAccount(),string2MD5(vo.getPassword()),vo.getName()));
+		return result;
+	}
 	
+	public boolean addRecord(OperationRecordPO po)
+	{
+		return data.insert(po);
+	}
 	
 	
 	

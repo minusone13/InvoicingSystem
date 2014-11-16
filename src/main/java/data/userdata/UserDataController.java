@@ -153,4 +153,8 @@ public class UserDataController implements StubUserDataService{
 	{
 		return l.insert(po);
 	}
+	public boolean updatePassword(UserPO po)
+	{
+		return l.updatePassword(po);
+	}
 }

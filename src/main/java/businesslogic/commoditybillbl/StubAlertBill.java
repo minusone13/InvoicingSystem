@@ -23,4 +23,9 @@ public class StubAlertBill extends Bill implements GetVOandPO
 	{
 		return new PO();
 	}
+	public void setPO(AlertBillPO po)
+	{
+		com=new MockCommodity(po.getCommodity());
+		shortage=po.getshortage();
+	}
 }

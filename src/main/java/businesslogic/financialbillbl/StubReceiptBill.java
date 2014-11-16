@@ -34,11 +34,19 @@ public class StubReceiptBill extends Bill implements GetVOandPO{
 		state = BillState.DRAFT;	
 	}
 
-	public VO getVO() {
-		return null;
+	public ReceiptVO getVO() {
+		ReceiptVO vo = new ReceiptVO();
+		vo.setCustomer(customer);
+		vo.setID(ID);
+		vo.setStyle(style);
+		vo.setOperator(operator);
+		vo.setTotal(total);
+		vo.setTransferlist(transferlist);
+		vo.setState(state);		
+		return vo;
 	}
 
-	public PO getPO() {
+	public ReceiptPO getPO() {
 		ReceiptPO po = new ReceiptPO();
 		po.setCustomer(customer);
 		po.setID(ID);

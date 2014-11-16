@@ -50,7 +50,7 @@ public class FinancialBLDriver {
 		BusinessSituationVO bsv = fbs.inquiryCondition("12", "income");
 		if(bsv !=null) System.out.println("INQUIRY SUCCESS");
 		else System.out.println("INQUIRY FAILE!");
-		
+		/*
 		boolean result6 = fbs.creatReceipt(new ReceiptVO());
 		if(result6==true) System.out.println("creat SUCCESS!");
 		else System.out.println("FAILE!");
@@ -62,7 +62,7 @@ public class FinancialBLDriver {
 		boolean result8 = fbs.creatCashPayment(new CashPaymentVO());
 		if(result8==true) System.out.println("creat SUCCESS!");
 		else System.out.println("FAILE!");
-		
+		*/
 			
 	}
 }
