@@ -2,7 +2,7 @@ package businesslogic.customerbl;
 
 import java.util.ArrayList;
 
-import vo.CustomerVo;
+import vo.CustomerVO;
 import vo.RM;
 import businesslogicservice.customerblservice.StubCustomerBlService;
 
@@ -28,7 +28,7 @@ public class CustomerController implements StubCustomerBlService{
 		
 	}
 
-	public RM updateCustomer(CustomerVo vo) {
+	public RM updateCustomer(CustomerVO vo) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -38,7 +38,7 @@ public class CustomerController implements StubCustomerBlService{
 		return false;
 	}
 
-	public CustomerVo findCustomer(String id) {
+	public CustomerVO findCustomer(String id) {
 		// TODO Auto-generated method stub
 		return null;
 	}

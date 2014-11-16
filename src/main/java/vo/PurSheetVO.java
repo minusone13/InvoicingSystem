@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import businesslogic.BillStyle;
 import businesslogic.customerbl.StubCustomer;
 
-public class PurSheetVo extends VO{
+public class PurSheetVO extends VO{
 	private BillStyle style=BillStyle.PurSheet;
 	StubCustomer customer;
 	String id;

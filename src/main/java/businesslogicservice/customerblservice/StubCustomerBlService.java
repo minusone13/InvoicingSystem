@@ -1,6 +1,6 @@
 package businesslogicservice.customerblservice;
 
-import vo.CustomerVo;
+import vo.CustomerVO;
 import vo.RM;
 
 public interface StubCustomerBlService {
@@ -10,9 +10,9 @@ public interface StubCustomerBlService {
 		 * */
 	
 		public void addCustomer();
-		public RM updateCustomer(CustomerVo vo);
+		public RM updateCustomer(CustomerVO vo);
 		public boolean deleteCustomer(String id);
-		public CustomerVo findCustomer(String id);
+		public CustomerVO findCustomer(String id);
 		//public customerList getAllCustomer();
 		
 		/*

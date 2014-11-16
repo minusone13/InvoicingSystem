@@ -1,6 +1,6 @@
 package vo;
 
-public class CustomerVo {
+public class CustomerVO {
 	int type;
 	String name;
 	String phonenumber;

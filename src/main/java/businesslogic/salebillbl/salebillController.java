@@ -1,7 +1,7 @@
 package businesslogic.salebillbl;
 
-import vo.CustomerVo;
-import businesslogicservice.saleblservice.StubSaleBlService;
+import vo.CustomerVO;
+import businesslogicservice.salebillblservice.StubSaleBillBlService;
 
 public class salebillController{
 		salebillList salebilllist;
