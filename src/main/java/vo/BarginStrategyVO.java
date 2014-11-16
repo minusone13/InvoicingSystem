@@ -15,6 +15,7 @@ public class BarginStrategyVO extends VO {
 	
 	private String StartTime;//开始日期
 	private int LastTime;//策略持续时间（天）
+	
 	/*构造方法*/
 	public BarginStrategyVO(){
 		

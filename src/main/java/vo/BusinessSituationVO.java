@@ -1,9 +1,10 @@
 package vo;
 
 public class BusinessSituationVO {
-	double income;
-	double expenditure;
-	double profit;
+	private double income;
+	private double expenditure;
+	private double profit;
+	public int tempForTest=0;
 	public double getIncome() {
 		return income;
 	}

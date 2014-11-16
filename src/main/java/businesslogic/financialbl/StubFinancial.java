@@ -6,7 +6,7 @@ import vo.*;
 import businesslogic.accountbl.StubAccount;
 import businesslogic.accountbl.StubAccountList;
 import businesslogic.financialbillbl.StubCashPaymentBill;
-import businesslogic.financialbillbl.StubFinancialListBill;
+import businesslogic.financialbillbl.StubFinancialBillList;
 import businesslogic.financialbillbl.StubPaymentBill;
 import businesslogic.financialbillbl.StubReceiptBill;
 import businesslogic.iquirybl.StubInquiry;
@@ -72,18 +72,18 @@ public class StubFinancial implements StubFinancialBlService{
 	}
 	
 	public boolean creatReceipt(ReceiptVO rv) {
-		StubFinancialListBill financialList = new StubFinancialListBill();
+		StubFinancialBillList financialList = new StubFinancialBillList();
 		return financialList.creatReceiptBill(rv);
 	}
 	
 	public boolean creatPayment(PaymentVO pv){
-		StubFinancialListBill financialList = new StubFinancialListBill();
+		StubFinancialBillList financialList = new StubFinancialBillList();
 		return financialList.creatPaymentBill(pv);
 	
 	}
 	
 	public boolean creatCashPayment(CashPaymentVO cpv) {
-		StubFinancialListBill financialList = new StubFinancialListBill();
+		StubFinancialBillList financialList = new StubFinancialBillList();
 		return financialList.creatCashPaymentBill(cpv);
 		
 	}

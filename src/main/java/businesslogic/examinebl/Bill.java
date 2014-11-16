@@ -6,7 +6,7 @@ import businesslogic.BillStyle;
 public class Bill {
 	private BillStyle style;//单据类型
 	private String ID;//单据编号
-	private BillState state;//单据状态
+	private BillState state=BillState.DRAFT;//单据状态,初始状态为草稿
 	/*设置单据状态*/
 	public void setState(BillState st){
 		state=st;
