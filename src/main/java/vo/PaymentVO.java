@@ -1,14 +1,18 @@
 package vo;
 
 import businesslogic.BillStyle;
+import businesslogic.Role;
 
 public class PaymentVO extends VO{
 	private BillStyle style=BillStyle.PaymentBill;
 	//单据编号、操作员自动生成
+		String ID;
+		Role operator;
 		String customer;
 		double total;
-		String account;//账户
-		double money;//转账金额
+		String[] account;//账户
+		double[] money;//转账金额
+		String[] remark;
 		public String getCustomer() {
 			return customer;
 		}
@@ -21,16 +25,14 @@ public class PaymentVO extends VO{
 		public void setTotal(double total) {
 			this.total = total;
 		}
-		public String getAccount() {
+		public String[] getAccount() {
 			return account;
 		}
-		public void setAccount(String account) {
-			this.account = account;
-		}
-		public double getMoney() {
+		
+		public double[] getMoney() {
 			return money;
 		}
-		public void setMoney(double money) {
-			this.money = money;
+		public String[] getRemark() {
+			return remark;
 		}
 }

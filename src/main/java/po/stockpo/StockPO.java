@@ -1,4 +1,4 @@
-package po;
+package po.stockpo;
 
 public class StockPO {
 	public enum Type

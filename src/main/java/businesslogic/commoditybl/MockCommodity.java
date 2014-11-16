@@ -1,6 +1,7 @@
 package businesslogic.commoditybl;
 
 import po.*;
+import po.stockpo.CommodityPO;
 import vo.*;
 
 public class MockCommodity {

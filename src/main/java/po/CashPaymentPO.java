@@ -1,40 +1,53 @@
 package po;
 
-public class CashPaymentPO extends PO{
+import java.io.Serializable;
+import java.util.ArrayList;
 
+import businesslogic.BillState;
+import businesslogic.BillStyle;
+import businesslogic.Role;
+import businesslogic.financialbillbl.StubItem;
+
+public class CashPaymentPO extends PO implements Serializable{
+	BillStyle style;
 	double total;
 	String account;//账户
-	double money;//金额
-	String item;
-	String remark;
+	String ID;
+	Role operator;
+	ArrayList<StubItem> itemList;
+	BillState state;
 	
-	String billNumber;
-	String operator;
-	
-	public String getBillNumber() {
-		return billNumber;
+	public BillState getState() {
+		return state;
 	}
-	public void setBillNumber(String billNumber) {
-		this.billNumber = billNumber;
+	public void setState(BillState state) {
+		this.state = state;
 	}
-	public String getOperator() {
+	public BillStyle getStyle() {
+		return style;
+	}
+	public void setStyle(BillStyle style) {
+		this.style = style;
+	}
+	public ArrayList<StubItem> getItemList() {
+		return itemList;
+	}
+	public void setItemList(ArrayList<StubItem> itemList) {
+		this.itemList = itemList;
+	}
+	public String getID() {
+		return ID;
+	}
+	public void setID(String iD) {
+		ID = iD;
+	}
+	public Role getOperator() {
 		return operator;
 	}
-	public void setOperator(String operator) {
+	public void setOperator(Role operator) {
 		this.operator = operator;
 	}
-	public String getItem() {
-		return item;
-	}
-	public void setItem(String item) {
-		this.item = item;
-	}
-	public String getRemark() {
-		return remark;
-	}
-	public void setRemark(String remark) {
-		this.remark = remark;
-	}
+	
 	public double getTotal() {
 		return total;
 	}
@@ -47,10 +60,5 @@ public class CashPaymentPO extends PO{
 	public void setAccount(String account) {
 		this.account = account;
 	}
-	public double getMoney() {
-		return money;
-	}
-	public void setMoney(double money) {
-		this.money = money;
-	}
+
 }

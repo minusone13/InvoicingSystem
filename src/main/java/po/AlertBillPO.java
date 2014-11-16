@@ -1,7 +1,11 @@
 package po;
 
+import java.io.Serializable;
 
-public class AlertBillPO extends PO{
+import po.stockpo.CommodityPO;
+
+
+public class AlertBillPO extends PO implements Serializable{
 	CommodityPO comPO;
 	int shortage;
 	public AlertBillPO(CommodityPO comPO,int shortage)

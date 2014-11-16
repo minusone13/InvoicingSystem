@@ -4,6 +4,7 @@ import java.io.*;
 import java.util.*;
 
 import po.*;
+import po.stockpo.CommodityPO;
 import vo.RM;
 
 public class StubCommodityList implements Serializable{

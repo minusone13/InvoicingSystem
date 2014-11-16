@@ -7,9 +7,9 @@ import businesslogic.commoditybl.MockCommodity;
 
 public class StubStrategyPool {
 
-	private ArrayList<StubLevelStrategy> alOfLevelStrategy;
-	private ArrayList<StubBarginStrategy> alOfBarginStrategy;
-	private ArrayList<StubReachStrategy> alOfReachStrategy;
+	private ArrayList<StubLevelStrategy> alOfLevelStrategy=new ArrayList<StubLevelStrategy>();
+	private ArrayList<StubBarginStrategy> alOfBarginStrategy=new ArrayList<StubBarginStrategy>();
+	private ArrayList<StubReachStrategy> alOfReachStrategy=new ArrayList<StubReachStrategy>();
 	/*构造函数*/
 	public StubStrategyPool(){
 		

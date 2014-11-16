@@ -10,7 +10,7 @@ public class VO {
 	private StrategyStyle strategystyle;//策略类型
 	private LevelStrategyStyle level_strategy_style;//客户分层策略种类
 	private ReachStrategyStyle reach_strategy_style;//满额促销种类
-	private String ID;
+	private String ID="0000";
 
 	/*获取单据类型*/
 	public BillStyle getBillStyle(){

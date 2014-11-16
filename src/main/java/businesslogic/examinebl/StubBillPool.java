@@ -14,6 +14,12 @@ import businesslogic.salebillbl.StubPurBackSheet;
 import businesslogic.salebillbl.StubPurSheet;
 import businesslogic.salebillbl.StubSaleBackSheet;
 import businesslogic.salebillbl.StubSaleSheet;
+import data.billdata.CommodityBillSaver;
+import data.billdata.FinancialBillSaver;
+import data.billdata.SaleBillSaver;
+import dataservice.billdataservice.CommodityBillSaverService;
+import dataservice.billdataservice.FinancialBillSaverService;
+import dataservice.billdataservice.SaleBillSaverService;
 
 public class StubBillPool {
 
@@ -31,6 +37,13 @@ public class StubBillPool {
 	private ArrayList<StubCashPaymentBill> alOfCashPaymentBill=new ArrayList<StubCashPaymentBill>();
 	/*构造函数*/
 	public StubBillPool(){
+		//读取文档中的对象
+		SaleBillSaverService sbs=new SaleBillSaver();
+		FinancialBillSaverService fbs=new FinancialBillSaver();
+		CommodityBillSaverService cbs=new CommodityBillSaver();
+		
+		//将返回的PO对象的信息传入真正的单据对象
+		
 		
 	}
 	/*需要向单据池中加入一张库存赠送单*/
@@ -198,8 +211,7 @@ public class StubBillPool {
 			if(temp.getState()==st){//如果单据状态符合筛选状态
 				result.add(temp);
 			}
-		}
-		
+		}	
 		return result;
 	}
 	/*实时保存池中数组对象*/

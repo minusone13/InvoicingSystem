@@ -1,4 +1,4 @@
-package po;
+package po.stockpo;
 
 import java.io.Serializable;
 

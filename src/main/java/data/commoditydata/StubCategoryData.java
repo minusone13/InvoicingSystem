@@ -4,7 +4,9 @@ import java.io.Serializable;
 import java.util.*;
 
 import po.*;
-import po.CommodityPO.*;
+import po.stockpo.CategoryPO;
+import po.stockpo.StockPO;
+import po.stockpo.CommodityPO.*;
 import vo.RM;
 
 public class StubCategoryData implements Serializable{
