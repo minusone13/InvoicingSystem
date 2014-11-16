@@ -1,14 +1,16 @@
 package presentation;
 
 
-import data.commoditydata.*;
-import data.initial.Initial;
+import presentation.commodityui.StockManagerDriver;
 import presentation.financialui.FinancialBLDriver;
+import presentation.managerui.ManagerBLDriver;
 import businesslogic.financialbl.StubFinancial;
-import presentation.commodityui.*;
+import businesslogic.managerbl.StubManager;
 import businesslogic.stockmanagerbl.StubStockController;
-import businesslogic.userbl.User;
 import businesslogicservice.financialblservice.StubFinancialBlService;
+import businesslogicservice.managerblservice.StubManagerBlService;
+import data.commoditydata.StubStockDataController;
+import data.initial.Initial;
 
 public class StartUp {
 
@@ -16,6 +18,10 @@ public class StartUp {
 	{
 		Initial initial= new Initial();
 		initial.initialAll();
+		//总经理的驱动程序
+		StubManagerBlService manager = new StubManager();
+		ManagerBLDriver managerDriver = new ManagerBLDriver(manager);
+		managerDriver.drive();
 		//财务人员的驱动程序
 		StubFinancialBlService financial = new StubFinancial();
 		FinancialBLDriver driver = new FinancialBLDriver(financial);

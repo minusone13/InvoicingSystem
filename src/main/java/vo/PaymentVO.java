@@ -8,7 +8,7 @@ import businesslogic.Role;
 import businesslogic.financialbillbl.StubTransferAccount;
 
 public class PaymentVO extends VO{
-	private BillStyle style=BillStyle.PaymentBill;
+	private BillStyle billstyle=BillStyle.PaymentBill;
 	//单据编号、操作员自动生成
 	String ID;
 	Role operator;
@@ -25,11 +25,11 @@ public class PaymentVO extends VO{
 	public void setTransferlist(ArrayList<StubTransferAccount> transferlist) {
 		this.transferlist = transferlist;
 	}
-	public BillStyle getStyle() {
-		return style;
+	public BillStyle getBillStyle() {
+		return billstyle;
 	}
-	public void setStyle(BillStyle style) {
-		this.style = style;
+	public void setBillStyle(BillStyle style) {
+		this.billstyle = style;
 	}
 	public String getID() {
 		return ID;
