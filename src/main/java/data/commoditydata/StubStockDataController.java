@@ -182,4 +182,12 @@ public class StubStockDataController implements StubCommodityDataService{
 	}
         return true;
     }
+
+	public static StubCommodityList getL() {
+		return l;
+	}
+
+	public static void setL(StubCommodityList l) {
+		StubStockDataController.l = l;
+	}
 }
