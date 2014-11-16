@@ -7,6 +7,7 @@ import po.stockpo.CommodityPO;
 
 public class GiftBillPO extends PO implements Serializable{
 	String ID;
+	String[] remark;
 	ArrayList<CommodityPO> coms;
 	public ArrayList<CommodityPO> getComs()
 	{
@@ -20,5 +21,11 @@ public class GiftBillPO extends PO implements Serializable{
 	}
 	public void setComs(ArrayList<CommodityPO> coms) {
 		this.coms = coms;
+	}
+	public String[] getRemark() {
+		return remark;
+	}
+	public void setRemark(String[] remark) {
+		this.remark = remark;
 	}
 }
