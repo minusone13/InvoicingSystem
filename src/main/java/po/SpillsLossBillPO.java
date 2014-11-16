@@ -5,7 +5,7 @@ import java.io.Serializable;
 import po.stockpo.CommodityPO;
 
 public class SpillsLossBillPO extends PO implements Serializable{
-	enum Type
+	public enum Type
 	{
 		Spills,
 		Loss

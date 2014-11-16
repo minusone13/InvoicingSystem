@@ -1,22 +1,17 @@
 package businesslogic.commoditybillbl;
 
-import po.PO;
-import po.SpillsLossBillPO;
+import po.*;
 import vo.VO;
 import businesslogic.BillStyle;
 import businesslogic.GetVOandPO;
+import businesslogic.commoditybl.MockCommodity;
 import businesslogic.examinebl.Bill;
 
 public class StubSpillsLossBill extends Bill implements GetVOandPO
 {//报溢报损单，统一进入单据池管理和存储
 	private BillStyle style=BillStyle.SpillsLossBill;
-	private String ID;
-	public enum Type
-	{
-		Spills,
-		Loss
-	}
-	Type t;
+	private MockCommodity com;
+	po.SpillsLossBillPO.Type t;
 	public VO getVO()
 	{
 		return new VO();
@@ -24,5 +19,10 @@ public class StubSpillsLossBill extends Bill implements GetVOandPO
 	public PO getPO()
 	{
 		return new PO();
+	}
+	public void setPO(SpillsLossBillPO po)
+	{
+		com=new MockCommodity(po.getCommodity());
+		t=po.getType();
 	}
 }
