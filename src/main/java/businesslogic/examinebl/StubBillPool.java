@@ -2,6 +2,16 @@ package businesslogic.examinebl;
 
 import java.util.ArrayList;
 
+import po.AlertBillPO;
+import po.CashPaymentPO;
+import po.GiftBillPO;
+import po.PaymentPO;
+import po.PurBackSheetPO;
+import po.PurSheetPO;
+import po.ReceiptPO;
+import po.SaleBackSheetPO;
+import po.SaleSheetPO;
+import po.SpillsLossBillPO;
 import businesslogic.BillState;
 import businesslogic.BillStyle;
 import businesslogic.commoditybillbl.StubAlertBill;
@@ -43,7 +53,97 @@ public class StubBillPool {
 		CommodityBillSaverService cbs=new CommodityBillSaver();
 		
 		//将返回的PO对象的信息传入真正的单据对象
-		
+		//赠送单
+		ArrayList<GiftBillPO> GiftBillListPO=cbs.getGiftBill();
+		if(GiftBillListPO!=null){
+			for(GiftBillPO tempPO:GiftBillListPO){
+				StubGiftBill gb=new StubGiftBill();
+				gb.setPO(tempPO);
+				alOfGiftBill.add(gb);
+			}
+		}
+		//报警单
+		ArrayList<AlertBillPO> AlertBillListPO=cbs.getAlertBill();
+		if(AlertBillListPO!=null){
+			for(AlertBillPO tempPO:AlertBillListPO){
+				StubAlertBill ab=new StubAlertBill();
+				ab.setPO(tempPO);
+				alOfAlertBill.add(ab);
+			}
+		}
+		//报溢报损单
+		ArrayList<SpillsLossBillPO> SpillsLossBillListPO=cbs.getSpillsLossBill();
+		if(SpillsLossBillListPO!=null){
+			for(SpillsLossBillPO tempPO:SpillsLossBillListPO){
+				StubSpillsLossBill slb=new StubSpillsLossBill();
+				slb.setPO(tempPO);
+				alOfSpillsLossBill.add(slb);
+			}
+		}
+		//进货单
+		ArrayList<PurSheetPO> PurSheetListPO=sbs.getPurSheet();
+		if(PurSheetListPO!=null){
+			for(PurSheetPO tempPO:PurSheetListPO){
+				StubPurSheet ps=new StubPurSheet();
+				ps.setPO(tempPO);
+				alOfPurSheet.add(ps);
+			}
+		}
+		//进货退货单
+		ArrayList<PurBackSheetPO> PurBackSheetListPO=sbs.getPurBackSheet();
+		if(PurBackSheetListPO!=null){
+			for(PurBackSheetPO tempPO:PurBackSheetListPO){
+				StubPurBackSheet pbs=new StubPurBackSheet();
+				pbs.setPO(tempPO);
+				alOfPurBackSheet.add(pbs);
+			}
+		}
+		//销售单
+		ArrayList<SaleSheetPO> SaleSheetListPO=sbs.getSaleSheet();
+		if(SaleSheetListPO!=null){
+			for(SaleSheetPO tempPO:SaleSheetListPO){
+				StubSaleSheet ss=new StubSaleSheet();
+				ss.setPO(tempPO);
+				alOfSaleSheet.add(ss);
+			}
+		}
+		//销售退货单
+		ArrayList<SaleBackSheetPO> SaleBackSheetListPO=sbs.getSaleBackSheet();
+		if(SaleBackSheetListPO!=null){
+			for(SaleBackSheetPO tempPO:SaleBackSheetListPO){
+				StubSaleBackSheet salebs=new StubSaleBackSheet();
+				salebs.setPO(tempPO);
+				alOfSaleBackSheet.add(salebs);
+			}
+		}
+		//收款单
+		ArrayList<ReceiptPO> ReceiptBillListPO=fbs.getReceipt();
+		if(ReceiptBillListPO!=null){
+			for(ReceiptPO tempPO:ReceiptBillListPO){
+				StubReceiptBill rcb=new StubReceiptBill();
+				rcb.setPO(tempPO);
+				alOfReceiptBill.add(rcb);
+			}
+		}
+		//付款单
+		ArrayList<PaymentPO> PaymentBillListPO=fbs.getPayment();
+		if(PaymentBillListPO!=null){
+			for(PaymentPO tempPO:PaymentBillListPO){
+				StubPaymentBill pmb=new StubPaymentBill();
+				pmb.setPO(tempPO);
+				alOfPaymentBill.add(pmb);
+			}
+		}
+		//赠送单
+		ArrayList<CashPaymentPO> CashPaymentBillListPO=fbs.getCashPayment();
+		if(CashPaymentBillListPO!=null){
+			for(CashPaymentPO tempPO:CashPaymentBillListPO){
+				StubCashPaymentBill cpb=new StubCashPaymentBill();
+				cpb.setPO(tempPO);
+				alOfCashPaymentBill.add(cpb);
+			}
+		}
+
 		
 	}
 	/*需要向单据池中加入一张库存赠送单*/
