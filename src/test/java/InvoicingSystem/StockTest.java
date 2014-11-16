@@ -6,6 +6,7 @@ import businesslogicservice.commodityblservice.StubCommodityBlService;
 import data.commoditydata.*;
 import dataservice.commoditydataservice.StubCommodityDataService;
 import vo.*;
+import vo.stockpo.MockCommodityVO;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;

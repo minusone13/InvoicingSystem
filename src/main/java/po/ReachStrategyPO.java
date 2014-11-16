@@ -2,7 +2,7 @@ package po;
 
 import java.util.ArrayList;
 
-import vo.MockCommodityVO;
+import vo.stockpo.MockCommodityVO;
 import businesslogic.ReachStrategyStyle;
 import businesslogic.StrategyStyle;
 

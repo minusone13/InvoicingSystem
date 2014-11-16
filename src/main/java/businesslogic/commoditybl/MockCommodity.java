@@ -3,6 +3,7 @@ package businesslogic.commoditybl;
 import po.*;
 import po.stockpo.CommodityPO;
 import vo.*;
+import vo.stockpo.MockCommodityVO;
 
 public class MockCommodity {
 	String parent;//the ID of parent Category
