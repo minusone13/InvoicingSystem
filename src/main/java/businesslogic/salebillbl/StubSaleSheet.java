@@ -3,6 +3,7 @@ package businesslogic.salebillbl;
 import java.util.ArrayList;
 
 import po.PO;
+import po.SaleSheetPO;
 import vo.VO;
 import businesslogic.BillStyle;
 import businesslogic.GetVOandPO;
@@ -10,14 +11,7 @@ import businesslogic.customerbl.StubCustomer;
 import businesslogic.examinebl.Bill;
 
 public class StubSaleSheet extends Bill implements GetVOandPO{
-	/*String customer,
-	 * String saler,
-	 * ArrayList sheet,
-	 * double money1,
-	 * double money2,
-	 * double discount,
-	 * double pmoney, 
-	 * String words*/
+
 	private String ID;
 	private BillStyle style=BillStyle.SaleSheet;
 		StubCustomer customer;
@@ -34,5 +28,16 @@ public class StubSaleSheet extends Bill implements GetVOandPO{
 		public PO getPO() {
 			// TODO Auto-generated method stub
 			return null;
+		}
+		
+		public void setPO(SaleSheetPO po){
+			this.ID=po.getid();
+			this.customer=po.getcustomer();
+			this.sheet=po.getsheet();
+			this.disconut=po.getdiscount();
+			this.money1=po.getmoney1();
+			this.money2=po.getmoney2();
+			this.pmoney=po.getpmoney();
+			this.words=po.getwords();
 		}
 }

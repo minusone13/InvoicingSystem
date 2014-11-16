@@ -32,7 +32,7 @@ public class SaleBackSheetPO extends PO implements Serializable{
 		this.discount=discount;
 	}
 	
-	public double pmoney(){
+	public double getpmoney(){
 		return pmoney;
 	}
 	

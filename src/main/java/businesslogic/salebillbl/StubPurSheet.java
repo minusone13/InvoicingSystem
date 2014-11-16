@@ -3,6 +3,7 @@ package businesslogic.salebillbl;
 import java.util.ArrayList;
 
 import po.PO;
+import po.PurSheetPO;
 import vo.VO;
 import businesslogic.BillStyle;
 import businesslogic.GetVOandPO;
@@ -24,6 +25,15 @@ public class StubPurSheet extends Bill implements GetVOandPO{
 		public PO getPO() {
 			// TODO Auto-generated method stub
 			return null;
+		}
+		
+		public void setPO(PurSheetPO po){
+			this.customer=po.getcustomer();
+			this.commodity=po.getcommodity();
+			this.ID=po.getid();
+			this.sheet=po.getsheet();
+			this.money1=po.getmoney1();
+			this.words=po.getwords();
 		}
 		
 		

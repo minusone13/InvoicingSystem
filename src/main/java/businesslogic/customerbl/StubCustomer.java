@@ -14,9 +14,15 @@ public class StubCustomer {
 	double shouldGive;//应收
 	String deSaler;//默认销售人员
 	
-	StubCustomer(CustomerPO po){
-		//格格项分别赋值;
+	public void setPO(CustomerPO po){
+		this.type=po.gettype();
+		this.name=po.getname();
+		this.address=po.getaddress();
+		this.phonenumber=po.getphonenumber();
+		this.postcode=po.getpostcode();
+		this.maxOwe=po.getmaxOwe();
+		this.shouldGive=po.getShouldGive();
+		this.shouldPay=po.getShouldPay();
+		this.deSaler=po.getdeSaler();
 	}
-	
-	
 }
