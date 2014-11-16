@@ -3,8 +3,8 @@ package businesslogic.strategybl;
 import java.util.ArrayList;
 
 import po.PO;
-import vo.MockCommodityVO;
 import vo.VO;
+import vo.stockpo.MockCommodityVO;
 import businesslogic.GetVOandPO;
 import businesslogic.LevelStrategyStyle;
 import businesslogic.ReachStrategyStyle;

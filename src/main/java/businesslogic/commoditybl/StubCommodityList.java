@@ -6,8 +6,8 @@ import po.*;
 import po.stockpo.CommodityPO;
 import businesslogic.stockmanagerbl.*;
 import dataservice.commoditydataservice.*;
-import vo.MockCommodityVO;
-import vo.MockCommodityVO.Type;
+import vo.stockpo.MockCommodityVO;
+import vo.stockpo.MockCommodityVO.Type;
 import vo.RM;
 
 public class StubCommodityList {//商品列表 haha

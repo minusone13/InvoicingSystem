@@ -2,6 +2,7 @@ package presentation.commodityui;
 
 import dataservice.commoditydataservice.*;
 import vo.*;
+import vo.stockpo.MockCommodityVO;
 import businesslogicservice.commodityblservice.*;
 
 public class StockManagerDriver {

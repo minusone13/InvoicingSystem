@@ -1,5 +1,7 @@
 package businesslogic.commoditybillbl;
 
+import java.nio.file.attribute.PosixFilePermission;
+
 import po.*;
 import vo.VO;
 import businesslogic.BillStyle;
@@ -22,7 +24,7 @@ public class StubSpillsLossBill extends Bill implements GetVOandPO
 	}
 	public void setPO(SpillsLossBillPO po)
 	{
-		com=new MockCommodity(po.getCommodity());
-		t=po.getType();
+		com=new MockCommodity(po.getComPO());
+		t=po.getT();
 	}
 }

@@ -3,6 +3,7 @@ package vo;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import vo.stockpo.MockCommodityVO;
 import businesslogic.LevelStrategyStyle;
 import businesslogic.StrategyStyle;
 

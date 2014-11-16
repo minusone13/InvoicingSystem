@@ -7,6 +7,7 @@ import businesslogic.commoditybillbl.*;
 import businesslogic.commoditybl.*;
 import businesslogicservice.commodityblservice.*;
 import vo.*;
+import vo.stockpo.MockCommodityVO;
 
 public class StubStockController implements StubCommodityBlService
 {//负责与界面及其他程序员的交互
