@@ -38,7 +38,9 @@ public class StubAccountList {
 		AccountPO apo = new AccountPO();
 		apo.setName(account.name);
 		apo = a.find(apo);
+		if(apo == null) return null;
 		AccountVO avo = new AccountVO();
+		
 		avo.setBalance(apo.getBalance());
 		avo.setName(apo.getName());
 		return avo;
