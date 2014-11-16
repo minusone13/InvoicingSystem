@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import vo.BarginStrategyVO;
 import vo.LevelStrategyVO;
+import vo.PaymentVO;
 import vo.ReachStrategyVO;
 import vo.VO;
 import businesslogicservice.managerblservice.StubManagerBlService;
@@ -18,7 +19,9 @@ public class ManagerBLDriver {
 	public void drive(){
 	mbs.modifyPassword("wwweee");
 	 
-	mbs.changeImformationOfBill(new VO());
+	//初始化一个假的单据vo
+	VO tempVO=new PaymentVO();
+	mbs.changeImformationOfBill(tempVO);
 	
 	mbs.PassBill(new ArrayList<VO>());
 	

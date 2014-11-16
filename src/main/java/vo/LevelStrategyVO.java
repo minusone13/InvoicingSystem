@@ -1,9 +1,9 @@
 package vo;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import businesslogic.LevelStrategyStyle;
-import businesslogic.ReachStrategyStyle;
 import businesslogic.StrategyStyle;
 
 public class LevelStrategyVO extends VO{
@@ -20,6 +20,18 @@ public class LevelStrategyVO extends VO{
 	
 	private String StartTime;//开始日期
 	private int LastTime;//策略持续时间（天）
+	
+	public LevelStrategyVO(){
+	     Calendar ca = Calendar.getInstance();
+	     int year = ca.get(Calendar.YEAR);//获取年份
+	     int month=ca.get(Calendar.MONTH);//获取月份 
+	     int day=ca.get(Calendar.DATE);//获取日
+	     int minute=ca.get(Calendar.MINUTE);//分 
+	     int hour=ca.get(Calendar.HOUR);//小时 
+	     int second=ca.get(Calendar.SECOND);//秒
+	
+	     String ID=String.valueOf(year)+String.valueOf(month)+String.valueOf(day)+String.valueOf(hour)+String.valueOf(minute)+String.valueOf(second);
+	}
 	public int getLevel() {
 		return level;
 	}

@@ -30,8 +30,8 @@ public class StubManager implements StubManagerBlService{
 
 	private String ID;
 	private String name;
-	private StubBillPool billPool;
-	private StubStrategyPool strategyPool;
+	private StubBillPool billPool=new StubBillPool();
+	private StubStrategyPool strategyPool=new StubStrategyPool();
 	
 	/*构造方法*/
 	public StubManager(){
@@ -175,7 +175,8 @@ public class StubManager implements StubManagerBlService{
 	}
 	/*需要删除一条客户分层策略*/
 	public boolean Remove (LevelStrategyVO ls){
-		strategyPool.RemoveLevelStrategy(ls.getID());
+		String ID=ls.getID();
+		strategyPool.RemoveLevelStrategy(ID);
 		return true;
 	}
 	/*需要删除一条特价包策略*/

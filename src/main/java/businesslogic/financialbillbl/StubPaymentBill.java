@@ -44,7 +44,7 @@ public class StubPaymentBill extends Bill implements GetVOandPO{
 		vo.setOperator(operator);
 		vo.setState(state);
 		vo.setTransferlist(transferlist);
-		vo.setStyle(style);
+		vo.setBillStyle(style);
 		return vo;
 	}
 

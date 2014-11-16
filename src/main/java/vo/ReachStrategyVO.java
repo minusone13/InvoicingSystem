@@ -9,6 +9,7 @@ public class ReachStrategyVO extends VO{
 	private StrategyStyle strategystyle=StrategyStyle.ReachStrategy;
 	private ReachStrategyStyle reach_strategy_style;
 	
+	private String ID="0000";
 	private double Limit;//消费金额下限
 	
 	private ArrayList< MockCommodityVO> alOfCommodityVo;//赠送赠品的商品信息数组
