@@ -13,5 +13,9 @@ public interface StubCustomerBlService {
 		public RM updateCustomer(CustomerVo vo);
 		public boolean deleteCustomer(String id);
 		public CustomerVo findCustomer(String id);
+		//public customerList getAllCustomer();
 		
+		/*
+		 * 关于模糊查找我重新写个方法；
+		 * */
 }

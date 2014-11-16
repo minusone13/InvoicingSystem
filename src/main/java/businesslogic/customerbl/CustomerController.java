@@ -13,6 +13,16 @@ public class CustomerController implements StubCustomerBlService{
 	
 	customerList customerlist;
 	
+	//获得所有客户
+	public customerList getAllCustomer(){
+		return null;
+	}
+	
+	//用来返回以';'分界的一串符合模糊条件的数据；
+	public String  fuzzySearch(String info){
+		return null;
+	}
+	
 	public void addCustomer() {
 		// TODO Auto-generated method stub
 		
