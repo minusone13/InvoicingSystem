@@ -95,9 +95,7 @@ public class StubBillPool {
 				result.add(temp);
 			}
 		}
-		
-		return result;
-		
+		return result;	
 	}
 	/*需要从单据池筛选指定状态的所有报溢/报损单*/
 	public ArrayList<StubSpillsLossBill> getSpillsLossBill (BillState st){
@@ -187,8 +185,7 @@ public class StubBillPool {
 			}
 		}
 		
-		return result;
-		
+		return result;	
 	}
 	/*需要从单据池筛选指定状态的所有付款单*/
 	public ArrayList<StubPaymentBill> getPaymentBill (BillState st){
@@ -199,9 +196,7 @@ public class StubBillPool {
 				result.add(temp);
 			}
 		}
-		
 		return result;
-		
 	}
 	/*需要从单据池筛选指定状态的所有现金费用单*/
 	public ArrayList<StubCashPaymentBill> getCashPaymentBill (BillState st){

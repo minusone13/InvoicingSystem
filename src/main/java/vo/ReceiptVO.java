@@ -1,17 +1,67 @@
 package vo;
 
+import java.util.ArrayList;
+
+import businesslogic.BillState;
 import businesslogic.BillStyle;
 import businesslogic.Role;
+import businesslogic.financialbillbl.StubTransferAccount;
 
 public class ReceiptVO extends VO{
 	private BillStyle style=BillStyle.ReceiptBill;
 	String ID;
-	Role operator ;
+	Role operator;
 	String customer;
 	double total;
 	double[] money;//转账金额
-	String[] account;
+	String[] accounts;
 	String[] remark;	
+	BillState state;
+	
+	public BillState getState() {
+		return state;
+	}
+	public void setState(BillState state) {
+		this.state = state;
+	}
+
+	ArrayList<StubTransferAccount> transferlist;
+	
+	public ArrayList<StubTransferAccount> getTransferlist() {
+		return transferlist;
+	}
+	public void setTransferlist(ArrayList<StubTransferAccount> transferlist) {
+		this.transferlist = transferlist;
+	}
+	public BillStyle getStyle() {
+		return style;
+	}
+	public void setStyle(BillStyle style) {
+		this.style = style;
+	}
+	public String getID() {
+		return ID;
+	}
+	public void setID(String ID) {
+		ID = ID;
+	}
+	public Role getOperator() {
+		return operator;
+	}
+	public void setOperator(Role operator) {
+		this.operator = operator;
+	}
+	public void setMoney(double[] money) {
+		this.money = money;
+	}
+	public void setAccount(String[] account) {
+		this.accounts = account;
+	}
+	public void setRemark(String[] remark) {
+		this.remark = remark;
+	}
+
+	
 	public ReceiptVO() {
 		
 	}
@@ -31,7 +81,7 @@ public class ReceiptVO extends VO{
 		this.total = total;
 	}
 	public String[] getAccount() {
-		return account;
+		return accounts;
 	}
 	
 	public double[] getMoney() {
