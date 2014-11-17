@@ -2,7 +2,7 @@ package presentation.commodityui;
 
 import dataservice.commoditydataservice.*;
 import vo.*;
-import vo.stockpo.MockCommodityVO;
+import vo.stockvo.CommodityVO;
 import businesslogicservice.commodityblservice.*;
 
 public class StockManagerDriver {
@@ -11,7 +11,7 @@ public class StockManagerDriver {
 	public void start(StubCommodityBlService combl,StubCommodityDataService comdata){
 		this.combl=combl;
 		combl.setdataobject(comdata);
-		MockCommodityVO vo = new MockCommodityVO("1\\id","philips","s01",10,10);
+		CommodityVO vo = new CommodityVO("1\\id","philips","s01",10,10);
 		RM r= combl.addCommodity(vo);
 	}
 	

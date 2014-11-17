@@ -67,6 +67,8 @@ public class StubCommodityList implements Serializable{
 		StubCategoryData temp=cat.goThrow(a, 1);
 		if(temp==null)
 			return RM.unknownerror;
+		if(temp.findSubCat(po.getName())!=null)
+			return RM.redundance;
 		RM result = temp.add(new StubCategoryData(po));
 		return result;
 	}

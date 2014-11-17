@@ -1,14 +1,14 @@
 package vo;
 
-import vo.stockpo.*;
+import vo.stockvo.*;
 import businesslogic.BillStyle;
 
 public class AlertBillVO extends VO{
 	String ID;
 	private BillStyle billstyle=BillStyle.AlertBill;
-	MockCommodityVO com;
+	CommodityVO com;
 	int shortage;
-	public MockCommodityVO getCommodity()
+	public CommodityVO getCommodity()
 	{
 		return com;
 	}
@@ -28,10 +28,10 @@ public class AlertBillVO extends VO{
 	public void setBillstyle(BillStyle billstyle) {
 		this.billstyle = billstyle;
 	}
-	public MockCommodityVO getCom() {
+	public CommodityVO getCom() {
 		return com;
 	}
-	public void setCom(MockCommodityVO com) {
+	public void setCom(CommodityVO com) {
 		this.com = com;
 	}
 	public int getShortage() {

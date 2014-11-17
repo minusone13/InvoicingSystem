@@ -12,7 +12,7 @@ import data.commoditydata.*;
 import data.initial.Initial;
 import dataservice.commoditydataservice.StubCommodityDataService;
 import vo.*;
-import vo.stockpo.*;
+import vo.stockvo.*;
 
 
 public class StockTest{
@@ -23,19 +23,29 @@ public class StockTest{
 		smd.start(new StubStockController(),data);
 		data.setL(new MockCommodityList());
 	}
+	
+	@Before
+	public void initial()
+	{
+		Initial initial=new Initial();
+		initial.initialStock();
+		data.insert(new CategoryPO("1", "灯"));
+		data.insert(new CategoryPO("1", "门"));
+	}
+	
 	@Test
 	public void testaddCommodity()
 	{
-		MockCommodityVO mockvo=new MockCommodityVO("1\\灯","飞利浦日光灯","SR01",20,30);
+		CommodityVO mockvo=new CommodityVO("1\\d","飞利浦日光灯","SR01",20,30);
 		StubCommodityBlService combl=smd.getCombl();
 		assertNotSame(RM.unknownerror,combl.addCommodity(mockvo));
 		//if unknown error happended,it fails. details are in enum RM
 	}
+	
 	@Test
-	public void testaddCategory()
+	public void testaddCategoryRedundance()
 	{
-		Initial initial=new Initial();
-		initial.initialStock();
-		assertNotSame(RM.unknownerror,data.insert(new CategoryPO("1", "日光灯")));
+		assertEquals(RM.redundance,data.insert(new CategoryPO("1", "灯")));
 	}
+	
 }

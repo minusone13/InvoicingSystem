@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import po.PO;
 import vo.VO;
-import vo.stockpo.MockCommodityVO;
+import vo.stockvo.CommodityVO;
 import businesslogic.GetVOandPO;
 import businesslogic.StrategyStyle;
 
@@ -12,7 +12,7 @@ public class StubBarginStrategy implements GetVOandPO{
 
 	private StrategyStyle strategystyle=StrategyStyle.BarginStrategy;
 	
-	private ArrayList<MockCommodityVO> alOfCommodityVo;//特价包商品信息数组
+	private ArrayList<CommodityVO> alOfCommodityVo;//特价包商品信息数组
 	private double discount;//降价金额
 	private int num;//特价包打包数量
 	
@@ -33,10 +33,10 @@ public class StubBarginStrategy implements GetVOandPO{
 	}
 	
 	/*成员变量的设置与获取*/
-	public ArrayList<MockCommodityVO> getAlOfCommodityVo() {
+	public ArrayList<CommodityVO> getAlOfCommodityVo() {
 		return alOfCommodityVo;
 	}
-	public void setAlOfCommodityVo(ArrayList<MockCommodityVO> alOfCommodityVo) {
+	public void setAlOfCommodityVo(ArrayList<CommodityVO> alOfCommodityVo) {
 		this.alOfCommodityVo = alOfCommodityVo;
 	}
 	public double getDiscount() {

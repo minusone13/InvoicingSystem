@@ -2,15 +2,15 @@ package vo;
 
 import java.util.ArrayList;
 
-import vo.stockpo.MockCommodityVO;
+import vo.stockvo.CommodityVO;
 import businesslogic.BillStyle;
 
 public class GiftBillVO extends VO{
 	private BillStyle billstyle=BillStyle.GiftBill;
 	String ID;
 	String[] remark;
-	ArrayList<MockCommodityVO> coms;
-	public ArrayList<MockCommodityVO> getComs()
+	ArrayList<CommodityVO> coms;
+	public ArrayList<CommodityVO> getComs()
 	{
 		return coms;
 	}
@@ -20,7 +20,7 @@ public class GiftBillVO extends VO{
 	public void setID(String iD) {
 		ID = iD;
 	}
-	public void setComs(ArrayList<MockCommodityVO> coms) {
+	public void setComs(ArrayList<CommodityVO> coms) {
 		this.coms = coms;
 	}
 	public String[] getRemark() {

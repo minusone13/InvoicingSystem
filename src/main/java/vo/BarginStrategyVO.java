@@ -2,7 +2,7 @@ package vo;
 
 import java.util.ArrayList;
 
-import vo.stockpo.MockCommodityVO;
+import vo.stockvo.CommodityVO;
 import businesslogic.LevelStrategyStyle;
 import businesslogic.StrategyStyle;
 
@@ -10,7 +10,7 @@ public class BarginStrategyVO extends VO {
 	private StrategyStyle strategystyle=StrategyStyle.BarginStrategy;
 	
 	private String ID="0000";
-	private ArrayList<MockCommodityVO> alOfCommodityVo;//特价包商品信息数组
+	private ArrayList<CommodityVO> alOfCommodityVo;//特价包商品信息数组
 	private double discount;//降价金额
 	private int num;//特价包打包数量
 	
@@ -22,10 +22,10 @@ public class BarginStrategyVO extends VO {
 		
 	}
 	
-	public ArrayList<MockCommodityVO> getAlOfCommodityVo() {
+	public ArrayList<CommodityVO> getAlOfCommodityVo() {
 		return alOfCommodityVo;
 	}
-	public void setAlOfCommodityVo(ArrayList<MockCommodityVO> alOfCommodityVo) {
+	public void setAlOfCommodityVo(ArrayList<CommodityVO> alOfCommodityVo) {
 		this.alOfCommodityVo = alOfCommodityVo;
 	}
 	public double getDiscount() {

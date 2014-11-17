@@ -1,12 +1,7 @@
-package vo.stockpo;
+package vo.stockvo;
 
-public class MockCommodityVO {
-	public enum Type
-	{
-		Category,
-		Commodity
-	} 
-	Type t;
+public class CommodityVO {
+	String id;
 	String parent;
 	String name;
 	String model;
@@ -15,26 +10,14 @@ public class MockCommodityVO {
 	double out;
 	double lastin;
 	double lastout;
-	public MockCommodityVO(String parent,String name)
+	double average;
+	public CommodityVO(String parent,String name,String model,double in,double out)
 	{
-		t=t.Category;
-		this.parent=parent;
-		this.name=name;
-	}
-	public MockCommodityVO(String parent,String name,String model,double in,double out)
-	{
-		t=t.Commodity;
 		this.parent=parent;
 		this.name=name;
 		this.model=model;
 		this.in=in;
 		this.out=out;
-	}
-	public Type getT() {
-		return t;
-	}
-	public void setT(Type t) {
-		this.t = t;
 	}
 	public String getParent() {
 		return parent;
@@ -83,6 +66,18 @@ public class MockCommodityVO {
 	}
 	public void setLastout(double lastout) {
 		this.lastout = lastout;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	public double getAverage() {
+		return average;
+	}
+	public void setAverage(double average) {
+		this.average = average;
 	}
 	
 }

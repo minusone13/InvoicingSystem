@@ -7,7 +7,7 @@ import businesslogic.commoditybillbl.*;
 import businesslogic.commoditybl.*;
 import businesslogicservice.commodityblservice.*;
 import vo.*;
-import vo.stockpo.MockCommodityVO;
+import vo.stockvo.CommodityVO;
 
 public class StubStockController implements StubCommodityBlService
 {//负责与界面及其他程序员的交互
@@ -17,11 +17,11 @@ public class StubStockController implements StubCommodityBlService
 	{
 		return l;
 	}
-	public RM addCommodity(MockCommodityVO vo)
+	public RM addCommodity(CommodityVO vo)
 	{
 		return l.addCommodity(vo);
 	}
-	public ArrayList<MockCommodityVO> findCommodity(String name)
+	public ArrayList<CommodityVO> findCommodity(String name)
 	{
 		return l.findCommodity(name);
 	}
@@ -29,7 +29,7 @@ public class StubStockController implements StubCommodityBlService
 	{
 		return l.addPack(commodityarray, quantity, discount);
 	}
-	public RM addCategory(MockCommodityVO vo)
+	public RM addCategory(CommodityVO vo)
 	{
 		return l.addCategory(vo);
 	}

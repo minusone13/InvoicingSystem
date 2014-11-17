@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import po.PO;
 import vo.VO;
-import vo.stockpo.MockCommodityVO;
+import vo.stockvo.CommodityVO;
 import businesslogic.GetVOandPO;
 import businesslogic.LevelStrategyStyle;
 import businesslogic.ReachStrategyStyle;
@@ -17,7 +17,7 @@ public class StubReachStrategy implements GetVOandPO{
 	
 	private double Limit;//消费金额下限
 	
-	private ArrayList< MockCommodityVO> alOfCommodityVo;//赠送赠品的商品信息数组
+	private ArrayList< CommodityVO> alOfCommodityVo;//赠送赠品的商品信息数组
 	private double couponrate;//赠送代金券的比例
 	
 	private String StartTime;//开始日期
@@ -46,11 +46,11 @@ public class StubReachStrategy implements GetVOandPO{
 		Limit = limit;
 	}
 
-	public ArrayList< MockCommodityVO> getAlOfCommodityVo() {
+	public ArrayList< CommodityVO> getAlOfCommodityVo() {
 		return alOfCommodityVo;
 	}
 
-	public void setAlOfCommodityVo(ArrayList< MockCommodityVO> alOfCommodityVo) {
+	public void setAlOfCommodityVo(ArrayList< CommodityVO> alOfCommodityVo) {
 		this.alOfCommodityVo = alOfCommodityVo;
 	}
 

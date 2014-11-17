@@ -1,13 +1,13 @@
 package vo;
 
 import po.SpillsLossBillPO.Type;
-import vo.stockpo.MockCommodityVO;
+import vo.stockvo.CommodityVO;
 import businesslogic.BillStyle;
 
 public class SpillsLossBillVO extends VO{
 	private BillStyle billstyle=BillStyle.SpillsLossBill;
 	Type t;
-	MockCommodityVO com;
+	CommodityVO com;
 	int quantity;
 	public BillStyle getBillstyle() {
 		return billstyle;
@@ -21,10 +21,10 @@ public class SpillsLossBillVO extends VO{
 	public void setT(Type t) {
 		this.t = t;
 	}
-	public MockCommodityVO getCom() {
+	public CommodityVO getCom() {
 		return com;
 	}
-	public void setCom(MockCommodityVO com) {
+	public void setCom(CommodityVO com) {
 		this.com = com;
 	}
 	public int getQuantity() {

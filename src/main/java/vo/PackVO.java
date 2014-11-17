@@ -2,10 +2,10 @@ package vo;
 
 import java.util.ArrayList;
 
-import vo.stockpo.MockCommodityVO;
+import vo.stockvo.CommodityVO;
 
 public class PackVO {
-	ArrayList<MockCommodityVO> coms;
+	ArrayList<CommodityVO> coms;
 	int quantity;
 	double discount;
 	double price;//price = total-discount

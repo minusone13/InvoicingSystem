@@ -3,7 +3,7 @@ package businesslogic.commoditybl;
 import po.*;
 import po.stockpo.CommodityPO;
 import vo.*;
-import vo.stockpo.MockCommodityVO;
+import vo.stockvo.CommodityVO;
 
 public class MockCommodity {
 	String parent;//the ID of parent Category
@@ -29,7 +29,7 @@ public class MockCommodity {
 		lastout=po.getLastOut();
 		average=po.getAverage();
 	}
-	public MockCommodity(MockCommodityVO vo)
+	public MockCommodity(CommodityVO vo)
 	{
 		parent=vo.getParent();
 		name=vo.getName();

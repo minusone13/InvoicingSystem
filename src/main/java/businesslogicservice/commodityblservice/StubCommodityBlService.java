@@ -3,9 +3,9 @@ import java.util.ArrayList;
 
 import dataservice.commoditydataservice.*;
 import vo.RM;
-import vo.stockpo.MockCommodityVO;
+import vo.stockvo.CommodityVO;
 public interface StubCommodityBlService {
-	public ArrayList<MockCommodityVO> findCommodity(String name);
-	public RM addCommodity(MockCommodityVO vo);
+	public ArrayList<CommodityVO> findCommodity(String name);
+	public RM addCommodity(CommodityVO vo);
 	public void setdataobject(StubCommodityDataService comdata);
 }
