@@ -10,12 +10,17 @@ import po.stockpo.CommodityPO.*;
 import vo.RM;
 
 public class StubCategoryData implements Serializable{
-	ArrayList<StubCategoryData> cats;
-	ArrayList<MockCommodityData> coms;
+	ArrayList<StubCategoryData> cats=new ArrayList<StubCategoryData>();
+	ArrayList<MockCommodityData> coms=new ArrayList<MockCommodityData>();
 	CategoryPO po;
 	public StubCategoryData(String parent,String name)
 	{
 		po=new CategoryPO(parent,name);
+	}
+	public StubCategoryData(){}
+	public StubCategoryData(CategoryPO po)
+	{
+		this.po=po;
 	}
 	public boolean canAddCategory()
 	{
@@ -52,7 +57,7 @@ public class StubCategoryData implements Serializable{
 		}
 		else 
 			return null;
-		return result;
+		return result;//return a stockPO
 	}
 	public StubCategoryData findSubCat(String name)
 	{
@@ -99,15 +104,15 @@ public class StubCategoryData implements Serializable{
 		else
 			return RM.treeerror;//已有分类，不能添加商品
 	}
-	public boolean add(StubCategoryData cat)
+	public RM add(StubCategoryData cat)
 	{
 		if(canAddCategory())
 		{
 			cats.add(cat);
-			return true;
+			return RM.done;
 		}
 		else
-			return false;//已有商品，不能添加分类
+			return RM.treeerror;//已有商品，不能添加分类
 	}
 	public ArrayList<StubCategoryData> getCats() {
 		return cats;

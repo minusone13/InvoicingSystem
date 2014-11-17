@@ -30,7 +30,7 @@ public class StubCommodityList {//商品列表 haha
 		else
 		{
 			MockCommodity com=new MockCommodity(vo);
-			RM result = comdata.addCommodity(com.toPO());
+			RM result = comdata.insert(com.toPO());
 			return result;
 		}
 	}

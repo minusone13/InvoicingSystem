@@ -2,12 +2,10 @@ package data.commoditydata;
 
 import java.io.*;
 import java.util.ArrayList;
-
 import data.Tool;
 import dataservice.commoditydataservice.*;
 import po.*;
-import po.stockpo.CommodityListPO;
-import po.stockpo.CommodityPO;
+import po.stockpo.*;
 import vo.RM;
 
 public class StubStockDataController implements StubCommodityDataService{
@@ -136,7 +134,7 @@ public class StubStockDataController implements StubCommodityDataService{
     		}
     }
     
-	public RM addCommodity(CommodityPO po)
+	public RM insert(CommodityPO po)
 	{
 		RM result=l.insert(po);
 		save();
@@ -165,10 +163,11 @@ public class StubStockDataController implements StubCommodityDataService{
 		save();
 		return true;
 	}
-	public boolean addCategory(String parent, String name)
+	public RM insert(CategoryPO po)
 	{
+		RM result=l.insert(po);
 		save();
-		return true;
+		return result;
 	}
     public static boolean save()
     {

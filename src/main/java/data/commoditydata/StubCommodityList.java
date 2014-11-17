@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 import po.*;
-import po.stockpo.CommodityPO;
+import po.stockpo.*;
 import vo.RM;
 
 public class StubCommodityList implements Serializable{
@@ -18,6 +18,7 @@ public class StubCommodityList implements Serializable{
 		cats.add(new StubCategoryData("0","1"));
 		packs=new ArrayList<StubPackData>();
 		cat=cats.get(0);
+		cat.add(new StubCategoryData("1","default category"));
 		flatlist=new ArrayList<MockCommodityData>();
 		return true;
 	}
@@ -28,6 +29,8 @@ public class StubCommodityList implements Serializable{
 		if(!a[0].equals("1"))//default root is 1
 			return RM.unknownerror;
 		StubCategoryData temp=cat.goThrow(a, 1);
+		if(temp==null)
+			return RM.unknownerror;
 		MockCommodityData com=new MockCommodityData(po);
 		RM result=temp.add(com);
 		flatlist.add(com);
@@ -47,6 +50,7 @@ public class StubCommodityList implements Serializable{
 		}
 		return null;//not found;
 	}
+
 	public boolean deleteCommodity(String name, String model)
 	{
 		return true;
@@ -55,13 +59,17 @@ public class StubCommodityList implements Serializable{
 	{
 		return true;
 	}
-	public boolean addCategory(String parent, String name)
+	public RM insert(CategoryPO po)
 	{
-		String a[]=parent.split("\\");
+		String a[]=po.getParent().split("\\\\");
 		if(!a[0].equals("1"))//default root is 1
-			return false;
+			return RM.unknownerror;
+		System.out.println("hahaha1");
 		StubCategoryData temp=cat.goThrow(a, 1);
-		boolean result = temp.add(new StubCategoryData(parent,name));
+		System.out.println("hahaha2");
+		if(temp==null)
+			return RM.unknownerror;
+		RM result = temp.add(new StubCategoryData(po));
 		return result;
 	}
 }
