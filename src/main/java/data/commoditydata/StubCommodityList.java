@@ -64,9 +64,7 @@ public class StubCommodityList implements Serializable{
 		String a[]=po.getParent().split("\\\\");
 		if(!a[0].equals("1"))//default root is 1
 			return RM.unknownerror;
-		System.out.println("hahaha1");
 		StubCategoryData temp=cat.goThrow(a, 1);
-		System.out.println("hahaha2");
 		if(temp==null)
 			return RM.unknownerror;
 		RM result = temp.add(new StubCategoryData(po));

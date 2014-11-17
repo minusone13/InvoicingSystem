@@ -31,7 +31,7 @@ public class StockTest{
 		assertNotSame(RM.unknownerror,combl.addCommodity(mockvo));
 		//if unknown error happended,it fails. details are in enum RM
 	}
-	@Ignore
+	@Test
 	public void testaddCategory()
 	{
 		Initial initial=new Initial();
