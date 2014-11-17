@@ -1,11 +1,8 @@
 package InvoicingSystem;
 
-//import static org.junit.Assert.*;
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import static org.junit.Assert.*;
 
-//import org.junit.*;
+import org.junit.*;
 
 import po.stockpo.*;
 import presentation.commodityui.StockManagerDriver;
@@ -18,7 +15,7 @@ import vo.*;
 import vo.stockpo.*;
 
 
-public class StockTest extends TestCase{
+public class StockTest{
 	static StockManagerDriver smd=new StockManagerDriver();
 	static StubStockDataController data=new StubStockDataController();
 	static
@@ -26,7 +23,7 @@ public class StockTest extends TestCase{
 		smd.start(new StubStockController(),data);
 		data.setL(new MockCommodityList());
 	}
-	
+	@Test
 	public void testaddCommodity()
 	{
 		MockCommodityVO mockvo=new MockCommodityVO("1\\灯","飞利浦日光灯","SR01",20,30);
@@ -34,7 +31,7 @@ public class StockTest extends TestCase{
 		assertNotSame(RM.unknownerror,combl.addCommodity(mockvo));
 		//if unknown error happended,it fails. details are in enum RM
 	}
-	
+	@Ignore
 	public void testaddCategory()
 	{
 		Initial initial=new Initial();
