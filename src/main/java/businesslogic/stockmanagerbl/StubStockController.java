@@ -7,7 +7,7 @@ import businesslogic.commoditybillbl.*;
 import businesslogic.commoditybl.*;
 import businesslogicservice.commodityblservice.*;
 import vo.*;
-import vo.stockvo.CommodityVO;
+import vo.stockvo.*;
 
 public class StubStockController implements StubCommodityBlService
 {//负责与界面及其他程序员的交互
@@ -29,7 +29,7 @@ public class StubStockController implements StubCommodityBlService
 	{
 		return l.addPack(commodityarray, quantity, discount);
 	}
-	public RM addCategory(CommodityVO vo)
+	public RM addCategory(CategoryVO vo)
 	{
 		return l.addCategory(vo);
 	}

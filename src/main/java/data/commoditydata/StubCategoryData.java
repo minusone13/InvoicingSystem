@@ -65,7 +65,7 @@ public class StubCategoryData implements Serializable{
 			return null;//does not have any sub category
 		for(int i=0;i<cats.size();i++)
 		{
-			if(cats.get(i).getName()==name)
+			if(cats.get(i).getName().equals(name))
 				return cats.get(i);
 		}
 		return null;//not found

@@ -6,7 +6,7 @@ import po.*;
 import po.stockpo.CommodityPO;
 import businesslogic.stockmanagerbl.*;
 import dataservice.commoditydataservice.*;
-import vo.stockvo.CommodityVO;
+import vo.stockvo.*;
 import vo.RM;
 
 public class StubCommodityList {//商品列表 haha
@@ -31,9 +31,9 @@ public class StubCommodityList {//商品列表 haha
 			return result;
 		}
 	}
-	public RM addCategory(CommodityVO vo)
+	public RM addCategory(CategoryVO vo)
 	{
-		return RM.done;
+		return comdata.insert(new StubCategory(vo).toPO());
 	}
 	public void setcomdata(StubCommodityDataService comdata)
 	{

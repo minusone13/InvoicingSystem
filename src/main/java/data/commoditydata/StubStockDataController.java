@@ -150,7 +150,7 @@ public class StubStockDataController implements StubCommodityDataService{
 	}
 	public CommodityPO findCommodity(String name, String model)
 	{
-		return new CommodityPO();
+		return l.findCommodity(name, model);
 	}
 	public boolean deleteCommodity(String name, String model)
 	{
