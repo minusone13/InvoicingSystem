@@ -76,7 +76,7 @@ public class StubManager implements StubManagerBlService{
 					}
 				}
 				//保存单据信息
-				billPool.save(billvo.getBillStyle());
+				billPool.save();
 				break;
 			case SpillsLossBill:
 				break;
@@ -120,7 +120,7 @@ public class StubManager implements StubManagerBlService{
 						}
 					}
 					//保存单据信息
-					billPool.save(tempOfVO.getBillStyle());
+					billPool.save();
 					break;
 				case SpillsLossBill:
 					break;

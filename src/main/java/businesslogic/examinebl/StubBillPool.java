@@ -149,42 +149,62 @@ public class StubBillPool {
 	/*需要向单据池中加入一张库存赠送单*/
 	public void add (StubGiftBill gb){
 		alOfGiftBill.add(gb);
+		//保存
+		this.save();
 	}
 	/*需要向单据池中加入一张报溢/报损单*/
 	public void add (StubSpillsLossBill spb){
 		alOfSpillsLossBill.add(spb);
+		//保存
+		this.save();
 	}
 	/*需要向单据池中加入一张库存报警单*/
 	public void add (StubAlertBill ab){
 		alOfAlertBill.add(ab);
+		//保存
+		this.save();
 	}
 	/*需要向单据池中加入一张进货单*/
 	public void add (StubPurSheet ps){
 		alOfPurSheet.add(ps);
+		//保存
+		this.save();
 	}
 	/*需要向单据池中加入一张进货退货单*/
 	public void add (StubPurBackSheet pbs){
 		alOfPurBackSheet.add(pbs);
+		//保存
+		this.save();
 	}
 	/*需要向单据池中加入一张销售单*/
 	public void add (StubSaleSheet ss){
 		alOfSaleSheet.add(ss);
+		//保存
+		this.save();
 	}
 	/*需要向单据池中加入一张销售退货单*/
 	public void add (StubSaleBackSheet sbs){
 		alOfSaleBackSheet.add(sbs);
+		//保存
+		this.save();
 	}
 	/*需要向单据池中加入一张收款单*/
 	public void add (StubReceiptBill rb){
 		alOfReceiptBill.add(rb);
+		//保存
+		this.save();
 	}
 	/*需要向单据池中加入一张付款单*/
 	public void add (StubPaymentBill pb){
 		alOfPaymentBill.add(pb);
+		//保存
+		this.save();
 	}
 	/*需要向单据池中加入一张现金费用单*/
 	public void add (StubCashPaymentBill cpb){
 		alOfCashPaymentBill.add(cpb);
+		//保存
+		this.save();
 	}
 	/*需要从单据池筛选指定状态的所有赠送单*/
 	public ArrayList<StubGiftBill> getGiftBill (BillState st){
@@ -310,7 +330,72 @@ public class StubBillPool {
 		return result;
 	}
 	/*实时保存池中数组对象*/
-	public void save(BillStyle st){
+	public void save(){
+		//保存文档中的对象
+		SaleBillSaverService sbs=new SaleBillSaver();
+		FinancialBillSaverService fbs=new FinancialBillSaver();
+		CommodityBillSaverService cbs=new CommodityBillSaver();
 		
+		//赠送单
+		ArrayList<GiftBillPO> GiftBillPO=new ArrayList<GiftBillPO>();
+		for(StubGiftBill temp:alOfGiftBill){//遍历数组，将对应PO对象加到新数组中
+			GiftBillPO.add(temp.getPO());
+		}
+		cbs.saveGiftBill(GiftBillPO);//保存PO数组到txt
+		//报溢报损单
+		ArrayList<SpillsLossBillPO> SpillsLossBillPO=new ArrayList<SpillsLossBillPO>();
+		for(StubSpillsLossBill temp:alOfSpillsLossBill){//遍历数组，将对应PO对象加到新数组中
+			SpillsLossBillPO.add(temp.getPO());
+		}
+		cbs.saveSpillsLossBill(SpillsLossBillPO);//保存PO数组到txt
+		//报警单
+		ArrayList<AlertBillPO> AlertBillPO=new ArrayList<AlertBillPO>();
+		for(StubAlertBill temp:alOfAlertBill){//遍历数组，将对应PO对象加到新数组中
+			AlertBillPO.add(temp.getPO());
+		}
+		cbs.saveAlertBill(AlertBillPO);;//保存PO数组到txt
+		//进货单
+		ArrayList<PurSheetPO> PurSheetPO=new ArrayList<PurSheetPO>();
+		for(StubPurSheet temp:alOfPurSheet){//遍历数组，将对应PO对象加到新数组中
+			PurSheetPO.add(temp.getPO());
+		}
+		sbs.savePurSheet(PurSheetPO);//保存PO数组到txt
+		//进货退货单
+		ArrayList<PurBackSheetPO> PurBackSheetPO=new ArrayList<PurBackSheetPO>();
+		for(StubPurBackSheet temp:alOfPurBackSheet){//遍历数组，将对应PO对象加到新数组中
+			PurBackSheetPO.add(temp.getPO());
+		}
+		sbs.savePurBackSheet(PurBackSheetPO);//保存PO数组到txt
+
+		//销售单
+		ArrayList<SaleSheetPO> SaleSheetPO=new ArrayList<SaleSheetPO>();
+		for(StubSaleSheet temp:alOfSaleSheet){//遍历数组，将对应PO对象加到新数组中
+			SaleSheetPO.add(temp.getPO());
+		}
+		sbs.saveSaleSheet(SaleSheetPO);//保存PO数组到txt
+		//销售退货单
+		ArrayList<SaleBackSheetPO> SaleBackSheetPO=new ArrayList<SaleBackSheetPO>();
+		for(StubSaleBackSheet temp:alOfSaleBackSheet){//遍历数组，将对应PO对象加到新数组中
+			SaleBackSheetPO.add(temp.getPO());
+		}
+		sbs.saveSaleBackSheet(SaleBackSheetPO);//保存PO数组到txt
+		//收款单
+		ArrayList<ReceiptPO> ReceiptBillPO=new ArrayList<ReceiptPO>();
+		for(StubReceiptBill temp:alOfReceiptBill){//遍历数组，将对应PO对象加到新数组中
+			ReceiptBillPO.add(temp.getPO());
+		}
+		fbs.saveReceipt(ReceiptBillPO);//保存PO数组到txt
+		//收款单
+		ArrayList<PaymentPO> PaymentBillPO=new ArrayList<PaymentPO>();
+		for(StubPaymentBill temp:alOfPaymentBill){//遍历数组，将对应PO对象加到新数组中
+			PaymentBillPO.add(temp.getPO());
+		}
+		fbs.savePayment(PaymentBillPO);//保存PO数组到txt
+		//收款单
+		ArrayList<CashPaymentPO> CashPaymentBillPO=new ArrayList<CashPaymentPO>();
+		for(StubCashPaymentBill temp:alOfCashPaymentBill){//遍历数组，将对应PO对象加到新数组中
+			CashPaymentBillPO.add(temp.getPO());
+		}
+		fbs.saveCashPayment(CashPaymentBillPO);//保存PO数组到txt
 	}
 }

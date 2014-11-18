@@ -18,9 +18,9 @@ public class StubSpillsLossBill extends Bill implements GetVOandPO
 	{
 		return new VO();
 	}
-	public PO getPO()
+	public SpillsLossBillPO getPO()
 	{
-		return new PO();
+		return new SpillsLossBillPO();
 	}
 	public void setPO(SpillsLossBillPO po)
 	{

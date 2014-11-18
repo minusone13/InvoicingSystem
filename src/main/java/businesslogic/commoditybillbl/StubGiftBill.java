@@ -18,9 +18,9 @@ public class StubGiftBill extends Bill implements GetVOandPO
 	{
 		return new VO();
 	}
-	public PO getPO()
+	public GiftBillPO getPO()
 	{
-		return new PO();
+		return new GiftBillPO();
 	}
 	public void setPO(GiftBillPO po)
 	{

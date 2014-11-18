@@ -2,9 +2,8 @@ package businesslogic.salebillbl;
 
 import java.util.ArrayList;
 
-import po.PO;
 import po.SaleSheetPO;
-import vo.VO;
+import vo.SaleSheetVO;
 import businesslogic.BillStyle;
 import businesslogic.GetVOandPO;
 import businesslogic.customerbl.StubCustomer;
@@ -21,11 +20,11 @@ public class StubSaleSheet extends Bill implements GetVOandPO{
 		double disconut;//折让金额；
 		double pmoney;//最终金额
 		String words;//备注
-		public VO getVO() {
+		public SaleSheetVO getVO() {
 			// TODO Auto-generated method stub
 			return null;
 		}
-		public PO getPO() {
+		public SaleSheetPO getPO() {
 			// TODO Auto-generated method stub
 			return null;
 		}

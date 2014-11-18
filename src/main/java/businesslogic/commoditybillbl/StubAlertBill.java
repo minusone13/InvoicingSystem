@@ -22,9 +22,9 @@ public class StubAlertBill extends Bill implements GetVOandPO
 	{
 		return new VO();
 	}
-	public PO getPO()
+	public AlertBillPO getPO()
 	{
-		return new PO();
+		return new AlertBillPO();
 	}
 	public void setPO(AlertBillPO po)
 	{

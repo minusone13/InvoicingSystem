@@ -2,9 +2,8 @@ package businesslogic.salebillbl;
 
 import java.util.ArrayList;
 
-import po.PO;
 import po.PurBackSheetPO;
-import vo.VO;
+import vo.PurBackSheetVO;
 import businesslogic.BillStyle;
 import businesslogic.GetVOandPO;
 import businesslogic.customerbl.StubCustomer;
@@ -18,7 +17,7 @@ public class StubPurBackSheet extends Bill implements GetVOandPO{
 	ArrayList sheet;//是不是应该是个arraylist<>?
 	double money1;//总金额
 	String words;//备注
-	public VO getVO() {
+	public PurBackSheetVO getVO() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -32,7 +31,7 @@ public class StubPurBackSheet extends Bill implements GetVOandPO{
 		this.words=po.getwords();
 	}
 	
-	public PO getPO() {
+	public PurBackSheetPO getPO() {
 		// TODO Auto-generated method stub
 		return null;
 	}

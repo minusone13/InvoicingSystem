@@ -8,6 +8,9 @@ import po.stockpo.CommodityPO;
 public class AlertBillPO extends PO implements Serializable{
 	CommodityPO comPO;
 	int shortage;
+	public AlertBillPO(){
+		
+	}
 	public AlertBillPO(CommodityPO comPO,int shortage)
 	{
 		this.comPO=comPO;
