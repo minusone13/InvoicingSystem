@@ -28,4 +28,10 @@ public class GiftBillPO extends PO implements Serializable{
 	public void setRemark(String[] remark) {
 		this.remark = remark;
 	}
+	public GiftBillPO(String ID, ArrayList<CommodityPO> coms, String[] remark)
+	{
+		this.ID=ID;
+		this.coms=coms;
+		this.remark=remark;
+	}
 }

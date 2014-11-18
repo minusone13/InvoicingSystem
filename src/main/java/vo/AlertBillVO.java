@@ -1,5 +1,6 @@
 package vo;
 
+
 import vo.stockvo.*;
 import businesslogic.BillStyle;
 
@@ -39,5 +40,11 @@ public class AlertBillVO extends VO{
 	}
 	public void setShortage(int shortage) {
 		this.shortage = shortage;
+	}
+	public AlertBillVO(String ID, CommodityVO com, int shortage)
+	{
+		this.ID=ID;
+		this.com=com;
+		this.shortage=shortage;
 	}
 }

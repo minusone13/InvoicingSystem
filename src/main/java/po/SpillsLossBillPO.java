@@ -10,9 +10,9 @@ public class SpillsLossBillPO extends PO implements Serializable{
 		Spills,
 		Loss
 	}
+	String ID;
 	Type t;
 	CommodityPO comPO;
-	int quantity;
 	public Type getT() {
 		return t;
 	}
@@ -25,10 +25,9 @@ public class SpillsLossBillPO extends PO implements Serializable{
 	public void setComPO(CommodityPO comPO) {
 		this.comPO = comPO;
 	}
-	public int getQuantity() {
-		return quantity;
-	}
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
+	public SpillsLossBillPO(String ID,Type t, CommodityPO comPO)
+	{
+		this.t=t;
+		this.comPO=comPO;
 	}
 }

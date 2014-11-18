@@ -19,6 +19,7 @@ public class CommodityVO {
 		this.in=in;
 		this.out=out;
 	}
+	public CommodityVO(){}
 	public String getParent() {
 		return parent;
 	}
