@@ -6,7 +6,7 @@ import vo.stockvo.CommodityVO;
 import businesslogic.ReachStrategyStyle;
 import businesslogic.StrategyStyle;
 
-public class ReachStrategyPO {
+public class ReachStrategyPO extends PO{
 	private StrategyStyle strategystyle=StrategyStyle.ReachStrategy;
 	private ReachStrategyStyle reach_strategy_style;
 	

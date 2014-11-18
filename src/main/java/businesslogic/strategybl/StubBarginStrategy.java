@@ -2,8 +2,9 @@ package businesslogic.strategybl;
 
 import java.util.ArrayList;
 
-import po.PO;
-import vo.VO;
+import po.BarginStrategyPO;
+import po.LevelStrategyPO;
+import vo.BarginStrategyVO;
 import vo.stockvo.CommodityVO;
 import businesslogic.GetVOandPO;
 import businesslogic.StrategyStyle;
@@ -22,12 +23,12 @@ public class StubBarginStrategy implements GetVOandPO{
 	public StubBarginStrategy(){
 		
 	}
-	public VO getVO() {
+	public BarginStrategyVO getVO() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public PO getPO() {
+	public BarginStrategyPO getPO() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -62,6 +63,13 @@ public class StubBarginStrategy implements GetVOandPO{
 	}
 	public void setLastTime(int lastTime) {
 		LastTime = lastTime;
+	}
+	public void setPO(BarginStrategyPO po){
+		this.setDiscount(po.getDiscount());
+		this.setAlOfCommodityVo(po.getAlOfCommodityVo());
+		this.setNum(po.getNum());
+		this.setLastTime(po.getLastTime());
+		this.setStartTime(po.getStartTime());
 	}
 
 }

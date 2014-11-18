@@ -2,8 +2,13 @@ package businesslogic.strategybl;
 
 import java.util.ArrayList;
 
+import po.BarginStrategyPO;
+import po.LevelStrategyPO;
+import po.ReachStrategyPO;
 import businesslogic.StrategyStyle;
 import businesslogic.commoditybl.MockCommodity;
+import data.strategydata.StrategySaver;
+import dataservice.strategydataservice.StrategySaverService;
 
 public class StubStrategyPool {
 
@@ -12,7 +17,36 @@ public class StubStrategyPool {
 	private ArrayList<StubReachStrategy> alOfReachStrategy=new ArrayList<StubReachStrategy>();
 	/*构造函数*/
 	public StubStrategyPool(){
+		StrategySaverService ss=new StrategySaver();
 		
+		//将返回的PO对象的信息传入真正的策略对象
+		//客户分层策略
+		ArrayList<LevelStrategyPO> LevelStrategyPOList=ss.getLevelStrategy();
+		if(LevelStrategyPOList!=null){
+			for(LevelStrategyPO tempPO:LevelStrategyPOList){
+				StubLevelStrategy ls=new StubLevelStrategy();
+				ls.setPO(tempPO);
+				alOfLevelStrategy.add(ls);
+			}
+		}
+		//客户分层策略
+		ArrayList<BarginStrategyPO> BarginStrategyPOList=ss.getBarginStrategy();
+		if(BarginStrategyPOList!=null){
+			for(BarginStrategyPO tempPO:BarginStrategyPOList){
+				StubBarginStrategy bs=new StubBarginStrategy();
+				bs.setPO(tempPO);
+				alOfBarginStrategy.add(bs);
+			}
+		}
+		//客户分层策略
+		ArrayList<ReachStrategyPO> ReachStrategyPOList=ss.getReachStrategy();
+		if(ReachStrategyPOList!=null){
+			for(ReachStrategyPO tempPO:ReachStrategyPOList){
+				StubReachStrategy rs=new StubReachStrategy();
+				rs.setPO(tempPO);
+				alOfReachStrategy.add(rs);
+			}
+		}
 	}
 	/*需要获取客户分层策略*/
 	public ArrayList<StubLevelStrategy> getLevelStrategy (){

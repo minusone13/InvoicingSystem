@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import vo.stockvo.CommodityVO;
 import businesslogic.StrategyStyle;
 
-public class BarginStrategyPO {
+public class BarginStrategyPO extends PO{
 
 
 	private StrategyStyle strategystyle=StrategyStyle.BarginStrategy;

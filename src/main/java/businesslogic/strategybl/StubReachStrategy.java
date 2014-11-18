@@ -2,11 +2,10 @@ package businesslogic.strategybl;
 
 import java.util.ArrayList;
 
-import po.PO;
-import vo.VO;
+import po.ReachStrategyPO;
+import vo.ReachStrategyVO;
 import vo.stockvo.CommodityVO;
 import businesslogic.GetVOandPO;
-import businesslogic.LevelStrategyStyle;
 import businesslogic.ReachStrategyStyle;
 import businesslogic.StrategyStyle;
 
@@ -27,12 +26,12 @@ public class StubReachStrategy implements GetVOandPO{
 		
 	}
 	
-	public VO getVO() {
+	public ReachStrategyVO getVO() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public PO getPO() {
+	public ReachStrategyPO getPO() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -86,4 +85,12 @@ public class StubReachStrategy implements GetVOandPO{
 		this.reach_strategy_style = reach_strategy_style;
 	}
 
+	public void setPO(ReachStrategyPO po){
+		this.setAlOfCommodityVo(po.getAlOfCommodityVo());
+		this.setCouponrate(po.getCouponrate());
+		this.setLastTime(po.getLastTime());
+		this.setLimit(po.getLimit());
+		this.setReach_strategy_style(po.getReach_strategy_style());
+		this.setStartTime(po.getStartTime());
+	}
 }

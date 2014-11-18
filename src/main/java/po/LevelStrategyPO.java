@@ -6,7 +6,7 @@ import vo.stockvo.CommodityVO;
 import businesslogic.LevelStrategyStyle;
 import businesslogic.StrategyStyle;
 
-public class LevelStrategyPO {
+public class LevelStrategyPO extends PO{
 	private StrategyStyle strategystyle=StrategyStyle.LevelStrategy;
 	private LevelStrategyStyle level_strategy_style;
 	
