@@ -3,10 +3,12 @@ package businesslogic.strategybl;
 import java.util.ArrayList;
 
 import po.BarginStrategyPO;
+import po.CashPaymentPO;
 import po.LevelStrategyPO;
 import po.ReachStrategyPO;
 import businesslogic.StrategyStyle;
 import businesslogic.commoditybl.MockCommodity;
+import businesslogic.financialbillbl.StubCashPaymentBill;
 import data.strategydata.StrategySaver;
 import dataservice.strategydataservice.StrategySaverService;
 
@@ -100,8 +102,27 @@ public class StubStrategyPool {
 		
 	}
 	/*实时保存池中数组对象*/
-	public void save(StrategyStyle st){
+	public void save(){
+		StrategySaverService ss=new StrategySaver();
 		
+		//客户分层策略
+		ArrayList<LevelStrategyPO> LevelStrategyPO=new ArrayList<LevelStrategyPO>();
+		for(StubLevelStrategy temp:alOfLevelStrategy){//遍历数组，将对应PO对象加到新数组中
+			LevelStrategyPO.add(temp.getPO());
+		}
+		ss.saveLevelStrategy(LevelStrategyPO);//保存PO数组到txt
+		//特价包策略
+		ArrayList<BarginStrategyPO> BarginStrategyPO=new ArrayList<BarginStrategyPO>();
+		for(StubBarginStrategy temp:alOfBarginStrategy){//遍历数组，将对应PO对象加到新数组中
+			BarginStrategyPO.add(temp.getPO());
+		}
+		ss.saveBarginStrategy(BarginStrategyPO);//保存PO数组到txt
+		//满额促销策略
+		ArrayList<ReachStrategyPO> ReachStrategyPO=new ArrayList<ReachStrategyPO>();
+		for(StubReachStrategy temp:alOfReachStrategy){//遍历数组，将对应PO对象加到新数组中
+			ReachStrategyPO.add(temp.getPO());
+		}
+		ss.saveReachStrategy(ReachStrategyPO);//保存PO数组到txt
 	}
 	
 
