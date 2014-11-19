@@ -1,5 +1,7 @@
 package vo.stockvo;
 
+import java.util.ArrayList;
+
 public class CommodityVO {
 	String id;
 	String parent;
@@ -11,6 +13,7 @@ public class CommodityVO {
 	double lastin;
 	double lastout;
 	double average;
+	ArrayList<CommodityRecordVO> record=null;
 	public CommodityVO(String parent,String name,String model,double in,double out)
 	{
 		this.parent=parent;
@@ -79,6 +82,12 @@ public class CommodityVO {
 	}
 	public void setAverage(double average) {
 		this.average = average;
+	}
+	public ArrayList<CommodityRecordVO> getRecord() {
+		return record;
+	}
+	public void setRecord(ArrayList<CommodityRecordVO> record) {
+		this.record = record;
 	}
 	
 }
