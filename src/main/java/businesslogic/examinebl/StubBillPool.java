@@ -329,6 +329,46 @@ public class StubBillPool {
 		}	
 		return result;
 	}
+	/*获取单据池所有赠送单*/
+	public ArrayList<StubGiftBill> getGiftBill (){
+		return alOfGiftBill;	
+	}
+	/*获取单据池的所有报溢/报损单*/
+	public ArrayList<StubSpillsLossBill> getSpillsLossBill (){
+		return alOfSpillsLossBill;
+	}
+	/*获取单据池的所有库存报警单*/
+	public ArrayList<StubAlertBill> getAlertBill (){
+		return alOfAlertBill;
+	}
+	/*获取单据池的所有进货单*/
+	public ArrayList<StubPurSheet> getPurSheet (){
+		return alOfPurSheet;
+	}
+	/*获取单据池的所有进货退货单*/
+	public ArrayList<StubPurBackSheet> getPurBackSheet (){
+		return alOfPurBackSheet;
+	}
+	/*获取单据池的所有销售单*/
+	public ArrayList<StubSaleSheet> getSaleSheet (){
+		return alOfSaleSheet;
+	}
+	/*获取单据池的所有销售退货单*/
+	public ArrayList<StubSaleBackSheet> getSaleBackSheet (){
+		return alOfSaleBackSheet;
+	}
+	/*获取单据池的所有收款单*/
+	public ArrayList<StubReceiptBill> getReceiptBill (){
+		return alOfReceiptBill;	
+	}
+	/*获取单据池的所有付款单*/
+	public ArrayList<StubPaymentBill> getPaymentBill (){
+		return alOfPaymentBill;
+	}
+	/*获取单据池的所有现金费用单*/
+	public ArrayList<StubCashPaymentBill> getCashPaymentBill (){
+		return alOfCashPaymentBill;
+	}
 	/*实时保存池中数组对象*/
 	public void save(){
 		//保存文档中的对象
