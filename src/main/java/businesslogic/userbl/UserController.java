@@ -1,10 +1,11 @@
 package businesslogic.userbl;
 
+import businesslogicservice.userblservice.StubUserBlService;
 import po.userpo.UserPO;
 import vo.UserVO;
 import dataservice.userdataservice.*;
 
-public class UserController {
+public class UserController implements StubUserBlService{
 	static StubUserDataService data;
 	User user=new User();
 	public UserVO login(String account, String password)

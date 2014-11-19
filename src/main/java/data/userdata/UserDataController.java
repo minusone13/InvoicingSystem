@@ -9,9 +9,16 @@ import po.userpo.OperationRecordPO;
 import po.userpo.UserPO;
 
 public class UserDataController implements StubUserDataService{
-	static UserList l;
-	static File f;
-	public UserDataController()
+	private static UserDataController instance=null;
+	UserList l;
+	File f;
+	public static UserDataController getInstance()
+	{
+		if(instance==null)
+			instance = new UserDataController();
+		return instance;
+	}
+	private UserDataController()
 	{
 		f = Tool.Opendoc(Tool.user);   
         
@@ -47,7 +54,7 @@ public class UserDataController implements StubUserDataService{
 			}       	
 	}
 	
-    public static void initial()
+    public void initial()
     {
         f = Tool.Opendoc(Tool.user);
         

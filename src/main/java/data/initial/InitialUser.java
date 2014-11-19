@@ -6,6 +6,7 @@ public class InitialUser
 {//初始化商品管理的文件
 	public InitialUser()
 	{
-		UserDataController.initial();
+		UserDataController data=UserDataController.getInstance();
+		data.initial();
 	}
 }
