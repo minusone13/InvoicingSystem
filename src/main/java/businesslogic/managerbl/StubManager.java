@@ -40,21 +40,79 @@ public class StubManager implements StubManagerBlService{
 	/*需要查看已提交单据*/
 	public ArrayList<VO> getHandedBill (){
 		ArrayList<VO> result=new ArrayList<VO>();
-		//搜索单据池，寻找已提交状态的单据（有误）
-//		ArrayList<StubGiftBill> alOfGB=billPool.getGiftBill(BillState.SUBMITED);
-//		ArrayList<StubSpillsLossBill> alOfSLB=billPool.getSpillsLossBill(BillState.SUBMITED);
-//		ArrayList<StubAlertBill> alOfAB=billPool.getAlertBill(BillState.SUBMITED);
-//		ArrayList<StubPurSheet> alOfPS=billPool.getPurSheet(BillState.SUBMITED);
-//		ArrayList<StubPurBackSheet> alOfPBS=billPool.getPurBackSheet(BillState.SUBMITED);
-//		ArrayList<StubSaleSheet> alOfSS=billPool.getSaleSheet(BillState.SUBMITED);
-//		ArrayList<StubSaleBackSheet> alOfSBS=billPool.getSaleBackSheet(BillState.SUBMITED);
-//		ArrayList<StubReceiptBill> alOfRB=billPool.getReceiptBill(BillState.SUBMITED);
-//		ArrayList<StubPaymentBill> alOfPB=billPool.getPaymentBill(BillState.SUBMITED);
-//		ArrayList<StubCashPaymentBill> alOfCPB=billPool.getCashPaymentBill(BillState.SUBMITED);
+		//搜索单据池，寻找已提交状态的单据
+		ArrayList<StubGiftBill> alOfGB=billPool.getGiftBill(BillState.SUBMITED);
+		ArrayList<StubSpillsLossBill> alOfSLB=billPool.getSpillsLossBill(BillState.SUBMITED);
+		ArrayList<StubAlertBill> alOfAB=billPool.getAlertBill(BillState.SUBMITED);
+		ArrayList<StubPurSheet> alOfPS=billPool.getPurSheet(BillState.SUBMITED);
+		ArrayList<StubPurBackSheet> alOfPBS=billPool.getPurBackSheet(BillState.SUBMITED);
+		ArrayList<StubSaleSheet> alOfSS=billPool.getSaleSheet(BillState.SUBMITED);
+		ArrayList<StubSaleBackSheet> alOfSBS=billPool.getSaleBackSheet(BillState.SUBMITED);
+		ArrayList<StubReceiptBill> alOfRB=billPool.getReceiptBill(BillState.SUBMITED);
+		ArrayList<StubPaymentBill> alOfPB=billPool.getPaymentBill(BillState.SUBMITED);
+		ArrayList<StubCashPaymentBill> alOfCPB=billPool.getCashPaymentBill(BillState.SUBMITED);
+
 		//进行逐个大遍历，返回符合条件单据对应的VO
-//		for(StubGiftBill temp:alOfGB){
-//			result.add(temp.getVO());
-//		}
+		//赠送单
+		if(alOfGB!=null){
+			for(StubGiftBill temp:alOfGB){
+				result.add(temp.getVO());
+			}
+		}
+		//报溢报损单
+		if(alOfSLB!=null){
+			for(StubSpillsLossBill temp:alOfSLB){
+				result.add(temp.getVO());
+			}
+		}
+		//报警单
+		if(alOfAB!=null){
+			for(StubAlertBill temp:alOfAB){
+				result.add(temp.getVO());
+			}
+		}
+		//进货单
+		if(alOfPS!=null){
+			for(StubPurSheet temp:alOfPS){
+				result.add(temp.getVO());
+			}
+		}
+		//进货退货单
+		if(alOfPBS!=null){
+			for(StubPurBackSheet temp:alOfPBS){
+				result.add(temp.getVO());
+			}
+		}
+		//销售单
+		if(alOfSS!=null){
+			for(StubSaleSheet temp:alOfSS){
+				result.add(temp.getVO());
+			}
+		}
+		//销售退货单
+		if(alOfSBS!=null){
+			for(StubSaleBackSheet temp:alOfSBS){
+				result.add(temp.getVO());
+			}
+		}
+		//收款单
+		if(alOfRB!=null){
+			for(StubReceiptBill temp:alOfRB){
+				result.add(temp.getVO());
+			}
+		}
+		//付款单
+		if(alOfPB!=null){
+			for(StubPaymentBill temp:alOfPB){
+				result.add(temp.getVO());
+			}
+		}
+		//现金费用单
+		if(alOfCPB!=null){
+			for(StubCashPaymentBill temp:alOfCPB){
+				result.add(temp.getVO());
+			}
+		}
 		return result;	
 	}
 	/*修改密码*/
