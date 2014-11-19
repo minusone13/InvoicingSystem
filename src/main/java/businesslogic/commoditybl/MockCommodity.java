@@ -48,15 +48,18 @@ public class MockCommodity {
 		lastin=vo.getLastin();
 		lastout=vo.getLastout();
 		average=vo.getAverage();
-		record=new ArrayList<CommodityRecordPO>();
-		ArrayList<CommodityRecordVO> temp=vo.getRecord();
-		for(int i=0;i<temp.size();i++)
+		if (vo.getRecord()!=null)
 		{
-			CommodityRecordVO recordvo=temp.get(i);
-			CommodityRecordPO recordpo=new CommodityRecordPO(recordvo.getD(),recordvo.getOutquantity(),recordvo.getInquantity(),
-					recordvo.getOutamount(),recordvo.getInamount(),recordvo.getSalequantity(),recordvo.getImportquantity(),
-					recordvo.getSaleamount(),recordvo.getImportamount());
-			record.add(recordpo);
+			record=new ArrayList<CommodityRecordPO>();
+			ArrayList<CommodityRecordVO> temp=vo.getRecord();
+			for(int i=0;i<temp.size();i++)
+			{
+				CommodityRecordVO recordvo=temp.get(i);
+				CommodityRecordPO recordpo=new CommodityRecordPO(recordvo.getD(),recordvo.getOutquantity(),recordvo.getInquantity(),
+						recordvo.getOutamount(),recordvo.getInamount(),recordvo.getSalequantity(),recordvo.getImportquantity(),
+						recordvo.getSaleamount(),recordvo.getImportamount());
+				record.add(recordpo);
+			}
 		}
 	}
 	
