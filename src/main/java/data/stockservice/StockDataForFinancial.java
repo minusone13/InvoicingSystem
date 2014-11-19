@@ -1,4 +1,4 @@
-package data.stockdataforfinancial;
+package data.stockservice;
 
 public interface StockDataForFinancial 
 {//库存管理在数据层为财务人员提供的接，由StockDataController实现

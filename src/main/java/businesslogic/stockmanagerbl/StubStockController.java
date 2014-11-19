@@ -2,15 +2,15 @@ package businesslogic.stockmanagerbl;
 
 import java.util.*;
 
-import dataservice.commoditydataservice.StubCommodityDataService;
-import businesslogic.StockBlForSalesMen;
+import dataservice.commoditydataservice.*;
 import businesslogic.commoditybillbl.*;
 import businesslogic.commoditybl.*;
+import businesslogic.stockservice.*;
 import businesslogicservice.commodityblservice.*;
 import vo.*;
 import vo.stockvo.*;
 
-public class StubStockController implements StubCommodityBlService, StockBlForSalesMen
+public class StubStockController implements StubCommodityBlService, StockBlForSalesMen, StockBlForManager,StockBlForFinancial
 {//负责与界面及其他程序员的交互
 	StubCommodityList l=new StubCommodityList();
 	static StubCommodityDataService comdata;

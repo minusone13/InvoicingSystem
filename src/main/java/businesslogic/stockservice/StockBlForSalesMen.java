@@ -1,4 +1,4 @@
-package businesslogic;
+package businesslogic.stockservice;
 
 import java.util.ArrayList;
 
