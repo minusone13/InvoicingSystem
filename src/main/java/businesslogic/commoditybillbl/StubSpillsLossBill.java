@@ -17,7 +17,7 @@ public class StubSpillsLossBill extends Bill implements GetVOandPO
 	private MockCommodity com;
 	String ID;
 	po.SpillsLossBillPO.Type t;
-	public VO getVO()
+	public SpillsLossBillVO getVO()
 	{
 		return new SpillsLossBillVO(ID,t,new CommodityVO());
 	}

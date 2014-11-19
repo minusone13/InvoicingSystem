@@ -19,7 +19,7 @@ public class StubAlertBill extends Bill implements GetVOandPO
 		this.com=com;
 		this.shortage=shortage;
 	}
-	public VO getVO()
+	public AlertBillVO getVO()
 	{
 		return new AlertBillVO(ID,new CommodityVO(),shortage);
 	}

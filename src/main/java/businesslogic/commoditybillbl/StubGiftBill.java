@@ -18,7 +18,7 @@ public class StubGiftBill extends Bill implements GetVOandPO
 	private String ID;
 	ArrayList<MockCommodity> coms;
 	String remark[];
-	public VO getVO()
+	public GiftBillVO getVO()
 	{
 		return new GiftBillVO(ID,new ArrayList<CommodityVO>(),remark);
 	}
