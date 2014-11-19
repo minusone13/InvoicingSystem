@@ -3,7 +3,20 @@ package vo.stockvo;
 import java.util.Date;
 
 public class CommodityRecordVO {
-	//记录商品的进出记录
+	public CommodityRecordVO(Date date, int outquantity, int inquantity,
+			double outamount, double inamount, int salequantity,
+			int importquantity, double saleamount, double importamount) {
+		this.date = date;
+		this.outquantity = outquantity;
+		this.inquantity = inquantity;
+		this.outamount = outamount;
+		this.inamount = inamount;
+		this.salequantity = salequantity;
+		this.importquantity = importquantity;
+		this.saleamount = saleamount;
+		this.importamount = importamount;
+	}
+		//记录商品的进出记录
 		Date date;//日期
 		int outquantity;//出库数量
 		int inquantity;//入库数量

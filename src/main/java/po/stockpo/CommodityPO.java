@@ -21,6 +21,7 @@ public class CommodityPO implements Serializable, Cloneable{
 	{	
 		this.parent=parent;
 		this.name=name;
+		id=parent+"\\"+name;
 		this.model=model;
 		this.number=number;
 		this.in=in;
@@ -28,6 +29,20 @@ public class CommodityPO implements Serializable, Cloneable{
 		this.lastin=lastin;
 		this.lastout=lastout;
 		this.average=average;
+	}
+	public CommodityPO(String parent,String name,String model,int number,double in,double out,double lastin,double lastout,double average,ArrayList<CommodityRecordPO> record)
+	{	
+		this.parent=parent;
+		this.name=name;
+		id=parent+"\\"+name;
+		this.model=model;
+		this.number=number;
+		this.in=in;
+		this.out=out;
+		this.lastin=lastin;
+		this.lastout=lastout;
+		this.average=average;
+		this.record=record;
 	}
 	public CommodityPO(String parent,String name)
 	{
