@@ -17,7 +17,7 @@ import vo.stockvo.*;
 
 public class StockTest{
 	static StockManagerDriver smd=new StockManagerDriver();
-	static StubStockDataController data=new StubStockDataController();
+	static StubStockDataController data=StubStockDataController.getInstance();
 	static
 	{
 		smd.start(new StubStockController(),data);

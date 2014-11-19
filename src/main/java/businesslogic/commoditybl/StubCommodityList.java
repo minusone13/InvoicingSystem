@@ -13,7 +13,10 @@ public class StubCommodityList {//商品列表 haha
 	static StubCommodityDataService comdata;
 	public ArrayList<CommodityVO> findCommodity(String name)
 	{
-		return null;
+		ArrayList <CommodityPO> pos=comdata.findCommodity(name);
+		ArrayList <MockCommodity> coms=posToCom(pos);
+		ArrayList <CommodityVO> vos=toVOs(coms);
+		return vos;
 	}
 	public boolean addPack(ArrayList<MockCommodity> commodityarray,int quantity, double discount)
 	{
@@ -54,5 +57,23 @@ public class StubCommodityList {//商品列表 haha
 			return false;
 		MockCommodity com=new MockCommodity(po);
 		return true;
+	}
+	public ArrayList<MockCommodity> posToCom(ArrayList<CommodityPO> h)
+	{
+		ArrayList<MockCommodity> result = new ArrayList<MockCommodity>();
+		for(int i=0;i<h.size();i++)
+		{
+			result.add(new MockCommodity(h.get(i)));
+		}
+		return result;
+	}
+	public ArrayList<CommodityVO> toVOs(ArrayList<MockCommodity> h)
+	{
+		ArrayList<CommodityVO> result = new ArrayList<CommodityVO>();
+		for(int i=0;i<h.size();i++)
+		{
+			result.add(h.get(i).toVO());
+		}
+		return result;
 	}
 }

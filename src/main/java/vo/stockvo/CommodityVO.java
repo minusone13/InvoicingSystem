@@ -3,6 +3,21 @@ package vo.stockvo;
 import java.util.ArrayList;
 
 public class CommodityVO {
+	public CommodityVO(String parent, String name, String model,
+			int number, double in, double out, double lastin, double lastout,
+			double average, ArrayList<CommodityRecordVO> record) {
+		this.parent = parent;
+		this.name = name;
+		id=parent+"\\"+name;
+		this.model = model;
+		this.number = number;
+		this.in = in;
+		this.out = out;
+		this.lastin = lastin;
+		this.lastout = lastout;
+		this.average = average;
+		this.record = record;
+	}
 	String id;
 	String parent;
 	String name;

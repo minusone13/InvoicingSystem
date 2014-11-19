@@ -3,13 +3,14 @@ package businesslogic.stockmanagerbl;
 import java.util.*;
 
 import dataservice.commoditydataservice.StubCommodityDataService;
+import businesslogic.StockBlForSalesMen;
 import businesslogic.commoditybillbl.*;
 import businesslogic.commoditybl.*;
 import businesslogicservice.commodityblservice.*;
 import vo.*;
 import vo.stockvo.*;
 
-public class StubStockController implements StubCommodityBlService
+public class StubStockController implements StubCommodityBlService, StockBlForSalesMen
 {//负责与界面及其他程序员的交互
 	StubCommodityList l=new StubCommodityList();
 	static StubCommodityDataService comdata;
@@ -40,11 +41,11 @@ public class StubStockController implements StubCommodityBlService
 		l.setcomdata(comdata);
 	}
 	
-	public boolean checkIn(String name, String model, int quantity, double price)
+	public boolean checkIn(String id, String name, String model, int quantity, double price)
 	{
 		return l.checkIn(name, model, quantity, price);
 	}
-	public boolean checkOut(String name, String model, int quantity, double price)
+	public boolean checkOut(String id, String name, String model, int quantity, double price)
 	{
 		return l.checkOut(name, model, quantity, price);
 	}

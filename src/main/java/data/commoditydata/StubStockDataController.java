@@ -2,18 +2,28 @@ package data.commoditydata;
 
 import java.io.*;
 import java.util.ArrayList;
+
 import data.Tool;
+import data.stockdataforfinancial.StockDataForFinancial;
 import dataservice.commoditydataservice.*;
 import po.*;
 import po.stockpo.*;
 import vo.RM;
 
-public class StubStockDataController implements StubCommodityDataService{
-	static StubCommodityList l;
-	static File f;
-	public StubStockDataController()
+public class StubStockDataController implements StubCommodityDataService, StockDataForFinancial{
+	private static StubStockDataController instance=null;
+	StubCommodityList l;
+	File f;
+	String filename="Stock.ser";
+	public static StubStockDataController getInstance()
 	{
-		f = Tool.Opendoc("Stock.ser");   
+		if(instance==null)
+			instance = new StubStockDataController();
+		return instance;
+	}
+	private StubStockDataController()
+	{
+		f = Tool.Opendoc(filename);   
         
         ObjectInputStream ois=null;
         	try {
@@ -47,9 +57,9 @@ public class StubStockDataController implements StubCommodityDataService{
 			}       	
 	}
 	
-    public static void Initial()
+    public void Initial()
     {
-        f = Tool.Opendoc("Stock.ser");
+        f = Tool.Opendoc(filename);
         
         //some initial under;
         ObjectOutputStream oos=null;
@@ -169,24 +179,34 @@ public class StubStockDataController implements StubCommodityDataService{
 		save();
 		return result;
 	}
-    public static boolean save()
+    public boolean save()
     {
-        try {
-		ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(f));
-		oos.writeObject(l);
-		oos.writeObject(null);
-		oos.close();
-	} catch (IOException e1) {
-		e1.printStackTrace();
-	}
+        save(f);
         return true;
     }
-
-	public static StubCommodityList getL() {
+    public boolean save(File file)
+    {
+    	try {
+    		ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file));
+    		oos.writeObject(l);
+    		oos.writeObject(null);
+    		oos.close();
+            } catch (IOException e1) {
+            	e1.printStackTrace();
+            }
+    	return true;
+    }
+    public boolean save(String s)
+    {
+    	File file=Tool.Opendoc(s);
+    	save (file);
+    	return true;
+    }
+	public StubCommodityList getL() {
 		return l;
 	}
 
-	public static void setL(StubCommodityList l) {
-		StubStockDataController.l = l;
+	public void setL(StubCommodityList l) {
+		this.l = l;
 	}
 }
