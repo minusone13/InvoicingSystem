@@ -1,6 +1,7 @@
 package businesslogic.strategybl;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import po.LevelStrategyPO;
 import vo.LevelStrategyVO;
@@ -8,23 +9,33 @@ import vo.stockvo.CommodityVO;
 import businesslogic.GetVOandPO;
 import businesslogic.LevelStrategyStyle;
 import businesslogic.StrategyStyle;
+import businesslogic.commoditybl.MockCommodity;
 
 public class StubLevelStrategy implements GetVOandPO{
 
 	private StrategyStyle strategystyle=StrategyStyle.LevelStrategy;
 	private LevelStrategyStyle level_strategy_style;
 	
+	private String ID;
 	private int level;//客户等级
 	private double Limit;//消费金额下限
 	
-	private ArrayList<CommodityVO> alOfCommodityVo;//赠品信息数组
+	private ArrayList<MockCommodity> alOfCommodity;//赠品信息数组
 	private double discountrate;//打折比例
 	private double couponrate;//代金券赠送比例
 	
 	private String StartTime;//开始日期
 	private int LastTime;//策略持续时间（天）
 	public StubLevelStrategy(){
-		
+	     Calendar ca = Calendar.getInstance();
+	     int year = ca.get(Calendar.YEAR);//获取年份
+	     int month=ca.get(Calendar.MONTH);//获取月份 
+	     int day=ca.get(Calendar.DATE);//获取日
+	     int minute=ca.get(Calendar.MINUTE);//分 
+	     int hour=ca.get(Calendar.HOUR);//小时 
+	     int second=ca.get(Calendar.SECOND);//秒
+	
+	     setID(String.valueOf(year)+String.valueOf(month)+String.valueOf(day)+String.valueOf(hour)+String.valueOf(minute)+String.valueOf(second));
 	}
 	public LevelStrategyVO getVO() {
 		// TODO Auto-generated method stub
@@ -48,11 +59,11 @@ public class StubLevelStrategy implements GetVOandPO{
 	public void setLimit(double limit) {
 		Limit = limit;
 	}
-	public ArrayList<CommodityVO> getAlOfCommodityVo() {
-		return alOfCommodityVo;
+	public ArrayList<MockCommodity> getAlOfCommodityVo() {
+		return alOfCommodity;
 	}
-	public void setAlOfCommodityVo(ArrayList<CommodityVO> alOfCommodityVo) {
-		this.alOfCommodityVo = alOfCommodityVo;
+	public void setAlOfCommodity(ArrayList<MockCommodity> alOfCommodity) {
+		this.alOfCommodity = alOfCommodity;
 	}
 	public double getDiscountrate() {
 		return discountrate;
@@ -88,12 +99,18 @@ public class StubLevelStrategy implements GetVOandPO{
 	public void setPO(LevelStrategyPO po){
 	
 		this.setLevel_strategy_style(po.getLevel_strategy_style());
-		this.setAlOfCommodityVo(po.getAlOfCommodityVo());
+		this.setAlOfCommodity(po.getAlOfCommodity());
 		this.setCouponrate(po.getCouponrate());
 		this.setLevel(po.getLevel());
 		this.setLimit(po.getLimit());
 		this.setDiscountrate(po.getDiscountrate());
 		this.setLastTime(po.getLastTime());
 		this.setStartTime(po.getStartTime());
+	}
+	public String getID() {
+		return ID;
+	}
+	public void setID(String iD) {
+		ID = iD;
 	}
 }

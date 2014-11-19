@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import vo.stockvo.CommodityVO;
 import businesslogic.LevelStrategyStyle;
 import businesslogic.StrategyStyle;
+import businesslogic.commoditybl.MockCommodity;
 
 public class LevelStrategyPO extends PO{
 	private StrategyStyle strategystyle=StrategyStyle.LevelStrategy;
@@ -13,17 +14,17 @@ public class LevelStrategyPO extends PO{
 	private int level;//客户等级
 	private double Limit;//消费金额下限
 	
-	private ArrayList<CommodityVO> alOfCommodityVo;//赠品信息数组
+	private ArrayList<MockCommodity> alOfCommodity;//赠品信息数组
 	private double discountrate;//打折比例
 	private double couponrate;//代金券赠送比例
 	
 	private String StartTime;//开始日期
 	private int LastTime;//策略持续时间（天）
-	public ArrayList<CommodityVO> getAlOfCommodityVo() {
-		return alOfCommodityVo;
+	public ArrayList<MockCommodity> getAlOfCommodity() {
+		return alOfCommodity;
 	}
-	public void setAlOfCommodityVo(ArrayList<CommodityVO> alOfCommodityVo) {
-		this.alOfCommodityVo = alOfCommodityVo;
+	public void setAlOfCommodity(ArrayList<MockCommodity> alOfCommodity) {
+		this.alOfCommodity = alOfCommodity;
 	}
 	public double getDiscountrate() {
 		return discountrate;

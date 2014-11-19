@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import vo.stockvo.CommodityVO;
 import businesslogic.ReachStrategyStyle;
 import businesslogic.StrategyStyle;
+import businesslogic.commoditybl.MockCommodity;
 
 public class ReachStrategyPO extends PO{
 	private StrategyStyle strategystyle=StrategyStyle.ReachStrategy;
@@ -12,7 +13,7 @@ public class ReachStrategyPO extends PO{
 	
 	private double Limit;//消费金额下限
 	
-	private ArrayList< CommodityVO> alOfCommodityVo;//赠送赠品的商品信息数组
+	private ArrayList<MockCommodity> alOfCommodity;//赠品信息数组
 	private double couponrate;//赠送代金券的比例
 	
 	private String StartTime;//开始日期
@@ -29,12 +30,7 @@ public class ReachStrategyPO extends PO{
 	public void setLimit(double limit) {
 		Limit = limit;
 	}
-	public ArrayList<CommodityVO> getAlOfCommodityVo() {
-		return alOfCommodityVo;
-	}
-	public void setAlOfCommodityVo(ArrayList<CommodityVO> alOfCommodityVo) {
-		this.alOfCommodityVo = alOfCommodityVo;
-	}
+
 	public double getCouponrate() {
 		return couponrate;
 	}
@@ -52,5 +48,11 @@ public class ReachStrategyPO extends PO{
 	}
 	public void setLastTime(int lastTime) {
 		LastTime = lastTime;
+	}
+	public ArrayList<MockCommodity> getAlOfCommodity() {
+		return alOfCommodity;
+	}
+	public void setAlOfCommodity(ArrayList<MockCommodity> alOfCommodity) {
+		this.alOfCommodity = alOfCommodity;
 	}
 }

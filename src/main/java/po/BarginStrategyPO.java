@@ -4,13 +4,14 @@ import java.util.ArrayList;
 
 import vo.stockvo.CommodityVO;
 import businesslogic.StrategyStyle;
+import businesslogic.commoditybl.MockCommodity;
 
 public class BarginStrategyPO extends PO{
 
 
 	private StrategyStyle strategystyle=StrategyStyle.BarginStrategy;
 	
-	private ArrayList<CommodityVO> alOfCommodityVo;//特价包商品信息数组
+	private ArrayList<MockCommodity> alOfCommodity;//赠品信息数组
 	private double discount;//降价金额
 	private int num;//特价包打包数量
 	
@@ -18,12 +19,7 @@ public class BarginStrategyPO extends PO{
 	private int LastTime;//策略持续时间（天）
 	
 	/*成员变量的set和get*/
-	public ArrayList<CommodityVO> getAlOfCommodityVo() {
-		return alOfCommodityVo;
-	}
-	public void setAlOfCommodityVo(ArrayList<CommodityVO> alOfCommodityVo) {
-		this.alOfCommodityVo = alOfCommodityVo;
-	}
+
 	public double getDiscount() {
 		return discount;
 	}
@@ -47,6 +43,12 @@ public class BarginStrategyPO extends PO{
 	}
 	public void setLastTime(int lastTime) {
 		LastTime = lastTime;
+	}
+	public ArrayList<MockCommodity> getAlOfCommodity() {
+		return alOfCommodity;
+	}
+	public void setAlOfCommodity(ArrayList<MockCommodity> alOfCommodity) {
+		this.alOfCommodity = alOfCommodity;
 	}
 	
 }

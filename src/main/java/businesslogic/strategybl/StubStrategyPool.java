@@ -3,12 +3,9 @@ package businesslogic.strategybl;
 import java.util.ArrayList;
 
 import po.BarginStrategyPO;
-import po.CashPaymentPO;
 import po.LevelStrategyPO;
 import po.ReachStrategyPO;
-import businesslogic.StrategyStyle;
 import businesslogic.commoditybl.MockCommodity;
-import businesslogic.financialbillbl.StubCashPaymentBill;
 import data.strategydata.StrategySaver;
 import dataservice.strategydataservice.StrategySaverService;
 
@@ -31,7 +28,7 @@ public class StubStrategyPool {
 				alOfLevelStrategy.add(ls);
 			}
 		}
-		//客户分层策略
+		//特价包策略
 		ArrayList<BarginStrategyPO> BarginStrategyPOList=ss.getBarginStrategy();
 		if(BarginStrategyPOList!=null){
 			for(BarginStrategyPO tempPO:BarginStrategyPOList){
@@ -40,7 +37,7 @@ public class StubStrategyPool {
 				alOfBarginStrategy.add(bs);
 			}
 		}
-		//客户分层策略
+		//满额促销策略
 		ArrayList<ReachStrategyPO> ReachStrategyPOList=ss.getReachStrategy();
 		if(ReachStrategyPOList!=null){
 			for(ReachStrategyPO tempPO:ReachStrategyPOList){
@@ -67,39 +64,104 @@ public class StubStrategyPool {
 	}
 	/*需要删除一条客户分层策略*/
 	public void RemoveLevelStrategy (String ID){
-		
+		for(int i=0;i<alOfLevelStrategy.size();i++){
+			if(alOfLevelStrategy.get(i).getID()==ID){
+				alOfLevelStrategy.remove(i);
+				break;
+			}
+		}
+		//保存
+		this.save();
 	}
 	/*需要删除一条特价包策略*/
 	public void RemoveBarginStrategy (String ID){
-		
+		for(int i=0;i<alOfBarginStrategy.size();i++){
+			if(alOfBarginStrategy.get(i).getID()==ID){
+				alOfBarginStrategy.remove(i);
+				break;
+			}
+		}
+		//保存
+		this.save();
 	}
 	/*需要删除一条满额促销策略*/
 	public void RemoveReachStrategy (String ID){
-		
+		for(int i=0;i<alOfReachStrategy.size();i++){
+			if(alOfReachStrategy.get(i).getID()==ID){
+				alOfReachStrategy.remove(i);
+				break;
+			}
+		}
+		//保存
+		this.save();
 	}
 	/*需要制定一个赠送赠品的客户分层策略*/
 	public void addLevelStrategy (int level,int Limit,ArrayList<MockCommodity> gift,String StartTime,int LastTime){
-		
+		StubLevelStrategy ls=new StubLevelStrategy();
+		ls.setLevel(level);
+		ls.setLimit(Limit);
+		ls.setAlOfCommodity(gift);
+		ls.setStartTime(StartTime);
+		ls.setLastTime(LastTime);
+		alOfLevelStrategy.add(ls);
+		//保存
+		this.save();
 	}
 	/*需要制定一个折让客户分层策略*/
 	public void addDiscountLevelStrategy (int level,double rate, String StartTime,int LastTime){
-		
+		StubLevelStrategy ls=new StubLevelStrategy();
+		ls.setLevel(level);
+		ls.setDiscountrate(rate);
+		ls.setStartTime(StartTime);
+		ls.setLastTime(LastTime);
+		alOfLevelStrategy.add(ls);
+		//保存
+		this.save();
 	}
 	/*需要制定一个赠送代金券客户分层策略*/
 	public void addCouponLevelStrategy (int level,double rate, String StartTime,int LastTime){
-		
+		StubLevelStrategy ls=new StubLevelStrategy();
+		ls.setLevel(level);
+		ls.setCouponrate(rate);
+		ls.setStartTime(StartTime);
+		ls.setLastTime(LastTime);
+		alOfLevelStrategy.add(ls);
+		//保存
+		this.save();
 	}
 	/*需要制定一条特价包促销策略*/
 	public void addBarginStrategy (ArrayList<MockCommodity> bargin,int discount,int num,String StartTime,int LastTime){
-		
+		StubBarginStrategy bs=new StubBarginStrategy();
+		bs.setAlOfCommodity(bargin);
+		bs.setDiscount(discount);
+		bs.setNum(num);
+		bs.setStartTime(StartTime);
+		bs.setLastTime(LastTime);
+		alOfBarginStrategy.add(bs);
+		//保存
+		this.save();
 	}
 	/*需要制定一条赠送赠品的满额促销策略*/
 	public void addReachStrategy (int Limit,ArrayList<MockCommodity> gift,String StartTime,int LastTime){
-		
+		StubReachStrategy rs=new StubReachStrategy();
+		rs.setLimit(Limit);
+		rs.setAlOfCommodity(gift);
+		rs.setStartTime(StartTime);
+		rs.setLastTime(LastTime);
+		alOfReachStrategy.add(rs);
+		//保存
+		this.save();
 	}
 	/*需要制定一条赠送代金券的满额促销策略*/
 	public void addReachStrategy (int Limit,int rate,String StartTime,int LastTime){
-		
+		StubReachStrategy rs=new StubReachStrategy();
+		rs.setLimit(Limit);
+		rs.setCouponrate(rate);
+		rs.setStartTime(StartTime);
+		rs.setLastTime(LastTime);
+		alOfReachStrategy.add(rs);
+		//保存
+		this.save();
 	}
 	/*实时保存池中数组对象*/
 	public void save(){
