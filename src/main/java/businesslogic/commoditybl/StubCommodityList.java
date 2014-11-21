@@ -42,21 +42,21 @@ public class StubCommodityList {//商品列表 haha
 	{
 		this.comdata=comdata;
 	}
-	public boolean checkIn(String name, String model, int quantity, double price)
+	public RM checkIn(String name, String model, int quantity, double price)
 	{//入库
 		CommodityPO po=comdata.findCommodity(name,model);
 		if(po==null)//not found
-			return false;
+			return RM.notfound;
 		MockCommodity com=new MockCommodity(po);
-		return true;
+		return RM.done;
 	}
-	public boolean checkOut(String name, String model, int quantity, double price)
+	public RM checkOut(String name, String model, int quantity, double price)
 	{//出库
 		CommodityPO po=comdata.findCommodity(name,model);
 		if(po==null)//not found
-			return false;
+			return RM.notfound;
 		MockCommodity com=new MockCommodity(po);
-		return true;
+		return RM.done;
 	}
 	public ArrayList<MockCommodity> posToCom(ArrayList<CommodityPO> h)
 	{

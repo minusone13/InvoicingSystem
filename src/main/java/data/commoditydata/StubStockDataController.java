@@ -156,11 +156,19 @@ public class StubStockDataController implements StubCommodityDataService, StockD
 	}
 	public ArrayList<CommodityPO> findCommodity(String name)
 	{
-		return new ArrayList<CommodityPO>();
+		return l.findCommodity(name)
 	}
 	public CommodityPO findCommodity(String name, String model)
 	{
 		return l.findCommodity(name, model);
+	}
+	public CategoryPO findCategory(String id)
+	{
+		return l.findCategory(id).getPo();
+	}
+	public ArrayList<StockPO> openCategory(String id)
+	{
+		return l.findCategory(id).open();
 	}
 	public boolean deleteCommodity(String name, String model)
 	{
@@ -205,7 +213,6 @@ public class StubStockDataController implements StubCommodityDataService, StockD
 	public StubCommodityList getL() {
 		return l;
 	}
-
 	public void setL(StubCommodityList l) {
 		this.l = l;
 	}

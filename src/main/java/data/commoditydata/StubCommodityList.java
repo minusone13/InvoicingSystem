@@ -38,7 +38,14 @@ public class StubCommodityList implements Serializable{
 	}
 	public ArrayList<CommodityPO> findCommodity(String name)
 	{
-		return new ArrayList<CommodityPO>();
+		ArrayList<CommodityPO> result=new ArrayList<CommodityPO>();
+		for(int i=0;i<flatlist.size();i++)
+		{
+			MockCommodityData com=flatlist.get(i);
+			if(com.getName().equals(name))
+				result.add(com.getPo());
+		}
+		return result;
 	}
 	public CommodityPO findCommodity(String name, String model)
 	{
@@ -50,7 +57,12 @@ public class StubCommodityList implements Serializable{
 		}
 		return null;//not found;
 	}
-
+	public StubCategoryData findCategory(String id)
+	{
+		String a[]=id.split("\\\\");
+		StubCategoryData result=cat.goThrow(a, 1);
+		return result;
+	}
 	public boolean deleteCommodity(String name, String model)
 	{
 		return true;

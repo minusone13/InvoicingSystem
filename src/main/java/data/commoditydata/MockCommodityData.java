@@ -7,6 +7,10 @@ import po.*;
 import po.stockpo.CommodityPO;
 
 public class MockCommodityData implements Serializable{
+	public boolean equals(MockCommodityData com)
+	{
+		return (po.getName().equals(com.getName()) && po.getModel().equals(com.getModel()));
+	}
 	
 	public String getID() {
 		return po.getId();

@@ -41,11 +41,11 @@ public class StubStockController implements StubCommodityBlService, StockBlForSa
 		l.setcomdata(comdata);
 	}
 	
-	public boolean checkIn(String id, String name, String model, int quantity, double price)
+	public RM checkIn(String id, String name, String model, int quantity, double price)
 	{
 		return l.checkIn(name, model, quantity, price);
 	}
-	public boolean checkOut(String id, String name, String model, int quantity, double price)
+	public RM checkOut(String id, String name, String model, int quantity, double price)
 	{
 		return l.checkOut(name, model, quantity, price);
 	}
