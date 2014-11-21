@@ -156,7 +156,7 @@ public class StubStockDataController implements StubCommodityDataService, StockD
 	}
 	public ArrayList<CommodityPO> findCommodity(String name)
 	{
-		return l.findCommodity(name)
+		return l.findCommodity(name);
 	}
 	public CommodityPO findCommodity(String name, String model)
 	{

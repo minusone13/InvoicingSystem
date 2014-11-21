@@ -62,4 +62,26 @@ public class UserList implements Serializable{
 			return true;
 		}
 	}
+	public boolean updateRole(UserPO po)
+	{
+		UserPO user = find(po.getAccount());
+		if(user == null)
+			return false;
+		else
+		{
+			user.setR(po.getR());//whether it's true?
+			return true;
+		}
+	}
+	public boolean updateName(UserPO po)
+	{
+		UserPO user = find(po.getAccount());
+		if(user == null)
+			return false;
+		else
+		{
+			user.setName(po.getName());//whether it's true?
+			return true;
+		}
+	}
 }
