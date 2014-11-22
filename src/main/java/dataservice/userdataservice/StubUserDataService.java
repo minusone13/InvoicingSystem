@@ -9,4 +9,5 @@ public interface StubUserDataService {
 	public UserPO find(String account);
 	public boolean insert(OperationRecordPO po);
 	public boolean updatePassword(UserPO po);
+	public int count(char c);
 }

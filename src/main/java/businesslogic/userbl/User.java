@@ -9,6 +9,13 @@ import businesslogic.Role;
 
 public class User {
 	static StubUserDataService data;
+	String ID;//自动生成
+	Role r;//职务
+	String account;//用于登陆的账号
+	String password;//经过MD5加密的密码
+	String name;//姓名
+	
+	
 	public UserVO login(String account, String password)
 	{
 		UserPO po = data.login(account, string2MD5(password));
@@ -23,14 +30,33 @@ public class User {
 			return false;
 		else
 		{
-			data.insert(new UserPO(vo.getR(),vo.getAccount(),string2MD5(vo.getPassword()),vo.getName()));
+			char c=0;
+			switch(vo.getR()){//自动生成ID，详见Data层的UserList类
+				case MANAGER: c='M';break;
+				case ADMINISTRATOR: c='A';break;
+				case FINANTCIAL_STAFF: c='F';break;
+				case STOCK_STAFF: c='I';break;//抱歉只能用I咯，S和下面的进货人员重了；
+				case PURCHASE_SALE_STAFF: c='S';break;
+				default: return false;
+			}
+			int x=data.count(c);
+			x++;
+			String result=Integer.toString(x);
+			switch(result.length())
+			{//编号前面补零，补成4位
+				case 1:result="000"+result;
+				case 2:result="00"+result;
+				case 3:result="0"+result;
+			}
+			result=c+result;
+			data.insert(new UserPO(result,vo.getR(),vo.getAccount(),string2MD5(vo.getPassword()),vo.getName()));
 			return true;
 		}
 	}
 	
 	public boolean changePassword(UserVO vo)
 	{
-		boolean result = data.updatePassword(new UserPO(vo.getR(),vo.getAccount(),string2MD5(vo.getPassword()),vo.getName()));
+		boolean result = data.updatePassword(new UserPO(vo.getID(),vo.getR(),vo.getAccount(),string2MD5(vo.getPassword()),vo.getName()));
 		return result;
 	}
 	
@@ -38,7 +64,19 @@ public class User {
 	{
 		return data.insert(po);
 	}
+	public void setPO(UserPO po)
+	{
+		ID=po.getID();
+		r=po.getR();
+		account=po.getAccount();
+		password=po.getPassword();
+		name=po.getName();
+	}
 	
+	public UserPO getPO(UserPO po)
+	{
+		return new UserPO(ID,r,account,password,name);
+	}
 	
 	
     public static String string2MD5(String inStr){  
@@ -68,5 +106,41 @@ public class User {
 	public void setdataobject(StubUserDataService data)
 	{
 		this.data=data;
+	}
+	public static StubUserDataService getData() {
+		return data;
+	}
+	public static void setData(StubUserDataService data) {
+		User.data = data;
+	}
+	public String getID() {
+		return ID;
+	}
+	public void setID(String iD) {
+		ID = iD;
+	}
+	public Role getR() {
+		return r;
+	}
+	public void setR(Role r) {
+		this.r = r;
+	}
+	public String getAccount() {
+		return account;
+	}
+	public void setAccount(String account) {
+		this.account = account;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 }

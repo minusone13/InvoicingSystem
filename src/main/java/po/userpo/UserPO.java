@@ -5,12 +5,13 @@ import java.io.*;
 import businesslogic.Role;
 
 public class UserPO implements Serializable, Cloneable{
-	Role r;
-	String account;
-	String password;
-	String name;
+	String ID;//自动生成
+	Role r;//职务
+	String account;//用于登陆的账号
+	String password;//经过MD5加密的密码
+	String name;//姓名
 	public UserPO(){}
-	public UserPO(Role r, String account, String password, String name)
+	public UserPO(String ID,Role r, String account, String password, String name)
 	{
 		this.r=r;
 		this.account=account;
@@ -51,5 +52,11 @@ public class UserPO implements Serializable, Cloneable{
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public String getID() {
+		return ID;
+	}
+	public void setID(String iD) {
+		ID = iD;
 	}
 }

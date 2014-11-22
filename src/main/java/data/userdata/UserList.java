@@ -14,9 +14,20 @@ public class UserList implements Serializable{
 	public void initial()
 	{
 		users=new ArrayList<UserPO>();
-		users.add(new UserPO(Role.ADMINISTRATOR,"admin","21232f297a57a5a743894a0e4a801fc3","管理员"));
+		users.add(new UserPO("A0001",Role.ADMINISTRATOR,"admin","21232f297a57a5a743894a0e4a801fc3","管理员"));
 		//default has a administrator account, default name is admin, password is admin. details see 大作业.doc
 		records=new ArrayList<OperationRecordPO>();
+	}
+	
+	public int count(char c)//参数代表职务 A为管理员  M为总经理 S为进货销售人员 F为才我人员 I为库存管理人员
+	{//因为人员有员工编号如 总经理为M0001等等，在生成编号时，要自动查找已有人员数量
+		for(int i=users.size()-1;i>=0;i--)
+		{//用户信息按照顺序存储，从后往前查找，查到的一定是编号最大的
+			String ID=users.get(i).getID();
+			if(ID.charAt(0)==c)
+				return Integer.parseInt(ID.substring(1));
+		}
+		return 0;
 	}
 	
 	public UserPO login(String account, String password)

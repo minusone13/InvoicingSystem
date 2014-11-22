@@ -3,11 +3,20 @@ package vo;
 import businesslogic.Role;
 
 public class UserVO implements Cloneable{
+	String ID;
 	Role r;
 	String account;
 	String password;
 	String name;
 	public UserVO(){}
+	public UserVO(String ID,Role r, String account, String password, String name)
+	{
+		this.ID=ID;
+		this.r=r;
+		this.account=account;
+		this.password=password;
+		this.name=name;
+	}
 	public UserVO(Role r, String account, String password, String name)
 	{
 		this.r=r;
@@ -56,5 +65,11 @@ public class UserVO implements Cloneable{
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public String getID() {
+		return ID;
+	}
+	public void setID(String iD) {
+		ID = iD;
 	}
 }

@@ -164,4 +164,8 @@ public class UserDataController implements StubUserDataService{
 	{
 		return l.updatePassword(po);
 	}
+	public int count(char c)
+	{
+		return l.count(c);
+	}
 }
