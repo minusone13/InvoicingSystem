@@ -7,6 +7,7 @@ import po.stockpo.CommodityPO;
 import vo.GiftBillVO;
 import vo.VO;
 import vo.stockvo.CommodityVO;
+import businesslogic.BillState;
 import businesslogic.BillStyle;
 import businesslogic.GetVOandPO;
 import businesslogic.commoditybl.MockCommodity;
@@ -17,6 +18,7 @@ public class StubGiftBill extends Bill implements GetVOandPO
 	private BillStyle style=BillStyle.GiftBill;
 	private String ID;
 	ArrayList<MockCommodity> coms;
+	BillState state=BillState.DRAFT;
 	String remark[];
 	public GiftBillVO getVO()
 	{
@@ -34,6 +36,8 @@ public class StubGiftBill extends Bill implements GetVOandPO
 		for(int i=0;i<po.getComs().size();i++)
 			coms.add(new MockCommodity(po.getComs().get(i)));
 		ID=po.getID();
+		state=po.getState();
+		remark=po.getRemark();
 	}
 	public BillStyle getStyle() {
 		return style;
@@ -58,5 +62,11 @@ public class StubGiftBill extends Bill implements GetVOandPO
 	}
 	public void setRemark(String[] remark) {
 		this.remark = remark;
+	}
+	public BillState getState() {
+		return state;
+	}
+	public void setState(BillState state) {
+		this.state = state;
 	}
 }

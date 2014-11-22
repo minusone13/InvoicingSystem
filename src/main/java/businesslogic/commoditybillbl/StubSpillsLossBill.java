@@ -6,6 +6,7 @@ import po.*;
 import vo.SpillsLossBillVO;
 import vo.VO;
 import vo.stockvo.CommodityVO;
+import businesslogic.BillState;
 import businesslogic.BillStyle;
 import businesslogic.GetVOandPO;
 import businesslogic.commoditybl.MockCommodity;
@@ -17,18 +18,21 @@ public class StubSpillsLossBill extends Bill implements GetVOandPO
 	private MockCommodity com;
 	String ID;
 	po.SpillsLossBillPO.Type t;
+	BillState state=BillState.DRAFT;
 	public SpillsLossBillVO getVO()
 	{
 		return new SpillsLossBillVO(ID,t,new CommodityVO());
 	}
 	public SpillsLossBillPO getPO()
 	{
-		return new SpillsLossBillPO(ID,t,com.toPO().clone());
+		return new SpillsLossBillPO(ID,t,com.toPO().clone(),state);
 	}
 	public void setPO(SpillsLossBillPO po)
 	{
 		com=new MockCommodity(po.getComPO());
 		t=po.getT();
+		ID=po.getID();
+		state=po.getState();
 	}
 	public BillStyle getStyle() {
 		return style;
@@ -53,5 +57,11 @@ public class StubSpillsLossBill extends Bill implements GetVOandPO
 	}
 	public void setID(String iD) {
 		ID = iD;
+	}
+	public BillState getState() {
+		return state;
+	}
+	public void setState(BillState state) {
+		this.state = state;
 	}
 }

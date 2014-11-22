@@ -13,6 +13,7 @@ public class StubAlertBill extends Bill implements GetVOandPO
 	MockCommodity com;
 	int shortage;
 	BillStyle style=BillStyle.AlertBill;
+	BillState state=BillState.DRAFT;
 	public StubAlertBill(){}
 	public StubAlertBill(MockCommodity com, int shortage)
 	{
@@ -25,12 +26,15 @@ public class StubAlertBill extends Bill implements GetVOandPO
 	}
 	public AlertBillPO getPO()
 	{
-		return new AlertBillPO(ID,com.toPO(),shortage);
+		return new AlertBillPO(ID,com.toPO(),shortage,state);
 	}
 	public void setPO(AlertBillPO po)
 	{
 		com=new MockCommodity(po.getCommodity());
 		shortage=po.getshortage();
+		ID=po.getID();
+		style=po.getStyle();
+		state=po.getState();
 	}
 	public MockCommodity getCom() {
 		return com;
@@ -55,5 +59,11 @@ public class StubAlertBill extends Bill implements GetVOandPO
 	}
 	public void setStyle(BillStyle style) {
 		this.style = style;
+	}
+	public BillState getState() {
+		return state;
+	}
+	public void setState(BillState state) {
+		this.state = state;
 	}
 }
