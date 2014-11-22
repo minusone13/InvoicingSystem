@@ -4,6 +4,7 @@ import po.stockpo.*;
 import vo.stockvo.*;
 
 public class StubCategory {
+	String id;
 	String parent;//the ID of parent Category
 	String name;
 	public String getParent() {
@@ -23,10 +24,28 @@ public class StubCategory {
 	{
 		parent=vo.getParent();
 		name=vo.getName();
+		id=parent+"\\"+name;
+	}
+	public StubCategory(CategoryPO po)
+	{
+		parent=po.getParent();
+		name=po.getName();
+		id=parent+"\\"+name;
 	}
 	public CategoryPO toPO()
 	{
 		CategoryPO po= new CategoryPO(parent,name);
 		return po;
+	}
+	public CategoryVO toVO()
+	{
+		CategoryVO vo=new CategoryVO(parent,name);
+		return vo;
+	}
+	public String getID() {
+		return id;
+	}
+	public void setID(String id) {
+		id = id;
 	}
 }

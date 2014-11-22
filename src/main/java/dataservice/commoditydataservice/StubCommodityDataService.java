@@ -6,6 +6,7 @@ import po.*;
 import po.stockpo.CategoryPO;
 import po.stockpo.CommodityListPO;
 import po.stockpo.CommodityPO;
+import po.stockpo.StockPO;
 import vo.RM;
 
 public interface StubCommodityDataService {
@@ -16,4 +17,5 @@ public interface StubCommodityDataService {
 	public boolean updateCommodity(CommodityPO po);
 	public RM insert(CategoryPO po);
 	public CommodityPO findCommodity(String name, String model);
+	public ArrayList<StockPO> openCategory(String id);
 }

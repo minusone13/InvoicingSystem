@@ -3,7 +3,7 @@ package businesslogic.commoditybl;
 import java.util.ArrayList;
 
 import po.*;
-import po.stockpo.CommodityPO;
+import po.stockpo.*;
 import businesslogic.stockmanagerbl.*;
 import dataservice.commoditydataservice.*;
 import vo.stockvo.*;
@@ -75,5 +75,19 @@ public class StubCommodityList {//商品列表 haha
 			result.add(h.get(i).toVO());
 		}
 		return result;
+	}
+	public ArrayList<StockVO> openCategory(String id)
+	{
+		ArrayList<StockPO> pos=comdata.openCategory(id);
+		ArrayList<StockVO> vos=new ArrayList<StockVO>();
+		for(int i=0;i<pos.size();i++)
+		{
+			StockPO stockpo=pos.get(i);
+			if(stockpo.getT()==StockPO.Type.Category)
+				vos.add(new StockVO(new StubCategory(stockpo.getCat()).toVO()));
+			else
+				vos.add(new StockVO(new MockCommodity(stockpo.getCom()).toVO()));
+		}
+		return vos;
 	}
 }

@@ -3,12 +3,14 @@ package po.stockpo;
 import java.io.Serializable;
 
 public class CategoryPO implements Serializable, Cloneable{
+	String id;
 	String parent;
 	String name;
 	public CategoryPO(String parent, String name)
 	{
 		this.parent=parent;
 		this.name=name;
+		id=parent+"\\"+name;
 	}
 	public String getParent() {
 		return parent;
@@ -32,5 +34,11 @@ public class CategoryPO implements Serializable, Cloneable{
 			e.printStackTrace();
 		}
 		return cloned;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
 	}
 }

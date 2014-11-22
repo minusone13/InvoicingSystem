@@ -49,5 +49,9 @@ public class StubStockController implements StubCommodityBlService, StockBlForSa
 	{
 		return l.checkOut(name, model, quantity, price);
 	}
+	public ArrayList<StockVO> openCategory(String id)
+	{
+		return l.openCategory(id);
+	}
 	
 }
