@@ -3,13 +3,15 @@ package po.userpo;
 import java.util.*;
 import java.io.*;
 
+import vo.RM;
+
 public class OperationRecordPO implements Serializable{
 //记录主要操作
-	Date d;
-	UserPO user;
-	String operation;
-	String result;
-	public OperationRecordPO(UserPO user,String operation,String result)
+	Date d;//操作日期
+	UserPO user;//操作者
+	String operation;//动作内容
+	RM result;//操作结果
+	public OperationRecordPO(UserPO user,String operation,RM result)
 	{
 		d=new Date();
 		this.user=user.clone();
@@ -34,5 +36,11 @@ public class OperationRecordPO implements Serializable{
 	}
 	public void setOperation(String operation) {
 		this.operation = operation;
+	}
+	public RM getResult() {
+		return result;
+	}
+	public void setResult(RM result) {
+		this.result = result;
 	}
 }
