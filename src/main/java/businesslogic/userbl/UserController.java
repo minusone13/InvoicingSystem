@@ -1,11 +1,13 @@
 package businesslogic.userbl;
 
+import businesslogic.userservice.UserService;
 import businesslogicservice.userblservice.StubUserBlService;
+import po.userpo.OperationRecordPO;
 import po.userpo.UserPO;
 import vo.UserVO;
 import dataservice.userdataservice.*;
 
-public class UserController implements StubUserBlService{
+public class UserController implements StubUserBlService, UserService{
 	static StubUserDataService data;
 	User user=new User();
 	public UserVO login(String account, String password)
@@ -38,5 +40,9 @@ public class UserController implements StubUserBlService{
 	}
 	public void setUser(User user) {
 		this.user = user;
+	}
+	public boolean addRecord(OperationRecordPO po)
+	{
+		return user.addRecord(po);
 	}
 }

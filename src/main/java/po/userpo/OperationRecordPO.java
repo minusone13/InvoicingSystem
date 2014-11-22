@@ -8,6 +8,15 @@ public class OperationRecordPO implements Serializable{
 	Date d;
 	UserPO user;
 	String operation;
+	String result;
+	public OperationRecordPO(UserPO user,String operation,String result)
+	{
+		d=new Date();
+		this.user=user.clone();
+		this.operation=operation;
+		this.result=result;
+	}
+	public OperationRecordPO(){}
 	public Date getD() {
 		return d;
 	}
