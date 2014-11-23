@@ -13,6 +13,7 @@ public class UserPO implements Serializable, Cloneable{
 	public UserPO(){}
 	public UserPO(String ID,Role r, String account, String password, String name)
 	{
+		this.ID=ID;
 		this.r=r;
 		this.account=account;
 		this.password=password;

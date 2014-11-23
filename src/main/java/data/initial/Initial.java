@@ -11,4 +11,8 @@ public class Initial {
 	{
 		new InitialStock();
 	}
+	public void initialUser()
+	{
+		new InitialUser();
+	}
 }
