@@ -1,8 +1,8 @@
 package vo.stockvo;
 
 public class CategoryVO {
-	String id;
-	String parent;
+	String id;//id恒等于parent+"\\"+name
+	String parent;//父分类的ID
 	String name;
 	public CategoryVO(String parent, String name)
 	{

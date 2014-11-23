@@ -3,8 +3,8 @@ package po.stockpo;
 import java.io.Serializable;
 
 public class CategoryPO implements Serializable, Cloneable{
-	String id;
-	String parent;
+	String id;//id恒等于parent+"\\"+name
+	String parent;//父分类的ID
 	String name;
 	public CategoryPO(String parent, String name)
 	{

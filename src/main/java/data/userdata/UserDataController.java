@@ -147,25 +147,25 @@ public class UserDataController implements StubUserDataService{
 	}
 	
 	public boolean insert(UserPO po)
-	{
+	{//插入一个用户（对应于增加用户）
 		return l.insert(po);
 	}
 	
 	public UserPO find(String account)
-	{
+	{//通过账号查找一个用和
 		return l.find(account);
 	}
 	
 	public boolean insert(OperationRecordPO po)
-	{
+	{//插入关键操作记录
 		return l.insert(po);
 	}
 	public boolean updatePassword(UserPO po)
-	{
+	{//更改密码
 		return l.updatePassword(po);
 	}
 	public int count(char c)
-	{
+	{//用于计算指定职务已有员工数量，便于逻辑层对新的员工生成ID
 		return l.count(c);
 	}
 }

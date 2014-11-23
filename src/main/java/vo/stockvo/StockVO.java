@@ -2,8 +2,9 @@ package vo.stockvo;
 
 
 public class StockVO {
+	//当不清楚类型时使用StockVO，如打开一个分类前，并不知道下一层是商品还是分类
 	public enum Type
-	{
+	{//指明类型
 		Category,
 		Commodity
 	}

@@ -23,21 +23,21 @@ public class StubCategoryData implements Serializable{
 		this.po=po;
 	}
 	public boolean canAddCategory()
-	{
+	{//根据作业要求，分类和商品不能为树的兄弟关系
 		if(!coms.isEmpty())
 			return false;
 		else 
 			return true;
 	}
 	public boolean canAddCommodity()
-	{
+	{//根据作业要求，分类和商品不能为树的兄弟关系
 		if(!cats.isEmpty())
 			return false;
 		else 
 			return true;
 	}
 	public ArrayList<StockPO> open()
-	{
+	{//打开一个分类，打开前不知道内容，所以返回了通用的StockPO
 		ArrayList <StockPO> result=new ArrayList<StockPO>();
 		if(!coms.isEmpty())
 		{
@@ -60,7 +60,7 @@ public class StubCategoryData implements Serializable{
 		return result;//return a stockPO
 	}
 	public StubCategoryData findSubCat(String name)
-	{
+	{//通过分类名查找子分类
 		if(cats==null || cats.size()==0)
 			return null;//does not have any sub category
 		for(int i=0;i<cats.size();i++)
@@ -84,7 +84,7 @@ public class StubCategoryData implements Serializable{
 		return cat.goThrow(nameOfParent, layer);
 	}
 	public MockCommodityData findCommodity(String name,String model)
-	{
+	{//通过名称和型号（唯一确定一个商品）查找下一层的商品，没找到返回NULL
 		if(coms==null || coms.size()==0)
 			return null;//does not have any sub category
 		for(int i=0;i<coms.size();i++)
@@ -95,7 +95,7 @@ public class StubCategoryData implements Serializable{
 		return null;//not found
 	}
 	public RM add(MockCommodityData com)
-	{
+	{//返回值参见RM中的说明
 		if(canAddCommodity())
 		{
 			coms.add(com);
@@ -105,7 +105,7 @@ public class StubCategoryData implements Serializable{
 			return RM.treeerror;//已有分类，不能添加商品
 	}
 	public RM add(StubCategoryData cat)
-	{
+	{//返回值参见RM中的说明
 		if(canAddCategory())
 		{
 			cats.add(cat);
@@ -118,22 +118,22 @@ public class StubCategoryData implements Serializable{
 		return cats;
 	}
 	public void update(String name)
-	{
+	{//更新姓名，同时会更新ID的子树当中的ID
 		String oldname=getName();
 		setName(name);
 		for(int i=0;i<cats.size();i++)
-		{
+		{//更新子分类
 			StubCategoryData cat=cats.get(i);
 			cat.updateParent(po.getId());
 		}
 		for(int i=0;i<coms.size();i++)
-		{
+		{//更新子商品
 			MockCommodityData com=coms.get(i);
 			com.setParent(po.getId());
 		}
 	}
 	private void updateParent(String parent)
-	{
+	{//服务于update(String name)的辅助算法
 		setParent(parent);
 		for(int i=0;i<cats.size();i++)
 		{

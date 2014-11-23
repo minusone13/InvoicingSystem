@@ -10,13 +10,14 @@ import po.*;
 import po.stockpo.*;
 import vo.RM;
 
-public class StubStockDataController implements StubCommodityDataService, StockDataForFinancial{
+public class StubStockDataController implements StubCommodityDataService, StockDataForFinancial
+{//这是一个单体模式的类，因为这样读写文件方便些
 	private static StubStockDataController instance=null;
 	StubCommodityList l;
 	File f;
 	String filename="Stock.ser";
 	public static StubStockDataController getInstance()
-	{
+	{//单体模式
 		if(instance==null)
 			instance = new StubStockDataController();
 		return instance;

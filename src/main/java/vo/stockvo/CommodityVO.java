@@ -18,10 +18,10 @@ public class CommodityVO {
 		this.average = average;
 		this.record = record;
 	}
-	String id;
-	String parent;
+	String id;//ID恒等于parent+"\\"+name
+	String parent;//父分类的ID
 	String name;
-	String model;
+	String model;//名称和型号唯一确定一个商品
 	int number;
 	double in;
 	double out;

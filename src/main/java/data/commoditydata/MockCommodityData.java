@@ -7,6 +7,7 @@ import po.*;
 import po.stockpo.CommodityPO;
 
 public class MockCommodityData implements Serializable{
+	CommodityPO po;//详见PO中的注释
 	public boolean equals(MockCommodityData com)
 	{
 		return (po.getName().equals(com.getName()) && po.getModel().equals(com.getModel()));
@@ -68,7 +69,6 @@ public class MockCommodityData implements Serializable{
 	public void setLastout(double lastout) {
 		po.setLastOut(lastout);;
 	}
-	CommodityPO po;
 	public MockCommodityData(CommodityPO po)
 	{
 		this.po=po;

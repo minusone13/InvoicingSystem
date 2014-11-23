@@ -40,13 +40,13 @@ public class UserList implements Serializable{
 	}
 	
 	public boolean insert(UserPO po)
-	{
+	{//插入一个用户（对应于增加用户）
 		users.add(po);
 		return true;
 	}
 	
 	public UserPO find(String account)
-	{
+	{//通过账号查找一个用和
 		for(int i=0;i<users.size();i++)
 		{
 			UserPO user=users.get(i);
@@ -57,13 +57,13 @@ public class UserList implements Serializable{
 	}
 	
 	public boolean insert(OperationRecordPO po)
-	{
+	{//插入关键操作记录
 		records.add(po);
 		return true;
 	}
 	
 	public boolean updatePassword(UserPO po)
-	{
+	{//更改密码
 		UserPO user = find(po.getAccount());
 		if(user == null)
 			return false;

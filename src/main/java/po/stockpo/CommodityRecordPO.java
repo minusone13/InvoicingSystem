@@ -17,7 +17,7 @@ public class CommodityRecordPO
 		this.saleamount = saleamount;
 		this.importamount = importamount;
 	}
-//记录商品的进出记录
+//记录商品的进出记录，库存查看和管理商品时都会用到
 	Date date;//日期
 	int outquantity;//出库数量
 	int inquantity;//入库数量
