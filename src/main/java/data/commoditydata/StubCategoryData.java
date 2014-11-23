@@ -117,6 +117,30 @@ public class StubCategoryData implements Serializable{
 	public ArrayList<StubCategoryData> getCats() {
 		return cats;
 	}
+	public void update(String name)
+	{
+		String oldname=getName();
+		setName(name);
+		for(int i=0;i<cats.size();i++)
+		{
+			StubCategoryData cat=cats.get(i);
+			cat.updateParent(po.getId());
+		}
+		for(int i=0;i<coms.size();i++)
+		{
+			MockCommodityData com=coms.get(i);
+			com.setParent(po.getId());
+		}
+	}
+	private void updateParent(String parent)
+	{
+		setParent(parent);
+		for(int i=0;i<cats.size();i++)
+		{
+			StubCategoryData cat=cats.get(i);
+			cat.updateParent(po.getId());
+		}
+	}
 	public void setCats(ArrayList<StubCategoryData> cats) {
 		this.cats = cats;
 	}
@@ -130,13 +154,15 @@ public class StubCategoryData implements Serializable{
 		return po.getParent();
 	}
 	public void setParent(String parent) {
-		po.setParent(parent);;
+		po.setParent(parent);
+		po.setId(po.getParent()+"\\"+po.getName());//ID随所属路径发生变化
 	}
 	public String getName() {
 		return po.getName();
 	}
 	public void setName(String name) {
-		po.setName(name);;
+		po.setName(name);
+		po.setId(po.getParent()+"\\"+po.getName());//ID随所属路径发生变化
 	}
 	public CategoryPO getPo() {
 		return po;

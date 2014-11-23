@@ -14,7 +14,8 @@ public interface StubCommodityDataService {
 	public CommodityListPO getAll();
 	public ArrayList<CommodityPO> findCommodity(String name);
 	public boolean deleteCommodity(String name, String model);
-	public boolean updateCommodity(CommodityPO po);
+	public boolean update(CommodityPO po);
+	public boolean update(CategoryPO po);
 	public RM insert(CategoryPO po);
 	public CommodityPO findCommodity(String name, String model);
 	public ArrayList<StockPO> openCategory(String id);

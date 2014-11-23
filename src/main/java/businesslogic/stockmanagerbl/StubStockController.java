@@ -43,11 +43,11 @@ public class StubStockController implements StubCommodityBlService, StockBlForSa
 	
 	public RM checkIn(String id, String name, String model, int quantity, double price)
 	{
-		return l.checkIn(name, model, quantity, price);
+		return l.checkIn(id, name, model, quantity, price);
 	}
 	public RM checkOut(String id, String name, String model, int quantity, double price)
 	{
-		return l.checkOut(name, model, quantity, price);
+		return l.checkOut(id, name, model, quantity, price);
 	}
 	public ArrayList<StockVO> openCategory(String id)
 	{

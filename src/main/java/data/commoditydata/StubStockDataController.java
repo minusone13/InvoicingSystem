@@ -160,11 +160,17 @@ public class StubStockDataController implements StubCommodityDataService, StockD
 	}
 	public CommodityPO findCommodity(String name, String model)
 	{
-		return l.findCommodity(name, model);
+		MockCommodityData result=l.findCommodity(name, model);
+		if(result==null)
+			return null;
+		return result.getPo().clone();
 	}
 	public CategoryPO findCategory(String id)
 	{
-		return l.findCategory(id).getPo();
+		StubCategoryData result=l.findCategory(id);
+		if(result==null)
+			return null;
+		return result.getPo().clone();
 	}
 	public ArrayList<StockPO> openCategory(String id)
 	{
@@ -176,10 +182,17 @@ public class StubStockDataController implements StubCommodityDataService, StockD
 		save();
 		return result;
 	}
-	public boolean updateCommodity(CommodityPO po)
+	public boolean update(CommodityPO po)
 	{
+		boolean result = l.update(po);
 		save();
-		return true;
+		return result;
+	}
+	public boolean update(CategoryPO po)
+	{
+		boolean result = l.update(po);
+		save();
+		return result;
 	}
 	public RM insert(CategoryPO po)
 	{

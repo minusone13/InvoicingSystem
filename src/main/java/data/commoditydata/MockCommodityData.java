@@ -22,18 +22,20 @@ public class MockCommodityData implements Serializable{
 		return po.getParent();
 	}
 	public void setParent(String parent) {
-		po.setParent(parent);;
+		po.setParent(parent);
+		po.setId(po.getParent()+"\\"+po.getName());
 	}
 	public String getName() {
 		return po.getName();
 	}
-	public void setName(String name) {
-		po.setName(name);;
+	private void setName(String name) {//名称和型号唯一确定一个商品，不能随意更改
+		po.setName(name);
+		po.setId(po.getParent()+"\\"+po.getName());
 	}
 	public String getModel() {
 		return po.getModel();
 	}
-	public void setModel(String model) {
+	private void setModel(String model) {
 		po.setModel(model);;
 	}
 	public int getNumber() {

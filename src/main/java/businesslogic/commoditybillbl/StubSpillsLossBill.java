@@ -3,13 +3,11 @@ package businesslogic.commoditybillbl;
 //import java.nio.file.attribute.PosixFilePermission; what is it?
 
 import po.*;
-import vo.SpillsLossBillVO;
-import vo.VO;
+import po.SpillsLossBillPO.*;
+import vo.*;
 import vo.stockvo.CommodityVO;
-import businesslogic.BillState;
-import businesslogic.BillStyle;
-import businesslogic.GetVOandPO;
-import businesslogic.commoditybl.MockCommodity;
+import businesslogic.*;
+import businesslogic.commoditybl.*;
 import businesslogic.examinebl.Bill;
 
 public class StubSpillsLossBill extends Bill implements GetVOandPO
@@ -17,7 +15,7 @@ public class StubSpillsLossBill extends Bill implements GetVOandPO
 	private BillStyle style=BillStyle.SpillsLossBill;
 	private MockCommodity com;
 	String ID;
-	po.SpillsLossBillPO.Type t;
+	Type t;
 	BillState state=BillState.DRAFT;
 	public SpillsLossBillVO getVO()
 	{
@@ -62,6 +60,14 @@ public class StubSpillsLossBill extends Bill implements GetVOandPO
 		return state;
 	}
 	public void setState(BillState state) {
+		if(this.state==BillState.SUBMITED && state==BillState.EXAMINED)
+		{//当审批订单后，实现系统中的库存数量修改
+			StubCommodityList l= new StubCommodityList();
+			if(t==Type.Loss)
+				l.checkOut(ID, com.getName(), com.getModel(), com.getNumber(), 0);//最后一个参数是价格，报溢报损为无费用的
+			else
+				l.checkIn(ID, com.getName(), com.getModel(), com.getNumber(), 0);
+		}
 		this.state = state;
 	}
 }
