@@ -21,6 +21,8 @@ public class ManagerUI extends JPanel {
 //	private JPfunction function=new JPfunction();
 	//审批单据1
 	private JPpassBill1 passbill1=new JPpassBill1();
+	//审批单据2
+	private JPpassBill2 passbill2=new JPpassBill2();
 	//home
 	private JLabel home=new JLabel();
 	//后退
@@ -47,8 +49,10 @@ public class ManagerUI extends JPanel {
 		navigation.setBounds(0, 165, 960, 35);
 //		//功能板
 //		function.setLocation(55, 233);
-		//审批单据1
-		passbill1.setLocation(55, 233);
+//		//审批单据1
+//		passbill1.setLocation(55, 233);
+		//审批单据2
+		passbill2.setLocation(55, 233);
 		//home
 		home.setIcon(new ImageIcon("src/image/home.png") );
 		home.setBounds(690, 165, 90, 32);
@@ -64,7 +68,7 @@ public class ManagerUI extends JPanel {
 		this.add(titile,0);
 		this.add(sign,1);
 		this.add(navigation,2);
-		this.add(passbill1,3);
+		this.add(passbill2,3);
 		this.add(home,4);
 		this.add(back,5);
 		this.add(signout,6);

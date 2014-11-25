@@ -9,6 +9,9 @@ public class GiftBillVO extends VO{
 	String ID;
 	String[] remark;
 	ArrayList<CommodityVO> coms;
+	public GiftBillVO(){
+		
+	}
 	public ArrayList<CommodityVO> getComs()
 	{
 		return coms;

@@ -41,11 +41,6 @@ public class Frame extends JFrame implements MouseListener{
 		mainJP.setBounds(0, 0, 960, 600);
 		mainJP.setLayout(null);
 		
-//		//测试用背景
-//		JLabel bg=new JLabel();
-//		bg.setIcon(new ImageIcon("src/image/passBillBG2.jpg"));
-//		mainJP.add(bg);
-//		bg.setBounds(0, 0, 960, 600);
 //		//加上监听接口
 //		bg.addMouseListener(this);
 		//关闭与小化
