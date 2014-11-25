@@ -2,14 +2,85 @@ package businesslogicservice.managerblservice;
 
 import java.util.ArrayList;
 
+import vo.AlertBillVO;
 import vo.BarginStrategyVO;
 import vo.BusinessSituationVO;
+import vo.CashPaymentVO;
+import vo.GiftBillVO;
 import vo.LevelStrategyVO;
+import vo.PaymentVO;
+import vo.PurBackSheetVO;
+import vo.PurSheetVO;
 import vo.ReachStrategyVO;
+import vo.ReceiptVO;
+import vo.SaleBackSheetVO;
+import vo.SaleSheetVO;
+import vo.SpillsLossBillVO;
 import vo.VO;
+import businesslogic.BillState;
 import businesslogic.BillStyle;
+import businesslogic.commoditybillbl.StubAlertBill;
+import businesslogic.commoditybillbl.StubGiftBill;
+import businesslogic.commoditybillbl.StubSpillsLossBill;
+import businesslogic.financialbillbl.StubCashPaymentBill;
+import businesslogic.financialbillbl.StubPaymentBill;
+import businesslogic.financialbillbl.StubReceiptBill;
+import businesslogic.salebillbl.StubPurBackSheet;
+import businesslogic.salebillbl.StubPurSheet;
+import businesslogic.salebillbl.StubSaleBackSheet;
+import businesslogic.salebillbl.StubSaleSheet;
 
 public interface StubManagerBlService {
+	/*需要从单据池筛选指定状态的所有赠送单*/
+	public ArrayList<GiftBillVO> getGiftBill (BillState st);
+	/*需要从单据池筛选指定状态的所有报溢/报损单*/
+	public ArrayList<SpillsLossBillVO> getSpillsLossBill (BillState st);
+	/*需要从单据池筛选指定状态的所有库存报警单*/
+	public ArrayList<AlertBillVO> getAlertBill (BillState st);
+	/*需要从单据池筛选指定状态的所有进货单*/
+	public ArrayList<PurSheetVO> getPurSheet (BillState st);
+	/*需要从单据池筛选指定状态的所有进货退货单*/
+	public ArrayList<PurBackSheetVO> getPurBackSheet (BillState st);
+	/*需要从单据池筛选指定状态的所有销售单*/
+	public ArrayList<SaleSheetVO> getSaleSheet (BillState st);
+	/*需要从单据池筛选指定状态的所有销售退货单*/
+	public ArrayList<SaleBackSheetVO> getSaleBackSheet (BillState st);
+	/*需要从单据池筛选指定状态的所有收款单*/
+	public ArrayList<ReceiptVO> getReceiptBill (BillState st);
+	/*需要从单据池筛选指定状态的所有付款单*/
+	public ArrayList<PaymentVO> getPaymentBill (BillState st);
+	/*需要从单据池筛选指定状态的所有现金费用单*/
+	public ArrayList<CashPaymentVO> getCashPaymentBill (BillState st);
+	/*获取单据池所有赠送单*/
+	public ArrayList<GiftBillVO> getGiftBill ();
+	
+	/*获取单据池的所有报溢/报损单*/
+	public ArrayList<SpillsLossBillVO> getSpillsLossBill ();
+
+	/*获取单据池的所有库存报警单*/
+	public ArrayList<AlertBillVO> getAlertBill ();
+
+	/*获取单据池的所有进货单*/
+	public ArrayList<PurSheetVO> getPurSheet ();
+
+	/*获取单据池的所有进货退货单*/
+	public ArrayList<PurBackSheetVO> getPurBackSheet ();
+
+	/*获取单据池的所有销售单*/
+	public ArrayList<SaleSheetVO> getSaleSheet ();
+
+	/*获取单据池的所有销售退货单*/
+	public ArrayList<SaleBackSheetVO> getSaleBackSheet ();
+
+	/*获取单据池的所有收款单*/
+	public ArrayList<ReceiptVO> getReceiptBill ();
+
+	/*获取单据池的所有付款单*/
+	public ArrayList<PaymentVO> getPaymentBill ();
+
+	/*获取单据池的所有现金费用单*/
+	public ArrayList<CashPaymentVO> getCashPaymentBill ();
+
 	/*需要查看已提交单据*/
 	public ArrayList<VO> getHandedBill ();
 	/*修改密码*/

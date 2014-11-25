@@ -2,10 +2,20 @@ package businesslogic.managerbl;
 
 import java.util.ArrayList;
 
+import vo.AlertBillVO;
 import vo.BarginStrategyVO;
 import vo.BusinessSituationVO;
+import vo.CashPaymentVO;
+import vo.GiftBillVO;
 import vo.LevelStrategyVO;
+import vo.PaymentVO;
+import vo.PurBackSheetVO;
+import vo.PurSheetVO;
 import vo.ReachStrategyVO;
+import vo.ReceiptVO;
+import vo.SaleBackSheetVO;
+import vo.SaleSheetVO;
+import vo.SpillsLossBillVO;
 import vo.VO;
 import businesslogic.BillState;
 import businesslogic.BillStyle;
@@ -20,9 +30,6 @@ import businesslogic.salebillbl.StubPurBackSheet;
 import businesslogic.salebillbl.StubPurSheet;
 import businesslogic.salebillbl.StubSaleBackSheet;
 import businesslogic.salebillbl.StubSaleSheet;
-import businesslogic.strategybl.StubBarginStrategy;
-import businesslogic.strategybl.StubLevelStrategy;
-import businesslogic.strategybl.StubReachStrategy;
 import businesslogic.strategybl.StubStrategyPool;
 import businesslogicservice.managerblservice.StubManagerBlService;
 
@@ -36,6 +43,222 @@ public class StubManager implements StubManagerBlService{
 	/*构造方法*/
 	public StubManager(){
 		
+	}
+	/*需要从单据池筛选指定状态的所有赠送单*/
+	public ArrayList<GiftBillVO> getGiftBill (BillState st){
+		ArrayList<GiftBillVO> result=new ArrayList<GiftBillVO>();
+		ArrayList<StubGiftBill> billList=billPool.getGiftBill(st);
+		for(StubGiftBill temp: billList){
+			result.add(temp.getVO());
+		}
+		
+		return result;
+
+	}
+	/*需要从单据池筛选指定状态的所有报溢/报损单*/
+	public ArrayList<SpillsLossBillVO> getSpillsLossBill (BillState st){
+		ArrayList<SpillsLossBillVO> result=new ArrayList<SpillsLossBillVO>();
+		ArrayList<StubSpillsLossBill> billList=billPool.getSpillsLossBill(st);
+		for(StubSpillsLossBill temp: billList){
+			result.add(temp.getVO());
+		}
+		
+		return result;
+
+		
+	}
+	/*需要从单据池筛选指定状态的所有库存报警单*/
+	public ArrayList<AlertBillVO> getAlertBill (BillState st){
+		ArrayList<AlertBillVO> result=new ArrayList<AlertBillVO>();
+		ArrayList<StubAlertBill> billList=billPool.getAlertBill(st);
+		for(StubAlertBill temp: billList){
+			result.add(temp.getVO());
+		}
+		
+		return result;
+
+	}
+	/*需要从单据池筛选指定状态的所有进货单*/
+	public ArrayList<PurSheetVO> getPurSheet (BillState st){
+		ArrayList<PurSheetVO> result=new ArrayList<PurSheetVO>();
+		ArrayList<StubPurSheet> billList=billPool.getPurSheet(st);
+		for(StubPurSheet temp: billList){
+			result.add(temp.getVO());
+		}
+		
+		return result;
+
+	}
+	/*需要从单据池筛选指定状态的所有进货退货单*/
+	public ArrayList<PurBackSheetVO> getPurBackSheet (BillState st){
+		ArrayList<PurBackSheetVO> result=new ArrayList<PurBackSheetVO>();
+		ArrayList<StubPurBackSheet> billList=billPool.getPurBackSheet(st);
+		for(StubPurBackSheet temp: billList){
+			result.add(temp.getVO());
+		}
+		
+		return result;
+
+	}
+	/*需要从单据池筛选指定状态的所有销售单*/
+	public ArrayList<SaleSheetVO> getSaleSheet (BillState st){
+		ArrayList<SaleSheetVO> result=new ArrayList<SaleSheetVO>();
+		ArrayList<StubSaleSheet> billList=billPool.getSaleSheet(st);
+		for(StubSaleSheet temp: billList){
+			result.add(temp.getVO());
+		}
+		
+		return result;
+
+	}
+	/*需要从单据池筛选指定状态的所有销售退货单*/
+	public ArrayList<SaleBackSheetVO> getSaleBackSheet (BillState st){
+		ArrayList<SaleBackSheetVO> result=new ArrayList<SaleBackSheetVO>();
+		ArrayList<StubSaleBackSheet> billList=billPool.getSaleBackSheet(st);
+		for(StubSaleBackSheet temp: billList){
+			result.add(temp.getVO());
+		}
+		
+		return result;
+
+	}
+	/*需要从单据池筛选指定状态的所有收款单*/
+	public ArrayList<ReceiptVO> getReceiptBill (BillState st){
+		ArrayList<ReceiptVO> result=new ArrayList<ReceiptVO>();
+		ArrayList<StubReceiptBill> billList=billPool.getReceiptBill(st);
+		for(StubReceiptBill temp: billList){
+			result.add(temp.getVO());
+		}
+		
+		return result;
+
+	}
+	/*需要从单据池筛选指定状态的所有付款单*/
+	public ArrayList<PaymentVO> getPaymentBill (BillState st){
+		ArrayList<PaymentVO> result=new ArrayList<PaymentVO>();
+		ArrayList<StubPaymentBill> billList=billPool.getPaymentBill(st);
+		for(StubPaymentBill temp: billList){
+			result.add(temp.getVO());
+		}
+		
+		return result;
+
+	}
+	/*需要从单据池筛选指定状态的所有现金费用单*/
+	public ArrayList<CashPaymentVO> getCashPaymentBill (BillState st){
+		ArrayList<CashPaymentVO> result=new ArrayList<CashPaymentVO>();
+		ArrayList<StubCashPaymentBill> billList=billPool.getCashPaymentBill(st);
+		for(StubCashPaymentBill temp: billList){
+			result.add(temp.getVO());
+		}
+		
+		return result;
+
+	}
+	/*获取单据池所有赠送单*/
+	public ArrayList<GiftBillVO> getGiftBill (){
+		ArrayList<GiftBillVO> result=new ArrayList<GiftBillVO>();
+		ArrayList<StubGiftBill> billList=billPool.getGiftBill();
+		for(StubGiftBill temp: billList){
+			result.add(temp.getVO());
+		}
+		
+		return result;
+	
+	}
+	/*获取单据池的所有报溢/报损单*/
+	public ArrayList<SpillsLossBillVO> getSpillsLossBill (){
+		ArrayList<SpillsLossBillVO> result=new ArrayList<SpillsLossBillVO>();
+		ArrayList<StubSpillsLossBill> billList=billPool.getSpillsLossBill();
+		for(StubSpillsLossBill temp: billList){
+			result.add(temp.getVO());
+		}
+		
+		return result;
+	}
+	/*获取单据池的所有库存报警单*/
+	public ArrayList<AlertBillVO> getAlertBill (){
+		ArrayList<AlertBillVO> result=new ArrayList<AlertBillVO>();
+		ArrayList<StubAlertBill> billList=billPool.getAlertBill();
+		for(StubAlertBill temp: billList){
+			result.add(temp.getVO());
+		}
+		
+		return result;
+
+	}
+	/*获取单据池的所有进货单*/
+	public ArrayList<PurSheetVO> getPurSheet (){
+		ArrayList<PurSheetVO> result=new ArrayList<PurSheetVO>();
+		ArrayList<StubPurSheet> billList=billPool.getPurSheet();
+		for(StubPurSheet temp: billList){
+			result.add(temp.getVO());
+		}
+		
+		return result;
+	}
+	/*获取单据池的所有进货退货单*/
+	public ArrayList<PurBackSheetVO> getPurBackSheet (){
+		ArrayList<PurBackSheetVO> result=new ArrayList<PurBackSheetVO>();
+		ArrayList<StubPurBackSheet> billList=billPool.getPurBackSheet();
+		for(StubPurBackSheet temp: billList){
+			result.add(temp.getVO());
+		}
+		
+		return result;
+
+	}
+	/*获取单据池的所有销售单*/
+	public ArrayList<SaleSheetVO> getSaleSheet (){
+		ArrayList<SaleSheetVO> result=new ArrayList<SaleSheetVO>();
+		ArrayList<StubSaleSheet> billList=billPool.getSaleSheet();
+		for(StubSaleSheet temp: billList){
+			result.add(temp.getVO());
+		}
+		
+		return result;
+	}
+	/*获取单据池的所有销售退货单*/
+	public ArrayList<SaleBackSheetVO> getSaleBackSheet (){
+		ArrayList<SaleBackSheetVO> result=new ArrayList<SaleBackSheetVO>();
+		ArrayList<StubSaleBackSheet> billList=billPool.getSaleBackSheet();
+		for(StubSaleBackSheet temp: billList){
+			result.add(temp.getVO());
+		}
+		
+		return result;
+
+	}
+	/*获取单据池的所有收款单*/
+	public ArrayList<ReceiptVO> getReceiptBill (){
+		ArrayList<ReceiptVO> result=new ArrayList<ReceiptVO>();
+		ArrayList<StubReceiptBill> billList=billPool.getReceiptBill();
+		for(StubReceiptBill temp: billList){
+			result.add(temp.getVO());
+		}
+		
+		return result;
+	}
+	/*获取单据池的所有付款单*/
+	public ArrayList<PaymentVO> getPaymentBill (){
+		ArrayList<PaymentVO> result=new ArrayList<PaymentVO>();
+		ArrayList<StubPaymentBill> billList=billPool.getPaymentBill();
+		for(StubPaymentBill temp: billList){
+			result.add(temp.getVO());
+		}
+		
+		return result;
+	}
+	/*获取单据池的所有现金费用单*/
+	public ArrayList<CashPaymentVO> getCashPaymentBill (){
+		ArrayList<CashPaymentVO> result=new ArrayList<CashPaymentVO>();
+		ArrayList<StubCashPaymentBill> billList=billPool.getCashPaymentBill();
+		for(StubCashPaymentBill temp: billList){
+			result.add(temp.getVO());
+		}
+		
+		return result;
+
 	}
 	/*需要查看已提交单据*/
 	public ArrayList<VO> getHandedBill (){
