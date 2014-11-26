@@ -6,10 +6,10 @@ import javax.swing.JPanel;
 
 import vo.GiftBillVO;
 
-public class BillList extends JPanel {
+public class JPBillList extends JPanel {
 
 	private int length=0;
-	public BillList(){
+	public JPBillList(){
 		//面板大小
 		this.setSize(261, 0);
 		//设置布局
@@ -23,7 +23,7 @@ public class BillList extends JPanel {
 	
 		//遍历数组把单据加上去
 		for(int i=length;i<gb.size();i++){
-			BillUI temp=new BillUI(gb.get(i));
+			JPBill temp=new JPBill(gb.get(i));
 			temp.setLocation(0, 93*i);
 			this.add(temp,i);
 		}

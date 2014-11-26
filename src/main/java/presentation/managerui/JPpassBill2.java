@@ -43,7 +43,7 @@ public class JPpassBill2 extends JPanel {
 		test.add(new GiftBillVO());
 		test.add(new GiftBillVO());
 		//单据列表
-		BillList billList=new BillList();
+		JPBillList billList=new JPBillList();
 		billList.addGiftBill(test);
 		billList.setLocation(0, 0);
 		jp.add(billList,0);

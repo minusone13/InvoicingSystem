@@ -18,13 +18,13 @@ import vo.SaleBackSheetVO;
 import vo.SaleSheetVO;
 import vo.SpillsLossBillVO;
 
-public class BillUI extends JPanel {
+public class JPBill extends JPanel implements Runnable{
 
 	//背景
 	private JLabel bg=new JLabel();
 	//向右按钮
 	private JLabel right=new JLabel();
-	public BillUI(GiftBillVO gb){
+	public JPBill(GiftBillVO gb){
 		//面板大小
 		this.setSize(522, 93);
 		//设置布局
@@ -43,7 +43,7 @@ public class BillUI extends JPanel {
 		this.add(bg,1);
 		
 	}
-	public BillUI(SpillsLossBillVO slb){
+	public JPBill(SpillsLossBillVO slb){
 		//面板大小
 		this.setSize(522, 93);
 		//设置布局
@@ -51,7 +51,7 @@ public class BillUI extends JPanel {
 		//设置面板透明
 		this.setOpaque(false);
 	}
-	public BillUI(AlertBillVO ab){
+	public JPBill(AlertBillVO ab){
 		//面板大小
 		this.setSize(522, 93);
 		//设置布局
@@ -59,7 +59,7 @@ public class BillUI extends JPanel {
 		//设置面板透明
 		this.setOpaque(false);
 	}
-	public BillUI(PurSheetVO ps){
+	public JPBill(PurSheetVO ps){
 		//面板大小
 		this.setSize(522, 93);
 		//设置布局
@@ -67,7 +67,7 @@ public class BillUI extends JPanel {
 		//设置面板透明
 		this.setOpaque(false);
 	}
-	public BillUI(PurBackSheetVO pbs){
+	public JPBill(PurBackSheetVO pbs){
 		//面板大小
 		this.setSize(522, 93);
 		//设置布局
@@ -75,7 +75,7 @@ public class BillUI extends JPanel {
 		//设置面板透明
 		this.setOpaque(false);
 	}
-	public BillUI(SaleSheetVO ss){
+	public JPBill(SaleSheetVO ss){
 		//面板大小
 		this.setSize(522, 93);
 		//设置布局
@@ -83,7 +83,7 @@ public class BillUI extends JPanel {
 		//设置面板透明
 		this.setOpaque(false);
 	}
-	public BillUI(SaleBackSheetVO sbs){
+	public JPBill(SaleBackSheetVO sbs){
 		//面板大小
 		this.setSize(522, 93);
 		//设置布局
@@ -91,7 +91,7 @@ public class BillUI extends JPanel {
 		//设置面板透明
 		this.setOpaque(false);
 	}
-	public BillUI(ReceiptVO rb){
+	public JPBill(ReceiptVO rb){
 		//面板大小
 		this.setSize(522, 93);
 		//设置布局
@@ -99,7 +99,7 @@ public class BillUI extends JPanel {
 		//设置面板透明
 		this.setOpaque(false);
 	}
-	public BillUI(PaymentVO pb){
+	public JPBill(PaymentVO pb){
 		//面板大小
 		this.setSize(522, 93);
 		//设置布局
@@ -107,7 +107,7 @@ public class BillUI extends JPanel {
 		//设置面板透明
 		this.setOpaque(false);
 	}
-	public BillUI(CashPaymentVO cb){
+	public JPBill(CashPaymentVO cb){
 		//面板大小
 		this.setSize(522, 93);
 		//设置布局
@@ -116,7 +116,9 @@ public class BillUI extends JPanel {
 		this.setOpaque(false);
 	}
 	public void showDetail(){
-		
+
+		Thread t=new Thread(this);
+		t.start();
 	}
 	public class MouseListenerOfButton implements MouseListener{
 
@@ -128,6 +130,8 @@ public class BillUI extends JPanel {
 		public void mousePressed(MouseEvent e) {
 			// TODO Auto-generated method stub
 			right.setIcon(new ImageIcon("src/image/rightR.png"));
+			//显示详细
+			showDetail();
 		}
 
 		public void mouseReleased(MouseEvent e) {
@@ -145,5 +149,25 @@ public class BillUI extends JPanel {
 			right.setIcon(new ImageIcon("src/image/right.png"));
 		}
 		
+	}
+	public void run() {
+		// TODO Auto-generated method stub
+		int x=0;
+		int y=(int)this.getLocation().getY();
+		while(x!=-261){
+			if((x+261)>10){
+				x-=10;
+			}
+			else{
+				x=-261;
+			}
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			this.setLocation(x, y);
+		}
 	}
 }
