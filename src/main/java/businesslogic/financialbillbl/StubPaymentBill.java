@@ -23,6 +23,7 @@ public class StubPaymentBill extends Bill implements GetVOandPO{
 	Role operator;
 	double total;
 	BillState state;
+	String date;
 	ArrayList<StubTransferAccount> transferlist = new ArrayList<StubTransferAccount>();
 	public StubPaymentBill() {
 		
@@ -44,7 +45,7 @@ public class StubPaymentBill extends Bill implements GetVOandPO{
 		state = BillState.DRAFT;
 		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
 		String currentTime = format.format(new Date());
-		
+		this.date = currentTime;
 		StubBillPool pool = new StubBillPool();
 		ArrayList<StubPaymentBill> list = pool.getPaymentBill();
 		ID = "FKD-"+currentTime+"-"+String.format("%05d", list.size()+1);

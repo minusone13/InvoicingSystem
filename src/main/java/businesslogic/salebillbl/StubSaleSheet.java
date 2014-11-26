@@ -20,10 +20,15 @@ public class StubSaleSheet extends Bill implements GetVOandPO{
 		double disconut;//折让金额；
 		double pmoney;//最终金额
 		String words;//备注
+		
+		public StubCustomer getCustomer() {
+			return customer;
+		}
 		public SaleSheetVO getVO() {
 			// TODO Auto-generated method stub
 			return null;
 		}
+		
 		public SaleSheetPO getPO() {
 			// TODO Auto-generated method stub
 			return null;

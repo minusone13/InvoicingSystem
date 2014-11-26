@@ -1,16 +1,25 @@
 package vo;
 
 public class InquirySaleVO {
-	String time;
+	
 	String commodityName;
 	String customer;
 	String operator;
 	String stock;
-	public String getTime() {
-		return time;
+	String timeBefore;
+	String timeAfter;
+	
+	public String getTimeBefore() {
+		return timeBefore;
 	}
-	public void setTime(String time) {
-		this.time = time;
+	public void setTimeBefore(String timeBefore) {
+		this.timeBefore = timeBefore;
+	}
+	public String getTimeAfter() {
+		return timeAfter;
+	}
+	public void setTimeAfter(String timeAfter) {
+		this.timeAfter = timeAfter;
 	}
 	public String getCommodityName() {
 		return commodityName;

@@ -22,6 +22,7 @@ public class StubReceiptBill extends Bill implements GetVOandPO{
 	Role operator;
 	double total;
 	BillState state;
+	String date;
 	ArrayList<StubTransferAccount> transferlist = new ArrayList<StubTransferAccount>();
 	public StubReceiptBill() {
 		
@@ -42,7 +43,7 @@ public class StubReceiptBill extends Bill implements GetVOandPO{
 		state = BillState.DRAFT;
 		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
 		String currentTime = format.format(new Date());
-		
+		this.date = currentTime;
 		StubBillPool pool = new StubBillPool();
 		ArrayList<StubReceiptBill> list = pool.getReceiptBill();
 		ID = "SKD-"+currentTime+"-"+String.format("%05d", list.size()+1);

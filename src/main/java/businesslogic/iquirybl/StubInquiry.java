@@ -19,13 +19,29 @@ public class StubInquiry {
 	StubBillPool bp = new StubBillPool();
 	public ArrayList<VO> inquirySale(InquirySaleVO isv) {
 		ArrayList<VO> list = new ArrayList<VO>();
-		ArrayList<StubSaleSheet> saleSheet = bp.getSaleSheet(BillState.EXAMINED);
-		ArrayList<StubSaleBackSheet> saleBackSheet = bp.getSaleBackSheet(BillState.EXAMINED);
+		ArrayList<StubSaleSheet> saleSheet = bp.getSaleSheet();
+		ArrayList<StubSaleBackSheet> saleBackSheet = bp.getSaleBackSheet();
 		int size1 = saleSheet.size();
 		for(int i=0;i<size1;i++) {		
 			StubSaleSheet sale = saleSheet.get(i);
 			
-			list.add(saleSheet.get(i).getVO());
+			if(isv.getTimeBefore()!=null) {
+				
+			
+				//if(sale.date.compareTo(isv.getTimeBefore())>=0&&
+				//	sale.date.compareTo(isv.getTimeAfter())<=0)
+					//list.add(saleSheet.get(i).getVO());
+					//else continue;
+				//}
+			}
+			if(isv.getCommodityName()!=null) {
+				//if(sale.(isv.getCommodityName())){}
+				//else continue;
+			}
+			if(isv.getCustomer()!=null) {
+				if(sale.getCustomer().name.equals(isv.getCustomer())){} 
+				else continue;
+			}
 		}
 		int size2 = saleBackSheet.size();
 		for(int i=0;i<size2;i++) {
@@ -36,15 +52,15 @@ public class StubInquiry {
 	
 	public ArrayList<VO> inquiryProcess(InquiryProcessVO ipv) {
 		ArrayList<VO> list = new ArrayList<VO>();
-		ArrayList<StubSaleSheet> saleSheet = bp.getSaleSheet(BillState.EXAMINED);
-		ArrayList<StubSaleBackSheet> saleBackSheet = bp.getSaleBackSheet(BillState.EXAMINED);
-		ArrayList<StubSpillsLossBill> spillsLoss = bp.getSpillsLossBill(BillState.EXAMINED);
-		ArrayList<StubAlertBill> alert  =bp.getAlertBill(BillState.EXAMINED);
-		ArrayList<StubPurSheet> purSheet = bp.getPurSheet(BillState.EXAMINED);
-		ArrayList<StubPurBackSheet> purBackSheet = bp.getPurBackSheet(BillState.EXAMINED);
-		ArrayList<StubReceiptBill> receipt = bp.getReceiptBill(BillState.EXAMINED);
-		ArrayList<StubPaymentBill> payment = bp.getPaymentBill(BillState.EXAMINED);
-		ArrayList<StubCashPaymentBill> cashPayment =bp.getCashPaymentBill(BillState.EXAMINED);
+		ArrayList<StubSaleSheet> saleSheet = bp.getSaleSheet();
+		ArrayList<StubSaleBackSheet> saleBackSheet = bp.getSaleBackSheet();
+		ArrayList<StubSpillsLossBill> spillsLoss = bp.getSpillsLossBill();
+		ArrayList<StubAlertBill> alert  =bp.getAlertBill();
+		ArrayList<StubPurSheet> purSheet = bp.getPurSheet();
+		ArrayList<StubPurBackSheet> purBackSheet = bp.getPurBackSheet();
+		ArrayList<StubReceiptBill> receipt = bp.getReceiptBill();
+		ArrayList<StubPaymentBill> payment = bp.getPaymentBill();
+		ArrayList<StubCashPaymentBill> cashPayment =bp.getCashPaymentBill();
 		
 		int size1 = saleSheet.size();
 		for(int i=0;i<size1;i++) {
