@@ -16,8 +16,9 @@ import businesslogic.examinebl.StubBillPool;
 import vo.PaymentVO;
 import vo.VO;
 
-public class StubPaymentBill extends Bill implements GetVOandPO{
-	private BillStyle style=BillStyle.PaymentBill;
+public class PaymentBill extends Bill implements GetVOandPO{
+	
+	private BillStyle billstyle=BillStyle.PaymentBill;
 	private String ID;
 	String customer;
 	Role operator;
@@ -25,10 +26,10 @@ public class StubPaymentBill extends Bill implements GetVOandPO{
 	BillState state;
 	String date;
 	ArrayList<StubTransferAccount> transferlist = new ArrayList<StubTransferAccount>();
-	public StubPaymentBill() {
+	public PaymentBill() {
 		
 	}
-	public StubPaymentBill(PaymentVO vo) {
+	public PaymentBill(PaymentVO vo) {
 		String customer=vo.getCustomer(); 
 		double total=vo.getTotal(); 
 		String[] account=vo.getAccount(); 
@@ -47,10 +48,58 @@ public class StubPaymentBill extends Bill implements GetVOandPO{
 		String currentTime = format.format(new Date());
 		this.date = currentTime;
 		StubBillPool pool = new StubBillPool();
-		ArrayList<StubPaymentBill> list = pool.getPaymentBill();
+		ArrayList<PaymentBill> list = pool.getPaymentBill();
 		ID = "FKD-"+currentTime+"-"+String.format("%05d", list.size()+1);
 	}
-
+	
+	public BillStyle getBillStyle() {
+		return billstyle;
+	}
+	public void setBillStyle(BillStyle style) {
+		this.billstyle = style;
+	}
+	public String getID() {
+		return ID;
+	}
+	public void setID(String iD) {
+		ID = iD;
+	}
+	public String getCustomer() {
+		return customer;
+	}
+	public void setCustomer(String customer) {
+		this.customer = customer;
+	}
+	public Role getOperator() {
+		return operator;
+	}
+	public void setOperator(Role operator) {
+		this.operator = operator;
+	}
+	public double getTotal() {
+		return total;
+	}
+	public void setTotal(double total) {
+		this.total = total;
+	}
+	public BillState getState() {
+		return state;
+	}
+	public void setState(BillState state) {
+		this.state = state;
+	}
+	public ArrayList<StubTransferAccount> getTransferlist() {
+		return transferlist;
+	}
+	public void setTransferlist(ArrayList<StubTransferAccount> transferlist) {
+		this.transferlist = transferlist;
+	}
+	public String getDate() {
+		return date;
+	}
+	public void setDate(String date) {
+		this.date = date;
+	}
 	
 	public PaymentVO getVO() {
 		PaymentVO vo = new PaymentVO();
@@ -60,7 +109,7 @@ public class StubPaymentBill extends Bill implements GetVOandPO{
 		vo.setOperator(operator);
 		vo.setState(state);
 		vo.setTransferlist(transferlist);
-		vo.setBillStyle(style);
+		vo.setBillStyle(billstyle);
 		return vo;
 	}
 
@@ -72,7 +121,7 @@ public class StubPaymentBill extends Bill implements GetVOandPO{
 		po.setState(state);
 		po.setTotal(total);
 		po.setTransferlist(transferlist);
-		po.setStyle(style);
+		po.setStyle(billstyle);
 		return po;
 	}
 	public void setPO (PaymentPO po) {

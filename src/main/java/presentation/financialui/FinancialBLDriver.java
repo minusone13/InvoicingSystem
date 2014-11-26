@@ -10,9 +10,9 @@ import vo.InquirySaleVO;
 import vo.PaymentVO;
 import vo.ReceiptVO;
 import vo.VO;
-import businesslogic.financialbillbl.StubCashPaymentBill;
-import businesslogic.financialbillbl.StubPaymentBill;
-import businesslogic.financialbillbl.StubReceiptBill;
+import businesslogic.financialbillbl.CashPaymentBill;
+import businesslogic.financialbillbl.PaymentBill;
+import businesslogic.financialbillbl.ReceiptBill;
 import businesslogicservice.financialblservice.StubFinancialBlService;
 
 public class FinancialBLDriver {

@@ -15,21 +15,22 @@ import businesslogic.examinebl.StubBillPool;
 import vo.ReceiptVO;
 import vo.VO;
 
-public class StubReceiptBill extends Bill implements GetVOandPO{
+public class ReceiptBill extends Bill implements GetVOandPO{
 	private BillStyle billstyle=BillStyle.ReceiptBill;
 	
 	private String ID;
-	String customer;
 	Role operator;
 	double total;
 	BillState state;
 	String date;
+	String customer;
+	
 	
 	ArrayList<StubTransferAccount> transferlist = new ArrayList<StubTransferAccount>();
-	public StubReceiptBill() {
+	public ReceiptBill() {
 		
 	}
-	public StubReceiptBill(ReceiptVO vo) {
+	public ReceiptBill(ReceiptVO vo) {
 		String customer = vo.getCustomer();
 		double total = vo.getTotal();
 		String[] account = vo.getAccount();
@@ -47,7 +48,7 @@ public class StubReceiptBill extends Bill implements GetVOandPO{
 		String currentTime = format.format(new Date());
 		this.date = currentTime;
 		StubBillPool pool = new StubBillPool();
-		ArrayList<StubReceiptBill> list = pool.getReceiptBill();
+		ArrayList<ReceiptBill> list = pool.getReceiptBill();
 		ID = "SKD-"+currentTime+"-"+String.format("%05d", list.size()+1);
 	}
 	
@@ -57,6 +58,48 @@ public class StubReceiptBill extends Bill implements GetVOandPO{
 	
 	public String getDate() {
 		return date;
+	}
+	public String getID() {
+		return ID;
+	}
+	public void setID(String iD) {
+		ID = iD;
+	}
+	public String getCustomer() {
+		return customer;
+	}
+	public void setCustomer(String customer) {
+		this.customer = customer;
+	}
+	public Role getOperator() {
+		return operator;
+	}
+	public void setOperator(Role operator) {
+		this.operator = operator;
+	}
+	public double getTotal() {
+		return total;
+	}
+	public void setTotal(double total) {
+		this.total = total;
+	}
+	public BillState getState() {
+		return state;
+	}
+	public void setState(BillState state) {
+		this.state = state;
+	}
+	public ArrayList<StubTransferAccount> getTransferlist() {
+		return transferlist;
+	}
+	public void setTransferlist(ArrayList<StubTransferAccount> transferlist) {
+		this.transferlist = transferlist;
+	}
+	public void setBillstyle(BillStyle billstyle) {
+		this.billstyle = billstyle;
+	}
+	public void setDate(String date) {
+		this.date = date;
 	}
 	
 	public ReceiptVO getVO() {

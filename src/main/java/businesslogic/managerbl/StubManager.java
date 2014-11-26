@@ -23,9 +23,9 @@ import businesslogic.commoditybillbl.StubAlertBill;
 import businesslogic.commoditybillbl.StubGiftBill;
 import businesslogic.commoditybillbl.StubSpillsLossBill;
 import businesslogic.examinebl.StubBillPool;
-import businesslogic.financialbillbl.StubCashPaymentBill;
-import businesslogic.financialbillbl.StubPaymentBill;
-import businesslogic.financialbillbl.StubReceiptBill;
+import businesslogic.financialbillbl.CashPaymentBill;
+import businesslogic.financialbillbl.PaymentBill;
+import businesslogic.financialbillbl.ReceiptBill;
 import businesslogic.salebillbl.StubPurBackSheet;
 import businesslogic.salebillbl.StubPurSheet;
 import businesslogic.salebillbl.StubSaleBackSheet;
@@ -125,8 +125,8 @@ public class StubManager implements StubManagerBlService{
 	/*需要从单据池筛选指定状态的所有收款单*/
 	public ArrayList<ReceiptVO> getReceiptBill (BillState st){
 		ArrayList<ReceiptVO> result=new ArrayList<ReceiptVO>();
-		ArrayList<StubReceiptBill> billList=billPool.getReceiptBill(st);
-		for(StubReceiptBill temp: billList){
+		ArrayList<ReceiptBill> billList=billPool.getReceiptBill(st);
+		for(ReceiptBill temp: billList){
 			result.add(temp.getVO());
 		}
 		
@@ -136,8 +136,8 @@ public class StubManager implements StubManagerBlService{
 	/*需要从单据池筛选指定状态的所有付款单*/
 	public ArrayList<PaymentVO> getPaymentBill (BillState st){
 		ArrayList<PaymentVO> result=new ArrayList<PaymentVO>();
-		ArrayList<StubPaymentBill> billList=billPool.getPaymentBill(st);
-		for(StubPaymentBill temp: billList){
+		ArrayList<PaymentBill> billList=billPool.getPaymentBill(st);
+		for(PaymentBill temp: billList){
 			result.add(temp.getVO());
 		}
 		
@@ -147,8 +147,8 @@ public class StubManager implements StubManagerBlService{
 	/*需要从单据池筛选指定状态的所有现金费用单*/
 	public ArrayList<CashPaymentVO> getCashPaymentBill (BillState st){
 		ArrayList<CashPaymentVO> result=new ArrayList<CashPaymentVO>();
-		ArrayList<StubCashPaymentBill> billList=billPool.getCashPaymentBill(st);
-		for(StubCashPaymentBill temp: billList){
+		ArrayList<CashPaymentBill> billList=billPool.getCashPaymentBill(st);
+		for(CashPaymentBill temp: billList){
 			result.add(temp.getVO());
 		}
 		
@@ -232,8 +232,8 @@ public class StubManager implements StubManagerBlService{
 	/*获取单据池的所有收款单*/
 	public ArrayList<ReceiptVO> getReceiptBill (){
 		ArrayList<ReceiptVO> result=new ArrayList<ReceiptVO>();
-		ArrayList<StubReceiptBill> billList=billPool.getReceiptBill();
-		for(StubReceiptBill temp: billList){
+		ArrayList<ReceiptBill> billList=billPool.getReceiptBill();
+		for(ReceiptBill temp: billList){
 			result.add(temp.getVO());
 		}
 		
@@ -242,8 +242,8 @@ public class StubManager implements StubManagerBlService{
 	/*获取单据池的所有付款单*/
 	public ArrayList<PaymentVO> getPaymentBill (){
 		ArrayList<PaymentVO> result=new ArrayList<PaymentVO>();
-		ArrayList<StubPaymentBill> billList=billPool.getPaymentBill();
-		for(StubPaymentBill temp: billList){
+		ArrayList<PaymentBill> billList=billPool.getPaymentBill();
+		for(PaymentBill temp: billList){
 			result.add(temp.getVO());
 		}
 		
@@ -252,8 +252,8 @@ public class StubManager implements StubManagerBlService{
 	/*获取单据池的所有现金费用单*/
 	public ArrayList<CashPaymentVO> getCashPaymentBill (){
 		ArrayList<CashPaymentVO> result=new ArrayList<CashPaymentVO>();
-		ArrayList<StubCashPaymentBill> billList=billPool.getCashPaymentBill();
-		for(StubCashPaymentBill temp: billList){
+		ArrayList<CashPaymentBill> billList=billPool.getCashPaymentBill();
+		for(CashPaymentBill temp: billList){
 			result.add(temp.getVO());
 		}
 		
@@ -271,9 +271,9 @@ public class StubManager implements StubManagerBlService{
 		ArrayList<StubPurBackSheet> alOfPBS=billPool.getPurBackSheet(BillState.SUBMITED);
 		ArrayList<StubSaleSheet> alOfSS=billPool.getSaleSheet(BillState.SUBMITED);
 		ArrayList<StubSaleBackSheet> alOfSBS=billPool.getSaleBackSheet(BillState.SUBMITED);
-		ArrayList<StubReceiptBill> alOfRB=billPool.getReceiptBill(BillState.SUBMITED);
-		ArrayList<StubPaymentBill> alOfPB=billPool.getPaymentBill(BillState.SUBMITED);
-		ArrayList<StubCashPaymentBill> alOfCPB=billPool.getCashPaymentBill(BillState.SUBMITED);
+		ArrayList<ReceiptBill> alOfRB=billPool.getReceiptBill(BillState.SUBMITED);
+		ArrayList<PaymentBill> alOfPB=billPool.getPaymentBill(BillState.SUBMITED);
+		ArrayList<CashPaymentBill> alOfCPB=billPool.getCashPaymentBill(BillState.SUBMITED);
 
 		//进行逐个大遍历，返回符合条件单据对应的VO
 		//赠送单
@@ -320,19 +320,19 @@ public class StubManager implements StubManagerBlService{
 		}
 		//收款单
 		if(alOfRB!=null){
-			for(StubReceiptBill temp:alOfRB){
+			for(ReceiptBill temp:alOfRB){
 				result.add(temp.getVO());
 			}
 		}
 		//付款单
 		if(alOfPB!=null){
-			for(StubPaymentBill temp:alOfPB){
+			for(PaymentBill temp:alOfPB){
 				result.add(temp.getVO());
 			}
 		}
 		//现金费用单
 		if(alOfCPB!=null){
-			for(StubCashPaymentBill temp:alOfCPB){
+			for(CashPaymentBill temp:alOfCPB){
 				result.add(temp.getVO());
 			}
 		}

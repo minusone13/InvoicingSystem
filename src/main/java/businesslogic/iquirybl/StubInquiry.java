@@ -8,9 +8,9 @@ import businesslogic.commoditybillbl.StubAlertBill;
 import businesslogic.commoditybillbl.StubSpillsLossBill;
 import businesslogic.examinebl.Bill;
 import businesslogic.examinebl.StubBillPool;
-import businesslogic.financialbillbl.StubCashPaymentBill;
-import businesslogic.financialbillbl.StubPaymentBill;
-import businesslogic.financialbillbl.StubReceiptBill;
+import businesslogic.financialbillbl.CashPaymentBill;
+import businesslogic.financialbillbl.PaymentBill;
+import businesslogic.financialbillbl.ReceiptBill;
 import businesslogic.salebillbl.StubPurBackSheet;
 import businesslogic.salebillbl.StubPurSheet;
 import businesslogic.salebillbl.StubSaleBackSheet;
@@ -63,9 +63,9 @@ public class StubInquiry {
 		ArrayList<StubAlertBill> alert  =bp.getAlertBill();
 		ArrayList<StubPurSheet> purSheet = bp.getPurSheet();
 		ArrayList<StubPurBackSheet> purBackSheet = bp.getPurBackSheet();
-		ArrayList<StubReceiptBill> receipt = bp.getReceiptBill();
-		ArrayList<StubPaymentBill> payment = bp.getPaymentBill();
-		ArrayList<StubCashPaymentBill> cashPayment =bp.getCashPaymentBill();
+		ArrayList<ReceiptBill> receipt = bp.getReceiptBill();
+		ArrayList<PaymentBill> payment = bp.getPaymentBill();
+		ArrayList<CashPaymentBill> cashPayment =bp.getCashPaymentBill();
 		
 		int size1 = saleSheet.size();
 		for(int i=0;i<size1;i++) {
@@ -91,10 +91,11 @@ public class StubInquiry {
 		for(int i=0;i<size6;i++) {
 			list.add(purBackSheet.get(i).getVO());
 		}
-		//收款单
+		
+		//收款单screen======================================
 		int size7 = receipt.size();
 		for(int i=0;i<size7;i++) {
-			StubReceiptBill re = receipt.get(i);
+			ReceiptBill re = receipt.get(i);
 			if(ipv.getTimeBefore()!=null) {
 				
 				if(re.getDate().compareTo(ipv.getTimeBefore())>=0&&
@@ -107,17 +108,68 @@ public class StubInquiry {
 				else continue;
 			}
 			
+			if(ipv.getCustomer()!=null) {
+				if(re.getCustomer().equals(ipv.getCustomer())){}
+				else continue;
+			}
 			
+			if(ipv.getOperator()!=null) {
+				if(re.getOperator().equals(ipv.getOperator())){}
+				else continue;
+			}
 			
-			list.add(receipt.get(i).getVO());
+			list.add(re.getVO());
 		}
+		
+		//付款单screen===================================
 		int size8 = payment.size();
 		for(int i=0;i<size8;i++) {
-			list.add(payment.get(i).getVO());
+			PaymentBill pa = payment.get(i);
+			if(ipv.getTimeBefore()!=null) {
+				
+				if(pa.getDate().compareTo(ipv.getTimeBefore())>=0&&
+					pa.getDate().compareTo(ipv.getTimeAfter())<=0){}
+				else continue;
+			}
+			
+			if(ipv.getBillstyle()!=null) {
+				if(pa.getBillStyle() == ipv.getBillstyle()){}
+				else continue;
+			}
+			
+			if(ipv.getCustomer()!=null) {
+				if(pa.getCustomer().equals(ipv.getCustomer())){}
+				else continue;
+			}
+			
+			if(ipv.getOperator()!=null) {
+				if(pa.getOperator().equals(ipv.getOperator())){}
+				else continue;
+			}
+			list.add(pa.getVO());
 		}
+		
+		//现金费用单==========================================
 		int size9 = cashPayment.size();
 		for(int i=0;i<size9;i++) {
-			list.add(cashPayment.get(i).getVO());
+			CashPaymentBill ca = cashPayment.get(i);
+			
+			if(ipv.getTimeBefore()!=null) {			
+				if(ca.getDate().compareTo(ipv.getTimeBefore())>=0&&
+					ca.getDate().compareTo(ipv.getTimeAfter())<=0){}
+				else continue;
+			}
+			
+			if(ipv.getBillstyle()!=null) {
+				if(ca.getBillStyle() == ipv.getBillstyle()){}
+				else continue;
+			}
+			
+			if(ipv.getOperator()!=null) {
+				if(ca.getOperator().equals(ipv.getOperator())){}
+				else continue;
+			}
+			list.add(ca.getVO());
 		}
 		return list;
 	}

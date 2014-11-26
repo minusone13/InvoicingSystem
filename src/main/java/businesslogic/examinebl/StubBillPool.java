@@ -17,9 +17,9 @@ import businesslogic.BillStyle;
 import businesslogic.commoditybillbl.StubAlertBill;
 import businesslogic.commoditybillbl.StubGiftBill;
 import businesslogic.commoditybillbl.StubSpillsLossBill;
-import businesslogic.financialbillbl.StubCashPaymentBill;
-import businesslogic.financialbillbl.StubPaymentBill;
-import businesslogic.financialbillbl.StubReceiptBill;
+import businesslogic.financialbillbl.CashPaymentBill;
+import businesslogic.financialbillbl.PaymentBill;
+import businesslogic.financialbillbl.ReceiptBill;
 import businesslogic.salebillbl.StubPurBackSheet;
 import businesslogic.salebillbl.StubPurSheet;
 import businesslogic.salebillbl.StubSaleBackSheet;
@@ -42,9 +42,9 @@ public class StubBillPool {
 	private ArrayList<StubPurBackSheet> alOfPurBackSheet=new ArrayList<StubPurBackSheet>();
 	private ArrayList<StubSaleSheet> alOfSaleSheet=new ArrayList<StubSaleSheet>();
 	private ArrayList<StubSaleBackSheet> alOfSaleBackSheet=new ArrayList<StubSaleBackSheet>();
-	private ArrayList<StubReceiptBill> alOfReceiptBill=new ArrayList<StubReceiptBill>();
-	private ArrayList<StubPaymentBill> alOfPaymentBill=new ArrayList<StubPaymentBill>();
-	private ArrayList<StubCashPaymentBill> alOfCashPaymentBill=new ArrayList<StubCashPaymentBill>();
+	private ArrayList<ReceiptBill> alOfReceiptBill=new ArrayList<ReceiptBill>();
+	private ArrayList<PaymentBill> alOfPaymentBill=new ArrayList<PaymentBill>();
+	private ArrayList<CashPaymentBill> alOfCashPaymentBill=new ArrayList<CashPaymentBill>();
 	/*构造函数*/
 	public StubBillPool(){
 		//读取文档中的对象
@@ -120,7 +120,7 @@ public class StubBillPool {
 		ArrayList<ReceiptPO> ReceiptBillListPO=fbs.getReceipt();
 		if(ReceiptBillListPO!=null){
 			for(ReceiptPO tempPO:ReceiptBillListPO){
-				StubReceiptBill rcb=new StubReceiptBill();
+				ReceiptBill rcb=new ReceiptBill();
 				rcb.setPO(tempPO);
 				alOfReceiptBill.add(rcb);
 			}
@@ -129,7 +129,7 @@ public class StubBillPool {
 		ArrayList<PaymentPO> PaymentBillListPO=fbs.getPayment();
 		if(PaymentBillListPO!=null){
 			for(PaymentPO tempPO:PaymentBillListPO){
-				StubPaymentBill pmb=new StubPaymentBill();
+				PaymentBill pmb=new PaymentBill();
 				pmb.setPO(tempPO);
 				alOfPaymentBill.add(pmb);
 			}
@@ -138,7 +138,7 @@ public class StubBillPool {
 		ArrayList<CashPaymentPO> CashPaymentBillListPO=fbs.getCashPayment();
 		if(CashPaymentBillListPO!=null){
 			for(CashPaymentPO tempPO:CashPaymentBillListPO){
-				StubCashPaymentBill cpb=new StubCashPaymentBill();
+				CashPaymentBill cpb=new CashPaymentBill();
 				cpb.setPO(tempPO);
 				alOfCashPaymentBill.add(cpb);
 			}
@@ -189,19 +189,19 @@ public class StubBillPool {
 		this.save();
 	}
 	/*需要向单据池中加入一张收款单*/
-	public void add (StubReceiptBill rb){
+	public void add (ReceiptBill rb){
 		alOfReceiptBill.add(rb);
 		//保存
 		this.save();
 	}
 	/*需要向单据池中加入一张付款单*/
-	public void add (StubPaymentBill pb){
+	public void add (PaymentBill pb){
 		alOfPaymentBill.add(pb);
 		//保存
 		this.save();
 	}
 	/*需要向单据池中加入一张现金费用单*/
-	public void add (StubCashPaymentBill cpb){
+	public void add (CashPaymentBill cpb){
 		alOfCashPaymentBill.add(cpb);
 		//保存
 		this.save();
@@ -296,10 +296,10 @@ public class StubBillPool {
 		
 	}
 	/*需要从单据池筛选指定状态的所有收款单*/
-	public ArrayList<StubReceiptBill> getReceiptBill (BillState st){
-		ArrayList<StubReceiptBill> result=new ArrayList<StubReceiptBill>();//用于储存返回的单据
+	public ArrayList<ReceiptBill> getReceiptBill (BillState st){
+		ArrayList<ReceiptBill> result=new ArrayList<ReceiptBill>();//用于储存返回的单据
 		//遍历池中制定单据数组
-		for(StubReceiptBill temp:alOfReceiptBill){
+		for(ReceiptBill temp:alOfReceiptBill){
 			if(temp.getState()==st){//如果单据状态符合筛选状态
 				result.add(temp);
 			}
@@ -308,10 +308,10 @@ public class StubBillPool {
 		return result;	
 	}
 	/*需要从单据池筛选指定状态的所有付款单*/
-	public ArrayList<StubPaymentBill> getPaymentBill (BillState st){
-		ArrayList<StubPaymentBill> result=new ArrayList<StubPaymentBill>();//用于储存返回的单据
+	public ArrayList<PaymentBill> getPaymentBill (BillState st){
+		ArrayList<PaymentBill> result=new ArrayList<PaymentBill>();//用于储存返回的单据
 		//遍历池中制定单据数组
-		for(StubPaymentBill temp:alOfPaymentBill){
+		for(PaymentBill temp:alOfPaymentBill){
 			if(temp.getState()==st){//如果单据状态符合筛选状态
 				result.add(temp);
 			}
@@ -319,10 +319,10 @@ public class StubBillPool {
 		return result;
 	}
 	/*需要从单据池筛选指定状态的所有现金费用单*/
-	public ArrayList<StubCashPaymentBill> getCashPaymentBill (BillState st){
-		ArrayList<StubCashPaymentBill> result=new ArrayList<StubCashPaymentBill>();//用于储存返回的单据
+	public ArrayList<CashPaymentBill> getCashPaymentBill (BillState st){
+		ArrayList<CashPaymentBill> result=new ArrayList<CashPaymentBill>();//用于储存返回的单据
 		//遍历池中制定单据数组
-		for(StubCashPaymentBill temp:alOfCashPaymentBill){
+		for(CashPaymentBill temp:alOfCashPaymentBill){
 			if(temp.getState()==st){//如果单据状态符合筛选状态
 				result.add(temp);
 			}
@@ -358,15 +358,15 @@ public class StubBillPool {
 		return alOfSaleBackSheet;
 	}
 	/*获取单据池的所有收款单*/
-	public ArrayList<StubReceiptBill> getReceiptBill (){
+	public ArrayList<ReceiptBill> getReceiptBill (){
 		return alOfReceiptBill;	
 	}
 	/*获取单据池的所有付款单*/
-	public ArrayList<StubPaymentBill> getPaymentBill (){
+	public ArrayList<PaymentBill> getPaymentBill (){
 		return alOfPaymentBill;
 	}
 	/*获取单据池的所有现金费用单*/
-	public ArrayList<StubCashPaymentBill> getCashPaymentBill (){
+	public ArrayList<CashPaymentBill> getCashPaymentBill (){
 		return alOfCashPaymentBill;
 	}
 	/*实时保存池中数组对象*/
@@ -421,19 +421,19 @@ public class StubBillPool {
 		sbs.saveSaleBackSheet(SaleBackSheetPO);//保存PO数组到txt
 		//收款单
 		ArrayList<ReceiptPO> ReceiptBillPO=new ArrayList<ReceiptPO>();
-		for(StubReceiptBill temp:alOfReceiptBill){//遍历数组，将对应PO对象加到新数组中
+		for(ReceiptBill temp:alOfReceiptBill){//遍历数组，将对应PO对象加到新数组中
 			ReceiptBillPO.add(temp.getPO());
 		}
 		fbs.saveReceipt(ReceiptBillPO);//保存PO数组到txt
 		//收款单
 		ArrayList<PaymentPO> PaymentBillPO=new ArrayList<PaymentPO>();
-		for(StubPaymentBill temp:alOfPaymentBill){//遍历数组，将对应PO对象加到新数组中
+		for(PaymentBill temp:alOfPaymentBill){//遍历数组，将对应PO对象加到新数组中
 			PaymentBillPO.add(temp.getPO());
 		}
 		fbs.savePayment(PaymentBillPO);//保存PO数组到txt
 		//收款单
 		ArrayList<CashPaymentPO> CashPaymentBillPO=new ArrayList<CashPaymentPO>();
-		for(StubCashPaymentBill temp:alOfCashPaymentBill){//遍历数组，将对应PO对象加到新数组中
+		for(CashPaymentBill temp:alOfCashPaymentBill){//遍历数组，将对应PO对象加到新数组中
 			CashPaymentBillPO.add(temp.getPO());
 		}
 		fbs.saveCashPayment(CashPaymentBillPO);//保存PO数组到txt
