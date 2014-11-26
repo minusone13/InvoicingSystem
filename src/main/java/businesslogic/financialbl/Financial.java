@@ -14,15 +14,15 @@ import businesslogic.iquirybl.StubInquiry;
 import businesslogic.userbl.User;
 import businesslogicservice.financialblservice.StubFinancialBlService;
 
-public class StubFinancial implements StubFinancialBlService{
+public class Financial implements StubFinancialBlService{
 	String name;
 	String password;
 	Role role;
-	public StubFinancial() {
+	public Financial() {
 		this(null, null, null);
 	}
 	
-	public StubFinancial(String n, String pw, Role r) {
+	public Financial(String n, String pw, Role r) {
 		name = n;
 		password = pw;
 		role = r;
