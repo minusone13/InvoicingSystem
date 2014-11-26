@@ -18,21 +18,30 @@ public class JPpassBill2 extends JPanel {
 	private JLabel up=new JLabel();
 	//向下
 	private JLabel down=new JLabel();
+	//单据列表
+	JPBillList billList=new JPBillList();
+	//审查通过功能按钮
+	private JLabel check=new JLabel();
+	//删除按钮
+	private JLabel delete=new JLabel();
+	//编辑按钮
+	private JLabel edit=new JLabel();
 	public JPpassBill2(){
 		//面板大小
-		this.setSize(345, 342);
+		this.setSize(800, 342);
 		//设置布局
 		this.setLayout(null);
 		//设置面板透明
 		this.setOpaque(false);
-		//背景
+		//该面板背景
 		bg.setIcon(new ImageIcon("src/image/passBill/PassBillblock2.png"));
 		bg.setBounds(0, 0, 345, 342);
-		//面板
+		//底板
 		JPanel jp=new JPanel();
 		jp.setLayout(null);
 		jp.setBounds(20,20,261, 93*3+22);
 		jp.setOpaque(false);
+		//底板的灰色背景
 		JLabel jpbg=new JLabel();
 		jpbg.setBounds(0, 0, 261, 301);
 		jpbg.setIcon(new ImageIcon("src/image/passBill/Pb2.png"));
@@ -42,10 +51,12 @@ public class JPpassBill2 extends JPanel {
 		test.add(new GiftBillVO());
 		test.add(new GiftBillVO());
 		test.add(new GiftBillVO());
-		//单据列表
-		JPBillList billList=new JPBillList();
+
+		//单据面板列表
 		billList.addGiftBill(test);
+
 		billList.setLocation(0, 0);
+		
 		jp.add(billList,0);
 		jp.add(jpbg,1);
 		//向上按钮
@@ -57,10 +68,26 @@ public class JPpassBill2 extends JPanel {
 		down.setBounds(281, 289, 32, 32);
 		down.addMouseListener(new MouseListenerOfButton(2));
 		
+		//审查功能按钮
+		check.setIcon(new ImageIcon("src/image/function/checkW.png"));
+		check.setBounds(720, 20, 72, 72);
+		check.addMouseListener(new MouseListenerOfButton(3));
+		//删除功能按钮
+		delete.setIcon(new ImageIcon("src/image/function/deleteW.png"));
+		delete.setBounds(720, 112, 72, 72);
+		delete.addMouseListener(new MouseListenerOfButton(4));
+		//编辑功能按钮
+		edit.setIcon(new ImageIcon("src/image/function/editW.png"));
+		edit.setBounds(720, 204, 72, 72);
+		edit.addMouseListener(new MouseListenerOfButton(5));
+		
 		this.add(jp,0);
 		this.add(up,1);
 		this.add(down,2);
-		this.add(bg,3);
+		this.add(check,3);
+		this.add(delete,4);
+		this.add(edit,5);
+		this.add(bg,6);
 	}
 	public class MouseListenerOfButton implements MouseListener{
 
@@ -77,9 +104,20 @@ public class JPpassBill2 extends JPanel {
 			// TODO Auto-generated method stub
 			switch(num){
 			case 1:up.setIcon(new ImageIcon("src/image/upR.png"));
+			//向上
+			billList.startUp();
 				break;
 			case 2:down.setIcon(new ImageIcon("src/image/downR.png"));
+			//向下
+			billList.startDown();
 				break;	
+			case 3:check.setIcon(new ImageIcon("src/image/function/checkR.png"));
+				break;
+			case 4:delete.setIcon(new ImageIcon("src/image/function/deleteR.png"));
+				billList.removeChosen();
+				break;
+			case 5:edit.setIcon(new ImageIcon("src/image/function/editR.png"));
+				break;
 			}
 		}
 
@@ -87,9 +125,19 @@ public class JPpassBill2 extends JPanel {
 			// TODO Auto-generated method stub
 			switch(num){
 			case 1:up.setIcon(new ImageIcon("src/image/upW.png"));
+			//向上停止
+			billList.stop();
 				break;
 			case 2:down.setIcon(new ImageIcon("src/image/downW.png"));
+			//向上停止
+			billList.stop();
 				break;	
+			case 3:check.setIcon(new ImageIcon("src/image/function/checkW.png"));
+				break;
+			case 4:delete.setIcon(new ImageIcon("src/image/function/deleteW.png"));
+				break;
+			case 5:edit.setIcon(new ImageIcon("src/image/function/editW.png"));
+				break;				
 			}
 		}
 
@@ -105,6 +153,12 @@ public class JPpassBill2 extends JPanel {
 				break;
 			case 2:down.setIcon(new ImageIcon("src/image/downW.png"));
 				break;	
+			case 3:check.setIcon(new ImageIcon("src/image/function/checkW.png"));
+				break;
+			case 4:delete.setIcon(new ImageIcon("src/image/function/deleteW.png"));
+				break;
+			case 5:edit.setIcon(new ImageIcon("src/image/function/editW.png"));
+				break;		
 			}
 		}
 		
