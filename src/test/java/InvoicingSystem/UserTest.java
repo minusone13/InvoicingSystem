@@ -7,6 +7,7 @@ import presentation.userui.UserDriver;
 import data.commoditydata.StubStockDataController;
 import data.initial.Initial;
 import data.userdata.UserDataController;
+import vo.RM;
 import vo.UserVO;
 import vo.stockvo.CommodityVO;
 
@@ -47,8 +48,8 @@ public class UserTest{
 	{
 		UserController user=new UserController();
 		UserVO vo = new UserVO(Role.STOCK_STAFF, "stock", "stock", "Helen");
-		boolean result = user.signUp(vo);
-		assertTrue(!result);
+		RM result = user.signUp(vo);
+		assertEquals(RM.redundance,result);
 	}
 	
 	@Test
@@ -56,8 +57,8 @@ public class UserTest{
 	{
 		UserController user=new UserController();
 		UserVO vo = new UserVO(Role.STOCK_STAFF, "stockxxx", "stock", "Helen");
-		boolean result = user.signUp(vo);
-		assertTrue(result);
+		RM result = user.signUp(vo);
+		assertEquals(RM.done,result);
 	}
 	
 	@Test

@@ -7,27 +7,39 @@ import businesslogic.Role;
 import po.*;
 import po.userpo.OperationRecordPO;
 import po.userpo.UserPO;
+import vo.RM;
 
 public class UserList implements Serializable{
 	ArrayList<UserPO> users;
 	ArrayList <OperationRecordPO> records;
+	ArrayList<UserPO> deleted;
+	
+	int numOfAdmin=0;
+	int numOfManager=0;
+	int numOfFinancial=0;
+	int numOfSales=0;
+	int numOfStock=0;
 	public void initial()
 	{
 		users=new ArrayList<UserPO>();
 		users.add(new UserPO("A0001",Role.ADMINISTRATOR,"admin","21232f297a57a5a743894a0e4a801fc3","管理员"));
+		numOfAdmin++;
 		//default has a administrator account, default name is admin, password is admin. details see 大作业.doc
 		records=new ArrayList<OperationRecordPO>();
+		deleted=new ArrayList<UserPO>();
 	}
 	
 	public int count(char c)//参数代表职务 A为管理员  M为总经理 S为进货销售人员 F为才我人员 I为库存管理人员
 	{//因为人员有员工编号如 总经理为M0001等等，在生成编号时，要自动查找已有人员数量
-		for(int i=users.size()-1;i>=0;i--)
-		{//用户信息按照顺序存储，从后往前查找，查到的一定是编号最大的
-			String ID=users.get(i).getID();
-			if(ID.charAt(0)==c)
-				return Integer.parseInt(ID.substring(1));
+		switch(c)
+		{
+			case 'A':return numOfAdmin;
+			case 'M':return numOfManager;
+			case 'S':return numOfSales;
+			case 'F':return numOfFinancial;
+			case 'I':return numOfStock;
+			default:return 0;
 		}
-		return 0;
 	}
 	
 	public UserPO login(String account, String password)
@@ -42,18 +54,52 @@ public class UserList implements Serializable{
 	public boolean insert(UserPO po)
 	{//插入一个用户（对应于增加用户）
 		users.add(po);
+		char c=po.getID().charAt(0);
+		switch(c)
+		{
+			case 'A':numOfAdmin++;break;
+			case 'M':numOfManager++;break;
+			case 'S':numOfSales++;break;
+			case 'F':numOfFinancial++;break;
+			case 'I':numOfStock++;break;
+			default:return false;
+		}
 		return true;
 	}
 	
 	public UserPO find(String account)
 	{//通过账号查找一个用和
+		int i=search(account);
+		if(i!=-1)
+		{
+			UserPO user=users.get(i);
+			return user.clone();
+		}
+		else
+		 return null;
+	}
+	private int search(String account)
+	{//通过账号查找一个用和
 		for(int i=0;i<users.size();i++)
 		{
 			UserPO user=users.get(i);
 			if(user.getAccount().equals(account))
-				return user.clone();
+				return i;
 		}
-		return null;
+		return -1;
+	}
+	
+	public boolean delete(UserPO po)
+	{
+		int i=search(po.getAccount());
+		if(i==-1)//not found
+			return false;
+		else
+		{
+			deleted.add(users.get(i));
+			users.remove(i);
+			return true;
+		}
 	}
 	
 	public boolean insert(OperationRecordPO po)
@@ -62,15 +108,15 @@ public class UserList implements Serializable{
 		return true;
 	}
 	
-	public boolean updatePassword(UserPO po)
+	public RM updatePassword(UserPO po)
 	{//更改密码
 		UserPO user = find(po.getAccount());
 		if(user == null)
-			return false;
+			return RM.notfound;
 		else
 		{
 			user.setPassword(po.getPassword());//whether it's true?
-			return true;
+			return RM.done;
 		}
 	}
 	public boolean updateRole(UserPO po)
@@ -94,5 +140,29 @@ public class UserList implements Serializable{
 			user.setName(po.getName());//whether it's true?
 			return true;
 		}
+	}
+
+	public ArrayList<UserPO> getUsers() {
+		return users;
+	}
+
+	public void setUsers(ArrayList<UserPO> users) {
+		this.users = users;
+	}
+
+	public ArrayList<OperationRecordPO> getRecords() {
+		return records;
+	}
+
+	public void setRecords(ArrayList<OperationRecordPO> records) {
+		this.records = records;
+	}
+
+	public ArrayList<UserPO> getDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(ArrayList<UserPO> deleted) {
+		this.deleted = deleted;
 	}
 }

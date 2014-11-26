@@ -1,10 +1,12 @@
 package businesslogic.userbl;
 
+import java.util.ArrayList;
+
+import businesslogic.Role;
 import businesslogic.userservice.UserService;
 import businesslogicservice.userblservice.StubUserBlService;
-import po.userpo.OperationRecordPO;
-import po.userpo.UserPO;
-import vo.UserVO;
+import po.userpo.*;
+import vo.*;
 import dataservice.userdataservice.*;
 
 public class UserController implements StubUserBlService, UserService{
@@ -14,12 +16,12 @@ public class UserController implements StubUserBlService, UserService{
 	{
 		return user.login(account, password);
 	}
-	public boolean signUp(UserVO vo)
+	public RM signUp(UserVO vo)
 	{
 		return user.signUp(vo);
 	}
 	
-	public boolean changePassword(UserVO vo)
+	public RM changePassword(UserVO vo)
 	{
 		return user.changePassword(vo);
 	}
@@ -44,5 +46,17 @@ public class UserController implements StubUserBlService, UserService{
 	public boolean addRecord(OperationRecordPO po)
 	{
 		return user.addRecord(po);
+	}
+	public RM changeRole(UserVO vo,Role newRole)
+	{
+		return user.changeRole(vo, newRole);
+	}
+	public RM deleteUser(UserVO vo)
+	{
+		return user.deleteUser(vo);
+	}
+	public ArrayList<UserVO> show()
+	{
+		return user.show();
 	}
 }

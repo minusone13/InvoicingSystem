@@ -1,12 +1,14 @@
 package data.userdata;
 
 import java.io.*;
+import java.util.ArrayList;
 
 import data.Tool;
 import dataservice.userdataservice.*;
 import po.*;
 import po.userpo.OperationRecordPO;
 import po.userpo.UserPO;
+import vo.RM;
 
 public class UserDataController implements StubUserDataService{
 	private static UserDataController instance=null;
@@ -160,12 +162,26 @@ public class UserDataController implements StubUserDataService{
 	{//插入关键操作记录
 		return l.insert(po);
 	}
-	public boolean updatePassword(UserPO po)
+	public boolean delete(UserPO po)
+	{
+		return l.delete(po);
+	}
+	public RM updatePassword(UserPO po)
 	{//更改密码
 		return l.updatePassword(po);
 	}
 	public int count(char c)
 	{//用于计算指定职务已有员工数量，便于逻辑层对新的员工生成ID
 		return l.count(c);
+	}
+	public ArrayList<UserPO> getUsers()
+	{
+		ArrayList<UserPO> users=l.getUsers();
+		for(int i=0;i<users.size();i++)
+		{
+			UserPO po = users.get(i);
+			users.set(i, po.clone());
+		}
+		return users;
 	}
 }

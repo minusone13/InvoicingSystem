@@ -1,8 +1,10 @@
 package businesslogic.userbl;
 
 import java.security.*;
+import java.util.ArrayList;
 
 import po.userpo.*;
+import vo.RM;
 import vo.UserVO;
 import dataservice.userdataservice.*;
 import businesslogic.Role;
@@ -24,10 +26,19 @@ public class User {
 		UserVO vo = new UserVO(po.getR(),po.getAccount(),po.getName());
 		return vo;
 	}
-	public boolean signUp(UserVO vo)
+	public RM deleteUser(UserVO vo)
+	{
+		if(data.find(vo.getAccount())==null)
+			return RM.notfound;
+		boolean result=data.delete(new UserPO(vo.getID(),vo.getR(),vo.getAccount(),string2MD5(vo.getPassword()),vo.getName()));
+		if(result==false)
+			return RM.unknownerror;
+		return RM.done;
+	}
+	public RM signUp(UserVO vo)
 	{
 		if(data.find(vo.getAccount())!=null)
-			return false;
+			return RM.redundance;
 		else
 		{
 			char c=0;
@@ -38,7 +49,7 @@ public class User {
 				case FINANCIAL_MANAGER:c='F';break;
 				case STOCK_STAFF: c='I';break;//抱歉只能用I咯，S和下面的进货人员重了；
 				case PURCHASE_SALE_STAFF: c='S';break;
-				default: return false;
+				default: return RM.unknownerror;
 			}
 			int x=data.count(c);
 			x++;
@@ -51,13 +62,33 @@ public class User {
 			}
 			result=c+result;
 			data.insert(new UserPO(result,vo.getR(),vo.getAccount(),string2MD5(vo.getPassword()),vo.getName()));
-			return true;
+			return RM.done;
 		}
 	}
 	
-	public boolean changePassword(UserVO vo)
+	public RM changePassword(UserVO vo)
 	{
-		boolean result = data.updatePassword(new UserPO(vo.getID(),vo.getR(),vo.getAccount(),string2MD5(vo.getPassword()),vo.getName()));
+		RM result = data.updatePassword(new UserPO(vo.getID(),vo.getR(),vo.getAccount(),string2MD5(vo.getPassword()),vo.getName()));
+		return result;
+	}
+	public RM changeRole(UserVO vo,Role newRole)
+	{
+		RM result = deleteUser(vo);//delete old account,because stuff ID relates to the kind of job
+		if(result!=RM.done)
+			return result;
+		vo.setR(newRole);//changeRole
+		result = signUp(vo);//signUp new account
+		return result;
+	}
+	public ArrayList<UserVO> show()
+	{
+		ArrayList<UserPO>users=data.getUsers();
+		ArrayList<UserVO>result=new ArrayList<UserVO>();
+		for(int i=0;i<users.size();i++)
+		{
+			UserPO po = users.get(i);
+			result.add(new UserVO(po.getID(),po.getR(),po.getAccount(),po.getPassword(),po.getName()));
+		}
 		return result;
 	}
 	
