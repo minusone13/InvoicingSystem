@@ -17,12 +17,14 @@ import vo.VO;
 
 public class StubReceiptBill extends Bill implements GetVOandPO{
 	private BillStyle billstyle=BillStyle.ReceiptBill;
+	
 	private String ID;
 	String customer;
 	Role operator;
 	double total;
 	BillState state;
 	String date;
+	
 	ArrayList<StubTransferAccount> transferlist = new ArrayList<StubTransferAccount>();
 	public StubReceiptBill() {
 		
@@ -48,7 +50,15 @@ public class StubReceiptBill extends Bill implements GetVOandPO{
 		ArrayList<StubReceiptBill> list = pool.getReceiptBill();
 		ID = "SKD-"+currentTime+"-"+String.format("%05d", list.size()+1);
 	}
-
+	
+	public BillStyle getBillstyle() {
+		return billstyle;
+	}
+	
+	public String getDate() {
+		return date;
+	}
+	
 	public ReceiptVO getVO() {
 		ReceiptVO vo = new ReceiptVO();
 		vo.setCustomer(customer);

@@ -3,8 +3,10 @@ package businesslogic.iquirybl;
 import java.util.ArrayList;
 
 import businesslogic.BillState;
+import businesslogic.BillStyle;
 import businesslogic.commoditybillbl.StubAlertBill;
 import businesslogic.commoditybillbl.StubSpillsLossBill;
+import businesslogic.examinebl.Bill;
 import businesslogic.examinebl.StubBillPool;
 import businesslogic.financialbillbl.StubCashPaymentBill;
 import businesslogic.financialbillbl.StubPaymentBill;
@@ -24,7 +26,7 @@ public class StubInquiry {
 		int size1 = saleSheet.size();
 		for(int i=0;i<size1;i++) {		
 			StubSaleSheet sale = saleSheet.get(i);
-			
+			//根据条件筛选单据
 			if(isv.getTimeBefore()!=null) {
 				
 			
@@ -41,6 +43,9 @@ public class StubInquiry {
 			if(isv.getCustomer()!=null) {
 				if(sale.getCustomer().name.equals(isv.getCustomer())){} 
 				else continue;
+			}
+			if(isv.getOperator()!=null) {
+				//if()
 			}
 		}
 		int size2 = saleBackSheet.size();
@@ -86,8 +91,24 @@ public class StubInquiry {
 		for(int i=0;i<size6;i++) {
 			list.add(purBackSheet.get(i).getVO());
 		}
+		//收款单
 		int size7 = receipt.size();
 		for(int i=0;i<size7;i++) {
+			StubReceiptBill re = receipt.get(i);
+			if(ipv.getTimeBefore()!=null) {
+				
+				if(re.getDate().compareTo(ipv.getTimeBefore())>=0&&
+					re.getDate().compareTo(ipv.getTimeAfter())<=0){}
+				else continue;
+			}
+			
+			if(ipv.getBillstyle()!=null) {
+				if(re.getBillstyle() == ipv.getBillstyle()){}
+				else continue;
+			}
+			
+			
+			
 			list.add(receipt.get(i).getVO());
 		}
 		int size8 = payment.size();

@@ -1,23 +1,37 @@
 package vo;
 
+import businesslogic.BillStyle;
+
 public class InquiryProcessVO {
-	String time;
-	String type;
-	public String getType() {
-		return type;
-	}
-	public void setType(String type) {
-		this.type = type;
-	}
+	
+	
+	String timeBefore;
+	String timeAfter;
 	String customer;
 	String operator;
 	String stock;
-	public String getTime() {
-		return time;
+	BillStyle billstyle;
+	public BillStyle getBillstyle() {
+		return billstyle;
 	}
-	public void setTime(String time) {
-		this.time = time;
+	public void setBillstyle(BillStyle billstyle) {
+		this.billstyle = billstyle;
 	}
+	public String getTimeBefore() {
+		return timeBefore;
+	}
+	public void setTimeBefore(String timeBefore) {
+		this.timeBefore = timeBefore;
+	}
+	public String getTimeAfter() {
+		return timeAfter;
+	}
+	public void setTimeAfter(String timeAfter) {
+		this.timeAfter = timeAfter;
+	}
+	
+	
+	
 	
 	public String getCustomer() {
 		return customer;
