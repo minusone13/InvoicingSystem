@@ -4,6 +4,7 @@ package presentation;
 import presentation.commodityui.StockManagerDriver;
 import presentation.financialui.FinancialBLDriver;
 import presentation.managerui.ManagerBLDriver;
+import presentation.userui.Login;
 import businesslogic.financialbl.StubFinancial;
 import businesslogic.managerbl.StubManager;
 import businesslogic.stockmanagerbl.StubStockController;
@@ -31,5 +32,6 @@ public class StartUp {
 		initial.initialStock();
 		StockManagerDriver smd=new StockManagerDriver();
 		smd.start(new StubStockController(),StubStockDataController.getInstance());
+			
 	}
 }

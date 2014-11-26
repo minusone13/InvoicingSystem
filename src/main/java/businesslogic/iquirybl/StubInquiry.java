@@ -22,7 +22,9 @@ public class StubInquiry {
 		ArrayList<StubSaleSheet> saleSheet = bp.getSaleSheet(BillState.EXAMINED);
 		ArrayList<StubSaleBackSheet> saleBackSheet = bp.getSaleBackSheet(BillState.EXAMINED);
 		int size1 = saleSheet.size();
-		for(int i=0;i<size1;i++) {
+		for(int i=0;i<size1;i++) {		
+			StubSaleSheet sale = saleSheet.get(i);
+			if() {}
 			list.add(saleSheet.get(i).getVO());
 		}
 		int size2 = saleBackSheet.size();

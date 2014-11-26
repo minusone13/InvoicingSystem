@@ -20,23 +20,33 @@ public class StubCashPaymentBill extends Bill implements GetVOandPO{
 	private BillStyle style=BillStyle.CashPaymentBill;
 	private String ID;
 	String account;
-	Role operator = Role.FINANTCIAL_STAFF;
+	Role operator;
 	double total;
 	BillState state;
 	ArrayList<StubItem> itemList = new ArrayList<StubItem>();
 	
 	public StubCashPaymentBill() {}
-	public StubCashPaymentBill(String account, double total, String[] item, double[] money, String[] remark) {
+	public StubCashPaymentBill(CashPaymentVO vo) {
+		String account = vo.getAccount(); 
+		double total = vo.getTotal();
+		String[] item = vo.getItem();
+		double[] money=vo.getMoney(); 
+		String[] remark=vo.getRemark();
+		    
 		int length = item.length;
 		for(int i=0;i<length;i++) {
 			itemList.add(new StubItem(item[i], money[i], remark[i]));
 		}
 		this.account = account;
 		this.total = total;
-		state = BillState.DRAFT;	
+		state = BillState.DRAFT;
+		this.operator = vo.getOperator();
 		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
 		String currentTime = format.format(new Date());
-		ID = "XJFYD-"+currentTime;
+		StubBillPool pool = new StubBillPool();
+		ArrayList<StubCashPaymentBill> list = pool.getCashPaymentBill();
+		ID = "XJFYD-"+currentTime+"-"+String.format("%05d", list.size()+1);
+		
 	}
 	
 	public CashPaymentVO getVO() {

@@ -13,7 +13,7 @@ public class StubFinancialBillList {
 	public boolean creatReceiptBill(ReceiptVO vo) {		
 		StubBillPool pool = new StubBillPool();
 		if(vo==null) return false;
-		StubReceiptBill receipt = new StubReceiptBill(vo.getCustomer(), vo.getTotal(), vo.getAccount(), vo.getMoney(), vo.getRemark());
+		StubReceiptBill receipt = new StubReceiptBill(vo);
 		pool.add(receipt);	
 		return true;
 	}
@@ -21,7 +21,7 @@ public class StubFinancialBillList {
 	public boolean creatPaymentBill(PaymentVO vo) {		
 		StubBillPool pool = new StubBillPool();
 		if(vo==null) return false;
-		StubPaymentBill payment = new StubPaymentBill(vo.getCustomer(), vo.getTotal(), vo.getAccount(), vo.getMoney(), vo.getRemark());
+		StubPaymentBill payment = new StubPaymentBill(vo);
 		pool.add(payment);	
 		return true;
 	}
@@ -29,7 +29,7 @@ public class StubFinancialBillList {
 	public boolean creatCashPaymentBill(CashPaymentVO vo) {		
 		StubBillPool pool = new StubBillPool();
 		if(vo==null) return false;
-		StubCashPaymentBill cash = new StubCashPaymentBill(vo.getAccount(), vo.getTotal(), vo.getItem(), vo.getMoney(), vo.getRemark());
+		StubCashPaymentBill cash = new StubCashPaymentBill(vo);
 		pool.add(cash);
 		return true;
 	}

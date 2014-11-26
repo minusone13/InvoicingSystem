@@ -22,8 +22,6 @@ public class FinancialBLDriver {
 	}
 	
 	public void drive() {
-		boolean result1 = fbs.updatePassword("sb");
-		if(result1==true) System.out.println("UPDATE SUCCESS!");
 		
 		boolean result2 = fbs.addAccount("00001");
 		if(result2==true) System.out.println("ADD SUCCESS!");

@@ -34,7 +34,8 @@ public class User {
 			switch(vo.getR()){//自动生成ID，详见Data层的UserList类
 				case MANAGER: c='M';break;
 				case ADMINISTRATOR: c='A';break;
-				case FINANTCIAL_STAFF: c='F';break;
+				case FINANCIAL_STAFF: ;
+				case FINANCIAL_MANAGER:c='F';break;
 				case STOCK_STAFF: c='I';break;//抱歉只能用I咯，S和下面的进货人员重了；
 				case PURCHASE_SALE_STAFF: c='S';break;
 				default: return false;

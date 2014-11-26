@@ -13,7 +13,7 @@ import vo.VO;
 
 
 public interface StubFinancialBlService {
-	public boolean updatePassword(String newPassword) ;
+	
 	
 	public boolean addAccount(String name) ;
 	
