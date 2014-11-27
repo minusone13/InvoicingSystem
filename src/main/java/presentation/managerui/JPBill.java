@@ -17,6 +17,7 @@ import vo.ReceiptVO;
 import vo.SaleBackSheetVO;
 import vo.SaleSheetVO;
 import vo.SpillsLossBillVO;
+import businesslogic.BillState;
 
 public class JPBill extends JPanel implements MouseListener{
 
@@ -128,22 +129,9 @@ public class JPBill extends JPanel implements MouseListener{
 		//设置面板透明
 		this.setOpaque(false);
 		//背景
-		switch(cb.getBillState()){
-		case DRAFT:
-			bg.setIcon(new ImageIcon("src/image/JPbill/CashPaymentbill/CashPaymentbill10.png"));
-			break;
-		case SUBMITED:
-			bg.setIcon(new ImageIcon("src/image/JPbill/CashPaymentbill/CashPaymentbill20.png"));
-			break;
-		case EXAMINED:
-			bg.setIcon(new ImageIcon("src/image/JPbill/CashPaymentbill/CashPaymentbill30.png"));
-			break;
-		case OVER:
-			bg.setIcon(new ImageIcon("src/image/JPbill/CashPaymentbill/CashPaymentbill40.png"));
-			break;
-		}
+		setBillBg(10,cb.getBillState(),0);
 		bg.setBounds(0, 0, 522, 93);
-		bg.addMouseListener(this);
+		bg.addMouseListener(new MouseListenerOfBill(10,cb.getBillState()));
 		//向右
 		right.setIcon(new ImageIcon("src/image/right.png"));
 		right.setBounds(221, 26, 40, 40);
@@ -156,6 +144,46 @@ public class JPBill extends JPanel implements MouseListener{
 		this.add(right,0);
 		this.add(left,1);
 		this.add(bg,2);
+	}
+	/*根据条件生成地址给单据上背景*/
+	public void setBillBg(int BillStyle,BillState state,int num){
+		String s1="";
+		String s2="";
+		switch(BillStyle){
+		case 1:
+			break;
+		case 2:
+			break;
+		case 3:
+			break;
+		case 4:
+			break;
+		case 5:
+			break;
+		case 6:
+			break;
+		case 7:
+			break;
+		case 8:
+			break;
+		case 9:
+			break;
+		case 10:s1="CashPaymentbill";
+			break;
+		}
+		switch(state){
+		case DRAFT:s2="1";
+			break;
+		case SUBMITED:s2="2";
+			break;
+		case EXAMINED:s2="3";
+			break;
+		case OVER:s2="4";
+			break;
+		}
+		bg.setIcon(new ImageIcon("src/image/JPbill/"+s1+"/"+s1+s2+String.valueOf(num)+".png"));
+
+		
 	}
 	/*看详细信息*/
 	public void showDetail(){
@@ -289,7 +317,7 @@ public class JPBill extends JPanel implements MouseListener{
 	}
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
-		choose=!choose;
+		
 	}
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
@@ -305,9 +333,11 @@ public class JPBill extends JPanel implements MouseListener{
 	}
 	public class MouseListenerOfBill implements MouseListener{
 
-		private int num;
-		public MouseListenerOfBill(int N){
+		private int num;//单据类型对应数字
+		private BillState state;//单据状态
+		public MouseListenerOfBill(int N,BillState st){
 			num=N;
+			state=st;
 		}
 		public void mouseClicked(MouseEvent e) {
 			// TODO Auto-generated method stub
@@ -316,6 +346,13 @@ public class JPBill extends JPanel implements MouseListener{
 
 		public void mousePressed(MouseEvent e) {
 			// TODO Auto-generated method stub
+			choose=!choose;//选中与取消选中
+			if(choose){
+				setBillBg(num,state,3);
+			}
+			else{
+				setBillBg(num,state,1);
+			}
 			
 		}
 
@@ -326,12 +363,22 @@ public class JPBill extends JPanel implements MouseListener{
 
 		public void mouseEntered(MouseEvent e) {
 			// TODO Auto-generated method stub
-			
+			if(choose){
+				setBillBg(num,state,3);
+			}
+			else{
+				setBillBg(num,state,1);
+			}
 		}
 
 		public void mouseExited(MouseEvent e) {
 			// TODO Auto-generated method stub
-			
+			if(choose){
+				setBillBg(num,state,2);
+			}
+			else{
+				setBillBg(num,state,0);
+			}
 		}
 		
 	}
