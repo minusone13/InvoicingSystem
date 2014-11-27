@@ -17,13 +17,15 @@ import businesslogic.Role;
 import businesslogic.stockmanagerbl.StubStockController;
 import businesslogic.userbl.*;
 import businesslogicservice.commodityblservice.StubCommodityBlService;
+import businesslogicservice.userblservice.StubUserBlService;
 
 public class UserTest{
 	static UserDriver smd=new UserDriver();
 	static UserDataController data=UserDataController.getInstance();
+	static StubUserBlService ubl=new UserController();
 	static
 	{
-		smd.start(new UserController(),data);
+		smd.start(ubl,data);
 	}
 	@Before
 	public void initial()
@@ -41,6 +43,13 @@ public class UserTest{
 		UserController user=new UserController();
 		UserVO vo = user.login("admin", "admin");
 		assertTrue(vo.getR()==vo.getR().ADMINISTRATOR);
+	}
+	
+	@Test
+	public void testadminLoginFail()
+	{
+		UserVO vo = ubl.login("admin", "admi");
+		assertEquals(null,vo);
 	}
 	
 	@Test
@@ -67,5 +76,30 @@ public class UserTest{
 		UserController user=new UserController();
 		UserVO vo = user.login("stock", "stock");
 		assertTrue(vo.getR()==vo.getR().STOCK_STAFF);
+	}
+	
+	@Test
+	public void testdeleteUser()
+	{
+		RM result=ubl.deleteUser(new UserVO("A0001",Role.ADMINISTRATOR,"admin","admin","管理员"));
+		assertEquals(RM.done,result);
+		UserVO vo = ubl.login("admin", "admin");
+		assertEquals(null,vo);
+	}
+	
+	@Test
+	public void testdeleteNotFound()
+	{
+		RM result=ubl.deleteUser(new UserVO("A0002",Role.ADMINISTRATOR,"admind","admin","管理员"));
+		assertEquals(RM.notfound,result);
+	}
+	
+	public void testchangeRole()
+	{
+		UserVO vo = ubl.login("stock", "stock");
+		RM result = ubl.changeRole(vo, Role.ADMINISTRATOR);
+		assertEquals(RM.done,result);
+		vo = ubl.login("stock", "stock");
+		assertEquals("A0002",vo.getID());
 	}
 }
