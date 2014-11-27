@@ -143,7 +143,10 @@ public class UserList implements Serializable{
 	}
 
 	public ArrayList<UserPO> getUsers() {
-		return users;
+		ArrayList<UserPO> result=new ArrayList<UserPO>();
+		for(int i=0;i<users.size();i++)
+			result.add(users.get(i).clone());
+		return result;
 	}
 
 	public void setUsers(ArrayList<UserPO> users) {
@@ -151,7 +154,10 @@ public class UserList implements Serializable{
 	}
 
 	public ArrayList<OperationRecordPO> getRecords() {
-		return records;
+		ArrayList<OperationRecordPO> result=new ArrayList<OperationRecordPO>();
+		for(int i=0;i<records.size();i++)
+			result.add(records.get(i).clone());
+		return result;
 	}
 
 	public void setRecords(ArrayList<OperationRecordPO> records) {

@@ -5,7 +5,7 @@ import java.io.*;
 
 import vo.RM;
 
-public class OperationRecordPO implements Serializable{
+public class OperationRecordPO implements Serializable, Cloneable{
 //记录主要操作
 	Date d;//操作日期
 	UserPO user;//操作者
@@ -42,5 +42,17 @@ public class OperationRecordPO implements Serializable{
 	}
 	public void setResult(RM result) {
 		this.result = result;
+	}
+	public OperationRecordPO clone()
+	{
+		OperationRecordPO cloned = null;
+		try {
+			cloned=(OperationRecordPO)super.clone();
+		} catch (CloneNotSupportedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		cloned.d=(Date) cloned.d.clone();
+		return cloned;
 	}
 }

@@ -11,7 +11,7 @@ import businesslogic.financialbillbl.StubFinancialBillList;
 import businesslogic.financialbillbl.PaymentBill;
 import businesslogic.financialbillbl.ReceiptBill;
 import businesslogic.iquirybl.StubInquiry;
-import businesslogic.userbl.User;
+import businesslogic.userbl.UserList;
 import businesslogicservice.financialblservice.StubFinancialBlService;
 
 public class Financial implements StubFinancialBlService{

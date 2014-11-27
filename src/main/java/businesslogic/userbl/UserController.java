@@ -7,29 +7,31 @@ import businesslogic.userservice.UserService;
 import businesslogicservice.userblservice.StubUserBlService;
 import po.userpo.*;
 import vo.*;
+import vo.uservo.OperationRecordVO;
+import vo.uservo.UserVO;
 import dataservice.userdataservice.*;
 
 public class UserController implements StubUserBlService, UserService{
 	static StubUserDataService data;
-	User user=new User();
+	UserList l=new UserList();
 	public UserVO login(String account, String password)
 	{
-		return user.login(account, password);
+		return l.login(account, password);
 	}
 	public RM signUp(UserVO vo)
 	{
-		return user.signUp(vo);
+		return l.signUp(vo);
 	}
 	
 	public RM changePassword(UserVO vo)
 	{
-		return user.changePassword(vo);
+		return l.changePassword(vo);
 	}
 	
 	public void setdataobject(StubUserDataService data)
 	{
 		this.data=data;
-		user.setdataobject(data);
+		l.setdataobject(data);
 	}
 	public static StubUserDataService getData() {
 		return data;
@@ -37,26 +39,30 @@ public class UserController implements StubUserBlService, UserService{
 	public static void setData(StubUserDataService data) {
 		UserController.data = data;
 	}
-	public User getUser() {
-		return user;
+	public UserList getUser() {
+		return l;
 	}
-	public void setUser(User user) {
-		this.user = user;
+	public void setUser(UserList user) {
+		this.l = user;
 	}
 	public boolean addRecord(OperationRecordPO po)
 	{
-		return user.addRecord(po);
+		return l.addRecord(po);
 	}
 	public RM changeRole(UserVO vo,Role newRole)
 	{
-		return user.changeRole(vo, newRole);
+		return l.changeRole(vo, newRole);
 	}
 	public RM deleteUser(UserVO vo)
 	{
-		return user.deleteUser(vo);
+		return l.deleteUser(vo);
 	}
-	public ArrayList<UserVO> show()
+	public ArrayList<UserVO> showUsers()
 	{
-		return user.show();
+		return l.showUsers();
+	}
+	public ArrayList<OperationRecordVO> showRecords()
+	{
+		return l.showRecords();
 	}
 }

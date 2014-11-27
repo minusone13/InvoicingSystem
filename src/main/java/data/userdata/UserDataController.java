@@ -184,4 +184,7 @@ public class UserDataController implements StubUserDataService{
 		}
 		return users;
 	}
+	public ArrayList<OperationRecordPO> getRecords() {
+		return l.getRecords();
+	}
 }

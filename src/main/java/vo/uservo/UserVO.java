@@ -1,13 +1,14 @@
-package vo;
+package vo.uservo;
 
 import businesslogic.Role;
 
 public class UserVO implements Cloneable{
-	String ID;
-	Role r;
-	String account;
-	String password;
-	String name;
+	String ID;//人员ID 示例：总经理为“M0001” 管理员为“A0001” 财务为“F0001” 销售“S0001” 库存“I0001”
+	//另外注意，为了保证不产生冲突，人员编号是一次性的，及时删除用户，这个ID就在重置系统前永久作废了
+	Role r;//职务
+	String account;//账户，用于登陆
+	String password;//密码，用于登陆
+	String name;//姓名
 	public UserVO(){}
 	public UserVO(String ID,Role r, String account, String password, String name)
 	{

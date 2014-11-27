@@ -8,8 +8,8 @@ import data.commoditydata.StubStockDataController;
 import data.initial.Initial;
 import data.userdata.UserDataController;
 import vo.RM;
-import vo.UserVO;
 import vo.stockvo.CommodityVO;
+import vo.uservo.UserVO;
 
 import org.junit.*;
 

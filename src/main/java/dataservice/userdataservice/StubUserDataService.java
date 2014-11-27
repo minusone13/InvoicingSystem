@@ -15,4 +15,5 @@ public interface StubUserDataService {
 	public RM updatePassword(UserPO po);
 	public int count(char c);
 	public ArrayList<UserPO> getUsers();
+	public ArrayList<OperationRecordPO> getRecords();
 }
