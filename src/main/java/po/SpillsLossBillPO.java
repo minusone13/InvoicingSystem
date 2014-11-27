@@ -12,11 +12,11 @@ public class SpillsLossBillPO extends PO implements Serializable{
 		Spills,
 		Loss
 	}
-	BillStyle style = BillStyle.SpillsLossBill;
-	String ID;
-	Type t;
-	CommodityPO comPO;
-	BillState state=BillState.DRAFT;
+	private BillStyle style = BillStyle.SpillsLossBill;//订单种类
+	private String ID;//单据编号
+	private Type t;//溢出or损坏种类
+	private CommodityPO comPO;//报告的商品，商品中的数量为溢出损坏数量
+	private BillState state=BillState.DRAFT;//单据状态
 	public Type getT() {
 		return t;
 	}

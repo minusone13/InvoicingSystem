@@ -8,11 +8,11 @@ import po.stockpo.CommodityPO;
 
 
 public class AlertBillPO extends PO implements Serializable{
-	BillStyle style = BillStyle.AlertBill;
-	String ID;
-	CommodityPO comPO;
-	int shortage;
-	BillState state=BillState.DRAFT;
+	private BillStyle style = BillStyle.AlertBill;
+	private String ID;
+	private CommodityPO comPO;
+	private int shortage;
+	private BillState state=BillState.DRAFT;
 	public AlertBillPO(){}
 	
 	public AlertBillPO(String ID,CommodityPO comPO, int shortage,BillState state)

@@ -2,13 +2,14 @@ package vo;
 
 
 import vo.stockvo.*;
-import businesslogic.BillStyle;
+import businesslogic.*;
 
 public class AlertBillVO extends VO{
-	String ID;
-	private BillStyle billstyle=BillStyle.AlertBill;
-	CommodityVO com;
-	int shortage;
+	private String ID;//订单编号
+	private BillStyle billstyle=BillStyle.AlertBill;//订单种类
+	private CommodityVO com;//需要报警的商品信息
+	private int shortage;//短缺数量
+	private BillState state = BillState.DRAFT;//订单状态，默认为草稿
 	public CommodityVO getCommodity()
 	{
 		return com;
@@ -46,5 +47,11 @@ public class AlertBillVO extends VO{
 		this.ID=ID;
 		this.com=com;
 		this.shortage=shortage;
+	}
+	public BillState getState() {
+		return state;
+	}
+	public void setState(BillState state) {
+		this.state = state;
 	}
 }

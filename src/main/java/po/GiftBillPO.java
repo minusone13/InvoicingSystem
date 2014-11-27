@@ -8,11 +8,11 @@ import businesslogic.BillStyle;
 import po.stockpo.CommodityPO;
 
 public class GiftBillPO extends PO implements Serializable{
-	BillStyle style = BillStyle.GiftBill;
-	String ID;
-	String[] remark;
-	ArrayList<CommodityPO> coms;
-	BillState state=BillState.DRAFT;
+	private BillStyle style = BillStyle.GiftBill;
+	private String ID;//订单编号
+	private String[] remark;//赠送原因（销售单据编号或手动），赠送客户。分别位于remark[0],remark[1]
+	private ArrayList<CommodityPO> coms;//一系列赠送商品，商品内的数量为
+	private BillState state=BillState.DRAFT;//订单状态
 	public ArrayList<CommodityPO> getComs()
 	{
 		return coms;
