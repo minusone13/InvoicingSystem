@@ -8,7 +8,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import vo.GiftBillVO;
+import businesslogic.BillState;
+import vo.CashPaymentVO;
 
 public class JPpassBill2 extends JPanel {
 
@@ -47,13 +48,23 @@ public class JPpassBill2 extends JPanel {
 		jpbg.setIcon(new ImageIcon("src/image/passBill/Pb2.png"));
 		
 		
-		ArrayList<GiftBillVO> test=new ArrayList<GiftBillVO>();
-		test.add(new GiftBillVO());
-		test.add(new GiftBillVO());
-		test.add(new GiftBillVO());
+		//测试数组的初始化
+		ArrayList<CashPaymentVO> test=new ArrayList<CashPaymentVO>();
+		CashPaymentVO bill1=new CashPaymentVO();
+		CashPaymentVO bill2=new CashPaymentVO();
+		CashPaymentVO bill3=new CashPaymentVO();
+		CashPaymentVO bill4=new CashPaymentVO();
+		bill1.setBillState(BillState.DRAFT);
+		bill2.setBillState(BillState.SUBMITED);
+		bill3.setBillState(BillState.EXAMINED);
+		bill4.setBillState(BillState.OVER);
+		test.add(bill1);
+		test.add(bill2);
+		test.add(bill3);
+		test.add(bill4);
 
-		//单据面板列表
-		billList.addGiftBillList(test);
+		//将测试数组加到单据面板列表
+		billList.addCashPaymentBillList(test);
 
 		billList.setLocation(0, 0);
 		

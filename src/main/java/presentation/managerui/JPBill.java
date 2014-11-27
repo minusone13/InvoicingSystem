@@ -127,6 +127,35 @@ public class JPBill extends JPanel implements MouseListener{
 		this.setLayout(null);
 		//设置面板透明
 		this.setOpaque(false);
+		//背景
+		switch(cb.getBillState()){
+		case DRAFT:
+			bg.setIcon(new ImageIcon("src/image/JPbill/CashPaymentbill/CashPaymentbill10.png"));
+			break;
+		case SUBMITED:
+			bg.setIcon(new ImageIcon("src/image/JPbill/CashPaymentbill/CashPaymentbill20.png"));
+			break;
+		case EXAMINED:
+			bg.setIcon(new ImageIcon("src/image/JPbill/CashPaymentbill/CashPaymentbill30.png"));
+			break;
+		case OVER:
+			bg.setIcon(new ImageIcon("src/image/JPbill/CashPaymentbill/CashPaymentbill40.png"));
+			break;
+		}
+		bg.setBounds(0, 0, 522, 93);
+		bg.addMouseListener(this);
+		//向右
+		right.setIcon(new ImageIcon("src/image/right.png"));
+		right.setBounds(221, 26, 40, 40);
+		right.addMouseListener(new MouseListenerOfButton(1));
+		//向左
+		left.setIcon(new ImageIcon("src/image/left.png"));
+		left.setBounds(482, 26, 40, 40);
+		left.addMouseListener(new MouseListenerOfButton(2));
+		//将组件加到面板上
+		this.add(right,0);
+		this.add(left,1);
+		this.add(bg,2);
 	}
 	/*看详细信息*/
 	public void showDetail(){
@@ -272,6 +301,38 @@ public class JPBill extends JPanel implements MouseListener{
 	}
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
+		
+	}
+	public class MouseListenerOfBill implements MouseListener{
+
+		private int num;
+		public MouseListenerOfBill(int N){
+			num=N;
+		}
+		public void mouseClicked(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		public void mousePressed(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		public void mouseReleased(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		public void mouseEntered(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		public void mouseExited(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
 		
 	}
 }
