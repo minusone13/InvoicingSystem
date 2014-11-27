@@ -20,6 +20,9 @@ import vo.SpillsLossBillVO;
 
 public class JPBill extends JPanel implements MouseListener{
 
+	//单据编号
+	//单据类型
+	
 	//背景
 	private JLabel bg=new JLabel();
 	//向右按钮

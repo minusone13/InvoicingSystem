@@ -14,6 +14,7 @@ import vo.ReceiptVO;
 import vo.SaleBackSheetVO;
 import vo.SaleSheetVO;
 import vo.SpillsLossBillVO;
+import businesslogic.BillState;
 
 public class JPBillList extends JPanel {
 
@@ -38,8 +39,8 @@ public class JPBillList extends JPanel {
 	
 
 	}
-	/*将数组中的面板加到底板上*/
-	public void addJPbillList(){
+	/*更新板根据数组更新*/
+	public void updateJP(){
 		if(JPupdate==null){
 			JPupdate=new JPanel();
 			//面板大小
@@ -69,163 +70,173 @@ public class JPBillList extends JPanel {
 		//把更新板加到底板上
 		this.add(JPupdate);
 	}
-	/*增加赠送单*/
-	public void addGiftBill(ArrayList<GiftBillVO> gb){
+	/*增加赠送单VO数组*/
+	public void addGiftBillList(ArrayList<GiftBillVO> gb){
 
 	
 		//遍历单据vo数组把单据加到单据面板数组
-		System.out.println("gb:"+gb.size());
 		for(int i=0;i<gb.size();i++){
 			JPbillList.add(new JPBill(gb.get(i)));
 		}
-		addJPbillList();
-	
-	
+		//更新到面板上
+		updateJP();
+	}
+	/*增加赠送单*/
+	public void addGiftBill(GiftBillVO gb){
+		JPbillList.add(new JPBill(gb));
+		//更新到面板上
+		updateJP();
+	}
+	/*增加报警单VO数组*/
+	public void addAlertBillList(ArrayList<AlertBillVO> ab){
+
+		//遍历单据vo数组把单据加到单据面板数组
+		for(int i=0;i<ab.size();i++){
+			JPbillList.add(new JPBill(ab.get(i)));
+		}
+		//更新到面板上
+		updateJP();
 
 	}
 	/*增加报警单*/
-	public void addAlertBill(ArrayList<AlertBillVO> ab){
-
-		
-		//遍历数组把单据加上去
-		for(int i=length;i<ab.size();i++){
-			JPBill temp=new JPBill(ab.get(i));
-			temp.setLocation(0, 93*i);
-			this.add(temp,i);
+	public void addAlertBill(AlertBillVO ab){
+		JPbillList.add(new JPBill(ab));
+		//更新到面板上
+		updateJP();
+	}
+	/*增加进货单VO数组*/
+	public void addPurSheetList(ArrayList<PurSheetVO> ps){
+		//遍历单据vo数组把单据加到单据面板数组
+		for(int i=0;i<ps.size();i++){
+			JPbillList.add(new JPBill(ps.get(i)));
 		}
-		length=length+ab.size()*93;
-		//面板大小
-		this.setSize(261, length);
-
-
+		//更新到面板上
+		updateJP();
 	}
 	/*增加进货单*/
-	public void addPurSheet(ArrayList<PurSheetVO> ps){
+	public void addPurSheet(PurSheetVO ps){
+		JPbillList.add(new JPBill(ps));
+		//更新到面板上
+		updateJP();
+	}
+	/*增加进货退货单VO数组*/
+	public void addPurBackSheetList(ArrayList<PurBackSheetVO> pbs){
 
-		
-		//遍历数组把单据加上去
-		for(int i=length;i<ps.size();i++){
-			JPBill temp=new JPBill(ps.get(i));
-			temp.setLocation(0, 93*i);
-			this.add(temp,i);
+		//遍历单据vo数组把单据加到单据面板数组
+		for(int i=0;i<pbs.size();i++){
+			JPbillList.add(new JPBill(pbs.get(i)));
 		}
-		length=length+ps.size()*93;
-		//面板大小
-		this.setSize(261, length);
-
+		//更新到面板上
+		updateJP();
 
 	}
 	/*增加进货退货单*/
-	public void addPurBackSheet(ArrayList<PurBackSheetVO> pbs){
-
-		
-		//遍历数组把单据加上去
-		for(int i=length;i<pbs.size();i++){
-			JPBill temp=new JPBill(pbs.get(i));
-			temp.setLocation(0, 93*i);
-			this.add(temp,i);
+	public void addPurBackSheet(PurBackSheetVO pbs){
+		JPbillList.add(new JPBill(pbs));
+		//更新到面板上
+		updateJP();
+	}
+	/*增加销售单VO数组*/
+	public void addSaleSheetList(ArrayList<SaleSheetVO> ss){
+		//遍历单据vo数组把单据加到单据面板数组
+		for(int i=0;i<ss.size();i++){
+			JPbillList.add(new JPBill(ss.get(i)));
 		}
-		length=length+pbs.size()*93;
-		//面板大小
-		this.setSize(261, length);
-
-
+		//更新到面板上
+		updateJP();
 	}
 	/*增加销售单*/
-	public void addSaleSheet(ArrayList<SaleSheetVO> ss){
+	public void addSaleSheet(SaleSheetVO ss){
+		JPbillList.add(new JPBill(ss));
+		//更新到面板上
+		updateJP();
+	}
+	/*增加销售退货单VO数组*/
+	public void addSaleBackSheetList(ArrayList<SaleBackSheetVO> sbs){
 
 		
-		//遍历数组把单据加上去
-		for(int i=length;i<ss.size();i++){
-			JPBill temp=new JPBill(ss.get(i));
-			temp.setLocation(0, 93*i);
-			this.add(temp,i);
+		//遍历单据vo数组把单据加到单据面板数组
+		for(int i=0;i<sbs.size();i++){
+			JPbillList.add(new JPBill(sbs.get(i)));
 		}
-		length=length+ss.size()*93;
-		//面板大小
-		this.setSize(261, length);
-
+		//更新到面板上
+		updateJP();
 
 	}
 	/*增加销售退货单*/
-	public void addSaleBackSheet(ArrayList<SaleBackSheetVO> sbs){
+	public void addSaleBackSheet(SaleBackSheetVO sbs){
+		JPbillList.add(new JPBill(sbs));
+		//更新到面板上
+		updateJP();
+	}
+	/*增加收款单VO数组*/
+	public void addReceiptBillList(ArrayList<ReceiptVO> rb){
 
 		
-		//遍历数组把单据加上去
-		for(int i=length;i<sbs.size();i++){
-			JPBill temp=new JPBill(sbs.get(i));
-			temp.setLocation(0, 93*i);
-			this.add(temp,i);
+		//遍历单据vo数组把单据加到单据面板数组
+		for(int i=0;i<rb.size();i++){
+			JPbillList.add(new JPBill(rb.get(i)));
 		}
-		length=length+sbs.size()*93;
-		//面板大小
-		this.setSize(261, length);
-
+		//更新到面板上
+		updateJP();
 
 	}
 	/*增加收款单*/
-	public void addReceiptBill(ArrayList<ReceiptVO> rb){
+	public void addReceiptBill(ReceiptVO rb){
+		JPbillList.add(new JPBill(rb));
+		//更新到面板上
+		updateJP();
+	}
+	/*增加付款单VO数组*/
+	public void addPaymentBillList(ArrayList<PaymentVO> pb){
 
-		
-		//遍历数组把单据加上去
-		for(int i=length;i<rb.size();i++){
-			JPBill temp=new JPBill(rb.get(i));
-			temp.setLocation(0, 93*i);
-			this.add(temp,i);
+		//遍历单据vo数组把单据加到单据面板数组
+		for(int i=0;i<pb.size();i++){
+			JPbillList.add(new JPBill(pb.get(i)));
 		}
-		length=length+rb.size()*93;
-		//面板大小
-		this.setSize(261, length);
+		//更新到面板上
+		updateJP();
 
 
 	}
-	/*增加报溢报损单*/
-	public void addPaymentBill(ArrayList<PaymentVO> pb){
+	/*增加付款单*/
+	public void addPaymentBill(PaymentVO pb){
+		JPbillList.add(new JPBill(pb));
+		//更新到面板上
+		updateJP();
+	}
+	/*增加现金费用单VO数组*/
+	public void addCashPaymentBillList(ArrayList<CashPaymentVO> spb){
 
 		
-		//遍历数组把单据加上去
-		for(int i=length;i<pb.size();i++){
-			JPBill temp=new JPBill(pb.get(i));
-			temp.setLocation(0, 93*i);
-			this.add(temp,i);
+		//遍历单据vo数组把单据加到单据面板数组
+		for(int i=0;i<spb.size();i++){
+			JPbillList.add(new JPBill(spb.get(i)));
 		}
-		length=length+pb.size()*93;
-		//面板大小
-		this.setSize(261, length);
+		//更新到面板上
+		updateJP();
+	}
+	/*增加现金费用单*/
+	public void addCashPaymentBill(CashPaymentVO spb){
+		JPbillList.add(new JPBill(spb));
+		//更新到面板上
+		updateJP();
+	}
+	/*增加报溢报损单VO数组*/
+	public void addSpillsLossBillList(ArrayList<SpillsLossBillVO> slb){
 
-
+		//遍历单据vo数组把单据加到单据面板数组
+		for(int i=0;i<slb.size();i++){
+			JPbillList.add(new JPBill(slb.get(i)));
+		}
+		//更新到面板上
+		updateJP();
 	}
 	/*增加报溢报损单*/
-	public void addCashPaymentBill(ArrayList<CashPaymentVO> spb){
-
-		
-		//遍历数组把单据加上去
-		for(int i=length;i<spb.size();i++){
-			JPBill temp=new JPBill(spb.get(i));
-			temp.setLocation(0, 93*i);
-			this.add(temp,i);
-		}
-		length=length+spb.size()*93;
-		//面板大小
-		this.setSize(261, length);
-
-
-	}
-	/*增加报溢报损单*/
-	public void addSpillsLossBill(ArrayList<SpillsLossBillVO> slb){
-
-		
-		//遍历数组把单据加上去
-		for(int i=length;i<slb.size();i++){
-			JPBill temp=new JPBill(slb.get(i));
-			temp.setLocation(0, 93*i);
-			this.add(temp,i);
-		}
-		length=length+slb.size()*93;
-		//面板大小
-		this.setSize(261, length);
-
-
+	public void addSpillsLossBill(SpillsLossBillVO slb){
+		JPbillList.add(new JPBill(slb));
+		//更新到面板上
+		updateJP();
 	}
 	/*删除选中的*/
 	public void removeChosen(){
@@ -237,8 +248,35 @@ public class JPBillList extends JPanel {
 			}
 		}
 		//重新加到底板上
-		addJPbillList();
+		updateJP();
 	}
+	/*返回被选中的个数*/
+	public int getChosenNum(){
+		int chosenNum=0;
+		for(int i=0;i<JPbillList.size();i++){
+			if(JPbillList.get(i).getChoose()){
+				chosenNum++;
+			}
+		}
+		return chosenNum;
+	}
+	/*选中的单据是否是同一个状态*/
+	public boolean isTheSameState(){
+		BillState state=null;
+		for(int i=0;i<JPbillList.size();i++){
+			if(JPbillList.get(i).getChoose()){
+			//未实现
+			}
+		}
+		return false;
+	}
+	/*返回选中单据的状态*/
+	public BillState stateOfChosen(){
+		//未实现
+		return null;
+		
+	}
+	/*面板向上移动*/
 	public void startUp(){
 		stop=false;
 		//线程
@@ -246,6 +284,7 @@ public class JPBillList extends JPanel {
 		//开启线程
 		t.start();
 	}
+	/*面板向下移动*/
 	public void startDown(){
 		stop=false;
 		//线程
@@ -253,10 +292,12 @@ public class JPBillList extends JPanel {
 		//开启线程
 		t.start();
 	}
+	/*面板停止移动*/
 	public void stop(){
 		stop=true;
 	}
 
+	/*向上移动线程*/
 	public class TreadOfUp implements Runnable{
 
 		public void run() {
@@ -276,6 +317,7 @@ public class JPBillList extends JPanel {
 
 		
 	}
+	/*向下移动线程*/
 	public class TreadOfDown implements Runnable{
 
 		public void run() {
