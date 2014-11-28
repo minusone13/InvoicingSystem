@@ -2,6 +2,8 @@ package businesslogic.commoditybillbl;
 
 //import java.nio.file.attribute.PosixFilePermission; what is it?
 
+import java.util.Date;
+
 import po.*;
 import po.SpillsLossBillPO.*;
 import vo.*;
@@ -12,8 +14,8 @@ import businesslogic.examinebl.Bill;
 
 public class StubSpillsLossBill extends Bill implements GetVOandPO
 {//报溢报损单，统一进入单据池管理和存储
-	private BillStyle billstyle=BillStyle.SpillsLossBill;
-	
+	Date date;
+	private BillStyle style=BillStyle.SpillsLossBill;
 	private MockCommodity com;
 	String ID;
 	Type t;
@@ -33,12 +35,11 @@ public class StubSpillsLossBill extends Bill implements GetVOandPO
 		ID=po.getID();
 		state=po.getState();
 	}
-	
-	public BillStyle getBillstyle() {
-		return billstyle;
+	public BillStyle getStyle() {
+		return style;
 	}
-	public void setBillstyle(BillStyle billstyle) {
-		this.billstyle = billstyle;
+	public void setStyle(BillStyle style) {
+		this.style = style;
 	}
 	public MockCommodity getCom() {
 		return com;
@@ -71,5 +72,11 @@ public class StubSpillsLossBill extends Bill implements GetVOandPO
 				l.checkIn(ID, com.getName(), com.getModel(), com.getNumber(), 0);
 		}
 		this.state = state;
+	}
+	public synchronized Date getDate() {
+		return date;
+	}
+	public synchronized void setDate(Date date) {
+		this.date = date;
 	}
 }

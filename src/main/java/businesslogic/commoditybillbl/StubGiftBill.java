@@ -1,6 +1,7 @@
 package businesslogic.commoditybillbl;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import po.*;
 import po.stockpo.CommodityPO;
@@ -15,6 +16,7 @@ import businesslogic.examinebl.Bill;
 
 public class StubGiftBill extends Bill implements GetVOandPO
 {//赠送单类，统一进入单据池管理和存储
+	Date date;
 	private BillStyle style=BillStyle.GiftBill;
 	private String ID;
 	ArrayList<MockCommodity> coms;
@@ -68,5 +70,11 @@ public class StubGiftBill extends Bill implements GetVOandPO
 	}
 	public void setState(BillState state) {
 		this.state = state;
+	}
+	public Date getDate() {
+		return date;
+	}
+	public void setDate(Date date) {
+		this.date = date;
 	}
 }

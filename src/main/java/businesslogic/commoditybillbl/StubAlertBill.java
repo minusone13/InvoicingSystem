@@ -1,5 +1,7 @@
 package businesslogic.commoditybillbl;
 
+import java.util.Date;
+
 import vo.*;
 import vo.stockvo.CommodityVO;
 import po.*;
@@ -9,10 +11,11 @@ import businesslogic.examinebl.Bill;
 
 public class StubAlertBill extends Bill implements GetVOandPO
 {//报警单对象，统一进入单据池管理和存储
+	Date date;
 	String ID;
 	MockCommodity com;
 	int shortage;
-	BillStyle billstyle=BillStyle.AlertBill;
+	BillStyle style=BillStyle.AlertBill;
 	BillState state=BillState.DRAFT;
 	public StubAlertBill(){}
 	public StubAlertBill(MockCommodity com, int shortage)
@@ -33,7 +36,7 @@ public class StubAlertBill extends Bill implements GetVOandPO
 		com=new MockCommodity(po.getCommodity());
 		shortage=po.getshortage();
 		ID=po.getID();
-		billstyle=po.getStyle();
+		style=po.getStyle();
 		state=po.getState();
 	}
 	public MockCommodity getCom() {
@@ -54,16 +57,22 @@ public class StubAlertBill extends Bill implements GetVOandPO
 	public void setID(String iD) {
 		ID = iD;
 	}
-	public BillStyle getBillstyle() {
-		return billstyle;
+	public BillStyle getStyle() {
+		return style;
 	}
 	public void setStyle(BillStyle style) {
-		this.billstyle = style;
+		this.style = style;
 	}
 	public BillState getState() {
 		return state;
 	}
 	public void setState(BillState state) {
 		this.state = state;
+	}
+	public synchronized Date getDate() {
+		return date;
+	}
+	public synchronized void setDate(Date date) {
+		this.date = date;
 	}
 }

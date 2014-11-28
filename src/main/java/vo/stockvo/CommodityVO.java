@@ -30,9 +30,10 @@ public class CommodityVO {
 	double average;
 	ArrayList<CommodityRecordVO> record=null;
 	public CommodityVO(String parent,String name,String model,double in,double out)
-	{
+	{//this is for ui
 		this.parent=parent;
 		this.name=name;
+		id=parent+"\\"+name;
 		this.model=model;
 		this.in=in;
 		this.out=out;
