@@ -45,9 +45,9 @@ public class UserController implements StubUserBlService, UserService{
 	public void setUser(UserList user) {
 		this.l = user;
 	}
-	public boolean addRecord(OperationRecordPO po)
+	public boolean addRecord(OperationRecord op)
 	{
-		return l.addRecord(po);
+		return l.addRecord(op);
 	}
 	public RM changeRole(UserVO vo,Role newRole)
 	{

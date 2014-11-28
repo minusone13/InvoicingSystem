@@ -11,6 +11,13 @@ public class OperationRecord {
 	User user;//操作者
 	String operation;//动作内容
 	RM result;//操作结果
+	public OperationRecord(User user,String operation,RM result)
+	{
+		d=new Date();
+		this.user=user.clone();
+		this.operation=operation;
+		this.result=result;
+	}
 	public OperationRecord(OperationRecordPO po)
 	{
 		d=po.getD();
