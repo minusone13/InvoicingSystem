@@ -1,6 +1,7 @@
 package businesslogic.salebillbl;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import po.PurSheetPO;
 import vo.PurSheetVO;
@@ -12,7 +13,7 @@ import businesslogic.examinebl.Bill;
 public class StubPurSheet extends Bill implements GetVOandPO{
 	private BillStyle billstyle=BillStyle.PurSheet;
 	
-
+		Date date;
 		StubCustomer customer;
 		private String ID;
 		String commodity;//仓库？
@@ -20,6 +21,13 @@ public class StubPurSheet extends Bill implements GetVOandPO{
 		double money1;//总金额
 		String words;//备注
 		
+		public Date getDate() {
+			return date;
+		}
+
+		public void setDate(Date date) {
+			this.date = date;
+		}
 		public BillStyle getBillstyle() {
 			return billstyle;
 		}

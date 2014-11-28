@@ -1,6 +1,7 @@
 package businesslogic.salebillbl;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import po.SaleBackSheetPO;
 import vo.SaleBackSheetVO;
@@ -12,8 +13,9 @@ import businesslogic.examinebl.Bill;
 public class StubSaleBackSheet extends Bill implements GetVOandPO{
 	private String ID;
 	private BillStyle billstyle=BillStyle.SaleBackSheet;
-	
+	Date date;
 
+	
 	StubCustomer customer;
 	ArrayList sheet;//销售单据，商品名，数量，单价
 	double money1;//折前总金额
@@ -28,6 +30,12 @@ public class StubSaleBackSheet extends Bill implements GetVOandPO{
 	public SaleBackSheetPO getPO() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	public Date getDate() {
+		return date;
+	}
+	public void setDate(Date date) {
+		this.date = date;
 	}
 
 	public BillStyle getBillstyle() {

@@ -22,7 +22,7 @@ public class ReceiptBill extends Bill implements GetVOandPO{
 	private Role operator;
 	private double total;
 	private BillState state;
-	private String date;
+	private Date date;
 	private String customer;
 	
 	
@@ -40,13 +40,14 @@ public class ReceiptBill extends Bill implements GetVOandPO{
 		for(int i=0;i<length;i++) {
 			transferlist.add(new StubTransferAccount(account[i], money[i], remark[i]));
 		}
+		this.date = new Date();
 		this.customer = customer;
 		this.total = total;
 		this.operator = vo.getOperator();
 		state = BillState.DRAFT;
 		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
 		String currentTime = format.format(new Date());
-		this.date = currentTime;
+		
 		StubBillPool pool = new StubBillPool();
 		ArrayList<ReceiptBill> list = pool.getReceiptBill();
 		ID = "SKD-"+currentTime+"-"+String.format("%05d", list.size()+1);
@@ -56,7 +57,7 @@ public class ReceiptBill extends Bill implements GetVOandPO{
 		return billstyle;
 	}
 	
-	public String getDate() {
+	public Date getDate() {
 		return date;
 	}
 	public String getID() {
@@ -98,7 +99,7 @@ public class ReceiptBill extends Bill implements GetVOandPO{
 	public void setBillstyle(BillStyle billstyle) {
 		this.billstyle = billstyle;
 	}
-	public void setDate(String date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 	

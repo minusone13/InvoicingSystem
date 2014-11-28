@@ -17,7 +17,8 @@ import businesslogic.examinebl.Bill;
 public class StubGiftBill extends Bill implements GetVOandPO
 {//赠送单类，统一进入单据池管理和存储
 	Date date;
-	private BillStyle style=BillStyle.GiftBill;
+	private BillStyle billstyle=BillStyle.GiftBill;
+	
 	private String ID;
 	ArrayList<MockCommodity> coms;
 	BillState state=BillState.DRAFT;
@@ -41,12 +42,14 @@ public class StubGiftBill extends Bill implements GetVOandPO
 		state=po.getState();
 		remark=po.getRemark();
 	}
-	public BillStyle getStyle() {
-		return style;
+	
+	public BillStyle getBillstyle() {
+		return billstyle;
 	}
-	public void setStyle(BillStyle style) {
-		this.style = style;
+	public void setBillstyle(BillStyle billstyle) {
+		this.billstyle = billstyle;
 	}
+	
 	public String getID() {
 		return ID;
 	}
