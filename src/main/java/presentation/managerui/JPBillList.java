@@ -241,14 +241,111 @@ public class JPBillList extends JPanel {
 	/*删除选中的*/
 	public void removeChosen(){
 
+		if(isTheSameState()&&stateOfChosen()==BillState.OVER){//如果是同一个状态且是已处理状态
+			for(int i=0;i<JPbillList.size();i++){
+				if(JPbillList.get(i).getChoose()){
+					JPbillList.remove(i);
+					i--;
+				}
+			}
+			//重新加到底板上
+			updateJP();
+		}
+	
+		else{
+			System.out.println("只有已处理单据能够移除");
+		}
+	}
+	/*修改选中的*/
+	public void changeChosen(GiftBillVO gb){
 		for(int i=0;i<JPbillList.size();i++){
 			if(JPbillList.get(i).getChoose()){
-				JPbillList.remove(i);
-				i--;
+				JPbillList.get(i).change(gb);
+				break;
 			}
 		}
-		//重新加到底板上
-		updateJP();
+	}
+	public void changeChosen(SpillsLossBillVO slb){
+		for(int i=0;i<JPbillList.size();i++){
+			if(JPbillList.get(i).getChoose()){
+				JPbillList.get(i).change(slb);
+				break;
+			}
+		}
+	}
+	public void changeChosen(AlertBillVO ab){
+		for(int i=0;i<JPbillList.size();i++){
+			if(JPbillList.get(i).getChoose()){
+				JPbillList.get(i).change(ab);
+				break;
+			}
+		}
+	}
+	public void changeChosen(PurSheetVO ps){
+		for(int i=0;i<JPbillList.size();i++){
+			if(JPbillList.get(i).getChoose()){
+				JPbillList.get(i).change(ps);
+				break;
+			}
+		}
+	}
+	public void changeChosen(PurBackSheetVO pbs){
+		for(int i=0;i<JPbillList.size();i++){
+			if(JPbillList.get(i).getChoose()){
+				JPbillList.get(i).change(pbs);
+				break;
+			}
+		}
+	}
+	public void changeChosen(SaleSheetVO ss){
+		for(int i=0;i<JPbillList.size();i++){
+			if(JPbillList.get(i).getChoose()){
+				JPbillList.get(i).change(ss);
+				break;
+			}
+		}
+	}
+	public void changeChosen(SaleBackSheetVO sbs){
+		for(int i=0;i<JPbillList.size();i++){
+			if(JPbillList.get(i).getChoose()){
+				JPbillList.get(i).change(sbs);
+				break;
+			}
+		}
+	}
+	public void changeChosen(ReceiptVO rb){
+		for(int i=0;i<JPbillList.size();i++){
+			if(JPbillList.get(i).getChoose()){
+				JPbillList.get(i).change(rb);
+				break;
+			}
+		}
+	}
+	public void changeChosen(PaymentVO pb){
+		for(int i=0;i<JPbillList.size();i++){
+			if(JPbillList.get(i).getChoose()){
+				JPbillList.get(i).change(pb);
+				break;
+			}
+		}
+	}
+	public void changeChosen(CashPaymentVO cb){
+		for(int i=0;i<JPbillList.size();i++){
+			if(JPbillList.get(i).getChoose()){
+				JPbillList.get(i).change(cb);
+				break;
+			}
+		}
+	}
+	/*通过选中的*/
+	public void passChosen(){
+		if(getChosenNum()>=1&&isTheSameState()&&stateOfChosen()==BillState.SUBMITED){
+			for(int i=0;i<JPbillList.size();i++){
+				if(JPbillList.get(i).getChoose()){
+					JPbillList.get(i).transformState(BillState.EXAMINED);
+				}
+			}
+		}
 	}
 	/*返回被选中的个数*/
 	public int getChosenNum(){
@@ -265,14 +362,23 @@ public class JPBillList extends JPanel {
 		BillState state=null;
 		for(int i=0;i<JPbillList.size();i++){
 			if(JPbillList.get(i).getChoose()){
-			//未实现
+				if(state!=null&&JPbillList.get(i).getState()!=state){
+					return false;
+				}
+				state=JPbillList.get(i).getState();
 			}
 		}
-		return false;
+		return true;
 	}
 	/*返回选中单据的状态*/
 	public BillState stateOfChosen(){
-		//未实现
+		if(isTheSameState()){//如果选中的单据都是同一个状态
+			for(int i=0;i<JPbillList.size();i++){
+				if(JPbillList.get(i).getChoose()){
+					return JPbillList.get(i).getState();
+				}
+			}
+		}
 		return null;
 		
 	}

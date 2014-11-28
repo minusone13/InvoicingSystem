@@ -103,9 +103,9 @@ public class UserList {
 		}
 		return result;
 	}
-	public boolean addRecord(OperationRecordPO po)
+	public boolean addRecord(OperationRecord op)
 	{
-		return data.insert(po);
+		return data.insert(op.toPO());
 	}
 	public void setPO(UserPO po)
 	{

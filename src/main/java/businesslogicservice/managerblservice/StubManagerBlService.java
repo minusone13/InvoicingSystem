@@ -86,7 +86,18 @@ public interface StubManagerBlService {
 	/*修改密码*/
 	public boolean modifyPassword (String newpassword);
     /*修改单据信息*/
-	public boolean changeImformationOfBill(VO billvo);
+	public boolean change(GiftBillVO gb);
+	public boolean change(SpillsLossBillVO slb);
+	public boolean change(AlertBillVO ab);
+	public boolean change(PurSheetVO ps);
+	public boolean change(PurBackSheetVO pbs);
+	public boolean change(SaleSheetVO ss);
+	public boolean change(SaleBackSheetVO sbs);
+	public boolean change(ReceiptVO rb);
+	public boolean change(PaymentVO pb);
+	public boolean change(CashPaymentVO cb);
+	/*改变单据状态*/
+	public void transformState(BillStyle style,String ID,BillState state);
 	/*通过数组中对应的单据*/
 	public boolean PassBill(ArrayList<VO> billvo);
 	/*返回所有客户分层策略信息*/

@@ -2,6 +2,7 @@ package businesslogic.examinebl;
 
 import businesslogic.BillState;
 import businesslogic.BillStyle;
+import businesslogic.commoditybillbl.StubAlertBill;
 
 public class Bill {
 	private BillStyle billstyle;//单据类型
@@ -27,10 +28,10 @@ public class Bill {
 		return ID;	
 	}
 	/*获取单据类型*/
+
 	
 	public BillStyle getBillstyle(){
 		return billstyle;
-		
-	}
-	
+	}	
+
 }

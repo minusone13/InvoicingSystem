@@ -3,8 +3,8 @@ package presentation.managerui;
 import java.util.ArrayList;
 
 import vo.BarginStrategyVO;
+import vo.GiftBillVO;
 import vo.LevelStrategyVO;
-import vo.PaymentVO;
 import vo.ReachStrategyVO;
 import vo.VO;
 import businesslogicservice.managerblservice.StubManagerBlService;
@@ -20,8 +20,8 @@ public class ManagerBLDriver {
 	mbs.modifyPassword("wwweee");
 	 
 	//初始化一个假的单据vo
-	VO tempVO=new PaymentVO();
-	mbs.changeImformationOfBill(tempVO);
+	GiftBillVO tempVO=new GiftBillVO();
+	mbs.change(tempVO);
 	
 	mbs.PassBill(new ArrayList<VO>());
 	
