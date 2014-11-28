@@ -19,6 +19,8 @@ import vo.SaleSheetVO;
 import vo.SpillsLossBillVO;
 import businesslogic.BillState;
 import businesslogic.BillStyle;
+import businesslogic.managerbl.StubManager;
+import businesslogicservice.managerblservice.StubManagerBlService;
 
 public class JPBill extends JPanel {
 
@@ -36,6 +38,8 @@ public class JPBill extends JPanel {
 	private JLabel left=new JLabel();
 	//选中标记
 	private boolean choose=false;
+	//逻辑层的接口
+	StubManagerBlService mbl=new StubManager();
 	public JPBill(GiftBillVO gb){
 		//面板大小
 		this.setSize(522, 93);
@@ -137,9 +141,9 @@ public class JPBill extends JPanel {
 		//设置面板透明
 		this.setOpaque(false);
 		//背景
-		setBillBg(10,cb.getBillState(),0);
+		setBillBg(BillStyle.CashPaymentBill,cb.getBillState(),0);
 		bg.setBounds(0, 0, 522, 93);
-		bg.addMouseListener(new MouseListenerOfBill(10,cb.getBillState()));
+		bg.addMouseListener(new MouseListenerOfBill(BillStyle.CashPaymentBill));
 		//向右
 		right.setIcon(new ImageIcon("src/image/right.png"));
 		right.setBounds(221, 26, 40, 40);
@@ -156,60 +160,98 @@ public class JPBill extends JPanel {
 	public void change(GiftBillVO gb){
 	
 		//调用逻辑层修改对应单据的数据
+		gb.setID(ID);//设置对应单据的编号
+		mbl.change(gb);
 		//根据内存中单据的数据重新设置面板界面
 	
 	}
 	public void change(SpillsLossBillVO slb){
-	
+		//调用逻辑层修改对应单据的数据
+		slb.setID(ID);//设置对应单据的编号
+		mbl.change(slb);
+		//根据内存中单据的数据重新设置面板界面
 	}
 	public void change(AlertBillVO ab){
-	
+		//调用逻辑层修改对应单据的数据
+		ab.setID(ID);//设置对应单据的编号
+		mbl.change(ab);
+		//根据内存中单据的数据重新设置面板界面
 	}
 	public void change(PurSheetVO ps){
-	
+		//调用逻辑层修改对应单据的数据
+		ps.setID(ID);//设置对应单据的编号
+		mbl.change(ps);
+		//根据内存中单据的数据重新设置面板界面
 	}
 	public void change(PurBackSheetVO pbs){
-	
+		//调用逻辑层修改对应单据的数据
+		pbs.setID(ID);//设置对应单据的编号
+		mbl.change(pbs);
+		//根据内存中单据的数据重新设置面板界面
 	}
 	public void change(SaleSheetVO ss){
-	
+		//调用逻辑层修改对应单据的数据
+		ss.setID(ID);//设置对应单据的编号
+		mbl.change(ss);
+		//根据内存中单据的数据重新设置面板界面
 	}
 	public void change(SaleBackSheetVO sbs){
-		
+		//调用逻辑层修改对应单据的数据
+		sbs.setID(ID);//设置对应单据的编号
+		mbl.change(sbs);
+		//根据内存中单据的数据重新设置面板界面
 	}
 	public void change(ReceiptVO rb){
-	
+		//调用逻辑层修改对应单据的数据
+		rb.setID(ID);//设置对应单据的编号
+		mbl.change(rb);
+		//根据内存中单据的数据重新设置面板界面
 	}
 	public void change(PaymentVO pb){
-	
+		//调用逻辑层修改对应单据的数据
+		pb.setID(ID);//设置对应单据的编号
+		mbl.change(pb);
+		//根据内存中单据的数据重新设置面板界面
 	}
 	public void change(CashPaymentVO cb){
-		
+		//调用逻辑层修改对应单据的数据
+		cb.setID(ID);//设置对应单据的编号
+		mbl.change(cb);
+		//根据内存中单据的数据重新设置面板界面
+	}
+	/*修改状态*/
+	public void transformState(BillState st){
+		//修改逻辑层的数据
+		//mbl.transformState(style, ID, st);
+		//界面层
+		state=st;
+		//修改背景
+		setBillBg(style,state,2);
 	}
 	/*根据条件生成地址给单据上背景*/
-	public void setBillBg(int BillStyle,BillState state,int num){
+	public void setBillBg(BillStyle style,BillState state,int num){
 		String s1="";
 		String s2="";
-		switch(BillStyle){
-		case 1:
+		switch(style){
+		case GiftBill:
 			break;
-		case 2:
+		case SpillsLossBill:
 			break;
-		case 3:
+		case AlertBill:
 			break;
-		case 4:
+		case PurSheet:
 			break;
-		case 5:
+		case PurBackSheet:
 			break;
-		case 6:
+		case SaleSheet:
 			break;
-		case 7:
+		case SaleBackSheet:
 			break;
-		case 8:
+		case ReceiptBill:
 			break;
-		case 9:
+		case PaymentBill:
 			break;
-		case 10:s1="CashPaymentbill";
+		case CashPaymentBill:s1="CashPaymentbill";
 			break;
 		}
 		switch(state){
@@ -240,6 +282,16 @@ public class JPBill extends JPanel {
 	/*返回选中状态*/
 	public boolean getChoose(){
 		return choose;
+	}
+	
+	public BillStyle getStyle() {
+		return style;
+	}
+	public BillState getState() {
+		return state;
+	}
+	public String getID() {
+		return ID;
 	}
 	public class MouseListenerOfButton implements MouseListener{
 
@@ -353,11 +405,11 @@ public class JPBill extends JPanel {
 
 	public class MouseListenerOfBill implements MouseListener{
 
-		private int num;//单据类型对应数字
-		private BillState state;//单据状态
-		public MouseListenerOfBill(int N,BillState st){
-			num=N;
-			state=st;
+		private BillStyle st;
+		
+		public MouseListenerOfBill(BillStyle s){
+			st=s;
+			
 		}
 		public void mouseClicked(MouseEvent e) {
 			// TODO Auto-generated method stub
@@ -368,10 +420,10 @@ public class JPBill extends JPanel {
 			// TODO Auto-generated method stub
 			choose=!choose;//选中与取消选中
 			if(choose){
-				setBillBg(num,state,3);
+				setBillBg(st,state,3);
 			}
 			else{
-				setBillBg(num,state,1);
+				setBillBg(st,state,1);
 			}
 			
 		}
@@ -384,20 +436,20 @@ public class JPBill extends JPanel {
 		public void mouseEntered(MouseEvent e) {
 			// TODO Auto-generated method stub
 			if(choose){
-				setBillBg(num,state,3);
+				setBillBg(st,state,3);
 			}
 			else{
-				setBillBg(num,state,1);
+				setBillBg(st,state,1);
 			}
 		}
 
 		public void mouseExited(MouseEvent e) {
 			// TODO Auto-generated method stub
 			if(choose){
-				setBillBg(num,state,2);
+				setBillBg(st,state,2);
 			}
 			else{
-				setBillBg(num,state,0);
+				setBillBg(st,state,0);
 			}
 		}
 		

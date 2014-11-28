@@ -12,6 +12,16 @@ import po.ReceiptPO;
 import po.SaleBackSheetPO;
 import po.SaleSheetPO;
 import po.SpillsLossBillPO;
+import vo.AlertBillVO;
+import vo.CashPaymentVO;
+import vo.GiftBillVO;
+import vo.PaymentVO;
+import vo.PurBackSheetVO;
+import vo.PurSheetVO;
+import vo.ReceiptVO;
+import vo.SaleBackSheetVO;
+import vo.SaleSheetVO;
+import vo.SpillsLossBillVO;
 import businesslogic.BillState;
 import businesslogic.BillStyle;
 import businesslogic.commoditybillbl.StubAlertBill;
@@ -33,8 +43,7 @@ import dataservice.billdataservice.SaleBillSaverService;
 
 public class StubBillPool {
 
-	//暂时用新new的对象
-	//待对象序列化写好后，都用从txt读取的对象
+
 	private ArrayList<StubGiftBill> alOfGiftBill=new ArrayList<StubGiftBill>();
 	private ArrayList<StubSpillsLossBill> alOfSpillsLossBill=new ArrayList<StubSpillsLossBill>();
 	private ArrayList<StubAlertBill> alOfAlertBill=new ArrayList<StubAlertBill>();
@@ -369,6 +378,177 @@ public class StubBillPool {
 	public ArrayList<CashPaymentBill> getCashPaymentBill (){
 		return alOfCashPaymentBill;
 	}
+   /*修改单据信息*/
+	public void change(GiftBillVO gb){
+	
+		for(int i=0;i<alOfGiftBill.size();i++){
+			if(alOfGiftBill.get(i).getID().equals(gb.getID())){//寻找相同编号
+				//进行修改
+			}
+		}
+		//保存
+		this.save();
+	}
+	public void change(SpillsLossBillVO slb){
+		for(int i=0;i<alOfSpillsLossBill.size();i++){
+			if(alOfSpillsLossBill.get(i).getID().equals(slb.getID())){//寻找相同编号
+				//进行修改
+			}
+		}
+		//保存
+		this.save();
+	}
+	public void change(AlertBillVO ab){
+		for(int i=0;i<alOfAlertBill.size();i++){
+			if(alOfAlertBill.get(i).getID().equals(ab.getID())){//寻找相同编号
+				//进行修改
+			}
+		}
+		//保存
+		this.save();
+	}
+	public void change(PurSheetVO ps){
+		for(int i=0;i<alOfPurSheet.size();i++){
+			if(alOfPurSheet.get(i).getID().equals(ps.getID())){//寻找相同编号
+				//进行修改
+			}
+		}
+		//保存
+		this.save();
+	}
+	public void change(PurBackSheetVO pbs){
+		for(int i=0;i<alOfPurBackSheet.size();i++){
+			if(alOfPurBackSheet.get(i).getID().equals(pbs.getID())){//寻找相同编号
+				//进行修改
+			}
+		}
+		//保存
+		this.save();
+	}
+	public void change(SaleSheetVO ss){
+		for(int i=0;i<alOfSaleSheet.size();i++){
+			if(alOfSaleSheet.get(i).getID().equals(ss.getID())){//寻找相同编号
+				//进行修改
+			}
+		}
+		//保存
+		this.save();
+	}
+	public void change(SaleBackSheetVO sbs){
+		for(int i=0;i<alOfSaleBackSheet.size();i++){
+			if(alOfSaleBackSheet.get(i).getID().equals(sbs.getID())){//寻找相同编号
+				//进行修改
+			}
+		}
+		//保存
+		this.save();
+	}
+	public void change(ReceiptVO rb){
+		for(int i=0;i<alOfReceiptBill.size();i++){
+			if(alOfReceiptBill.get(i).getID().equals(rb.getID())){//寻找相同编号
+				//进行修改
+			}
+		}
+		//保存
+		this.save();
+	}
+	public void change(PaymentVO pb){
+		for(int i=0;i<alOfPaymentBill.size();i++){
+			if(alOfPaymentBill.get(i).getID().equals(pb.getID())){//寻找相同编号
+				//进行修改
+			}
+		}
+		//保存
+		this.save();
+	}
+	public void change(CashPaymentVO cb){
+		for(int i=0;i<alOfCashPaymentBill.size();i++){
+			if(alOfCashPaymentBill.get(i).getID().equals(cb.getID())){//寻找相同编号
+				//进行修改
+			}
+		}
+		//保存
+		this.save();
+	}
+	/*改单据状态*/
+	public void transformState(BillStyle style,String ID,BillState state){
+		switch(style){
+		case GiftBill:
+			for(int i=0;i<alOfGiftBill.size();i++){
+				if(alOfGiftBill.get(i).getID().equals(ID)){
+					alOfGiftBill.get(i).setState(state);
+				}
+			}
+			break;
+		case SpillsLossBill:
+			for(int i=0;i<alOfSpillsLossBill.size();i++){
+				if(alOfSpillsLossBill.get(i).getID().equals(ID)){
+					alOfSpillsLossBill.get(i).setState(state);
+				}
+			}
+			break;
+		case AlertBill:
+			for(int i=0;i<alOfAlertBill.size();i++){
+				if(alOfAlertBill.get(i).getID().equals(ID)){
+					alOfAlertBill.get(i).setState(state);
+				}
+			}
+			break;
+		case PurSheet:
+			for(int i=0;i<alOfPurSheet.size();i++){
+				if(alOfPurSheet.get(i).getID().equals(ID)){
+					alOfPurSheet.get(i).setState(state);
+				}
+			}
+			break;
+		case PurBackSheet:
+			for(int i=0;i<alOfPurBackSheet.size();i++){
+				if(alOfPurBackSheet.get(i).getID().equals(ID)){
+					alOfPurBackSheet.get(i).setState(state);
+				}
+			}
+			break;
+		case SaleSheet:
+			for(int i=0;i<alOfSaleSheet.size();i++){
+				if(alOfSaleSheet.get(i).getID().equals(ID)){
+					alOfSaleSheet.get(i).setState(state);
+				}
+			}
+			break;
+		case SaleBackSheet:
+			for(int i=0;i<alOfSaleBackSheet.size();i++){
+				if(alOfSaleBackSheet.get(i).getID().equals(ID)){
+					alOfSaleBackSheet.get(i).setState(state);
+				}
+			}
+			break;
+		case ReceiptBill:
+			for(int i=0;i<alOfReceiptBill.size();i++){
+				if(alOfReceiptBill.get(i).getID().equals(ID)){
+					alOfReceiptBill.get(i).setState(state);
+				}
+			}
+			break;
+		case PaymentBill:
+			for(int i=0;i<alOfPaymentBill.size();i++){
+				if(alOfPaymentBill.get(i).getID().equals(ID)){
+					alOfPaymentBill.get(i).setState(state);
+				}
+			}
+			break;
+		case CashPaymentBill:
+			for(int i=0;i<alOfCashPaymentBill.size();i++){
+				if(alOfCashPaymentBill.get(i).getID().equals(ID)){
+					alOfCashPaymentBill.get(i).setState(state);
+				}
+			}
+			break;
+			
+		}
+		//保存
+		save();
+	}
+	
 	/*实时保存池中数组对象*/
 	public void save(){
 		//保存文档中的对象

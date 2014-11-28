@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import junit.framework.TestCase;
 import vo.BarginStrategyVO;
 import vo.BusinessSituationVO;
+import vo.GiftBillVO;
 import vo.LevelStrategyVO;
 import vo.ReachStrategyVO;
 import vo.VO;
@@ -27,8 +28,9 @@ public class ManagerTest extends TestCase{
 		assertTrue(result);
 	}
     /*修改单据信息*/
-	public void testchangeImformationOfBill(VO billvo){
-		boolean result=mbl.changeImformationOfBill(null);
+	public void testchange(GiftBillVO gb){
+		GiftBillVO vo=new GiftBillVO();
+		boolean result=mbl.change(vo);
 		assertTrue(result);
 	}
 	/*通过数组中对应的单据*/

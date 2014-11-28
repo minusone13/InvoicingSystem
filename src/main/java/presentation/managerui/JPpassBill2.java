@@ -123,6 +123,7 @@ public class JPpassBill2 extends JPanel {
 			billList.startDown();
 				break;	
 			case 3:check.setIcon(new ImageIcon("src/image/function/checkR.png"));
+				billList.passChosen();
 				break;
 			case 4:delete.setIcon(new ImageIcon("src/image/function/deleteR.png"));
 				billList.removeChosen();

@@ -161,7 +161,7 @@ public class StubInquiry {
 			}
 			
 			if(ipv.getBillstyle()!=null) {
-				if(ca.getBillStyle() == ipv.getBillstyle()){}
+				if(ca.getStyle() == ipv.getBillstyle()){}
 				else continue;
 			}
 			

@@ -2,9 +2,10 @@ package businesslogic.examinebl;
 
 import businesslogic.BillState;
 import businesslogic.BillStyle;
+import businesslogic.commoditybillbl.StubAlertBill;
 
 public class Bill {
-	private BillStyle billstyle;//单据类型
+	private BillStyle style;//单据类型
 	private String ID;//单据编号
 	private BillState state=BillState.DRAFT;//单据状态,初始状态为草稿
 	/*设置单据状态*/
@@ -27,8 +28,8 @@ public class Bill {
 		return ID;	
 	}
 	/*获取单据类型*/
-	public BillStyle getBillStyle(){
-		return billstyle;
-		
+	public BillStyle getStyle(){
+		return style;
 	}
+
 }

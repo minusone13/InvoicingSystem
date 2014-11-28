@@ -344,80 +344,50 @@ public class StubManager implements StubManagerBlService{
 		
 	}
     /*修改单据信息*/
-	public void change(GiftBillVO gb){
-		
-		//调用逻辑层修改对应单据的数据
-		//根据内存中单据的数据重新设置面板界面
-	
-	}
-	public void change(SpillsLossBillVO slb){
-	
-	}
-	public void change(AlertBillVO ab){
-	
-	}
-	public void change(PurSheetVO ps){
-	
-	}
-	public void change(PurBackSheetVO pbs){
-	
-	}
-	public void change(SaleSheetVO ss){
-	
-	}
-	public void change(SaleBackSheetVO sbs){
-		
-	}
-	public void change(ReceiptVO rb){
-	
-	}
-	public void change(PaymentVO pb){
-	
-	}
-	public void change(CashPaymentVO cb){
-		
-	}
-	public boolean changeImformationOfBill(VO billvo){
-		//通过新VO修改对应单据对象的信息
-		if(billvo!=null){
-			switch(billvo.getBillStyle()){
-			case GiftBill:
-			    //获取对应类型的数组
-				ArrayList<StubGiftBill> alOfGB=billPool.getGiftBill(BillState.SUBMITED);
-				for(StubGiftBill temp:alOfGB){
-					if(temp.getID()==billvo.getID()){
-					//将vo中的信息覆盖真实单据对象的信息
-					}
-				}
-				//保存单据信息
-				billPool.save();
-				break;
-			case SpillsLossBill:
-				break;
-			case AlertBill:
-				break;
-			case PurSheet:
-				break;
-			case PurBackSheet:
-				break;
-			case SaleSheet:
-				break;
-			case SaleBackSheet:
-				break;
-			case ReceiptBill:
-				break;
-			case PaymentBill:
-				break;
-			case CashPaymentBill:
-				break;
-			}
-			
-			
-			//保存操作
-		}
-
-		
+	public boolean change(GiftBillVO gb){
+		billPool.change(gb);
 		return true;
+	}
+	public boolean change(SpillsLossBillVO slb){
+		billPool.change(slb);
+		return true;
+	}
+	public boolean change(AlertBillVO ab){
+		billPool.change(ab);
+		return true;
+	}
+	public boolean change(PurSheetVO ps){
+		billPool.change(ps);
+		return true;
+	}
+	public boolean change(PurBackSheetVO pbs){
+		billPool.change(pbs);
+		return true;
+	}
+	public boolean change(SaleSheetVO ss){
+		billPool.change(ss);
+		return true;
+	}
+	public boolean change(SaleBackSheetVO sbs){
+		billPool.change(sbs);
+		return true;
+	}
+	public boolean change(ReceiptVO rb){
+		billPool.change(rb);
+		return true;
+	}
+	public boolean change(PaymentVO pb){
+		billPool.change(pb);
+		return true;
+	}
+	public boolean change(CashPaymentVO cb){
+		billPool.change(cb);
+		return true;
+	}
+	
+	/*改单据状态*/
+	public void transformState(BillStyle style,String ID,BillState state){
+		billPool.transformState(style, ID, state);
 	}
 	/*通过数组中对应的单据*/
 	public boolean PassBill(ArrayList<VO> billvo){

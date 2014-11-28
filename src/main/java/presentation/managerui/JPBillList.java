@@ -241,17 +241,23 @@ public class JPBillList extends JPanel {
 	/*删除选中的*/
 	public void removeChosen(){
 
-		for(int i=0;i<JPbillList.size();i++){
-			if(JPbillList.get(i).getChoose()){
-				JPbillList.remove(i);
-				i--;
+		if(isTheSameState()&&stateOfChosen()==BillState.OVER){//如果是同一个状态且是已处理状态
+			for(int i=0;i<JPbillList.size();i++){
+				if(JPbillList.get(i).getChoose()){
+					JPbillList.remove(i);
+					i--;
+				}
 			}
+			//重新加到底板上
+			updateJP();
 		}
-		//重新加到底板上
-		updateJP();
+	
+		else{
+			System.out.println("只有已处理单据能够移除");
+		}
 	}
 	/*修改选中的*/
-	public void change(GiftBillVO gb){
+	public void changeChosen(GiftBillVO gb){
 		for(int i=0;i<JPbillList.size();i++){
 			if(JPbillList.get(i).getChoose()){
 				JPbillList.get(i).change(gb);
@@ -259,7 +265,7 @@ public class JPBillList extends JPanel {
 			}
 		}
 	}
-	public void change(SpillsLossBillVO slb){
+	public void changeChosen(SpillsLossBillVO slb){
 		for(int i=0;i<JPbillList.size();i++){
 			if(JPbillList.get(i).getChoose()){
 				JPbillList.get(i).change(slb);
@@ -267,7 +273,7 @@ public class JPBillList extends JPanel {
 			}
 		}
 	}
-	public void change(AlertBillVO ab){
+	public void changeChosen(AlertBillVO ab){
 		for(int i=0;i<JPbillList.size();i++){
 			if(JPbillList.get(i).getChoose()){
 				JPbillList.get(i).change(ab);
@@ -275,7 +281,7 @@ public class JPBillList extends JPanel {
 			}
 		}
 	}
-	public void change(PurSheetVO ps){
+	public void changeChosen(PurSheetVO ps){
 		for(int i=0;i<JPbillList.size();i++){
 			if(JPbillList.get(i).getChoose()){
 				JPbillList.get(i).change(ps);
@@ -283,7 +289,7 @@ public class JPBillList extends JPanel {
 			}
 		}
 	}
-	public void change(PurBackSheetVO pbs){
+	public void changeChosen(PurBackSheetVO pbs){
 		for(int i=0;i<JPbillList.size();i++){
 			if(JPbillList.get(i).getChoose()){
 				JPbillList.get(i).change(pbs);
@@ -291,7 +297,7 @@ public class JPBillList extends JPanel {
 			}
 		}
 	}
-	public void change(SaleSheetVO ss){
+	public void changeChosen(SaleSheetVO ss){
 		for(int i=0;i<JPbillList.size();i++){
 			if(JPbillList.get(i).getChoose()){
 				JPbillList.get(i).change(ss);
@@ -299,7 +305,7 @@ public class JPBillList extends JPanel {
 			}
 		}
 	}
-	public void change(SaleBackSheetVO sbs){
+	public void changeChosen(SaleBackSheetVO sbs){
 		for(int i=0;i<JPbillList.size();i++){
 			if(JPbillList.get(i).getChoose()){
 				JPbillList.get(i).change(sbs);
@@ -307,7 +313,7 @@ public class JPBillList extends JPanel {
 			}
 		}
 	}
-	public void change(ReceiptVO rb){
+	public void changeChosen(ReceiptVO rb){
 		for(int i=0;i<JPbillList.size();i++){
 			if(JPbillList.get(i).getChoose()){
 				JPbillList.get(i).change(rb);
@@ -315,7 +321,7 @@ public class JPBillList extends JPanel {
 			}
 		}
 	}
-	public void change(PaymentVO pb){
+	public void changeChosen(PaymentVO pb){
 		for(int i=0;i<JPbillList.size();i++){
 			if(JPbillList.get(i).getChoose()){
 				JPbillList.get(i).change(pb);
@@ -323,11 +329,21 @@ public class JPBillList extends JPanel {
 			}
 		}
 	}
-	public void change(CashPaymentVO cb){
+	public void changeChosen(CashPaymentVO cb){
 		for(int i=0;i<JPbillList.size();i++){
 			if(JPbillList.get(i).getChoose()){
 				JPbillList.get(i).change(cb);
 				break;
+			}
+		}
+	}
+	/*通过选中的*/
+	public void passChosen(){
+		if(getChosenNum()>=1&&isTheSameState()&&stateOfChosen()==BillState.SUBMITED){
+			for(int i=0;i<JPbillList.size();i++){
+				if(JPbillList.get(i).getChoose()){
+					JPbillList.get(i).transformState(BillState.EXAMINED);
+				}
 			}
 		}
 	}
@@ -346,14 +362,23 @@ public class JPBillList extends JPanel {
 		BillState state=null;
 		for(int i=0;i<JPbillList.size();i++){
 			if(JPbillList.get(i).getChoose()){
-			//未实现
+				if(state!=null&&JPbillList.get(i).getState()!=state){
+					return false;
+				}
+				state=JPbillList.get(i).getState();
 			}
 		}
-		return false;
+		return true;
 	}
 	/*返回选中单据的状态*/
 	public BillState stateOfChosen(){
-		//未实现
+		if(isTheSameState()){//如果选中的单据都是同一个状态
+			for(int i=0;i<JPbillList.size();i++){
+				if(JPbillList.get(i).getChoose()){
+					return JPbillList.get(i).getState();
+				}
+			}
+		}
 		return null;
 		
 	}
