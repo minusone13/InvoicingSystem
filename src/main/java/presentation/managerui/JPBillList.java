@@ -250,6 +250,87 @@ public class JPBillList extends JPanel {
 		//重新加到底板上
 		updateJP();
 	}
+	/*修改选中的*/
+	public void change(GiftBillVO gb){
+		for(int i=0;i<JPbillList.size();i++){
+			if(JPbillList.get(i).getChoose()){
+				JPbillList.get(i).change(gb);
+				break;
+			}
+		}
+	}
+	public void change(SpillsLossBillVO slb){
+		for(int i=0;i<JPbillList.size();i++){
+			if(JPbillList.get(i).getChoose()){
+				JPbillList.get(i).change(slb);
+				break;
+			}
+		}
+	}
+	public void change(AlertBillVO ab){
+		for(int i=0;i<JPbillList.size();i++){
+			if(JPbillList.get(i).getChoose()){
+				JPbillList.get(i).change(ab);
+				break;
+			}
+		}
+	}
+	public void change(PurSheetVO ps){
+		for(int i=0;i<JPbillList.size();i++){
+			if(JPbillList.get(i).getChoose()){
+				JPbillList.get(i).change(ps);
+				break;
+			}
+		}
+	}
+	public void change(PurBackSheetVO pbs){
+		for(int i=0;i<JPbillList.size();i++){
+			if(JPbillList.get(i).getChoose()){
+				JPbillList.get(i).change(pbs);
+				break;
+			}
+		}
+	}
+	public void change(SaleSheetVO ss){
+		for(int i=0;i<JPbillList.size();i++){
+			if(JPbillList.get(i).getChoose()){
+				JPbillList.get(i).change(ss);
+				break;
+			}
+		}
+	}
+	public void change(SaleBackSheetVO sbs){
+		for(int i=0;i<JPbillList.size();i++){
+			if(JPbillList.get(i).getChoose()){
+				JPbillList.get(i).change(sbs);
+				break;
+			}
+		}
+	}
+	public void change(ReceiptVO rb){
+		for(int i=0;i<JPbillList.size();i++){
+			if(JPbillList.get(i).getChoose()){
+				JPbillList.get(i).change(rb);
+				break;
+			}
+		}
+	}
+	public void change(PaymentVO pb){
+		for(int i=0;i<JPbillList.size();i++){
+			if(JPbillList.get(i).getChoose()){
+				JPbillList.get(i).change(pb);
+				break;
+			}
+		}
+	}
+	public void change(CashPaymentVO cb){
+		for(int i=0;i<JPbillList.size();i++){
+			if(JPbillList.get(i).getChoose()){
+				JPbillList.get(i).change(cb);
+				break;
+			}
+		}
+	}
 	/*返回被选中的个数*/
 	public int getChosenNum(){
 		int chosenNum=0;

@@ -86,6 +86,16 @@ public interface StubManagerBlService {
 	/*修改密码*/
 	public boolean modifyPassword (String newpassword);
     /*修改单据信息*/
+	public void change(GiftBillVO gb);
+	public void change(SpillsLossBillVO slb);
+	public void change(AlertBillVO ab);
+	public void change(PurSheetVO ps);
+	public void change(PurBackSheetVO pbs);
+	public void change(SaleSheetVO ss);
+	public void change(SaleBackSheetVO sbs);
+	public void change(ReceiptVO rb);
+	public void change(PaymentVO pb);
+	public void change(CashPaymentVO cb);
 	public boolean changeImformationOfBill(VO billvo);
 	/*通过数组中对应的单据*/
 	public boolean PassBill(ArrayList<VO> billvo);

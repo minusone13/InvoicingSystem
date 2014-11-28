@@ -18,12 +18,16 @@ import vo.SaleBackSheetVO;
 import vo.SaleSheetVO;
 import vo.SpillsLossBillVO;
 import businesslogic.BillState;
+import businesslogic.BillStyle;
 
-public class JPBill extends JPanel implements MouseListener{
+public class JPBill extends JPanel {
 
 	//单据编号
+	private String ID;
 	//单据类型
-	
+	private BillStyle style;
+	//单据状态
+	private BillState state;
 	//背景
 	private JLabel bg=new JLabel();
 	//向右按钮
@@ -42,7 +46,7 @@ public class JPBill extends JPanel implements MouseListener{
 		//背景
 		bg.setIcon(new ImageIcon("src/image/sample.jpg"));
 		bg.setBounds(0, 0, 522, 93);
-		bg.addMouseListener(this);
+		
 		//向右
 		right.setIcon(new ImageIcon("src/image/right.png"));
 		right.setBounds(221, 26, 40, 40);
@@ -122,6 +126,10 @@ public class JPBill extends JPanel implements MouseListener{
 		this.setOpaque(false);
 	}
 	public JPBill(CashPaymentVO cb){
+		//设置单据编号，状态，种类
+		state=cb.getBillState();
+		style=cb.getBillStyle();
+		ID=cb.getID();
 		//面板大小
 		this.setSize(522, 93);
 		//设置布局
@@ -144,6 +152,39 @@ public class JPBill extends JPanel implements MouseListener{
 		this.add(right,0);
 		this.add(left,1);
 		this.add(bg,2);
+	}
+	public void change(GiftBillVO gb){
+	
+		//调用逻辑层修改对应单据的数据
+		//根据内存中单据的数据重新设置面板界面
+	
+	}
+	public void change(SpillsLossBillVO slb){
+	
+	}
+	public void change(AlertBillVO ab){
+	
+	}
+	public void change(PurSheetVO ps){
+	
+	}
+	public void change(PurBackSheetVO pbs){
+	
+	}
+	public void change(SaleSheetVO ss){
+	
+	}
+	public void change(SaleBackSheetVO sbs){
+		
+	}
+	public void change(ReceiptVO rb){
+	
+	}
+	public void change(PaymentVO pb){
+	
+	}
+	public void change(CashPaymentVO cb){
+		
 	}
 	/*根据条件生成地址给单据上背景*/
 	public void setBillBg(int BillStyle,BillState state,int num){
@@ -310,27 +351,6 @@ public class JPBill extends JPanel implements MouseListener{
 		
 	}
 
-	/*单据面板本身的监控*/
-	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
 	public class MouseListenerOfBill implements MouseListener{
 
 		private int num;//单据类型对应数字

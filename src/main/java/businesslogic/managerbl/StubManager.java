@@ -344,6 +344,39 @@ public class StubManager implements StubManagerBlService{
 		
 	}
     /*修改单据信息*/
+	public void change(GiftBillVO gb){
+		
+		//调用逻辑层修改对应单据的数据
+		//根据内存中单据的数据重新设置面板界面
+	
+	}
+	public void change(SpillsLossBillVO slb){
+	
+	}
+	public void change(AlertBillVO ab){
+	
+	}
+	public void change(PurSheetVO ps){
+	
+	}
+	public void change(PurBackSheetVO pbs){
+	
+	}
+	public void change(SaleSheetVO ss){
+	
+	}
+	public void change(SaleBackSheetVO sbs){
+		
+	}
+	public void change(ReceiptVO rb){
+	
+	}
+	public void change(PaymentVO pb){
+	
+	}
+	public void change(CashPaymentVO cb){
+		
+	}
 	public boolean changeImformationOfBill(VO billvo){
 		//通过新VO修改对应单据对象的信息
 		if(billvo!=null){
