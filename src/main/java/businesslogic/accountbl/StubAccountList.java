@@ -48,7 +48,7 @@ public class StubAccountList {
 	
 	public void buildAccount() {
 		String str="";
-		StubCommodityList scl = new StubStockController().getCommodityList();//调用商品信息
+		//StubCommodityList scl = new StubStockController().getCommodityList();//调用商品信息
 		new CustomerController().findCustomer(str); //调用客户信息
 		ArrayList<AccountPO> acc= getAllAccountInfo();//调用账户信息
 	}

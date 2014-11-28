@@ -50,7 +50,8 @@ public class StubInquiry {
 		}
 		int size2 = saleBackSheet.size();
 		for(int i=0;i<size2;i++) {
-			list.add(saleBackSheet.get(i).getVO());
+			StubSaleBackSheet saleback = saleBackSheet.get(i);
+			list.add(saleback.getVO());
 		}
 		return list;
 	}
@@ -67,29 +68,78 @@ public class StubInquiry {
 		ArrayList<PaymentBill> payment = bp.getPaymentBill();
 		ArrayList<CashPaymentBill> cashPayment =bp.getCashPaymentBill();
 		
+		//销售单===============================
 		int size1 = saleSheet.size();
 		for(int i=0;i<size1;i++) {
-			list.add(saleSheet.get(i).getVO());
+			StubSaleSheet sale = saleSheet.get(i);
+			
+			if(ipv.getBillstyle()!=null) {
+				if(sale.getBillstyle() == ipv.getBillstyle()){}
+				else continue;
+			}
+			list.add(sale.getVO());
 		}
+		
+		//销售退货单===================================
 		int size2 = saleBackSheet.size();
 		for(int i=0;i<size2;i++) {
-			list.add(saleBackSheet.get(i).getVO());
+			StubSaleBackSheet saleback = saleBackSheet.get(i);
+			
+			if(ipv.getBillstyle()!=null) {
+				if(saleback.getBillstyle() == ipv.getBillstyle()){}
+				else continue;
+			}
+			list.add(saleback.getVO());
 		}
+		
+		//报溢报损=========================================
 		int size3 = spillsLoss.size();
 		for(int i=0;i<size3;i++) {
-			list.add(spillsLoss.get(i).getVO());
+			StubSpillsLossBill spillLossBill = spillsLoss.get(i);
+			
+			if(ipv.getBillstyle()!=null) {
+				if(spillLossBill.getBillstyle() == ipv.getBillstyle()){}
+				else continue;
+			}
+			
+			list.add(spillLossBill.getVO());
 		}
+		
+		//报警单==========================================
 		int size4 = alert.size();
 		for(int i=0;i<size4;i++) {
-			list.add(alert.get(i).getVO());
+			StubAlertBill alertBill = alert.get(i);
+			
+			if(ipv.getBillstyle()!=null) {
+				if(alertBill.getBillstyle() == ipv.getBillstyle()){}
+				else continue;
+			}
+			list.add(alertBill.getVO());
 		}
+		
+		//进货单
 		int size5 = purSheet.size();
 		for(int i=0;i<size5;i++) {
-			list.add(purSheet.get(i).getVO());
+			StubPurSheet pur = purSheet.get(i);
+			
+			if(ipv.getBillstyle()!=null) {
+				if(pur.getBillstyle()== ipv.getBillstyle()){}
+				else continue;
+			}
+			
+			list.add(pur.getVO());
 		}
+		
+		//进货退货单
 		int size6 = purBackSheet.size();
 		for(int i=0;i<size6;i++) {
-			list.add(purBackSheet.get(i).getVO());
+			StubPurBackSheet back = purBackSheet.get(i);
+			
+			if(ipv.getBillstyle()!=null) {
+				if(back.getBillstyle() == ipv.getBillstyle()){}
+				else continue;
+			}
+			list.add(back.getVO());
 		}
 		
 		//收款单screen======================================
@@ -161,7 +211,7 @@ public class StubInquiry {
 			}
 			
 			if(ipv.getBillstyle()!=null) {
-				if(ca.getBillStyle() == ipv.getBillstyle()){}
+				if(ca.getBillstyle() == ipv.getBillstyle()){}
 				else continue;
 			}
 			

@@ -11,7 +11,9 @@ import businesslogic.examinebl.Bill;
 
 public class StubSaleBackSheet extends Bill implements GetVOandPO{
 	private String ID;
-	private BillStyle style=BillStyle.SaleBackSheet;
+	private BillStyle billstyle=BillStyle.SaleBackSheet;
+	
+
 	StubCustomer customer;
 	ArrayList sheet;//销售单据，商品名，数量，单价
 	double money1;//折前总金额
@@ -28,6 +30,10 @@ public class StubSaleBackSheet extends Bill implements GetVOandPO{
 		return null;
 	}
 
+	public BillStyle getBillstyle() {
+		return billstyle;
+	}
+	
 	public void setPO(SaleBackSheetPO po){
 		this.ID=po.getid();
 		this.customer=po.getcustomer();

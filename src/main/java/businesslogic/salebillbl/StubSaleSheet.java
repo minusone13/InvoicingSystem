@@ -12,7 +12,9 @@ import businesslogic.examinebl.Bill;
 public class StubSaleSheet extends Bill implements GetVOandPO{
 
 	private String ID;
-	private BillStyle style=BillStyle.SaleSheet;
+	private BillStyle billstyle=BillStyle.SaleSheet;
+		
+
 		StubCustomer customer;
 		ArrayList sheet;//销售单据，商品名，数量，单价
 		double money1;//折前总金额
@@ -24,6 +26,11 @@ public class StubSaleSheet extends Bill implements GetVOandPO{
 		public StubCustomer getCustomer() {
 			return customer;
 		}
+		
+		public BillStyle getBillstyle() {
+			return billstyle;
+		}
+		
 		public SaleSheetVO getVO() {
 			// TODO Auto-generated method stub
 			return null;

@@ -19,11 +19,11 @@ public class ReceiptBill extends Bill implements GetVOandPO{
 	private BillStyle billstyle=BillStyle.ReceiptBill;
 	
 	private String ID;
-	Role operator;
-	double total;
-	BillState state;
-	String date;
-	String customer;
+	private Role operator;
+	private double total;
+	private BillState state;
+	private String date;
+	private String customer;
 	
 	
 	ArrayList<StubTransferAccount> transferlist = new ArrayList<StubTransferAccount>();

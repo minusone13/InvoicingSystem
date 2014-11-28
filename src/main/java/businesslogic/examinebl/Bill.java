@@ -27,8 +27,10 @@ public class Bill {
 		return ID;	
 	}
 	/*获取单据类型*/
-	public BillStyle getBillStyle(){
+	
+	public BillStyle getBillstyle(){
 		return billstyle;
 		
 	}
+	
 }

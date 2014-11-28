@@ -30,9 +30,6 @@ public class InquiryProcessVO {
 		this.timeAfter = timeAfter;
 	}
 	
-	
-	
-	
 	public String getCustomer() {
 		return customer;
 	}

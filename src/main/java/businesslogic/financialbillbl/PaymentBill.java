@@ -20,12 +20,12 @@ public class PaymentBill extends Bill implements GetVOandPO{
 	
 	private BillStyle billstyle=BillStyle.PaymentBill;
 	private String ID;
-	String customer;
-	Role operator;
-	double total;
-	BillState state;
-	String date;
-	ArrayList<StubTransferAccount> transferlist = new ArrayList<StubTransferAccount>();
+	private String customer;
+	private Role operator;
+	private double total;
+	private BillState state;
+	private String date;
+	private ArrayList<StubTransferAccount> transferlist = new ArrayList<StubTransferAccount>();
 	public PaymentBill() {
 		
 	}

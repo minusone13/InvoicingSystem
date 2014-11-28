@@ -18,14 +18,14 @@ import vo.VO;
 
 public class CashPaymentBill extends Bill implements GetVOandPO{
 	
-	private BillStyle style=BillStyle.CashPaymentBill;
+	private BillStyle billstyle=BillStyle.CashPaymentBill;
 	private String ID;
-	String account;
-	Role operator;
-	double total;
-	BillState state;
-	String date;
-	ArrayList<StubItem> itemList = new ArrayList<StubItem>();
+	private String account;
+	private Role operator;
+	private double total;
+	private BillState state;
+	private String date;
+	private ArrayList<StubItem> itemList = new ArrayList<StubItem>();
 	
 	public CashPaymentBill() {}
 	public CashPaymentBill(CashPaymentVO vo) {
@@ -52,14 +52,13 @@ public class CashPaymentBill extends Bill implements GetVOandPO{
 		
 	}
 	
-	
-	
-	public BillStyle getStyle() {
-		return style;
+	public BillStyle getBillstyle() {
+		return billstyle;
 	}
-	public void setStyle(BillStyle style) {
-		this.style = style;
+	public void setBillstyle(BillStyle billstyle) {
+		this.billstyle = billstyle;
 	}
+	
 	public String getID() {
 		return ID;
 	}
@@ -109,7 +108,7 @@ public class CashPaymentBill extends Bill implements GetVOandPO{
 		vo.setTotal(total);
 		vo.setItemList(itemList);
 		vo.setOperator(operator);
-		vo.setBillStyle(style);
+		vo.setBillStyle(billstyle);
 		vo.setBillState(state);		
 		return vo;
 	}
@@ -121,7 +120,7 @@ public class CashPaymentBill extends Bill implements GetVOandPO{
 		po.setItemList(itemList);
 		po.setOperator(operator);
 		po.setState(state);
-		po.setStyle(style);
+		po.setStyle(billstyle);
 		po.setTotal(total);
 		return po;
 	}

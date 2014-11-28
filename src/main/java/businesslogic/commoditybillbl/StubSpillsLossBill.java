@@ -12,7 +12,8 @@ import businesslogic.examinebl.Bill;
 
 public class StubSpillsLossBill extends Bill implements GetVOandPO
 {//报溢报损单，统一进入单据池管理和存储
-	private BillStyle style=BillStyle.SpillsLossBill;
+	private BillStyle billstyle=BillStyle.SpillsLossBill;
+	
 	private MockCommodity com;
 	String ID;
 	Type t;
@@ -32,11 +33,12 @@ public class StubSpillsLossBill extends Bill implements GetVOandPO
 		ID=po.getID();
 		state=po.getState();
 	}
-	public BillStyle getStyle() {
-		return style;
+	
+	public BillStyle getBillstyle() {
+		return billstyle;
 	}
-	public void setStyle(BillStyle style) {
-		this.style = style;
+	public void setBillstyle(BillStyle billstyle) {
+		this.billstyle = billstyle;
 	}
 	public MockCommodity getCom() {
 		return com;

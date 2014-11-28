@@ -10,13 +10,20 @@ import businesslogic.customerbl.StubCustomer;
 import businesslogic.examinebl.Bill;
 
 public class StubPurSheet extends Bill implements GetVOandPO{
-	private BillStyle style=BillStyle.PurSheet;
+	private BillStyle billstyle=BillStyle.PurSheet;
+	
+
 		StubCustomer customer;
 		private String ID;
 		String commodity;//仓库？
 		ArrayList sheet;//是不是应该是个arraylist<>?
 		double money1;//总金额
 		String words;//备注
+		
+		public BillStyle getBillstyle() {
+			return billstyle;
+		}
+		
 		public PurSheetVO getVO() {
 			// TODO Auto-generated method stub
 			return null;
