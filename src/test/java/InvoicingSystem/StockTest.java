@@ -20,9 +20,11 @@ import vo.stockvo.*;
 public class StockTest{
 	static StockManagerDriver smd=new StockManagerDriver();
 	static StubStockDataController data=StubStockDataController.getInstance();
+	static StubCommodityBlService combl;
 	static
 	{
 		smd.start(new StubStockController(),data);
+		combl=smd.getCombl();
 	}
 	
 	@Before
@@ -104,5 +106,29 @@ public class StockTest{
 		//assertEquals(-1,com.getLastout(),0.1);
 		assertEquals(200,com.getIn(),0.1);
 		assertEquals(300,com.getOut(),0.1);
+	}
+	
+	@Test
+	public void testdeleteCommodity()
+	{
+		RM result=combl.deleteCommodity("好好防盗门","fdm02");
+		assertEquals(RM.done,result);
+	}
+	
+	@Test
+	public void testdeleteCommodityNotFount()
+	{
+		RM result=combl.deleteCommodity("好好防盗门1","fdm02");
+		assertEquals(RM.notfound,result);
+	}
+	
+	@Test
+	public void testdeleteCommodity2()
+	{
+		RM result=combl.deleteCommodity("好好防盗门","fdm02");
+		StubCommodityBlService combl=smd.getCombl();
+		ArrayList<StockVO> vos=combl.openCategory("1");
+		vos=combl.openCategory(vos.get(2).getCat().getId());
+		assertEquals(0,vos.size());
 	}
 }

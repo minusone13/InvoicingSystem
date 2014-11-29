@@ -10,7 +10,7 @@ public class MockCommodityData implements Serializable{
 	CommodityPO po;//详见PO中的注释
 	public boolean canBeDeleted()
 	{
-		return po.getRecord().size()==0;
+		return (po.getRecord()==null || po.getRecord().size()==0);
 	}
 	public boolean equals(MockCommodityData com)
 	{

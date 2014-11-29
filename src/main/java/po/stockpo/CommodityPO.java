@@ -15,7 +15,7 @@ public class CommodityPO implements Serializable, Cloneable{
 	double lastin;
 	double lastout;
 	double average;
-	ArrayList<CommodityRecordPO> record=null;
+	ArrayList<CommodityRecordPO> record=new ArrayList<CommodityRecordPO>();
 	public CommodityPO(){}
 	public CommodityPO(String parent,String name,String model,int number,double in,double out,double lastin,double lastout,double average)
 	{	

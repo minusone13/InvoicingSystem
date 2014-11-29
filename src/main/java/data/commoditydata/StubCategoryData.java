@@ -59,8 +59,6 @@ public class StubCategoryData implements Serializable{
 				result.add(new StockPO(cat.getPo().clone()));
 			}
 		}
-		else 
-			return null;
 		return result;//return a stockPO
 	}
 	public StubCategoryData findSubCat(String name)
