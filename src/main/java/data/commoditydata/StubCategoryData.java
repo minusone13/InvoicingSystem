@@ -114,6 +114,31 @@ public class StubCategoryData implements Serializable{
 		else
 			return RM.treeerror;//已有商品，不能添加分类
 	}
+	public RM delete(String name,String model)
+	{//delete Commodity in the Category
+		if(canAddCommodity())
+		{
+			int i=search(name,model);
+			if(coms.get(i).canBeDeleted())
+			{
+				coms.remove(i);
+				return RM.done;
+			}
+			else
+				return RM.alreadyHaveUnremoveableContents;
+		}
+		else 
+			return RM.treeerror;
+	}
+	private int search(String name,String model)
+	{//Search a Commodity, return the index. if not found return -1
+		for(int i=0;i<coms.size();i++)
+		{
+			if(coms.get(i).equals(name, model))
+				return i;
+		}
+		return -1;
+	}
 	public ArrayList<StubCategoryData> getCats() {
 		return cats;
 	}

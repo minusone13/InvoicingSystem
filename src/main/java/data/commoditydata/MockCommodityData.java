@@ -8,11 +8,18 @@ import po.stockpo.CommodityPO;
 
 public class MockCommodityData implements Serializable{
 	CommodityPO po;//详见PO中的注释
+	public boolean canBeDeleted()
+	{
+		return po.getRecord().size()==0;
+	}
 	public boolean equals(MockCommodityData com)
 	{
 		return (po.getName().equals(com.getName()) && po.getModel().equals(com.getModel()));
 	}
-	
+	public boolean equals(String name,String model)
+	{
+		return (po.getName().equals(name) && po.getModel().equals(model));
+	}
 	public String getID() {
 		return po.getId();
 	}
@@ -79,5 +86,4 @@ public class MockCommodityData implements Serializable{
 	public void setPo(CommodityPO po) {
 		this.po = po;
 	}
-	
 }

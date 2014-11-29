@@ -49,13 +49,21 @@ public class StubCommodityList implements Serializable{
 	}
 	public MockCommodityData findCommodity(String name, String model)
 	{
+		int i=searchCommodity(name,model);
+		if(i==-1)
+			return null;//not found;
+		else
+			return flatlist.get(i);
+	}
+	private int searchCommodity(String name,String model)
+	{//Search in flatlist
 		for(int i=0;i<flatlist.size();i++)
 		{
 			MockCommodityData com=flatlist.get(i);
 			if(com.getName().equals(name) && com.getModel().equals(model))
-				return com;
+				return i;
 		}
-		return null;//not found;
+		return -1;
 	}
 	public StubCategoryData findCategory(String id)
 	{
@@ -63,10 +71,23 @@ public class StubCommodityList implements Serializable{
 		StubCategoryData result=cat.goThrow(a, 1);
 		return result;
 	}
-	public boolean deleteCommodity(String name, String model)
+	public RM deleteCommodity(String name, String model)
 	{
-		//CommodityPO po = findCommodity
-		return true;
+		int i=searchCommodity(name,model);
+		if(i==-1)
+			return RM.notfound;
+		MockCommodityData com = flatlist.get(i);
+		String s=com.getParent();
+		String a[]=s.split("\\\\");
+		if(!a[0].equals("1"))//default root is 1
+			return RM.unknownerror;
+		StubCategoryData temp=cat.goThrow(a, 1);
+		if(temp==null)
+			return RM.unknownerror;
+		RM result=temp.delete(name, model);
+		if(result==RM.done)
+			flatlist.remove(i);//i have 2 list here to manage commodity
+		return result;
 	}
 	public boolean update(CommodityPO po)
 	{

@@ -177,9 +177,9 @@ public class StubStockDataController implements StubCommodityDataService, StockD
 	{
 		return l.findCategory(id).open();
 	}
-	public boolean deleteCommodity(String name, String model)
+	public RM deleteCommodity(String name, String model)
 	{
-		boolean result=l.deleteCommodity(name, model);
+		RM result=l.deleteCommodity(name, model);
 		save();
 		return result;
 	}

@@ -13,7 +13,8 @@ public interface StubCommodityDataService {
 	public RM insert(CommodityPO po);
 	public CommodityListPO getAll();
 	public ArrayList<CommodityPO> findCommodity(String name);
-	public boolean deleteCommodity(String name, String model);
+	public RM deleteCommodity(String name, String model);
+	//public RM deleteCategory(String id);
 	public boolean update(CommodityPO po);
 	public boolean update(CategoryPO po);
 	public RM insert(CategoryPO po);
