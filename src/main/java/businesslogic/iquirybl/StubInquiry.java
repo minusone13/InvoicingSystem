@@ -97,6 +97,7 @@ public class StubInquiry {
 				else continue;
 			}
 			
+			
 		}
 		//销售单===============================
 		int size1 = saleSheet.size();

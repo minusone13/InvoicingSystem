@@ -36,18 +36,18 @@ public class FinancialBLDriver {
 		if(result5==true) System.out.println("UPDATE SUCCESS!");
 		
 		fbs.buildAccount();
-		
-		ArrayList<VO> list1 = fbs.inquirySale(new InquirySaleVO());
-		if(list1 != null) System.out.println("INQUIRY SUCCESS!");
-		else System.out.println("INQUIRY FAILE!");
-		
-		ArrayList<VO> list2 = fbs.inquiryProcess(new InquiryProcessVO());
-		if(list2 != null) System.out.println("INQUIRY SUCCESS!");
-		else System.out.println("INQUIRY FAILE!");
-		
-		BusinessSituationVO bsv = fbs.inquiryCondition("12", "income");
-		if(bsv !=null) System.out.println("INQUIRY SUCCESS");
-		else System.out.println("INQUIRY FAILE!");
+
+//		ArrayList<VO> list1 = fbs.inquirySale(new InquirySaleVO());
+//		if(list1 != null) System.out.println("INQUIRY SUCCESS!");
+//		else System.out.println("INQUIRY FAILE!");
+//		
+//		ArrayList<VO> list2 = fbs.inquiryProcess(new InquiryProcessVO());
+//		if(list2 != null) System.out.println("INQUIRY SUCCESS!");
+//		else System.out.println("INQUIRY FAILE!");
+//		
+//		BusinessSituationVO bsv = fbs.inquiryCondition("12", "income");
+//		if(bsv !=null) System.out.println("INQUIRY SUCCESS");
+//		else System.out.println("INQUIRY FAILE!");
 		/*
 		boolean result6 = fbs.creatReceipt(new ReceiptVO());
 		if(result6==true) System.out.println("creat SUCCESS!");
