@@ -7,6 +7,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import presentation.commodityui.JPcommodity;
+
 public class ManagerUI extends JPanel {
 
 	//背景
@@ -53,6 +55,9 @@ public class ManagerUI extends JPanel {
 //		passbill1.setLocation(55, 233);
 		//审批单据2
 		passbill2.setLocation(55, 233);
+		//商品test
+		JPcommodity comodityTest=new JPcommodity("飞利浦日光灯","dx1000",10);
+		comodityTest.setLocation(555, 233);
 		//home
 		home.setIcon(new ImageIcon("src/image/home.png") );
 		home.setBounds(690, 165, 90, 32);
@@ -72,7 +77,8 @@ public class ManagerUI extends JPanel {
 		this.add(home,4);
 		this.add(back,5);
 		this.add(signout,6);
-		this.add(bg,7);
+		this.add(comodityTest,7);
+		this.add(bg,8);
 		
 	}
 	public class MouseListenerOfButton implements MouseListener{
