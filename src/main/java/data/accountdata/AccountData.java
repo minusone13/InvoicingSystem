@@ -14,7 +14,7 @@ import data.Tool;
 import data.commoditydata.StubCommodityList;
 import dataservice.accountdataservice.StubAccountDataService;
 
-public class StubAccountData implements StubAccountDataService{
+public class AccountData implements StubAccountDataService{
 	
 
 	public AccountPO find(AccountPO a) {
@@ -128,7 +128,37 @@ public class StubAccountData implements StubAccountDataService{
 		}
 	}
 	
+	public void writer (ArrayList<AccountPO> accountList, String filename) {
+		//String filename = "account.txt";
+		ObjectOutputStream oos = null;
+		try {
+			oos = new ObjectOutputStream(new FileOutputStream(filename));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+			
+		} 
+		try {
+			oos.writeObject(accountList);
+		} catch (IOException e) {
+			e.printStackTrace();
+			
+		} finally {
+			try {
+				oos.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 	public ArrayList<AccountPO> getAllAcountInfo() {	
 		return reader();
+	}
+	
+	public void saveAccount(String filename) {
+		ArrayList<AccountPO> acc = reader();
+		writer(acc, filename);	
 	}
 }

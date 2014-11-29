@@ -2,7 +2,8 @@
 
 import java.util.ArrayList;
 
-import data.accountdata.StubAccountData;
+import data.accountdata.AccountBuild;
+import data.accountdata.AccountData;
 import dataservice.accountdataservice.StubAccountDataService;
 import businesslogic.commoditybl.StubCommodityList;
 import businesslogic.customerbl.CustomerController;
@@ -12,7 +13,7 @@ import vo.accountVO.AccountVO;
 
 public class StubAccountList {
 	
-	StubAccountDataService a = new StubAccountData();
+	StubAccountDataService a = new AccountData();
 
 	public boolean addAccount(StubAccount account) {
 		AccountPO apo = new AccountPO();
@@ -47,10 +48,11 @@ public class StubAccountList {
 	}
 	
 	public void buildAccount() {
-		String str="";
-		//StubCommodityList scl = new StubStockController().getCommodityList();//调用商品信息
-		new CustomerController().findCustomer(str); //调用客户信息
-		ArrayList<AccountPO> acc= getAllAccountInfo();//调用账户信息
+		String str="";		
+		//new CustomerController().findCustomer(str); //调用客户信息
+		AccountBuild build = new AccountBuild();
+		build.saveCommodity();
+		build.saveAccount();
 	}
 	
 	public ArrayList<AccountPO> getAllAccountInfo() {

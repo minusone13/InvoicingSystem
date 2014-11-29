@@ -8,6 +8,7 @@ import vo.financialBillVO.CashPaymentVO;
 import vo.financialBillVO.PaymentVO;
 import vo.financialBillVO.ReceiptVO;
 import vo.inquiryVO.BusinessSituationVO;
+import vo.inquiryVO.InquiryConditionVO;
 import vo.inquiryVO.InquiryProcessVO;
 import vo.inquiryVO.InquirySaleVO;
 import businesslogic.Role;
@@ -62,7 +63,6 @@ public class Financial implements StubFinancialBlService{
 	public void buildAccount() {
 		StubAccountList a = new StubAccountList();
 		a.buildAccount();
-		//System.out.println("BUILD SUCCESS!");
 	}
 	
 	public ArrayList<VO> inquirySale(InquirySaleVO isv) {
@@ -75,9 +75,9 @@ public class Financial implements StubFinancialBlService{
 		return i.inquiryProcess(ipv);
 	}
 	
-	public BusinessSituationVO inquiryCondition(String time, String type) {
+	public BusinessSituationVO inquiryCondition(InquiryConditionVO vo) {
 		Inquiry i = new Inquiry();
-		return i.inquiryCondition(time, type);
+		return i.inquiryCondition(vo);
 	}
 	
 	public boolean creatReceipt(ReceiptVO rv) {

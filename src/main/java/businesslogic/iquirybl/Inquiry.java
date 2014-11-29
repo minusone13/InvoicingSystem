@@ -21,9 +21,11 @@ import businesslogic.salebillbl.StubSaleBackSheet;
 import businesslogic.salebillbl.StubSaleSheet;
 import vo.*;
 import vo.inquiryVO.BusinessSituationVO;
+import vo.inquiryVO.InquiryConditionVO;
 import vo.inquiryVO.InquiryProcessVO;
 import vo.inquiryVO.InquirySaleVO;
 
+//销售人员确定
 public class Inquiry {
 	StubBillPool bp = new StubBillPool();
 	public ArrayList<VO> inquirySale(InquirySaleVO isv) {
@@ -352,7 +354,158 @@ public class Inquiry {
 		return list;
 	}
 	
-	public BusinessSituationVO inquiryCondition(String time, String type) {
+	public BusinessSituationVO inquiryCondition(InquiryConditionVO vo) {
+		ArrayList<StubGiftBill> gift = bp.getGiftBill();
+		ArrayList<StubSaleSheet> saleSheet = bp.getSaleSheet();
+		ArrayList<StubSaleBackSheet> saleBackSheet = bp.getSaleBackSheet();
+		ArrayList<StubSpillsLossBill> spillsLoss = bp.getSpillsLossBill();
+		ArrayList<StubAlertBill> alert  =bp.getAlertBill();
+		ArrayList<StubPurSheet> purSheet = bp.getPurSheet();
+		ArrayList<StubPurBackSheet> purBackSheet = bp.getPurBackSheet();
+		ArrayList<ReceiptBill> receipt = bp.getReceiptBill();
+		ArrayList<PaymentBill> payment = bp.getPaymentBill();
+		ArrayList<CashPaymentBill> cashPayment =bp.getCashPaymentBill();
+		
+		Date dateBefore=null;
+		Date dateAfter=null;
+		SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+		double profit=0; //利润
+		
+		try {
+			dateBefore = format.parse(vo.getTimeBefore());
+			dateAfter = format.parse(vo.getTimeAfter());
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		int size0 = gift.size();
+		for(int i=0;i<size0;i++) {
+			StubGiftBill g = gift.get(i);
+			
+			if(dateBefore!=null) {
+				if(g.getDate().compareTo(dateBefore)>=0&&
+						g.getDate().compareTo(dateAfter)<=0){}
+				else continue;
+			}
+			
+		}
+		//销售单===============================
+		int size1 = saleSheet.size();
+		for(int i=0;i<size1;i++) {
+			StubSaleSheet sale = saleSheet.get(i);
+			
+			if(dateBefore!=null) {
+				if(sale.getDate().compareTo(dateBefore)>=0&&
+						sale.getDate().compareTo(dateAfter)<=0){}
+				else continue;
+			}
+			
+		}
+		
+		//销售退货单===================================
+		int size2 = saleBackSheet.size();
+		for(int i=0;i<size2;i++) {
+			StubSaleBackSheet saleback = saleBackSheet.get(i);
+			
+			if(dateBefore!=null) {
+				if(saleback.getDate().compareTo(dateBefore)>=0&&
+						saleback.getDate().compareTo(dateAfter)<=0){}
+				else continue;
+			}
+			
+		}
+		
+		//报溢报损=========================================
+		int size3 = spillsLoss.size();
+		for(int i=0;i<size3;i++) {
+			StubSpillsLossBill spillLossBill = spillsLoss.get(i);
+			
+			if(dateBefore!=null) {
+				if(spillLossBill.getDate().compareTo(dateBefore)>=0&&
+						spillLossBill.getDate().compareTo(dateAfter)<=0){}
+				else continue;
+			}
+			
+		}
+		
+		//报警单==========================================
+		int size4 = alert.size();
+		for(int i=0;i<size4;i++) {
+			StubAlertBill alertBill = alert.get(i);
+			
+			if(dateBefore!=null) {
+				if(alertBill.getDate().compareTo(dateBefore)>=0&&
+						alertBill.getDate().compareTo(dateAfter)<=0){}
+				else continue;
+			}
+
+		}
+		
+		//进货单
+		int size5 = purSheet.size();
+		for(int i=0;i<size5;i++) {
+			StubPurSheet pur = purSheet.get(i);
+			
+			if(dateBefore!=null) {
+				if(pur.getDate().compareTo(dateBefore)>=0&&
+						pur.getDate().compareTo(dateAfter)<=0){}
+				else continue;
+			}
+		}
+		
+		//进货退货单
+		int size6 = purBackSheet.size();
+		for(int i=0;i<size6;i++) {
+			StubPurBackSheet back = purBackSheet.get(i);
+			
+			if(dateBefore!=null) {
+				if(back.getDate().compareTo(dateBefore)>=0&&
+						back.getDate().compareTo(dateAfter)<=0){}
+				else continue;
+			}
+			
+		}
+		
+		//收款单screen======================================
+		int size7 = receipt.size();
+		for(int i=0;i<size7;i++) {
+			ReceiptBill re = receipt.get(i);
+			
+			if(dateBefore!=null) {
+				if(re.getDate().compareTo(dateBefore)>=0&&
+						re.getDate().compareTo(dateAfter)<=0){}
+				else continue;
+			}
+			
+		}
+		
+		//付款单screen===================================
+		int size8 = payment.size();
+		for(int i=0;i<size8;i++) {
+			PaymentBill pa = payment.get(i);
+			if(dateBefore!=null) {
+				if(pa.getDate().compareTo(dateBefore)>=0&&
+						pa.getDate().compareTo(dateAfter)<=0){}
+				else continue;
+			}
+			
+			
+		}
+		
+		//现金费用单==========================================
+		int size9 = cashPayment.size();
+		for(int i=0;i<size9;i++) {
+			CashPaymentBill ca = cashPayment.get(i);
+			
+			if(dateBefore!=null) {
+				if(ca.getDate().compareTo(dateBefore)>=0&&
+						ca.getDate().compareTo(dateAfter)<=0){}
+				else continue;
+			}
+			
+			
+			
+		}
 		
 		return null;
 	}

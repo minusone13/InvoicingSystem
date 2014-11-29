@@ -8,6 +8,7 @@ import vo.financialBillVO.CashPaymentVO;
 import vo.financialBillVO.PaymentVO;
 import vo.financialBillVO.ReceiptVO;
 import vo.inquiryVO.BusinessSituationVO;
+import vo.inquiryVO.InquiryConditionVO;
 import vo.inquiryVO.InquiryProcessVO;
 import vo.inquiryVO.InquirySaleVO;
 
@@ -29,7 +30,7 @@ public interface StubFinancialBlService {
 	
 	public ArrayList<VO> inquiryProcess (InquiryProcessVO ipv);
 	
-	public BusinessSituationVO inquiryCondition(String time, String type) ;
+	public BusinessSituationVO inquiryCondition(InquiryConditionVO vo);
 	
 	public boolean creatReceipt(ReceiptVO rv);
 	

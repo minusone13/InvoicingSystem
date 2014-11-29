@@ -15,4 +15,6 @@ public interface StubAccountDataService {
 	
 	public boolean update(AccountPO apo);
 	public ArrayList<AccountPO> getAllAcountInfo ();
+	
+	public void saveAccount(String filename);
 }
