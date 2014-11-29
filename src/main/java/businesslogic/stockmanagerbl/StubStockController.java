@@ -53,5 +53,12 @@ public class StubStockController implements StubCommodityBlService, StockBlForSa
 	{
 		return l.openCategory(id);
 	}
-	
+	public RM deleteCommodity(String name,String model)
+	{//有可能返回RM。done，若已有进出记录，返回alreadyHaveUnremoveableContents
+		return l.deleteCommodity(name, model);
+	}
+	public RM deleteCategory(String id)
+	{//有可能返回RM。done，若已有子分类或商品，返回alreadyHaveUnremoveableContents
+		return l.deleteCategory(id);
+	}
 }

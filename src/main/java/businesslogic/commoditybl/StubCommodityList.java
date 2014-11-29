@@ -90,4 +90,14 @@ public class StubCommodityList {//商品列表 haha
 		}
 		return vos;
 	}
+	public RM deleteCommodity(String name,String model)
+	{
+		RM result=comdata.deleteCommodity(name, model);
+		return result;
+	}
+	public RM deleteCategory(String id)
+	{
+		RM result=comdata.deleteCategory(id);
+		return result;
+	}
 }

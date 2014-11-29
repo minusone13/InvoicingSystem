@@ -36,6 +36,10 @@ public class StubCategoryData implements Serializable{
 		else 
 			return true;
 	}
+	public boolean canBeDeleted()
+	{//当已有子分类或商品时不能被删除
+		return (cats.size()==0 && coms.size()==0);
+	}
 	public ArrayList<StockPO> open()
 	{//打开一个分类，打开前不知道内容，所以返回了通用的StockPO
 		ArrayList <StockPO> result=new ArrayList<StockPO>();
@@ -130,11 +134,36 @@ public class StubCategoryData implements Serializable{
 		else 
 			return RM.treeerror;
 	}
+	public RM delete(String name)
+	{//delete Category in the Category
+		if(canAddCategory())
+		{
+			int i=search(name);
+			if(cats.get(i).canBeDeleted())
+			{
+				cats.remove(i);
+				return RM.done;
+			}
+			else
+				return RM.alreadyHaveUnremoveableContents;
+		}
+		else 
+			return RM.treeerror;
+	}
 	private int search(String name,String model)
 	{//Search a Commodity, return the index. if not found return -1
 		for(int i=0;i<coms.size();i++)
 		{
 			if(coms.get(i).equals(name, model))
+				return i;
+		}
+		return -1;
+	}
+	private int search(String name)
+	{//Search a Category, return the index. if not found return -1
+		for(int i=0;i<coms.size();i++)
+		{
+			if(cats.get(i).equals(name))
 				return i;
 		}
 		return -1;

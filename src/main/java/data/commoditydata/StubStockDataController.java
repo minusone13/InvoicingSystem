@@ -183,6 +183,11 @@ public class StubStockDataController implements StubCommodityDataService, StockD
 		save();
 		return result;
 	}
+	public RM deleteCategory(String id)
+	{
+		RM result=l.deleteCategory(id);
+		return result;
+	}
 	public boolean update(CommodityPO po)
 	{
 		boolean result = l.update(po);
