@@ -6,14 +6,17 @@ import dataservice.commoditydataservice.*;
 import businesslogic.commoditybillbl.*;
 import businesslogic.commoditybl.*;
 import businesslogic.stockservice.*;
+import businesslogic.userbl.User;
 import businesslogicservice.commodityblservice.*;
 import vo.*;
 import vo.stockvo.*;
+import vo.uservo.UserVO;
 
 public class StubStockController implements StubCommodityBlService, StockBlForSalesMen, StockBlForManager,StockBlForFinancial
 {//负责与界面及其他程序员的交互
 	StubCommodityList l=new StubCommodityList();
 	static StubCommodityDataService comdata;
+	User user;
 	public StubCommodityList getCommodityList ()
 	{
 		return l;
@@ -60,5 +63,9 @@ public class StubStockController implements StubCommodityBlService, StockBlForSa
 	public RM deleteCategory(String id)
 	{//有可能返回RM。done，若已有子分类或商品，返回alreadyHaveUnremoveableContents
 		return l.deleteCategory(id);
+	}
+	public void setUser(UserVO vo)
+	{
+		user=new User(vo);
 	}
 }
