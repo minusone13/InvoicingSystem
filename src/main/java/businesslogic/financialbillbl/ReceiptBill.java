@@ -24,7 +24,7 @@ public class ReceiptBill extends Bill implements GetVOandPO{
 	private BillState state;
 	private Date date;
 	private String customer;
-	
+	private String userID;
 	
 	ArrayList<StubTransferAccount> transferlist = new ArrayList<StubTransferAccount>();
 	public ReceiptBill() {
@@ -51,6 +51,13 @@ public class ReceiptBill extends Bill implements GetVOandPO{
 		StubBillPool pool = new StubBillPool();
 		ArrayList<ReceiptBill> list = pool.getReceiptBill();
 		ID = "SKD-"+currentTime+"-"+String.format("%05d", list.size()+1);
+	}
+	
+	public String getUserID() {
+		return userID;
+	}
+	public void setUserID(String userID) {
+		this.userID = userID;
 	}
 	
 	public BillStyle getBillstyle() {

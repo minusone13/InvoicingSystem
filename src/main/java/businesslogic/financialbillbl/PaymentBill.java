@@ -25,6 +25,8 @@ public class PaymentBill extends Bill implements GetVOandPO{
 	private double total;
 	private BillState state;
 	private Date date;
+	private String userID;
+	
 	private ArrayList<StubTransferAccount> transferlist = new ArrayList<StubTransferAccount>();
 	public PaymentBill() {
 		
@@ -50,6 +52,13 @@ public class PaymentBill extends Bill implements GetVOandPO{
 		StubBillPool pool = new StubBillPool();
 		ArrayList<PaymentBill> list = pool.getPaymentBill();
 		ID = "FKD-"+currentTime+"-"+String.format("%05d", list.size()+1);
+	}
+	
+	public String getUserID() {
+		return userID;
+	}
+	public void setUserID(String userID) {
+		this.userID = userID;
 	}
 	
 	public BillStyle getBillStyle() {

@@ -10,7 +10,7 @@ import businesslogic.financialbillbl.CashPaymentBill;
 import businesslogic.financialbillbl.StubFinancialBillList;
 import businesslogic.financialbillbl.PaymentBill;
 import businesslogic.financialbillbl.ReceiptBill;
-import businesslogic.iquirybl.StubInquiry;
+import businesslogic.iquirybl.Inquiry;
 import businesslogic.userbl.UserList;
 import businesslogicservice.financialblservice.StubFinancialBlService;
 
@@ -59,17 +59,17 @@ public class Financial implements StubFinancialBlService{
 	}
 	
 	public ArrayList<VO> inquirySale(InquirySaleVO isv) {
-		StubInquiry i = new StubInquiry();
+		Inquiry i = new Inquiry();
 		return i.inquirySale(isv);
 	}
 	
 	public ArrayList<VO> inquiryProcess (InquiryProcessVO ipv) {
-		StubInquiry i = new StubInquiry();
+		Inquiry i = new Inquiry();
 		return i.inquiryProcess(ipv);
 	}
 	
 	public BusinessSituationVO inquiryCondition(String time, String type) {
-		StubInquiry i = new StubInquiry();
+		Inquiry i = new Inquiry();
 		return i.inquiryCondition(time, type);
 	}
 	

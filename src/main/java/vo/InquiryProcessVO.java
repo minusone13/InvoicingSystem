@@ -10,9 +10,17 @@ public class InquiryProcessVO {
 	String customer;
 	String operator;
 	String stock;
+	String userID;
+	
 	BillStyle billstyle;
 	public BillStyle getBillstyle() {
 		return billstyle;
+	}
+	public String getUserID() {
+		return userID;
+	}
+	public void setUserID(String userID) {
+		this.userID = userID;
 	}
 	public void setBillstyle(BillStyle billstyle) {
 		this.billstyle = billstyle;
