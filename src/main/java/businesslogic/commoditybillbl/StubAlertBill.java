@@ -13,6 +13,7 @@ public class StubAlertBill extends Bill implements GetVOandPO
 {//报警单对象，统一进入单据池管理和存储
 	Date date;
 	String ID;
+	String userID;
 	MockCommodity com;
 	int shortage;
 	BillStyle style=BillStyle.AlertBill;
@@ -74,5 +75,11 @@ public class StubAlertBill extends Bill implements GetVOandPO
 	}
 	public synchronized void setDate(Date date) {
 		this.date = date;
+	}
+	public String getUserID() {
+		return userID;
+	}
+	public void setUserID(String userID) {
+		this.userID = userID;
 	}
 }

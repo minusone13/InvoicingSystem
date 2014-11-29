@@ -15,6 +15,7 @@ import businesslogic.examinebl.Bill;
 public class StubSpillsLossBill extends Bill implements GetVOandPO
 {//报溢报损单，统一进入单据池管理和存储
 	Date date;
+	String userID;
 	private BillStyle style=BillStyle.SpillsLossBill;
 	private MockCommodity com;
 	String ID;
@@ -78,5 +79,11 @@ public class StubSpillsLossBill extends Bill implements GetVOandPO
 	}
 	public synchronized void setDate(Date date) {
 		this.date = date;
+	}
+	public String getUserID() {
+		return userID;
+	}
+	public void setUserID(String userID) {
+		this.userID = userID;
 	}
 }

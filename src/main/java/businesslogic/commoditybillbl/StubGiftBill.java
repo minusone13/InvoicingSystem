@@ -18,7 +18,7 @@ public class StubGiftBill extends Bill implements GetVOandPO
 {//赠送单类，统一进入单据池管理和存储
 	Date date;
 	private BillStyle billstyle=BillStyle.GiftBill;
-	
+	String userID;
 	private String ID;
 	ArrayList<MockCommodity> coms;
 	BillState state=BillState.DRAFT;
@@ -79,5 +79,11 @@ public class StubGiftBill extends Bill implements GetVOandPO
 	}
 	public void setDate(Date date) {
 		this.date = date;
+	}
+	public String getUserID() {
+		return userID;
+	}
+	public void setUserID(String userID) {
+		this.userID = userID;
 	}
 }
