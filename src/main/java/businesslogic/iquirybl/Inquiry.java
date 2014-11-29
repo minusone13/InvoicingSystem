@@ -25,7 +25,12 @@ import vo.inquiryVO.InquiryConditionVO;
 import vo.inquiryVO.InquiryProcessVO;
 import vo.inquiryVO.InquirySaleVO;
 
-//销售人员确定
+//1、销售人员确定商品名、客户和仓库怎么访问
+//2、完善返回到ui层的内容
+//3、红冲功能，需要各位人员创建单据功能
+//4、销售人员和库存人员来完成收入支出计算的操作
+//5、导出excel表
+//6、金额计算
 public class Inquiry {
 	StubBillPool bp = new StubBillPool();
 	public ArrayList<VO> inquirySale(InquirySaleVO isv) {
