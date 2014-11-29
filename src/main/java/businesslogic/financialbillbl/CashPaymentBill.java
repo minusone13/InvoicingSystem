@@ -13,8 +13,8 @@ import businesslogic.examinebl.StubBillPool;
 import po.CashPaymentPO;
 import po.PO;
 import po.ReceiptPO;
-import vo.CashPaymentVO;
 import vo.VO;
+import vo.financialBillVO.CashPaymentVO;
 
 public class CashPaymentBill extends Bill implements GetVOandPO{
 	

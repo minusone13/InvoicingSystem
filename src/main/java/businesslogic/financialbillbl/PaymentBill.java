@@ -13,8 +13,8 @@ import businesslogic.BillState;
 import businesslogic.Role;
 import businesslogic.examinebl.Bill;
 import businesslogic.examinebl.StubBillPool;
-import vo.PaymentVO;
 import vo.VO;
+import vo.financialBillVO.PaymentVO;
 
 public class PaymentBill extends Bill implements GetVOandPO{
 	

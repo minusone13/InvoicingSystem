@@ -8,7 +8,7 @@ import businesslogic.commoditybl.StubCommodityList;
 import businesslogic.customerbl.CustomerController;
 import businesslogic.stockmanagerbl.StubStockController;
 import po.AccountPO;
-import vo.AccountVO;
+import vo.accountVO.AccountVO;
 
 public class StubAccountList {
 	

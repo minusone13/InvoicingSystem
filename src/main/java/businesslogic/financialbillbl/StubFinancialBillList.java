@@ -1,9 +1,9 @@
 package businesslogic.financialbillbl;
 
-import vo.CashPaymentVO;
-import vo.PaymentVO;
-import vo.ReceiptVO;
 import vo.VO;
+import vo.financialBillVO.CashPaymentVO;
+import vo.financialBillVO.PaymentVO;
+import vo.financialBillVO.ReceiptVO;
 import businesslogic.BillStyle;
 import businesslogic.examinebl.Bill;
 import businesslogic.examinebl.StubBillPool;

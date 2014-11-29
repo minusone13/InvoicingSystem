@@ -9,7 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import businesslogic.BillState;
-import vo.CashPaymentVO;
+import vo.financialBillVO.CashPaymentVO;
 
 public class JPpassBill2 extends JPanel {
 

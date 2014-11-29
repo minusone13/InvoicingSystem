@@ -20,6 +20,9 @@ import businesslogic.salebillbl.StubPurSheet;
 import businesslogic.salebillbl.StubSaleBackSheet;
 import businesslogic.salebillbl.StubSaleSheet;
 import vo.*;
+import vo.inquiryVO.BusinessSituationVO;
+import vo.inquiryVO.InquiryProcessVO;
+import vo.inquiryVO.InquirySaleVO;
 
 public class Inquiry {
 	StubBillPool bp = new StubBillPool();
@@ -27,34 +30,58 @@ public class Inquiry {
 		ArrayList<VO> list = new ArrayList<VO>();
 		ArrayList<StubSaleSheet> saleSheet = bp.getSaleSheet();
 		ArrayList<StubSaleBackSheet> saleBackSheet = bp.getSaleBackSheet();
+		Date dateBefore=null;
+		Date dateAfter=null;
+		SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+		
+		try {
+			dateBefore = format.parse(isv.getTimeBefore());
+			dateAfter = format.parse(isv.getTimeAfter());
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
 		int size1 = saleSheet.size();
 		for(int i=0;i<size1;i++) {		
 			StubSaleSheet sale = saleSheet.get(i);
 			//根据条件筛选单据
-			if(isv.getTimeBefore()!=null) {
-				
-			
-				//if(sale.date.compareTo(isv.getTimeBefore())>=0&&
-				//	sale.date.compareTo(isv.getTimeAfter())<=0)
-					//list.add(saleSheet.get(i).getVO());
-					//else continue;
-				//}
+			//时间区间
+			if(dateBefore!=null) {
+				if(sale.getDate().compareTo(dateBefore)>=0&&
+						sale.getDate().compareTo(dateAfter)<=0){}
+				else continue;
 			}
+			//商品名
 			if(isv.getCommodityName()!=null) {
-				//if(sale.(isv.getCommodityName())){}
-				//else continue;
+				
 			}
+			//客户
 			if(isv.getCustomer()!=null) {
 				if(sale.getCustomer().name.equals(isv.getCustomer())){} 
 				else continue;
 			}
-			if(isv.getOperator()!=null) {
-				//if()
+            //业务员
+			if(isv.getUserID()!=null) {
+				if(sale.getUserID().equals(sale.getUserID())){}
+				else continue;				
 			}
+			//stock
 		}
 		int size2 = saleBackSheet.size();
 		for(int i=0;i<size2;i++) {
 			StubSaleBackSheet saleback = saleBackSheet.get(i);
+			//时间区间
+			if(dateBefore!=null) {
+				if(saleback.getDate().compareTo(dateBefore)>=0&&
+						saleback.getDate().compareTo(dateAfter)<=0){}
+				else continue;
+			}
+			
+			//业务员
+			if(isv.getUserID()!=null) {
+				if(saleback.getUserID().equals(saleback.getUserID())){}
+				else continue;				
+			}
 			list.add(saleback.getVO());
 		}
 		return list;
@@ -97,6 +124,10 @@ public class Inquiry {
 				else continue;
 			}
 			
+			if(ipv.getUserID()!=null) {
+				if(g.getUserID().equals(ipv.getUserID())){}
+				else continue;				
+			}
 			
 		}
 		//销售单===============================
@@ -163,6 +194,10 @@ public class Inquiry {
 				else continue;
 			}
 			
+			if(ipv.getUserID()!=null) {
+				if(spillLossBill.getUserID().equals(ipv.getUserID())){}
+				else continue;				
+			}
 			list.add(spillLossBill.getVO());
 		}
 		
@@ -181,6 +216,12 @@ public class Inquiry {
 				if(alertBill.getBillstyle() == ipv.getBillstyle()){}
 				else continue;
 			}
+			
+			if(ipv.getUserID()!=null) {
+				if(alertBill.getUserID().equals(ipv.getUserID())){}
+				else continue;				
+			}
+			
 			list.add(alertBill.getVO());
 		}
 		
@@ -311,8 +352,8 @@ public class Inquiry {
 		return list;
 	}
 	
-	
 	public BusinessSituationVO inquiryCondition(String time, String type) {
+		
 		return null;
 	}
 	

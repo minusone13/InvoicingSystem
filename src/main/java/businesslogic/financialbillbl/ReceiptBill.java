@@ -12,8 +12,8 @@ import businesslogic.BillState;
 import businesslogic.Role;
 import businesslogic.examinebl.Bill;
 import businesslogic.examinebl.StubBillPool;
-import vo.ReceiptVO;
 import vo.VO;
+import vo.financialBillVO.ReceiptVO;
 
 public class ReceiptBill extends Bill implements GetVOandPO{
 	private BillStyle billstyle=BillStyle.ReceiptBill;

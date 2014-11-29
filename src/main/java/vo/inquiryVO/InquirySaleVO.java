@@ -1,29 +1,20 @@
-package vo;
+package vo.inquiryVO;
 
-import businesslogic.BillStyle;
-
-public class InquiryProcessVO {
+public class InquirySaleVO {
 	
+	private String commodityName;
+	private String customer;
+	private String operator;
+	private String stock;
+	private String timeBefore;
+	private String timeAfter;
+	private String userID;
 	
-	String timeBefore;
-	String timeAfter;
-	String customer;
-	String operator;
-	String stock;
-	String userID;
-	
-	BillStyle billstyle;
-	public BillStyle getBillstyle() {
-		return billstyle;
-	}
 	public String getUserID() {
 		return userID;
 	}
 	public void setUserID(String userID) {
 		this.userID = userID;
-	}
-	public void setBillstyle(BillStyle billstyle) {
-		this.billstyle = billstyle;
 	}
 	public String getTimeBefore() {
 		return timeBefore;
@@ -37,7 +28,12 @@ public class InquiryProcessVO {
 	public void setTimeAfter(String timeAfter) {
 		this.timeAfter = timeAfter;
 	}
-	
+	public String getCommodityName() {
+		return commodityName;
+	}
+	public void setCommodityName(String commodityName) {
+		this.commodityName = commodityName;
+	}
 	public String getCustomer() {
 		return customer;
 	}

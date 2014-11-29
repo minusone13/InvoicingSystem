@@ -1,7 +1,8 @@
-package vo;
+package vo.financialBillVO;
 
 import java.util.ArrayList;
 
+import vo.VO;
 import businesslogic.BillState;
 import businesslogic.BillStyle;
 import businesslogic.Role;

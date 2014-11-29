@@ -4,11 +4,11 @@ import java.util.ArrayList;
 
 import junit.framework.TestCase;
 import vo.BarginStrategyVO;
-import vo.BusinessSituationVO;
 import vo.GiftBillVO;
 import vo.LevelStrategyVO;
 import vo.ReachStrategyVO;
 import vo.VO;
+import vo.inquiryVO.BusinessSituationVO;
 import businesslogic.BillStyle;
 import businesslogic.managerbl.StubManager;
 import businesslogicservice.managerblservice.StubManagerBlService;

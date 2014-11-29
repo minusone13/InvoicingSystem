@@ -1,7 +1,7 @@
 package InvoicingSystem;
 
 import presentation.financialui.FinancialBLDriver;
-import vo.AccountVO;
+import vo.accountVO.AccountVO;
 import businesslogic.financialbl.Financial;
 import businesslogicservice.financialblservice.StubFinancialBlService;
 import junit.framework.Test;

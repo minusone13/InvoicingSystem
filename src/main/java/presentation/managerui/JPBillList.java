@@ -5,15 +5,15 @@ import java.util.ArrayList;
 import javax.swing.JPanel;
 
 import vo.AlertBillVO;
-import vo.CashPaymentVO;
 import vo.GiftBillVO;
-import vo.PaymentVO;
 import vo.PurBackSheetVO;
 import vo.PurSheetVO;
-import vo.ReceiptVO;
 import vo.SaleBackSheetVO;
 import vo.SaleSheetVO;
 import vo.SpillsLossBillVO;
+import vo.financialBillVO.CashPaymentVO;
+import vo.financialBillVO.PaymentVO;
+import vo.financialBillVO.ReceiptVO;
 import businesslogic.BillState;
 
 public class JPBillList extends JPanel {

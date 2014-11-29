@@ -2,14 +2,14 @@ package presentation.financialui;
 
 import java.util.ArrayList;
 
-import vo.AccountVO;
-import vo.BusinessSituationVO;
-import vo.CashPaymentVO;
-import vo.InquiryProcessVO;
-import vo.InquirySaleVO;
-import vo.PaymentVO;
-import vo.ReceiptVO;
 import vo.VO;
+import vo.accountVO.AccountVO;
+import vo.financialBillVO.CashPaymentVO;
+import vo.financialBillVO.PaymentVO;
+import vo.financialBillVO.ReceiptVO;
+import vo.inquiryVO.BusinessSituationVO;
+import vo.inquiryVO.InquiryProcessVO;
+import vo.inquiryVO.InquirySaleVO;
 import businesslogic.financialbillbl.CashPaymentBill;
 import businesslogic.financialbillbl.PaymentBill;
 import businesslogic.financialbillbl.ReceiptBill;
