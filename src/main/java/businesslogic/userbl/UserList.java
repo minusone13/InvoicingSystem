@@ -7,11 +7,12 @@ import po.userpo.*;
 import vo.RM;
 import vo.uservo.OperationRecordVO;
 import vo.uservo.UserVO;
+import data.userdata.UserDataController;
 import dataservice.userdataservice.*;
 import businesslogic.Role;
 
 public class UserList {
-	static StubUserDataService data;
+	static StubUserDataService data=UserDataController.getInstance();//need to be deleted
 	String ID;//自动生成
 	Role r;//职务
 	String account;//用于登陆的账号

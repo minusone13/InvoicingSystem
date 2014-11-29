@@ -4,7 +4,7 @@ import po.userpo.UserPO;
 import vo.uservo.UserVO;
 import businesslogic.Role;
 
-public class User {
+public class User implements Cloneable{
 	String ID;//自动生成
 	Role r;//职务
 	String account;//用于登陆的账号

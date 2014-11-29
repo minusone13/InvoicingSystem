@@ -3,10 +3,14 @@ package businesslogic.stockmanagerbl;
 import java.util.*;
 
 import dataservice.commoditydataservice.*;
+import businesslogic.Role;
 import businesslogic.commoditybillbl.*;
 import businesslogic.commoditybl.*;
 import businesslogic.stockservice.*;
+import businesslogic.userbl.OperationRecord;
 import businesslogic.userbl.User;
+import businesslogic.userbl.UserController;
+import businesslogic.userservice.UserService;
 import businesslogicservice.commodityblservice.*;
 import vo.*;
 import vo.stockvo.*;
@@ -15,15 +19,18 @@ import vo.uservo.UserVO;
 public class StubStockController implements StubCommodityBlService, StockBlForSalesMen, StockBlForManager,StockBlForFinancial
 {//负责与界面及其他程序员的交互
 	StubCommodityList l=new StubCommodityList();
+	UserService us=new UserController();
 	static StubCommodityDataService comdata;
-	User user;
+	User user=new User("I0001",Role.STOCK_STAFF,"default","default","default");
 	public StubCommodityList getCommodityList ()
 	{
 		return l;
 	}
 	public RM addCommodity(CommodityVO vo)
 	{
-		return l.addCommodity(vo);
+		RM result=l.addCommodity(vo);
+		us.addRecord(new OperationRecord(user,"addCommodity",result));
+		return result;
 	}
 	public ArrayList<CommodityVO> findCommodity(String name)
 	{
@@ -35,7 +42,9 @@ public class StubStockController implements StubCommodityBlService, StockBlForSa
 	}
 	public RM addCategory(CategoryVO vo)
 	{
-		return l.addCategory(vo);
+		RM result=l.addCategory(vo);
+		us.addRecord(new OperationRecord(user,"addCategory",result));
+		return result;
 	}
 	
 	public void setdataobject(StubCommodityDataService comdata)
@@ -58,11 +67,15 @@ public class StubStockController implements StubCommodityBlService, StockBlForSa
 	}
 	public RM deleteCommodity(String name,String model)
 	{//有可能返回RM。done，若已有进出记录，返回alreadyHaveUnremoveableContents
-		return l.deleteCommodity(name, model);
+		RM result=l.deleteCommodity(name, model);
+		us.addRecord(new OperationRecord(user,"deleteCommodity",result));
+		return result;
 	}
 	public RM deleteCategory(String id)
 	{//有可能返回RM。done，若已有子分类或商品，返回alreadyHaveUnremoveableContents
-		return l.deleteCategory(id);
+		RM result=l.deleteCategory(id);
+		us.addRecord(new OperationRecord(user,"deleteCategory",result));
+		return result;
 	}
 	public void setUser(UserVO vo)
 	{
