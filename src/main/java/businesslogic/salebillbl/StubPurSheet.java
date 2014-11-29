@@ -12,19 +12,26 @@ import businesslogic.examinebl.Bill;
 
 public class StubPurSheet extends Bill implements GetVOandPO{
 	private BillStyle billstyle=BillStyle.PurSheet;
-	
-		Date date;
-		StubCustomer customer;
-		private String ID;
-		String commodity;//仓库？
-		ArrayList sheet;//是不是应该是个arraylist<>?
-		double money1;//总金额
-		String words;//备注
+
+	Date date;
+	StubCustomer customer;
+	private String ID;
+	private String userID;
+	String commodity;//仓库？
+	ArrayList sheet;//是不是应该是个arraylist<>?
+	double money1;//总金额
+	String words;//备注
 		
 		public Date getDate() {
 			return date;
 		}
+		public String getUserID() {
+			return userID;
+		}
 
+		public void setUserID(String userID) {
+			this.userID = userID;
+		}
 		public void setDate(Date date) {
 			this.date = date;
 		}

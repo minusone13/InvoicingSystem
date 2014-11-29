@@ -13,6 +13,8 @@ import businesslogic.examinebl.Bill;
 public class StubPurBackSheet extends Bill implements GetVOandPO{
 	StubCustomer customer;
 	private String ID;
+	private String userID;
+	
 	private BillStyle billstyle=BillStyle.PurBackSheet;
 	
 	Date date;
@@ -33,7 +35,13 @@ public class StubPurBackSheet extends Bill implements GetVOandPO{
 	public void setDate(Date date) {
 		this.date = date;
 	}
+	public String getUserID() {
+		return userID;
+	}
 
+	public void setUserID(String userID) {
+		this.userID = userID;
+	}
 	
 	public PurBackSheetVO getVO() {
 		// TODO Auto-generated method stub

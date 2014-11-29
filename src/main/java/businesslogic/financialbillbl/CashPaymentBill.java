@@ -25,6 +25,7 @@ public class CashPaymentBill extends Bill implements GetVOandPO{
 	private double total;
 	private BillState state;
 	private Date date;
+	private String userID;
 	private ArrayList<StubItem> itemList = new ArrayList<StubItem>();
 	
 	public CashPaymentBill() {}
@@ -52,6 +53,12 @@ public class CashPaymentBill extends Bill implements GetVOandPO{
 		
 	}
 	
+	public String getUserID() {
+		return userID;
+	}
+	public void setUserID(String userID) {
+		this.userID = userID;
+	}
 	public BillStyle getBillstyle() {
 		return billstyle;
 	}

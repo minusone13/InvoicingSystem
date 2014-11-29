@@ -21,7 +21,7 @@ import businesslogic.salebillbl.StubSaleBackSheet;
 import businesslogic.salebillbl.StubSaleSheet;
 import vo.*;
 
-public class StubInquiry {
+public class Inquiry {
 	StubBillPool bp = new StubBillPool();
 	public ArrayList<VO> inquirySale(InquirySaleVO isv) {
 		ArrayList<VO> list = new ArrayList<VO>();
@@ -114,6 +114,12 @@ public class StubInquiry {
 				if(sale.getBillstyle() == ipv.getBillstyle()){}
 				else continue;
 			}
+			
+			if(ipv.getUserID()!=null) {
+				if(sale.getUserID().equals(ipv.getUserID())){}
+				else continue;				
+			}
+			
 			list.add(sale.getVO());
 		}
 		
@@ -132,6 +138,12 @@ public class StubInquiry {
 				if(saleback.getBillstyle() == ipv.getBillstyle()){}
 				else continue;
 			}
+			
+			if(ipv.getUserID()!=null) {
+				if(saleback.getUserID().equals(ipv.getUserID())){}
+				else continue;				
+			}
+			
 			list.add(saleback.getVO());
 		}
 		
@@ -188,6 +200,10 @@ public class StubInquiry {
 				else continue;
 			}
 			
+			if(ipv.getUserID()!=null) {
+				if(pur.getUserID().equals(ipv.getUserID())){}
+				else continue;				
+			}
 			list.add(pur.getVO());
 		}
 		
@@ -205,6 +221,10 @@ public class StubInquiry {
 			if(ipv.getBillstyle()!=null) {
 				if(back.getBillstyle() == ipv.getBillstyle()){}
 				else continue;
+			}
+			if(ipv.getUserID()!=null) {
+				if(back.getUserID().equals(ipv.getUserID())){}
+				else continue;				
 			}
 			list.add(back.getVO());
 		}
@@ -230,9 +250,9 @@ public class StubInquiry {
 				else continue;
 			}
 			
-			if(ipv.getOperator()!=null) {
-				if(re.getOperator().equals(ipv.getOperator())){}
-				else continue;
+			if(ipv.getUserID()!=null) {
+				if(re.getUserID().equals(ipv.getUserID())){}
+				else continue;				
 			}
 			
 			list.add(re.getVO());
@@ -258,9 +278,9 @@ public class StubInquiry {
 				else continue;
 			}
 			
-			if(ipv.getOperator()!=null) {
-				if(pa.getOperator().equals(ipv.getOperator())){}
-				else continue;
+			if(ipv.getUserID()!=null) {
+				if(pa.getUserID().equals(ipv.getUserID())){}
+				else continue;				
 			}
 			list.add(pa.getVO());
 		}
@@ -282,9 +302,9 @@ public class StubInquiry {
 				else continue;
 			}
 			
-			if(ipv.getOperator()!=null) {
-				if(ca.getOperator().equals(ipv.getOperator())){}
-				else continue;
+			if(ipv.getUserID()!=null) {
+				if(ca.getUserID().equals(ipv.getUserID())){}
+				else continue;				
 			}
 			list.add(ca.getVO());
 		}

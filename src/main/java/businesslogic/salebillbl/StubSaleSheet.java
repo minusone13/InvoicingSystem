@@ -13,6 +13,7 @@ import businesslogic.examinebl.Bill;
 public class StubSaleSheet extends Bill implements GetVOandPO{
 
 	private String ID;
+	private String userID;
 	private BillStyle billstyle=BillStyle.SaleSheet;
 		
 		Date date;
@@ -27,6 +28,13 @@ public class StubSaleSheet extends Bill implements GetVOandPO{
 		
 		public StubCustomer getCustomer() {
 			return customer;
+		}
+		public String getUserID() {
+			return userID;
+		}
+
+		public void setUserID(String userID) {
+			this.userID = userID;
 		}
 		
 		public BillStyle getBillstyle() {
