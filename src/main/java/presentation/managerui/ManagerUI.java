@@ -7,7 +7,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import presentation.commodityui.JPcommodity;
+import presentation.commodityui.JPcommodityPack;
 
 public class ManagerUI extends JPanel {
 
@@ -55,9 +55,11 @@ public class ManagerUI extends JPanel {
 //		passbill1.setLocation(55, 233);
 		//审批单据2
 		passbill2.setLocation(55, 233);
-		//商品test
-		JPcommodity comodityTest=new JPcommodity("飞利浦日光灯","dx1000",10);
-		comodityTest.setLocation(555, 233);
+		//商品选择test
+		JPcommodityPack comodityChooseTest=new JPcommodityPack();
+		comodityChooseTest.addCommodities();
+		comodityChooseTest.update();
+		comodityChooseTest.setLocation(55, 233);
 		//home
 		home.setIcon(new ImageIcon("src/image/home.png") );
 		home.setBounds(690, 165, 90, 32);
@@ -73,11 +75,11 @@ public class ManagerUI extends JPanel {
 		this.add(titile,0);
 		this.add(sign,1);
 		this.add(navigation,2);
-		this.add(passbill2,3);
+		this.add(comodityChooseTest,3);
 		this.add(home,4);
 		this.add(back,5);
 		this.add(signout,6);
-		this.add(comodityTest,7);
+		this.add(passbill2,7);
 		this.add(bg,8);
 		
 	}

@@ -3,7 +3,11 @@ package presentation.managerui;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-
+/**
+ * @先设置标题和内容再update
+ * @author wyc
+ *
+ */
 public class JTableOfList extends JPanel{
 
 	private String[][] List;
