@@ -3,6 +3,7 @@ package InvoicingSystem;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import org.junit.*;
 
@@ -130,5 +131,16 @@ public class StockTest{
 		ArrayList<StockVO> vos=combl.openCategory("1");
 		vos=combl.openCategory(vos.get(2).getCat().getId());
 		assertEquals(0,vos.size());
+	}
+	
+	@Test
+	public void teststockForFinancial()
+	{
+		StubStockController sc=new StubStockController();
+		Date d1=new Date();
+		Date d2=new Date();
+		sc.getLossTotal(d1, d2);
+		sc.getSpillsTotal(d1, d2);
+		assertTrue(true);
 	}
 }

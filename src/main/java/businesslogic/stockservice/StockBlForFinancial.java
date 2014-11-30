@@ -1,5 +1,8 @@
 package businesslogic.stockservice;
 
-public interface StockBlForFinancial {
+import java.util.Date;
 
+public interface StockBlForFinancial {
+	public double getSpillsTotal(Date d1, Date d2);//including d1 and d2
+	public double getLossTotal(Date d1, Date d2);//see above
 }

@@ -81,4 +81,14 @@ public class StubStockController implements StubCommodityBlService, StockBlForSa
 	{
 		user=new User(vo);
 	}
+	public double getSpillsTotal(Date d1, Date d2)
+	{//including d1 and d2
+		StubCommodityBill cb=new StubCommodityBill();
+		return cb.getSpillsTotal(d1, d2);
+	}
+	public double getLossTotal(Date d1, Date d2)
+	{//see above
+		StubCommodityBill cb=new StubCommodityBill();
+		return cb.getLossTotal(d1, d2);
+	}
 }
