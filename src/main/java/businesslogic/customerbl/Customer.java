@@ -15,6 +15,10 @@ public class Customer {
 	double shouldGive;//应收
 	String deSaler;//默认销售人员
 	
+	Customer(){
+		
+	}//是不是必要的？既然已经有了setPO方法；
+	
 	public void setPO(CustomerPO po){
 		this.type=po.gettype();
 		this.name=po.getname();

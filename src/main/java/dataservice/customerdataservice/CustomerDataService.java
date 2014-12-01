@@ -8,9 +8,8 @@ import po.CustomerPO;
 
 public interface CustomerDataService {
 	public boolean addCustomer(CustomerPO po);
-	public CustomerPO getAll();
-	public ArrayList<CustomerPO> findCommodity(String name);
-	public boolean deleteCommodity(String name, String model);
-	public boolean updateCommodity(CustomerPO po);
-	public boolean addCategory(String parent, String name);
+	//public CustomerPO getAll();
+	public CustomerPO findCustomer(String name);
+	public boolean deleteCustomer(String name);
+	public boolean updateCustomer(CustomerPO po);
 }
