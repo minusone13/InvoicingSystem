@@ -3,6 +3,7 @@ package po;
 public class CustomerPO {
 	int type;
 	String name;
+	String id;
 	String phonenumber;
 	String address;
 	String postcode;
@@ -10,6 +11,14 @@ public class CustomerPO {
 	double shouldPay;
 	double shouldGive;
 	String deSaler;
+	
+	public String getid(){
+		return this.id;
+	}
+	
+	public void setid(String id){
+		this.id=id;
+	}
 	
 	public int gettype(){
 		return this.type;

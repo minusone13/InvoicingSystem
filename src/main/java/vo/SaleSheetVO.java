@@ -3,11 +3,11 @@ package vo;
 import java.util.ArrayList;
 
 import businesslogic.BillStyle;
-import businesslogic.customerbl.StubCustomer;
+import businesslogic.customerbl.Customer;
 
 public class SaleSheetVO extends VO{
 	private BillStyle style=BillStyle.SaleSheet;
-	StubCustomer customer;
+	Customer customer;
 	String id;
 	String commodity;//仓库？
 	ArrayList sheet;//是不是应该是个arraylist<>?
@@ -41,11 +41,11 @@ public class SaleSheetVO extends VO{
 		this.pmoney=pmoney;
 	}
 	
-	public StubCustomer getcustomer(){
+	public Customer getcustomer(){
 		return customer;
 	}
 	
-	public void setCustomer(StubCustomer customer){
+	public void setCustomer(Customer customer){
 		this.customer=customer;
 	}
 	

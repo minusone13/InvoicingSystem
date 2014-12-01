@@ -7,14 +7,14 @@ import po.PurSheetPO;
 import vo.PurSheetVO;
 import businesslogic.BillStyle;
 import businesslogic.GetVOandPO;
-import businesslogic.customerbl.StubCustomer;
+import businesslogic.customerbl.Customer;
 import businesslogic.examinebl.Bill;
 
 public class StubPurSheet extends Bill implements GetVOandPO{
 	private BillStyle billstyle=BillStyle.PurSheet;
 
 	Date date;
-	StubCustomer customer;
+	Customer customer;
 	private String ID;
 	private String userID;
 	String commodity;//仓库？

@@ -7,7 +7,7 @@ import po.SaleSheetPO;
 import vo.SaleSheetVO;
 import businesslogic.BillStyle;
 import businesslogic.GetVOandPO;
-import businesslogic.customerbl.StubCustomer;
+import businesslogic.customerbl.Customer;
 import businesslogic.examinebl.Bill;
 
 public class StubSaleSheet extends Bill implements GetVOandPO{
@@ -18,15 +18,15 @@ public class StubSaleSheet extends Bill implements GetVOandPO{
 		
 		Date date;
 		
-		StubCustomer customer;
-		ArrayList sheet;//销售单据，商品名，数量，单价
+		Customer customer;
+		ArrayList sheet;//销售单据，商品名，数量，单价//ArrayList<>在写一个类；
 		double money1;//折前总金额
 		double money2;//代金券金额
 		double disconut;//折让金额；
 		double pmoney;//最终金额
 		String words;//备注
 		
-		public StubCustomer getCustomer() {
+		public Customer getCustomer() {
 			return customer;
 		}
 		public String getUserID() {

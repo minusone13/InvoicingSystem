@@ -3,10 +3,10 @@ package po;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import businesslogic.customerbl.StubCustomer;
+import businesslogic.customerbl.Customer;
 
 public class SaleBackSheetPO extends PO implements Serializable{
-	StubCustomer customer;
+	Customer customer;
 	String id;
 	String commodity;//仓库？
 	ArrayList sheet;//是不是应该是个arraylist<>?
@@ -40,11 +40,11 @@ public class SaleBackSheetPO extends PO implements Serializable{
 		this.pmoney=pmoney;
 	}
 	
-	public StubCustomer getcustomer(){
+	public Customer getcustomer(){
 		return customer;
 	}
 	
-	public void setCustomer(StubCustomer customer){
+	public void setCustomer(Customer customer){
 		this.customer=customer;
 	}
 	

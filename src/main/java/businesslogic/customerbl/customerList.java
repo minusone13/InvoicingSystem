@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import dataservice.customerdataservice.CustomerDataService;
 
-public class customerList extends ArrayList<StubCustomer>{
+public class customerList extends ArrayList<Customer>{
 		/*
 		 * 这里面都是StubCustomer。
 		 * */

@@ -10,14 +10,7 @@ public class CustomerVO {
 	double shouldPay;
 	double shouldGive;
 	String deSaler;
-	
-	/*void setType(int type){
-		this.type=type;
-	}
-	
-	void setName(String name){
-		this.name=name;
-	}*/
+	private String id;
 	
 	public int gettype(){
 		return this.type;
@@ -89,6 +82,11 @@ public class CustomerVO {
 	
 	public void setShouldGive(double shouleGive){
 		this.shouldGive=shouleGive;
+	}
+
+	public void setid(String id) {
+		// TODO Auto-generated method stub
+		this.id=id;
 	}
 	
 }

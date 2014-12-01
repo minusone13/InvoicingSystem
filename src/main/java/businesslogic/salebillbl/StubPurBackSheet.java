@@ -7,11 +7,11 @@ import po.PurBackSheetPO;
 import vo.PurBackSheetVO;
 import businesslogic.BillStyle;
 import businesslogic.GetVOandPO;
-import businesslogic.customerbl.StubCustomer;
+import businesslogic.customerbl.Customer;
 import businesslogic.examinebl.Bill;
 
 public class StubPurBackSheet extends Bill implements GetVOandPO{
-	StubCustomer customer;
+	Customer customer;
 	private String ID;
 	private String userID;
 	

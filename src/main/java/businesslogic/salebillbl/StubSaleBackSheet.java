@@ -7,7 +7,7 @@ import po.SaleBackSheetPO;
 import vo.SaleBackSheetVO;
 import businesslogic.BillStyle;
 import businesslogic.GetVOandPO;
-import businesslogic.customerbl.StubCustomer;
+import businesslogic.customerbl.Customer;
 import businesslogic.examinebl.Bill;
 
 public class StubSaleBackSheet extends Bill implements GetVOandPO{
@@ -18,7 +18,7 @@ public class StubSaleBackSheet extends Bill implements GetVOandPO{
 	Date date;
 
 	
-	StubCustomer customer;
+	Customer customer;
 	ArrayList sheet;//销售单据，商品名，数量，单价
 	double money1;//折前总金额
 	double money2;//代金券金额
