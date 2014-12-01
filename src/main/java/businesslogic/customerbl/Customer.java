@@ -4,7 +4,6 @@ import po.CustomerPO;
 import vo.CustomerVO;
 
 public class Customer {
-	
 	int type;//客户的级别
 	public String name;//客户的姓名
 	public String id;//客户编号；
