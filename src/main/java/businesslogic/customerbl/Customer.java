@@ -4,16 +4,96 @@ import po.CustomerPO;
 import vo.CustomerVO;
 
 public class Customer {
-	int type;//客户的级别
-	public String name;//客户的姓名
-	public String id;//客户编号；
-	String phonenumber;//电话号码
-	String address;//地址
-	String postcode;//邮箱
-	double maxOwe;//最大赊账（应付）
-	double shouldPay;//应付
-	double shouldGive;//应收
-	String deSaler;//默认销售人员
+	private int type;//客户的级别
+	private String name;//客户的姓名
+	private String id;//客户编号；
+	private String phonenumber;//电话号码
+	private String address;//地址
+	private String postcode;//邮箱
+	private double maxOwe;//最大赊账（应付）
+	private double shouldPay;//应付
+	private double shouldGive;//应收
+	private String deSaler;//默认销售人员
+	
+	public String getid(){
+		return this.id;
+	}
+	
+	public void setid(String id){
+		this.id=id;
+	}
+	
+	public int gettype(){
+		return this.type;
+	}
+	
+	public String getname(){
+		return this.name;
+	}
+	
+	public String getphonenumber(){
+		return this.phonenumber;
+	}
+	
+	public String getaddress(){
+		return this.address;
+	}
+	
+	public String getpostcode(){
+		return this.postcode;
+	}
+	
+	public String getdeSaler(){
+		return this.deSaler;
+	}
+	
+	public double getmaxOwe(){
+		return this.maxOwe;
+	}
+	
+	public double getShouldPay(){
+		return this.shouldPay;
+	}	
+	
+	public double getShouldGive(){
+		return this.shouldGive;
+	}
+	
+	public void settype(int type){
+		this.type=type;
+	}
+	
+	public void setname(String name){
+		this.name=name;
+	}
+	
+	public void setphonenumber(String phonenumber){
+		this.phonenumber=phonenumber;
+	}
+	
+	public void setaddress(String address){
+		this.address=address;
+	}
+	
+	public void setpostcode(String postcode){
+		this.postcode=postcode;
+	}
+	
+	public void setdeSaler(String deSaler){
+		this.deSaler=deSaler;
+	}
+	
+	public void setmaxOwe(double maxOwe){
+		this.maxOwe=maxOwe;
+	}
+	
+	public void setShouldPay(double ShouldPay){
+		this.shouldPay=ShouldPay;
+	}	
+	
+	public void setShouldGive(double shouleGive){
+		this.shouldGive=shouleGive;
+	}
 	
 	Customer(){
 		
