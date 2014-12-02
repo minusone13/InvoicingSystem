@@ -72,7 +72,7 @@ public class Inquiry {
 				if(sale.getUserID().equals(sale.getUserID())){}
 				else continue;				
 			}
-			//stock
+			
 		}
 		int size2 = saleBackSheet.size();
 		for(int i=0;i<size2;i++) {
