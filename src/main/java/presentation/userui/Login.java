@@ -11,11 +11,15 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import presentation.commodityui.JPcommodity.MouseListenerOfComfirm;
+
 
 public class Login extends JPanel {
 
 	//背景
 	JLabel bg=new JLabel();
+	//隐藏的注册面板
+	JPregister jpRegister=new JPregister();
 	//按钮
 	JLabel signIn=new JLabel();
 	JLabel register=new JLabel();
@@ -54,17 +58,26 @@ public class Login extends JPanel {
 		password.setOpaque(false);
 		password.setForeground(Color.white);
 		
-		this.add(signIn,0);
-		this.add(register,1);
-		this.add(username,2);
-		this.add(password,3);
-		this.add(bg,4);
+		//注册面板
+		jpRegister.setLocation(310, 220);
+		jpRegister.setVisible(false);
+		
+		this.add(jpRegister,0);
+		this.add(signIn,1);
+		this.add(register,2);
+		this.add(username,3);
+		this.add(password,4);
+		this.add(bg,5);
 	}
 	public class MouseListenerOfButton implements MouseListener{
 
 		private int num;
+		private boolean work=true;
 		public MouseListenerOfButton(int N){
 			num=N;
+		}
+		public void setWork(boolean work){
+			this.work=work;
 		}
 		public void mouseClicked(MouseEvent e) {
 			// TODO Auto-generated method stub
@@ -73,26 +86,33 @@ public class Login extends JPanel {
 
 		public void mousePressed(MouseEvent e) {
 			// TODO Auto-generated method stub
-			if(num==1){
+			if(work){
+				if(num==1){
+					
+					signIn.setIcon(new ImageIcon("src/image/userUi/sign in2.png")  );
+					
+				}
+				else if(num==2){
+					register.setIcon(new ImageIcon("src/image/userUi/register2.png") );
+					jpRegister.setVisible(true);
+				}
+			}
 			
-				signIn.setIcon(new ImageIcon("src/image/userUi/sign in2.png")  );
-				
-			}
-			else if(num==2){
-				register.setIcon(new ImageIcon("src/image/userUi/register2.png") );
-			}
 		}
 
 		public void mouseReleased(MouseEvent e) {
 			// TODO Auto-generated method stub
-			if(num==1){
-				
-				signIn.setIcon(new ImageIcon("src/image/userUi/sign in.png")  );
-				
+			if(work){
+				if(num==1){
+					
+					signIn.setIcon(new ImageIcon("src/image/userUi/sign in.png")  );
+					
+				}
+				else if(num==2){
+					register.setIcon(new ImageIcon("src/image/userUi/register.png") );
+				}
 			}
-			else if(num==2){
-				register.setIcon(new ImageIcon("src/image/userUi/register.png") );
-			}
+		
 		}
 
 		public void mouseEntered(MouseEvent e) {
@@ -102,15 +122,44 @@ public class Login extends JPanel {
 
 		public void mouseExited(MouseEvent e) {
 			// TODO Auto-generated method stub
-			if(num==1){
-				
-				signIn.setIcon(new ImageIcon("src/image/userUi/sign in.png")  );
-				
+			if(work){
+				if(num==1){
+					
+					signIn.setIcon(new ImageIcon("src/image/userUi/sign in.png")  );
+					
+				}
+				else if(num==2){
+					register.setIcon(new ImageIcon("src/image/userUi/register.png") );
+				}
 			}
-			else if(num==2){
-				register.setIcon(new ImageIcon("src/image/userUi/register.png") );
-			}
+		
 		}
 		
+	}
+	public class JPregister extends JPanel{
+		
+		public JPregister(){
+			this.setSize(350, 300);
+			//设置布局
+			this.setLayout(null);
+			//设置面板透明
+			this.setOpaque(false);
+			//背景
+			JLabel back=new JLabel();
+			back.setIcon(new ImageIcon("src/image/userUi/registerBG.png"));
+			back.setBounds(0, 0, 350, 300);
+			//确认按钮
+			JLabel confirm=new JLabel();
+			confirm.setIcon(new ImageIcon("src/image/ChooseCom/confirm.png") );
+			confirm.setBounds(140, 250, 24, 24);
+			//取消按钮
+			JLabel cancel=new JLabel();
+			cancel.setIcon(new ImageIcon("src/image/userUi/cancel.png") );
+			cancel.setBounds(186, 250, 24, 24);
+			
+			this.add(confirm,0);
+			this.add(cancel,1);
+			this.add(back,2);
+		}
 	}
 }
