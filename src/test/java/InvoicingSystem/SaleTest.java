@@ -1,7 +1,7 @@
 package InvoicingSystem;
 
 import businesslogic.salebillbl.salebillController;
-import businesslogicservice.customerblservice.StubCustomerBlService;
+import businesslogicservice.customerblservice.CustomerBlService;
 import businesslogicservice.salebillblservice.StubSaleBillBlService;
 import junit.framework.TestCase;
 
