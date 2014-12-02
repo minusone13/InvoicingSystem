@@ -9,7 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import presentation.managerui.ManagerUI;
+import presentation.userui.Login;
 
 public class Frame extends JFrame implements MouseListener{
 
@@ -54,16 +54,16 @@ public class Frame extends JFrame implements MouseListener{
 		mainJP.add(minus,1);
 		
 		
-//		//登录面板
-//		Login login=new Login();
-//		mainJP.add(login,2);
-//		login.setBounds(0, 0, 960, 600);
+		//登录面板
+		Login login=new Login();
+		mainJP.add(login,2);
+		login.setBounds(0, 0, 960, 600);
 		
-		ManagerUI manager=new ManagerUI();
-		mainJP.add(manager,2);
-		manager.setBounds(0, 0, 960, 600);
+//		ManagerUI manager=new ManagerUI();
+//		mainJP.add(manager,2);
+//		manager.setBounds(0, 0, 960, 600);
 		//加上监听接口
-		manager.addMouseListener(this);
+		login.addMouseListener(this);
 		//设置窗口可见
 		this.setVisible(true);
 	}

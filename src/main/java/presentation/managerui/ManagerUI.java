@@ -7,7 +7,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import presentation.commodityui.JPcommodityPack;
+import presentation.commodityui.JPManagerCom;
 
 public class ManagerUI extends JPanel {
 
@@ -41,13 +41,13 @@ public class ManagerUI extends JPanel {
 		bg.setBounds(0, 0, 960, 600);
 
 		//标题栏
-		titile.setIcon(new ImageIcon("src/image/managerUI/titile.png") );
+		titile.setIcon(new ImageIcon("src/image/navigation/titile.png") );
 		titile.setBounds(0, 0, 180, 32);
 		//标识栏
-		sign.setIcon(new ImageIcon("src/image/managerUI/sign.png") );
+		sign.setIcon(new ImageIcon("src/image/navigation/manager.png") );
 		sign.setBounds(0, 32, 960, 123);
 		//导航
-		navigation.setIcon(new ImageIcon("src/image/managerUI/navigation0.png") );
+		navigation.setIcon(new ImageIcon("src/image/navigation/navigation0.png") );
 		navigation.setBounds(0, 165, 960, 35);
 //		//功能板
 //		function.setLocation(55, 233);
@@ -56,10 +56,8 @@ public class ManagerUI extends JPanel {
 		//审批单据2
 		passbill2.setLocation(55, 233);
 		//商品选择test
-		JPcommodityPack comodityChooseTest=new JPcommodityPack();
-		comodityChooseTest.addCommodities();
-		comodityChooseTest.update();
-		comodityChooseTest.setLocation(55, 233);
+		JPManagerCom comodityChooseTest=new JPManagerCom();
+		comodityChooseTest.setLocation(55, 213);
 		//home
 		home.setIcon(new ImageIcon("src/image/home.png") );
 		home.setBounds(690, 165, 90, 32);

@@ -6,7 +6,6 @@ import data.accountdata.AccountBuild;
 import data.accountdata.AccountData;
 import dataservice.accountdataservice.StubAccountDataService;
 import businesslogic.commoditybl.StubCommodityList;
-import businesslogic.customerbl.CustomerController;
 import businesslogic.stockmanagerbl.StubStockController;
 import po.AccountPO;
 import vo.accountVO.AccountVO;

@@ -18,7 +18,7 @@ public class JPcommodityPack extends JPanel {
 	private JPanel pack=null;
 	private ArrayList<JPcommodity> commodities=new ArrayList<JPcommodity>();
 	public JPcommodityPack(){
-		this.setSize(467, 350);
+		this.setSize(467, 300);
 		//设置布局
 		this.setLayout(null);
 		//设置面板透明
@@ -26,10 +26,10 @@ public class JPcommodityPack extends JPanel {
 		//背景
 		JLabel back=new JLabel();
 		back.setIcon(new ImageIcon("src/image/ChooseCom/back.png"));
-		back.setBounds(0, 0, 450, 350);
+		back.setBounds(0, 0, 450, 300);
 		
 		SCR = new JScrollPane();
-		SCR.setBounds(0, 0, 467, 350);
+		SCR.setBounds(0, 0, 467, 300);
 		SCR.setOpaque(false);//设置透明
 		SCR.getViewport().setOpaque(false);//设置透明
 		SCR.setBorder(null);

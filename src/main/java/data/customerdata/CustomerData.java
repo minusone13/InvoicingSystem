@@ -12,29 +12,19 @@ public class CustomerData implements CustomerDataService{
 		return false;
 	}
 
-	public CustomerPO getAll() {
+	public boolean deleteCustomer(String name) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean updateCustomer(CustomerPO po) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public CustomerPO findCustomer(String name) {
 		// TODO Auto-generated method stub
 		return null;
-	}
-
-	public ArrayList<CustomerPO> findCommodity(String name) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public boolean deleteCommodity(String name, String model) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	public boolean updateCommodity(CustomerPO po) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	public boolean addCategory(String parent, String name) {
-		// TODO Auto-generated method stub
-		return false;
 	}
 
 }
