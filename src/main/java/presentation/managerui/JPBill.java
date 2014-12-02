@@ -247,11 +247,11 @@ public class JPBill extends JPanel {
 			break;
 		case SaleBackSheet:
 			break;
-		case ReceiptBill:
+		case ReceiptBill:s1="Receiptbill";
 			break;
-		case PaymentBill:
+		case PaymentBill:s1="Paymentbill";
 			break;
-		case CashPaymentBill:s1="CashPaymentbill";
+		case CashPaymentBill:s1="CashPayment";
 			break;
 		}
 		switch(state){
