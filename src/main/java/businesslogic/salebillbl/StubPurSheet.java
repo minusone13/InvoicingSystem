@@ -92,12 +92,29 @@ public class StubPurSheet extends Bill implements GetVOandPO{
 		}
 		
 		public PurSheetVO getVO() {
-			// TODO Auto-generated method stub
-			return null;
+			PurSheetVO vo = new PurSheetVO();
+			vo.setCustomer(customer);
+			vo.setdate(date);
+			vo.setid(ID);
+			vo.setuserid(userID);
+			vo.setmoney1(money1);
+			vo.setsheet(sheet);
+			vo.setstock(stock);
+			vo.setwords(words);
+			return vo;
 		}
+		
 		public PurSheetPO getPO() {
-			// TODO Auto-generated method stub
-			return null;
+			PurSheetPO po = new PurSheetPO();
+			po.setCustomer(customer);
+			po.setdate(date);
+			po.setid(ID);
+			po.setuserid(userID);
+			po.setmoney1(money1);
+			po.setsheet(sheet);
+			po.setstock(stock);
+			po.setwords(words);
+			return po;
 		}
 		
 		public void setPO(PurSheetPO po){
