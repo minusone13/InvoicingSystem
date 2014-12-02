@@ -25,7 +25,7 @@ public class JPfunction extends JPanel {
 		//设置面板透明
 		this.setOpaque(false);
 		//背景
-		bg.setIcon(new ImageIcon("src/image/managerUI/block.png"));
+		bg.setIcon(new ImageIcon("src/image/block/blockForFunctions.png"));
 		bg.setBounds(0, 0, 522, 325);
 		//功能1
 		function1.setIcon(new ImageIcon("src/image/managerUI/makeStrategy0.jpg"));

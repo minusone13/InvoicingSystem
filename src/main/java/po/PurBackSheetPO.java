@@ -2,16 +2,35 @@ package po;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 
 import businesslogic.customerbl.Customer;
 
 public class PurBackSheetPO extends PO implements Serializable{
 	Customer customer;
 	String id;
-	String commodity;//仓库？
+	String userid;
+	Date date;
+	String stock;//仓库？
 	ArrayList sheet;//是不是应该是个arraylist<>?
 	double money1;//总金额
 	String words;//备注
+	
+	public Date getdate(){
+		return date;
+	}
+	
+	public void setdate(Date date){
+		this.date=date;
+	}
+	
+	public String getuserid(){
+		return userid;
+	}
+	
+	public void setuserid(String userid){
+		this.userid=userid;
+	}
 	
 	public Customer getcustomer(){
 		return customer;
@@ -29,12 +48,12 @@ public class PurBackSheetPO extends PO implements Serializable{
 		this.id=id;
 	}
 	
-	public String getcommodity(){
-		return commodity;
+	public String getstock(){
+		return stock;
 	}
 	
-	public void setcommodity(String commodity){
-		this.commodity=commodity;
+	public void setstock(String stock){
+		this.stock=stock;
 	}
 	
 	public ArrayList getsheet(){

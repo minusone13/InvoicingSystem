@@ -1,6 +1,7 @@
 package vo;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import businesslogic.BillStyle;
 import businesslogic.customerbl.Customer;
@@ -9,6 +10,8 @@ public class SaleBackSheetVO extends VO{
 	private BillStyle style=BillStyle.SaleBackSheet;
 	Customer customer;
 	String id;
+	String userid;
+	Date date;
 	String commodity;//仓库？
 	ArrayList sheet;//是不是应该是个arraylist<>?
 	double money1;//总金额
@@ -17,6 +20,21 @@ public class SaleBackSheetVO extends VO{
 	double pmoney;
 	String words;//备注
 	
+	public String getuserid(){
+		return userid;
+	}
+	
+	public void setuserid(String userid){
+		this.userid=userid;
+	}
+	
+	public Date getdate(){
+		return date;
+	}
+	
+	public void setdate(Date date){
+		this.date=date;
+	}
 	public double getmoney2(){
 		return money2;
 	}

@@ -19,7 +19,7 @@ public class StubPurBackSheet extends Bill implements GetVOandPO{
 	
 	Date date;
 	
-	String commodity;//仓库？
+	String stock;//仓库？
 	ArrayList sheet;//是不是应该是个arraylist<>?
 	double money1;//总金额
 	String words;//备注
@@ -30,7 +30,6 @@ public class StubPurBackSheet extends Bill implements GetVOandPO{
 	public Date getDate() {
 		return date;
 	}
-
 
 	public void setDate(Date date) {
 		this.date = date;
@@ -43,22 +42,91 @@ public class StubPurBackSheet extends Bill implements GetVOandPO{
 		this.userID = userID;
 	}
 	
+	
+	public Customer getcustomer(){
+		return customer;
+	}
+	
+	public void setCustomer(Customer customer){
+		this.customer=customer;
+	}
+	
+	public String getid(){
+		return this.ID;
+	}
+	
+	public void setid(String ID){
+		this.ID=ID;
+	}
+	
+	public String getstock(){
+		return stock;
+	}
+	
+	public void setstock(String stock){
+		this.stock=stock;
+	}
+	
+	public ArrayList getsheet(){
+		return sheet;
+	}
+	
+	public void setsheet(ArrayList sheet){
+		this.sheet=sheet;
+	}
+	
+	public double getmoney1(){
+		return money1;
+	}
+	
+	public void setmoney1(double money1){
+		this.money1=money1;
+	}
+	
+	public String getwords(){
+		return words;
+	}
+
+	public void setwords(String words){
+		this.words=words;
+	}
+	
 	public PurBackSheetVO getVO() {
-		// TODO Auto-generated method stub
-		return null;
+		PurBackSheetVO vo = new PurBackSheetVO();
+		vo.setCustomer(customer);
+		vo.setdate(date);
+		vo.setid(ID);
+		vo.setuserid(userID);
+		vo.setmoney1(money1);
+		vo.setsheet(sheet);
+		vo.setstock(stock);
+		vo.setwords(words);
+		return vo;
+	}
+	
+	public PurBackSheetPO getPO() {
+		PurBackSheetPO po= new PurBackSheetPO();
+		po.setCustomer(customer);
+		po.setdate(date);
+		po.setid(ID);
+		po.setuserid(userID);
+		po.setmoney1(money1);
+		po.setsheet(sheet);
+		po.setstock(stock);
+		po.setwords(words);
+		return po;
 	}
 	
 	public void setPO(PurBackSheetPO po){
 		this.customer=po.getcustomer();
-		this.commodity=po.getcommodity();
+		this.userID=po.getuserid();
+		this.date=po.getdate();
+		this.stock=po.getstock();
 		this.ID=po.getid();
 		this.sheet=po.getsheet();
 		this.money1=po.getmoney1();
 		this.words=po.getwords();
 	}
 	
-	public PurBackSheetPO getPO() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 }
