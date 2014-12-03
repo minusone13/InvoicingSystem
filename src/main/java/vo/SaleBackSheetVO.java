@@ -19,6 +19,7 @@ public class SaleBackSheetVO extends VO{
 	double discount;
 	double pmoney;
 	String words;//备注
+	String stock;
 	
 	public String getuserid(){
 		return userid;
@@ -105,6 +106,14 @@ public class SaleBackSheetVO extends VO{
 
 	public void setwords(String words){
 		this.words=words;
+	}
+
+	public void setstock(String stock) {
+		this.stock=stock;
+	}
+	
+	public String getstock(){
+		return this.stock;
 	}
 		
 }
