@@ -2,10 +2,8 @@ package businesslogicservice.commodityblservice;
 import java.util.ArrayList;
 
 import dataservice.commoditydataservice.*;
-import vo.RM;
-import vo.stockvo.CategoryVO;
-import vo.stockvo.CommodityVO;
-import vo.stockvo.StockVO;
+import vo.*;
+import vo.stockvo.*;
 import vo.uservo.UserVO;
 public interface StubCommodityBlService {
 	public ArrayList<CommodityVO> findCommodity(String name);//输入商品名称，返回一系列具有同样名称的商品 need to be changed to mohuchazhao
@@ -17,4 +15,16 @@ public interface StubCommodityBlService {
 	public RM deleteCommodity(String name,String model);//有可能返回RM。done，若已有进出记录，返回alreadyHaveUnremoveableContents
 	public RM deleteCategory(String id);//有可能返回RM。done，若已有子分类或商品，返回alreadyHaveUnremoveableContents
 	public void setUser(UserVO vo);//告诉代码此时操作的User
+	
+	public RM creat(GiftBillVO vo);
+	public RM creat(SpillsLossBillVO vo);
+	public RM creat(AlertBillVO vo);
+	
+	public RM update(GiftBillVO vo);
+	public RM update(SpillsLossBillVO vo);
+	public RM update(AlertBillVO vo);
+	
+	public RM submit(GiftBillVO vo);
+	public RM submit(SpillsLossBillVO vo);
+	public RM submit(AlertBillVO vo);
 }

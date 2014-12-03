@@ -91,4 +91,43 @@ public class StubStockController implements StubCommodityBlService, StockBlForSa
 		StubCommodityBill cb=new StubCommodityBill();
 		return cb.getLossTotal(d1, d2);
 	}
+	
+	public RM creat(GiftBillVO vo)
+	{
+		return RM.done;
+	}
+	public RM creat(SpillsLossBillVO vo)
+	{
+		return RM.done;
+	}
+	public RM creat(AlertBillVO vo)
+	{
+		return RM.done;
+	}
+	
+	public RM update(GiftBillVO vo)
+	{
+		return RM.done;
+	}
+	public RM update(SpillsLossBillVO vo)
+	{
+		return RM.done;
+	}
+	public RM update(AlertBillVO vo)
+	{
+		return RM.done;
+	}
+	
+	public RM submit(GiftBillVO vo)
+	{
+		return RM.done;
+	}
+	public RM submit(SpillsLossBillVO vo)
+	{
+		return RM.done;
+	}
+	public RM submit(AlertBillVO vo)
+	{
+		return RM.done;
+	}
 }
