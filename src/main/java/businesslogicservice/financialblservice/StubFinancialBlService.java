@@ -36,6 +36,12 @@ public interface StubFinancialBlService {
 	
 	public boolean creatPayment(PaymentVO pv);
 	
-	public boolean creatCashPayment(CashPaymentVO cpv) ;
+	public boolean creatCashPayment(CashPaymentVO cpv);
+	
+	public ArrayList<CashPaymentVO> getAllOfCashPaymentBills ();
+	
+	public ArrayList<PaymentVO> getAllOfPaymentBills ();
+	
+	public ArrayList<ReceiptVO> getAllOfReceiptBills ();
 		
 }

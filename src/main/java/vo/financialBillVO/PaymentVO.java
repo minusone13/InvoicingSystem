@@ -12,7 +12,7 @@ public class PaymentVO extends VO{
 	private BillStyle billstyle=BillStyle.PaymentBill;
 	//单据编号、操作员自动生成
 	String ID;
-	Role operator;
+	Role role;
 	String customer;
 	double total;
 	double[] money;//转账金额
@@ -38,11 +38,11 @@ public class PaymentVO extends VO{
 	public void setID(String iD) {
 		ID = iD;
 	}
-	public Role getOperator() {
-		return operator;
+	public Role getRole() {
+		return role;
 	}
-	public void setOperator(Role operator) {
-		this.operator = operator;
+	public void setRole(Role r) {
+		this.role = r;
 	}
 	public BillState getState() {
 		return state;

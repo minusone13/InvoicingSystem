@@ -10,7 +10,7 @@ import businesslogic.financialbillbl.StubTransferAccount;
 
 public class PO {
 	String ID;
-	Role operator;
+	Role role;
 	String customer;
 	double total;
 	BillState state;
