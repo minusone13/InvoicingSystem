@@ -346,6 +346,22 @@ public class JPBillList extends JPanel {
 				}
 			}
 		}
+		else{
+			System.out.println("只有提交状态的单据能够通过审批");
+		}
+	}
+	/*提交选中的*/
+	public void submitChosen(){
+		if(getChosenNum()>=1&&isTheSameState()&&stateOfChosen()==BillState.DRAFT){
+			for(int i=0;i<JPbillList.size();i++){
+				if(JPbillList.get(i).getChoose()){
+					JPbillList.get(i).transformState(BillState.SUBMITED);
+				}
+			}
+		}
+		else{
+			System.out.println("只有草稿状态的单据能够提交");
+		}
 	}
 	/*返回被选中的个数*/
 	public int getChosenNum(){

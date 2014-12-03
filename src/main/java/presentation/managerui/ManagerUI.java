@@ -73,12 +73,12 @@ public class ManagerUI extends JPanel {
 		this.add(titile,0);
 		this.add(sign,1);
 		this.add(navigation,2);
-		this.add(comodityChooseTest,3);
-		this.add(home,4);
-		this.add(back,5);
-		this.add(signout,6);
-		this.add(passbill2,7);
-		this.add(bg,8);
+//		this.add(comodityChooseTest,3);
+		this.add(home,3);
+		this.add(back,4);
+		this.add(signout,5);
+		this.add(passbill2,6);
+		this.add(bg,7);
 		
 	}
 	public class MouseListenerOfButton implements MouseListener{
