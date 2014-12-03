@@ -27,6 +27,19 @@ public class JPpassBill2 extends JPanel {
 	private JLabel delete=new JLabel();
 	//编辑按钮
 	private JLabel edit=new JLabel();
+	//图片
+	ImageIcon upIconW=new ImageIcon("src/image/upW.png");
+	ImageIcon downIconW=new ImageIcon("src/image/downW.png");
+	ImageIcon checkIconW=new ImageIcon("src/image/function/checkW.png");
+	ImageIcon deleteIconW=new ImageIcon("src/image/function/deleteW.png");
+	ImageIcon editIconW=new ImageIcon("src/image/function/editW.png");
+	
+	ImageIcon upIconR=new ImageIcon("src/image/upR.png");
+	ImageIcon downIconR=new ImageIcon("src/image/downR.png");
+	ImageIcon checkIconR=new ImageIcon("src/image/function/checkR.png");
+	ImageIcon deleteIconR=new ImageIcon("src/image/function/deleteR.png");
+	ImageIcon editIconR=new ImageIcon("src/image/function/editR.png");
+	
 	public JPpassBill2(){
 		//面板大小
 		this.setSize(800, 342);
@@ -71,25 +84,25 @@ public class JPpassBill2 extends JPanel {
 		jp.add(billList,0);
 		jp.add(jpbg,1);
 		//向上按钮
-		up.setIcon(new ImageIcon("src/image/upW.png"));
+		up.setIcon(upIconW);
 		up.setBounds(281, 20, 32, 32);
 		up.addMouseListener(new MouseListenerOfButton(1));
 		//向下按钮
-		down.setIcon(new ImageIcon("src/image/downW.png"));
+		down.setIcon(downIconW);
 		down.setBounds(281, 289, 32, 32);
 		down.addMouseListener(new MouseListenerOfButton(2));
 		
 		//审查功能按钮
-		check.setIcon(new ImageIcon("src/image/function/checkW.png"));
-		check.setBounds(720, 20, 72, 72);
+		check.setIcon(checkIconW);
+		check.setBounds(720, 20, 50, 50);
 		check.addMouseListener(new MouseListenerOfButton(3));
 		//删除功能按钮
-		delete.setIcon(new ImageIcon("src/image/function/deleteW.png"));
-		delete.setBounds(720, 112, 72, 72);
+		delete.setIcon(deleteIconW);
+		delete.setBounds(720, 112, 50, 50);
 		delete.addMouseListener(new MouseListenerOfButton(4));
 		//编辑功能按钮
-		edit.setIcon(new ImageIcon("src/image/function/editW.png"));
-		edit.setBounds(720, 204, 72, 72);
+		edit.setIcon(editIconW);
+		edit.setBounds(720, 204, 50, 50);
 		edit.addMouseListener(new MouseListenerOfButton(5));
 		
 		this.add(jp,0);
@@ -114,21 +127,26 @@ public class JPpassBill2 extends JPanel {
 		public void mousePressed(MouseEvent e) {
 			// TODO Auto-generated method stub
 			switch(num){
-			case 1:up.setIcon(new ImageIcon("src/image/upR.png"));
+			case 1:
+			up.setIcon(upIconR);
 			//向上
 			billList.startUp();
 				break;
-			case 2:down.setIcon(new ImageIcon("src/image/downR.png"));
+			case 2:
+			down.setIcon(downIconR);
 			//向下
 			billList.startDown();
 				break;	
-			case 3:check.setIcon(new ImageIcon("src/image/function/checkR.png"));
+			case 3:
+				check.setIcon(checkIconR);
 				billList.passChosen();
 				break;
-			case 4:delete.setIcon(new ImageIcon("src/image/function/deleteR.png"));
+			case 4:
+				delete.setIcon(deleteIconR);
 				billList.removeChosen();
 				break;
-			case 5:edit.setIcon(new ImageIcon("src/image/function/editR.png"));
+			case 5:
+				edit.setIcon(editIconR);
 				break;
 			}
 		}
@@ -136,19 +154,24 @@ public class JPpassBill2 extends JPanel {
 		public void mouseReleased(MouseEvent e) {
 			// TODO Auto-generated method stub
 			switch(num){
-			case 1:up.setIcon(new ImageIcon("src/image/upW.png"));
+			case 1:
+			up.setIcon(upIconW);
 			//向上停止
 			billList.stop();
 				break;
-			case 2:down.setIcon(new ImageIcon("src/image/downW.png"));
+			case 2:
+			down.setIcon(downIconW);
 			//向上停止
 			billList.stop();
 				break;	
-			case 3:check.setIcon(new ImageIcon("src/image/function/checkW.png"));
+			case 3:
+				check.setIcon(checkIconW);
 				break;
-			case 4:delete.setIcon(new ImageIcon("src/image/function/deleteW.png"));
+			case 4:
+				delete.setIcon(deleteIconW);
 				break;
-			case 5:edit.setIcon(new ImageIcon("src/image/function/editW.png"));
+			case 5:
+				edit.setIcon(editIconW);
 				break;				
 			}
 		}
@@ -161,15 +184,20 @@ public class JPpassBill2 extends JPanel {
 		public void mouseExited(MouseEvent e) {
 			// TODO Auto-generated method stub
 			switch(num){
-			case 1:up.setIcon(new ImageIcon("src/image/upW.png"));
+			case 1:
+				up.setIcon(upIconW);
 				break;
-			case 2:down.setIcon(new ImageIcon("src/image/downW.png"));
+			case 2:
+				down.setIcon(downIconW);
 				break;	
-			case 3:check.setIcon(new ImageIcon("src/image/function/checkW.png"));
+			case 3:
+				check.setIcon(checkIconW);
 				break;
-			case 4:delete.setIcon(new ImageIcon("src/image/function/deleteW.png"));
+			case 4:
+				delete.setIcon(deleteIconW);
 				break;
-			case 5:edit.setIcon(new ImageIcon("src/image/function/editW.png"));
+			case 5:
+				edit.setIcon(editIconW);
 				break;		
 			}
 		}

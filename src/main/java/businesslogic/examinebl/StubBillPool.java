@@ -384,6 +384,7 @@ public class StubBillPool {
 		for(int i=0;i<alOfGiftBill.size();i++){
 			if(alOfGiftBill.get(i).getID().equals(gb.getID())){//寻找相同编号
 				//进行修改
+				
 			}
 		}
 		//保存
@@ -465,6 +466,7 @@ public class StubBillPool {
 		for(int i=0;i<alOfCashPaymentBill.size();i++){
 			if(alOfCashPaymentBill.get(i).getID().equals(cb.getID())){//寻找相同编号
 				//进行修改
+			
 			}
 		}
 		//保存

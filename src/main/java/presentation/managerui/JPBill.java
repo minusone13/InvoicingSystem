@@ -40,6 +40,11 @@ public class JPBill extends JPanel {
 	private boolean choose=false;
 	//逻辑层的接口
 	StubManagerBlService mbl=new StubManager();
+	//现金费用单的标签
+	JLabel operatorOfCas=new JLabel("操作员");
+	JLabel accountOfCas=new JLabel("帐户");
+	JLabel moneyOfCas=new JLabel("总额");
+	
 	public JPBill(GiftBillVO gb){
 		//面板大小
 		this.setSize(522, 93);
@@ -144,6 +149,7 @@ public class JPBill extends JPanel {
 		setBillBg(BillStyle.CashPaymentBill,cb.getBillState(),0);
 		bg.setBounds(0, 0, 522, 93);
 		bg.addMouseListener(new MouseListenerOfBill(BillStyle.CashPaymentBill));
+		bg.addMouseListener(new MouseListenerGetXY());
 		//向右
 		right.setIcon(new ImageIcon("src/image/right.png"));
 		right.setBounds(221, 26, 40, 40);
@@ -152,10 +158,17 @@ public class JPBill extends JPanel {
 		left.setIcon(new ImageIcon("src/image/left.png"));
 		left.setBounds(482, 26, 40, 40);
 		left.addMouseListener(new MouseListenerOfButton(2));
+		//单据信息
+		operatorOfCas.setBounds(345, 15, 50, 16);
+		accountOfCas.setBounds(360, 33, 50, 16);
+		moneyOfCas.setBounds(330, 49, 50, 16);
 		//将组件加到面板上
 		this.add(right,0);
 		this.add(left,1);
-		this.add(bg,2);
+		this.add(operatorOfCas,2);
+		this.add(accountOfCas,3);
+		this.add(moneyOfCas,4);
+		this.add(bg,5);
 	}
 	public void change(GiftBillVO gb){
 	
@@ -218,6 +231,15 @@ public class JPBill extends JPanel {
 		cb.setID(ID);//设置对应单据的编号
 		mbl.change(cb);
 		//根据内存中单据的数据重新设置面板界面
+		 operatorOfCas.setText("");
+		 if(!cb.getAccount().equals("")){//如果vo对象里的账户属性不为空
+			 accountOfCas.setText(cb.getAccount());
+		 }
+		 if(cb.getTotal()!=0){//如果vo对象里的账户属性不为空
+			 moneyOfCas.setText(String.valueOf(cb.getTotal()));
+		 }
+		 
+		 
 	}
 	/*修改状态*/
 	public void transformState(BillState st){
