@@ -21,11 +21,13 @@ public class PaymentBill extends Bill implements GetVOandPO{
 	private BillStyle billstyle=BillStyle.PaymentBill;
 	private String ID;
 	private String customer;
-	private Role operator;
+	private Role role;
 	private double total;
 	private BillState state;
 	private Date date;
 	private String userID;
+	private String userName;
+	private String op;//操作员 userName+userID
 	
 	private ArrayList<StubTransferAccount> transferlist = new ArrayList<StubTransferAccount>();
 	public PaymentBill() {
@@ -44,7 +46,7 @@ public class PaymentBill extends Bill implements GetVOandPO{
 		}
 		this.customer = customer;
 		this.total = total;
-		this.operator = vo.getOperator();
+		this.role = vo.getRole();
 		state = BillState.DRAFT;
 		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
 		String currentTime = format.format(new Date());
@@ -52,6 +54,20 @@ public class PaymentBill extends Bill implements GetVOandPO{
 		StubBillPool pool = new StubBillPool();
 		ArrayList<PaymentBill> list = pool.getPaymentBill();
 		ID = "FKD-"+currentTime+"-"+String.format("%05d", list.size()+1);
+		
+		op = getUserName()+" "+getUserID();
+	}
+	
+	public String getOperator() {
+		return this.op;
+	}
+	
+	public String getUserName() {
+		return userName;
+	}
+	
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 	
 	public String getUserID() {
@@ -79,11 +95,11 @@ public class PaymentBill extends Bill implements GetVOandPO{
 	public void setCustomer(String customer) {
 		this.customer = customer;
 	}
-	public Role getOperator() {
-		return operator;
+	public Role getRole() {
+		return role;
 	}
-	public void setOperator(Role operator) {
-		this.operator = operator;
+	public void setRole(Role r) {
+		this.role = r;
 	}
 	public double getTotal() {
 		return total;
@@ -115,7 +131,7 @@ public class PaymentBill extends Bill implements GetVOandPO{
 		vo.setCustomer(customer);
 		vo.setID(ID);
 		vo.setTotal(total);
-		vo.setOperator(operator);
+		vo.setRole(role);
 		vo.setState(state);
 		vo.setTransferlist(transferlist);
 		vo.setBillStyle(billstyle);
@@ -126,7 +142,7 @@ public class PaymentBill extends Bill implements GetVOandPO{
 		PaymentPO po = new PaymentPO();
 		po.setCustomer(customer);
 		po.setID(ID);
-		po.setOperator(operator);
+		po.setRole(role);
 		po.setState(state);
 		po.setTotal(total);
 		po.setTransferlist(transferlist);

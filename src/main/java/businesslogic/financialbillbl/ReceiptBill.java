@@ -18,13 +18,15 @@ import vo.financialBillVO.ReceiptVO;
 public class ReceiptBill extends Bill implements GetVOandPO{
 	private BillStyle billstyle=BillStyle.ReceiptBill;
 	
-	private String ID;
-	private Role operator;
-	private double total;
-	private BillState state;
+	private String ID;//单据编号
+	private Role role;//权限
+	private double total;//总额
+	private BillState state;//单据状态
 	private Date date;
 	private String customer;
 	private String userID;
+	private String userName;
+	private String op;//操作员 userName+userID
 	
 	ArrayList<StubTransferAccount> transferlist = new ArrayList<StubTransferAccount>();
 	public ReceiptBill() {
@@ -43,7 +45,8 @@ public class ReceiptBill extends Bill implements GetVOandPO{
 		this.date = new Date();
 		this.customer = customer;
 		this.total = total;
-		this.operator = vo.getOperator();
+		this.role = vo.getRole();
+		
 		state = BillState.DRAFT;
 		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
 		String currentTime = format.format(new Date());
@@ -51,6 +54,19 @@ public class ReceiptBill extends Bill implements GetVOandPO{
 		StubBillPool pool = new StubBillPool();
 		ArrayList<ReceiptBill> list = pool.getReceiptBill();
 		ID = "SKD-"+currentTime+"-"+String.format("%05d", list.size()+1);
+		
+		op = getUserName()+" "+getUserID();
+	}
+	
+	public String getOperator() {
+		return this.op;
+	}
+	public String getUserName() {
+		return userName;
+	}
+	
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 	
 	public String getUserID() {
@@ -79,11 +95,11 @@ public class ReceiptBill extends Bill implements GetVOandPO{
 	public void setCustomer(String customer) {
 		this.customer = customer;
 	}
-	public Role getOperator() {
-		return operator;
+	public Role getRole() {
+		return role;
 	}
-	public void setOperator(Role operator) {
-		this.operator = operator;
+	public void setRole(Role r) {
+		this.role = r;
 	}
 	public double getTotal() {
 		return total;
@@ -115,7 +131,7 @@ public class ReceiptBill extends Bill implements GetVOandPO{
 		vo.setCustomer(customer);
 		vo.setID(ID);
 		vo.setBillStyle(billstyle);
-		vo.setOperator(operator);
+		vo.setRole(role);
 		vo.setTotal(total);
 		vo.setTransferlist(transferlist);
 		vo.setBillState(state);		
@@ -126,7 +142,7 @@ public class ReceiptBill extends Bill implements GetVOandPO{
 		ReceiptPO po = new ReceiptPO();
 		po.setCustomer(customer);
 		po.setID(ID);
-		po.setOperator(operator);
+		po.setRole(role);
 		po.setState(state);
 		po.setTotal(total);
 		po.setTransferlist(transferlist);

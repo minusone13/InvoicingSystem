@@ -21,12 +21,14 @@ public class CashPaymentBill extends Bill implements GetVOandPO{
 	private BillStyle billstyle=BillStyle.CashPaymentBill;
 	private String ID;
 	private String account;
-	private Role operator;
+	private Role role;
 	private double total;
 	private BillState state;
 	private Date date;
 	private String userID;
+	private String userName;
 	private ArrayList<StubItem> itemList = new ArrayList<StubItem>();
+	private String op;//操作员 userName+userID
 	
 	public CashPaymentBill() {}
 	public CashPaymentBill(CashPaymentVO vo) {
@@ -43,7 +45,7 @@ public class CashPaymentBill extends Bill implements GetVOandPO{
 		this.account = account;
 		this.total = total;
 		state = BillState.DRAFT;
-		this.operator = vo.getOperator();
+		this.role = vo.getRole();
 		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
 		String currentTime = format.format(new Date());
 		this.date = new Date();
@@ -51,8 +53,20 @@ public class CashPaymentBill extends Bill implements GetVOandPO{
 		ArrayList<CashPaymentBill> list = pool.getCashPaymentBill();
 		ID = "XJFYD-"+currentTime+"-"+String.format("%05d", list.size()+1);
 		
+		op = getUserName()+" "+getUserID();
 	}
 	
+	public String getOperator() {
+		return this.op;
+	}
+	
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
 	public String getUserID() {
 		return userID;
 	}
@@ -78,11 +92,11 @@ public class CashPaymentBill extends Bill implements GetVOandPO{
 	public void setAccount(String account) {
 		this.account = account;
 	}
-	public Role getOperator() {
-		return operator;
+	public Role getRole() {
+		return role;
 	}
-	public void setOperator(Role operator) {
-		this.operator = operator;
+	public void setRole(Role r) {
+		this.role = r;
 	}
 	public double getTotal() {
 		return total;
@@ -114,7 +128,7 @@ public class CashPaymentBill extends Bill implements GetVOandPO{
 		vo.setID(ID);
 		vo.setTotal(total);
 		vo.setItemList(itemList);
-		vo.setOperator(operator);
+		vo.setRole(role);
 		vo.setBillStyle(billstyle);
 		vo.setBillState(state);		
 		return vo;
@@ -125,7 +139,7 @@ public class CashPaymentBill extends Bill implements GetVOandPO{
 		po.setAccount(account);
 		po.setID(ID);
 		po.setItemList(itemList);
-		po.setOperator(operator);
+		po.setRole(role);
 		po.setState(state);
 		po.setStyle(billstyle);
 		po.setTotal(total);
