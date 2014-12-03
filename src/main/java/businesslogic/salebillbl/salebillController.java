@@ -173,8 +173,5 @@ public class salebillController implements StubSaleBillBlService{
 			// TODO Auto-generated method stub
 			return null;
 		}
-		
-		
-
 	
 }
