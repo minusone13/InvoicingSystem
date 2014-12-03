@@ -64,7 +64,7 @@ public class Inquiry {
 			}
 			//客户
 			if(isv.getCustomer()!=null) {
-				if(sale.getCustomer().getname().equals(isv.getCustomer())){} 
+				if(sale.getcustomer().getname().equals(isv.getCustomer())){} 
 				else continue;
 			}
             //业务员
