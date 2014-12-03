@@ -18,6 +18,24 @@ public class SaleSheetPO extends PO implements Serializable{
 	double discount;
 	double pmoney;
 	String words;//备注
+	String username;
+	String op;
+	
+	public String getop(){
+		return this.op;
+	}
+	
+	public void setop(String op){
+		this.op=op;
+	}
+	
+	public String getusername(){
+		return this.username;
+	}
+	
+	public void setusername(String username){
+		this.username=username;
+	}
 	
 	public Date getdate(){
 		return date;

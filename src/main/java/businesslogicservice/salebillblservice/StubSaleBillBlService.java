@@ -48,7 +48,6 @@ public interface StubSaleBillBlService {
 		public boolean deleteSaleSheet();
 		public boolean deleteSaleBackSheet();
 		
-		
 		public ArrayList<PurSheetVO> getAllPurSheet();
 		public ArrayList<PurBackSheetVO> getAllPurBackSheet();
 		public ArrayList<SaleSheetVO> getAllSaleSheet();
@@ -58,6 +57,5 @@ public interface StubSaleBillBlService {
 		public PurBackSheetVO findPurBackSheet(String id);
 		public SaleSheetVO findSaleSheet(String id);
 		public SaleBackSheetVO findSaleBackSheet(String id);
-		
 		
 }

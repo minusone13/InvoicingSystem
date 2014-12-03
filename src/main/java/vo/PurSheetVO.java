@@ -16,6 +16,24 @@ public class PurSheetVO extends VO{
 	ArrayList sheet;//是不是应该是个arraylist<>?
 	double money1;//总金额
 	String words;//备注
+	String username;
+	String op;
+	
+	public String getop(){
+		return this.op;
+	}
+	
+	public void setop(String op){
+		this.op=op;
+	}
+	
+	public String getusername(){
+		return this.username;
+	}
+	
+	public void setusername(String username){
+		this.username=username;
+	}
 	
 	public Date getdate(){
 		return date;

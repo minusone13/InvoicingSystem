@@ -17,6 +17,24 @@ public class PurSheetPO extends PO implements Serializable{
 	double money1;//总金额
 	String words;//备注
 	//关于状态的东西我还没有写；
+	String username;
+	String op;
+	
+	public String getop(){
+		return this.op;
+	}
+	
+	public void setop(String op){
+		this.op=op;
+	}
+	
+	public String getusername(){
+		return this.username;
+	}
+	
+	public void setusername(String username){
+		this.username=username;
+	}
 	
 	public Date getdate(){
 		return date;
