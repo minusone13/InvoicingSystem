@@ -22,7 +22,25 @@ public class StubPurSheet extends Bill implements GetVOandPO{
 	ArrayList sheet;//是不是应该是个arraylist<>?
 	double money1;//总金额
 	String words;//备注
-		
+	String username;
+	String op;
+	
+	public String getop(){
+		return this.op;
+	}
+	
+	public void setop(String op){
+		this.op=op;
+	}
+	
+	public String getusername(){
+		return this.username;
+	}
+	
+	public void setusername(String username){
+		this.username=username;
+	}
+	
 		public Date getDate() {
 			return date;
 		}
@@ -101,6 +119,8 @@ public class StubPurSheet extends Bill implements GetVOandPO{
 			vo.setsheet(sheet);
 			vo.setstock(stock);
 			vo.setwords(words);
+			vo.setop(op);
+			vo.setusername(username);
 			return vo;
 		}
 		
@@ -114,6 +134,8 @@ public class StubPurSheet extends Bill implements GetVOandPO{
 			po.setsheet(sheet);
 			po.setstock(stock);
 			po.setwords(words);
+			po.setop(op);
+			po.setusername(username);
 			return po;
 		}
 		
@@ -126,6 +148,8 @@ public class StubPurSheet extends Bill implements GetVOandPO{
 			this.sheet=po.getsheet();
 			this.money1=po.getmoney1();
 			this.words=po.getwords();
+			this.op=po.getop();
+			this.username=po.getusername();
 		}
 		
 		

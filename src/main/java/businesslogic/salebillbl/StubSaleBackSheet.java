@@ -23,6 +23,24 @@ public class StubSaleBackSheet extends Bill implements GetVOandPO{
 	double discount;//折让金额；
 	double pmoney;//最终金额，代金券不退还。
 	String words;//备注
+	String username;
+	String op;
+	
+	public String getop(){
+		return this.op;
+	}
+	
+	public void setop(String op){
+		this.op=op;
+	}
+	
+	public String getusername(){
+		return this.username;
+	}
+	
+	public void setusername(String username){
+		this.username=username;
+	}
 	
 	public String getUserID() {
 		return userID;
@@ -116,7 +134,6 @@ public class StubSaleBackSheet extends Bill implements GetVOandPO{
 	
 	public void setPO(SaleBackSheetPO po){
 		this.date=po.getdate();
-		this.userID=po.getuserid();
 		this.ID=po.getid();
 		this.customer=po.getcustomer();
 		this.sheet=po.getsheet();
@@ -125,6 +142,9 @@ public class StubSaleBackSheet extends Bill implements GetVOandPO{
 		this.money2=po.getmoney2();
 		this.pmoney=po.getpmoney();
 		this.words=po.getwords();
+		this.userID=po.getuserid();
+		this.username=po.getusername();
+		this.op=po.getop();
 	}
 	
 	public SaleBackSheetVO getVO() {
@@ -134,9 +154,12 @@ public class StubSaleBackSheet extends Bill implements GetVOandPO{
 		vo.setid(ID);
 		vo.setuserid(userID);
 		vo.setmoney1(money1);
+		vo.setmoney2(money2);
 		vo.setsheet(sheet);
 		vo.setstock(stock);
 		vo.setwords(words);
+		vo.setop(op);
+		vo.setusername(username);
 		return vo;
 	}
 	public SaleBackSheetPO getPO() {
@@ -146,9 +169,12 @@ public class StubSaleBackSheet extends Bill implements GetVOandPO{
 		po.setid(ID);
 		po.setuserid(userID);
 		po.setmoney1(money1);
+		po.setmoney2(money2);
 		po.setsheet(sheet);
 		po.setstock(stock);
 		po.setwords(words);
+		po.setop(op);
+		po.setusername(username);
 		return po;
 	}
 	
