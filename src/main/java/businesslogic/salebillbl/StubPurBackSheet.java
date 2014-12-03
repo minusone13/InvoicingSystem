@@ -17,7 +17,7 @@ public class StubPurBackSheet extends Bill implements GetVOandPO{
 	private BillStyle billstyle=BillStyle.PurBackSheet;
 	Date date;
 	String stock;//仓库？
-	ArrayList sheet;//是不是应该是个arraylist<>?
+	ArrayList sheet;//写了一个commodityInSheet类。
 	double money1;//总金额
 	String words;//备注
 	String username;
