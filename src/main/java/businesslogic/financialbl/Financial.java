@@ -15,7 +15,7 @@ import businesslogic.Role;
 import businesslogic.accountbl.StubAccount;
 import businesslogic.accountbl.StubAccountList;
 import businesslogic.financialbillbl.CashPaymentBill;
-import businesslogic.financialbillbl.StubFinancialBillList;
+import businesslogic.financialbillbl.FinancialBillList;
 import businesslogic.financialbillbl.PaymentBill;
 import businesslogic.financialbillbl.ReceiptBill;
 import businesslogic.iquirybl.Inquiry;
@@ -81,41 +81,41 @@ public class Financial implements StubFinancialBlService{
 	}
 	
 	public boolean creatReceipt(ReceiptVO rv) {
-		rv.setOperator(role);
-		StubFinancialBillList financialList = new StubFinancialBillList();
+		rv.setRole(role);
+		FinancialBillList financialList = new FinancialBillList();
 		return financialList.creatReceiptBill(rv);
 	}
 	
 	public boolean creatPayment(PaymentVO pv){
-		pv.setOperator(role);
-		StubFinancialBillList financialList = new StubFinancialBillList();
+		pv.setRole(role);
+		FinancialBillList financialList = new FinancialBillList();
 		return financialList.creatPaymentBill(pv);
 	
 	}
 	
 	//创建现金费用单
 	public boolean creatCashPayment(CashPaymentVO cpv) {
-		cpv.setOperator(role);
-		StubFinancialBillList financialList = new StubFinancialBillList();
+		cpv.setRole(role);
+		FinancialBillList financialList = new FinancialBillList();
 		return financialList.creatCashPaymentBill(cpv);
 		
 	}
 	
 	/*需要从单据池筛选指定状态的所有收款单*/
 	public ArrayList<ReceiptVO> getAllOfReceiptBills () {
-		StubFinancialBillList financialList = new StubFinancialBillList();
+		FinancialBillList financialList = new FinancialBillList();
 		return financialList.getAllOfReceiptBills();
 	}
 	
 	/*需要从单据池筛选指定状态的所有付款单*/
 	public ArrayList<PaymentVO> getAllOfPaymentBills () {
-		StubFinancialBillList financialList = new StubFinancialBillList();
+		FinancialBillList financialList = new FinancialBillList();
 		return financialList.getAllOfPaymentBills();
 	}
 	
 	/*需要从单据池筛选指定状态的所有现金费用单*/
 	public ArrayList<CashPaymentVO> getAllOfCashPaymentBills () {
-		StubFinancialBillList financialList = new StubFinancialBillList();
+		FinancialBillList financialList = new FinancialBillList();
 		return financialList.getAllOfCashPaymentBills();
 	}
 }

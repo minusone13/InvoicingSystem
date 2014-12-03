@@ -10,12 +10,13 @@ import businesslogic.financialbillbl.StubTransferAccount;
 
 public class ReceiptPO extends PO implements Serializable{
 	String ID;
-	Role operator;
+	Role role;
 	String customer;
 	double total;
 	BillState state;
 	ArrayList<StubTransferAccount> transferlist;
 	BillStyle style;
+	
 	public BillStyle getStyle() {
 		return style;
 	}
@@ -40,11 +41,11 @@ public class ReceiptPO extends PO implements Serializable{
 	public void setID(String ID) {
 		this.ID = ID;
 	}
-	public Role getOperator() {
-		return operator;
+	public Role getRole() {
+		return role;
 	}
-	public void setOperator(Role operator) {
-		this.operator = operator;
+	public void setRole(Role r) {
+		this.role = r;
 	}
 	public String getCustomer() {
 		return customer;

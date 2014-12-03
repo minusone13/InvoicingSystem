@@ -11,7 +11,7 @@ import businesslogic.financialbillbl.StubTransferAccount;
 public class ReceiptVO extends VO{
 	private BillStyle billstyle=BillStyle.ReceiptBill;
 	String ID;
-	Role operator;
+	Role role;
 	String customer;
 	double total;
 	double[] money;//转账金额
@@ -46,11 +46,12 @@ public class ReceiptVO extends VO{
 	public void setID(String ID) {
 		ID = ID;
 	}
-	public Role getOperator() {
-		return operator;
+	public Role getRole() {
+		return role;
 	}
-	public void setOperator(Role operator) {
-		this.operator = operator;
+	
+	public void setRole(Role r) {
+		this.role = r;
 	}
 	public void setMoney(double[] money) {
 		this.money = money;

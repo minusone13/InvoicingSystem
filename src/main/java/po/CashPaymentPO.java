@@ -13,7 +13,7 @@ public class CashPaymentPO extends PO implements Serializable{
 	double total;
 	String account;//账户
 	String ID;
-	Role operator;
+	Role role;
 	ArrayList<StubItem> itemList;
 	BillState state;
 	
@@ -41,11 +41,11 @@ public class CashPaymentPO extends PO implements Serializable{
 	public void setID(String iD) {
 		ID = iD;
 	}
-	public Role getOperator() {
-		return operator;
+	public Role getRole() {
+		return role;
 	}
-	public void setOperator(Role operator) {
-		this.operator = operator;
+	public void setRole(Role r) {
+		this.role = r;
 	}
 	
 	public double getTotal() {

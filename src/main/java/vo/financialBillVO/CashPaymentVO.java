@@ -18,7 +18,7 @@ public class CashPaymentVO extends VO{
 	String[] item;
 	String[] remark;
 	BillState state;
-	Role operator;
+	Role role;
 	ArrayList<StubItem> itemList;
 	
 	public BillStyle getBillStyle() {
@@ -37,12 +37,12 @@ public class CashPaymentVO extends VO{
 		this.state = state;
 	}
 
-	public Role getOperator() {
-		return operator;
+	public Role getRole() {
+		return role;
 	}
 
-	public void setOperator(Role operator) {
-		this.operator = operator;
+	public void setRole(Role r) {
+		this.role = r;
 	}
 
 	public ArrayList<StubItem> getItemList() {

@@ -11,7 +11,7 @@ import businesslogic.BillStyle;
 import businesslogic.examinebl.Bill;
 import businesslogic.examinebl.StubBillPool;
 
-public class StubFinancialBillList {
+public class FinancialBillList {
 	
 	public boolean creatReceiptBill(ReceiptVO vo) {		
 		StubBillPool pool = new StubBillPool();
