@@ -93,6 +93,7 @@ public class Financial implements StubFinancialBlService{
 	
 	}
 	
+	//创建现金费用单
 	public boolean creatCashPayment(CashPaymentVO cpv) {
 		cpv.setOperator(role);
 		StubFinancialBillList financialList = new StubFinancialBillList();
@@ -100,4 +101,21 @@ public class Financial implements StubFinancialBlService{
 		
 	}
 	
+	/*需要从单据池筛选指定状态的所有收款单*/
+	public ArrayList<ReceiptVO> getAllOfReceiptBills () {
+		StubFinancialBillList financialList = new StubFinancialBillList();
+		return financialList.getAllOfReceiptBills();
+	}
+	
+	/*需要从单据池筛选指定状态的所有付款单*/
+	public ArrayList<PaymentVO> getAllOfPaymentBills () {
+		StubFinancialBillList financialList = new StubFinancialBillList();
+		return financialList.getAllOfPaymentBills();
+	}
+	
+	/*需要从单据池筛选指定状态的所有现金费用单*/
+	public ArrayList<CashPaymentVO> getAllOfCashPaymentBills () {
+		StubFinancialBillList financialList = new StubFinancialBillList();
+		return financialList.getAllOfCashPaymentBills();
+	}
 }

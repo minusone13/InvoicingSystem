@@ -1,9 +1,12 @@
 package businesslogic.financialbillbl;
 
+import java.util.ArrayList;
+
 import vo.VO;
 import vo.financialBillVO.CashPaymentVO;
 import vo.financialBillVO.PaymentVO;
 import vo.financialBillVO.ReceiptVO;
+import businesslogic.BillState;
 import businesslogic.BillStyle;
 import businesslogic.examinebl.Bill;
 import businesslogic.examinebl.StubBillPool;
@@ -33,5 +36,39 @@ public class StubFinancialBillList {
 		pool.add(cash);
 		return true;
 	}
+	
+	/*需要从单据池筛选指定状态的所有收款单*/
+	public ArrayList<ReceiptVO> getAllOfReceiptBills (){
+		StubBillPool billPool = new StubBillPool();
+		ArrayList<ReceiptVO> result=new ArrayList<ReceiptVO>();
+		ArrayList<ReceiptBill> billList=billPool.getReceiptBill();
+		for(ReceiptBill temp: billList){
+			result.add(temp.getVO());
+		}	
+		return result;
+	}
+	
+	/*需要从单据池筛选指定状态的所有付款单*/
+	public ArrayList<PaymentVO> getAllOfPaymentBills (){
+		StubBillPool billPool = new StubBillPool();
+		ArrayList<PaymentVO> result=new ArrayList<PaymentVO>();
+		ArrayList<PaymentBill> billList=billPool.getPaymentBill();
+		for(PaymentBill temp: billList){
+			result.add(temp.getVO());
+		}
+		return result;
+	}
+	
+	/*需要从单据池筛选指定状态的所有现金费用单*/
+	public ArrayList<CashPaymentVO> getAllOfCashPaymentBills (){
+		StubBillPool billPool = new StubBillPool();
+		ArrayList<CashPaymentVO> result=new ArrayList<CashPaymentVO>();
+		ArrayList<CashPaymentBill> billList=billPool.getCashPaymentBill();
+		for(CashPaymentBill temp: billList){
+			result.add(temp.getVO());
+		}	
+		return result;
+	}
+	
 	
 }
