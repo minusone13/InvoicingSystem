@@ -18,8 +18,14 @@ public class PaymentVO extends VO{
 	double[] money;//转账金额
 	String[] accounts;
 	String[] remark;	
-	BillState state;
+	private BillState state;
 	ArrayList<StubTransferAccount> transferlist;
+	public BillState getBillState() {
+		return state;
+	}
+	public void setBillState(BillState state) {
+		this.state = state;
+	}
 	public ArrayList<StubTransferAccount> getTransferlist() {
 		return transferlist;
 	}

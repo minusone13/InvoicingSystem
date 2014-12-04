@@ -1,4 +1,4 @@
-package presentation.financialui;
+package presentation.saleui;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -13,7 +13,6 @@ import javax.swing.JTextField;
 
 import presentation.managerui.JPBillList;
 import presentation.managerui.MouseListenerGetXY;
-import presentation.saleui.JPmanageBills2.JPanelEdit.MouseListenerOfButton;
 import businesslogic.BillStyle;
 
 public class JPmanageBills2 extends JPanel {
@@ -251,22 +250,25 @@ public class JPmanageBills2 extends JPanel {
 			private ImageIcon add1=new ImageIcon("src/image/function/littleAddR.png");
 			private ImageIcon confirm0=new ImageIcon("src/image/function/confirmW.png");
 			private ImageIcon confirm1=new ImageIcon("src/image/function/confirmR.png");
-			
-			//现金费用单的附件
-			private JLabel account=new JLabel("账户");
-			private JLabel list=new JLabel("条目");
-			private JLabel total=new JLabel("总额");
-			private JLabel addList=new JLabel();//增加条目按钮
-			private JTextField accountText=new JTextField(10);
-			private JTextField totalText=new JTextField(10);
-			private JPaddList ListEdit=new JPaddList(BillStyle.CashPaymentBill);//隐藏的条目编辑面板
-			//付款收款单
+			//进货与退货单的附件
 			private JLabel customer=new JLabel("客户");
-			private JLabel tranList=new JLabel("转账列表");
-			private JLabel tranTotal=new JLabel("总额");
+			private JLabel warehouse=new JLabel("仓库");
+			private JLabel list=new JLabel("商品清单");
+			private JLabel total=new JLabel("总额");
+			private JLabel note=new JLabel("备注");
 			private JComboBox customerCombo;
-			private JTextField tranTotalText=new JTextField(10);
-			private JPaddList tranListEdit=new JPaddList(BillStyle.PaymentBill);//隐藏的条目编辑面板
+			private JComboBox warehouseCombo;
+			private JLabel addList=new JLabel();//增加商品
+			private JTextField totalText=new JTextField(10);
+			private JTextField noteText=new JTextField(10);
+			//销售与退货单的附件
+			private JLabel coupon=new JLabel("使用代金券");
+			private JLabel discount=new JLabel("折让金额");
+			private JLabel finalTotal=new JLabel("最终总额");
+			private JTextField couponText=new JTextField(10);
+			private JTextField discountText=new JTextField(10);
+			private JTextField finalTotalText=new JTextField(10);
+			
 			public JPanelEdit(BillStyle style){
 				//确认种类
 				billStyle=style;
@@ -289,130 +291,154 @@ public class JPmanageBills2 extends JPanel {
 				confirm.setIcon(confirm0);
 				confirm.setBounds(120, 236, 24, 24);
 				confirm.addMouseListener(new MouseListenerOfButton(3));
+				
 				//根据单据种类加上不同的附件
 				switch(style){
-				case ReceiptBill:
+				case PurSheet:
+				case PurBackSheet:
 					//设置标签字体
 					customer.setFont(new Font("宋体",Font.BOLD,14));
-					tranList.setFont(new Font("宋体",Font.BOLD,14));
-					tranTotal.setFont(new Font("宋体",Font.BOLD,14));
-					//设置字体颜色
-					customer.setForeground(Color.white);
-					tranList.setForeground(Color.white);
-					tranTotal.setForeground(Color.white);
-					//设置标签大小位置
-					customer.setBounds(40, 30, 40, 20);
-					tranList.setBounds(40, 60, 60, 20);
-					tranTotal.setBounds(40, 90, 40, 20);
-					//客户选择下拉框
-					customerCombo = new JComboBox();
-					customerCombo.setFont(new Font("宋体",Font.BOLD,14));
-					customerCombo.setBounds(80,28, 150, 20);
-					customerCombo.setBackground(Color.gray);
-					customerCombo.setForeground(Color.white);
-					//总额文本框
-					tranTotalText.setBounds(80,90, 150, 20);
-					tranTotalText.setOpaque(false);//文本框透明
-					tranTotalText.setForeground(Color.white);//前景色
-					//增加条目按钮
-					addList.setIcon(add0);
-					addList.setBounds(100, 58, 24, 24);
-					addList.addMouseListener(new MouseListenerOfButton(2));
-					//隐藏的条目编辑面板
-					tranListEdit.setLocation(59, 56);
-					tranListEdit.setVisible(false);
-					
-					this.add(tranListEdit,0);
-					this.add(customer,1);
-					this.add(tranList,2);
-					this.add(tranTotal,3);
-					this.add(right,4);
-					this.add(customerCombo,5);
-					this.add(tranTotalText,6);
-					this.add(addList,7);
-					this.add(confirm,8);
-					this.add(back,9);
-					break;
-				case PaymentBill:
-					//设置标签字体
-					customer.setFont(new Font("宋体",Font.BOLD,14));
-					tranList.setFont(new Font("宋体",Font.BOLD,14));
-					tranTotal.setFont(new Font("宋体",Font.BOLD,14));
-					//设置字体颜色
-					customer.setForeground(Color.white);
-					tranList.setForeground(Color.white);
-					tranTotal.setForeground(Color.white);
-					//设置标签大小位置
-					customer.setBounds(40, 30, 40, 20);
-					tranList.setBounds(40, 60, 60, 20);
-					tranTotal.setBounds(40, 90, 40, 20);
-					//客户选择下拉框
-					customerCombo = new JComboBox();
-					customerCombo.setFont(new Font("宋体",Font.BOLD,14));
-					customerCombo.setBounds(80,28, 150, 20);
-					customerCombo.setBackground(Color.gray);
-					customerCombo.setForeground(Color.white);
-					//总额文本框
-					tranTotalText.setBounds(80,90, 150, 20);
-					tranTotalText.setOpaque(false);//文本框透明
-					tranTotalText.setForeground(Color.white);//前景色
-					//增加条目按钮
-					addList.setIcon(add0);
-					addList.setBounds(100, 58, 24, 24);
-					addList.addMouseListener(new MouseListenerOfButton(2));
-					//隐藏的条目编辑面板
-					tranListEdit.setLocation(59, 56);
-					tranListEdit.setVisible(false);
-					
-					this.add(tranListEdit,0);
-					this.add(customer,1);
-					this.add(tranList,2);
-					this.add(tranTotal,3);
-					this.add(right,4);
-					this.add(customerCombo,5);
-					this.add(tranTotalText,6);
-					this.add(addList,7);
-					this.add(confirm,8);
-					this.add(back,9);
-					break;
-				case CashPaymentBill:
-					//设置标签字体
-					account.setFont(new Font("宋体",Font.BOLD,14));
+					warehouse.setFont(new Font("宋体",Font.BOLD,14));
 					list.setFont(new Font("宋体",Font.BOLD,14));
 					total.setFont(new Font("宋体",Font.BOLD,14));
+					note.setFont(new Font("宋体",Font.BOLD,14));
 					//设置字体颜色
-					account.setForeground(Color.white);
+					customer.setForeground(Color.white);
+					warehouse.setForeground(Color.white);
 					list.setForeground(Color.white);
 					total.setForeground(Color.white);
+					note.setForeground(Color.white);
 					//设置标签大小位置
-					account.setBounds(40, 30, 40, 20);
-					list.setBounds(40, 60, 40, 20);
-					total.setBounds(40, 90, 40, 20);
-					//文本框
-					accountText.setBounds(80,28, 150, 20);
-					accountText.setOpaque(false);//文本框透明
-					accountText.setForeground(Color.white);//前景色
-					totalText.setBounds(80,90, 150, 20);
-					totalText.setOpaque(false);//文本框透明
-					totalText.setForeground(Color.white);//前景色
+					customer.setBounds(40, 30, 40, 20);
+					warehouse.setBounds(40, 60, 40, 20);
+					list.setBounds(40, 90, 60, 20);
+					total.setBounds(40, 120, 40, 20);
+					note.setBounds(40, 150, 40, 20);
+					//客户选择下拉框
+					customerCombo = new JComboBox();
+					customerCombo.setFont(new Font("宋体",Font.BOLD,14));
+					customerCombo.setBounds(80,30, 150, 20);
+					customerCombo.setBackground(Color.gray);
+					customerCombo.setForeground(Color.white);
+					//仓库选择下拉框
+					warehouseCombo = new JComboBox();
+					warehouseCombo.setFont(new Font("宋体",Font.BOLD,14));
+					warehouseCombo.setBounds(80,60, 150, 20);
+					warehouseCombo.setBackground(Color.gray);
+					warehouseCombo.setForeground(Color.white);
 					//增加条目按钮
 					addList.setIcon(add0);
-					addList.setBounds(80, 58, 24, 24);
+					addList.setBounds(105, 88, 24, 24);
 					addList.addMouseListener(new MouseListenerOfButton(2));
-					//隐藏的条目编辑面板
-					ListEdit.setLocation(59, 56);
-					ListEdit.setVisible(false);
+					//总额文本框
+					totalText.setBounds(80,120, 150, 20);
+					totalText.setOpaque(false);//文本框透明
+					totalText.setForeground(Color.white);//前景色
+					//备注文本框
+					noteText.setBounds(80,150, 150, 20);
+					noteText.setOpaque(false);//文本框透明
+					noteText.setForeground(Color.white);//前景色
 					
-					this.add(ListEdit,0);
-					this.add(account,1);
+					this.add(customer,0);
+					this.add(warehouse,1);
 					this.add(list,2);
 					this.add(total,3);
-					this.add(right,4);
-					this.add(accountText,5);
-					this.add(totalText,6);
-					this.add(addList,7);
-					this.add(confirm,8);
-					this.add(back,9);
+					this.add(note,4);
+					this.add(right,5);
+					this.add(customerCombo,6);
+					this.add(warehouseCombo,7);
+					this.add(addList,8);
+					this.add(totalText,9);
+					this.add(noteText,10);
+					this.add(confirm,11);
+					this.add(back,12);
+					break;
+				case SaleSheet:
+				case SaleBackSheet:
+					//设置标签字体
+					customer.setFont(new Font("宋体",Font.BOLD,14));
+					warehouse.setFont(new Font("宋体",Font.BOLD,14));
+					list.setFont(new Font("宋体",Font.BOLD,14));
+					total.setFont(new Font("宋体",Font.BOLD,14));
+					note.setFont(new Font("宋体",Font.BOLD,14));
+					coupon.setFont(new Font("宋体",Font.BOLD,14));
+					discount.setFont(new Font("宋体",Font.BOLD,14));
+					finalTotal.setFont(new Font("宋体",Font.BOLD,14));
+					//设置字体颜色
+					customer.setForeground(Color.white);
+					warehouse.setForeground(Color.white);
+					list.setForeground(Color.white);
+					total.setForeground(Color.white);
+					note.setForeground(Color.white);
+					coupon.setForeground(Color.white);
+					discount.setForeground(Color.white);
+					finalTotal.setForeground(Color.white);
+					//设置标签大小位置
+					customer.setBounds(40, 20, 40, 20);
+					warehouse.setBounds(40, 45, 40, 20);
+					list.setBounds(40, 70, 60, 20);
+					total.setBounds(40, 95, 40, 20);
+					coupon.setBounds(40,120, 75, 20);
+					discount.setBounds(40,145, 60, 20);
+					finalTotal.setBounds(40,170, 60, 20);
+					note.setBounds(40, 195, 40, 20);
+					
+					//客户选择下拉框
+					customerCombo = new JComboBox();
+					customerCombo.setFont(new Font("宋体",Font.BOLD,14));
+					customerCombo.setBounds(80,20, 150, 20);
+					customerCombo.setBackground(Color.gray);
+					customerCombo.setForeground(Color.white);
+					//仓库选择下拉框
+					warehouseCombo = new JComboBox();
+					warehouseCombo.setFont(new Font("宋体",Font.BOLD,14));
+					warehouseCombo.setBounds(80,45, 150, 20);
+					warehouseCombo.setBackground(Color.gray);
+					warehouseCombo.setForeground(Color.white);
+					//增加条目按钮
+					addList.setIcon(add0);
+					addList.setBounds(105,68, 24, 24);
+					addList.addMouseListener(new MouseListenerOfButton(2));
+					//总额文本框
+					totalText.setBounds(80,95, 150, 20);
+					totalText.setOpaque(false);//文本框透明
+					totalText.setForeground(Color.white);//前景色
+					//使用代金券文本框
+					couponText.setBounds(125,120, 105, 20);
+					couponText.setOpaque(false);//文本框透明
+					couponText.setForeground(Color.white);//前景色
+					//折让文本框
+					discountText.setBounds(110,145, 120, 20);
+					discountText.setOpaque(false);//文本框透明
+					discountText.setForeground(Color.white);//前景色
+					//最终总额文本框
+					finalTotalText.setBounds(110,170, 120, 20);
+					finalTotalText.setOpaque(false);//文本框透明
+					finalTotalText.setForeground(Color.white);//前景色
+					//备注文本框
+					noteText.setBounds(80,195, 150, 20);
+					noteText.setOpaque(false);//文本框透明
+					noteText.setForeground(Color.white);//前景色
+					
+					this.add(customer,0);
+					this.add(warehouse,1);
+					this.add(list,2);
+					this.add(total,3);
+					this.add(coupon,4);
+					this.add(discount,5);
+					this.add(finalTotal,6);
+					this.add(note,7);
+					this.add(right,8);
+					this.add(customerCombo,9);
+					this.add(warehouseCombo,10);
+					this.add(addList,11);
+					this.add(totalText,12);
+					this.add(couponText,13);
+					this.add(discountText,14);
+					this.add(finalTotalText,15);
+					this.add(noteText,16);
+					this.add(confirm,17);
+					this.add(back,18);
 					break;
 				}
 			}
@@ -431,6 +457,7 @@ public class JPmanageBills2 extends JPanel {
 			public class MouseListenerOfButton implements MouseListener{
 
 				private int num;//1、右移 2、加号 3、确认
+				
 				public MouseListenerOfButton(int N){
 					num=N;
 				}
@@ -450,16 +477,14 @@ public class JPmanageBills2 extends JPanel {
 						break;
 					case 2:
 						addList.setIcon(add1);
-						//显示编辑条目面板
+						//显示商品选择面板
 						switch(billStyle){
-						case ReceiptBill:
-							tranListEdit.setVisible(true);
+						case PurSheet:
+						case PurBackSheet:
 							break;
-						case PaymentBill:
-							tranListEdit.setVisible(true);
+						case SaleSheet:
+						case SaleBackSheet:
 							break;
-						case CashPaymentBill:
-							ListEdit.setVisible(true);
 						}
 						
 						break;
@@ -553,153 +578,6 @@ public class JPmanageBills2 extends JPanel {
 					}
 				}
 				
-			}
-			public class JPaddList extends JPanel{
-				//背景
-				private JLabel bg=new JLabel();
-				//确认按钮
-				private JLabel confirm=new JLabel();
-				//文本框（现金费用单）
-				private JTextField listTxt=new JTextField(10);
-				private JTextField moneyTxt=new JTextField(10);
-				private JTextField noteTxt=new JTextField(10);
-				//文本框（付款收款单）
-				private JTextField tranListTxt=new JTextField(10);
-				private JTextField tranMoneyTxt=new JTextField(10);
-				private JTextField tranNoteTxt=new JTextField(10);
-				//图片
-				private ImageIcon confirmW=new ImageIcon("src/image/function/confirmW.png");
-				private ImageIcon confirmR=new ImageIcon("src/image/function/confirmR.png");
-				
-				public JPaddList(BillStyle style){
-					//面板大小
-					this.setSize(181,157);
-					//设置布局
-					this.setLayout(null);
-					//设置面板透明
-					this.setOpaque(false);
-					//监控
-					this.addMouseListener(new MouseListenerGetXY());
-					//背景
-					this.bg.setIcon(new ImageIcon("src/image/function/editList.png"));
-					this.bg.setBounds(0, 0, 181,157);
-					//确认按钮
-					this.confirm.setIcon(confirmW);
-					this.confirm.setBounds(78, 123, 24,24);
-					this.confirm.addMouseListener(new MouseListenerOfButton());
-					//根据单据种类加上不同的附件
-					
-					switch(style){
-					case ReceiptBill:
-					case PaymentBill:
-						//现金费用单的附件
-						JLabel tranListName=new JLabel("账户");
-						JLabel tranMoney=new JLabel("金额");
-						JLabel tranNote=new JLabel("备注");
-						//设置标签字体
-						tranListName.setFont(new Font("宋体",Font.BOLD,14));
-						tranMoney.setFont(new Font("宋体",Font.BOLD,14));
-						tranNote.setFont(new Font("宋体",Font.BOLD,14));
-						//设置字体颜色
-						tranListName.setForeground(Color.white);
-						tranMoney.setForeground(Color.white);
-						tranNote.setForeground(Color.white);
-						//设置标签大小位置
-						tranListName.setBounds(25, 30, 40, 20);
-						tranMoney.setBounds(25, 60, 40, 20);
-						tranNote.setBounds(25, 90, 40, 20);
-						//文本框
-						tranListTxt.setBounds(70,30, 100, 20);
-						tranListTxt.setOpaque(false);//文本框透明
-						tranListTxt.setForeground(Color.white);//前景色
-						tranMoneyTxt.setBounds(70,60, 100, 20);
-						tranMoneyTxt.setOpaque(false);//文本框透明
-						tranMoneyTxt.setForeground(Color.white);//前景色
-						tranNoteTxt.setBounds(70,90, 100, 20);
-						tranNoteTxt.setOpaque(false);//文本框透明
-						tranNoteTxt.setForeground(Color.white);//前景色
-						
-						this.add(tranListName,0);
-						this.add(tranMoney,1);
-						this.add(tranNote,2);
-						this.add(tranListTxt,3);
-						this.add(tranMoneyTxt,4);
-						this.add(tranNoteTxt,5);
-						this.add(confirm,6);
-						this.add(bg,7);
-						break;
-					case CashPaymentBill:
-						//现金费用单的附件
-						JLabel listName=new JLabel("条目");
-						JLabel money=new JLabel("金额");
-						JLabel note=new JLabel("备注");
-						//设置标签字体
-						listName.setFont(new Font("宋体",Font.BOLD,14));
-						money.setFont(new Font("宋体",Font.BOLD,14));
-						note.setFont(new Font("宋体",Font.BOLD,14));
-						//设置字体颜色
-						listName.setForeground(Color.white);
-						money.setForeground(Color.white);
-						note.setForeground(Color.white);
-						//设置标签大小位置
-						listName.setBounds(25, 30, 40, 20);
-						money.setBounds(25, 60, 40, 20);
-						note.setBounds(25, 90, 40, 20);
-						//文本框
-						listTxt.setBounds(70,30, 100, 20);
-						listTxt.setOpaque(false);//文本框透明
-						listTxt.setForeground(Color.white);//前景色
-						moneyTxt.setBounds(70,60, 100, 20);
-						moneyTxt.setOpaque(false);//文本框透明
-						moneyTxt.setForeground(Color.white);//前景色
-						noteTxt.setBounds(70,90, 100, 20);
-						noteTxt.setOpaque(false);//文本框透明
-						noteTxt.setForeground(Color.white);//前景色
-						
-						this.add(listName,0);
-						this.add(money,1);
-						this.add(note,2);
-						this.add(listTxt,3);
-						this.add(moneyTxt,4);
-						this.add(noteTxt,5);
-						this.add(confirm,6);
-						this.add(bg,7);
-						break;
-					}
-					
-					
-				}
-				public class MouseListenerOfButton implements MouseListener{
-
-					
-					public void mouseClicked(MouseEvent e) {
-						// TODO Auto-generated method stub
-						
-					}
-
-					public void mousePressed(MouseEvent e) {
-						// TODO Auto-generated method stub
-						JPaddList.this.confirm.setIcon(confirmR);
-						
-					}
-
-					public void mouseReleased(MouseEvent e) {
-						// TODO Auto-generated method stub
-						JPaddList.this.confirm.setIcon(confirmW);
-						JPaddList.this.setVisible(false);
-					}
-
-					public void mouseEntered(MouseEvent e) {
-						// TODO Auto-generated method stub
-						
-					}
-
-					public void mouseExited(MouseEvent e) {
-						// TODO Auto-generated method stub
-						JPaddList.this.confirm.setIcon(confirmW);
-					}
-					
-				}
 			}
 
 		}

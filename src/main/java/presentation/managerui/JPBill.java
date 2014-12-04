@@ -44,6 +44,10 @@ public class JPBill extends JPanel {
 	JLabel operatorOfCas=new JLabel("操作员");
 	JLabel accountOfCas=new JLabel("帐户");
 	JLabel moneyOfCas=new JLabel("总额");
+	//收款付款单的标签
+	JLabel operatorOfPR=new JLabel("操作员");
+	JLabel customerOfPR=new JLabel("客户");
+	JLabel moneyOfPR=new JLabel("总额");
 	
 	public JPBill(GiftBillVO gb){
 		//面板大小
@@ -118,22 +122,81 @@ public class JPBill extends JPanel {
 		//设置面板透明
 		this.setOpaque(false);
 	}
+	/*收款单构造界面*/
 	public JPBill(ReceiptVO rb){
+		//设置单据编号，状态，种类
+		state=rb.getBillState();
+		style=rb.getBillStyle();
+		ID=rb.getID();
 		//面板大小
 		this.setSize(522, 93);
 		//设置布局
 		this.setLayout(null);
 		//设置面板透明
 		this.setOpaque(false);
+		//背景
+		setBillBg(BillStyle.ReceiptBill,rb.getBillState(),0);
+		bg.setBounds(0, 0, 522, 93);
+		bg.addMouseListener(new MouseListenerOfBill(BillStyle.ReceiptBill));
+		bg.addMouseListener(new MouseListenerGetXY());
+		//向右
+		right.setIcon(new ImageIcon("src/image/right.png"));
+		right.setBounds(221, 26, 40, 40);
+		right.addMouseListener(new MouseListenerOfButton(1));
+		//向左
+		left.setIcon(new ImageIcon("src/image/left.png"));
+		left.setBounds(482, 26, 40, 40);
+		left.addMouseListener(new MouseListenerOfButton(2));
+		//单据信息
+		operatorOfPR.setBounds(345, 15, 50, 16);
+		customerOfPR.setBounds(330, 33, 50, 16);
+		moneyOfPR.setBounds(330, 49, 50, 16);
+		//将组件加到面板上
+		this.add(right,0);
+		this.add(left,1);
+		this.add(operatorOfPR,2);
+		this.add(customerOfPR,3);
+		this.add(moneyOfPR,4);
+		this.add(bg,5);
 	}
+	/*付款单构造界面*/
 	public JPBill(PaymentVO pb){
+		//设置单据编号，状态，种类
+		state=pb.getBillState();
+		style=pb.getBillStyle();
+		ID=pb.getID();
 		//面板大小
 		this.setSize(522, 93);
 		//设置布局
 		this.setLayout(null);
 		//设置面板透明
 		this.setOpaque(false);
+		//背景
+		setBillBg(BillStyle.PaymentBill,pb.getBillState(),0);
+		bg.setBounds(0, 0, 522, 93);
+		bg.addMouseListener(new MouseListenerOfBill(BillStyle.PaymentBill));
+		bg.addMouseListener(new MouseListenerGetXY());
+		//向右
+		right.setIcon(new ImageIcon("src/image/right.png"));
+		right.setBounds(221, 26, 40, 40);
+		right.addMouseListener(new MouseListenerOfButton(1));
+		//向左
+		left.setIcon(new ImageIcon("src/image/left.png"));
+		left.setBounds(482, 26, 40, 40);
+		left.addMouseListener(new MouseListenerOfButton(2));
+		//单据信息
+		operatorOfPR.setBounds(345, 15, 50, 16);
+		customerOfPR.setBounds(330, 33, 50, 16);
+		moneyOfPR.setBounds(330, 49, 50, 16);
+		//将组件加到面板上
+		this.add(right,0);
+		this.add(left,1);
+		this.add(operatorOfPR,2);
+		this.add(customerOfPR,3);
+		this.add(moneyOfPR,4);
+		this.add(bg,5);
 	}
+	/*现金费用单构造界面*/
 	public JPBill(CashPaymentVO cb){
 		//设置单据编号，状态，种类
 		state=cb.getBillState();

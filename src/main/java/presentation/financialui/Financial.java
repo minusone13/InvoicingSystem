@@ -9,7 +9,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import vo.financialBillVO.CashPaymentVO;
+import vo.financialBillVO.PaymentVO;
+import vo.financialBillVO.ReceiptVO;
 import businesslogic.BillState;
+import businesslogic.BillStyle;
 
 public class Financial extends JPanel {
 	//背景
@@ -56,11 +59,11 @@ public class Financial extends JPanel {
 			manageBills.setLocation(55, 233);
 			
 			//测试单据数组
-			ArrayList<CashPaymentVO> test=new ArrayList<CashPaymentVO>();
-			CashPaymentVO bill1=new CashPaymentVO();
-			CashPaymentVO bill2=new CashPaymentVO();
-			CashPaymentVO bill3=new CashPaymentVO();
-			CashPaymentVO bill4=new CashPaymentVO();
+			ArrayList<PaymentVO> test=new ArrayList<PaymentVO>();
+			PaymentVO bill1=new PaymentVO();
+			PaymentVO bill2=new PaymentVO();
+			PaymentVO bill3=new PaymentVO();
+			PaymentVO bill4=new PaymentVO();
 			bill1.setBillState(BillState.DRAFT);
 			bill2.setBillState(BillState.SUBMITED);
 			bill3.setBillState(BillState.EXAMINED);
@@ -70,8 +73,9 @@ public class Financial extends JPanel {
 			test.add(bill3);
 			test.add(bill4);
 			//单据管理板2
-			JPmanageBills2 manageBills2=new JPmanageBills2(test);
+			JPmanageBills2 manageBills2=new JPmanageBills2(BillStyle.PaymentBill);
 			manageBills2.setLocation(55, 233);
+			manageBills2.getBillsList().addPaymentBillList(test);//加单据数组
 			
 			//home
 			home.setIcon(new ImageIcon("src/image/home.png") );
@@ -91,7 +95,7 @@ public class Financial extends JPanel {
 			this.add(home,3);
 			this.add(back,4);
 			this.add(signout,5);
-			this.add(manageBills,6);
+			this.add(manageBills2,6);
 			this.add(bg,7);
 			
 		}

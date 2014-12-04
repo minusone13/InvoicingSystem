@@ -1,5 +1,6 @@
 package businesslogic.commoditybl;
 
+import java.util.*;
 import java.util.ArrayList;
 
 import po.*;
@@ -20,6 +21,7 @@ public class StubCommodityList {//商品列表 haha
 	}
 	public boolean addPack(ArrayList<MockCommodity> commodityarray,int quantity, double discount)
 	{
+		//comdata.a
 		return true;
 	}
 	public RM addCommodity(CommodityVO vo)
@@ -48,7 +50,12 @@ public class StubCommodityList {//商品列表 haha
 		if(po==null)//not found
 			return RM.notfound;
 		MockCommodity com=new MockCommodity(po);
-		return RM.done;
+		com.add(new CommodityRecord(new Date(),0,quantity,0,price,0,quantity,0,price));
+		boolean result = comdata.update(com.toPO());
+		if(result)
+			return RM.done;
+		else
+			return RM.unknownerror;
 	}
 	public RM checkOut(String id, String name, String model, int quantity, double price)
 	{//出库
@@ -56,7 +63,12 @@ public class StubCommodityList {//商品列表 haha
 		if(po==null)//not found
 			return RM.notfound;
 		MockCommodity com=new MockCommodity(po);
-		return RM.done;
+		com.add(new CommodityRecord(new Date(),quantity,0,price,0,quantity,0,price,0));
+		boolean result = comdata.update(com.toPO());
+		if(result)
+			return RM.done;
+		else
+			return RM.unknownerror;
 	}
 	public ArrayList<MockCommodity> posToCom(ArrayList<CommodityPO> h)
 	{
@@ -99,5 +111,22 @@ public class StubCommodityList {//商品列表 haha
 	{
 		RM result=comdata.deleteCategory(id);
 		return result;
+	}
+	public RM updateCommodity(CommodityVO vo)
+	{
+		CommodityPO po=comdata.findCommodity(vo.getName(),vo.getModel());
+		if(po==null)//not found
+			return RM.notfound;
+		if(comdata.update(new MockCommodity(vo).toPO()))
+			return RM.done;
+		else
+			return RM.unknownerror;
+	}
+	public RM updateCategory(CategoryVO vo)
+	{
+		if(comdata.update(new StubCategory(vo).toPO()))
+			return RM.done;
+		else
+			return RM.unknownerror;
 	}
 }

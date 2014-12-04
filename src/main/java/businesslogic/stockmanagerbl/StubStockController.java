@@ -92,6 +92,15 @@ public class StubStockController implements StubCommodityBlService, StockBlForSa
 		return cb.getLossTotal(d1, d2);
 	}
 	
+	public RM updateCommodity(CommodityVO vo)
+	{
+		return l.updateCommodity(vo);
+	}
+	public RM updateCategory(CategoryVO vo)
+	{
+		return l.updateCategory(vo);
+	}
+	
 	public RM creat(GiftBillVO vo)
 	{
 		return RM.done;

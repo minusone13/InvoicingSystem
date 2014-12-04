@@ -19,8 +19,8 @@ public class MockCommodity {
 	double out;
 	double lastin;
 	double lastout;
-	double average;
-	ArrayList<CommodityRecord> record=null;
+	int alertLine;
+	ArrayList<CommodityRecord> record=new ArrayList<CommodityRecord>();
 	public MockCommodity(){}
 	public MockCommodity(CommodityPO po)
 	{
@@ -33,7 +33,7 @@ public class MockCommodity {
 		out=po.getOut();
 		lastin=po.getLastIn();
 		lastout=po.getLastOut();
-		average=po.getAverage();
+		alertLine=po.getAlertLine();
 		record=posToCom(po.getRecord());
 	}
 	public MockCommodity(CommodityVO vo)
@@ -47,22 +47,25 @@ public class MockCommodity {
 		out=vo.getOut();
 		lastin=vo.getLastin();
 		lastout=vo.getLastout();
-		average=vo.getAverage();
+		alertLine=vo.getAlertLine();
 		if (vo.getRecord()!=null)
 		{
 			record=vosToCom(vo.getRecord());
 		}
 	}
 	
-	
+	public void add(CommodityRecord r)
+	{
+		record.add(r);
+	}
 	public CommodityPO toPO()
 	{
-		return new CommodityPO(parent,name,model,number,in,out,lastin,lastout,average,toRecordPOs());
+		return new CommodityPO(parent,name,model,number,in,out,lastin,lastout,alertLine,toRecordPOs());
 	}
 	public CommodityVO toVO()
 	{
 		
-		return new CommodityVO(parent,name,model,number,in,out,lastin,lastout,average,toRecordVOs());
+		return new CommodityVO(parent,name,model,number,in,out,lastin,lastout,alertLine,toRecordVOs());
 	}
 	public String getId() {
 		return id;
@@ -118,11 +121,11 @@ public class MockCommodity {
 	public void setLastout(double lastout) {
 		this.lastout = lastout;
 	}
-	public double getAverage() {
-		return average;
+	public int getAlertLine() {
+		return alertLine;
 	}
-	public void setAverage(double average) {
-		this.average = average;
+	public void setAlertLine(int alertLine) {
+		this.alertLine = alertLine;
 	}
 	public ArrayList<CommodityRecord> getRecord() {
 		return record;
