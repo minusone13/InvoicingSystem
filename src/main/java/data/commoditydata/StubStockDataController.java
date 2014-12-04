@@ -151,9 +151,9 @@ public class StubStockDataController implements StubCommodityDataService, StockD
 		save();
 		return result;
 	}
-	public RM insert(CategoryPO po)
+	public RM insert(PackPO po)
 	{
-		
+		return RM.done;
 	}
 	public CommodityListPO getAll()
 	{//this is for financial
