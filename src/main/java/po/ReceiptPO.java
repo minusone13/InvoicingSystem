@@ -16,7 +16,28 @@ public class ReceiptPO extends PO implements Serializable{
 	BillState state;
 	ArrayList<StubTransferAccount> transferlist;
 	BillStyle style;
+	private String userID;
+	private String userName;
+	private String op;//操作员 userName+userID
 	
+	public String getUserID() {
+		return userID;
+	}
+	public void setUserID(String userID) {
+		this.userID = userID;
+	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	public String getOp() {
+		return op;
+	}
+	public void setOp(String op) {
+		this.op = op;
+	}
 	public BillStyle getStyle() {
 		return style;
 	}

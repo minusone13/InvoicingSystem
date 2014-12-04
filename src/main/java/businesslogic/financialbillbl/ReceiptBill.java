@@ -28,6 +28,7 @@ public class ReceiptBill extends Bill implements GetVOandPO{
 	private String userName;
 	private String op;//操作员 userName+userID
 	
+	
 	ArrayList<StubTransferAccount> transferlist = new ArrayList<StubTransferAccount>();
 	public ReceiptBill() {
 		
@@ -56,6 +57,13 @@ public class ReceiptBill extends Bill implements GetVOandPO{
 		ID = "SKD-"+currentTime+"-"+String.format("%05d", list.size()+1);
 		
 		op = getUserName()+" "+getUserID();
+	}
+	
+	public String getOp() {
+		return op;
+	}
+	public void setOp(String op) {
+		this.op = op;
 	}
 	
 	public String getOperator() {
@@ -147,6 +155,9 @@ public class ReceiptBill extends Bill implements GetVOandPO{
 		po.setTotal(total);
 		po.setTransferlist(transferlist);
 		po.setStyle(billstyle);
+		po.setOp(op);
+		po.setUserID(userID);
+		po.setUserName(userName);
 		return po;
 	}
 	public void setPO (ReceiptPO po) {

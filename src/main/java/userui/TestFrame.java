@@ -4,11 +4,17 @@ import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
 import businesslogic.BillStyle;
 import presentation.WarningPanel;
 import presentation.saleui.JPfunctions;
 import presentation.saleui.Sale;
 import presentation.saleui.JPmanageBills2;
+import presentation.WarningPanel;
+import presentation.financialui.AccountBuildIndexPanel;
+import presentation.financialui.ClientInfoPanel;
+import presentation.saleui.JPmanageBills2;
+
 import presentation.managerui.MouseListenerGetXY;
 
 
@@ -32,8 +38,12 @@ public class TestFrame extends JFrame {
 		this.addMouseListener(new MouseListenerGetXY());
 	}
 	public static void main(String[] args) {
+
 		// TODO Auto-generated method stub
-		//TestFrame testJP=new TestFrame(new JPfunctions());
+
+		TestFrame testJP=new TestFrame(new ClientInfoPanel());
+
+
 	}
 
 }
