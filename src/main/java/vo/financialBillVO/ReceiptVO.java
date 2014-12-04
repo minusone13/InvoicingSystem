@@ -18,7 +18,46 @@ public class ReceiptVO extends VO{
 	String[] accounts;
 	String[] remark;	
 	BillState state;
+	private String userID;
+	private String userName;
+	private String op;//操作员 userName+userID
 	
+	public BillStyle getBillstyle() {
+		return billstyle;
+	}
+	public void setBillstyle(BillStyle billstyle) {
+		this.billstyle = billstyle;
+	}
+	public String[] getAccounts() {
+		return accounts;
+	}
+	public void setAccounts(String[] accounts) {
+		this.accounts = accounts;
+	}
+	public BillState getState() {
+		return state;
+	}
+	public void setState(BillState state) {
+		this.state = state;
+	}
+	public String getUserID() {
+		return userID;
+	}
+	public void setUserID(String userID) {
+		this.userID = userID;
+	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	public String getOp() {
+		return op;
+	}
+	public void setOp(String op) {
+		this.op = op;
+	}
 	public BillState getBillState() {
 		return state;
 	}
