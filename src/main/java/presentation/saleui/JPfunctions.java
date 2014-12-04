@@ -33,11 +33,11 @@ public class JPfunctions extends JPanel{
 		bg.setBounds(0, 0, 522, 325);
 		//功能1
 		function1.setIcon(Imagefun10);
-		function1.setBounds(21, 22, 160, 277);
+		function1.setBounds(101, 22, 160, 277);
 		function1.addMouseListener(new MouseListenerOfButton(1));
 		//功能2
 		function2.setIcon(Imagefun20);
-		function2.setBounds(181, 22, 160, 277);
+		function2.setBounds(261, 22, 160, 277);
 		function2.addMouseListener(new MouseListenerOfButton(2));
 		this.add(function1,0);
 		this.add(function2,1);

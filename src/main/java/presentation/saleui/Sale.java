@@ -7,9 +7,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import presentation.financialui.JPfunctions;
-import presentation.financialui.Financial.MouseListenerOfButton;
-
 public class Sale extends JPanel{
 		/*
 		 * 成员变量注释参照Finance。java；
@@ -54,14 +51,16 @@ public class Sale extends JPanel{
 			signout.setBounds(870, 165, 90, 32);
 			signout.addMouseListener(new MouseListenerOfButton(3));
 			
+			function.setLocation(55, 233);//测试其他版时可以直接注释掉这一行
+			
 			this.add(title,0);
 			this.add(sign,1);
 			this.add(navigation,2);
 			this.add(home,3);
 			this.add(back,4);
 			this.add(signout,5);
-			//this.add(manageBills,6);
-			this.add(bg,6);
+			this.add(function,6);
+			this.add(bg,7);
 		}
 
 		public class MouseListenerOfButton implements MouseListener{

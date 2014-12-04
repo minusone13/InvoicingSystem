@@ -8,13 +8,11 @@ import javax.swing.JPanel;
 import businesslogic.BillStyle;
 import presentation.WarningPanel;
 import presentation.saleui.JPfunctions;
+import presentation.saleui.JPmanageBills1;
 import presentation.saleui.Sale;
 import presentation.saleui.JPmanageBills2;
 import presentation.WarningPanel;
-import presentation.financialui.AccountBuildIndexPanel;
-import presentation.financialui.ClientInfoPanel;
 import presentation.saleui.JPmanageBills2;
-
 import presentation.managerui.MouseListenerGetXY;
 
 
@@ -41,7 +39,7 @@ public class TestFrame extends JFrame {
 
 		// TODO Auto-generated method stub
 
-		TestFrame testJP=new TestFrame(new ClientInfoPanel());
+		TestFrame testJP=new TestFrame(new JPmanageBills1());
 
 
 	}
