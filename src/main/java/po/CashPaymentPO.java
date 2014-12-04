@@ -2,6 +2,7 @@ package po;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 
 import businesslogic.BillState;
 import businesslogic.BillStyle;
@@ -16,7 +17,34 @@ public class CashPaymentPO extends PO implements Serializable{
 	Role role;
 	ArrayList<StubItem> itemList;
 	BillState state;
-	
+	Date date;
+	private String userID;
+	private String userName;
+	String op;
+	public Date getDate() {
+		return date;
+	}
+	public void setDate(Date date) {
+		this.date = date;
+	}
+	public String getUserID() {
+		return userID;
+	}
+	public void setUserID(String userID) {
+		this.userID = userID;
+	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	public String getOp() {
+		return op;
+	}
+	public void setOp(String op) {
+		this.op = op;
+	}
 	public BillState getState() {
 		return state;
 	}

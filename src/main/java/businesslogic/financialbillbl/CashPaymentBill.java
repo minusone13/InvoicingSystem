@@ -34,13 +34,13 @@ public class CashPaymentBill extends Bill implements GetVOandPO{
 	public CashPaymentBill(CashPaymentVO vo) {
 		String account = vo.getAccount(); 
 		double total = vo.getTotal();
-		String[] item = vo.getItem();
-		double[] money=vo.getMoney(); 
-		String[] remark=vo.getRemark();
+		ArrayList<String> item = vo.getItem();
+		ArrayList<Double> money=vo.getMoney(); 
+		ArrayList<String> remark=vo.getRemark();
 		    
-		int length = item.length;
+		int length = item.size();
 		for(int i=0;i<length;i++) {
-			itemList.add(new StubItem(item[i], money[i], remark[i]));
+			itemList.add(new StubItem(item.get(i), money.get(i), remark.get(i)));
 		}
 		this.account = account;
 		this.total = total;
@@ -130,7 +130,11 @@ public class CashPaymentBill extends Bill implements GetVOandPO{
 		vo.setItemList(itemList);
 		vo.setRole(role);
 		vo.setBillStyle(billstyle);
-		vo.setBillState(state);		
+		vo.setBillState(state);	
+		vo.setUserID(userID);
+		vo.setUserName(userName);
+		vo.setOp(op);
+		vo.setDate(date);
 		return vo;
 	}
 	
@@ -143,6 +147,10 @@ public class CashPaymentBill extends Bill implements GetVOandPO{
 		po.setState(state);
 		po.setStyle(billstyle);
 		po.setTotal(total);
+		po.setDate(date);
+		po.setUserID(userID);
+		po.setUserName(userName);
+		po.setOp(op);
 		return po;
 	}
 	
@@ -151,6 +159,12 @@ public class CashPaymentBill extends Bill implements GetVOandPO{
 		account = po.getAccount();
 		total = po.getTotal();
 		state = po.getState();
-		itemList = po.getItemList();		
+		billstyle = po.getStyle();
+		itemList = po.getItemList();
+		role = po.getRole();
+		date = po.getDate();
+		userID = po.getUserID();
+		userName = po.getUserName();
+		op = po.getOp();
 	}
 }

@@ -27,21 +27,20 @@ public class ReceiptBill extends Bill implements GetVOandPO{
 	private String userID;
 	private String userName;
 	private String op;//操作员 userName+userID
+	ArrayList<TransferAccount> transferlist = new ArrayList<TransferAccount>();
 	
-	
-	ArrayList<StubTransferAccount> transferlist = new ArrayList<StubTransferAccount>();
 	public ReceiptBill() {
 		
 	}
 	public ReceiptBill(ReceiptVO vo) {
 		String customer = vo.getCustomer();
 		double total = vo.getTotal();
-		String[] account = vo.getAccount();
-		double[] money = vo.getMoney();
-		String[] remark = vo.getRemark();
-		int length = account.length;
+		ArrayList<String> account = vo.getAccounts();
+		ArrayList<Double> money = vo.getMoney();
+		ArrayList<String> remark = vo.getRemark();
+		int length = account.size();
 		for(int i=0;i<length;i++) {
-			transferlist.add(new StubTransferAccount(account[i], money[i], remark[i]));
+			transferlist.add(new TransferAccount(account.get(i), money.get(i), remark.get(i)));
 		}
 		this.date = new Date();
 		this.customer = customer;
@@ -121,10 +120,10 @@ public class ReceiptBill extends Bill implements GetVOandPO{
 	public void setState(BillState state) {
 		this.state = state;
 	}
-	public ArrayList<StubTransferAccount> getTransferlist() {
+	public ArrayList<TransferAccount> getTransferlist() {
 		return transferlist;
 	}
-	public void setTransferlist(ArrayList<StubTransferAccount> transferlist) {
+	public void setTransferlist(ArrayList<TransferAccount> transferlist) {
 		this.transferlist = transferlist;
 	}
 	public void setBillstyle(BillStyle billstyle) {
@@ -142,7 +141,11 @@ public class ReceiptBill extends Bill implements GetVOandPO{
 		vo.setRole(role);
 		vo.setTotal(total);
 		vo.setTransferlist(transferlist);
-		vo.setBillState(state);		
+		vo.setBillState(state);
+		vo.setOp(op);
+		vo.setUserID(userID);
+		vo.setUserName(userName);
+		vo.setDate(date);
 		return vo;
 	}
 
@@ -158,6 +161,7 @@ public class ReceiptBill extends Bill implements GetVOandPO{
 		po.setOp(op);
 		po.setUserID(userID);
 		po.setUserName(userName);
+		po.setDate(date);
 		return po;
 	}
 	public void setPO (ReceiptPO po) {
@@ -166,5 +170,11 @@ public class ReceiptBill extends Bill implements GetVOandPO{
 		total = po.getTotal();
 		state = po.getState();
 		transferlist = po.getTransferlist();
+		role = po.getRole();
+		billstyle = po.getStyle();
+		op = po.getOp();
+		userID = po.getUserID();
+		userName = po.getUserName();
+		date = po.getDate();
 	}
 }

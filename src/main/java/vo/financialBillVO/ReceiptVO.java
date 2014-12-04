@@ -1,12 +1,13 @@
 package vo.financialBillVO;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import vo.VO;
 import businesslogic.BillState;
 import businesslogic.BillStyle;
 import businesslogic.Role;
-import businesslogic.financialbillbl.StubTransferAccount;
+import businesslogic.financialbillbl.TransferAccount;
 
 public class ReceiptVO extends VO{
 	private BillStyle billstyle=BillStyle.ReceiptBill;
@@ -14,24 +15,39 @@ public class ReceiptVO extends VO{
 	Role role;
 	String customer;
 	double total;
-	double[] money;//转账金额
-	String[] accounts;
-	String[] remark;	
+	ArrayList<Double> money;//转账金额
+	ArrayList<String> accounts;
+	ArrayList<String> remark;
+
+	ArrayList<TransferAccount> transferlist;
 	BillState state;
 	private String userID;
 	private String userName;
 	private String op;//操作员 userName+userID
-	
+	Date date;
+	public ReceiptVO() {
+		
+	}
+	public ReceiptVO(String customer, double total, String[] account, double[] money, String[] remark) {
+		
+	}
+	public Date getDate() {
+		return date;
+	}
+	public void setDate(Date date) {
+		this.date = date;
+	}
+	public ArrayList<String> getAccounts() {
+		return accounts;
+	}
 	public BillStyle getBillstyle() {
 		return billstyle;
 	}
 	public void setBillstyle(BillStyle billstyle) {
 		this.billstyle = billstyle;
 	}
-	public String[] getAccounts() {
-		return accounts;
-	}
-	public void setAccounts(String[] accounts) {
+	
+	public void setAccounts(ArrayList<String> accounts) {		
 		this.accounts = accounts;
 	}
 	public BillState getState() {
@@ -64,13 +80,11 @@ public class ReceiptVO extends VO{
 	public void setBillState(BillState state) {
 		this.state = state;
 	}
-
-	ArrayList<StubTransferAccount> transferlist;
 	
-	public ArrayList<StubTransferAccount> getTransferlist() {
+	public ArrayList<TransferAccount> getTransferlist() {
 		return transferlist;
 	}
-	public void setTransferlist(ArrayList<StubTransferAccount> transferlist) {
+	public void setTransferlist(ArrayList<TransferAccount> transferlist) {
 		this.transferlist = transferlist;
 	}
 	public BillStyle getBillStyle() {
@@ -92,23 +106,19 @@ public class ReceiptVO extends VO{
 	public void setRole(Role r) {
 		this.role = r;
 	}
-	public void setMoney(double[] money) {
+	
+	public void setMoney(ArrayList<Double> money) {
 		this.money = money;
 	}
-	public void setAccount(String[] account) {
+	public void setAccount(ArrayList<String> account) {
 		this.accounts = account;
 	}
-	public void setRemark(String[] remark) {
+	public void setRemark(ArrayList<String> remark) {
 		this.remark = remark;
 	}
 
 	
-	public ReceiptVO() {
-		
-	}
-	public ReceiptVO(String customer, double total, String[] account, double[] money, String[] remark) {
-		
-	}
+	
 	public String getCustomer() {
 		return customer;
 	}
@@ -121,15 +131,12 @@ public class ReceiptVO extends VO{
 	public void setTotal(double total) {
 		this.total = total;
 	}
-	public String[] getAccount() {
-		return accounts;
-	}
 	
-	public double[] getMoney() {
+	public ArrayList<Double> getMoney() {
 		return money;
 	}
 	
-	public String[] getRemark() {
+	public ArrayList<String> getRemark() {
 		return remark;
 	}
 	

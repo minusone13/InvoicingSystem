@@ -9,7 +9,7 @@ import businesslogic.ReachStrategyStyle;
 import businesslogic.Role;
 import businesslogic.StrategyStyle;
 import businesslogic.financialbillbl.StubItem;
-import businesslogic.financialbillbl.StubTransferAccount;
+import businesslogic.financialbillbl.TransferAccount;
 
 public class VO {
 	private BillStyle billstyle;//单据类型
@@ -27,7 +27,7 @@ public class VO {
 	Role operator;
 	ArrayList<StubItem> itemList;		
 	String customer;
-	ArrayList<StubTransferAccount> transferlist;
+	ArrayList<TransferAccount> transferlist;
 	/*获取单据类型*/
 	public BillStyle getBillStyle(){
 		return billstyle;
