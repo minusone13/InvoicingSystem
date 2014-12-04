@@ -6,7 +6,7 @@ import businesslogic.BillState;
 import businesslogic.BillStyle;
 import businesslogic.Role;
 import businesslogic.financialbillbl.StubItem;
-import businesslogic.financialbillbl.StubTransferAccount;
+import businesslogic.financialbillbl.TransferAccount;
 
 public class PO {
 	String ID;
@@ -14,7 +14,7 @@ public class PO {
 	String customer;
 	double total;
 	BillState state;
-	ArrayList<StubTransferAccount> transferlist;
+	ArrayList<TransferAccount> transferlist;
 	BillStyle style;
 	ArrayList<StubItem> itemList;
 	String account;//账户

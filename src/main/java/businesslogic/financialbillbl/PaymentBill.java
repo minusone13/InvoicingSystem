@@ -29,20 +29,20 @@ public class PaymentBill extends Bill implements GetVOandPO{
 	private String userName;
 	private String op;//操作员 userName+userID
 	
-	private ArrayList<StubTransferAccount> transferlist = new ArrayList<StubTransferAccount>();
+	private ArrayList<TransferAccount> transferlist = new ArrayList<TransferAccount>();
 	public PaymentBill() {
 		
 	}
 	public PaymentBill(PaymentVO vo) {
 		String customer=vo.getCustomer(); 
 		double total=vo.getTotal(); 
-		String[] account=vo.getAccount(); 
-		double[] money=vo.getMoney(); 
-		String[] remark=vo.getRemark();
+		ArrayList<String> account=vo.getAccounts(); 
+		ArrayList<Double> money=vo.getMoney(); 
+		ArrayList<String> remark=vo.getRemark();
 		 
-		int length = account.length;
+		int length = account.size();
 		for(int i=0;i<length;i++) {
-			transferlist.add(new StubTransferAccount(account[i], money[i], remark[i]));
+			transferlist.add(new TransferAccount(account.get(i), money.get(i), remark.get(i)));
 		}
 		this.customer = customer;
 		this.total = total;
@@ -113,10 +113,10 @@ public class PaymentBill extends Bill implements GetVOandPO{
 	public void setState(BillState state) {
 		this.state = state;
 	}
-	public ArrayList<StubTransferAccount> getTransferlist() {
+	public ArrayList<TransferAccount> getTransferlist() {
 		return transferlist;
 	}
-	public void setTransferlist(ArrayList<StubTransferAccount> transferlist) {
+	public void setTransferlist(ArrayList<TransferAccount> transferlist) {
 		this.transferlist = transferlist;
 	}
 	public Date getDate() {
@@ -135,6 +135,10 @@ public class PaymentBill extends Bill implements GetVOandPO{
 		vo.setState(state);
 		vo.setTransferlist(transferlist);
 		vo.setBillStyle(billstyle);
+		vo.setDate(date);
+		vo.setUserID(userID);
+		vo.setUserName(userName);
+		vo.setOp(op);		
 		return vo;
 	}
 
@@ -147,6 +151,10 @@ public class PaymentBill extends Bill implements GetVOandPO{
 		po.setTotal(total);
 		po.setTransferlist(transferlist);
 		po.setStyle(billstyle);
+		po.setUserID(userID);
+		po.setUserName(userName);
+		po.setOp(op);
+		po.setDate(date);
 		return po;
 	}
 	public void setPO (PaymentPO po) {
@@ -155,5 +163,11 @@ public class PaymentBill extends Bill implements GetVOandPO{
 		total = po.getTotal();
 		state = po.getState();
 		transferlist = po.getTransferlist();
+		role = po.getRole();
+		billstyle = po.getStyle();
+		userID = po.getUserID();
+		userName = po.getUserName();
+		op = po.getOp();
+		date = po.getDate();
 	}
 }

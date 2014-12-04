@@ -2,11 +2,12 @@ package po;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 
 import businesslogic.BillState;
 import businesslogic.BillStyle;
 import businesslogic.Role;
-import businesslogic.financialbillbl.StubTransferAccount;
+import businesslogic.financialbillbl.TransferAccount;
 
 public class ReceiptPO extends PO implements Serializable{
 	String ID;
@@ -14,12 +15,19 @@ public class ReceiptPO extends PO implements Serializable{
 	String customer;
 	double total;
 	BillState state;
-	ArrayList<StubTransferAccount> transferlist;
+	ArrayList<TransferAccount> transferlist;
 	BillStyle style;
 	private String userID;
 	private String userName;
 	private String op;//操作员 userName+userID
+	Date date;
 	
+	public Date getDate() {
+		return date;
+	}
+	public void setDate(Date date) {
+		this.date = date;
+	}
 	public String getUserID() {
 		return userID;
 	}
@@ -44,10 +52,10 @@ public class ReceiptPO extends PO implements Serializable{
 	public void setStyle(BillStyle style) {
 		this.style = style;
 	}
-	public ArrayList<StubTransferAccount> getTransferlist() {
+	public ArrayList<TransferAccount> getTransferlist() {
 		return transferlist;
 	}
-	public void setTransferlist(ArrayList<StubTransferAccount> transferlist) {
+	public void setTransferlist(ArrayList<TransferAccount> transferlist) {
 		this.transferlist = transferlist;
 	}
 	public BillState getState() {

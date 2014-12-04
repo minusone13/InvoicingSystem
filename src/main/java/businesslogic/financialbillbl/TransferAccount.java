@@ -1,15 +1,15 @@
 package businesslogic.financialbillbl;
 
-public class StubTransferAccount {
+public class TransferAccount {
 	String account;
 	double money;
 	String remark;
 	
-	public StubTransferAccount() {
+	public TransferAccount() {
 		this(null, 0.0, null);
 	}
 	
-	public StubTransferAccount(String a, double m, String r) {
+	public TransferAccount(String a, double m, String r) {
 		account = a;
 		money = m;
 		remark = r;

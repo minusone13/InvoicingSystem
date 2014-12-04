@@ -1,12 +1,13 @@
 package vo.financialBillVO;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import vo.VO;
 import businesslogic.BillState;
 import businesslogic.BillStyle;
 import businesslogic.Role;
-import businesslogic.financialbillbl.StubTransferAccount;
+import businesslogic.financialbillbl.TransferAccount;
 
 public class PaymentVO extends VO{
 	private BillStyle billstyle=BillStyle.PaymentBill;
@@ -15,21 +16,56 @@ public class PaymentVO extends VO{
 	Role role;
 	String customer;
 	double total;
-	double[] money;//转账金额
-	String[] accounts;
-	String[] remark;	
+	ArrayList<Double> money;//转账金额
+	ArrayList<String> accounts;
+	ArrayList<String> remark;	
 	private BillState state;
-	ArrayList<StubTransferAccount> transferlist;
+	ArrayList<TransferAccount> transferlist;
+	String userID;
+	String userName;
+	String op;
+	Date date;
+	
+	public String getUserID() {
+		return userID;
+	}
+	public void setUserID(String userID) {
+		this.userID = userID;
+	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	public String getOp() {
+		return op;
+	}
+	public void setOp(String op) {
+		this.op = op;
+	}
+	public BillStyle getBillstyle() {
+		return billstyle;
+	}
+	public void setBillstyle(BillStyle billstyle) {
+		this.billstyle = billstyle;
+	}
+	public Date getDate() {
+		return date;
+	}
+	public void setDate(Date date) {
+		this.date = date;
+	}
 	public BillState getBillState() {
 		return state;
 	}
 	public void setBillState(BillState state) {
 		this.state = state;
 	}
-	public ArrayList<StubTransferAccount> getTransferlist() {
+	public ArrayList<TransferAccount> getTransferlist() {
 		return transferlist;
 	}
-	public void setTransferlist(ArrayList<StubTransferAccount> transferlist) {
+	public void setTransferlist(ArrayList<TransferAccount> transferlist) {
 		this.transferlist = transferlist;
 	}
 	public BillStyle getBillStyle() {
@@ -56,13 +92,13 @@ public class PaymentVO extends VO{
 	public void setState(BillState state) {
 		this.state = state;
 	}
-	public void setMoney(double[] money) {
+	public void setMoney(ArrayList<Double> money) {
 		this.money = money;
 	}
-	public void setAccount(String[] account) {
-		this.accounts = account;
+	public void setAccounts(ArrayList<String> accounts) {
+		this.accounts = accounts;
 	}
-	public void setRemark(String[] remark) {
+	public void setRemark(ArrayList<String> remark) {
 		this.remark = remark;
 	}
 		public String getCustomer() {
@@ -77,14 +113,14 @@ public class PaymentVO extends VO{
 		public void setTotal(double total) {
 			this.total = total;
 		}
-		public String[] getAccount() {
+		public ArrayList<String> getAccounts() {
 			return accounts;
 		}
 		
-		public double[] getMoney() {
+		public ArrayList<Double> getMoney() {
 			return money;
 		}
-		public String[] getRemark() {
+		public ArrayList<String> getRemark() {
 			return remark;
 		}
 }
