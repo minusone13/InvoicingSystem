@@ -10,21 +10,13 @@ public interface StubCommodityBlService {
 	//find by id
 	public RM addCommodity(CommodityVO vo);
 	public RM addCategory(CategoryVO vo);
+	public RM updateCommodity(CommodityVO vo);
+	public RM updateCategory(CategoryVO vo);
 	public void setdataobject(StubCommodityDataService comdata);
 	public ArrayList<StockVO> openCategory(String id);//root category's ID is"1"
 	public RM deleteCommodity(String name,String model);//有可能返回RM。done，若已有进出记录，返回alreadyHaveUnremoveableContents
 	public RM deleteCategory(String id);//有可能返回RM。done，若已有子分类或商品，返回alreadyHaveUnremoveableContents
 	public void setUser(UserVO vo);//告诉代码此时操作的User
 	
-	public RM creat(GiftBillVO vo);
-	public RM creat(SpillsLossBillVO vo);
-	public RM creat(AlertBillVO vo);
-	
-	public RM update(GiftBillVO vo);
-	public RM update(SpillsLossBillVO vo);
-	public RM update(AlertBillVO vo);
-	
-	public RM submit(GiftBillVO vo);
-	public RM submit(SpillsLossBillVO vo);
-	public RM submit(AlertBillVO vo);
+
 }

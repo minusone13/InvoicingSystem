@@ -9,14 +9,14 @@ import vo.RM;
 
 public class StubCommodityList implements Serializable{
 	ArrayList<StubCategoryData> cats;
-	ArrayList<StubPackData> packs;
+	ArrayList<PackPO> packs;
 	StubCategoryData cat;//=cats.get(0);
 	ArrayList <MockCommodityData> flatlist;//平铺式的商品列表，便于搜索操作。注意商品增删时候的同步操作
 	public boolean initial()
 	{//初始化方法，程序第一次运行或测试与调试阶段使用
 		cats=new ArrayList<StubCategoryData>();
 		cats.add(new StubCategoryData("0","1"));
-		packs=new ArrayList<StubPackData>();
+		packs=new ArrayList<PackPO>();
 		cat=cats.get(0);
 		cat.add(new StubCategoryData("1","default category"));
 		flatlist=new ArrayList<MockCommodityData>();
@@ -165,5 +165,10 @@ public class StubCommodityList implements Serializable{
 			return RM.redundance;
 		RM result = temp.add(new StubCategoryData(po));
 		return result;
+	}
+	public RM insert(PackPO po)
+	{
+		packs.add(po);
+		return RM.done;
 	}
 }

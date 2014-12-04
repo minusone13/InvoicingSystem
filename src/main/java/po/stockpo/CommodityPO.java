@@ -14,10 +14,10 @@ public class CommodityPO implements Serializable, Cloneable{
 	double out;
 	double lastin;
 	double lastout;
-	double average;
+	int alertLine;
 	ArrayList<CommodityRecordPO> record=new ArrayList<CommodityRecordPO>();
 	public CommodityPO(){}
-	public CommodityPO(String parent,String name,String model,int number,double in,double out,double lastin,double lastout,double average)
+	public CommodityPO(String parent,String name,String model,int number,double in,double out,double lastin,double lastout,int alertLine)
 	{	
 		this.parent=parent;
 		this.name=name;
@@ -28,9 +28,9 @@ public class CommodityPO implements Serializable, Cloneable{
 		this.out=out;
 		this.lastin=lastin;
 		this.lastout=lastout;
-		this.average=average;
+		this.alertLine=alertLine;
 	}
-	public CommodityPO(String parent,String name,String model,int number,double in,double out,double lastin,double lastout,double average,ArrayList<CommodityRecordPO> record)
+	public CommodityPO(String parent,String name,String model,int number,double in,double out,double lastin,double lastout,int alertLine,ArrayList<CommodityRecordPO> record)
 	{	
 		this.parent=parent;
 		this.name=name;
@@ -41,7 +41,7 @@ public class CommodityPO implements Serializable, Cloneable{
 		this.out=out;
 		this.lastin=lastin;
 		this.lastout=lastout;
-		this.average=average;
+		this.alertLine=alertLine;
 		this.record=record;
 	}
 	public CommodityPO(String parent,String name)
@@ -127,10 +127,7 @@ public class CommodityPO implements Serializable, Cloneable{
 		this.lastout = lastout;
 	}
 	public double getAverage() {
-		return average;
-	}
-	public void setAverage(double average) {
-		this.average = average;
+		return alertLine;
 	}
 	public void setParent(String parent) {
 		this.parent = parent;
@@ -149,5 +146,11 @@ public class CommodityPO implements Serializable, Cloneable{
 	}
 	public void setId(String id) {
 		this.id = id;
+	}
+	public int getAlertLine() {
+		return alertLine;
+	}
+	public void setAlertLine(int alertLine) {
+		this.alertLine = alertLine;
 	}
 }

@@ -3,6 +3,7 @@ package po.stockpo;
 import java.util.ArrayList;
 
 public class PackPO {
+	String name;
 	ArrayList<CommodityPO> coms;
 	int quantity;
 	double price;
@@ -23,5 +24,11 @@ public class PackPO {
 	}
 	public void setPrice(double price) {
 		this.price = price;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 }

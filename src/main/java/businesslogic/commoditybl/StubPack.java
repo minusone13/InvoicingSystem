@@ -2,8 +2,22 @@ package businesslogic.commoditybl;
 
 import java.util.ArrayList;
 
+import vo.PackVO;
+
 public class StubPack 
 {//特价包类
+	public StubPack(String name, ArrayList<MockCommodity> coms, int quantity,
+			double price) {
+		this.name = name;
+		this.coms = coms;
+		this.quantity = quantity;
+		this.price = price;
+	}
+	public StubPack(PackVO vo)
+	{
+		
+	}
+	String name;
 	ArrayList<MockCommodity> coms;
 	int quantity;
 	double price;//总价，通过total-discount得出
@@ -24,5 +38,11 @@ public class StubPack
 	}
 	public void setPrice(double price) {
 		this.price = price;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 }

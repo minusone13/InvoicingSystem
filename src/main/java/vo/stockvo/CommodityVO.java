@@ -2,10 +2,12 @@ package vo.stockvo;
 
 import java.util.ArrayList;
 
+import businesslogic.commoditybl.CommodityRecord;
+
 public class CommodityVO {
 	public CommodityVO(String parent, String name, String model,
 			int number, double in, double out, double lastin, double lastout,
-			double average, ArrayList<CommodityRecordVO> record) {
+			int alertLine, ArrayList<CommodityRecordVO> record) {
 		this.parent = parent;
 		this.name = name;
 		id=parent+"\\"+name;
@@ -15,7 +17,7 @@ public class CommodityVO {
 		this.out = out;
 		this.lastin = lastin;
 		this.lastout = lastout;
-		this.average = average;
+		this.alertLine = alertLine;
 		this.record = record;
 	}
 	String id;//ID恒等于parent+"\\"+name
@@ -27,8 +29,8 @@ public class CommodityVO {
 	double out;
 	double lastin;
 	double lastout;
-	double average;
-	ArrayList<CommodityRecordVO> record=null;
+	int alertLine;
+	ArrayList<CommodityRecordVO> record=new ArrayList<CommodityRecordVO>();
 	public CommodityVO(String parent,String name,String model,double in,double out)
 	{//this is for ui
 		this.parent=parent;
@@ -93,11 +95,11 @@ public class CommodityVO {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public double getAverage() {
-		return average;
+	public int getAlertLine() {
+		return alertLine;
 	}
-	public void setAverage(double average) {
-		this.average = average;
+	public void setAlertLine(int alertLine) {
+		this.alertLine = alertLine;
 	}
 	public ArrayList<CommodityRecordVO> getRecord() {
 		return record;
