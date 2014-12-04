@@ -5,8 +5,15 @@ import java.awt.Toolkit;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+
+import presentation.WarningPanel;
 import presentation.financialui.JPfunctions;
+
 import presentation.saleui.Sale;
+
+import presentation.managerui.MouseListenerGetXY;
+
+
 
 public class TestFrame extends JFrame {
 
@@ -21,14 +28,18 @@ public class TestFrame extends JFrame {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		//设置布局
 		this.setLayout(null);
-		
+		this.setBounds(100, 100, 960, 600);
 		this.add(jp);
 		this.setVisible(true);
-		
+		this.addMouseListener(new MouseListenerGetXY());
 	}
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		TestFrame testJP=new TestFrame(new Sale());
+
+		//TestFrame testJP=new TestFrame(new Sale());
+
+
+
 	}
 
 }
