@@ -6,8 +6,12 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 
+
+
+import businesslogic.BillStyle;
 import presentation.WarningPanel;
 import presentation.financialui.JPfunctions;
+import presentation.saleui.JPmanageBills2;
 import presentation.managerui.MouseListenerGetXY;
 
 
@@ -32,7 +36,7 @@ public class TestFrame extends JFrame {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		TestFrame testJP=new TestFrame(new WarningPanel("草泥马!!"));
+		TestFrame testJP=new TestFrame(new JPmanageBills2(BillStyle.SaleSheet));
 
 	}
 
