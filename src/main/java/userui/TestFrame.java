@@ -5,7 +5,7 @@ import java.awt.Toolkit;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import presentation.financialui.JPfunctions;
+import presentation.financialui.JPmanageBills1;
 
 public class TestFrame extends JFrame {
 
@@ -27,7 +27,7 @@ public class TestFrame extends JFrame {
 	}
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		TestFrame testJP=new TestFrame(new JPfunctions());
+		TestFrame testJP=new TestFrame(new JPmanageBills1());
 	}
 
 }
