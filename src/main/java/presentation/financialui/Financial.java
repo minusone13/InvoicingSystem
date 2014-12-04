@@ -51,9 +51,9 @@ public class Financial extends JPanel {
 			//test区域
 			//功能板
 //			function.setLocation(55, 233);
-//			//单据管理板1
-//			JPmanageBills1 manageBills=new JPmanageBills1();
-//			manageBills.setLocation(55, 233);
+			//单据管理板1
+			JPmanageBills1 manageBills=new JPmanageBills1();
+			manageBills.setLocation(55, 233);
 			
 			//测试单据数组
 			ArrayList<CashPaymentVO> test=new ArrayList<CashPaymentVO>();
@@ -91,7 +91,7 @@ public class Financial extends JPanel {
 			this.add(home,3);
 			this.add(back,4);
 			this.add(signout,5);
-			this.add(manageBills2,6);
+			this.add(manageBills,6);
 			this.add(bg,7);
 			
 		}

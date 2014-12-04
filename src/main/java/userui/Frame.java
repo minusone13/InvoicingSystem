@@ -67,7 +67,7 @@ public class Frame extends JFrame implements MouseListener{
 		mainJP.add(financial,2);
 		financial.setBounds(0, 0, 960, 600);
 		//加上监听接口
-		financial.addMouseListener(this);
+//		Login.addMouseListener(this);
 		//设置窗口可见
 		this.setVisible(true);
 	}

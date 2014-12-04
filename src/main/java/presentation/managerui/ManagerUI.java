@@ -19,8 +19,8 @@ public class ManagerUI extends JPanel {
 	private JLabel sign=new JLabel();
 	//导航
 	private JLabel navigation=new JLabel();
-//	//功能板 
-//	private JPfunction function=new JPfunction();
+	//功能板 
+	private JPfunction function=new JPfunction();
 	//审批单据1
 	private JPpassBill1 passbill1=new JPpassBill1();
 	//审批单据2
@@ -49,8 +49,8 @@ public class ManagerUI extends JPanel {
 		//导航
 		navigation.setIcon(new ImageIcon("src/image/navigation/navigation0.png") );
 		navigation.setBounds(0, 165, 960, 35);
-//		//功能板
-//		function.setLocation(55, 233);
+		//功能板
+		function.setLocation(55, 233);
 //		//审批单据1
 //		passbill1.setLocation(55, 233);
 		//审批单据2
@@ -77,7 +77,7 @@ public class ManagerUI extends JPanel {
 		this.add(home,3);
 		this.add(back,4);
 		this.add(signout,5);
-		this.add(passbill2,6);
+		this.add(function,6);
 		this.add(bg,7);
 		
 	}
