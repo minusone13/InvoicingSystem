@@ -104,7 +104,7 @@ public class Login extends JPanel {
 					signIn.setIcon(new ImageIcon("src/image/userUi/sign in2.png")  );
 					//登录
 					String userName=username.getText();
-					String passWords=passwords.getPassword().toString();
+					String passWords=new String(passwords.getPassword());
 					boolean legal=false;
 					//判断是否输入合法
 					if(!userName.equals("")&&!passWords.equals("")){
@@ -113,7 +113,13 @@ public class Login extends JPanel {
 					//如果合法就登录
 					if(legal){
 						UserVO userVO=userService.login(userName,passWords);
-						System.out.println("登录的是："+userVO.getR());
+						if(userVO!=null){
+							System.out.println("登录的是："+userVO.getR());
+						}
+						else{
+							System.out.println("用户名或密码错误，请重新输入");
+						}
+						
 					}
 				}
 				else if(num==2){
