@@ -59,11 +59,11 @@ public class Financial extends JPanel {
 			manageBills.setLocation(55, 233);
 			
 			//测试单据数组
-			ArrayList<PaymentVO> test=new ArrayList<PaymentVO>();
-			PaymentVO bill1=new PaymentVO();
-			PaymentVO bill2=new PaymentVO();
-			PaymentVO bill3=new PaymentVO();
-			PaymentVO bill4=new PaymentVO();
+			ArrayList<CashPaymentVO> test=new ArrayList<CashPaymentVO>();
+			CashPaymentVO bill1=new CashPaymentVO();
+			CashPaymentVO bill2=new CashPaymentVO();
+			CashPaymentVO bill3=new CashPaymentVO();
+			CashPaymentVO bill4=new CashPaymentVO();
 			bill1.setBillState(BillState.DRAFT);
 			bill2.setBillState(BillState.SUBMITED);
 			bill3.setBillState(BillState.EXAMINED);
@@ -73,9 +73,9 @@ public class Financial extends JPanel {
 			test.add(bill3);
 			test.add(bill4);
 			//单据管理板2
-			JPmanageBills2 manageBills2=new JPmanageBills2(BillStyle.PaymentBill);
+			JPmanageBills2 manageBills2=new JPmanageBills2(BillStyle.CashPaymentBill);
 			manageBills2.setLocation(55, 233);
-			manageBills2.getBillsList().addPaymentBillList(test);//加单据数组
+			manageBills2.getBillsList().addCashPaymentBillList(test);//加单据数组
 			
 			//home
 			home.setIcon(new ImageIcon("src/image/home.png") );

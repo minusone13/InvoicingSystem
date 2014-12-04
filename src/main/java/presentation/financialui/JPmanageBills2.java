@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
@@ -13,7 +14,6 @@ import javax.swing.JTextField;
 
 import presentation.managerui.JPBillList;
 import presentation.managerui.MouseListenerGetXY;
-import presentation.saleui.JPmanageBills2.JPanelEdit.MouseListenerOfButton;
 import businesslogic.BillStyle;
 
 public class JPmanageBills2 extends JPanel {
@@ -54,7 +54,7 @@ public class JPmanageBills2 extends JPanel {
 		ImageIcon submitIconR=new ImageIcon("src/image/function/uploadR.png");
 		ImageIcon addIconR=new ImageIcon("src/image/function/addR.png");
 		
-		public JPmanageBills2(BillStyle style){
+		public JPmanageBills2(BillStyle style){//参数决定编辑板的类型
 			//面板大小
 			this.setSize(905, 342);
 			//设置布局
@@ -142,14 +142,14 @@ public class JPmanageBills2 extends JPanel {
 				// TODO Auto-generated method stub
 				switch(num){
 				case 1:
-				up.setIcon(upIconR);
-				//向上
-				billList.startUp();
+					up.setIcon(upIconR);
+					//向上
+					billList.startUp();
 					break;
 				case 2:
-				down.setIcon(downIconR);
-				//向下
-				billList.startDown();
+					down.setIcon(downIconR);
+					//向下
+					billList.startDown();
 					break;	
 				case 3:
 					done.setIcon(checkIconR);
@@ -160,6 +160,7 @@ public class JPmanageBills2 extends JPanel {
 					break;
 				case 5:
 					edit.setIcon(editIconR);
+					JPedit.setIsAdd(false);//不是加单据是编辑单据
 					JPedit.leftMove();
 					break;
 				case 6:
@@ -167,6 +168,8 @@ public class JPmanageBills2 extends JPanel {
 					break;
 				case 7:
 					add.setIcon(addIconR);
+					JPedit.setIsAdd(true);//加单据
+					JPedit.leftMove();
 					break;
 				}
 			}
@@ -238,6 +241,8 @@ public class JPmanageBills2 extends JPanel {
 		public class JPanelEdit extends JPanel{
 			//辨别单据类型
 			private BillStyle billStyle;
+			//判断是加单据还是编辑单据
+			private boolean isAdd=true;//默认是加单据
 			//背景
 			private JLabel back=new JLabel();
 			//右移按钮
@@ -428,6 +433,12 @@ public class JPmanageBills2 extends JPanel {
 				Thread t=new Thread(new TreadOfRight());
 				t.start();
 			}
+			public boolean getIsAdd() {
+				return isAdd;
+			}
+			public void setIsAdd(boolean isAdd) {
+				this.isAdd = isAdd;
+			}
 			public class MouseListenerOfButton implements MouseListener{
 
 				private int num;//1、右移 2、加号 3、确认
@@ -465,6 +476,95 @@ public class JPmanageBills2 extends JPanel {
 						break;
 					case 3:
 						confirm.setIcon(confirm1);
+						//判断是加单据还是修改单据
+						if(isAdd){//如果是加单据
+							switch(billStyle){
+							case ReceiptBill:
+								if(customerCombo.getSelectedItem()==null){
+									System.out.println("没有客户，不能创建单据");
+								}
+								else{
+									boolean legal=false;
+									boolean customerIsEmpty=customerCombo.getSelectedItem().toString().equals("");
+									boolean totalIsEmpty=tranTotalText.getText().equals("");
+									boolean listIsEmpty=tranListEdit.getListArray().isEmpty();
+									
+									if(!customerIsEmpty&&!totalIsEmpty&&!listIsEmpty){
+										legal=true;
+									}
+									if(legal){
+										//生成新的单据加入到billList
+										System.out.println("生成了一张收款单");
+										//清空信息
+										tranTotalText.setText("");
+										tranListEdit.getListArray().clear();//清空三个数组
+										tranListEdit.getMoneyArray().clear();
+										tranListEdit.getNoteArray().clear();
+									}
+									else{
+										System.out.println("单据信息不完整，请检查是否填写了转账列表");
+									}
+								}
+								break;
+							case PaymentBill:
+								if(customerCombo.getSelectedItem()==null){
+									System.out.println("没有客户，不能创建单据");
+								}
+								else{
+									boolean legal2=false;
+									boolean customerIsEmpty2=customerCombo.getSelectedItem().toString().equals("");
+									boolean totalIsEmpty2=tranTotalText.getText().equals("");
+									boolean listIsEmpty2=tranListEdit.getListArray().isEmpty();
+									
+									if(!customerIsEmpty2&&!totalIsEmpty2&&!listIsEmpty2){
+										legal2=true;
+									}
+									if(legal2){
+										//生成新的单据加入到billList
+										System.out.println("生成了一张付款单");
+										//清空信息
+										tranTotalText.setText("");
+										tranListEdit.getListArray().clear();//清空三个数组
+										tranListEdit.getMoneyArray().clear();
+										tranListEdit.getNoteArray().clear();
+									}
+									else{
+										System.out.println("单据信息不完整，请检查是否填写了转账列表");
+									}
+								}
+								break;
+							case CashPaymentBill:
+								boolean legal3=false;
+								boolean accountIsEmpty=accountText.getText().equals("");
+								boolean totalIsEmpty3=totalText.getText().equals("");
+								boolean listIsEmpty3=ListEdit.getListArray().isEmpty();
+								
+								if(!accountIsEmpty&&!totalIsEmpty3&&!listIsEmpty3){
+									legal3=true;
+								}
+								if(legal3){
+									//生成新的单据加入到billList
+									System.out.println("生成了一张现金费用单");
+									System.out.println("银行账户是："+accountText.getText());
+									for(int i=0;i<ListEdit.getListArray().size();i++){
+										System.out.println("条目名"+(i+1)+":"+ListEdit.getListArray().get(i));
+										System.out.println("金额"+(i+1)+":"+ListEdit.getMoneyArray().get(i));
+										System.out.println("备注"+(i+1)+":"+ListEdit.getNoteArray().get(i));
+									}
+									System.out.println("总额是："+totalText.getText());
+									//清空信息
+									accountText.setText("");
+									totalText.setText("");
+									ListEdit.getListArray().clear();//清空三个数组
+									ListEdit.getMoneyArray().clear();
+									ListEdit.getNoteArray().clear();
+								}
+								else{
+									System.out.println("单据信息不完整，请检查是否填写了转账列表");
+								}
+								break;
+							}
+						}
 						break;
 					}
 				}
@@ -570,6 +670,10 @@ public class JPmanageBills2 extends JPanel {
 				//图片
 				private ImageIcon confirmW=new ImageIcon("src/image/function/confirmW.png");
 				private ImageIcon confirmR=new ImageIcon("src/image/function/confirmR.png");
+				//储存信息的数组
+				private ArrayList<String> listArray=new ArrayList<String>();
+				private ArrayList<Double> moneyArray=new ArrayList<Double>();
+				private ArrayList<String> noteArray=new ArrayList<String>();
 				
 				public JPaddList(BillStyle style){
 					//面板大小
@@ -669,6 +773,18 @@ public class JPmanageBills2 extends JPanel {
 					
 					
 				}
+				//返回信息数组
+				public ArrayList<String> getListArray(){
+					return listArray;
+				}
+				//返回信息数组
+				public ArrayList<Double> getMoneyArray(){
+					return moneyArray;
+				}
+				//返回信息数组
+				public ArrayList<String> getNoteArray(){
+					return noteArray;
+				}
 				public class MouseListenerOfButton implements MouseListener{
 
 					
@@ -679,14 +795,54 @@ public class JPmanageBills2 extends JPanel {
 
 					public void mousePressed(MouseEvent e) {
 						// TODO Auto-generated method stub
+						//图片变化
 						JPaddList.this.confirm.setIcon(confirmR);
-						
+					
 					}
 
 					public void mouseReleased(MouseEvent e) {
 						// TODO Auto-generated method stub
 						JPaddList.this.confirm.setIcon(confirmW);
-						JPaddList.this.setVisible(false);
+						//功能
+						String list=listTxt.getText();
+						String money=moneyTxt.getText();
+						String note=noteTxt.getText();
+						boolean legal=false;
+						if(!list.equals("")&&!money.equals("")&&!note.equals("")){
+							legal=true;
+						}
+						
+						if(legal){
+							//合法则将信息加入到数组
+							double mon=Double.parseDouble(money);
+							listArray.add(list);
+							moneyArray.add(mon);
+							noteArray.add(note);
+							//清空文本框
+							listTxt.setText("");
+							moneyTxt.setText("");
+							noteTxt.setText("");
+							//计算总额
+							double totalMoney=0;
+							for(int i=0;i<moneyArray.size();i++){
+								totalMoney+=moneyArray.get(i);
+							}
+							switch(billStyle){
+							case ReceiptBill:
+							case PaymentBill:
+								tranTotalText.setText(String.valueOf(totalMoney));
+								break;
+							case CashPaymentBill:
+								totalText.setText(String.valueOf(totalMoney));
+							}
+							//合法操作才隐藏板块
+							JPaddList.this.setVisible(false);
+						}
+						else{
+							System.out.println("请完整输入信息，若无备注请填写“无”！");
+						}
+						
+						
 					}
 
 					public void mouseEntered(MouseEvent e) {
