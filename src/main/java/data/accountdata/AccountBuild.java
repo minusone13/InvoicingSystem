@@ -17,7 +17,7 @@ import data.commoditydata.StubStockDataController;
 import data.stockservice.StockDataForFinancial;
 import dataservice.accountdataservice.StubAccountDataService;
 
-public class AccountBuild {
+public class AccountBuild{
 	//差客户信息
 	String version=null;
 	public AccountBuild() {
@@ -47,9 +47,8 @@ public class AccountBuild {
 			e.printStackTrace();
 			
 		} catch (IOException e) {
-			e.printStackTrace();
-			
-		} 
+			e.printStackTrace();			
+		}
 		try {
 			oos.writeObject(versions);
 		} catch (IOException e) {
