@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import businesslogic.BillState;
 import businesslogic.BillStyle;
 import businesslogic.Role;
-import businesslogic.financialbillbl.StubItem;
+import businesslogic.financialbillbl.Item;
 import businesslogic.financialbillbl.TransferAccount;
 
 public class PO {
@@ -16,7 +16,7 @@ public class PO {
 	BillState state;
 	ArrayList<TransferAccount> transferlist;
 	BillStyle style;
-	ArrayList<StubItem> itemList;
+	ArrayList<Item> itemList;
 	String account;//账户
 	
 	

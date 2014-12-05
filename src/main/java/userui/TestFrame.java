@@ -13,6 +13,7 @@ import presentation.saleui.Sale;
 import presentation.saleui.JPmanageBills2;
 import presentation.WarningPanel;
 import presentation.saleui.JPmanageBills2;
+import presentation.financialui.InfoPanel;
 import presentation.managerui.MouseListenerGetXY;
 
 
@@ -39,7 +40,8 @@ public class TestFrame extends JFrame {
 
 		// TODO Auto-generated method stub
 
-		TestFrame testJP=new TestFrame(new JPmanageBills1());
+		TestFrame testJP=new TestFrame(new InfoPanel());
+
 
 
 	}

@@ -7,7 +7,7 @@ import java.util.Date;
 import businesslogic.BillState;
 import businesslogic.BillStyle;
 import businesslogic.Role;
-import businesslogic.financialbillbl.StubItem;
+import businesslogic.financialbillbl.Item;
 
 public class CashPaymentPO extends PO implements Serializable{
 	BillStyle style;
@@ -15,7 +15,7 @@ public class CashPaymentPO extends PO implements Serializable{
 	String account;//账户
 	String ID;
 	Role role;
-	ArrayList<StubItem> itemList;
+	ArrayList<Item> itemList;
 	BillState state;
 	Date date;
 	private String userID;
@@ -57,10 +57,10 @@ public class CashPaymentPO extends PO implements Serializable{
 	public void setStyle(BillStyle style) {
 		this.style = style;
 	}
-	public ArrayList<StubItem> getItemList() {
+	public ArrayList<Item> getItemList() {
 		return itemList;
 	}
-	public void setItemList(ArrayList<StubItem> itemList) {
+	public void setItemList(ArrayList<Item> itemList) {
 		this.itemList = itemList;
 	}
 	public String getID() {

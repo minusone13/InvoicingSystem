@@ -3,6 +3,12 @@ package vo.accountVO;
 public class AccountVO {
 	String name;
 	double balance;
+	
+	public AccountVO(){}
+	public AccountVO(String n, double bal) {
+		this.name = n;
+		this.balance = bal;
+	}
 	public String getName() {
 		return name;
 	}

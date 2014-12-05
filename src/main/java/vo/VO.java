@@ -8,7 +8,7 @@ import businesslogic.LevelStrategyStyle;
 import businesslogic.ReachStrategyStyle;
 import businesslogic.Role;
 import businesslogic.StrategyStyle;
-import businesslogic.financialbillbl.StubItem;
+import businesslogic.financialbillbl.Item;
 import businesslogic.financialbillbl.TransferAccount;
 
 public class VO {
@@ -25,7 +25,7 @@ public class VO {
 	String[] accounts;
 	BillState state;
 	Role operator;
-	ArrayList<StubItem> itemList;		
+	ArrayList<Item> itemList;		
 	String customer;
 	ArrayList<TransferAccount> transferlist;
 	/*获取单据类型*/
