@@ -40,6 +40,10 @@ public class StubStockController implements StubCommodityBlService, StockBlForSa
 	{
 		return l.addPack(commodityarray, quantity, discount);
 	}
+	public RM addPack(StubPack p)
+	{
+		return RM.done;
+	}
 	public RM addCategory(CategoryVO vo)
 	{
 		RM result=l.addCategory(vo);
@@ -60,6 +64,14 @@ public class StubStockController implements StubCommodityBlService, StockBlForSa
 	public RM checkOut(String id, String name, String model, int quantity, double price)
 	{
 		return l.checkOut(id, name, model, quantity, price);
+	}
+	public RM readyForIn(String id,String name, String model, int quantity, double price)
+	{//当进货单或销售退货单提交后，请调用
+		return RM.done;
+	}
+	public RM readyForOut(String id,String name, String model, int quantity, double price)
+	{//当销售单或进货退货单被提交后，请调用
+		return RM.done;
 	}
 	public ArrayList<StockVO> openCategory(String id)
 	{

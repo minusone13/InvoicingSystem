@@ -6,7 +6,7 @@ import java.awt.event.ItemListener;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
-public class InfoPanel extends JPanel{
+public class InitialInfoPanel extends JPanel{
 	String[] nameOfClent = {"姓名","编号","分类","级别","电话","地址","邮编","电子邮箱","应收额度","应收","应付","默认业务员"};
 	String[] nameOfCommodity = {"商品名","编号","商品分类","型号","进价","售价","库存数量","最近进价","最近售价"};
 	String[] nameOfAccount = {"姓名","金额"};
@@ -16,7 +16,7 @@ public class InfoPanel extends JPanel{
 	JScrollPane pane;
 	JComboBox box;
 	
-	public InfoPanel () {
+	public InitialInfoPanel () {
 		initial();
 	}
 	
