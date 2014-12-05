@@ -21,7 +21,7 @@ public class AccountBuild {
 	//差客户信息
 	String version;
 	public AccountBuild() {
-		SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");//change yyyy/MM/dd to this by lhw
 		version = format.format(new Date());
 	}
 	public void saveAccount() {
