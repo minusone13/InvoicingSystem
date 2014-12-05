@@ -25,6 +25,8 @@ public interface StubFinancialBlService {
 	public boolean updateAccount(String oldname, String newname);
 	//期初建账
 	public void buildAccount() ;
+	public ArrayList<AccountVO> getOldAccountsInfo(String version);
+	
 	
 	public ArrayList<VO> inquirySale(InquirySaleVO isv) ;
 	

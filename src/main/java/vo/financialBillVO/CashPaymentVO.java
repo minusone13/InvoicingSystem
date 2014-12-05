@@ -7,7 +7,7 @@ import vo.VO;
 import businesslogic.BillState;
 import businesslogic.BillStyle;
 import businesslogic.Role;
-import businesslogic.financialbillbl.StubItem;
+import businesslogic.financialbillbl.Item;
 
 public class CashPaymentVO extends VO{
 	private BillStyle billstyle=BillStyle.CashPaymentBill;
@@ -20,7 +20,7 @@ public class CashPaymentVO extends VO{
 	ArrayList<String> remark;
 	BillState state;
 	Role role;
-	ArrayList<StubItem> itemList;
+	ArrayList<Item> itemList;
 	Date date;
 	String userID;
 	String userName;
@@ -105,11 +105,11 @@ public class CashPaymentVO extends VO{
 		this.role = r;
 	}
 
-	public ArrayList<StubItem> getItemList() {
+	public ArrayList<Item> getItemList() {
 		return itemList;
 	}
 
-	public void setItemList(ArrayList<StubItem> itemList) {
+	public void setItemList(ArrayList<Item> itemList) {
 		this.itemList = itemList;
 	}
 

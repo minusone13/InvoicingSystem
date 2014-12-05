@@ -16,4 +16,5 @@ public class StubAccount {
 		name = n;
 		balance = b;
 	}
+	
 }

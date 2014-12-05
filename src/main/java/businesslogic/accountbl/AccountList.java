@@ -10,7 +10,7 @@ import businesslogic.stockmanagerbl.StubStockController;
 import po.AccountPO;
 import vo.accountVO.AccountVO;
 
-public class StubAccountList {
+public class AccountList {
 	
 	StubAccountDataService a = new AccountData();
 
@@ -52,8 +52,21 @@ public class StubAccountList {
 		AccountBuild build = new AccountBuild();
 		build.saveCommodity();
 		build.saveAccount();
+		build.saveVersion();
 	}
 	
+	public ArrayList<AccountVO> getOldAccountsInfo(String version) {
+		AccountBuild build = new AccountBuild();
+		ArrayList<AccountPO> accountsPO = build.getAccount(version);
+		ArrayList<AccountVO> accountsVO = new ArrayList<AccountVO>();
+		int size = accountsPO.size();
+		for(int i=0;i<size;i++) {
+			accountsVO.add(new AccountVO(accountsPO.get(i).getName(), 
+					accountsPO.get(i).getBalance()));
+			
+		}
+		return accountsVO;
+	}
 	public ArrayList<AccountPO> getAllAccountInfo() {
 		ArrayList<AccountPO> accList = a.getAllAcountInfo();
 		return accList;

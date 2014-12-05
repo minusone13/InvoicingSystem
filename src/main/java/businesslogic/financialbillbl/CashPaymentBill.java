@@ -27,7 +27,7 @@ public class CashPaymentBill extends Bill implements GetVOandPO{
 	private Date date;
 	private String userID;
 	private String userName;
-	private ArrayList<StubItem> itemList = new ArrayList<StubItem>();
+	private ArrayList<Item> itemList = new ArrayList<Item>();
 	private String op;//操作员 userName+userID
 	
 	public CashPaymentBill() {}
@@ -40,7 +40,7 @@ public class CashPaymentBill extends Bill implements GetVOandPO{
 		    
 		int length = item.size();
 		for(int i=0;i<length;i++) {
-			itemList.add(new StubItem(item.get(i), money.get(i), remark.get(i)));
+			itemList.add(new Item(item.get(i), money.get(i), remark.get(i)));
 		}
 		this.account = account;
 		this.total = total;
@@ -116,10 +116,10 @@ public class CashPaymentBill extends Bill implements GetVOandPO{
 	public void setDate(Date date) {
 		this.date = date;
 	}
-	public ArrayList<StubItem> getItemList() {
+	public ArrayList<Item> getItemList() {
 		return itemList;
 	}
-	public void setItemList(ArrayList<StubItem> itemList) {
+	public void setItemList(ArrayList<Item> itemList) {
 		this.itemList = itemList;
 	}
 	public CashPaymentVO getVO() {
