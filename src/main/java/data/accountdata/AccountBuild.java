@@ -19,7 +19,7 @@ import dataservice.accountdataservice.StubAccountDataService;
 
 public class AccountBuild {
 	//差客户信息
-	String version;
+	String version=null;
 	public AccountBuild() {
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");//change yyyy/MM/dd to this by lhw
 		version = format.format(new Date());
@@ -37,6 +37,7 @@ public class AccountBuild {
 	
 	public void saveVersion () {
 		ArrayList<String> versions = getVersion();
+		if(versions==null) versions = new ArrayList<String>();
 		versions.add(version);
 		String filename = "accountBuild.ser";
 		ObjectOutputStream oos = null;
