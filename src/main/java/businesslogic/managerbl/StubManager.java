@@ -22,6 +22,7 @@ import businesslogic.BillStyle;
 import businesslogic.commoditybillbl.StubAlertBill;
 import businesslogic.commoditybillbl.StubGiftBill;
 import businesslogic.commoditybillbl.StubSpillsLossBill;
+import businesslogic.commoditybl.MockCommodity;
 import businesslogic.examinebl.StubBillPool;
 import businesslogic.financialbillbl.CashPaymentBill;
 import businesslogic.financialbillbl.PaymentBill;
@@ -475,31 +476,50 @@ public class StubManager implements StubManagerBlService{
 	}
 	/*需要制定一个赠送赠品的客户分层策略*/
 	public boolean addGiftLevelStrategy (LevelStrategyVO lsvo){
+		ArrayList<MockCommodity> gift=new ArrayList<MockCommodity>();
+		for(int i=0;i<lsvo.getAlOfCommodity().size();i++){
+			MockCommodity temp=new MockCommodity(lsvo.getAlOfCommodity().get(i));
+			gift.add(temp);
+		}
+		strategyPool.addGiftLevelStrategy(lsvo.getLevel(), lsvo.getLimit(),gift , lsvo.getStartTime(), lsvo.getLastTime());
 		return true;
-		
 	}
 	/*需要制定一个折让客户分层策略*/
 	public boolean addDiscountLevelStrategy (LevelStrategyVO lsvo){
+		strategyPool.addDiscountLevelStrategy(lsvo.getLevel(), lsvo.getDiscountrate(), lsvo.getStartTime(), lsvo.getLastTime());
 		return true;
-		
 	}
 	/*需要制定一个赠送代金券客户分层策略*/
 	public boolean addCouponLevelStrategy (LevelStrategyVO lsvo){
+		strategyPool.addCouponLevelStrategy(lsvo.getLevel(), lsvo.getCouponrate(),lsvo.getStartTime(), lsvo.getLastTime());
 		return true;
 	
 	}
 	/*需要制定一条特价包促销策略*/
 	public boolean addBarginStrategy (BarginStrategyVO bsvo){
+		ArrayList<MockCommodity> pack=new ArrayList<MockCommodity>();
+		for(int i=0;i<bsvo.getAlOfCommodity().size();i++){
+			MockCommodity temp=new MockCommodity(bsvo.getAlOfCommodity().get(i));
+			pack.add(temp);
+		}
+		strategyPool.addBarginStrategy(pack,bsvo.getDiscount(), bsvo.getNum(), bsvo.getStartTime(), bsvo.getLastTime());
 		return true;
 		
 	}
 	/*需要制定一条赠送赠品的满额促销策略*/
 	public boolean addGiftReachStrategy (ReachStrategyVO rsvo){
+		ArrayList<MockCommodity> gift=new ArrayList<MockCommodity>();
+		for(int i=0;i<rsvo.getAlOfCommodity().size();i++){
+			MockCommodity temp=new MockCommodity(rsvo.getAlOfCommodity().get(i));
+			gift.add(temp);
+		}
+		strategyPool.addReachStrategy(rsvo.getLimit(), gift, rsvo.getStartTime(),rsvo.getLastTime());
 		return true;
 		
 	}
 	/*需要制定一条赠送代金券的满额促销策略*/
 	public boolean addCouponReachStrategy (ReachStrategyVO rsvo){
+		strategyPool.addReachStrategy(rsvo.getLimit(), rsvo.getCouponrate(), rsvo.getStartTime(), rsvo.getLastTime());
 		return true;
 		
 	}

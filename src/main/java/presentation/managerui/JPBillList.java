@@ -39,6 +39,32 @@ public class JPBillList extends JPanel {
 	
 
 	}
+	/*单据面板数组根据状态重新排序*/
+	public ArrayList<JPBill> sortBillList(ArrayList<JPBill> bl){
+		ArrayList<JPBill> result=new ArrayList<JPBill>();
+		for(int i=0;i<bl.size();i++){
+			if(bl.get(i).getState()==BillState.DRAFT){
+				result.add(bl.get(i));
+			}
+		}
+		for(int i=0;i<bl.size();i++){
+			if(bl.get(i).getState()==BillState.SUBMITED){
+				result.add(bl.get(i));
+			}
+		}
+		for(int i=0;i<bl.size();i++){
+			if(bl.get(i).getState()==BillState.EXAMINED){
+				result.add(bl.get(i));
+			}
+		}
+		for(int i=0;i<bl.size();i++){
+			if(bl.get(i).getState()==BillState.OVER){
+				result.add(bl.get(i));
+			}
+		}
+		return result;
+	}
+	
 	/*更新板根据数组更新*/
 	public void updateJP(){
 		if(JPupdate==null){
@@ -61,6 +87,9 @@ public class JPBillList extends JPanel {
 			//设置面板透明
 			JPupdate.setOpaque(false);
 		}
+		//重新排序
+		JPbillList=sortBillList(JPbillList);
+		//循环加到更新面板上
 		for(int i=0;i<JPbillList.size();i++){
 			JPbillList.get(i).setLocation(0, 93*i);
 			JPupdate.add(JPbillList.get(i),i);
@@ -78,7 +107,7 @@ public class JPBillList extends JPanel {
 		for(int i=0;i<gb.size();i++){
 			JPbillList.add(new JPBill(gb.get(i)));
 		}
-		//更新到面板上
+		//更新面板
 		updateJP();
 	}
 	/*增加赠送单*/
@@ -238,24 +267,7 @@ public class JPBillList extends JPanel {
 		//更新到面板上
 		updateJP();
 	}
-	/*删除选中的*/
-	public void removeChosen(){
-
-		if(isTheSameState()&&stateOfChosen()==BillState.OVER){//如果是同一个状态且是已处理状态
-			for(int i=0;i<JPbillList.size();i++){
-				if(JPbillList.get(i).getChoose()){
-					JPbillList.remove(i);
-					i--;
-				}
-			}
-			//重新加到底板上
-			updateJP();
-		}
 	
-		else{
-			System.out.println("只有已处理单据能够移除");
-		}
-	}
 	/*修改选中的*/
 	public void changeChosen(GiftBillVO gb){
 		for(int i=0;i<JPbillList.size();i++){
@@ -345,6 +357,8 @@ public class JPBillList extends JPanel {
 					JPbillList.get(i).transformState(BillState.EXAMINED);
 				}
 			}
+			//更新面板
+			updateJP();
 		}
 		else{
 			System.out.println("只有提交状态的单据能够通过审批");
@@ -358,11 +372,47 @@ public class JPBillList extends JPanel {
 					JPbillList.get(i).transformState(BillState.SUBMITED);
 				}
 			}
+			//更新面板
+			updateJP();
 		}
 		else{
 			System.out.println("只有草稿状态的单据能够提交");
 		}
 	}
+	/*处理选中的*/
+	public void doneChosen(){
+		if(getChosenNum()>=1&&isTheSameState()&&stateOfChosen()==BillState.EXAMINED){
+			for(int i=0;i<JPbillList.size();i++){
+				if(JPbillList.get(i).getChoose()){
+					JPbillList.get(i).transformState(BillState.OVER);
+				}
+			}
+			//更新面板
+			updateJP();
+		}
+		else{
+			System.out.println("只有已经通过审批的单据能够处理");
+		}
+	}
+	/*删除选中的*/
+	public void removeChosen(){
+
+		if(isTheSameState()&&stateOfChosen()==BillState.OVER){//如果是同一个状态且是已处理状态
+			for(int i=0;i<JPbillList.size();i++){
+				if(JPbillList.get(i).getChoose()){
+					JPbillList.remove(i);
+					i--;
+				}
+			}
+			//重新加到底板上
+			updateJP();
+		}
+	
+		else{
+			System.out.println("只有已处理单据能够移除");
+		}
+	}
+	
 	/*返回被选中的个数*/
 	public int getChosenNum(){
 		int chosenNum=0;

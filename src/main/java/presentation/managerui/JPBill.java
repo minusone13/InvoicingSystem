@@ -222,9 +222,12 @@ public class JPBill extends JPanel {
 		left.setBounds(482, 26, 40, 40);
 		left.addMouseListener(new MouseListenerOfButton(2));
 		//单据信息
-		operatorOfCas.setBounds(345, 15, 50, 16);
-		accountOfCas.setBounds(360, 33, 50, 16);
-		moneyOfCas.setBounds(330, 49, 50, 16);
+		operatorOfCas.setBounds(345, 15, 150, 16);
+		accountOfCas.setBounds(360, 33, 150, 16);
+		moneyOfCas.setBounds(330, 49, 150, 16);
+		operatorOfCas.setText(cb.getOp());
+		accountOfCas.setText(cb.getAccount());
+		moneyOfCas.setText(String.valueOf(cb.getTotal()));
 		//将组件加到面板上
 		this.add(right,0);
 		this.add(left,1);
