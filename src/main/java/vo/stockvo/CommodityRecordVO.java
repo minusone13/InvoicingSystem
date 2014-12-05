@@ -3,9 +3,10 @@ package vo.stockvo;
 import java.util.Date;
 
 public class CommodityRecordVO {
-	public CommodityRecordVO(Date date, int outquantity, int inquantity,
+	public CommodityRecordVO(String id,Date date, int outquantity, int inquantity,
 			double outamount, double inamount, int salequantity,
 			int importquantity, double saleamount, double importamount) {
+		this.id=id;
 		this.date = date;
 		this.outquantity = outquantity;
 		this.inquantity = inquantity;
@@ -18,6 +19,7 @@ public class CommodityRecordVO {
 	}
 		//记录商品的进出记录,库存查看、管理商品时都会用到
 		Date date;//日期
+		String id;
 		int outquantity;//出库数量
 		int inquantity;//入库数量
 		double outamount;//相应金额
@@ -80,5 +82,17 @@ public class CommodityRecordVO {
 		}
 		public void setImportamount(double importamount) {
 			this.importamount = importamount;
+		}
+		public Date getDate() {
+			return date;
+		}
+		public void setDate(Date date) {
+			this.date = date;
+		}
+		public String getId() {
+			return id;
+		}
+		public void setId(String id) {
+			this.id = id;
 		}
 }

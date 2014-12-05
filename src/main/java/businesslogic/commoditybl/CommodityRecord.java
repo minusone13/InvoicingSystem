@@ -6,9 +6,10 @@ import po.stockpo.CommodityRecordPO;
 import vo.stockvo.CommodityRecordVO;
 
 public class CommodityRecord {
-	public CommodityRecord(Date date, int outquantity, int inquantity,
+	public CommodityRecord(String id,Date date, int outquantity, int inquantity,
 			double outamount, double inamount, int salequantity,
 			int importquantity, double saleamount, double importamount) {
+		this.id=id;
 		this.date = date;
 		this.outquantity = outquantity;
 		this.inquantity = inquantity;
@@ -19,7 +20,21 @@ public class CommodityRecord {
 		this.saleamount = saleamount;
 		this.importamount = importamount;
 	}
+	public CommodityRecord(String id,Date date, int outquantity, int inquantity,
+			double outamount, double inamount) {
+		this.id=id;
+		this.date = date;
+		this.outquantity = outquantity;
+		this.inquantity = inquantity;
+		this.outamount = outamount;
+		this.inamount = inamount;
+		this.salequantity = outquantity;
+		this.importquantity = inquantity;
+		this.saleamount = outamount;
+		this.importamount = inamount;
+	}
 	public CommodityRecord(CommodityRecordPO po) {
+		this.id = po.getId();
 		this.date = po.getD();
 		this.outquantity = po.getOutquantity();
 		this.inquantity = po.getInquantity();
@@ -31,6 +46,7 @@ public class CommodityRecord {
 		this.importamount = po.getImportamount();
 	}
 	public CommodityRecord(CommodityRecordVO vo) {
+		this.id = vo.getId();
 		this.date = vo.getD();
 		this.outquantity = vo.getOutquantity();
 		this.inquantity = vo.getInquantity();
@@ -43,6 +59,7 @@ public class CommodityRecord {
 	}
 //记录商品的进出记录
 	Date date;//日期
+	String id;
 	int outquantity;//出库数量
 	int inquantity;//入库数量
 	double outamount;//相应金额
@@ -110,14 +127,30 @@ public class CommodityRecord {
 	}
 	public CommodityRecordPO toPO()
 	{
-		return new CommodityRecordPO(date, outquantity, inquantity,
+		return new CommodityRecordPO(id,date, outquantity, inquantity,
 				outamount, inamount, salequantity,
 				importquantity, saleamount, importamount);
 	}
 	public CommodityRecordVO toVO()
 	{
-		return new CommodityRecordVO(date, outquantity, inquantity,
+		return new CommodityRecordVO(id,date, outquantity, inquantity,
 				outamount, inamount, salequantity,
 				importquantity, saleamount, importamount);
+	}
+	public boolean equals(CommodityRecord r)
+	{
+		return (id.equals(r.getId()));
+	}
+	public Date getDate() {
+		return date;
+	}
+	public void setDate(Date date) {
+		this.date = date;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
 	}
 }

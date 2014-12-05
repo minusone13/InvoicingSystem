@@ -3,6 +3,8 @@ package po.stockpo;
 import java.io.Serializable;
 import java.util.*;
 
+import businesslogic.commoditybl.CommodityRecord;
+
 
 public class CommodityPO implements Serializable, Cloneable{
 	String id;
@@ -16,6 +18,7 @@ public class CommodityPO implements Serializable, Cloneable{
 	double lastout;
 	int alertLine;
 	ArrayList<CommodityRecordPO> record=new ArrayList<CommodityRecordPO>();
+	ArrayList<CommodityRecordPO> prepareRecord=new ArrayList<CommodityRecordPO>();
 	public CommodityPO(){}
 	public CommodityPO(String parent,String name,String model,int number,double in,double out,double lastin,double lastout,int alertLine)
 	{	
@@ -30,7 +33,7 @@ public class CommodityPO implements Serializable, Cloneable{
 		this.lastout=lastout;
 		this.alertLine=alertLine;
 	}
-	public CommodityPO(String parent,String name,String model,int number,double in,double out,double lastin,double lastout,int alertLine,ArrayList<CommodityRecordPO> record)
+	public CommodityPO(String parent,String name,String model,int number,double in,double out,double lastin,double lastout,int alertLine,ArrayList<CommodityRecordPO> record,ArrayList<CommodityRecordPO> prepareRecord)
 	{	
 		this.parent=parent;
 		this.name=name;
@@ -43,6 +46,7 @@ public class CommodityPO implements Serializable, Cloneable{
 		this.lastout=lastout;
 		this.alertLine=alertLine;
 		this.record=record;
+		this.prepareRecord=prepareRecord;
 	}
 	public CommodityPO(String parent,String name)
 	{
@@ -152,5 +156,11 @@ public class CommodityPO implements Serializable, Cloneable{
 	}
 	public void setAlertLine(int alertLine) {
 		this.alertLine = alertLine;
+	}
+	public ArrayList<CommodityRecordPO> getPrepareRecord() {
+		return prepareRecord;
+	}
+	public void setPrepareRecord(ArrayList<CommodityRecordPO> prepareRecord) {
+		this.prepareRecord = prepareRecord;
 	}
 }

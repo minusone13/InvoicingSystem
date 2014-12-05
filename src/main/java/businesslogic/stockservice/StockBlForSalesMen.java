@@ -12,4 +12,7 @@ public interface StockBlForSalesMen
 	public RM checkIn(String id,String name, String model, int quantity, double price);//当进货单或销售退货单被审批后，请调用
 	public RM checkOut(String id,String name, String model, int quantity, double price);//当销售单或进货退货单被审批后，请调用
 	//上面两个方法会修改库存余量
+	
+	public RM readyForIn(String id,String name, String model, int quantity, double price);//当进货单或销售退货单提交后，请调用
+	public RM readyForOut(String id,String name, String model, int quantity, double price);//当销售单或进货退货单被提交后，请调用
 }

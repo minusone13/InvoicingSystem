@@ -21,6 +21,7 @@ public class MockCommodity {
 	double lastout;
 	int alertLine;
 	ArrayList<CommodityRecord> record=new ArrayList<CommodityRecord>();
+	ArrayList<CommodityRecord> prepareRecord=new ArrayList<CommodityRecord>();
 	public MockCommodity(){}
 	public MockCommodity(CommodityPO po)
 	{
@@ -35,6 +36,7 @@ public class MockCommodity {
 		lastout=po.getLastOut();
 		alertLine=po.getAlertLine();
 		record=posToCom(po.getRecord());
+		prepareRecord=posToCom(po.getPrepareRecord());
 	}
 	public MockCommodity(CommodityVO vo)
 	{
@@ -52,20 +54,31 @@ public class MockCommodity {
 		{
 			record=vosToCom(vo.getRecord());
 		}
+		prepareRecord=vosToCom(vo.getPrepareRecord());
 	}
 	
 	public void add(CommodityRecord r)
 	{
 		record.add(r);
 	}
+	public void prepareDelete(CommodityRecord r)
+	{
+		for(int i=0;i<prepareRecord.size();i++)
+			if(prepareRecord.get(i).equals(r))
+				prepareRecord.remove(i);
+	}
+	public void prepareAdd(CommodityRecord r)
+	{
+		prepareRecord.add(r);
+	}
 	public CommodityPO toPO()
 	{
-		return new CommodityPO(parent,name,model,number,in,out,lastin,lastout,alertLine,toRecordPOs());
+		return new CommodityPO(parent,name,model,number,in,out,lastin,lastout,alertLine,toRecordPOs(record), toRecordPOs(prepareRecord));
 	}
 	public CommodityVO toVO()
 	{
 		
-		return new CommodityVO(parent,name,model,number,in,out,lastin,lastout,alertLine,toRecordVOs());
+		return new CommodityVO(parent,name,model,number,in,out,lastin,lastout,alertLine,toRecordVOs(record), toRecordVOs(prepareRecord));
 	}
 	public String getId() {
 		return id;
@@ -133,25 +146,25 @@ public class MockCommodity {
 	public void setRecord(ArrayList<CommodityRecord> record) {
 		this.record = record;
 	}
-	private ArrayList<CommodityRecordPO> toRecordPOs()
+	private ArrayList<CommodityRecordPO> toRecordPOs(ArrayList<CommodityRecord> h)
 	{
 		ArrayList<CommodityRecordPO> result=null;
-		if(record!=null)
+		if(h!=null)
 		{
 			result=new ArrayList<CommodityRecordPO>();
-			for(int i=0;i<record.size();i++)
-				result.add(record.get(i).toPO());
+			for(int i=0;i<h.size();i++)
+				result.add(h.get(i).toPO());
 		}
 		return result;
 	}
-	private ArrayList<CommodityRecordVO> toRecordVOs()
+	private ArrayList<CommodityRecordVO> toRecordVOs(ArrayList<CommodityRecord> h)
 	{
 		ArrayList<CommodityRecordVO> result=null;
-		if(record!=null)
+		if(h!=null)
 		{
 			result=new ArrayList<CommodityRecordVO>();
-			for(int i=0;i<record.size();i++)
-				result.add(record.get(i).toVO());
+			for(int i=0;i<h.size();i++)
+				result.add(h.get(i).toVO());
 		}
 		return result;
 	}
