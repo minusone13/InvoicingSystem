@@ -19,8 +19,9 @@ public class StubAlertBill extends Bill implements GetVOandPO
 	BillStyle style=BillStyle.AlertBill;
 	BillState state=BillState.DRAFT;
 	public StubAlertBill(){}
-	public StubAlertBill(MockCommodity com, int shortage)
+	public StubAlertBill(String userID,MockCommodity com, int shortage)
 	{
+		this.userID=userID;
 		this.com=com;
 		this.shortage=shortage;
 	}

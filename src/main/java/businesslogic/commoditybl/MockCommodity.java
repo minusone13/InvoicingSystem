@@ -22,6 +22,10 @@ public class MockCommodity {
 	int alertLine;
 	ArrayList<CommodityRecord> record=new ArrayList<CommodityRecord>();
 	ArrayList<CommodityRecord> prepareRecord=new ArrayList<CommodityRecord>();
+	public int checkAlert()
+	{
+		return alertLine-number;
+	}
 	public MockCommodity(){}
 	public MockCommodity(CommodityPO po)
 	{
@@ -56,7 +60,13 @@ public class MockCommodity {
 		}
 		prepareRecord=vosToCom(vo.getPrepareRecord());
 	}
-	
+	public int getPotential()
+	{
+		int potential = number;
+		for(int i=0;i<prepareRecord.size();i++)
+			potential-=prepareRecord.get(i).getOutquantity();
+		return potential;
+	}
 	public void add(CommodityRecord r)
 	{
 		record.add(r);

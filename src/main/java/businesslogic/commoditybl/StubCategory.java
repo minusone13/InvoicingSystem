@@ -46,6 +46,6 @@ public class StubCategory {
 		return id;
 	}
 	public void setID(String id) {
-		id = id;
+		this.id = id;
 	}
 }

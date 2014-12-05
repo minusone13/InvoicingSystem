@@ -49,10 +49,19 @@ public class StubCommodityList {//商品列表 haha
 		if(po==null)//not found
 			return RM.notfound;
 		MockCommodity com=new MockCommodity(po);
+		int num = com.getNumber();
+		if(num<quantity)
+			return RM.insufficient;
+		com.setNumber(num-quantity);
 		CommodityRecord r = new CommodityRecord(id,new Date(),0,quantity,0,price,0,quantity,0,price);
 		com.add(r);
 		com.prepareDelete(r);
 		boolean result = comdata.update(com.toPO());
+		int shortage = com.checkAlert();
+		if(shortage>0)
+		{
+			//need to be changed
+		}
 		if(result)
 			return RM.done;
 		else
@@ -64,6 +73,8 @@ public class StubCommodityList {//商品列表 haha
 		if(po==null)//not found
 			return RM.notfound;
 		MockCommodity com=new MockCommodity(po);
+		int num = com.getNumber();
+		com.setNumber(num+quantity);
 		CommodityRecord r = new CommodityRecord(id,new Date(),quantity,0,price,0,quantity,0,price,0);
 		com.add(r);
 		com.prepareDelete(r);
@@ -79,6 +90,9 @@ public class StubCommodityList {//商品列表 haha
 		if(po==null)//not found
 			return RM.notfound;
 		MockCommodity com=new MockCommodity(po);
+		int num = com.getPotential();
+		if(num<quantity)
+			return RM.insufficient;
 		CommodityRecord r = new CommodityRecord(id,new Date(),0,quantity,0,price,0,quantity,0,price);
 		com.prepareAdd(r);
 		boolean result = comdata.update(com.toPO());
