@@ -27,19 +27,31 @@ public class StubAlertBill extends Bill implements GetVOandPO
 	}
 	public AlertBillVO getVO()
 	{
-		return new AlertBillVO(ID,new CommodityVO(),shortage);
+		return new AlertBillVO(date,userID,ID,new CommodityVO(),shortage,state);
 	}
 	public AlertBillPO getPO()
 	{
-		return new AlertBillPO(ID,com.toPO(),shortage,state);
+		return new AlertBillPO(date,userID,ID,com.toPO(),shortage,state);
 	}
 	public void setPO(AlertBillPO po)
 	{
+		date=po.getDate();
+		userID=po.getUserID();
 		com=new MockCommodity(po.getCommodity());
 		shortage=po.getshortage();
 		ID=po.getID();
 		style=po.getStyle();
 		state=po.getState();
+	}
+	public void setVO(AlertBillVO vo)
+	{
+		date=vo.getDate();
+		userID=vo.getUserID();
+		com=new MockCommodity(vo.getCommodity());
+		shortage=vo.getshortage();
+		ID=vo.getID();
+		style=vo.getBillstyle();
+		state=vo.getState();
 	}
 	public MockCommodity getCom() {
 		return com;
