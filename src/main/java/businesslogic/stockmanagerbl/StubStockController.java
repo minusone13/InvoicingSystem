@@ -111,6 +111,14 @@ public class StubStockController implements StubCommodityBlService, StockBlForSa
 		StubCommodityBill cb=new StubCommodityBill();
 		return cb.getLossTotal(d1, d2);
 	}
+	public double getAdjustmentTotal(Date d1, Date d2)
+	{//商品调价。这个返回值可能为正，也可能为负
+		return 0;
+	}
+	public double getGiftBillTotal(Date d1, Date d2)
+	{//赠送单支出。这个返回值可能为非负
+		return 0;
+	}
 	
 	public RM updateCommodity(CommodityVO vo)
 	{
