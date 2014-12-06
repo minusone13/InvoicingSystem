@@ -1,6 +1,7 @@
 package po;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import businesslogic.BillState;
 import businesslogic.BillStyle;
@@ -9,21 +10,34 @@ import po.stockpo.CommodityPO;
 
 public class AlertBillPO extends PO implements Serializable{
 	private BillStyle style = BillStyle.AlertBill;
+	private Date date;
+	String userID;
 	private String ID;
 	private CommodityPO comPO;
 	private int shortage;
 	private BillState state=BillState.DRAFT;
 	public AlertBillPO(){}
 	
-	public AlertBillPO(String ID,CommodityPO comPO, int shortage,BillState state)
+	public AlertBillPO(Date date,String userID,String ID,CommodityPO comPO, int shortage,BillState state)
 	{
+		this.date=date;
+		this.userID=userID;
 		this.ID=ID;
 		this.comPO=comPO;
 		this.shortage=shortage;
 		this.state=state;
 	}
-	public AlertBillPO(String ID, CommodityPO comPO, int shortage)
+	public AlertBillPO(String userID,String ID,CommodityPO comPO, int shortage,BillState state)
 	{
+		this.userID=userID;
+		this.ID=ID;
+		this.comPO=comPO;
+		this.shortage=shortage;
+		this.state=state;
+	}
+	public AlertBillPO(String userID,String ID, CommodityPO comPO, int shortage)
+	{
+		this.userID=userID;
 		this.ID=ID;
 		this.comPO=comPO;
 		this.shortage=shortage;
@@ -74,5 +88,21 @@ public class AlertBillPO extends PO implements Serializable{
 
 	public void setState(BillState state) {
 		this.state = state;
+	}
+
+	public String getUserID() {
+		return userID;
+	}
+
+	public void setUserID(String userID) {
+		this.userID = userID;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
 	}
 }

@@ -14,6 +14,8 @@ import javax.swing.JTextField;
 
 import presentation.managerui.JPBillList;
 import presentation.managerui.MouseListenerGetXY;
+import vo.financialBillVO.CashPaymentVO;
+import vo.financialBillVO.PaymentVO;
 import businesslogic.BillStyle;
 
 public class JPmanageBills2 extends JPanel {
@@ -138,6 +140,7 @@ public class JPmanageBills2 extends JPanel {
 				
 			}
 
+			//点击功能按键
 			public void mousePressed(MouseEvent e) {
 				// TODO Auto-generated method stub
 				switch(num){
@@ -153,23 +156,25 @@ public class JPmanageBills2 extends JPanel {
 					break;	
 				case 3:
 					done.setIcon(checkIconR);
+					billList.doneChosen();//处理选中的
 					break;
 				case 4:
 					delete.setIcon(deleteIconR);
-					billList.removeChosen();
+					billList.removeChosen();//删除选中的
 					break;
 				case 5:
 					edit.setIcon(editIconR);
 					JPedit.setIsAdd(false);//不是加单据是编辑单据
-					JPedit.leftMove();
+					JPedit.leftMove();//调出编辑板
 					break;
 				case 6:
 					submit.setIcon(submitIconR);
+					billList.submitChosen();//上交选中的
 					break;
 				case 7:
 					add.setIcon(addIconR);
 					JPedit.setIsAdd(true);//加单据
-					JPedit.leftMove();
+					JPedit.leftMove();//调出编辑板
 					break;
 				}
 			}
@@ -522,6 +527,8 @@ public class JPmanageBills2 extends JPanel {
 									if(legal2){
 										//生成新的单据加入到billList
 										System.out.println("生成了一张付款单");
+										PaymentVO newPay=new PaymentVO();
+										//传入单据数据
 										//清空信息
 										tranTotalText.setText("");
 										tranListEdit.getListArray().clear();//清空三个数组
@@ -544,14 +551,30 @@ public class JPmanageBills2 extends JPanel {
 								}
 								if(legal3){
 									//生成新的单据加入到billList
+									//设置单据数据
 									System.out.println("生成了一张现金费用单");
+									CashPaymentVO newCash=new CashPaymentVO();
+									
 									System.out.println("银行账户是："+accountText.getText());
+									newCash.setAccount(accountText.getText());
+									
 									for(int i=0;i<ListEdit.getListArray().size();i++){
 										System.out.println("条目名"+(i+1)+":"+ListEdit.getListArray().get(i));
+										newCash.getItem().add(ListEdit.getListArray().get(i));
+										
 										System.out.println("金额"+(i+1)+":"+ListEdit.getMoneyArray().get(i));
+										newCash.getMoney().add(ListEdit.getMoneyArray().get(i));
+										
 										System.out.println("备注"+(i+1)+":"+ListEdit.getNoteArray().get(i));
+										newCash.getRemark().add(ListEdit.getNoteArray().get(i));
 									}
 									System.out.println("总额是："+totalText.getText());
+									newCash.setTotal(Double.parseDouble(totalText.getText()));
+									
+									//操作员
+									newCash.setOp("临时操作员");
+									//将设置好数据的单据VO加到billList
+									billList.addCashPaymentBill(newCash);
 									//清空信息
 									accountText.setText("");
 									totalText.setText("");
@@ -564,6 +587,9 @@ public class JPmanageBills2 extends JPanel {
 								}
 								break;
 							}
+						}
+						else{//是修改单据
+							
 						}
 						break;
 					}

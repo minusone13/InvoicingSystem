@@ -59,7 +59,9 @@ public class CashPaymentBill extends Bill implements GetVOandPO{
 	public String getOperator() {
 		return this.op;
 	}
-	
+	public void setOp(String op) {
+		this.op = op;
+	}
 	public String getUserName() {
 		return userName;
 	}

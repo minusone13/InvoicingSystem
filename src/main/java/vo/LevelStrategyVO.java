@@ -16,7 +16,7 @@ public class LevelStrategyVO extends VO{
 	private int level;//客户等级
 	private double Limit;//消费金额下限
 	
-	private ArrayList<MockCommodity> alOfCommodity;//赠品信息数组
+	private ArrayList<CommodityVO> alOfCommodity;//赠品信息数组
 	private double discountrate;//打折比例
 	private double couponrate;//代金券赠送比例
 	
@@ -62,10 +62,10 @@ public class LevelStrategyVO extends VO{
 	public void setLastTime(int lastTime) {
 		LastTime = lastTime;
 	}
-	public ArrayList<MockCommodity> getAlOfCommodity() {
+	public ArrayList<CommodityVO> getAlOfCommodity() {
 		return alOfCommodity;
 	}
-	public void setAlOfCommodity(ArrayList<MockCommodity> alOfCommodity) {
+	public void setAlOfCommodity(ArrayList<CommodityVO> alOfCommodity) {
 		this.alOfCommodity = alOfCommodity;
 	}
 }

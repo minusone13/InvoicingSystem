@@ -8,7 +8,7 @@ public class StubPack
 {//特价包类
 	public StubPack(String name, ArrayList<MockCommodity> coms, int quantity,
 			double price) {
-		this.name = name;
+		this.ID = name;
 		this.coms = coms;
 		this.quantity = quantity;
 		this.price = price;
@@ -17,7 +17,7 @@ public class StubPack
 	{
 		
 	}
-	String name;
+	String ID;
 	ArrayList<MockCommodity> coms;
 	int quantity;
 	double price;//总价，通过total-discount得出
@@ -39,10 +39,10 @@ public class StubPack
 	public void setPrice(double price) {
 		this.price = price;
 	}
-	public String getName() {
-		return name;
+	public String getID() {
+		return ID;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setID(String ID) {
+		this.ID = ID;
 	}
 }

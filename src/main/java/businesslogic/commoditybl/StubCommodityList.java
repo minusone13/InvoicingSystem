@@ -1,7 +1,6 @@
 package businesslogic.commoditybl;
 
 import java.util.*;
-import java.util.ArrayList;
 
 import po.*;
 import po.stockpo.*;
@@ -50,8 +49,19 @@ public class StubCommodityList {//商品列表 haha
 		if(po==null)//not found
 			return RM.notfound;
 		MockCommodity com=new MockCommodity(po);
-		com.add(new CommodityRecord(new Date(),0,quantity,0,price,0,quantity,0,price));
+		int num = com.getNumber();
+		if(num<quantity)
+			return RM.insufficient;
+		com.setNumber(num-quantity);
+		CommodityRecord r = new CommodityRecord(id,new Date(),0,quantity,0,price,0,quantity,0,price);
+		com.add(r);
+		com.prepareDelete(r);
 		boolean result = comdata.update(com.toPO());
+		int shortage = com.checkAlert();
+		if(shortage>0)
+		{
+			//need to be changed
+		}
 		if(result)
 			return RM.done;
 		else
@@ -63,7 +73,42 @@ public class StubCommodityList {//商品列表 haha
 		if(po==null)//not found
 			return RM.notfound;
 		MockCommodity com=new MockCommodity(po);
-		com.add(new CommodityRecord(new Date(),quantity,0,price,0,quantity,0,price,0));
+		int num = com.getNumber();
+		com.setNumber(num+quantity);
+		CommodityRecord r = new CommodityRecord(id,new Date(),quantity,0,price,0,quantity,0,price,0);
+		com.add(r);
+		com.prepareDelete(r);
+		boolean result = comdata.update(com.toPO());
+		if(result)
+			return RM.done;
+		else
+			return RM.unknownerror;
+	}
+	public RM readyForIn(String id,String name, String model, int quantity, double price)
+	{//当进货单或销售退货单提交后，请调用
+		CommodityPO po=comdata.findCommodity(name,model);
+		if(po==null)//not found
+			return RM.notfound;
+		MockCommodity com=new MockCommodity(po);
+		int num = com.getPotential();
+		if(num<quantity)
+			return RM.insufficient;
+		CommodityRecord r = new CommodityRecord(id,new Date(),0,quantity,0,price,0,quantity,0,price);
+		com.prepareAdd(r);
+		boolean result = comdata.update(com.toPO());
+		if(result)
+			return RM.done;
+		else
+			return RM.unknownerror;
+	}
+	public RM readyForOut(String id,String name, String model, int quantity, double price)
+	{//当销售单或进货退货单被提交后，请调用
+		CommodityPO po=comdata.findCommodity(name,model);
+		if(po==null)//not found
+			return RM.notfound;
+		MockCommodity com=new MockCommodity(po);
+		CommodityRecord r = new CommodityRecord(id,new Date(),quantity,0,price,0,quantity,0,price,0);
+		com.prepareAdd(r);
 		boolean result = comdata.update(com.toPO());
 		if(result)
 			return RM.done;

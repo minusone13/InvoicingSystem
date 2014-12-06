@@ -23,18 +23,33 @@ public class StubSpillsLossBill extends Bill implements GetVOandPO
 	BillState state=BillState.DRAFT;
 	public SpillsLossBillVO getVO()
 	{
-		return new SpillsLossBillVO(ID,t,new CommodityVO());
+		return new SpillsLossBillVO(userID,ID,t,new CommodityVO(),state);
 	}
 	public SpillsLossBillPO getPO()
 	{
-		return new SpillsLossBillPO(ID,t,com.toPO().clone(),state);
+		return new SpillsLossBillPO(userID,ID,t,com.toPO().clone(),state);
 	}
 	public void setPO(SpillsLossBillPO po)
 	{
+		date=po.getDate();
+		userID=po.getUserID();
 		com=new MockCommodity(po.getComPO());
+		style=BillStyle.SpillsLossBill;
 		t=po.getT();
 		ID=po.getID();
 		state=po.getState();
+		t=po.getT();
+	}
+	public void setVO(SpillsLossBillPO vo)
+	{
+		date=vo.getDate();
+		userID=vo.getUserID();
+		com=new MockCommodity(vo.getComPO());
+		style=BillStyle.SpillsLossBill;
+		t=vo.getT();
+		ID=vo.getID();
+		state=vo.getState();
+		t=vo.getT();
 	}
 	public BillStyle getStyle() {
 		return style;

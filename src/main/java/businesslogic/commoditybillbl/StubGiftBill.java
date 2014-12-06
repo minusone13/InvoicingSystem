@@ -25,14 +25,17 @@ public class StubGiftBill extends Bill implements GetVOandPO
 	String remark[];
 	public GiftBillVO getVO()
 	{
-		return new GiftBillVO(ID,new ArrayList<CommodityVO>(),remark);
+		ArrayList<CommodityVO> result=new ArrayList<CommodityVO>();
+		for(int i=0;i<coms.size();i++)
+			result.add(coms.get(i).toVO());
+		return new GiftBillVO(date,userID,ID,result,remark,state);
 	}
 	public GiftBillPO getPO()
 	{
 		ArrayList<CommodityPO> result=new ArrayList<CommodityPO>();
 		for(int i=0;i<coms.size();i++)
 			result.add(coms.get(i).toPO());
-		return new GiftBillPO(ID,result,remark);//bug may appear
+		return new GiftBillPO(date,userID,ID,result,remark,state);//bug may appear
 	}
 	public void setPO(GiftBillPO po)
 	{
@@ -41,6 +44,24 @@ public class StubGiftBill extends Bill implements GetVOandPO
 		ID=po.getID();
 		state=po.getState();
 		remark=po.getRemark();
+		date=po.getDate();
+		billstyle=BillStyle.GiftBill;
+		userID=po.getUserID();
+		ID=po.getID();
+		remark=po.getRemark();
+	}
+	public void setVO(GiftBillVO vo)
+	{
+		for(int i=0;i<vo.getComs().size();i++)
+			coms.add(new MockCommodity(vo.getComs().get(i)));
+		ID=vo.getID();
+		state=vo.getState();
+		remark=vo.getRemark();
+		date=vo.getDate();
+		billstyle=BillStyle.GiftBill;
+		userID=vo.getUserID();
+		ID=vo.getID();
+		remark=vo.getRemark();
 	}
 	
 	public BillStyle getBillstyle() {

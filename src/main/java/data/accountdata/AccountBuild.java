@@ -17,11 +17,11 @@ import data.commoditydata.StubStockDataController;
 import data.stockservice.StockDataForFinancial;
 import dataservice.accountdataservice.StubAccountDataService;
 
-public class AccountBuild {
+public class AccountBuild{
 	//差客户信息
-	String version;
+	String version=null;
 	public AccountBuild() {
-		SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");//change yyyy/MM/dd to this by lhw
 		version = format.format(new Date());
 	}
 	public void saveAccount() {
@@ -37,6 +37,7 @@ public class AccountBuild {
 	
 	public void saveVersion () {
 		ArrayList<String> versions = getVersion();
+		if(versions==null) versions = new ArrayList<String>();
 		versions.add(version);
 		String filename = "accountBuild.ser";
 		ObjectOutputStream oos = null;
@@ -46,9 +47,8 @@ public class AccountBuild {
 			e.printStackTrace();
 			
 		} catch (IOException e) {
-			e.printStackTrace();
-			
-		} 
+			e.printStackTrace();			
+		}
 		try {
 			oos.writeObject(versions);
 		} catch (IOException e) {

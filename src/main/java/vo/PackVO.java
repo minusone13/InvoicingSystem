@@ -5,17 +5,11 @@ import java.util.ArrayList;
 import vo.stockvo.CommodityVO;
 
 public class PackVO {
-	String name;
+	String ID;
 	ArrayList<CommodityVO> coms;
 	int quantity;
-	//double discount;
+	double discount;
 	double price;//price = total-discount
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
 	public ArrayList<CommodityVO> getComs() {
 		return coms;
 	}
@@ -33,5 +27,17 @@ public class PackVO {
 	}
 	public void setPrice(double price) {
 		this.price = price;
+	}
+	public String getID() {
+		return ID;
+	}
+	public void setID(String iD) {
+		ID = iD;
+	}
+	public double getDiscount() {
+		return discount;
+	}
+	public void setDiscount(double discount) {
+		this.discount = discount;
 	}
 }

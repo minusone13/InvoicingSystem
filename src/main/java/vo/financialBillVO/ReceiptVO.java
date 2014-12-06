@@ -15,12 +15,12 @@ public class ReceiptVO extends VO{
 	Role role;
 	String customer;
 	double total;
-	ArrayList<Double> money;//转账金额
-	ArrayList<String> accounts;
-	ArrayList<String> remark;
+	ArrayList<Double> money = new ArrayList<Double>();//转账金额
+	ArrayList<String> accounts = new ArrayList<String>();
+	ArrayList<String> remark =new ArrayList<String>();
 
-	ArrayList<TransferAccount> transferlist;
-	BillState state;
+	ArrayList<TransferAccount> transferlist = new ArrayList<TransferAccount>();
+	BillState state=BillState.DRAFT;
 	private String userID;
 	private String userName;
 	private String op;//操作员 userName+userID
@@ -28,7 +28,7 @@ public class ReceiptVO extends VO{
 	public ReceiptVO() {
 		
 	}
-	public ReceiptVO(String customer, double total, String[] account, double[] money, String[] remark) {
+	public ReceiptVO(String customer, double total) {
 		
 	}
 	public Date getDate() {

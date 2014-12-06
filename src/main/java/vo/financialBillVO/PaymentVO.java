@@ -16,15 +16,16 @@ public class PaymentVO extends VO{
 	Role role;
 	String customer;
 	double total;
-	ArrayList<Double> money;//转账金额
-	ArrayList<String> accounts;
-	ArrayList<String> remark;	
-	private BillState state;
-	ArrayList<TransferAccount> transferlist;
+	ArrayList<Double> money = new ArrayList<Double>();//转账金额
+	ArrayList<String> accounts = new ArrayList<String>();
+	ArrayList<String> remark =new ArrayList<String>();
+	private BillState state = BillState.DRAFT;
+	ArrayList<TransferAccount> transferlist = new ArrayList<TransferAccount>();
 	String userID;
 	String userName;
 	String op;
 	Date date;
+	
 	
 	public String getUserID() {
 		return userID;
