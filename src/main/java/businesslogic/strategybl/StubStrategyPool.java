@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import po.BarginStrategyPO;
 import po.LevelStrategyPO;
 import po.ReachStrategyPO;
+import businesslogic.LevelStrategyStyle;
+import businesslogic.ReachStrategyStyle;
 import businesslogic.commoditybl.MockCommodity;
 import data.strategydata.StrategySaver;
 import dataservice.strategydataservice.StrategySaverService;
@@ -98,6 +100,7 @@ public class StubStrategyPool {
 	/*需要制定一个赠送赠品的客户分层策略*/
 	public void addGiftLevelStrategy (int level,double Limit,ArrayList<MockCommodity> gift,String StartTime,int LastTime){
 		StubLevelStrategy ls=new StubLevelStrategy();
+		ls.setLevel_strategy_style(LevelStrategyStyle.Gift);
 		ls.setLevel(level);
 		ls.setLimit(Limit);
 		ls.setAlOfCommodity(gift);
@@ -110,6 +113,7 @@ public class StubStrategyPool {
 	/*需要制定一个折让客户分层策略*/
 	public void addDiscountLevelStrategy (int level,double rate, String StartTime,int LastTime){
 		StubLevelStrategy ls=new StubLevelStrategy();
+		ls.setLevel_strategy_style(LevelStrategyStyle.Discount);
 		ls.setLevel(level);
 		ls.setDiscountrate(rate);
 		ls.setStartTime(StartTime);
@@ -121,6 +125,7 @@ public class StubStrategyPool {
 	/*需要制定一个赠送代金券客户分层策略*/
 	public void addCouponLevelStrategy (int level,double rate, String StartTime,int LastTime){
 		StubLevelStrategy ls=new StubLevelStrategy();
+		ls.setLevel_strategy_style(LevelStrategyStyle.Coupon);
 		ls.setLevel(level);
 		ls.setCouponrate(rate);
 		ls.setStartTime(StartTime);
@@ -144,6 +149,7 @@ public class StubStrategyPool {
 	/*需要制定一条赠送赠品的满额促销策略*/
 	public void addReachStrategy (double Limit,ArrayList<MockCommodity> gift,String StartTime,int LastTime){
 		StubReachStrategy rs=new StubReachStrategy();
+		rs.setReach_strategy_style(ReachStrategyStyle.Gift);
 		rs.setLimit(Limit);
 		rs.setAlOfCommodity(gift);
 		rs.setStartTime(StartTime);
@@ -155,6 +161,7 @@ public class StubStrategyPool {
 	/*需要制定一条赠送代金券的满额促销策略*/
 	public void addReachStrategy (double Limit,double rate,String StartTime,int LastTime){
 		StubReachStrategy rs=new StubReachStrategy();
+		rs.setReach_strategy_style(ReachStrategyStyle.Coupon);
 		rs.setLimit(Limit);
 		rs.setCouponrate(rate);
 		rs.setStartTime(StartTime);

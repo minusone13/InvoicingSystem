@@ -11,7 +11,7 @@ public class BarginStrategyVO extends VO {
 	private StrategyStyle strategystyle=StrategyStyle.BarginStrategy;
 	
 	private String ID="0000";
-	private ArrayList<CommodityVO> alOfCommodity;//赠品信息数组
+	private ArrayList<CommodityVO> alOfCommodity=new ArrayList<CommodityVO>();;//赠品信息数组
 	private double discount;//降价金额
 	private int num;//特价包打包数量
 	

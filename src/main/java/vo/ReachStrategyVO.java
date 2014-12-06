@@ -9,12 +9,12 @@ import businesslogic.commoditybl.MockCommodity;
 
 public class ReachStrategyVO extends VO{
 	private StrategyStyle strategystyle=StrategyStyle.ReachStrategy;
-	private ReachStrategyStyle reach_strategy_style;
+	private ReachStrategyStyle reach_strategy_style=ReachStrategyStyle.Default;
 	
 	private String ID="0000";
 	private double Limit;//消费金额下限
 	
-	private ArrayList<CommodityVO> alOfCommodity;//赠品信息数组
+	private ArrayList<CommodityVO> alOfCommodity=new ArrayList<CommodityVO>();//赠品信息数组
 	private double couponrate;//赠送代金券的比例
 	
 	private String StartTime;//开始日期
