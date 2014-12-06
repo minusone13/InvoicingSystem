@@ -15,10 +15,10 @@ import businesslogic.examinebl.StubBillPool;
 import businesslogic.financialbillbl.CashPaymentBill;
 import businesslogic.financialbillbl.PaymentBill;
 import businesslogic.financialbillbl.ReceiptBill;
-import businesslogic.salebillbl.StubPurBackSheet;
-import businesslogic.salebillbl.StubPurSheet;
-import businesslogic.salebillbl.StubSaleBackSheet;
-import businesslogic.salebillbl.StubSaleSheet;
+import businesslogic.salebillbl.PurBackSheet;
+import businesslogic.salebillbl.PurSheet;
+import businesslogic.salebillbl.SaleBackSheet;
+import businesslogic.salebillbl.SaleSheet;
 import vo.*;
 import vo.inquiryVO.BusinessSituationVO;
 import vo.inquiryVO.InquiryConditionVO;
@@ -35,8 +35,8 @@ public class Inquiry {
 	StubBillPool bp = new StubBillPool();
 	public ArrayList<VO> inquirySale(InquirySaleVO isv) {
 		ArrayList<VO> list = new ArrayList<VO>();
-		ArrayList<StubSaleSheet> saleSheet = bp.getSaleSheet();
-		ArrayList<StubSaleBackSheet> saleBackSheet = bp.getSaleBackSheet();
+		ArrayList<SaleSheet> saleSheet = bp.getSaleSheet();
+		ArrayList<SaleBackSheet> saleBackSheet = bp.getSaleBackSheet();
 		Date dateBefore=null;
 		Date dateAfter=null;
 		SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
@@ -50,7 +50,7 @@ public class Inquiry {
 		
 		int size1 = saleSheet.size();
 		for(int i=0;i<size1;i++) {		
-			StubSaleSheet sale = saleSheet.get(i);
+			SaleSheet sale = saleSheet.get(i);
 			//根据条件筛选单据
 			//时间区间
 			if(dateBefore!=null) {
@@ -76,7 +76,7 @@ public class Inquiry {
 		}
 		int size2 = saleBackSheet.size();
 		for(int i=0;i<size2;i++) {
-			StubSaleBackSheet saleback = saleBackSheet.get(i);
+			SaleBackSheet saleback = saleBackSheet.get(i);
 			//时间区间
 			if(dateBefore!=null) {
 				if(saleback.getDate().compareTo(dateBefore)>=0&&
@@ -97,12 +97,12 @@ public class Inquiry {
 	public ArrayList<VO> inquiryProcess(InquiryProcessVO ipv) {
 		ArrayList<VO> list = new ArrayList<VO>();
 		ArrayList<StubGiftBill> gift = bp.getGiftBill();
-		ArrayList<StubSaleSheet> saleSheet = bp.getSaleSheet();
-		ArrayList<StubSaleBackSheet> saleBackSheet = bp.getSaleBackSheet();
+		ArrayList<SaleSheet> saleSheet = bp.getSaleSheet();
+		ArrayList<SaleBackSheet> saleBackSheet = bp.getSaleBackSheet();
 		ArrayList<StubSpillsLossBill> spillsLoss = bp.getSpillsLossBill();
 		ArrayList<StubAlertBill> alert  =bp.getAlertBill();
-		ArrayList<StubPurSheet> purSheet = bp.getPurSheet();
-		ArrayList<StubPurBackSheet> purBackSheet = bp.getPurBackSheet();
+		ArrayList<PurSheet> purSheet = bp.getPurSheet();
+		ArrayList<PurBackSheet> purBackSheet = bp.getPurBackSheet();
 		ArrayList<ReceiptBill> receipt = bp.getReceiptBill();
 		ArrayList<PaymentBill> payment = bp.getPaymentBill();
 		ArrayList<CashPaymentBill> cashPayment =bp.getCashPaymentBill();
@@ -140,7 +140,7 @@ public class Inquiry {
 		//销售单===============================
 		int size1 = saleSheet.size();
 		for(int i=0;i<size1;i++) {
-			StubSaleSheet sale = saleSheet.get(i);
+			SaleSheet sale = saleSheet.get(i);
 			
 			if(dateBefore!=null) {
 				if(sale.getDate().compareTo(dateBefore)>=0&&
@@ -164,7 +164,7 @@ public class Inquiry {
 		//销售退货单===================================
 		int size2 = saleBackSheet.size();
 		for(int i=0;i<size2;i++) {
-			StubSaleBackSheet saleback = saleBackSheet.get(i);
+			SaleBackSheet saleback = saleBackSheet.get(i);
 			
 			if(dateBefore!=null) {
 				if(saleback.getDate().compareTo(dateBefore)>=0&&
@@ -235,7 +235,7 @@ public class Inquiry {
 		//进货单
 		int size5 = purSheet.size();
 		for(int i=0;i<size5;i++) {
-			StubPurSheet pur = purSheet.get(i);
+			PurSheet pur = purSheet.get(i);
 			
 			if(dateBefore!=null) {
 				if(pur.getDate().compareTo(dateBefore)>=0&&
@@ -258,7 +258,7 @@ public class Inquiry {
 		//进货退货单
 		int size6 = purBackSheet.size();
 		for(int i=0;i<size6;i++) {
-			StubPurBackSheet back = purBackSheet.get(i);
+			PurBackSheet back = purBackSheet.get(i);
 			
 			if(dateBefore!=null) {
 				if(back.getDate().compareTo(dateBefore)>=0&&
@@ -361,12 +361,12 @@ public class Inquiry {
 	
 	public BusinessSituationVO inquiryCondition(InquiryConditionVO vo) {
 		ArrayList<StubGiftBill> gift = bp.getGiftBill();
-		ArrayList<StubSaleSheet> saleSheet = bp.getSaleSheet();
-		ArrayList<StubSaleBackSheet> saleBackSheet = bp.getSaleBackSheet();
+		ArrayList<SaleSheet> saleSheet = bp.getSaleSheet();
+		ArrayList<SaleBackSheet> saleBackSheet = bp.getSaleBackSheet();
 		ArrayList<StubSpillsLossBill> spillsLoss = bp.getSpillsLossBill();
 		ArrayList<StubAlertBill> alert  =bp.getAlertBill();
-		ArrayList<StubPurSheet> purSheet = bp.getPurSheet();
-		ArrayList<StubPurBackSheet> purBackSheet = bp.getPurBackSheet();
+		ArrayList<PurSheet> purSheet = bp.getPurSheet();
+		ArrayList<PurBackSheet> purBackSheet = bp.getPurBackSheet();
 		ArrayList<ReceiptBill> receipt = bp.getReceiptBill();
 		ArrayList<PaymentBill> payment = bp.getPaymentBill();
 		ArrayList<CashPaymentBill> cashPayment =bp.getCashPaymentBill();
@@ -397,7 +397,7 @@ public class Inquiry {
 		//销售单===============================
 		int size1 = saleSheet.size();
 		for(int i=0;i<size1;i++) {
-			StubSaleSheet sale = saleSheet.get(i);
+			SaleSheet sale = saleSheet.get(i);
 			
 			if(dateBefore!=null) {
 				if(sale.getDate().compareTo(dateBefore)>=0&&
@@ -410,7 +410,7 @@ public class Inquiry {
 		//销售退货单===================================
 		int size2 = saleBackSheet.size();
 		for(int i=0;i<size2;i++) {
-			StubSaleBackSheet saleback = saleBackSheet.get(i);
+			SaleBackSheet saleback = saleBackSheet.get(i);
 			
 			if(dateBefore!=null) {
 				if(saleback.getDate().compareTo(dateBefore)>=0&&
@@ -449,7 +449,7 @@ public class Inquiry {
 		//进货单
 		int size5 = purSheet.size();
 		for(int i=0;i<size5;i++) {
-			StubPurSheet pur = purSheet.get(i);
+			PurSheet pur = purSheet.get(i);
 			
 			if(dateBefore!=null) {
 				if(pur.getDate().compareTo(dateBefore)>=0&&
@@ -461,7 +461,7 @@ public class Inquiry {
 		//进货退货单
 		int size6 = purBackSheet.size();
 		for(int i=0;i<size6;i++) {
-			StubPurBackSheet back = purBackSheet.get(i);
+			PurBackSheet back = purBackSheet.get(i);
 			
 			if(dateBefore!=null) {
 				if(back.getDate().compareTo(dateBefore)>=0&&

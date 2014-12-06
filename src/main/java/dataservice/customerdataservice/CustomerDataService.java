@@ -12,4 +12,5 @@ public interface CustomerDataService {
 	public CustomerPO findCustomer(String name);
 	public boolean deleteCustomer(String name);
 	public boolean updateCustomer(CustomerPO po);
+	public ArrayList<CustomerPO> getAllCustomer();
 }

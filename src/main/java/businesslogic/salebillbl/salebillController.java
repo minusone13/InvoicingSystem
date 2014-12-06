@@ -7,9 +7,10 @@ import vo.PurBackSheetVO;
 import vo.PurSheetVO;
 import vo.SaleBackSheetVO;
 import vo.SaleSheetVO;
-import businesslogicservice.salebillblservice.StubSaleBillBlService;
+import businesslogic.examinebl.StubBillPool;
+import businesslogicservice.salebillblservice.SaleBillBlService;
 
-public class salebillController implements StubSaleBillBlService{
+public class salebillController implements SaleBillBlService{
 		salebillList salebilllist;
 		
 		// salebillsaversevvice中有getall的方法；
@@ -17,29 +18,36 @@ public class salebillController implements StubSaleBillBlService{
 			System.out.println("salebillController success!");
 		}
 
-		public void createPurSheet() {
-			// TODO Auto-generated method stub
-			
+		public boolean createPurSheet(PurSheetVO vo) {
+			StubBillPool pool = new StubBillPool();
+			if(vo==null) return false;
+			PurSheet pursheet = new PurSheet(vo);
+			pool.add(pursheet);
+			return true;
 		}
 
-		public void createPurBackSheet() {
-			// TODO Auto-generated method stub
-			
+		public boolean createPurBackSheet(PurBackSheetVO vo) {
+			StubBillPool pool = new StubBillPool();
+			if(vo==null) return false;
+			PurBackSheet purbacksheet = new PurBackSheet(vo);
+			pool.add(purbacksheet);
+			return true;
 		}
 
-		public void createSaleSheet() {
-			// TODO Auto-generated method stub
-			
+		public boolean createSaleSheet(SaleSheetVO vo) {
+			StubBillPool pool = new StubBillPool();
+			if(vo==null) return false;
+			SaleSheet salesheet = new SaleSheet(vo);
+			pool.add(salesheet);
+			return true;
 		}
 
-		public void createSaleBackSheet() {
-			// TODO Auto-generated method stub
-			
-		}
-
-		public void changeState() {
-			// TODO Auto-generated method stub
-			
+		public boolean createSaleBackSheet(SaleBackSheetVO vo) {
+			StubBillPool pool = new StubBillPool();
+			if(vo==null) return false;
+			SaleBackSheet salebacksheet = new SaleBackSheet(vo);
+			pool.add(salebacksheet);
+			return true;
 		}
 
 		public boolean getPurSheet(String id) {
@@ -74,6 +82,8 @@ public class salebillController implements StubSaleBillBlService{
 				return false;
 		}
 
+		
+		
 		public boolean changeState_PurSheet() {
 			// TODO Auto-generated method stub
 			return false;

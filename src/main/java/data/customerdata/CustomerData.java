@@ -27,4 +27,9 @@ public class CustomerData implements CustomerDataService{
 		return null;
 	}
 
+	public ArrayList<CustomerPO> getAllCustomer() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

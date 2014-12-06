@@ -27,10 +27,10 @@ import businesslogic.examinebl.StubBillPool;
 import businesslogic.financialbillbl.CashPaymentBill;
 import businesslogic.financialbillbl.PaymentBill;
 import businesslogic.financialbillbl.ReceiptBill;
-import businesslogic.salebillbl.StubPurBackSheet;
-import businesslogic.salebillbl.StubPurSheet;
-import businesslogic.salebillbl.StubSaleBackSheet;
-import businesslogic.salebillbl.StubSaleSheet;
+import businesslogic.salebillbl.PurBackSheet;
+import businesslogic.salebillbl.PurSheet;
+import businesslogic.salebillbl.SaleBackSheet;
+import businesslogic.salebillbl.SaleSheet;
 import businesslogic.strategybl.StubStrategyPool;
 import businesslogicservice.managerblservice.StubManagerBlService;
 
@@ -82,8 +82,8 @@ public class StubManager implements StubManagerBlService{
 	/*需要从单据池筛选指定状态的所有进货单*/
 	public ArrayList<PurSheetVO> getPurSheet (BillState st){
 		ArrayList<PurSheetVO> result=new ArrayList<PurSheetVO>();
-		ArrayList<StubPurSheet> billList=billPool.getPurSheet(st);
-		for(StubPurSheet temp: billList){
+		ArrayList<PurSheet> billList=billPool.getPurSheet(st);
+		for(PurSheet temp: billList){
 			result.add(temp.getVO());
 		}
 		
@@ -93,8 +93,8 @@ public class StubManager implements StubManagerBlService{
 	/*需要从单据池筛选指定状态的所有进货退货单*/
 	public ArrayList<PurBackSheetVO> getPurBackSheet (BillState st){
 		ArrayList<PurBackSheetVO> result=new ArrayList<PurBackSheetVO>();
-		ArrayList<StubPurBackSheet> billList=billPool.getPurBackSheet(st);
-		for(StubPurBackSheet temp: billList){
+		ArrayList<PurBackSheet> billList=billPool.getPurBackSheet(st);
+		for(PurBackSheet temp: billList){
 			result.add(temp.getVO());
 		}
 		
@@ -104,8 +104,8 @@ public class StubManager implements StubManagerBlService{
 	/*需要从单据池筛选指定状态的所有销售单*/
 	public ArrayList<SaleSheetVO> getSaleSheet (BillState st){
 		ArrayList<SaleSheetVO> result=new ArrayList<SaleSheetVO>();
-		ArrayList<StubSaleSheet> billList=billPool.getSaleSheet(st);
-		for(StubSaleSheet temp: billList){
+		ArrayList<SaleSheet> billList=billPool.getSaleSheet(st);
+		for(SaleSheet temp: billList){
 			result.add(temp.getVO());
 		}
 		
@@ -115,8 +115,8 @@ public class StubManager implements StubManagerBlService{
 	/*需要从单据池筛选指定状态的所有销售退货单*/
 	public ArrayList<SaleBackSheetVO> getSaleBackSheet (BillState st){
 		ArrayList<SaleBackSheetVO> result=new ArrayList<SaleBackSheetVO>();
-		ArrayList<StubSaleBackSheet> billList=billPool.getSaleBackSheet(st);
-		for(StubSaleBackSheet temp: billList){
+		ArrayList<SaleBackSheet> billList=billPool.getSaleBackSheet(st);
+		for(SaleBackSheet temp: billList){
 			result.add(temp.getVO());
 		}
 		
@@ -191,8 +191,8 @@ public class StubManager implements StubManagerBlService{
 	/*获取单据池的所有进货单*/
 	public ArrayList<PurSheetVO> getPurSheet (){
 		ArrayList<PurSheetVO> result=new ArrayList<PurSheetVO>();
-		ArrayList<StubPurSheet> billList=billPool.getPurSheet();
-		for(StubPurSheet temp: billList){
+		ArrayList<PurSheet> billList=billPool.getPurSheet();
+		for(PurSheet temp: billList){
 			result.add(temp.getVO());
 		}
 		
@@ -201,8 +201,8 @@ public class StubManager implements StubManagerBlService{
 	/*获取单据池的所有进货退货单*/
 	public ArrayList<PurBackSheetVO> getPurBackSheet (){
 		ArrayList<PurBackSheetVO> result=new ArrayList<PurBackSheetVO>();
-		ArrayList<StubPurBackSheet> billList=billPool.getPurBackSheet();
-		for(StubPurBackSheet temp: billList){
+		ArrayList<PurBackSheet> billList=billPool.getPurBackSheet();
+		for(PurBackSheet temp: billList){
 			result.add(temp.getVO());
 		}
 		
@@ -212,8 +212,8 @@ public class StubManager implements StubManagerBlService{
 	/*获取单据池的所有销售单*/
 	public ArrayList<SaleSheetVO> getSaleSheet (){
 		ArrayList<SaleSheetVO> result=new ArrayList<SaleSheetVO>();
-		ArrayList<StubSaleSheet> billList=billPool.getSaleSheet();
-		for(StubSaleSheet temp: billList){
+		ArrayList<SaleSheet> billList=billPool.getSaleSheet();
+		for(SaleSheet temp: billList){
 			result.add(temp.getVO());
 		}
 		
@@ -222,8 +222,8 @@ public class StubManager implements StubManagerBlService{
 	/*获取单据池的所有销售退货单*/
 	public ArrayList<SaleBackSheetVO> getSaleBackSheet (){
 		ArrayList<SaleBackSheetVO> result=new ArrayList<SaleBackSheetVO>();
-		ArrayList<StubSaleBackSheet> billList=billPool.getSaleBackSheet();
-		for(StubSaleBackSheet temp: billList){
+		ArrayList<SaleBackSheet> billList=billPool.getSaleBackSheet();
+		for(SaleBackSheet temp: billList){
 			result.add(temp.getVO());
 		}
 		
@@ -268,10 +268,10 @@ public class StubManager implements StubManagerBlService{
 		ArrayList<StubGiftBill> alOfGB=billPool.getGiftBill(BillState.SUBMITED);
 		ArrayList<StubSpillsLossBill> alOfSLB=billPool.getSpillsLossBill(BillState.SUBMITED);
 		ArrayList<StubAlertBill> alOfAB=billPool.getAlertBill(BillState.SUBMITED);
-		ArrayList<StubPurSheet> alOfPS=billPool.getPurSheet(BillState.SUBMITED);
-		ArrayList<StubPurBackSheet> alOfPBS=billPool.getPurBackSheet(BillState.SUBMITED);
-		ArrayList<StubSaleSheet> alOfSS=billPool.getSaleSheet(BillState.SUBMITED);
-		ArrayList<StubSaleBackSheet> alOfSBS=billPool.getSaleBackSheet(BillState.SUBMITED);
+		ArrayList<PurSheet> alOfPS=billPool.getPurSheet(BillState.SUBMITED);
+		ArrayList<PurBackSheet> alOfPBS=billPool.getPurBackSheet(BillState.SUBMITED);
+		ArrayList<SaleSheet> alOfSS=billPool.getSaleSheet(BillState.SUBMITED);
+		ArrayList<SaleBackSheet> alOfSBS=billPool.getSaleBackSheet(BillState.SUBMITED);
 		ArrayList<ReceiptBill> alOfRB=billPool.getReceiptBill(BillState.SUBMITED);
 		ArrayList<PaymentBill> alOfPB=billPool.getPaymentBill(BillState.SUBMITED);
 		ArrayList<CashPaymentBill> alOfCPB=billPool.getCashPaymentBill(BillState.SUBMITED);
@@ -297,25 +297,25 @@ public class StubManager implements StubManagerBlService{
 		}
 		//进货单
 		if(alOfPS!=null){
-			for(StubPurSheet temp:alOfPS){
+			for(PurSheet temp:alOfPS){
 				result.add(temp.getVO());
 			}
 		}
 		//进货退货单
 		if(alOfPBS!=null){
-			for(StubPurBackSheet temp:alOfPBS){
+			for(PurBackSheet temp:alOfPBS){
 				result.add(temp.getVO());
 			}
 		}
 		//销售单
 		if(alOfSS!=null){
-			for(StubSaleSheet temp:alOfSS){
+			for(SaleSheet temp:alOfSS){
 				result.add(temp.getVO());
 			}
 		}
 		//销售退货单
 		if(alOfSBS!=null){
-			for(StubSaleBackSheet temp:alOfSBS){
+			for(SaleBackSheet temp:alOfSBS){
 				result.add(temp.getVO());
 			}
 		}

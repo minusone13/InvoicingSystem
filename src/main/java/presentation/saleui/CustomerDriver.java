@@ -1,13 +1,13 @@
 package presentation.saleui;
 
 import businesslogicservice.customerblservice.CustomerBlService;
-import businesslogicservice.salebillblservice.StubSaleBillBlService;
+import businesslogicservice.salebillblservice.SaleBillBlService;
 
 public class CustomerDriver {
 		CustomerBlService cbs;
-		StubSaleBillBlService sbbs;
+		SaleBillBlService sbbs;
 		
-		public CustomerDriver(CustomerBlService cbs,StubSaleBillBlService sbbs){
+		public CustomerDriver(CustomerBlService cbs,SaleBillBlService sbbs){
 			this.cbs=cbs;
 			this.sbbs=sbbs;
 		}

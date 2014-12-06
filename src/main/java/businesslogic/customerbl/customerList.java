@@ -1,5 +1,7 @@
 package businesslogic.customerbl;
 
+import java.util.ArrayList;
+
 import po.CustomerPO;
 import vo.CustomerVO;
 import data.customerdata.CustomerData;
@@ -34,6 +36,11 @@ public class customerList {
 			CustomerPO po = new CustomerPO();
 			po = newCustomer.getPO();
 			return customerdata.updateCustomer(po);
+		}
+		
+		public ArrayList<CustomerVO> getAllCustomer(){
+			
+			return null;
 		}
 		
 }

@@ -3,28 +3,39 @@ package businesslogic.salebillbl;
 import java.util.ArrayList;
 import java.util.Date;
 
-import po.SaleBackSheetPO;
-import vo.SaleBackSheetVO;
+import po.PurBackSheetPO;
+import vo.PurBackSheetVO;
 import businesslogic.BillStyle;
 import businesslogic.GetVOandPO;
 import businesslogic.customerbl.Customer;
 import businesslogic.examinebl.Bill;
 
-public class StubSaleBackSheet extends Bill implements GetVOandPO{
+public class PurBackSheet extends Bill implements GetVOandPO{
+	Customer customer;
 	private String ID;
 	private String userID;
-	private BillStyle billstyle=BillStyle.SaleBackSheet;
+	private BillStyle billstyle=BillStyle.PurBackSheet;
 	Date date;
-	Customer customer;
-	String stock;
-	ArrayList sheet;//销售单据，商品名，数量，单价
-	double money1;//折前总金额
-	double money2;//代金券金额
-	double discount;//折让金额；
-	double pmoney;//最终金额，代金券不退还。
+	String stock;//仓库？
+	ArrayList sheet;//写了一个commodityInSheet类。
+	double money1;//总金额
 	String words;//备注
 	String username;
 	String op;
+	
+	public PurBackSheet(){};
+	public PurBackSheet(PurBackSheetVO vo){
+		this.customer=vo.getcustomer();
+		this.userID=vo.getuserid();
+		this.date=vo.getdate();
+		this.stock=vo.getstock();
+		this.ID=vo.getid();
+		this.sheet=vo.getsheet();
+		this.money1=vo.getmoney1();
+		this.words=vo.getwords();
+		this.op=vo.getop();
+		this.username=vo.getusername();
+	}
 	
 	public String getop(){
 		return this.op;
@@ -42,47 +53,26 @@ public class StubSaleBackSheet extends Bill implements GetVOandPO{
 		this.username=username;
 	}
 	
-	public String getUserID() {
-		return userID;
-	}
-	public void setUserID(String userID) {
-		this.userID = userID;
+	public BillStyle getBillstyle() {
+		return billstyle;
 	}
 	
 	public Date getDate() {
 		return date;
 	}
+
 	public void setDate(Date date) {
 		this.date = date;
 	}
+	
+	public String getUserID() {
+		return userID;
+	}
 
-	public BillStyle getBillstyle() {
-		return billstyle;
+	public void setUserID(String userID) {
+		this.userID = userID;
 	}
 	
-	public double getmoney2(){
-		return money2;
-	}
-	
-	public void setmoney2(double money2){
-		this.money2=money2;
-	}
-	
-	public double getdiscount(){
-		return discount;
-	}
-	
-	public void setdiscount(double discount){
-		this.discount=discount;
-	}
-	
-	public double getpmoney(){
-		return pmoney;
-	}
-	
-	public void  setpmoney(double pmoney){
-		this.pmoney=pmoney;
-	}
 	
 	public Customer getcustomer(){
 		return customer;
@@ -93,14 +83,14 @@ public class StubSaleBackSheet extends Bill implements GetVOandPO{
 	}
 	
 	public String getid(){
-		return ID;
+		return this.ID;
 	}
 	
-	public void setid(String id){
-		this.ID=id;
+	public void setid(String ID){
+		this.ID=ID;
 	}
 	
-	public String getcommodity(){
+	public String getstock(){
 		return stock;
 	}
 	
@@ -132,29 +122,13 @@ public class StubSaleBackSheet extends Bill implements GetVOandPO{
 		this.words=words;
 	}
 	
-	public void setPO(SaleBackSheetPO po){
-		this.date=po.getdate();
-		this.ID=po.getid();
-		this.customer=po.getcustomer();
-		this.sheet=po.getsheet();
-		this.discount=po.getdiscount();
-		this.money1=po.getmoney1();
-		this.money2=po.getmoney2();
-		this.pmoney=po.getpmoney();
-		this.words=po.getwords();
-		this.userID=po.getuserid();
-		this.username=po.getusername();
-		this.op=po.getop();
-	}
-	
-	public SaleBackSheetVO getVO() {
-		SaleBackSheetVO vo = new SaleBackSheetVO();
+	public PurBackSheetVO getVO() {
+		PurBackSheetVO vo = new PurBackSheetVO();
 		vo.setCustomer(customer);
 		vo.setdate(date);
 		vo.setid(ID);
 		vo.setuserid(userID);
 		vo.setmoney1(money1);
-		vo.setmoney2(money2);
 		vo.setsheet(sheet);
 		vo.setstock(stock);
 		vo.setwords(words);
@@ -162,14 +136,14 @@ public class StubSaleBackSheet extends Bill implements GetVOandPO{
 		vo.setusername(username);
 		return vo;
 	}
-	public SaleBackSheetPO getPO() {
-		SaleBackSheetPO po = new SaleBackSheetPO();
+	
+	public PurBackSheetPO getPO() {
+		PurBackSheetPO po= new PurBackSheetPO();
 		po.setCustomer(customer);
 		po.setdate(date);
 		po.setid(ID);
 		po.setuserid(userID);
 		po.setmoney1(money1);
-		po.setmoney2(money2);
 		po.setsheet(sheet);
 		po.setstock(stock);
 		po.setwords(words);
@@ -178,5 +152,18 @@ public class StubSaleBackSheet extends Bill implements GetVOandPO{
 		return po;
 	}
 	
+	public void setPO(PurBackSheetPO po){
+		this.customer=po.getcustomer();
+		this.userID=po.getuserid();
+		this.date=po.getdate();
+		this.stock=po.getstock();
+		this.ID=po.getid();
+		this.sheet=po.getsheet();
+		this.money1=po.getmoney1();
+		this.words=po.getwords();
+		this.op=po.getop();
+		this.username=po.getusername();
+	}
+	
+	
 }
-

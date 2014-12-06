@@ -25,10 +25,10 @@ import businesslogic.commoditybillbl.StubSpillsLossBill;
 import businesslogic.financialbillbl.CashPaymentBill;
 import businesslogic.financialbillbl.PaymentBill;
 import businesslogic.financialbillbl.ReceiptBill;
-import businesslogic.salebillbl.StubPurBackSheet;
-import businesslogic.salebillbl.StubPurSheet;
-import businesslogic.salebillbl.StubSaleBackSheet;
-import businesslogic.salebillbl.StubSaleSheet;
+import businesslogic.salebillbl.PurBackSheet;
+import businesslogic.salebillbl.PurSheet;
+import businesslogic.salebillbl.SaleBackSheet;
+import businesslogic.salebillbl.SaleSheet;
 
 public interface StubManagerBlService {
 	/*需要从单据池筛选指定状态的所有赠送单*/
