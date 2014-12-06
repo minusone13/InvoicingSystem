@@ -2,7 +2,7 @@ package po;
 
 import java.util.ArrayList;
 
-import vo.stockvo.CommodityVO;
+import po.stockpo.CommodityPO;
 import businesslogic.StrategyStyle;
 import businesslogic.commoditybl.MockCommodity;
 
@@ -10,8 +10,8 @@ public class BarginStrategyPO extends PO{
 
 
 	private StrategyStyle strategystyle=StrategyStyle.BarginStrategy;
-	
-	private ArrayList<MockCommodity> alOfCommodity;//赠品信息数组
+	private String ID;
+	private ArrayList<CommodityPO> alOfCommodity=new ArrayList<CommodityPO>();//赠品信息数组
 	private double discount;//降价金额
 	private int num;//特价包打包数量
 	
@@ -44,11 +44,17 @@ public class BarginStrategyPO extends PO{
 	public void setLastTime(int lastTime) {
 		LastTime = lastTime;
 	}
-	public ArrayList<MockCommodity> getAlOfCommodity() {
+	public ArrayList<CommodityPO> getAlOfCommodity() {
 		return alOfCommodity;
 	}
-	public void setAlOfCommodity(ArrayList<MockCommodity> alOfCommodity) {
+	public void setAlOfCommodity(ArrayList<CommodityPO> alOfCommodity) {
 		this.alOfCommodity = alOfCommodity;
+	}
+	public String getID() {
+		return ID;
+	}
+	public void setID(String iD) {
+		ID = iD;
 	}
 	
 }

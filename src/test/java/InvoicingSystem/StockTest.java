@@ -10,6 +10,7 @@ import org.junit.*;
 import po.stockpo.*;
 import presentation.commodityui.StockManagerDriver;
 import businesslogic.stockmanagerbl.StubStockController;
+import businesslogic.stockservice.StockBlForSalesMen;
 import businesslogicservice.commodityblservice.StubCommodityBlService;
 import data.commoditydata.*;
 import data.initial.Initial;
@@ -142,5 +143,33 @@ public class StockTest{
 		sc.getLossTotal(d1, d2);
 		sc.getSpillsTotal(d1, d2);
 		assertTrue(true);
+	}
+	
+	@Test
+	public void teststockForSalesMen()
+	{
+		StockBlForSalesMen sc=new StubStockController();
+		RM result=sc.checkIn("JHD-20141206-00001", "好好防盗门", "fdm02", 50, 150);
+		assertEquals(RM.done,result);
+		result=sc.checkOut("XSD-20141206-00001", "好好防盗门", "fdm02", 10, 300);
+		assertEquals(RM.done,result);
+	}
+	
+	@Test
+	public void teststockForSalesMenInsufficient()
+	{
+		StockBlForSalesMen sc=new StubStockController();
+		RM result=sc.checkIn("JHD-20141206-00001", "好好防盗门", "fdm02", 50, 150);
+		assertEquals(RM.done,result);
+		result=sc.checkOut("XSD-20141206-00001", "好好防盗门", "fdm02", 51, 300);
+		assertEquals(RM.insufficient,result);
+	}
+	
+	@Test
+	public void teststockForSalesMenNotFound()
+	{
+		StockBlForSalesMen sc=new StubStockController();
+		RM result=sc.checkIn("JHD-20141206-00001", "好好防盗门1", "fdm02", 50, 150);
+		assertEquals(RM.notfound,result);
 	}
 }

@@ -2,5 +2,7 @@ package businesslogic;
 
 public enum ReachStrategyStyle {
 
-	Gift,Coupon;
+	Gift,//赠品
+	Coupon,//代金券
+	Default;//默认
 }
