@@ -96,7 +96,7 @@ public class StubStrategyPool {
 		this.save();
 	}
 	/*需要制定一个赠送赠品的客户分层策略*/
-	public void addLevelStrategy (int level,int Limit,ArrayList<MockCommodity> gift,String StartTime,int LastTime){
+	public void addGiftLevelStrategy (int level,double Limit,ArrayList<MockCommodity> gift,String StartTime,int LastTime){
 		StubLevelStrategy ls=new StubLevelStrategy();
 		ls.setLevel(level);
 		ls.setLimit(Limit);
@@ -130,7 +130,7 @@ public class StubStrategyPool {
 		this.save();
 	}
 	/*需要制定一条特价包促销策略*/
-	public void addBarginStrategy (ArrayList<MockCommodity> bargin,int discount,int num,String StartTime,int LastTime){
+	public void addBarginStrategy (ArrayList<MockCommodity> bargin,double discount,int num,String StartTime,int LastTime){
 		StubBarginStrategy bs=new StubBarginStrategy();
 		bs.setAlOfCommodity(bargin);
 		bs.setDiscount(discount);
@@ -142,7 +142,7 @@ public class StubStrategyPool {
 		this.save();
 	}
 	/*需要制定一条赠送赠品的满额促销策略*/
-	public void addReachStrategy (int Limit,ArrayList<MockCommodity> gift,String StartTime,int LastTime){
+	public void addReachStrategy (double Limit,ArrayList<MockCommodity> gift,String StartTime,int LastTime){
 		StubReachStrategy rs=new StubReachStrategy();
 		rs.setLimit(Limit);
 		rs.setAlOfCommodity(gift);
@@ -153,7 +153,7 @@ public class StubStrategyPool {
 		this.save();
 	}
 	/*需要制定一条赠送代金券的满额促销策略*/
-	public void addReachStrategy (int Limit,int rate,String StartTime,int LastTime){
+	public void addReachStrategy (double Limit,double rate,String StartTime,int LastTime){
 		StubReachStrategy rs=new StubReachStrategy();
 		rs.setLimit(Limit);
 		rs.setCouponrate(rate);

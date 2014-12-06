@@ -27,9 +27,12 @@ import businesslogic.BillStyle;
 import businesslogic.commoditybillbl.StubAlertBill;
 import businesslogic.commoditybillbl.StubGiftBill;
 import businesslogic.commoditybillbl.StubSpillsLossBill;
+import businesslogic.commoditybl.MockCommodity;
 import businesslogic.financialbillbl.CashPaymentBill;
+import businesslogic.financialbillbl.Item;
 import businesslogic.financialbillbl.PaymentBill;
 import businesslogic.financialbillbl.ReceiptBill;
+import businesslogic.financialbillbl.TransferAccount;
 import businesslogic.salebillbl.StubPurBackSheet;
 import businesslogic.salebillbl.StubPurSheet;
 import businesslogic.salebillbl.StubSaleBackSheet;
@@ -384,7 +387,16 @@ public class StubBillPool {
 		for(int i=0;i<alOfGiftBill.size();i++){
 			if(alOfGiftBill.get(i).getID().equals(gb.getID())){//寻找相同编号
 				//进行修改
-				
+				//修改赠品
+				//转换vo成商品数组
+				ArrayList<MockCommodity> gift=new ArrayList<MockCommodity>();
+				for(int j=0;j<gb.getComs().size();j++){
+					gift.add(new MockCommodity(gb.getComs().get(j)));
+				}
+				//进行修改
+				alOfGiftBill.get(i).setComs(gift);
+				//修改完毕
+				break;
 			}
 		}
 		//保存
@@ -394,6 +406,11 @@ public class StubBillPool {
 		for(int i=0;i<alOfSpillsLossBill.size();i++){
 			if(alOfSpillsLossBill.get(i).getID().equals(slb.getID())){//寻找相同编号
 				//进行修改
+				//修改报溢报损的商品数量
+				alOfSpillsLossBill.get(i).setCom(new MockCommodity(slb.getCom()));
+				//修改操作员
+				//修改完毕
+				break;
 			}
 		}
 		//保存
@@ -403,6 +420,7 @@ public class StubBillPool {
 		for(int i=0;i<alOfAlertBill.size();i++){
 			if(alOfAlertBill.get(i).getID().equals(ab.getID())){//寻找相同编号
 				//进行修改
+				//暂定不能修改
 			}
 		}
 		//保存
@@ -412,6 +430,19 @@ public class StubBillPool {
 		for(int i=0;i<alOfPurSheet.size();i++){
 			if(alOfPurSheet.get(i).getID().equals(ps.getID())){//寻找相同编号
 				//进行修改
+				//修改客户
+				alOfPurSheet.get(i).setCustomer(ps.getcustomer());
+				//修改仓库
+				alOfPurSheet.get(i).setstock(ps.getstock());
+				//修改操作员
+				//修改商品清单
+				
+				//修改总金额
+				alOfPurSheet.get(i).setmoney1(ps.getmoney1());
+				//修改备注
+				alOfPurSheet.get(i).setwords(ps.getwords());
+				//修改完毕
+				break;
 			}
 		}
 		//保存
@@ -421,6 +452,19 @@ public class StubBillPool {
 		for(int i=0;i<alOfPurBackSheet.size();i++){
 			if(alOfPurBackSheet.get(i).getID().equals(pbs.getID())){//寻找相同编号
 				//进行修改
+				//修改客户
+				alOfPurBackSheet.get(i).setCustomer(pbs.getcustomer());
+				//修改仓库
+				alOfPurBackSheet.get(i).setstock(pbs.getstock());
+				//修改操作员
+				//修改商品清单
+				
+				//修改总金额
+				alOfPurBackSheet.get(i).setmoney1(pbs.getmoney1());
+				//修改备注
+				alOfPurBackSheet.get(i).setwords(pbs.getwords());
+				//修改完毕
+				break;
 			}
 		}
 		//保存
@@ -430,6 +474,24 @@ public class StubBillPool {
 		for(int i=0;i<alOfSaleSheet.size();i++){
 			if(alOfSaleSheet.get(i).getID().equals(ss.getID())){//寻找相同编号
 				//进行修改
+				//修改客户
+				alOfSaleSheet.get(i).setCustomer(ss.getcustomer());
+				//修改仓库
+				alOfSaleSheet.get(i).setstock(ss.getstock());
+				//修改操作员
+				//修改商品清单
+				//修改总金额
+				alOfSaleSheet.get(i).setmoney1(ss.getmoney1());
+				//修改使用代金券
+				alOfSaleSheet.get(i).setpmoney(ss.pmoney());
+				//修改折让金额
+				alOfSaleSheet.get(i).setdiscount(ss.getdiscount());
+				//修改最终金额
+				alOfSaleSheet.get(i).setmoney2(ss.getmoney2());
+				//修改备注
+				alOfSaleSheet.get(i).setwords(ss.getwords());
+				//修改完毕
+				break;
 			}
 		}
 		//保存
@@ -439,6 +501,24 @@ public class StubBillPool {
 		for(int i=0;i<alOfSaleBackSheet.size();i++){
 			if(alOfSaleBackSheet.get(i).getID().equals(sbs.getID())){//寻找相同编号
 				//进行修改
+				//修改客户
+				alOfSaleBackSheet.get(i).setCustomer(sbs.getcustomer());
+				//修改仓库
+				alOfSaleBackSheet.get(i).setstock(sbs.getstock());
+				//修改操作员
+				//修改商品清单
+				//修改总金额
+				alOfSaleBackSheet.get(i).setmoney1(sbs.getmoney1());
+				//修改使用代金券
+				alOfSaleBackSheet.get(i).setpmoney(sbs.pmoney());
+				//修改折让金额
+				alOfSaleBackSheet.get(i).setdiscount(sbs.getdiscount());
+				//修改最终金额
+				alOfSaleBackSheet.get(i).setmoney2(sbs.getmoney2());
+				//修改备注
+				alOfSaleBackSheet.get(i).setwords(sbs.getwords());
+				//修改完毕
+				break;
 			}
 		}
 		//保存
@@ -448,6 +528,24 @@ public class StubBillPool {
 		for(int i=0;i<alOfReceiptBill.size();i++){
 			if(alOfReceiptBill.get(i).getID().equals(rb.getID())){//寻找相同编号
 				//进行修改
+				//修改客户
+				alOfReceiptBill.get(i).setCustomer(rb.getCustomer());
+				//修改操作员
+				alOfReceiptBill.get(i).setOp(rb.getOp());
+				//修改总额
+				alOfReceiptBill.get(i).setTotal(rb.getTotal());
+				//修改转账列表
+				ArrayList<String> account = rb.getAccounts();
+				ArrayList<Double> money = rb.getMoney();
+				ArrayList<String> remark = rb.getRemark();
+				ArrayList<TransferAccount> transferlist = new ArrayList<TransferAccount>();
+				int length = account.size();
+				for(int j=0;j<length;j++) {
+					transferlist.add(new TransferAccount(account.get(j), money.get(j), remark.get(j)));
+				}
+				alOfReceiptBill.get(i).setTransferlist(transferlist);
+				//修改完毕
+				break;
 			}
 		}
 		//保存
@@ -457,6 +555,24 @@ public class StubBillPool {
 		for(int i=0;i<alOfPaymentBill.size();i++){
 			if(alOfPaymentBill.get(i).getID().equals(pb.getID())){//寻找相同编号
 				//进行修改
+				//修改客户
+				alOfPaymentBill.get(i).setCustomer(pb.getCustomer());
+				//修改操作员
+				alOfPaymentBill.get(i).setOp(pb.getOp());
+				//修改总额
+				alOfPaymentBill.get(i).setTotal(pb.getTotal());
+				//修改转账列表
+				ArrayList<String> account = pb.getAccounts();
+				ArrayList<Double> money = pb.getMoney();
+				ArrayList<String> remark = pb.getRemark();
+				ArrayList<TransferAccount> transferlist = new ArrayList<TransferAccount>();
+				int length = account.size();
+				for(int j=0;j<length;j++) {
+					transferlist.add(new TransferAccount(account.get(j), money.get(j), remark.get(j)));
+				}
+				alOfReceiptBill.get(i).setTransferlist(transferlist);
+				//修改完毕
+				break;
 			}
 		}
 		//保存
@@ -466,7 +582,24 @@ public class StubBillPool {
 		for(int i=0;i<alOfCashPaymentBill.size();i++){
 			if(alOfCashPaymentBill.get(i).getID().equals(cb.getID())){//寻找相同编号
 				//进行修改
-			
+				//修改银行账户
+				alOfCashPaymentBill.get(i).setAccount(cb.getAccount());
+				//修改操作员
+				alOfCashPaymentBill.get(i).setOp(cb.getOp());
+				//修改总额
+				alOfCashPaymentBill.get(i).setTotal(cb.getTotal());
+				//修改条目清单
+				ArrayList<String> item = cb.getItem();
+				ArrayList<Double> money=cb.getMoney(); 
+				ArrayList<String> remark=cb.getRemark();
+				ArrayList<Item> itemList = new ArrayList<Item>();
+				int length = item.size();
+				for(int j=0;j<length;j++) {
+					itemList.add(new Item(item.get(j), money.get(j), remark.get(j)));
+				}
+				alOfCashPaymentBill.get(i).setItemList(itemList);
+				//修改完毕
+				break;
 			}
 		}
 		//保存

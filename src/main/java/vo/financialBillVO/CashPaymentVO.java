@@ -15,10 +15,10 @@ public class CashPaymentVO extends VO{
 	String ID;
 	double total;
 	String account;//账户
-	ArrayList<Double> money;//金额
-	ArrayList<String> item;
-	ArrayList<String> remark;
-	BillState state;
+	ArrayList<Double> money=new ArrayList<Double>();//金额
+	ArrayList<String> item=new ArrayList<String>();
+	ArrayList<String> remark=new ArrayList<String>();
+	BillState state=BillState.DRAFT;
 	Role role;
 	ArrayList<Item> itemList;
 	Date date;

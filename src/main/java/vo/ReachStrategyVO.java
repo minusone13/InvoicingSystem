@@ -14,7 +14,7 @@ public class ReachStrategyVO extends VO{
 	private String ID="0000";
 	private double Limit;//消费金额下限
 	
-	private ArrayList<MockCommodity> alOfCommodity;//赠品信息数组
+	private ArrayList<CommodityVO> alOfCommodity;//赠品信息数组
 	private double couponrate;//赠送代金券的比例
 	
 	private String StartTime;//开始日期
@@ -45,10 +45,10 @@ public class ReachStrategyVO extends VO{
 	public void setCouponrate(double couponrate) {
 		this.couponrate = couponrate;
 	}
-	public ArrayList<MockCommodity> getAlOfCommodity() {
+	public ArrayList<CommodityVO> getAlOfCommodity() {
 		return alOfCommodity;
 	}
-	public void setAlOfCommodity(ArrayList<MockCommodity> alOfCommodity) {
+	public void setAlOfCommodity(ArrayList<CommodityVO> alOfCommodity) {
 		this.alOfCommodity = alOfCommodity;
 	}
 }
