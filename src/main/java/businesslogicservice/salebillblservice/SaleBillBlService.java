@@ -31,10 +31,10 @@ public interface SaleBillBlService {
 		public boolean getSaleSheet(String id);
 		public boolean getSaleBackSheet(String id);
 		
-		public boolean changeState_PurSheet();
+		/*public boolean changeState_PurSheet();
 		public boolean changeState_PurBackSheet();
 		public boolean changeState_Salesheet();
-		public boolean changeState_SaleBackSheet();
+		public boolean changeState_SaleBackSheet();*/
 		
 		//更新的具体实现我还没有想好；
 		public boolean updatePurSheet();

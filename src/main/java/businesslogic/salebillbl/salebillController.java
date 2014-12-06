@@ -7,7 +7,9 @@ import vo.PurBackSheetVO;
 import vo.PurSheetVO;
 import vo.SaleBackSheetVO;
 import vo.SaleSheetVO;
+import vo.financialBillVO.ReceiptVO;
 import businesslogic.examinebl.StubBillPool;
+import businesslogic.financialbillbl.ReceiptBill;
 import businesslogicservice.salebillblservice.SaleBillBlService;
 
 public class salebillController implements SaleBillBlService{
@@ -82,14 +84,56 @@ public class salebillController implements SaleBillBlService{
 				return false;
 		}
 
-		
-		
-		public boolean changeState_PurSheet() {
-			// TODO Auto-generated method stub
-			return false;
+		/*获取所有的进货单*/
+		public ArrayList<PurSheetVO> getAllOfPurSheet (){
+			StubBillPool billPool = new StubBillPool();
+			ArrayList<PurSheetVO> result=new ArrayList<PurSheetVO>();
+			ArrayList<PurSheet> billList=billPool.getPurSheet();
+			for(PurSheet temp: billList){
+				result.add(temp.getVO());
+			}	
+			return result;
 		}
+		
+		/*获取所有的进货退货单*/
+		public ArrayList<PurBackSheetVO> getAllOfPurBackSheet (){
+			StubBillPool billPool = new StubBillPool();
+			ArrayList<PurBackSheetVO> result=new ArrayList<PurBackSheetVO>();
+			ArrayList<PurBackSheet> billList=billPool.getPurBackSheet();
+			for(PurBackSheet temp: billList){
+				result.add(temp.getVO());
+			}	
+			return result;
+		}
+		
+		/*获取所有的销售单*/
+		public ArrayList<SaleSheetVO> getAllOfSaleSheet (){
+			StubBillPool billPool = new StubBillPool();
+			ArrayList<SaleSheetVO> result=new ArrayList<SaleSheetVO>();
+			ArrayList<SaleSheet> billList=billPool.getSaleSheet();
+			for(SaleSheet temp: billList){
+				result.add(temp.getVO());
+			}	
+			return result;
+		}
+		
+		/*获取所有的销售退货单*/
+		public ArrayList<SaleBackSheetVO> getAllOfSaleBackSheet (){
+			StubBillPool billPool = new StubBillPool();
+			ArrayList<SaleBackSheetVO> result=new ArrayList<SaleBackSheetVO>();
+			ArrayList<SaleBackSheet> billList=billPool.getSaleBackSheet();
+			for(SaleBackSheet temp: billList){
+				result.add(temp.getVO());
+			}	
+			return result;
+		}
+		
+		//public boolean changeState_PurSheet() {
+			// TODO Auto-generated method stub
+			//return false;
+		//}
 
-		public boolean changeState_PurBackSheet() {
+		/*public boolean changeState_PurBackSheet() {
 			// TODO Auto-generated method stub
 			return false;
 		}
@@ -102,7 +146,7 @@ public class salebillController implements SaleBillBlService{
 		public boolean changeState_SaleBackSheet() {
 			// TODO Auto-generated method stub
 			return false;
-		}
+		}*/
 
 		public boolean updatePurSheet() {
 			// TODO Auto-generated method stub
