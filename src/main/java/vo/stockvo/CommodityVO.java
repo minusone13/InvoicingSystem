@@ -42,6 +42,16 @@ public class CommodityVO {
 		this.in=in;
 		this.out=out;
 	}
+	public CommodityVO(String parent,String name,String model,double in,double out,int alertLine)
+	{//this is for ui
+		this.parent=parent;
+		this.name=name;
+		id=parent+"\\"+name;
+		this.model=model;
+		this.in=in;
+		this.out=out;
+		this.alertLine=alertLine;
+	}
 	public CommodityVO(){}
 	public String getParent() {
 		return parent;

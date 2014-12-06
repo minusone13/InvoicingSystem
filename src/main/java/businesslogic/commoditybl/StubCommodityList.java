@@ -4,13 +4,18 @@ import java.util.*;
 
 import po.*;
 import po.stockpo.*;
+import businesslogic.Role;
+import businesslogic.commoditybillbl.StubAlertBill;
+import businesslogic.commoditybillbl.StubCommodityBill;
 import businesslogic.stockmanagerbl.*;
+import businesslogic.userbl.User;
 import dataservice.commoditydataservice.*;
 import vo.stockvo.*;
 import vo.RM;
 
 public class StubCommodityList {//商品列表 haha
 	static StubCommodityDataService comdata;
+	User user=new User("I0001",Role.STOCK_STAFF,"default","default","default");
 	public ArrayList<CommodityVO> findCommodity(String name)
 	{
 		ArrayList <CommodityPO> pos=comdata.findCommodity(name);
@@ -101,7 +106,9 @@ public class StubCommodityList {//商品列表 haha
 		int shortage = com.checkAlert();
 		if(shortage>0)
 		{
-			//need to be changed
+			StubAlertBill ab = new StubAlertBill(user.getID(),com,shortage);
+			StubCommodityBill cb = new StubCommodityBill();
+			cb.add(ab);
 		}
 		if(result)
 			return RM.done;
@@ -197,5 +204,17 @@ public class StubCommodityList {//商品列表 haha
 			return RM.done;
 		else
 			return RM.unknownerror;
+	}
+	public static StubCommodityDataService getComdata() {
+		return comdata;
+	}
+	public static void setComdata(StubCommodityDataService comdata) {
+		StubCommodityList.comdata = comdata;
+	}
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
 	}
 }

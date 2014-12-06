@@ -6,6 +6,7 @@ import dataservice.commoditydataservice.*;
 import businesslogic.Role;
 import businesslogic.commoditybillbl.*;
 import businesslogic.commoditybl.*;
+import businesslogic.examinebl.StubBillPool;
 import businesslogic.stockservice.*;
 import businesslogic.userbl.OperationRecord;
 import businesslogic.userbl.User;
@@ -22,6 +23,8 @@ public class StubStockController implements StubCommodityBlService, StockBlForSa
 	UserService us=new UserController();
 	static StubCommodityDataService comdata;
 	User user=new User("I0001",Role.STOCK_STAFF,"default","default","default");
+	
+	StubBillPool pool = new StubBillPool();
 	public StubCommodityList getCommodityList ()
 	{
 		return l;
@@ -100,6 +103,7 @@ public class StubStockController implements StubCommodityBlService, StockBlForSa
 	public void setUser(UserVO vo)
 	{
 		user=new User(vo);
+		l.setUser(user);
 	}
 	public double getSpillsTotal(Date d1, Date d2)
 	{//including d1 and d2
@@ -129,16 +133,26 @@ public class StubStockController implements StubCommodityBlService, StockBlForSa
 		return l.updateCategory(vo);
 	}
 	
+	StubCommodityBill bl=new StubCommodityBill();
 	public RM creat(GiftBillVO vo)
 	{
+		StubGiftBill gb=new StubGiftBill();
+		gb.setVO(vo);
+		bl.add(gb);
 		return RM.done;
 	}
 	public RM creat(SpillsLossBillVO vo)
 	{
+		StubSpillsLossBill gb=new StubSpillsLossBill();
+		gb.setVO(vo);
+		bl.add(gb);
 		return RM.done;
 	}
 	public RM creat(AlertBillVO vo)
 	{
+		StubAlertBill gb=new StubAlertBill();
+		gb.setVO(vo);
+		bl.add(gb);
 		return RM.done;
 	}
 	
