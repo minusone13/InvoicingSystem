@@ -40,7 +40,7 @@ public class TestFrame extends JFrame {
 
 		// TODO Auto-generated method stub
 
-		TestFrame testJP=new TestFrame(new InfoPanel());
+		TestFrame testJP=new TestFrame(new Sale());
 
 
 
