@@ -50,18 +50,23 @@ public class StubCommodityList {//商品列表 haha
 			return RM.notfound;
 		MockCommodity com=new MockCommodity(po);
 		int num = com.getNumber();
-		if(num<quantity)
-			return RM.insufficient;
-		com.setNumber(num-quantity);
+		com.setNumber(num+quantity);
+		com.setLastin(price);
+		//下面调整平均进价
+		if(com.getRecord().size()==0)
+			com.setIn(price);//如果没有记录，进价仍然是添加商品时填写的，此时失去意义
+		else
+		{
+			double total=com.getIn()*com.getNumber();
+			total+=quantity*price;
+			int quantitytemp=com.getNumber();
+			quantitytemp+=quantity;
+			com.setIn(total/quantitytemp);
+		}
 		CommodityRecord r = new CommodityRecord(id,new Date(),0,quantity,0,price,0,quantity,0,price);
 		com.add(r);
 		com.prepareDelete(r);
 		boolean result = comdata.update(com.toPO());
-		int shortage = com.checkAlert();
-		if(shortage>0)
-		{
-			//need to be changed
-		}
 		if(result)
 			return RM.done;
 		else
@@ -74,11 +79,30 @@ public class StubCommodityList {//商品列表 haha
 			return RM.notfound;
 		MockCommodity com=new MockCommodity(po);
 		int num = com.getNumber();
-		com.setNumber(num+quantity);
+		if(num<quantity)
+			return RM.insufficient;
+		com.setNumber(num-quantity);
+		com.setLastout(price);
+		//下面调整平均进价
+		if(com.getRecord().size()==0)
+			com.setOut(price);//如果没有记录，进价仍然是添加商品时填写的，此时失去意义
+		else
+		{
+			double total=com.getIn()*com.getNumber();
+			total-=quantity*price;
+			int quantitytemp=com.getNumber();
+			quantitytemp-=quantity;
+			com.setIn(total/quantitytemp);
+		}
 		CommodityRecord r = new CommodityRecord(id,new Date(),quantity,0,price,0,quantity,0,price,0);
 		com.add(r);
 		com.prepareDelete(r);
 		boolean result = comdata.update(com.toPO());
+		int shortage = com.checkAlert();
+		if(shortage>0)
+		{
+			//need to be changed
+		}
 		if(result)
 			return RM.done;
 		else

@@ -200,4 +200,10 @@ public class MockCommodity {
 		}
 		return result;
 	}
+	public ArrayList<CommodityRecord> getPrepareRecord() {
+		return prepareRecord;
+	}
+	public void setPrepareRecord(ArrayList<CommodityRecord> prepareRecord) {
+		this.prepareRecord = prepareRecord;
+	}
 }
