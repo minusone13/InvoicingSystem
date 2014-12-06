@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import po.LevelStrategyPO;
+import po.stockpo.CommodityPO;
 import vo.LevelStrategyVO;
 import vo.stockvo.CommodityVO;
 import businesslogic.GetVOandPO;
@@ -14,13 +15,13 @@ import businesslogic.commoditybl.MockCommodity;
 public class StubLevelStrategy implements GetVOandPO{
 
 	private StrategyStyle strategystyle=StrategyStyle.LevelStrategy;
-	private LevelStrategyStyle level_strategy_style;
+	private LevelStrategyStyle level_strategy_style=LevelStrategyStyle.Default;
 	
 	private String ID;
 	private int level;//客户等级
 	private double Limit;//消费金额下限
 	
-	private ArrayList<MockCommodity> alOfCommodity;//赠品信息数组
+	private ArrayList<MockCommodity> alOfCommodity=new ArrayList<MockCommodity>();//赠品信息数组
 	private double discountrate;//打折比例
 	private double couponrate;//代金券赠送比例
 	
@@ -39,11 +40,45 @@ public class StubLevelStrategy implements GetVOandPO{
 	}
 	public LevelStrategyVO getVO() {
 		// TODO Auto-generated method stub
+		LevelStrategyVO result=new LevelStrategyVO();
+		result.setID(this.getID());
+		result.setLevel_strategy_style(this.getLevel_strategy_style());
+		result.setLevel(this.getLevel());
+		result.setLimit(this.getLimit());
+		
+		ArrayList<CommodityVO> temp=new ArrayList<CommodityVO>();//临时转换
+		for(int i=0;i<this.getAlOfCommodity().size();i++){
+			temp.add(this.getAlOfCommodity().get(i).toVO());
+		}
+		result.setAlOfCommodity(temp);
+		
+		result.setDiscountrate(this.getDiscountrate());
+		result.setCouponrate(this.getCouponrate());
+		
+		result.setStartTime(this.getStartTime());
+		result.setLastTime(this.getLastTime());
 		return null;
 	}
 
 	public LevelStrategyPO getPO() {
 		// TODO Auto-generated method stub
+		LevelStrategyPO result=new LevelStrategyPO();
+		result.setID(this.getID());
+		result.setLevel_strategy_style(this.getLevel_strategy_style());
+		result.setLevel(this.getLevel());
+		result.setLimit(this.getLimit());
+		
+		ArrayList<CommodityPO> temp=new ArrayList<CommodityPO>();//临时转换
+		for(int i=0;i<this.getAlOfCommodity().size();i++){
+			temp.add(this.getAlOfCommodity().get(i).toPO());
+		}
+		result.setAlOfCommodity(temp);
+		
+		result.setDiscountrate(this.getDiscountrate());
+		result.setCouponrate(this.getCouponrate());
+		
+		result.setStartTime(this.getStartTime());
+		result.setLastTime(this.getLastTime());
 		return null;
 	}
 	/*成员变量的设置与获取*/
@@ -59,7 +94,7 @@ public class StubLevelStrategy implements GetVOandPO{
 	public void setLimit(double limit) {
 		Limit = limit;
 	}
-	public ArrayList<MockCommodity> getAlOfCommodityVo() {
+	public ArrayList<MockCommodity> getAlOfCommodity() {
 		return alOfCommodity;
 	}
 	public void setAlOfCommodity(ArrayList<MockCommodity> alOfCommodity) {
@@ -99,7 +134,11 @@ public class StubLevelStrategy implements GetVOandPO{
 	public void setPO(LevelStrategyPO po){
 	
 		this.setLevel_strategy_style(po.getLevel_strategy_style());
-		this.setAlOfCommodity(po.getAlOfCommodity());
+		ArrayList<MockCommodity> temp=new ArrayList<MockCommodity>();//用于临时转换
+		for(int i=0;i<po.getAlOfCommodity().size();i++){
+			temp.add(new MockCommodity(po.getAlOfCommodity().get(i)));
+		}
+		this.setAlOfCommodity(temp);
 		this.setCouponrate(po.getCouponrate());
 		this.setLevel(po.getLevel());
 		this.setLimit(po.getLimit());
