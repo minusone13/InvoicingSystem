@@ -146,6 +146,13 @@ public class StubCommodityList {//商品列表 haha
 		else
 			return RM.unknownerror;
 	}
+	public boolean isEnough(String name,String model,int n)
+	{//在填写单据时检查，给出的是潜在库存最小值，也就是最保险的值
+		CommodityPO po=comdata.findCommodity(name, model);
+		MockCommodity com=new MockCommodity(po);
+		int potential = com.getPotential();
+		return(n<potential);
+	}
 	public ArrayList<MockCommodity> posToCom(ArrayList<CommodityPO> h)
 	{
 		ArrayList<MockCommodity> result = new ArrayList<MockCommodity>();

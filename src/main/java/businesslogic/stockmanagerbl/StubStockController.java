@@ -78,11 +78,17 @@ public class StubStockController implements StubCommodityBlService, StockBlForSa
 	}
 	public RM readyForIn(String id,String name, String model, int quantity, double price)
 	{//当进货单或销售退货单提交后，请调用
-		return RM.done;
+		RM result = l.readyForIn(id, name, model, quantity, price);
+		return result;
 	}
 	public RM readyForOut(String id,String name, String model, int quantity, double price)
 	{//当销售单或进货退货单被提交后，请调用
-		return RM.done;
+		RM result = l.readyForOut(id, name, model, quantity, price);
+		return result;
+	}
+	public boolean isEnough(String name,String model,int n)
+	{//在填写单据时检查，给出的是潜在库存最小值，也就是最保险的值
+		return l.isEnough(name, model, n);
 	}
 	public ArrayList<StockVO> openCategory(String id)
 	{
