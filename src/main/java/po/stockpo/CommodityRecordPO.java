@@ -1,8 +1,9 @@
 package po.stockpo;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class CommodityRecordPO 
+public class CommodityRecordPO implements Serializable, Cloneable
 {
 	public CommodityRecordPO(String id,Date date, int outquantity, int inquantity,
 			double outamount, double inamount, int salequantity,

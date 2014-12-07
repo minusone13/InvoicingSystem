@@ -87,10 +87,10 @@ public class StubAlertBill extends Bill implements GetVOandPO
 	public void setState(BillState state) {
 		this.state = state;
 	}
-	public synchronized Date getDate() {
+	public  Date getDate() {
 		return date;
 	}
-	public synchronized void setDate(Date date) {
+	public  void setDate(Date date) {
 		this.date = date;
 	}
 	public String getUserID() {

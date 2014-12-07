@@ -89,10 +89,10 @@ public class StubSpillsLossBill extends Bill implements GetVOandPO
 		}
 		this.state = state;
 	}
-	public synchronized Date getDate() {
+	public  Date getDate() {
 		return date;
 	}
-	public synchronized void setDate(Date date) {
+	public  void setDate(Date date) {
 		this.date = date;
 	}
 	public String getUserID() {

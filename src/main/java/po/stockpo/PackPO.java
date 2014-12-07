@@ -1,8 +1,9 @@
 package po.stockpo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class PackPO {
+public class PackPO implements Serializable, Cloneable{
 	String name;
 	ArrayList<CommodityPO> coms;
 	int quantity;
