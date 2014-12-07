@@ -89,17 +89,20 @@ public class StubCommodityList {//商品列表 haha
 		int num = com.getNumber();
 		if(num<quantity)
 			return RM.insufficient;
-		com.setLastout(price);
-		//下面调整平均进价
-		if(!com.hasOut())
-			com.setOut(price);//如果没有记录，进价仍然是添加商品时填写的，此时失去意义
-		else
+		if(price!=0)
 		{
-			double total=com.outTotal();
-			total+=quantity*price;
-			int quantitytemp=com.outQuantity();
-			quantitytemp+=quantity;
-			com.setOut(total/quantitytemp);
+			com.setLastout(price);
+			//下面调整平均进价
+			if(!com.hasOut())
+				com.setOut(price);//如果没有记录，进价仍然是添加商品时填写的，此时失去意义
+			else
+			{
+				double total=com.outTotal();
+				total+=quantity*price;
+				int quantitytemp=com.outQuantity();
+				quantitytemp+=quantity;
+				com.setOut(total/quantitytemp);
+			}
 		}
 		com.setNumber(num-quantity);
 		CommodityRecord r = new CommodityRecord(id,new Date(),quantity,0,price,0,quantity,0,price,0);
@@ -145,6 +148,69 @@ public class StubCommodityList {//商品列表 haha
 			return RM.insufficient;
 		CommodityRecord r = new CommodityRecord(id,new Date(),quantity,0,price,0,quantity,0,price,0);
 		com.prepareAdd(r);
+		boolean result = comdata.update(com.toPO());
+		if(result)
+			return RM.done;
+		else
+			return RM.unknownerror;
+	}
+	public RM undoCheckIn(String id,String name, String model, int quantity, double price)
+	{//当进货退货单被审批后，请调用
+		CommodityPO po=comdata.findCommodity(name,model);
+		if(po==null)//not found
+			return RM.notfound;
+		MockCommodity com=new MockCommodity(po);
+		int num = com.getNumber();
+		if(num<quantity)
+			return RM.insufficient;
+		//下面调整平均进价
+		double total=com.getIn()*com.getNumber();
+		total-=quantity*price;
+		int quantitytemp=com.getNumber();
+		quantitytemp-=quantity;
+		com.setIn(total/quantitytemp);
+		CommodityRecord r = new CommodityRecord(id,new Date(),0,quantity,0,price,0,quantity,0,price);
+		com.setNumber(num-quantity);
+		com.add(r);
+		com.prepareDelete(r);
+		boolean result = comdata.update(com.toPO());
+		int shortage = com.checkAlert();
+		if(shortage>0)
+		{
+			StubAlertBill ab = new StubAlertBill(user.getID(),com,shortage);
+			StubCommodityBill cb = new StubCommodityBill();
+			cb.add(ab);
+		}
+		if(result)
+			return RM.done;
+		else
+			return RM.unknownerror;
+	}
+	public RM undoCheckOut(String id,String name, String model, int quantity, double price)
+	{//当销售退货单被审批后，请调用
+		CommodityPO po=comdata.findCommodity(name,model);
+		if(po==null)//not found
+			return RM.notfound;
+		MockCommodity com=new MockCommodity(po);
+		int num = com.getNumber();
+		if(price!=0)
+		{
+			//下面调整平均进价
+			if(!com.hasOut())
+				com.setOut(price);//如果没有记录，进价仍然是添加商品时填写的，此时失去意义
+			else
+			{
+				double total=com.outTotal();
+				total-=quantity*price;
+				int quantitytemp=com.outQuantity();
+				quantitytemp-=quantity;
+				com.setOut(total/quantitytemp);
+			}
+		}
+		com.setNumber(num+quantity);
+		CommodityRecord r = new CommodityRecord(id,new Date(),quantity,0,price,0,quantity,0,price,0);
+		com.add(r);
+		com.prepareDelete(r);
 		boolean result = comdata.update(com.toPO());
 		if(result)
 			return RM.done;

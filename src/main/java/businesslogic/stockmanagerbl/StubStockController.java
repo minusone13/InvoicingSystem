@@ -127,7 +127,8 @@ public class StubStockController implements StubCommodityBlService, StockBlForSa
 	}
 	public double getGiftBillTotal(Date d1, Date d2)
 	{//赠送单支出。这个返回值可能为非负
-		return 0;
+		StubCommodityBill cb=new StubCommodityBill();
+		return cb.getGiftBillTotal(d1, d2);
 	}
 	
 	public RM updateCommodity(CommodityVO vo)
