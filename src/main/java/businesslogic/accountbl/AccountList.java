@@ -4,10 +4,15 @@ import java.util.ArrayList;
 
 import data.accountdata.AccountBuild;
 import data.accountdata.AccountData;
+import data.commoditydata.StubStockDataController;
+import data.stockservice.StockDataForFinancial;
 import dataservice.accountdataservice.StubAccountDataService;
 import businesslogic.commoditybl.StubCommodityList;
+import businesslogic.customerService.CustomerForFinancial;
+import businesslogic.customerbl.CustomerList;
 import businesslogic.stockmanagerbl.StubStockController;
 import po.AccountPO;
+import vo.CustomerVO;
 import vo.accountVO.AccountVO;
 
 public class AccountList {
@@ -52,9 +57,14 @@ public class AccountList {
 		AccountBuild build = new AccountBuild();
 		build.saveCommodity();
 		build.saveAccount();
+		build.saveCustomer();
 		build.saveVersion();
 	}
 	
+	public ArrayList<CustomerVO> getOldCustomersInfo(String version) {
+		CustomerForFinancial cff = new CustomerList();
+		return cff.getCustomer(version);
+	}
 	public ArrayList<AccountVO> getOldAccountsInfo(String version) {
 		AccountBuild build = new AccountBuild();
 		ArrayList<AccountPO> accountsPO = build.getAccount(version);

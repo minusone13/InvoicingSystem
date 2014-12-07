@@ -11,6 +11,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import businesslogic.customerService.CustomerForFinancial;
+import businesslogic.customerbl.CustomerList;
 import po.AccountPO;
 import data.Tool;
 import data.commoditydata.StubStockDataController;
@@ -35,7 +37,10 @@ public class AccountBuild{
 		sd.save("accountBuild\\commodity\\"+version+".ser");		
 	}
 	
-
+	public void saveCustomer() {
+		CustomerForFinancial cff = new CustomerList();
+		cff.saveCustomer("accountBuild\\customerInfo\\"+version+".ser");
+	}
 	public void saveVersion () {
 		ArrayList<String> versions = getVersion();
 		if(versions==null) versions = new ArrayList<String>();

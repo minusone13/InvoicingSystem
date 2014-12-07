@@ -66,6 +66,10 @@ public class Financial implements StubFinancialBlService{
 		a.buildAccount();
 	}
 	
+	public ArrayList<CustomerVO> getOldCustomersInfo(String version) {
+		AccountList a = new AccountList();
+		return a.getOldCustomersInfo(version);
+	}
 	public ArrayList<AccountVO> getOldAccountsInfo(String version) {
 		AccountList a = new AccountList();
 		return a.getOldAccountsInfo(version);

@@ -376,9 +376,21 @@ public class Inquiry {
 			e.printStackTrace();
 		}
 		StockBlForFinancial stock = new StubStockController();
+		//商品调价收入
 		double adjustmentTotal = stock.getAdjustmentTotal(dateBefore, dateAfter);
+		bsVO.setAdjustmentTotal(adjustmentTotal);
 		
-		double gift = stock.getGiftBillTotal(dateBefore, dateAfter);
+		//商品报溢收入
+		double spillsTotal = stock.getSpillsTotal(dateBefore, dateAfter);
+		bsVO.setSpillsTotal(spillsTotal);
+		
+		//商品赠出
+		double giftTotal = stock.getGiftBillTotal(dateBefore, dateAfter);
+		bsVO.setGiftTotal(giftTotal);
+		
+		//商品报损
+		double lossTotal = stock.getLossTotal(dateBefore, dateAfter);
+		bsVO.setLossTotal(lossTotal);
 		
 		return bsVO;
 	}
