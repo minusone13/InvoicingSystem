@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import businesslogic.BillState;
+import businesslogic.commoditybl.MockCommodity;
 import businesslogic.examinebl.StubBillPool;
 import vo.*;
 
@@ -90,7 +91,8 @@ public class StubCommodityBill
 		for (int i=0;i<sls.size();i++)
 		{
 			StubSpillsLossBill temp=sls.get(i);
-			if(temp.t==temp.t.Spills)
+			Date d = temp.getDate();
+			if(temp.t==temp.t.Spills && d.after(d1) && d.before(d2))
 				sum+=temp.getCom().getIn()*temp.getCom().getNumber();
 		}
 		return sum;
@@ -102,8 +104,28 @@ public class StubCommodityBill
 		for (int i=0;i<sls.size();i++)
 		{
 			StubSpillsLossBill temp=sls.get(i);
-			if(temp.t==temp.t.Loss)
+			Date d = temp.getDate();
+			if(temp.t==temp.t.Loss && d.after(d1) && d.before(d2))
 				sum+=temp.getCom().getIn()*temp.getCom().getNumber();
+		}
+		return sum;
+	}
+	public double getGiftBillTotal(Date d1, Date d2)
+	{//赠送单支出。这个返回值可能为非负
+		gifts=pool.getGiftBill(BillState.OVER);
+		double sum=0;
+		for (int i=0;i<gifts.size();i++)
+		{
+			StubGiftBill temp=gifts.get(i);
+			Date d = temp.getDate();
+			if(d.after(d1) && d.before(d2))
+			{
+				for(int j=0;j<temp.getComs().size();i++)
+				{
+					MockCommodity com=temp.getComs().get(j);
+					sum+=com.getIn()*com.getNumber();
+				}
+			}
 		}
 		return sum;
 	}

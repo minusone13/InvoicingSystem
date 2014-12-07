@@ -210,6 +210,12 @@ public class StubStockDataController implements StubCommodityDataService, StockD
 		save();
 		return result;
 	}
+	public boolean insert(AdjustmentRecordPO po)
+	{
+		boolean result = l.insert(po);
+		save();
+		return result;
+	}
     public boolean save()
     {
         save(f);
@@ -238,5 +244,10 @@ public class StubStockDataController implements StubCommodityDataService, StockD
 	}
 	public void setL(StubCommodityList l) {
 		this.l = l;
+	}
+	public ArrayList<AdjustmentRecordPO> getAdjustmentRecords()
+	{
+		ArrayList<AdjustmentRecordPO> result = l.getAdjustmentRecords();
+		return result;
 	}
 }
