@@ -26,6 +26,20 @@ public class MockCommodity {
 	{
 		return alertLine-number;
 	}
+	public boolean hasIn()
+	{
+		int temp=0;
+		for(int i=0;i<record.size();i++)
+			temp+=record.get(i).getInquantity();
+		return (temp!=0);
+	}
+	public boolean hasOut()
+	{
+		int temp=0;
+		for(int i=0;i<record.size();i++)
+			temp+=record.get(i).getOutquantity();
+		return (temp!=0);
+	}
 	public MockCommodity(){}
 	public MockCommodity(CommodityPO po)
 	{

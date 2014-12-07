@@ -58,7 +58,7 @@ public class StubCommodityList {//商品列表 haha
 		com.setNumber(num+quantity);
 		com.setLastin(price);
 		//下面调整平均进价
-		if(com.getRecord().size()==0)
+		if(com.hasIn())
 			com.setIn(price);//如果没有记录，进价仍然是添加商品时填写的，此时失去意义
 		else
 		{
@@ -89,7 +89,7 @@ public class StubCommodityList {//商品列表 haha
 		com.setNumber(num-quantity);
 		com.setLastout(price);
 		//下面调整平均进价
-		if(com.getRecord().size()==0)
+		if(com.hasOut())
 			com.setOut(price);//如果没有记录，进价仍然是添加商品时填写的，此时失去意义
 		else
 		{
@@ -138,6 +138,8 @@ public class StubCommodityList {//商品列表 haha
 		if(po==null)//not found
 			return RM.notfound;
 		MockCommodity com=new MockCommodity(po);
+		if(com.getPotential()<quantity)
+			return RM.insufficient;
 		CommodityRecord r = new CommodityRecord(id,new Date(),quantity,0,price,0,quantity,0,price,0);
 		com.prepareAdd(r);
 		boolean result = comdata.update(com.toPO());
