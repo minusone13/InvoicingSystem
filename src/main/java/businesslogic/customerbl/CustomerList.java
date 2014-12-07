@@ -35,32 +35,30 @@ public class CustomerList implements CustomerForFinancial, CustomerBlService{
 			return vo;
 		}
 		
-		public boolean updateCustomer(Customer newCustomer){
+		public boolean updateCustomer(CustomerVO newCustomerVO){
+			Customer newCustomer = new Customer(newCustomerVO);
 			CustomerPO po = new CustomerPO();
 			po = newCustomer.getPO();
 			return customerdata.updateCustomer(po);
 		}
 		
 		public ArrayList<CustomerVO> getAllCustomer(){
-			
+			//读取地址是固定的ma?
 			return null;
 		}
-
-		public boolean addCustomer(String name) {
-			// TODO Auto-generated method stub
-			return false;
-		}
-
-		public RM updateCustomer(CustomerVO vo) {
-			// TODO Auto-generated method stub
-			return null;
-		}
+		//这边的命名和梅杰要商量一下；
 
 		public ArrayList<CustomerVO> getCustomer(String address) {
-			// TODO Auto-generated method stub
-			return null;
+			ArrayList<CustomerVO> listOfCustomer = this.getAllCustomer();
+			return listOfCustomer;
 		}
-
+		
+		/*
+		 public void saveAllCustomer(ArrayList<CustomerPO> listOfCustomerPO){
+		 	customerdata.saveAllCustomer(listOfCustomerPO);
+		 } 
+		 
+		 * */
 		public void saveCustomer(String address) {
 			// TODO Auto-generated method stub
 			

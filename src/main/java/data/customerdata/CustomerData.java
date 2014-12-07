@@ -32,4 +32,9 @@ public class CustomerData implements CustomerDataService{
 		return null;
 	}
 
+	public void saveAllCustomer(ArrayList<CustomerPO> listOfCustomerPO) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

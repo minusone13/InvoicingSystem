@@ -88,5 +88,10 @@ public class CustomerVO {
 		// TODO Auto-generated method stub
 		this.id=id;
 	}
+
+	public String getid() {
+		// TODO Auto-generated method stub
+		return this.id;
+	}
 	
 }

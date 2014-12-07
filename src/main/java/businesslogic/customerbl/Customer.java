@@ -15,6 +15,21 @@ public class Customer {
 	private double shouldGive;//应收
 	private String deSaler;//默认销售人员
 	
+	public Customer(){};
+	public Customer(CustomerVO vo){
+		this.type=vo.gettype();
+		this.name=vo.getname();
+		this.id=vo.getid();
+		this.address=vo.getaddress();
+		this.phonenumber=vo.getphonenumber();
+		this.postcode=vo.getpostcode();
+		this.maxOwe=vo.getmaxOwe();
+		this.shouldGive=vo.getShouldGive();
+		this.shouldPay=vo.getShouldPay();
+		this.deSaler=vo.getdeSaler();
+	};
+	
+	
 	public String getid(){
 		return this.id;
 	}
@@ -94,10 +109,6 @@ public class Customer {
 	public void setShouldGive(double shouleGive){
 		this.shouldGive=shouleGive;
 	}
-	
-	Customer(){
-		
-	}//是不是必要的？既然已经有了setPO方法；
 	
 	public void setPO(CustomerPO po){
 		this.type=po.gettype();

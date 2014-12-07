@@ -13,8 +13,8 @@ public class CustomerDriver {
 		}
 		
 		public void drive(){
-			boolean result1=cbs.addCustomer("csc");
-			if(result1==true) System.out.println("addCustomer success!"); 
+			//boolean result1=cbs.addCustomer("csc");
+			//if(result1==true) System.out.println("addCustomer success!"); 
 			boolean result2=cbs.deleteCustomer("131");
 			if(result2==true) System.out.println("deleteCustomer success!"); 
 			boolean result3=sbbs.getPurBackSheet("131");
