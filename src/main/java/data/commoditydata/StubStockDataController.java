@@ -245,4 +245,9 @@ public class StubStockDataController implements StubCommodityDataService, StockD
 	public void setL(StubCommodityList l) {
 		this.l = l;
 	}
+	public ArrayList<AdjustmentRecordPO> getAdjustmentRecords()
+	{
+		ArrayList<AdjustmentRecordPO> result = l.getAdjustmentRecords();
+		return result;
+	}
 }

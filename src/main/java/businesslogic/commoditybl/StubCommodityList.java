@@ -231,4 +231,17 @@ public class StubCommodityList {//商品列表 haha
 	public void setUser(User user) {
 		this.user = user;
 	}
+	public double getAdjustmentTotal(Date d1, Date d2)
+	{//商品调价。这个返回值可能为正，也可能为负
+		ArrayList<AdjustmentRecordPO> h = comdata.getAdjustmentRecords();
+		double income=0;
+		for(int i=0;i<h.size();i++)
+		{
+			AdjustmentRecordPO po = h.get(i);
+			Date d = po.getDate();
+			if(d.after(d1) && d.before(d2))
+				income+=po.getIncome();
+		}
+		return income;
+	}
 }

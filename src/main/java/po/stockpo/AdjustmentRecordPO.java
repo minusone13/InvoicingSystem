@@ -1,8 +1,9 @@
 package po.stockpo;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class AdjustmentRecordPO {
+public class AdjustmentRecordPO implements Serializable, Cloneable{
 	public AdjustmentRecordPO(double income)
 	{
 		Date date = new Date();
@@ -21,5 +22,17 @@ public class AdjustmentRecordPO {
 	}
 	public void setIncome(double income) {
 		this.income = income;
+	}
+	public AdjustmentRecordPO clone()
+	{
+		AdjustmentRecordPO cloned = null;
+		try {
+			cloned=(AdjustmentRecordPO)super.clone();
+		} catch (CloneNotSupportedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		cloned.setDate((Date) date.clone());
+		return cloned;
 	}
 }

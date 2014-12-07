@@ -177,4 +177,11 @@ public class StubCommodityList implements Serializable{
 		packs.add(po);
 		return RM.done;
 	}
+	public ArrayList<AdjustmentRecordPO> getAdjustmentRecords()
+	{
+		ArrayList<AdjustmentRecordPO> result = new ArrayList<AdjustmentRecordPO>();
+		for(int i=0;i<adjusts.size();i++)
+			result.add(adjusts.get(i));
+		return result;
+	}
 }

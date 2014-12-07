@@ -21,4 +21,6 @@ public interface StubCommodityDataService {
 	public boolean update(CategoryPO po);
 	public CommodityPO findCommodity(String name, String model);
 	public ArrayList<StockPO> openCategory(String id);
+	
+	public ArrayList<AdjustmentRecordPO> getAdjustmentRecords();
 }
