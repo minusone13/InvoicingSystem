@@ -40,11 +40,11 @@ public class StubSpillsLossBill extends Bill implements GetVOandPO
 		state=po.getState();
 		t=po.getT();
 	}
-	public void setVO(SpillsLossBillPO vo)
+	public void setVO(SpillsLossBillVO vo)
 	{
 		date=vo.getDate();
 		userID=vo.getUserID();
-		com=new MockCommodity(vo.getComPO());
+		com=new MockCommodity(vo.getCom());
 		style=BillStyle.SpillsLossBill;
 		t=vo.getT();
 		ID=vo.getID();
@@ -89,10 +89,10 @@ public class StubSpillsLossBill extends Bill implements GetVOandPO
 		}
 		this.state = state;
 	}
-	public synchronized Date getDate() {
+	public  Date getDate() {
 		return date;
 	}
-	public synchronized void setDate(Date date) {
+	public  void setDate(Date date) {
 		this.date = date;
 	}
 	public String getUserID() {

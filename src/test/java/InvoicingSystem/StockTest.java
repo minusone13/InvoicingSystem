@@ -9,6 +9,8 @@ import org.junit.*;
 
 import po.stockpo.*;
 import presentation.commodityui.StockManagerDriver;
+import businesslogic.commoditybillbl.StubAlertBill;
+import businesslogic.examinebl.StubBillPool;
 import businesslogic.stockmanagerbl.StubStockController;
 import businesslogic.stockservice.StockBlForSalesMen;
 import businesslogicservice.commodityblservice.StubCommodityBlService;
@@ -39,7 +41,7 @@ public class StockTest{
 		data.insert(new CategoryPO("1\\灯","日光灯"));
 		data.insert(new CategoryPO("1\\灯\\日光灯","纯白日光灯"));
 		data.insert(new CategoryPO("1", "门"));
-		CommodityVO mockvo=new CommodityVO("1\\门","好好防盗门","fdm02",200,300);
+		CommodityVO mockvo=new CommodityVO("1\\门","好好防盗门","fdm02",200,300,10);
 		StubCommodityBlService combl=smd.getCombl();
 		combl.addCommodity(mockvo);
 	}
@@ -171,5 +173,18 @@ public class StockTest{
 		StockBlForSalesMen sc=new StubStockController();
 		RM result=sc.checkIn("JHD-20141206-00001", "好好防盗门1", "fdm02", 50, 150);
 		assertEquals(RM.notfound,result);
+	}
+	
+	@Ignore
+	public void teststockForSalesMenAlert()
+	{
+		StockBlForSalesMen sc=new StubStockController();
+		RM result=sc.checkIn("JHD-20141206-00001", "好好防盗门", "fdm02", 50, 150);
+		assertEquals(RM.done,result);
+		//result=sc.checkOut("XSD-20141206-00001", "好好防盗门", "fdm02", 41, 300);
+		assertEquals(RM.done,result);
+		StubBillPool pool = new StubBillPool();
+		ArrayList<StubAlertBill> h = pool.getAlertBill();
+		assertEquals(1,h.size());
 	}
 }

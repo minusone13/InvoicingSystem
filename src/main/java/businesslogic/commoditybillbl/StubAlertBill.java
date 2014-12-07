@@ -18,9 +18,13 @@ public class StubAlertBill extends Bill implements GetVOandPO
 	int shortage;
 	BillStyle style=BillStyle.AlertBill;
 	BillState state=BillState.DRAFT;
-	public StubAlertBill(){}
+	public StubAlertBill()
+	{
+		date = new Date();
+	}
 	public StubAlertBill(String userID,MockCommodity com, int shortage)
 	{
+		date = new Date();
 		this.userID=userID;
 		this.com=com;
 		this.shortage=shortage;
@@ -83,10 +87,10 @@ public class StubAlertBill extends Bill implements GetVOandPO
 	public void setState(BillState state) {
 		this.state = state;
 	}
-	public synchronized Date getDate() {
+	public  Date getDate() {
 		return date;
 	}
-	public synchronized void setDate(Date date) {
+	public  void setDate(Date date) {
 		this.date = date;
 	}
 	public String getUserID() {

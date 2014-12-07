@@ -6,6 +6,7 @@ import dataservice.commoditydataservice.*;
 import businesslogic.Role;
 import businesslogic.commoditybillbl.*;
 import businesslogic.commoditybl.*;
+import businesslogic.examinebl.StubBillPool;
 import businesslogic.stockservice.*;
 import businesslogic.userbl.OperationRecord;
 import businesslogic.userbl.User;
@@ -22,6 +23,8 @@ public class StubStockController implements StubCommodityBlService, StockBlForSa
 	UserService us=new UserController();
 	static StubCommodityDataService comdata;
 	User user=new User("I0001",Role.STOCK_STAFF,"default","default","default");
+	
+	StubBillPool pool = new StubBillPool();
 	public StubCommodityList getCommodityList ()
 	{
 		return l;
@@ -75,11 +78,17 @@ public class StubStockController implements StubCommodityBlService, StockBlForSa
 	}
 	public RM readyForIn(String id,String name, String model, int quantity, double price)
 	{//当进货单或销售退货单提交后，请调用
-		return RM.done;
+		RM result = l.readyForIn(id, name, model, quantity, price);
+		return result;
 	}
 	public RM readyForOut(String id,String name, String model, int quantity, double price)
 	{//当销售单或进货退货单被提交后，请调用
-		return RM.done;
+		RM result = l.readyForOut(id, name, model, quantity, price);
+		return result;
+	}
+	public boolean isEnough(String name,String model,int n)
+	{//在填写单据时检查，给出的是潜在库存最小值，也就是最保险的值
+		return l.isEnough(name, model, n);
 	}
 	public ArrayList<StockVO> openCategory(String id)
 	{
@@ -100,6 +109,7 @@ public class StubStockController implements StubCommodityBlService, StockBlForSa
 	public void setUser(UserVO vo)
 	{
 		user=new User(vo);
+		l.setUser(user);
 	}
 	public double getSpillsTotal(Date d1, Date d2)
 	{//including d1 and d2
@@ -129,16 +139,26 @@ public class StubStockController implements StubCommodityBlService, StockBlForSa
 		return l.updateCategory(vo);
 	}
 	
+	StubCommodityBill bl=new StubCommodityBill();
 	public RM creat(GiftBillVO vo)
 	{
+		StubGiftBill gb=new StubGiftBill();
+		gb.setVO(vo);
+		bl.add(gb);
 		return RM.done;
 	}
 	public RM creat(SpillsLossBillVO vo)
 	{
+		StubSpillsLossBill gb=new StubSpillsLossBill();
+		gb.setVO(vo);
+		bl.add(gb);
 		return RM.done;
 	}
 	public RM creat(AlertBillVO vo)
 	{
+		StubAlertBill gb=new StubAlertBill();
+		gb.setVO(vo);
+		bl.add(gb);
 		return RM.done;
 	}
 	
