@@ -28,17 +28,32 @@ public class MockCommodity {
 	}
 	public boolean hasIn()
 	{
+		return (inQuantity()!=0);
+	}
+	public boolean hasOut()
+	{
+		return (outQuantity()!=0);
+	}
+	public int inQuantity()
+	{
 		int temp=0;
 		for(int i=0;i<record.size();i++)
 			temp+=record.get(i).getInquantity();
-		return (temp!=0);
+		return temp;
 	}
-	public boolean hasOut()
+	public int outQuantity()
 	{
 		int temp=0;
 		for(int i=0;i<record.size();i++)
 			temp+=record.get(i).getOutquantity();
-		return (temp!=0);
+		return temp;
+	}
+	public double outTotal()
+	{
+		double temp=0;
+		for(int i=0;i<record.size();i++)
+			temp+=record.get(i).getOutquantity()*record.get(i).getOutamount();
+		return temp;
 	}
 	public MockCommodity(){}
 	public MockCommodity(CommodityPO po)

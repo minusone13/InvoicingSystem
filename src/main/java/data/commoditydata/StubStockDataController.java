@@ -210,6 +210,12 @@ public class StubStockDataController implements StubCommodityDataService, StockD
 		save();
 		return result;
 	}
+	public boolean insert(AdjustmentRecordPO po)
+	{
+		boolean result = l.insert(po);
+		save();
+		return result;
+	}
     public boolean save()
     {
         save(f);

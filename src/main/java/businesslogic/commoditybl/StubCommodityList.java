@@ -36,6 +36,8 @@ public class StubCommodityList {//商品列表 haha
 		else
 		{
 			MockCommodity com=new MockCommodity(vo);
+			com.setLastin(-1);
+			com.setLastout(-1);
 			RM result = comdata.insert(com.toPO());
 			return result;
 		}
@@ -55,10 +57,9 @@ public class StubCommodityList {//商品列表 haha
 			return RM.notfound;
 		MockCommodity com=new MockCommodity(po);
 		int num = com.getNumber();
-		com.setNumber(num+quantity);
 		com.setLastin(price);
 		//下面调整平均进价
-		if(com.hasIn())
+		if(!com.hasIn())
 			com.setIn(price);//如果没有记录，进价仍然是添加商品时填写的，此时失去意义
 		else
 		{
@@ -69,6 +70,7 @@ public class StubCommodityList {//商品列表 haha
 			com.setIn(total/quantitytemp);
 		}
 		CommodityRecord r = new CommodityRecord(id,new Date(),0,quantity,0,price,0,quantity,0,price);
+		com.setNumber(num+quantity);
 		com.add(r);
 		com.prepareDelete(r);
 		boolean result = comdata.update(com.toPO());
@@ -86,19 +88,19 @@ public class StubCommodityList {//商品列表 haha
 		int num = com.getNumber();
 		if(num<quantity)
 			return RM.insufficient;
-		com.setNumber(num-quantity);
 		com.setLastout(price);
 		//下面调整平均进价
-		if(com.hasOut())
+		if(!com.hasOut())
 			com.setOut(price);//如果没有记录，进价仍然是添加商品时填写的，此时失去意义
 		else
 		{
-			double total=com.getIn()*com.getNumber();
-			total-=quantity*price;
-			int quantitytemp=com.getNumber();
-			quantitytemp-=quantity;
-			com.setIn(total/quantitytemp);
+			double total=com.outTotal();
+			total+=quantity*price;
+			int quantitytemp=com.outQuantity();
+			quantitytemp+=quantity;
+			com.setOut(total/quantitytemp);
 		}
+		com.setNumber(num-quantity);
 		CommodityRecord r = new CommodityRecord(id,new Date(),quantity,0,price,0,quantity,0,price,0);
 		com.add(r);
 		com.prepareDelete(r);
@@ -202,7 +204,10 @@ public class StubCommodityList {//商品列表 haha
 		CommodityPO po=comdata.findCommodity(vo.getName(),vo.getModel());
 		if(po==null)//not found
 			return RM.notfound;
-		if(comdata.update(new MockCommodity(vo).toPO()))
+		MockCommodity com = new MockCommodity(vo);
+		double income = (com.getIn()-po.getIn())*com.getNumber();
+		comdata.insert(new AdjustmentRecordPO(income));
+		if(comdata.update(com.toPO()))
 			return RM.done;
 		else
 			return RM.unknownerror;

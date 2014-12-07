@@ -10,6 +10,7 @@ import vo.RM;
 public class StubCommodityList implements Serializable{
 	ArrayList<StubCategoryData> cats;
 	ArrayList<PackPO> packs;
+	ArrayList<AdjustmentRecordPO> adjusts;
 	StubCategoryData cat;//=cats.get(0);
 	ArrayList <MockCommodityData> flatlist;//平铺式的商品列表，便于搜索操作。注意商品增删时候的同步操作
 	public boolean initial()
@@ -35,6 +36,11 @@ public class StubCommodityList implements Serializable{
 		RM result=temp.add(com);
 		flatlist.add(com);
 		return result;
+	}
+	public boolean insert(AdjustmentRecordPO po)
+	{
+		adjusts.add(po);
+		return true;
 	}
 	public StubCategoryData getFather(StubCategoryData c)
 	{

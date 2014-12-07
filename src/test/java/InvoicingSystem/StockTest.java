@@ -213,15 +213,15 @@ public class StockTest{
 	public void testreadyForCheckOutComplex()
 	{
 		StockBlForSalesMen sc=new StubStockController();
-		RM result = sc.readyForOut("JHD-20141206-00001", "好好防盗门", "fdm05", 20, 200);
+		RM result = sc.readyForOut("XSD-20141206-00001", "好好防盗门", "fdm05", 20, 200);
 		assertEquals(RM.done,result);
-		result = sc.checkOut("JHD-20141206-00001", "好好防盗门", "fdm05", 10, 200);
+		result = sc.checkOut("XSD-20141206-00001", "好好防盗门", "fdm05", 10, 200);
 		assertEquals(RM.done,result);
 		boolean b = sc.isEnough("好好防盗门", "fdm05", 31);
 		assertTrue(b);
-		result = sc.readyForOut("JHD-20141206-00002", "好好防盗门", "fdm05", 35, 200);
+		result = sc.readyForOut("XSD-20141206-00002", "好好防盗门", "fdm05", 35, 200);
 		assertEquals(RM.done,result);
-		result = sc.readyForOut("JHD-20141206-00003", "好好防盗门", "fdm05", 30, 200);
+		result = sc.readyForOut("XSD-20141206-00003", "好好防盗门", "fdm05", 30, 200);
 		assertEquals(RM.insufficient,result);
 	}
 	
@@ -229,18 +229,47 @@ public class StockTest{
 	public void testLastOut()
 	{
 		StockBlForSalesMen sc=new StubStockController();
-		RM result = sc.readyForOut("JHD-20141206-00001", "好好防盗门", "fdm05", 20, 200);
+		RM result = sc.readyForOut("XSD-20141206-00001", "好好防盗门", "fdm05", 20, 200);
 		assertEquals(RM.done,result);
-		result = sc.checkOut("JHD-20141206-00001", "好好防盗门", "fdm05", 10, 300);
+		result = sc.checkOut("XSD-20141206-00001", "好好防盗门", "fdm05", 10, 300);
 		CommodityPO po = data.findCommodity("好好防盗门", "fdm05");
 		double lastout = po.getLastOut();
 		assertEquals(300,(int)lastout);
 		assertEquals(RM.done,result);
 		boolean b = sc.isEnough("好好防盗门", "fdm05", 31);
 		assertTrue(b);
-		result = sc.readyForOut("JHD-20141206-00002", "好好防盗门", "fdm05", 35, 200);
+		result = sc.readyForOut("XSD-20141206-00002", "好好防盗门", "fdm05", 35, 200);
 		assertEquals(RM.done,result);
-		result = sc.readyForOut("JHD-20141206-00003", "好好防盗门", "fdm05", 30, 200);
+		result = sc.readyForOut("XSD-20141206-00003", "好好防盗门", "fdm05", 30, 200);
 		assertEquals(RM.insufficient,result);
 	}
+	
+	@Test
+	public void testIn()
+	{
+		StockBlForSalesMen sc=new StubStockController();
+		RM result = sc.readyForOut("XSD-20141206-00001", "好好防盗门", "fdm05", 20, 200);
+		assertEquals(RM.done,result);
+		result = sc.checkOut("XSD-20141206-00001", "好好防盗门", "fdm05", 10, 300);
+		result = sc.checkIn("JHD-20141206-00002", "好好防盗门", "fdm05", 40, 50);
+		CommodityPO po = data.findCommodity("好好防盗门", "fdm05");
+		double in = po.getIn();
+		assertEquals(100,(int)in);
+		assertEquals(RM.done,result);
+	}
+	
+	@Test
+	public void testOut()
+	{
+		StockBlForSalesMen sc=new StubStockController();
+		RM result = sc.checkOut("XSD-20141206-00001", "好好防盗门", "fdm05", 20, 20);
+		assertEquals(RM.done,result);
+		result = sc.checkOut("XSD-20141206-00002", "好好防盗门", "fdm05", 20, 40);
+		assertEquals(RM.done,result);
+		CommodityPO po = data.findCommodity("好好防盗门", "fdm05");
+		double out = po.getOut();
+		assertEquals(30,(int)out);
+	}
+	
+	
 }
