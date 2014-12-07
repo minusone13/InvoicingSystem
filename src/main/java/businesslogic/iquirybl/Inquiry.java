@@ -8,6 +8,7 @@ import java.util.Date;
 import businesslogic.BillState;
 import businesslogic.BillStyle;
 import businesslogic.commoditybillbl.StubAlertBill;
+import businesslogic.commoditybillbl.StubCommodityBill;
 import businesslogic.commoditybillbl.StubGiftBill;
 import businesslogic.commoditybillbl.StubSpillsLossBill;
 import businesslogic.examinebl.Bill;
@@ -15,17 +16,20 @@ import businesslogic.examinebl.StubBillPool;
 import businesslogic.financialbillbl.CashPaymentBill;
 import businesslogic.financialbillbl.PaymentBill;
 import businesslogic.financialbillbl.ReceiptBill;
+import businesslogic.salebillbl.SaleBackSheet;
 import businesslogic.salebillbl.PurBackSheet;
 import businesslogic.salebillbl.PurSheet;
 import businesslogic.salebillbl.SaleBackSheet;
 import businesslogic.salebillbl.SaleSheet;
+import businesslogic.stockmanagerbl.StubStockController;
+import businesslogic.stockservice.StockBlForFinancial;
 import vo.*;
 import vo.inquiryVO.BusinessSituationVO;
 import vo.inquiryVO.InquiryConditionVO;
 import vo.inquiryVO.InquiryProcessVO;
 import vo.inquiryVO.InquirySaleVO;
 
-//1、销售人员确定商品名、客户和仓库怎么访问
+//1、模糊查找
 //2、完善返回到ui层的内容
 //3、红冲功能，需要各位人员创建单据功能
 //4、销售人员和库存人员来完成收入支出计算的操作
@@ -360,21 +364,10 @@ public class Inquiry {
 	}
 	
 	public BusinessSituationVO inquiryCondition(InquiryConditionVO vo) {
-		ArrayList<StubGiftBill> gift = bp.getGiftBill();
-		ArrayList<SaleSheet> saleSheet = bp.getSaleSheet();
-		ArrayList<SaleBackSheet> saleBackSheet = bp.getSaleBackSheet();
-		ArrayList<StubSpillsLossBill> spillsLoss = bp.getSpillsLossBill();
-		ArrayList<StubAlertBill> alert  =bp.getAlertBill();
-		ArrayList<PurSheet> purSheet = bp.getPurSheet();
-		ArrayList<PurBackSheet> purBackSheet = bp.getPurBackSheet();
-		ArrayList<ReceiptBill> receipt = bp.getReceiptBill();
-		ArrayList<PaymentBill> payment = bp.getPaymentBill();
-		ArrayList<CashPaymentBill> cashPayment =bp.getCashPaymentBill();
-		
+		BusinessSituationVO bsVO = new BusinessSituationVO();
 		Date dateBefore=null;
 		Date dateAfter=null;
 		SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
-		double profit=0; //利润
 		
 		try {
 			dateBefore = format.parse(vo.getTimeBefore());
@@ -382,137 +375,12 @@ public class Inquiry {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
+		StockBlForFinancial stock = new StubStockController();
+		double adjustmentTotal = stock.getAdjustmentTotal(dateBefore, dateAfter);
 		
-		int size0 = gift.size();
-		for(int i=0;i<size0;i++) {
-			StubGiftBill g = gift.get(i);
-			
-			if(dateBefore!=null) {
-				if(g.getDate().compareTo(dateBefore)>=0&&
-						g.getDate().compareTo(dateAfter)<=0){}
-				else continue;
-			}
-			
-		}
-		//销售单===============================
-		int size1 = saleSheet.size();
-		for(int i=0;i<size1;i++) {
-			SaleSheet sale = saleSheet.get(i);
-			
-			if(dateBefore!=null) {
-				if(sale.getDate().compareTo(dateBefore)>=0&&
-						sale.getDate().compareTo(dateAfter)<=0){}
-				else continue;
-			}
-			
-		}
+		double gift = stock.getGiftBillTotal(dateBefore, dateAfter);
 		
-		//销售退货单===================================
-		int size2 = saleBackSheet.size();
-		for(int i=0;i<size2;i++) {
-			SaleBackSheet saleback = saleBackSheet.get(i);
-			
-			if(dateBefore!=null) {
-				if(saleback.getDate().compareTo(dateBefore)>=0&&
-						saleback.getDate().compareTo(dateAfter)<=0){}
-				else continue;
-			}
-			
-		}
-		
-		//报溢报损=========================================
-		int size3 = spillsLoss.size();
-		for(int i=0;i<size3;i++) {
-			StubSpillsLossBill spillLossBill = spillsLoss.get(i);
-			
-			if(dateBefore!=null) {
-				if(spillLossBill.getDate().compareTo(dateBefore)>=0&&
-						spillLossBill.getDate().compareTo(dateAfter)<=0){}
-				else continue;
-			}
-			
-		}
-		
-		//报警单==========================================
-		int size4 = alert.size();
-		for(int i=0;i<size4;i++) {
-			StubAlertBill alertBill = alert.get(i);
-			
-			if(dateBefore!=null) {
-				if(alertBill.getDate().compareTo(dateBefore)>=0&&
-						alertBill.getDate().compareTo(dateAfter)<=0){}
-				else continue;
-			}
-
-		}
-		
-		//进货单
-		int size5 = purSheet.size();
-		for(int i=0;i<size5;i++) {
-			PurSheet pur = purSheet.get(i);
-			
-			if(dateBefore!=null) {
-				if(pur.getDate().compareTo(dateBefore)>=0&&
-						pur.getDate().compareTo(dateAfter)<=0){}
-				else continue;
-			}
-		}
-		
-		//进货退货单
-		int size6 = purBackSheet.size();
-		for(int i=0;i<size6;i++) {
-			PurBackSheet back = purBackSheet.get(i);
-			
-			if(dateBefore!=null) {
-				if(back.getDate().compareTo(dateBefore)>=0&&
-						back.getDate().compareTo(dateAfter)<=0){}
-				else continue;
-			}
-			
-		}
-		
-		//收款单screen======================================
-		int size7 = receipt.size();
-		for(int i=0;i<size7;i++) {
-			ReceiptBill re = receipt.get(i);
-			
-			if(dateBefore!=null) {
-				if(re.getDate().compareTo(dateBefore)>=0&&
-						re.getDate().compareTo(dateAfter)<=0){}
-				else continue;
-			}
-			
-		}
-		
-		//付款单screen===================================
-		int size8 = payment.size();
-		for(int i=0;i<size8;i++) {
-			PaymentBill pa = payment.get(i);
-			if(dateBefore!=null) {
-				if(pa.getDate().compareTo(dateBefore)>=0&&
-						pa.getDate().compareTo(dateAfter)<=0){}
-				else continue;
-			}
-			
-			
-		}
-		
-		//现金费用单==========================================
-		int size9 = cashPayment.size();
-		for(int i=0;i<size9;i++) {
-			CashPaymentBill ca = cashPayment.get(i);
-			
-			if(dateBefore!=null) {
-				if(ca.getDate().compareTo(dateBefore)>=0&&
-						ca.getDate().compareTo(dateAfter)<=0){}
-				else continue;
-			}
-			
-			
-			
-		}
-		
-		return null;
+		return bsVO;
 	}
 	
 	

@@ -106,7 +106,10 @@ public class StrategySaver implements StrategySaverService{
 			e.printStackTrace();
 		}
 		
-		if(levelstrategyList!=null) return levelstrategyList;
+		if(levelstrategyList!=null) {
+			System.out.println("!!!");
+			return levelstrategyList;
+		}
 		else return null;
 		
 		

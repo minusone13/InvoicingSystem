@@ -35,11 +35,12 @@ public class AccountBuild{
 		sd.save("accountBuild\\commodity\\"+version+".ser");		
 	}
 	
+
 	public void saveVersion () {
 		ArrayList<String> versions = getVersion();
 		if(versions==null) versions = new ArrayList<String>();
 		versions.add(version);
-		String filename = "accountBuild.ser";
+		String filename = "version.ser";
 		ObjectOutputStream oos = null;
 		try {
 			oos = new ObjectOutputStream(new FileOutputStream(filename));
@@ -64,7 +65,7 @@ public class AccountBuild{
 	} 
 	
 	public ArrayList<String> getVersion() {
-		File filename = Tool.Opendoc("accountBuild.ser");
+		File filename = Tool.Opendoc("version.ser");
 		
 		ArrayList<String> versions = null;
 		ObjectInputStream ois=null;
@@ -88,6 +89,7 @@ public class AccountBuild{
 		if(versions!=null) return versions;
 		else return null;
 	}
+	
 	public ArrayList<AccountPO> getAccount(String version) {
 		File filename = Tool.Opendoc("accountBuild\\accountInfo\\"+version+".ser");
 		

@@ -3,7 +3,7 @@ package vo.inquiryVO;
 public class BusinessSituationVO {
 	private double income;
 	private double expenditure;
-	private double profit;
+	private double profit;//利润
 	public int tempForTest=0;
 	public double getIncome() {
 		return income;

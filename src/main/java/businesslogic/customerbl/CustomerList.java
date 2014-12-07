@@ -2,12 +2,15 @@ package businesslogic.customerbl;
 
 import java.util.ArrayList;
 
+import businesslogic.customerService.CustomerForFinancial;
+import businesslogicservice.customerblservice.CustomerBlService;
 import po.CustomerPO;
 import vo.CustomerVO;
+import vo.RM;
 import data.customerdata.CustomerData;
 import dataservice.customerdataservice.CustomerDataService;
 
-public class customerList {
+public class CustomerList implements CustomerForFinancial, CustomerBlService{
 		/*
 		 * 这里面都是bCustomer。
 		 * */
@@ -41,6 +44,26 @@ public class customerList {
 		public ArrayList<CustomerVO> getAllCustomer(){
 			
 			return null;
+		}
+
+		public boolean addCustomer(String name) {
+			// TODO Auto-generated method stub
+			return false;
+		}
+
+		public RM updateCustomer(CustomerVO vo) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		public ArrayList<CustomerVO> getCustomer(String address) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		public void saveCustomer(String address) {
+			// TODO Auto-generated method stub
+			
 		}
 		
 }
