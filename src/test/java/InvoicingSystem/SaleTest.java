@@ -2,11 +2,11 @@ package InvoicingSystem;
 
 import businesslogic.salebillbl.salebillController;
 import businesslogicservice.customerblservice.CustomerBlService;
-import businesslogicservice.salebillblservice.StubSaleBillBlService;
+import businesslogicservice.salebillblservice.SaleBillBlService;
 import junit.framework.TestCase;
 
 public class SaleTest extends TestCase{
-		StubSaleBillBlService sbbs=new salebillController();
+		SaleBillBlService sbbs=new salebillController();
 		
 		public void testgetPurBackSheet(){
 			boolean result3=sbbs.getPurBackSheet("131");

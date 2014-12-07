@@ -69,7 +69,7 @@ public class SaleSheetVO extends VO{
 		this.discount=discount;
 	}
 	
-	public double pmoney(){
+	public double getpmoney(){
 		return pmoney;
 	}
 	
@@ -124,5 +124,6 @@ public class SaleSheetVO extends VO{
 	public void setwords(String words){
 		this.words=words;
 	}
+
 		
 }

@@ -33,10 +33,10 @@ import businesslogic.financialbillbl.Item;
 import businesslogic.financialbillbl.PaymentBill;
 import businesslogic.financialbillbl.ReceiptBill;
 import businesslogic.financialbillbl.TransferAccount;
-import businesslogic.salebillbl.StubPurBackSheet;
-import businesslogic.salebillbl.StubPurSheet;
-import businesslogic.salebillbl.StubSaleBackSheet;
-import businesslogic.salebillbl.StubSaleSheet;
+import businesslogic.salebillbl.PurBackSheet;
+import businesslogic.salebillbl.PurSheet;
+import businesslogic.salebillbl.SaleBackSheet;
+import businesslogic.salebillbl.SaleSheet;
 import data.billdata.CommodityBillSaver;
 import data.billdata.FinancialBillSaver;
 import data.billdata.SaleBillSaver;
@@ -50,10 +50,10 @@ public class StubBillPool {
 	private ArrayList<StubGiftBill> alOfGiftBill=new ArrayList<StubGiftBill>();
 	private ArrayList<StubSpillsLossBill> alOfSpillsLossBill=new ArrayList<StubSpillsLossBill>();
 	private ArrayList<StubAlertBill> alOfAlertBill=new ArrayList<StubAlertBill>();
-	private ArrayList<StubPurSheet> alOfPurSheet=new ArrayList<StubPurSheet>();
-	private ArrayList<StubPurBackSheet> alOfPurBackSheet=new ArrayList<StubPurBackSheet>();
-	private ArrayList<StubSaleSheet> alOfSaleSheet=new ArrayList<StubSaleSheet>();
-	private ArrayList<StubSaleBackSheet> alOfSaleBackSheet=new ArrayList<StubSaleBackSheet>();
+	private ArrayList<PurSheet> alOfPurSheet=new ArrayList<PurSheet>();
+	private ArrayList<PurBackSheet> alOfPurBackSheet=new ArrayList<PurBackSheet>();
+	private ArrayList<SaleSheet> alOfSaleSheet=new ArrayList<SaleSheet>();
+	private ArrayList<SaleBackSheet> alOfSaleBackSheet=new ArrayList<SaleBackSheet>();
 	private ArrayList<ReceiptBill> alOfReceiptBill=new ArrayList<ReceiptBill>();
 	private ArrayList<PaymentBill> alOfPaymentBill=new ArrayList<PaymentBill>();
 	private ArrayList<CashPaymentBill> alOfCashPaymentBill=new ArrayList<CashPaymentBill>();
@@ -96,7 +96,7 @@ public class StubBillPool {
 		ArrayList<PurSheetPO> PurSheetListPO=sbs.getPurSheet();
 		if(PurSheetListPO!=null){
 			for(PurSheetPO tempPO:PurSheetListPO){
-				StubPurSheet ps=new StubPurSheet();
+				PurSheet ps=new PurSheet();
 				ps.setPO(tempPO);
 				alOfPurSheet.add(ps);
 			}
@@ -105,7 +105,7 @@ public class StubBillPool {
 		ArrayList<PurBackSheetPO> PurBackSheetListPO=sbs.getPurBackSheet();
 		if(PurBackSheetListPO!=null){
 			for(PurBackSheetPO tempPO:PurBackSheetListPO){
-				StubPurBackSheet pbs=new StubPurBackSheet();
+				PurBackSheet pbs=new PurBackSheet();
 				pbs.setPO(tempPO);
 				alOfPurBackSheet.add(pbs);
 			}
@@ -114,7 +114,7 @@ public class StubBillPool {
 		ArrayList<SaleSheetPO> SaleSheetListPO=sbs.getSaleSheet();
 		if(SaleSheetListPO!=null){
 			for(SaleSheetPO tempPO:SaleSheetListPO){
-				StubSaleSheet ss=new StubSaleSheet();
+				SaleSheet ss=new SaleSheet();
 				ss.setPO(tempPO);
 				alOfSaleSheet.add(ss);
 			}
@@ -123,7 +123,7 @@ public class StubBillPool {
 		ArrayList<SaleBackSheetPO> SaleBackSheetListPO=sbs.getSaleBackSheet();
 		if(SaleBackSheetListPO!=null){
 			for(SaleBackSheetPO tempPO:SaleBackSheetListPO){
-				StubSaleBackSheet salebs=new StubSaleBackSheet();
+				SaleBackSheet salebs=new SaleBackSheet();
 				salebs.setPO(tempPO);
 				alOfSaleBackSheet.add(salebs);
 			}
@@ -177,25 +177,25 @@ public class StubBillPool {
 		this.save();
 	}
 	/*需要向单据池中加入一张进货单*/
-	public void add (StubPurSheet ps){
+	public void add (PurSheet ps){
 		alOfPurSheet.add(ps);
 		//保存
 		this.save();
 	}
 	/*需要向单据池中加入一张进货退货单*/
-	public void add (StubPurBackSheet pbs){
+	public void add (PurBackSheet pbs){
 		alOfPurBackSheet.add(pbs);
 		//保存
 		this.save();
 	}
 	/*需要向单据池中加入一张销售单*/
-	public void add (StubSaleSheet ss){
+	public void add (SaleSheet ss){
 		alOfSaleSheet.add(ss);
 		//保存
 		this.save();
 	}
 	/*需要向单据池中加入一张销售退货单*/
-	public void add (StubSaleBackSheet sbs){
+	public void add (SaleBackSheet sbs){
 		alOfSaleBackSheet.add(sbs);
 		//保存
 		this.save();
@@ -256,10 +256,10 @@ public class StubBillPool {
 		
 	}
 	/*需要从单据池筛选指定状态的所有进货单*/
-	public ArrayList<StubPurSheet> getPurSheet (BillState st){
-		ArrayList<StubPurSheet> result=new ArrayList<StubPurSheet>();//用于储存返回的单据
+	public ArrayList<PurSheet> getPurSheet (BillState st){
+		ArrayList<PurSheet> result=new ArrayList<PurSheet>();//用于储存返回的单据
 		//遍历池中制定单据数组
-		for(StubPurSheet temp:alOfPurSheet){
+		for(PurSheet temp:alOfPurSheet){
 			if(temp.getState()==st){//如果单据状态符合筛选状态
 				result.add(temp);
 			}
@@ -269,10 +269,10 @@ public class StubBillPool {
 		
 	}
 	/*需要从单据池筛选指定状态的所有进货退货单*/
-	public ArrayList<StubPurBackSheet> getPurBackSheet (BillState st){
-		ArrayList<StubPurBackSheet> result=new ArrayList<StubPurBackSheet>();//用于储存返回的单据
+	public ArrayList<PurBackSheet> getPurBackSheet (BillState st){
+		ArrayList<PurBackSheet> result=new ArrayList<PurBackSheet>();//用于储存返回的单据
 		//遍历池中制定单据数组
-		for(StubPurBackSheet temp:alOfPurBackSheet){
+		for(PurBackSheet temp:alOfPurBackSheet){
 			if(temp.getState()==st){//如果单据状态符合筛选状态
 				result.add(temp);
 			}
@@ -282,10 +282,10 @@ public class StubBillPool {
 		
 	}
 	/*需要从单据池筛选指定状态的所有销售单*/
-	public ArrayList<StubSaleSheet> getSaleSheet (BillState st){
-		ArrayList<StubSaleSheet> result=new ArrayList<StubSaleSheet>();//用于储存返回的单据
+	public ArrayList<SaleSheet> getSaleSheet (BillState st){
+		ArrayList<SaleSheet> result=new ArrayList<SaleSheet>();//用于储存返回的单据
 		//遍历池中制定单据数组
-		for(StubSaleSheet temp:alOfSaleSheet){
+		for(SaleSheet temp:alOfSaleSheet){
 			if(temp.getState()==st){//如果单据状态符合筛选状态
 				result.add(temp);
 			}
@@ -295,10 +295,10 @@ public class StubBillPool {
 		
 	}
 	/*需要从单据池筛选指定状态的所有销售退货单*/
-	public ArrayList<StubSaleBackSheet> getSaleBackSheet (BillState st){
-		ArrayList<StubSaleBackSheet> result=new ArrayList<StubSaleBackSheet>();//用于储存返回的单据
+	public ArrayList<SaleBackSheet> getSaleBackSheet (BillState st){
+		ArrayList<SaleBackSheet> result=new ArrayList<SaleBackSheet>();//用于储存返回的单据
 		//遍历池中制定单据数组
-		for(StubSaleBackSheet temp:alOfSaleBackSheet){
+		for(SaleBackSheet temp:alOfSaleBackSheet){
 			if(temp.getState()==st){//如果单据状态符合筛选状态
 				result.add(temp);
 			}
@@ -354,19 +354,19 @@ public class StubBillPool {
 		return alOfAlertBill;
 	}
 	/*获取单据池的所有进货单*/
-	public ArrayList<StubPurSheet> getPurSheet (){
+	public ArrayList<PurSheet> getPurSheet (){
 		return alOfPurSheet;
 	}
 	/*获取单据池的所有进货退货单*/
-	public ArrayList<StubPurBackSheet> getPurBackSheet (){
+	public ArrayList<PurBackSheet> getPurBackSheet (){
 		return alOfPurBackSheet;
 	}
 	/*获取单据池的所有销售单*/
-	public ArrayList<StubSaleSheet> getSaleSheet (){
+	public ArrayList<SaleSheet> getSaleSheet (){
 		return alOfSaleSheet;
 	}
 	/*获取单据池的所有销售退货单*/
-	public ArrayList<StubSaleBackSheet> getSaleBackSheet (){
+	public ArrayList<SaleBackSheet> getSaleBackSheet (){
 		return alOfSaleBackSheet;
 	}
 	/*获取单据池的所有收款单*/
@@ -483,7 +483,7 @@ public class StubBillPool {
 				//修改总金额
 				alOfSaleSheet.get(i).setmoney1(ss.getmoney1());
 				//修改使用代金券
-				alOfSaleSheet.get(i).setpmoney(ss.pmoney());
+				alOfSaleSheet.get(i).setpmoney(ss.getpmoney());
 				//修改折让金额
 				alOfSaleSheet.get(i).setdiscount(ss.getdiscount());
 				//修改最终金额
@@ -510,7 +510,7 @@ public class StubBillPool {
 				//修改总金额
 				alOfSaleBackSheet.get(i).setmoney1(sbs.getmoney1());
 				//修改使用代金券
-				alOfSaleBackSheet.get(i).setpmoney(sbs.pmoney());
+				alOfSaleBackSheet.get(i).setpmoney(sbs.getpmoney());
 				//修改折让金额
 				alOfSaleBackSheet.get(i).setdiscount(sbs.getdiscount());
 				//修改最终金额
@@ -711,26 +711,26 @@ public class StubBillPool {
 		cbs.saveAlertBill(AlertBillPO);;//保存PO数组到txt
 		//进货单
 		ArrayList<PurSheetPO> PurSheetPO=new ArrayList<PurSheetPO>();
-		for(StubPurSheet temp:alOfPurSheet){//遍历数组，将对应PO对象加到新数组中
+		for(PurSheet temp:alOfPurSheet){//遍历数组，将对应PO对象加到新数组中
 			PurSheetPO.add(temp.getPO());
 		}
 		sbs.savePurSheet(PurSheetPO);//保存PO数组到txt
 		//进货退货单
 		ArrayList<PurBackSheetPO> PurBackSheetPO=new ArrayList<PurBackSheetPO>();
-		for(StubPurBackSheet temp:alOfPurBackSheet){//遍历数组，将对应PO对象加到新数组中
+		for(PurBackSheet temp:alOfPurBackSheet){//遍历数组，将对应PO对象加到新数组中
 			PurBackSheetPO.add(temp.getPO());
 		}
 		sbs.savePurBackSheet(PurBackSheetPO);//保存PO数组到txt
 
 		//销售单
 		ArrayList<SaleSheetPO> SaleSheetPO=new ArrayList<SaleSheetPO>();
-		for(StubSaleSheet temp:alOfSaleSheet){//遍历数组，将对应PO对象加到新数组中
+		for(SaleSheet temp:alOfSaleSheet){//遍历数组，将对应PO对象加到新数组中
 			SaleSheetPO.add(temp.getPO());
 		}
 		sbs.saveSaleSheet(SaleSheetPO);//保存PO数组到txt
 		//销售退货单
 		ArrayList<SaleBackSheetPO> SaleBackSheetPO=new ArrayList<SaleBackSheetPO>();
-		for(StubSaleBackSheet temp:alOfSaleBackSheet){//遍历数组，将对应PO对象加到新数组中
+		for(SaleBackSheet temp:alOfSaleBackSheet){//遍历数组，将对应PO对象加到新数组中
 			SaleBackSheetPO.add(temp.getPO());
 		}
 		sbs.saveSaleBackSheet(SaleBackSheetPO);//保存PO数组到txt

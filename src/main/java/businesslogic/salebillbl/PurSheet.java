@@ -11,7 +11,7 @@ import businesslogic.GetVOandPO;
 import businesslogic.customerbl.Customer;
 import businesslogic.examinebl.Bill;
 
-public class StubPurSheet extends Bill implements GetVOandPO{
+public class PurSheet extends Bill implements GetVOandPO{
 	private BillStyle billstyle=BillStyle.PurSheet;
 	private BillState billstate=BillState.DRAFT;
 	Date date;
@@ -24,6 +24,20 @@ public class StubPurSheet extends Bill implements GetVOandPO{
 	String words;//备注
 	String username;
 	String op;
+	
+	public PurSheet(){};
+	public PurSheet(PurSheetVO vo){
+		this.customer=vo.getcustomer();
+		this.userID=vo.getuserid();
+		this.date=vo.getdate();
+		this.stock=vo.getstock();
+		this.ID=vo.getid();
+		this.sheet=vo.getsheet();
+		this.money1=vo.getmoney1();
+		this.words=vo.getwords();
+		this.op=vo.getop();
+		this.username=vo.getusername();
+	}
 	
 	public String getop(){
 		return this.op;

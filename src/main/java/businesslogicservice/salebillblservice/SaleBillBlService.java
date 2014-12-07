@@ -8,7 +8,7 @@ import vo.PurSheetVO;
 import vo.SaleBackSheetVO;
 import vo.SaleSheetVO;
 
-public interface StubSaleBillBlService {
+public interface SaleBillBlService {
 		/*
 		 *这个接口包含了进货销售人员的任务
 		 *分别是进货和销售单据的增删改查
@@ -21,20 +21,20 @@ public interface StubSaleBillBlService {
 		/*
 		 * 这个类里面只有对单据的操作；
 		 * */
-		public void createPurSheet();
-		public void createPurBackSheet();
-		public void createSaleSheet();
-		public void createSaleBackSheet();
+		public boolean createPurSheet(PurSheetVO vo);
+		public boolean createPurBackSheet(PurBackSheetVO vo);
+		public boolean createSaleSheet(SaleSheetVO vo);
+		public boolean createSaleBackSheet(SaleBackSheetVO vo);
 		
 		public boolean getPurSheet(String id);
 		public boolean getPurBackSheet(String id);
 		public boolean getSaleSheet(String id);
 		public boolean getSaleBackSheet(String id);
 		
-		public boolean changeState_PurSheet();
+		/*public boolean changeState_PurSheet();
 		public boolean changeState_PurBackSheet();
 		public boolean changeState_Salesheet();
-		public boolean changeState_SaleBackSheet();
+		public boolean changeState_SaleBackSheet();*/
 		
 		//更新的具体实现我还没有想好；
 		public boolean updatePurSheet();

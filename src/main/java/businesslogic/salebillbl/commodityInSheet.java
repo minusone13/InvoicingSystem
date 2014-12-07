@@ -1,6 +1,5 @@
 package businesslogic.salebillbl;
 
-import po.stockpo.CommodityPO;
 import businesslogic.commoditybl.MockCommodity;
 
 public class commodityInSheet {

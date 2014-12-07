@@ -10,7 +10,7 @@ import businesslogic.GetVOandPO;
 import businesslogic.customerbl.Customer;
 import businesslogic.examinebl.Bill;
 
-public class StubSaleSheet extends Bill implements GetVOandPO{
+public class SaleSheet extends Bill implements GetVOandPO{
 
 		private String ID;
 		private String userID;
@@ -26,6 +26,22 @@ public class StubSaleSheet extends Bill implements GetVOandPO{
 		String words;//备注
 		String username;
 		String op;
+		
+		public SaleSheet(){};
+		public SaleSheet(SaleSheetVO vo){
+			this.ID=vo.getid();
+			this.customer=vo.getcustomer();
+			this.sheet=vo.getsheet();
+			this.discount=vo.getdiscount();
+			this.money1=vo.getmoney1();
+			this.money2=vo.getmoney2();
+			this.pmoney=vo.getpmoney();
+			this.words=vo.getwords();
+			this.userID=vo.getuserid();
+			this.username=vo.getusername();
+			this.op=vo.getop();
+			this.date=vo.getdate();
+		};
 		
 		public String getop(){
 			return this.op;
