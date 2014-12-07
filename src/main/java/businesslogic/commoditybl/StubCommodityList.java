@@ -36,6 +36,7 @@ public class StubCommodityList {//商品列表 haha
 		else
 		{
 			MockCommodity com=new MockCommodity(vo);
+			com.setNumber(0);
 			com.setLastin(-1);
 			com.setLastout(-1);
 			RM result = comdata.insert(com.toPO());

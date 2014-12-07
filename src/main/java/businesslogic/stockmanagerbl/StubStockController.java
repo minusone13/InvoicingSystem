@@ -123,7 +123,7 @@ public class StubStockController implements StubCommodityBlService, StockBlForSa
 	}
 	public double getAdjustmentTotal(Date d1, Date d2)
 	{//商品调价。这个返回值可能为正，也可能为负
-		return 0;
+		return l.getAdjustmentTotal(d1, d2);
 	}
 	public double getGiftBillTotal(Date d1, Date d2)
 	{//赠送单支出。这个返回值可能为非负

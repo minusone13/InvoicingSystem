@@ -77,7 +77,7 @@ public class MockCommodity {
 		name=vo.getName();
 		id=parent+"\\"+name;
 		model=vo.getModel();
-		number=0;
+		number=vo.getNumber();
 		in=vo.getIn();
 		out=vo.getOut();
 		lastin=vo.getLastin();

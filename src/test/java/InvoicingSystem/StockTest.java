@@ -12,6 +12,7 @@ import presentation.commodityui.StockManagerDriver;
 import businesslogic.commoditybillbl.StubAlertBill;
 import businesslogic.examinebl.StubBillPool;
 import businesslogic.stockmanagerbl.StubStockController;
+import businesslogic.stockservice.StockBlForFinancial;
 import businesslogic.stockservice.StockBlForSalesMen;
 import businesslogicservice.commodityblservice.StubCommodityBlService;
 import data.commoditydata.*;
@@ -47,7 +48,7 @@ public class StockTest{
 		combl.addCommodity(mockvo);
 		combl.addCommodity(mockvo1);
 		StubStockController contro=new StubStockController();
-		contro.checkIn("JHD-20141206-00001", "好好防盗门", "fdm05", 50, 150);
+		contro.checkIn("JHD-20141204-00001", "好好防盗门", "fdm05", 50, 150);
 	}
 	
 	@Test
@@ -271,5 +272,39 @@ public class StockTest{
 		assertEquals(30,(int)out);
 	}
 	
+	@Test
+	public void testStockForFinancial()
+	{
+		StockBlForFinancial sf=new StubStockController();
+		StubStockController sc=new StubStockController();
+		ArrayList<CommodityVO> coms = sc.findCommodity("好好防盗门");
+		CommodityVO com = coms.get(1);
+		com.setIn(160);
+		sc.updateCommodity(com);
+		Date d1 = new Date();
+		d1.setYear(100);
+		Date d2 = new Date();
+		d2.setYear(200);
+		double result = sf.getAdjustmentTotal(d1, d2);
+		assertEquals(500,(int)result);
+	}
 	
+	@Test
+	public void testStockForFinancialComplex()
+	{
+		StockBlForFinancial sf=new StubStockController();
+		StubStockController sc=new StubStockController();
+		ArrayList<CommodityVO> coms = sc.findCommodity("好好防盗门");
+		CommodityVO com = coms.get(1);
+		com.setIn(160);
+		sc.updateCommodity(com);
+		com.setIn(140);
+		sc.updateCommodity(com);
+		Date d1 = new Date();
+		d1.setYear(100);
+		Date d2 = new Date();
+		d2.setYear(200);
+		double result = sf.getAdjustmentTotal(d1, d2);
+		assertEquals(-500,(int)result);
+	}
 }

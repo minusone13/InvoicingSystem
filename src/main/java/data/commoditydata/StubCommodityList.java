@@ -21,6 +21,7 @@ public class StubCommodityList implements Serializable{
 		cat=cats.get(0);
 		cat.add(new StubCategoryData("1","default category"));
 		flatlist=new ArrayList<MockCommodityData>();
+		adjusts=new ArrayList<AdjustmentRecordPO>();
 		return true;
 	}
 	public RM insert(CommodityPO po)
