@@ -16,11 +16,13 @@ import businesslogic.examinebl.StubBillPool;
 import businesslogic.financialbillbl.CashPaymentBill;
 import businesslogic.financialbillbl.PaymentBill;
 import businesslogic.financialbillbl.ReceiptBill;
+import businesslogic.salebillServicec.salebillForFinancial;
 import businesslogic.salebillbl.SaleBackSheet;
 import businesslogic.salebillbl.PurBackSheet;
 import businesslogic.salebillbl.PurSheet;
 import businesslogic.salebillbl.SaleBackSheet;
 import businesslogic.salebillbl.SaleSheet;
+import businesslogic.salebillbl.salebillController;
 import businesslogic.stockmanagerbl.StubStockController;
 import businesslogic.stockservice.StockBlForFinancial;
 import vo.*;
@@ -62,6 +64,7 @@ public class Inquiry {
 						sale.getDate().compareTo(dateAfter)<=0){}
 				else continue;
 			}
+			
 			//商品名
 			if(isv.getCommodityName()!=null) {
 				
@@ -376,6 +379,7 @@ public class Inquiry {
 			e.printStackTrace();
 		}
 		StockBlForFinancial stock = new StubStockController();
+		salebillForFinancial sale = new salebillController();
 		//商品调价收入
 		double adjustmentTotal = stock.getAdjustmentTotal(dateBefore, dateAfter);
 		bsVO.setAdjustmentTotal(adjustmentTotal);
@@ -392,6 +396,16 @@ public class Inquiry {
 		double lossTotal = stock.getLossTotal(dateBefore, dateAfter);
 		bsVO.setLossTotal(lossTotal);
 		
+		//代金券与实际收款差额收入
+		double bonusTotal = sale.getAllVoucherBonus(dateBefore, dateAfter);
+		
+		//折让后收入
+		double saleTotal = sale.getAllSalesIncome(dateBefore, dateAfter);
+		
+		//折让
+		double discount = sale.getAllSalesDiscount(dateBefore, dateAfter);
+		
+		//销售成本
 		return bsVO;
 	}
 	
