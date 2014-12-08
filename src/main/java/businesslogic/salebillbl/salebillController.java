@@ -1,6 +1,7 @@
 package businesslogic.salebillbl;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import vo.CustomerVO;
 import vo.PurBackSheetVO;
@@ -226,6 +227,16 @@ public class salebillController implements SaleBillBlService{
 		public SaleBackSheetVO findSaleBackSheet(String id) {
 			// TODO Auto-generated method stub
 			return null;
+		}
+
+		public int getAllVoucher(Date start, Date end) {
+			// TODO Auto-generated method stub
+			return 0;
+		}
+
+		public double getAllVoucherBonus(Date start, Date end) {
+			// TODO Auto-generated method stub
+			return 0;
 		}
 	
 }
