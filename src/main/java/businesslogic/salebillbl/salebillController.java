@@ -181,6 +181,7 @@ public class salebillController implements SaleBillBlService,salebillForFinancia
 		}*/
 		
 		//改变状态这个方法需要调用单据池里面写完了的的就好了；
+		//感觉还是不能删，只是调用就行；
 
 		public boolean updatePurSheet() {
 			// TODO Auto-generated method stub
@@ -301,7 +302,13 @@ public class salebillController implements SaleBillBlService,salebillForFinancia
 		
 		//写下面四个函数时，注意要对时间进行判断，而且要筛选单据的状态；
 		public int getAllVoucher(Date start, Date end) {
-			// TODO Auto-generated method stub
+			int number=0;
+			StubBillPool pool = new StubBillPool();
+			ArrayList<SaleSheet> listOfSaleSheet= new ArrayList<SaleSheet>();
+			listOfSaleSheet=pool.getSaleSheet();
+			ArrayList<SaleBackSheet> listOfSaleBackSheet= new ArrayList<SaleBackSheet>();
+			listOfSaleBackSheet=pool.getSaleBackSheet();
+			
 			return 0;
 		}
 
