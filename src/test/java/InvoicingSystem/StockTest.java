@@ -273,6 +273,30 @@ public class StockTest{
 	}
 	
 	@Test
+	public void testundoIn()
+	{
+		StockBlForSalesMen sc=new StubStockController();
+		RM result = sc.checkOut("XSD-20141206-00000", "好好防盗门", "fdm05", 10, 300);
+		assertEquals(RM.done,result);
+		CommodityPO po = data.findCommodity("好好防盗门", "fdm05");
+		result = sc.readyForOut("XSD-20141206-00001", "好好防盗门", "fdm05", 20, 200);
+		assertEquals(RM.done,result);
+		result = sc.checkOut("XSD-20141206-00001", "好好防盗门", "fdm05", 10, 300);
+		assertEquals(RM.done,result);
+		sc.undoCheckOut("XSTHD-20141206-00001", "好好防盗门", "fdm05", 10, 300);
+		result = sc.checkIn("JHD-20141206-00002", "好好防盗门", "fdm05", 40, 50);
+		assertEquals(RM.done,result);
+		result = sc.undoCheckIn("JHTHD-20141206-00002", "好好防盗门", "fdm05", 40, 50);
+		assertEquals(RM.done,result);
+		CommodityPO po1 = data.findCommodity("好好防盗门", "fdm05");
+		assertEquals(po.getAlertLine(),po1.getAlertLine());
+		assertEquals(po.getId(),po1.getId());
+		assertEquals(po.getIn(),po1.getIn(),0.01);
+		assertEquals(po.getOut(),po1.getOut(),0.01);
+		assertEquals(po.getNumber(),po1.getNumber());
+	}
+	
+	@Test
 	public void testStockForFinancial()
 	{
 		StockBlForFinancial sf=new StubStockController();

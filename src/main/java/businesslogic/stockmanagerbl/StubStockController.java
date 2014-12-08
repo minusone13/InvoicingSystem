@@ -62,11 +62,11 @@ public class StubStockController implements StubCommodityBlService, StockBlForSa
 	
 	public RM undoCheckIn(String id,String name, String model, int quantity, double price)
 	{//当进货退货单被审批后，请调用
-		return RM.done;
+		return l.undoCheckIn(id, name, model, quantity, price);
 	}
 	public RM undoCheckOut(String id,String name, String model, int quantity, double price)
 	{//当销售退货单被审批后，请调用
-		return RM.done;
+		return l.undoCheckOut(id, name, model, quantity, price);
 	}
 	public RM checkIn(String id, String name, String model, int quantity, double price)
 	{
