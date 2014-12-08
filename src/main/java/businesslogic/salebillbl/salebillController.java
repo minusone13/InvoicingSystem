@@ -54,36 +54,66 @@ public class salebillController implements SaleBillBlService,salebillForFinancia
 			return true;
 		}
 
+		
+		//等等这边有个逻辑上的问题，我怎么得到的是个boolean型...
 		public boolean getPurSheet(String id) {
 			// TODO Auto-generated method stub
-			if(id=="131")
-				return true;
-			else
-				return false;
+			StubBillPool pool = new StubBillPool();
+			ArrayList<PurSheet> listOfPurSheet= new ArrayList<PurSheet>();
+			listOfPurSheet=pool.getPurSheet();
+			boolean hasFind = false;
+			for(PurSheet pursheet:listOfPurSheet){
+				if(pursheet.getid().equals(id)){
+					hasFind=true;
+					break;
+				}
+			}
+			return hasFind;
 		}
 
 		public boolean getPurBackSheet(String id) {
 			// TODO Auto-generated method stub
-			if(id=="131")
-				return true;
-			else
-				return false;
+			StubBillPool pool = new StubBillPool();
+			ArrayList<PurBackSheet> listOfPurBackSheet= new ArrayList<PurBackSheet>();
+			listOfPurBackSheet=pool.getPurBackSheet();
+			boolean hasFind = false;
+			for(PurBackSheet purbacksheet:listOfPurBackSheet){
+				if(purbacksheet.getid().equals(id)){
+					hasFind=true;
+					break;
+				}
+			}
+			return hasFind;
 		}
 
 		public boolean getSaleSheet(String id) {
 			// TODO Auto-generated method stub
-			if(id=="131")
-				return true;
-			else
-				return false;
+			StubBillPool pool = new StubBillPool();
+			ArrayList<SaleSheet> listOfSaleSheet= new ArrayList<SaleSheet>();
+			listOfSaleSheet=pool.getSaleSheet();
+			boolean hasFind = false;
+			for(SaleSheet salesheet:listOfSaleSheet){
+				if(salesheet.getid().equals(id)){
+					hasFind=true;
+					break;
+				}
+			}
+			return hasFind;
 		}
 
 		public boolean getSaleBackSheet(String id) {
 			// TODO Auto-generated method stub
-			if(id=="131")
-				return true;
-			else
-				return false;
+			StubBillPool pool = new StubBillPool();
+			ArrayList<SaleBackSheet> listOfSaleBackSheet= new ArrayList<SaleBackSheet>();
+			listOfSaleBackSheet=pool.getSaleBackSheet();
+			boolean hasFind = false;
+			for(SaleBackSheet salebacksheet:listOfSaleBackSheet){
+				if(salebacksheet.getid().equals(id)){
+					hasFind=true;
+					break;
+				}
+			}
+			return hasFind;
 		}
 
 		/*获取所有的进货单*/
@@ -149,6 +179,8 @@ public class salebillController implements SaleBillBlService,salebillForFinancia
 			// TODO Auto-generated method stub
 			return false;
 		}*/
+		
+		//改变状态这个方法需要调用单据池里面写完了的的就好了；
 
 		public boolean updatePurSheet() {
 			// TODO Auto-generated method stub
@@ -211,25 +243,63 @@ public class salebillController implements SaleBillBlService,salebillForFinancia
 		}
 
 		public PurSheetVO findPurSheet(String id) {
-			// TODO Auto-generated method stub
-			return null;
+			StubBillPool pool = new StubBillPool();
+			ArrayList<PurSheet> listOfPurSheet= new ArrayList<PurSheet>();
+			listOfPurSheet=pool.getPurSheet();
+			PurSheetVO result = new PurSheetVO();
+			for(PurSheet pursheet:listOfPurSheet){
+				if(pursheet.getid().equals(id)){
+					result=pursheet.getVO();
+					break;
+				}
+			}
+			return result;
 		}
 
 		public PurBackSheetVO findPurBackSheet(String id) {
-			// TODO Auto-generated method stub
-			return null;
+			StubBillPool pool = new StubBillPool();
+			ArrayList<PurBackSheet> listOfPurBackSheet= new ArrayList<PurBackSheet>();
+			listOfPurBackSheet=pool.getPurBackSheet();
+			PurBackSheetVO result = new PurBackSheetVO();
+			for(PurBackSheet purbacksheet:listOfPurBackSheet){
+				if(purbacksheet.getid().equals(id)){
+					result=purbacksheet.getVO();
+					break;
+				}
+			}
+			return result;
 		}
 
 		public SaleSheetVO findSaleSheet(String id) {
-			// TODO Auto-generated method stub
-			return null;
+			StubBillPool pool = new StubBillPool();
+			ArrayList<SaleSheet> listOfSaleSheet= new ArrayList<SaleSheet>();
+			listOfSaleSheet=pool.getSaleSheet();
+			SaleSheetVO result = new SaleSheetVO();
+			for(SaleSheet salesheet:listOfSaleSheet){
+				if(salesheet.getid().equals(id)){
+					result=salesheet.getVO();
+					break;
+				}
+			}
+			return result;
 		}
 
 		public SaleBackSheetVO findSaleBackSheet(String id) {
-			// TODO Auto-generated method stub
-			return null;
+			StubBillPool pool = new StubBillPool();
+			ArrayList<SaleBackSheet> listOfSaleBackSheet= new ArrayList<SaleBackSheet>();
+			listOfSaleBackSheet=pool.getSaleBackSheet();
+			SaleBackSheetVO result = new SaleBackSheetVO();
+			for(SaleBackSheet salebacksheet:listOfSaleBackSheet){
+				if(salebacksheet.getid().equals(id)){
+					result=salebacksheet.getVO();
+					break;
+				}
+			}
+			return result;
 		}
 
+		
+		//写下面四个函数时，注意要对时间进行判断，而且要筛选单据的状态；
 		public int getAllVoucher(Date start, Date end) {
 			// TODO Auto-generated method stub
 			return 0;
