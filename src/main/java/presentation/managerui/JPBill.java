@@ -151,6 +151,9 @@ public class JPBill extends JPanel {
 		operatorOfPR.setBounds(345, 15, 50, 16);
 		customerOfPR.setBounds(330, 33, 50, 16);
 		moneyOfPR.setBounds(330, 49, 50, 16);
+		operatorOfPR.setText(rb.getOp());
+		customerOfPR.setText(rb.getCustomer());
+		moneyOfPR.setText(String.valueOf(rb.getTotal()));
 		//将组件加到面板上
 		this.add(right,0);
 		this.add(left,1);
@@ -188,6 +191,9 @@ public class JPBill extends JPanel {
 		operatorOfPR.setBounds(345, 15, 50, 16);
 		customerOfPR.setBounds(330, 33, 50, 16);
 		moneyOfPR.setBounds(330, 49, 50, 16);
+		operatorOfPR.setText(pb.getOp());
+		customerOfPR.setText(pb.getCustomer());
+		moneyOfPR.setText(String.valueOf(pb.getTotal()));
 		//将组件加到面板上
 		this.add(right,0);
 		this.add(left,1);
@@ -285,19 +291,39 @@ public class JPBill extends JPanel {
 		rb.setID(ID);//设置对应单据的编号
 		mbl.change(rb);
 		//根据内存中单据的数据重新设置面板界面
+		if(!rb.getOp().equals("")){
+			 operatorOfPR.setText(rb.getOp());
+		}
+		 if(!rb.getCustomer().equals("")){//如果vo对象里的账户属性不为空
+			 customerOfPR.setText(rb.getCustomer());
+		 }
+		 if(rb.getTotal()!=0){//如果vo对象里的账户属性不为空
+			 moneyOfPR.setText(String.valueOf(rb.getTotal()));
+		 }
 	}
 	public void change(PaymentVO pb){
 		//调用逻辑层修改对应单据的数据
 		pb.setID(ID);//设置对应单据的编号
 		mbl.change(pb);
 		//根据内存中单据的数据重新设置面板界面
+		if(!pb.getOp().equals("")){
+			 operatorOfPR.setText(pb.getOp());
+		}
+		 if(!pb.getCustomer().equals("")){//如果vo对象里的账户属性不为空
+			 customerOfPR.setText(pb.getCustomer());
+		 }
+		 if(pb.getTotal()!=0){//如果vo对象里的账户属性不为空
+			 moneyOfPR.setText(String.valueOf(pb.getTotal()));
+		 }
 	}
 	public void change(CashPaymentVO cb){
 		//调用逻辑层修改对应单据的数据
 		cb.setID(ID);//设置对应单据的编号
 		mbl.change(cb);
 		//根据内存中单据的数据重新设置面板界面
-		 operatorOfCas.setText("");
+		if(!cb.getOp().equals("")){
+			 operatorOfCas.setText(cb.getOp());
+		}
 		 if(!cb.getAccount().equals("")){//如果vo对象里的账户属性不为空
 			 accountOfCas.setText(cb.getAccount());
 		 }
