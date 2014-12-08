@@ -11,9 +11,10 @@ import vo.SaleSheetVO;
 import vo.financialBillVO.ReceiptVO;
 import businesslogic.examinebl.StubBillPool;
 import businesslogic.financialbillbl.ReceiptBill;
+import businesslogic.salebillServicec.salebillForFinancial;
 import businesslogicservice.salebillblservice.SaleBillBlService;
 
-public class salebillController implements SaleBillBlService{
+public class salebillController implements SaleBillBlService,salebillForFinancial{
 		salebillList salebilllist;
 		
 		// salebillsaversevvice中有getall的方法；
@@ -235,6 +236,16 @@ public class salebillController implements SaleBillBlService{
 		}
 
 		public double getAllVoucherBonus(Date start, Date end) {
+			// TODO Auto-generated method stub
+			return 0;
+		}
+
+		public double getAllSalesIncome(Date start,Date end) {
+			// TODO Auto-generated method stub
+			return 0;
+		}
+
+		public double getAllSalesDiscount(Date start,Date end) {
 			// TODO Auto-generated method stub
 			return 0;
 		}

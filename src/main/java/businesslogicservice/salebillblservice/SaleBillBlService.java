@@ -59,8 +59,6 @@ public interface SaleBillBlService {
 		public SaleSheetVO findSaleSheet(String id);
 		public SaleBackSheetVO findSaleBackSheet(String id);
 		
-		public int getAllVoucher(Date start,Date end);//计算一段时间内发放了多少代金券；
-		public double getAllVoucherBonus(Date start,Date end);//计算一段时间内实际收款差额；
-		
+
 		
 }
