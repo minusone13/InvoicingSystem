@@ -130,9 +130,6 @@ public class CommodityPO implements Serializable, Cloneable{
 	public void setLastout(double lastout) {
 		this.lastout = lastout;
 	}
-	public double getAverage() {
-		return alertLine;
-	}
 	public void setParent(String parent) {
 		this.parent = parent;
 	}

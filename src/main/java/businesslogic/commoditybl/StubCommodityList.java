@@ -168,7 +168,8 @@ public class StubCommodityList {//商品列表 haha
 		total-=quantity*price;
 		int quantitytemp=com.getNumber();
 		quantitytemp-=quantity;
-		com.setIn(total/quantitytemp);
+		if(quantitytemp!=0)
+			com.setIn(total/quantitytemp);
 		CommodityRecord r = new CommodityRecord(id,new Date(),0,quantity,0,price,0,quantity,0,price);
 		com.setNumber(num-quantity);
 		com.add(r);
@@ -204,7 +205,8 @@ public class StubCommodityList {//商品列表 haha
 				total-=quantity*price;
 				int quantitytemp=com.outQuantity();
 				quantitytemp-=quantity;
-				com.setOut(total/quantitytemp);
+				if(quantitytemp!=0)
+					com.setOut(total/quantitytemp);
 			}
 		}
 		com.setNumber(num+quantity);
