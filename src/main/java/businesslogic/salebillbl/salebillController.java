@@ -308,7 +308,6 @@ public class salebillController implements SaleBillBlService,salebillForFinancia
 			listOfSaleSheet=pool.getSaleSheet();
 			ArrayList<SaleBackSheet> listOfSaleBackSheet= new ArrayList<SaleBackSheet>();
 			listOfSaleBackSheet=pool.getSaleBackSheet();
-			
 			return 0;
 		}
 
@@ -323,6 +322,11 @@ public class salebillController implements SaleBillBlService,salebillForFinancia
 		}
 
 		public double getAllSalesDiscount(Date start,Date end) {
+			// TODO Auto-generated method stub
+			return 0;
+		}
+
+		public double getAllPurMoney(Date start, Date end) {
 			// TODO Auto-generated method stub
 			return 0;
 		}

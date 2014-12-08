@@ -8,4 +8,6 @@ public interface salebillForFinancial {
 	
 	public double getAllSalesIncome(Date start,Date end);//计算一段时间内有多少折让后收入；
 	public double getAllSalesDiscount(Date start,Date end);//计算一段时间内共计多少折让；
+	
+	public double getAllPurMoney(Date start,Date end);//计算一段时间内进货支出;
 }
