@@ -14,8 +14,10 @@ import javax.swing.JTextField;
 
 import presentation.managerui.JPBillList;
 import presentation.managerui.MouseListenerGetXY;
+import presentation.userui.Login;
 import vo.financialBillVO.CashPaymentVO;
 import vo.financialBillVO.PaymentVO;
+import vo.financialBillVO.ReceiptVO;
 import businesslogic.BillStyle;
 
 public class JPmanageBills2 extends JPanel {
@@ -500,6 +502,15 @@ public class JPmanageBills2 extends JPanel {
 									if(legal){
 										//生成新的单据加入到billList
 										System.out.println("生成了一张收款单");
+										ReceiptVO newRec=new ReceiptVO();
+										//传入单据数据
+										newRec.setCustomer(customerCombo.getSelectedItem().toString());
+										newRec.setTotal(Double.parseDouble(tranTotalText.getText()));
+										newRec.setAccounts(tranListEdit.getListArray());
+										newRec.setMoney(tranListEdit.getMoneyArray());
+										newRec.setRemark(tranListEdit.getNoteArray());
+										//将设置好数据的单据VO加到billList
+										billList.addReceiptBill(newRec);
 										//清空信息
 										tranTotalText.setText("");
 										tranListEdit.getListArray().clear();//清空三个数组
@@ -529,6 +540,13 @@ public class JPmanageBills2 extends JPanel {
 										System.out.println("生成了一张付款单");
 										PaymentVO newPay=new PaymentVO();
 										//传入单据数据
+										newPay.setCustomer(customerCombo.getSelectedItem().toString());
+										newPay.setTotal(Double.parseDouble(tranTotalText.getText()));
+										newPay.setAccounts(tranListEdit.getListArray());
+										newPay.setMoney(tranListEdit.getMoneyArray());
+										newPay.setRemark(tranListEdit.getNoteArray());
+										//将设置好数据的单据VO加到billList
+										billList.addPaymentBill(newPay);
 										//清空信息
 										tranTotalText.setText("");
 										tranListEdit.getListArray().clear();//清空三个数组
@@ -589,7 +607,127 @@ public class JPmanageBills2 extends JPanel {
 							}
 						}
 						else{//是修改单据
-							
+							switch(billStyle){
+							case ReceiptBill:
+								if(customerCombo.getSelectedItem()==null){
+									System.out.println("没有客户，不能创建单据");
+								}
+								else{
+									boolean legal=false;
+									boolean customerIsEmpty=customerCombo.getSelectedItem().toString().equals("");
+									boolean totalIsEmpty=tranTotalText.getText().equals("");
+									boolean listIsEmpty=tranListEdit.getListArray().isEmpty();
+									
+									if(!customerIsEmpty&&!totalIsEmpty&&!listIsEmpty){
+										legal=true;
+									}
+									if(legal){
+										//生成新的单据加入到billList
+										System.out.println("生成了一张收款单");
+										ReceiptVO newRec=new ReceiptVO();
+										//传入单据数据
+										newRec.setCustomer(customerCombo.getSelectedItem().toString());
+										newRec.setTotal(Double.parseDouble(tranTotalText.getText()));
+										newRec.setAccounts(tranListEdit.getListArray());
+										newRec.setMoney(tranListEdit.getMoneyArray());
+										newRec.setRemark(tranListEdit.getNoteArray());
+										newRec.setOp(Login.operator+Login.IDofOperator);//修改操作员
+										//修改billList中被选中的单据
+										billList.changeChosen(newRec);
+										//清空信息
+										tranTotalText.setText("");
+										tranListEdit.getListArray().clear();//清空三个数组
+										tranListEdit.getMoneyArray().clear();
+										tranListEdit.getNoteArray().clear();
+									}
+									else{
+										System.out.println("单据信息不完整，请检查是否填写了转账列表");
+									}
+								}
+								break;
+							case PaymentBill:
+								if(customerCombo.getSelectedItem()==null){
+									System.out.println("没有客户，不能创建单据");
+								}
+								else{
+									boolean legal2=false;
+									boolean customerIsEmpty2=customerCombo.getSelectedItem().toString().equals("");
+									boolean totalIsEmpty2=tranTotalText.getText().equals("");
+									boolean listIsEmpty2=tranListEdit.getListArray().isEmpty();
+									
+									if(!customerIsEmpty2&&!totalIsEmpty2&&!listIsEmpty2){
+										legal2=true;
+									}
+									if(legal2){
+										//生成新的单据加入到billList
+										System.out.println("生成了一张付款单");
+										PaymentVO newPay=new PaymentVO();
+										//传入单据数据
+										newPay.setCustomer(customerCombo.getSelectedItem().toString());
+										newPay.setTotal(Double.parseDouble(tranTotalText.getText()));
+										newPay.setAccounts(tranListEdit.getListArray());
+										newPay.setMoney(tranListEdit.getMoneyArray());
+										newPay.setRemark(tranListEdit.getNoteArray());
+										newPay.setOp(Login.operator+Login.IDofOperator);//修改操作员
+										//修改billList中被选中的单据
+										billList.changeChosen(newPay);
+										//清空信息
+										tranTotalText.setText("");
+										tranListEdit.getListArray().clear();//清空三个数组
+										tranListEdit.getMoneyArray().clear();
+										tranListEdit.getNoteArray().clear();
+									}
+									else{
+										System.out.println("单据信息不完整，请检查是否填写了转账列表");
+									}
+								}
+								break;
+							case CashPaymentBill:
+								boolean legal3=false;
+								boolean accountIsEmpty=accountText.getText().equals("");
+								boolean totalIsEmpty3=totalText.getText().equals("");
+								boolean listIsEmpty3=ListEdit.getListArray().isEmpty();
+								
+								if(!accountIsEmpty&&!totalIsEmpty3&&!listIsEmpty3){
+									legal3=true;
+								}
+								if(legal3){
+									//生成新的单据加入到billList
+									//设置单据数据
+									System.out.println("生成了一张现金费用单");
+									CashPaymentVO newCash=new CashPaymentVO();
+									
+									System.out.println("银行账户是："+accountText.getText());
+									newCash.setAccount(accountText.getText());
+									
+									for(int i=0;i<ListEdit.getListArray().size();i++){
+										System.out.println("条目名"+(i+1)+":"+ListEdit.getListArray().get(i));
+										newCash.getItem().add(ListEdit.getListArray().get(i));
+										
+										System.out.println("金额"+(i+1)+":"+ListEdit.getMoneyArray().get(i));
+										newCash.getMoney().add(ListEdit.getMoneyArray().get(i));
+										
+										System.out.println("备注"+(i+1)+":"+ListEdit.getNoteArray().get(i));
+										newCash.getRemark().add(ListEdit.getNoteArray().get(i));
+									}
+									System.out.println("总额是："+totalText.getText());
+									newCash.setTotal(Double.parseDouble(totalText.getText()));
+									
+									newCash.setOp(Login.operator+Login.IDofOperator);//修改操作员
+									//修改billList中被选中的单据
+									billList.changeChosen(newCash);
+									//清空信息
+									accountText.setText("");
+									totalText.setText("");
+									ListEdit.getListArray().clear();//清空三个数组
+									ListEdit.getMoneyArray().clear();
+									ListEdit.getNoteArray().clear();
+								}
+								else{
+									System.out.println("单据信息不完整，请检查是否填写了转账列表");
+								}
+								break;
+							}
 						}
 						break;
 					}

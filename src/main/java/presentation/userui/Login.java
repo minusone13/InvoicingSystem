@@ -22,6 +22,9 @@ import businesslogicservice.userblservice.StubUserBlService;
 
 public class Login extends JPanel {
 
+	//操作员信息
+	public static String operator="";//操作员名字
+	public static String IDofOperator="";//操作员ID
 	//背景
 	private JLabel bg=new JLabel();
 	//隐藏的注册面板
@@ -115,6 +118,9 @@ public class Login extends JPanel {
 						UserVO userVO=userService.login(userName,passWords);
 						if(userVO!=null){
 							System.out.println("登录的是："+userVO.getR());
+							//将当前操作员信息赋值给当前登录面板的静态变量
+							operator=userVO.getName();
+							IDofOperator=userVO.getID();
 						}
 						else{
 							System.out.println("用户名或密码错误，请重新输入");
