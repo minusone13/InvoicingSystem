@@ -43,9 +43,19 @@ public class CustomerList implements CustomerForFinancial, CustomerBlService{
 		}
 		
 		public ArrayList<CustomerVO> getAllCustomer(){
-			//读取地址是固定的ma?
-			return null;
+			ArrayList<CustomerVO> listOfCustomerVO = new ArrayList<CustomerVO>();
+			ArrayList<CustomerPO> listOfCustomerPO = customerdata.getAllCustomer();
+			for(CustomerPO po: listOfCustomerPO){
+				Customer customer = new Customer();
+				customer.setPO(po);
+				CustomerVO vo = customer.getVO();
+				listOfCustomerVO.add(vo);
+			}
+			return listOfCustomerVO;
 		}
+		
+		//数据层的那个数据需要读入地址作为参数吗？
+		//感觉是需要的啊。。
 		//这边的命名和梅杰要商量一下；
 
 		public ArrayList<CustomerVO> getCustomer(String address) {
@@ -58,10 +68,12 @@ public class CustomerList implements CustomerForFinancial, CustomerBlService{
 		 	customerdata.saveAllCustomer(listOfCustomerPO);
 		 } 
 		 
+		//这个方法是把现在ArrayList里的po序列化得保存到目标地址;
+		 
 		 * */
 		public void saveCustomer(String address) {
 			// TODO Auto-generated method stub
-			
+			//这个方法是把已有的客户整体搬迁到另一个文档里;
 		}
 		
 }
