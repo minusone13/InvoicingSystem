@@ -16,11 +16,13 @@ import businesslogic.examinebl.StubBillPool;
 import businesslogic.financialbillbl.CashPaymentBill;
 import businesslogic.financialbillbl.PaymentBill;
 import businesslogic.financialbillbl.ReceiptBill;
+import businesslogic.salebillServicec.salebillForFinancial;
 import businesslogic.salebillbl.SaleBackSheet;
 import businesslogic.salebillbl.PurBackSheet;
 import businesslogic.salebillbl.PurSheet;
 import businesslogic.salebillbl.SaleBackSheet;
 import businesslogic.salebillbl.SaleSheet;
+import businesslogic.salebillbl.salebillController;
 import businesslogic.stockmanagerbl.StubStockController;
 import businesslogic.stockservice.StockBlForFinancial;
 import vo.*;
@@ -32,7 +34,7 @@ import vo.inquiryVO.InquirySaleVO;
 //1、模糊查找
 //2、完善返回到ui层的内容
 //3、红冲功能，需要各位人员创建单据功能
-//4、销售人员和库存人员来完成收入支出计算的操作
+
 //5、导出excel表
 //6、金额计算
 public class Inquiry {
@@ -62,6 +64,7 @@ public class Inquiry {
 						sale.getDate().compareTo(dateAfter)<=0){}
 				else continue;
 			}
+			
 			//商品名
 			if(isv.getCommodityName()!=null) {
 				
@@ -376,6 +379,7 @@ public class Inquiry {
 			e.printStackTrace();
 		}
 		StockBlForFinancial stock = new StubStockController();
+		salebillForFinancial sale = new salebillController();
 		//商品调价收入
 		double adjustmentTotal = stock.getAdjustmentTotal(dateBefore, dateAfter);
 		bsVO.setAdjustmentTotal(adjustmentTotal);
@@ -392,6 +396,19 @@ public class Inquiry {
 		double lossTotal = stock.getLossTotal(dateBefore, dateAfter);
 		bsVO.setLossTotal(lossTotal);
 		
+		//代金券与实际收款差额收入
+		double bonusTotal = sale.getAllVoucherBonus(dateBefore, dateAfter);
+		bsVO.setBonusTotal(bonusTotal);
+		
+		//折让后收入
+		double saleTotal = sale.getAllSalesIncome(dateBefore, dateAfter);
+		bsVO.setSaleTotal(saleTotal);
+		
+		//折让
+		double discount = sale.getAllSalesDiscount(dateBefore, dateAfter);
+		bsVO.setDiscount(discount);
+		
+		//销售成本
 		return bsVO;
 	}
 	
