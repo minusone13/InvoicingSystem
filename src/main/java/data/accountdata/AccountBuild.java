@@ -34,7 +34,7 @@ public class AccountBuild{
 	
 	public void saveCommodity() {
 		StockDataForFinancial sd = StubStockDataController.getInstance();
-		sd.save("accountBuild\\commodity\\"+version+".ser");		
+		sd.saveAndBuild("accountBuild\\commodity\\"+version+".ser");		
 	}
 	
 	public void saveCustomer() {
