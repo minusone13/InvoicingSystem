@@ -20,7 +20,6 @@ import data.stockservice.StockDataForFinancial;
 import dataservice.accountdataservice.StubAccountDataService;
 
 public class AccountBuild{
-	//差客户信息
 	String version=null;
 	public AccountBuild() {
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");//change yyyy/MM/dd to this by lhw

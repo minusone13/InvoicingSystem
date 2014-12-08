@@ -34,7 +34,7 @@ import vo.inquiryVO.InquirySaleVO;
 //1、模糊查找
 //2、完善返回到ui层的内容
 //3、红冲功能，需要各位人员创建单据功能
-//4、销售人员和库存人员来完成收入支出计算的操作
+
 //5、导出excel表
 //6、金额计算
 public class Inquiry {
@@ -398,12 +398,15 @@ public class Inquiry {
 		
 		//代金券与实际收款差额收入
 		double bonusTotal = sale.getAllVoucherBonus(dateBefore, dateAfter);
+		bsVO.setBonusTotal(bonusTotal);
 		
 		//折让后收入
 		double saleTotal = sale.getAllSalesIncome(dateBefore, dateAfter);
+		bsVO.setSaleTotal(saleTotal);
 		
 		//折让
 		double discount = sale.getAllSalesDiscount(dateBefore, dateAfter);
+		bsVO.setDiscount(discount);
 		
 		//销售成本
 		return bsVO;
