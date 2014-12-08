@@ -239,6 +239,12 @@ public class StubStockDataController implements StubCommodityDataService, StockD
     	save (file);
     	return true;
     }
+    public boolean saveAndBuild(String s)
+    {
+    	l.accountBuild();
+    	save(s);
+    	return true;
+    }
 	public StubCommodityList getL() {
 		return l;
 	}

@@ -185,4 +185,13 @@ public class StubCommodityList implements Serializable{
 			result.add(adjusts.get(i));
 		return result;
 	}
+	public boolean accountBuild()
+	{
+		for(int i=0;i<flatlist.size();i++)
+		{
+			flatlist.get(i).setLastin(-1);
+			flatlist.get(i).setLastout(-1);
+		}
+		return true;
+	}
 }
