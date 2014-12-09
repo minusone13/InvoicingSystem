@@ -1,5 +1,7 @@
 package presentation.managerui;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -19,8 +21,6 @@ import vo.financialBillVO.PaymentVO;
 import vo.financialBillVO.ReceiptVO;
 import businesslogic.BillState;
 import businesslogic.BillStyle;
-import businesslogic.managerbl.StubManager;
-import businesslogicservice.managerblservice.StubManagerBlService;
 
 public class JPBill extends JPanel {
 
@@ -38,17 +38,25 @@ public class JPBill extends JPanel {
 	private JLabel left=new JLabel();
 	//选中标记
 	private boolean choose=false;
+	//查看清单按钮
+	JLabel showList=new	JLabel();
 	//逻辑层的接口
-	StubManagerBlService mbl=new StubManager();
+//	StubManagerBlService mbl=new StubManager();
 	//现金费用单的标签
 	JLabel operatorOfCas=new JLabel("操作员");
 	JLabel accountOfCas=new JLabel("帐户");
 	JLabel moneyOfCas=new JLabel("总额");
+	String[] itemOfCas={"条目名","金额","备注"};
+	String[][] listOfCas;
+	
 	//收款付款单的标签
 	JLabel operatorOfPR=new JLabel("操作员");
 	JLabel customerOfPR=new JLabel("客户");
 	JLabel moneyOfPR=new JLabel("总额");
-	
+	String[] itemOfPR={"银行账户","转账金额","备注"};
+	String[][] listOfPR;
+	//清单表格的引用
+	JTableOfList table;
 	public JPBill(GiftBillVO gb){
 		//面板大小
 		this.setSize(522, 93);
@@ -151,9 +159,16 @@ public class JPBill extends JPanel {
 		operatorOfPR.setBounds(345, 15, 50, 16);
 		customerOfPR.setBounds(330, 33, 50, 16);
 		moneyOfPR.setBounds(330, 49, 50, 16);
+		
 		operatorOfPR.setText(rb.getOp());
 		customerOfPR.setText(rb.getCustomer());
 		moneyOfPR.setText(String.valueOf(rb.getTotal()));
+		listOfPR=new String[rb.getAccounts().size()][3];
+		for(int i=0;i<rb.getAccounts().size();i++){
+			listOfPR[i][0]=rb.getAccounts().get(i);
+			listOfPR[i][1]=String.valueOf(rb.getMoney().get(i));
+			listOfPR[i][2]=rb.getRemark().get(i);
+		}
 		//将组件加到面板上
 		this.add(right,0);
 		this.add(left,1);
@@ -191,9 +206,16 @@ public class JPBill extends JPanel {
 		operatorOfPR.setBounds(345, 15, 50, 16);
 		customerOfPR.setBounds(330, 33, 50, 16);
 		moneyOfPR.setBounds(330, 49, 50, 16);
+		
 		operatorOfPR.setText(pb.getOp());
 		customerOfPR.setText(pb.getCustomer());
 		moneyOfPR.setText(String.valueOf(pb.getTotal()));
+		listOfPR=new String[pb.getAccounts().size()][3];
+		for(int i=0;i<pb.getAccounts().size();i++){
+			listOfPR[i][0]=pb.getAccounts().get(i);
+			listOfPR[i][1]=String.valueOf(pb.getMoney().get(i));
+			listOfPR[i][2]=pb.getRemark().get(i);
+		}
 		//将组件加到面板上
 		this.add(right,0);
 		this.add(left,1);
@@ -227,69 +249,83 @@ public class JPBill extends JPanel {
 		left.setIcon(new ImageIcon("src/image/left.png"));
 		left.setBounds(482, 26, 40, 40);
 		left.addMouseListener(new MouseListenerOfButton(2));
+		//查看清单按钮
+		showList.setText("条目清单");
+		showList.setFont(new Font("隶书",Font.BOLD,18));
+		showList.setBounds(275,60,80, 30);
+		showList.setForeground(Color.white);
+		showList.addMouseListener(new MouseListenerOfButton(3));
 		//单据信息
 		operatorOfCas.setBounds(345, 15, 150, 16);
 		accountOfCas.setBounds(360, 33, 150, 16);
 		moneyOfCas.setBounds(330, 49, 150, 16);
+		
 		operatorOfCas.setText(cb.getOp());
 		accountOfCas.setText(cb.getAccount());
 		moneyOfCas.setText(String.valueOf(cb.getTotal()));
+		listOfCas=new String[cb.getItem().size()][3];
+		for(int i=0;i<cb.getItem().size();i++){
+			listOfCas[i][0]=cb.getItem().get(i);
+			listOfCas[i][1]=String.valueOf(cb.getMoney().get(i));
+			listOfCas[i][2]=cb.getRemark().get(i);
+		}
 		//将组件加到面板上
 		this.add(right,0);
 		this.add(left,1);
 		this.add(operatorOfCas,2);
 		this.add(accountOfCas,3);
 		this.add(moneyOfCas,4);
-		this.add(bg,5);
+		this.add(showList,5);
+		this.add(bg,6);
 	}
 	public void change(GiftBillVO gb){
 	
 		//调用逻辑层修改对应单据的数据
 		gb.setID(ID);//设置对应单据的编号
-		mbl.change(gb);
+//		mbl.change(gb);
 		//根据内存中单据的数据重新设置面板界面
 	
 	}
 	public void change(SpillsLossBillVO slb){
 		//调用逻辑层修改对应单据的数据
 		slb.setID(ID);//设置对应单据的编号
-		mbl.change(slb);
+//		mbl.change(slb);
 		//根据内存中单据的数据重新设置面板界面
 	}
 	public void change(AlertBillVO ab){
 		//调用逻辑层修改对应单据的数据
 		ab.setID(ID);//设置对应单据的编号
-		mbl.change(ab);
+//		mbl.change(ab);
 		//根据内存中单据的数据重新设置面板界面
 	}
 	public void change(PurSheetVO ps){
 		//调用逻辑层修改对应单据的数据
 		ps.setID(ID);//设置对应单据的编号
-		mbl.change(ps);
+//		mbl.change(ps);
 		//根据内存中单据的数据重新设置面板界面
 	}
 	public void change(PurBackSheetVO pbs){
 		//调用逻辑层修改对应单据的数据
 		pbs.setID(ID);//设置对应单据的编号
-		mbl.change(pbs);
+//		mbl.change(pbs);
 		//根据内存中单据的数据重新设置面板界面
 	}
 	public void change(SaleSheetVO ss){
 		//调用逻辑层修改对应单据的数据
 		ss.setID(ID);//设置对应单据的编号
-		mbl.change(ss);
+//		mbl.change(ss);
 		//根据内存中单据的数据重新设置面板界面
 	}
 	public void change(SaleBackSheetVO sbs){
 		//调用逻辑层修改对应单据的数据
 		sbs.setID(ID);//设置对应单据的编号
-		mbl.change(sbs);
+//		mbl.change(sbs);
 		//根据内存中单据的数据重新设置面板界面
 	}
 	public void change(ReceiptVO rb){
 		//调用逻辑层修改对应单据的数据
 		rb.setID(ID);//设置对应单据的编号
-		mbl.change(rb);
+//		mbl.change(rb);
 		//根据内存中单据的数据重新设置面板界面
 		if(!rb.getOp().equals("")){
 			 operatorOfPR.setText(rb.getOp());
@@ -304,7 +340,7 @@ public class JPBill extends JPanel {
 	public void change(PaymentVO pb){
 		//调用逻辑层修改对应单据的数据
 		pb.setID(ID);//设置对应单据的编号
-		mbl.change(pb);
+//		mbl.change(pb);
 		//根据内存中单据的数据重新设置面板界面
 		if(!pb.getOp().equals("")){
 			 operatorOfPR.setText(pb.getOp());
@@ -319,7 +355,7 @@ public class JPBill extends JPanel {
 	public void change(CashPaymentVO cb){
 		//调用逻辑层修改对应单据的数据
 		cb.setID(ID);//设置对应单据的编号
-		mbl.change(cb);
+//		mbl.change(cb);
 		//根据内存中单据的数据重新设置面板界面
 		if(!cb.getOp().equals("")){
 			 operatorOfCas.setText(cb.getOp());
@@ -397,7 +433,10 @@ public class JPBill extends JPanel {
 	public boolean getChoose(){
 		return choose;
 	}
-	
+	/*获取清单表格的引用*/
+	public void getTable(JTableOfList t){
+		table=t;
+	}
 	public BillStyle getStyle() {
 		return style;
 	}
@@ -409,7 +448,7 @@ public class JPBill extends JPanel {
 	}
 	public class MouseListenerOfButton implements MouseListener{
 
-		private int num;
+		private int num;//1、右 2、左 3、清单
 		public MouseListenerOfButton(int N){
 			num=N;
 		}
@@ -430,6 +469,34 @@ public class JPBill extends JPanel {
 			    //显示简
 			    showBrief();
 				break;
+			case 3:
+				showList.setForeground(Color.red);
+				switch(style){
+				case GiftBill:
+					break;
+				case SpillsLossBill:
+					break;
+				case AlertBill:
+					break;
+				case PurSheet:
+					break;
+				case PurBackSheet:
+					break;
+				case SaleSheet:
+					break;
+				case SaleBackSheet:
+					break;
+				case ReceiptBill:
+					break;
+				case PaymentBill:
+					break;
+				case CashPaymentBill:
+					table.setColumnNames(itemOfCas);
+					table.setList(listOfCas);
+					table.updateShow();
+					break;
+				}
+			    break;
 			}
 	
 		}
@@ -443,7 +510,9 @@ public class JPBill extends JPanel {
 				break;
 			case 2:left.setIcon(new ImageIcon("src/image/left.png"));
 				break;
-			
+			case 3:
+				showList.setForeground(Color.white);
+			    break;
 			}
 		}
 
@@ -460,7 +529,9 @@ public class JPBill extends JPanel {
 				break;
 			case 2:left.setIcon(new ImageIcon("src/image/left.png"));
 				break;
-			
+			case 3:
+				showList.setForeground(Color.white);
+			    break;
 			}
 			
 		}

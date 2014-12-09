@@ -13,15 +13,17 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import presentation.managerui.JPBillList;
+import presentation.managerui.JTableOfList;
 import presentation.managerui.MouseListenerGetXY;
 import presentation.userui.Login;
 import vo.financialBillVO.CashPaymentVO;
 import vo.financialBillVO.PaymentVO;
 import vo.financialBillVO.ReceiptVO;
+import businesslogic.BillState;
 import businesslogic.BillStyle;
 
 public class JPmanageBills2 extends JPanel {
-	//背景
+	    //背景
 		private JLabel bg=new JLabel();
 		//向上
 		private JLabel up=new JLabel();
@@ -29,6 +31,8 @@ public class JPmanageBills2 extends JPanel {
 		private JLabel down=new JLabel();
 		//单据列表
 		JPBillList billList=new JPBillList();
+		//清单表格
+		JTableOfList table=new JTableOfList();
 		//处理按钮
 		private JLabel done=new JLabel();
 		//删除按钮
@@ -84,6 +88,24 @@ public class JPmanageBills2 extends JPanel {
 			//将列表加在底板上
 			jp.add(billList,0);
 			jp.add(jpbg,1);
+			
+			//表格
+			table.setLocation(375, 10);
+			String[] items=null;
+			switch(style){
+			case ReceiptBill:
+				break;
+			case PaymentBill:
+				break;
+			case CashPaymentBill:
+				String[] temp={"条目名","金额","备注"};
+				items=temp;
+				break;
+			}
+			table.setColumnNames(items);
+			table.setList(new String[1][3]);
+			table.updateShow();
+			billList.getTable(table);//将引用传递
 			//向上按钮
 			up.setIcon(upIconW);
 			up.setBounds(281, 20, 32, 32);
@@ -126,7 +148,8 @@ public class JPmanageBills2 extends JPanel {
 			this.add(edit,6);
 			this.add(submit,7);
 			this.add(add,8);
-			this.add(bg,9);
+			this.add(table,9);
+			this.add(bg,10);
 		}
 		public JPBillList getBillsList(){
 			return billList;
@@ -166,8 +189,13 @@ public class JPmanageBills2 extends JPanel {
 					break;
 				case 5:
 					edit.setIcon(editIconR);
-					JPedit.setIsAdd(false);//不是加单据是编辑单据
-					JPedit.leftMove();//调出编辑板
+					if(billList.getChosenNum()==1&&billList.stateOfChosen()==BillState.DRAFT){
+						JPedit.setIsAdd(false);//不是加单据是修改单据
+						JPedit.leftMove();//调出编辑板
+					}
+					else{
+						System.out.println("只能修改一张草稿状态的单据");
+					}
 					break;
 				case 6:
 					submit.setIcon(submitIconR);
@@ -245,6 +273,7 @@ public class JPmanageBills2 extends JPanel {
 			}
 			
 		}
+		/*编辑栏面板*/
 		public class JPanelEdit extends JPanel{
 			//辨别单据类型
 			private BillStyle billStyle;
@@ -631,7 +660,7 @@ public class JPmanageBills2 extends JPanel {
 										newRec.setAccounts(tranListEdit.getListArray());
 										newRec.setMoney(tranListEdit.getMoneyArray());
 										newRec.setRemark(tranListEdit.getNoteArray());
-										newRec.setOp(Login.operator+Login.IDofOperator);//修改操作员
+										newRec.setOp(Login.user.getName()+Login.user.getID());//修改操作员
 										//修改billList中被选中的单据
 										billList.changeChosen(newRec);
 										//清空信息
@@ -668,7 +697,7 @@ public class JPmanageBills2 extends JPanel {
 										newPay.setAccounts(tranListEdit.getListArray());
 										newPay.setMoney(tranListEdit.getMoneyArray());
 										newPay.setRemark(tranListEdit.getNoteArray());
-										newPay.setOp(Login.operator+Login.IDofOperator);//修改操作员
+										newPay.setOp(Login.user.getName()+Login.user.getID());//修改操作员
 										//修改billList中被选中的单据
 										billList.changeChosen(newPay);
 										//清空信息
@@ -713,7 +742,7 @@ public class JPmanageBills2 extends JPanel {
 									System.out.println("总额是："+totalText.getText());
 									newCash.setTotal(Double.parseDouble(totalText.getText()));
 									
-									newCash.setOp(Login.operator+Login.IDofOperator);//修改操作员
+									newCash.setOp(Login.user.getName()+Login.user.getID());//修改操作员
 									//修改billList中被选中的单据
 									billList.changeChosen(newCash);
 									//清空信息
@@ -839,6 +868,7 @@ public class JPmanageBills2 extends JPanel {
 				private ArrayList<Double> moneyArray=new ArrayList<Double>();
 				private ArrayList<String> noteArray=new ArrayList<String>();
 				
+				/*条目编辑面板*/
 				public JPaddList(BillStyle style){
 					//面板大小
 					this.setSize(181,157);

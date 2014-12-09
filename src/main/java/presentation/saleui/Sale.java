@@ -7,6 +7,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import presentation.financialui.Financial;
+import userui.Frame;
+
 public class Sale extends JPanel{
 		/*
 		 * 成员变量注释参照Finance。java；
@@ -19,7 +22,8 @@ public class Sale extends JPanel{
 		private JLabel home = new JLabel();
 		private JLabel back = new JLabel();
 		private JLabel signout = new JLabel();
-		
+		//frame的引用
+	    Frame frame;
 		public Sale(){
 
 			//设置窗口大小
@@ -63,6 +67,10 @@ public class Sale extends JPanel{
 			this.add(bg,7);
 		}
 
+	    /*获取frame引用*/
+	    public void getFrame( Frame f){
+	    		frame=f;
+	    }
 		public class MouseListenerOfButton implements MouseListener{
 
 			private int num;
@@ -100,6 +108,9 @@ public class Sale extends JPanel{
 					break;
 				case 3:
 					signout.setIcon(new ImageIcon("src/image/signout1.png"));
+					//实现登出跳转
+					frame.getLogin().setVisible(true);
+					Sale.this.setVisible(false);
 					break;
 				}
 			}

@@ -29,6 +29,8 @@ public class JPBillList extends JPanel {
 	ArrayList<JPBill> JPbillList=new ArrayList<JPBill>();
 	//更新板
 	JPanel JPupdate=null;
+	//清单表格
+	JTableOfList table;//表格的引用
 	public JPBillList(){
 		//面板大小
 		this.setSize(261, 0);
@@ -89,6 +91,8 @@ public class JPBillList extends JPanel {
 		}
 		//重新排序
 		JPbillList=sortBillList(JPbillList);
+		//将table引用传给每个单据
+		giveTableToBill();
 		//循环加到更新面板上
 		for(int i=0;i<JPbillList.size();i++){
 			JPbillList.get(i).setLocation(0, 93*i);
@@ -349,6 +353,16 @@ public class JPBillList extends JPanel {
 			}
 		}
 	}
+	/*传递清单表格的引用给单据面板*/
+	public void giveTableToBill(){
+		for(int i=0;i<JPbillList.size();i++){
+			JPbillList.get(i).getTable(table);
+		}
+	}
+	public void getTable(JTableOfList t){
+		table=t;
+	}
+
 	/*通过选中的*/
 	public void passChosen(){
 		if(getChosenNum()>=1&&isTheSameState()&&stateOfChosen()==BillState.SUBMITED){

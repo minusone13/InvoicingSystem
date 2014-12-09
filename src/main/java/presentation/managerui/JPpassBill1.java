@@ -7,6 +7,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import userui.Frame;
+
 public class JPpassBill1 extends JPanel {
 
 	private JLabel giftBill = new JLabel("New label");
@@ -21,6 +23,8 @@ public class JPpassBill1 extends JPanel {
 	private JLabel purchasebackbill = new JLabel("New label");
 	private JLabel salebill = new JLabel("New label");
 	private JLabel salebackbill = new JLabel("New label");
+	//frame的引用
+    Frame frame;
 	public JPpassBill1(){
 		//设置窗口大小
 		this.setSize(445, 330);
@@ -96,6 +100,10 @@ public class JPpassBill1 extends JPanel {
 		
 		add(bg,10);
 	}
+	/*获取frame的引用*/
+	public void getFrame( Frame f){
+  		frame=f;
+    }
 	public class MouseListenOfButton implements MouseListener{
 
 		private int num;

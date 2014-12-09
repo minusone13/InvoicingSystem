@@ -8,6 +8,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import presentation.financialui.Financial;
+import userui.Frame;
 import vo.financialBillVO.CashPaymentVO;
 import vo.financialBillVO.PaymentVO;
 import vo.financialBillVO.ReceiptVO;
@@ -31,6 +33,8 @@ public class Stock extends JPanel {
 	private JLabel back=new JLabel();
 	//登出
 	private JLabel signout=new JLabel();
+	//frame的引用
+    Frame frame;
 	public Stock(){
 
 			//设置窗口大小
@@ -52,8 +56,8 @@ public class Stock extends JPanel {
 			navigation.setBounds(0, 165, 960, 35);
 			
 			//test区域
-			//功能板
-//			function.setLocation(55, 233);
+//			功能板
+			function.setLocation(55, 233);
 			//单据管理板1
 			//JPmanageBills1 manageBills=new JPmanageBills1();
 			//manageBills.setLocation(55, 233);
@@ -82,10 +86,14 @@ public class Stock extends JPanel {
 			this.add(home,3);
 			this.add(back,4);
 			this.add(signout,5);
-		//	this.add(manageBills2,6);
+			this.add(function,6);
 			this.add(bg,7);
 			
 		}
+    /*获取frame引用*/
+    public void getFrame( Frame f){
+    		frame=f;
+    }
 		public class MouseListenerOfButton implements MouseListener{
 
 			private int num;
@@ -108,6 +116,7 @@ public class Stock extends JPanel {
 					break;
 				case 3:
 					signout.setIcon(new ImageIcon("src/image/signout2.png"));
+				
 					break;
 				}
 			}
@@ -123,6 +132,9 @@ public class Stock extends JPanel {
 					break;
 				case 3:
 					signout.setIcon(new ImageIcon("src/image/signout1.png"));
+					//实现登出跳转
+					frame.getLogin().setVisible(true);
+					Stock.this.setVisible(false);
 					break;
 				}
 			}
