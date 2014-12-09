@@ -187,9 +187,7 @@ public class StockTest{
 	public void teststockForSalesMenAlert()
 	{
 		StockBlForSalesMen sc=new StubStockController();
-		RM result=sc.checkIn("JHD-20141206-00001", "好好防盗门", "fdm05", 50, 150);
-		assertEquals(RM.done,result);
-		//result=sc.checkOut("XSD-20141206-00001", "好好防盗门", "fdm05", 41, 300);
+		RM result=sc.checkOut("XSD-20141206-00001", "好好防盗门", "fdm05", 41, 300);
 		assertEquals(RM.done,result);
 		StubBillPool pool = new StubBillPool();
 		ArrayList<StubAlertBill> h = pool.getAlertBill();

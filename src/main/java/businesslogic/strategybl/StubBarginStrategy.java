@@ -47,7 +47,7 @@ public class StubBarginStrategy implements GetVOandPO{
 		result.setNum(this.getNum());
 		result.setStartTime(this.getStartTime());
 		result.setLastTime(this.getLastTime());
-		return null;
+		return result;
 	}
 
 	public BarginStrategyPO getPO() {
@@ -63,7 +63,7 @@ public class StubBarginStrategy implements GetVOandPO{
 		result.setNum(this.getNum());
 		result.setStartTime(this.getStartTime());
 		result.setLastTime(this.getLastTime());
-		return null;
+		return result;
 	}
 	
 	/*成员变量的设置与获取*/

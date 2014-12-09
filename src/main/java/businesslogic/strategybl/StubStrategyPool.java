@@ -24,9 +24,9 @@ public class StubStrategyPool {
 		//客户分层策略
 		ArrayList<LevelStrategyPO> LevelStrategyPOList=ss.getLevelStrategy();
 		if(LevelStrategyPOList!=null){
-			for(LevelStrategyPO tempPO:LevelStrategyPOList){
+			for(int i=0;i<LevelStrategyPOList.size();i++){
 				StubLevelStrategy ls=new StubLevelStrategy();
-				ls.setPO(tempPO);
+				ls.setPO(LevelStrategyPOList.get(i));
 				alOfLevelStrategy.add(ls);
 			}
 		}
@@ -69,6 +69,7 @@ public class StubStrategyPool {
 		for(int i=0;i<alOfLevelStrategy.size();i++){
 			if(alOfLevelStrategy.get(i).getID()==ID){
 				alOfLevelStrategy.remove(i);
+				System.out.println("已删除这条客户策略");
 				break;
 			}
 		}
@@ -80,6 +81,7 @@ public class StubStrategyPool {
 		for(int i=0;i<alOfBarginStrategy.size();i++){
 			if(alOfBarginStrategy.get(i).getID()==ID){
 				alOfBarginStrategy.remove(i);
+				System.out.println("已删除这条特价包策略");
 				break;
 			}
 		}
@@ -91,6 +93,7 @@ public class StubStrategyPool {
 		for(int i=0;i<alOfReachStrategy.size();i++){
 			if(alOfReachStrategy.get(i).getID()==ID){
 				alOfReachStrategy.remove(i);
+				System.out.println("已删除这条满额促销策略");
 				break;
 			}
 		}
