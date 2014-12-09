@@ -59,8 +59,8 @@ public class CustomerList implements CustomerForFinancial, CustomerBlService{
 		//这边的命名和梅杰要商量一下；
 
 		public ArrayList<CustomerVO> getCustomer(String address) {
-			ArrayList<CustomerVO> listOfCustomer = this.getAllCustomer();
-			return listOfCustomer;
+			ArrayList<CustomerVO> listOfCustomerVO = this.getAllCustomer();
+			return listOfCustomerVO;
 		}
 		
 		/*
@@ -72,7 +72,14 @@ public class CustomerList implements CustomerForFinancial, CustomerBlService{
 		 
 		 * */
 		public void saveCustomer(String address) {
-			// TODO Auto-generated method stub
+			ArrayList<CustomerVO> listOfCustomerVO = this.getAllCustomer();
+			ArrayList<CustomerPO> listOfCustomerPO = new ArrayList<CustomerPO>();
+			for(CustomerVO vo:listOfCustomerVO){
+				Customer customer = new Customer(vo);
+				CustomerPO po = customer.getPO();
+				listOfCustomerPO.add(po);
+			}
+			customerdata.saveAllCustomer(listOfCustomerPO);
 			//这个方法是把已有的客户整体搬迁到另一个文档里;
 		}
 		

@@ -27,6 +27,7 @@ public class salebillController implements SaleBillBlService,salebillForFinancia
 			if(vo==null) return false;
 			PurSheet pursheet = new PurSheet(vo);
 			pool.add(pursheet);
+			//添加之后的保存是怎样的机制？
 			return true;
 		}
 
