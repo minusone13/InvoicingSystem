@@ -81,8 +81,6 @@ public interface StubManagerBlService {
 	/*获取单据池的所有现金费用单*/
 	public ArrayList<CashPaymentVO> getCashPaymentBill ();
 
-	/*需要查看已提交单据*/
-	public ArrayList<VO> getHandedBill ();
 	/*修改密码*/
 	public boolean modifyPassword (String newpassword);
     /*修改单据信息*/
@@ -98,14 +96,12 @@ public interface StubManagerBlService {
 	public boolean change(CashPaymentVO cb);
 	/*改变单据状态*/
 	public void transformState(BillStyle style,String ID,BillState state);
-	/*通过数组中对应的单据*/
-	public boolean PassBill(ArrayList<VO> billvo);
 	/*返回所有客户分层策略信息*/
-	public ArrayList<VO> ShowLevelStrategy ();
+	public ArrayList<LevelStrategyVO> ShowLevelStrategy ();
 	/*返回所有特价包策略信息*/
-	public ArrayList<VO> ShowBarginStrategy ();
+	public ArrayList<BarginStrategyVO> ShowBarginStrategy ();
 	/*返回所有满额促销策略信息*/
-	public ArrayList<VO> ShowReachStrategy  ();
+	public ArrayList<ReachStrategyVO> ShowReachStrategy  ();
 	/*需要删除一条客户分层策略*/
 	public boolean Remove (LevelStrategyVO ls);
 	/*需要删除一条特价包策略*/

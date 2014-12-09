@@ -39,12 +39,7 @@ public class TestFrame extends JFrame {
 	}
 	public static void main(String[] args) {
 
-		// TODO Auto-generated method stub
-
-
 		TestFrame testJP=new TestFrame(new Sale());
-
-
 
 
 	}
