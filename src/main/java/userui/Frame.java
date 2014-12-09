@@ -9,17 +9,65 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import presentation.commodityui.Stock;
 import presentation.financialui.Financial;
+import presentation.managerui.ManagerUI;
+import presentation.saleui.Sale;
 import presentation.userui.Login;
 
 public class Frame extends JFrame implements MouseListener{
 
 	//基层jp
-	JPanel mainJP=new JPanel();
+	private JPanel mainJP=new JPanel();
 	//关闭与小化
-	JLabel close=new JLabel();
-	JLabel minus=new JLabel();
-	
+	private JLabel close=new JLabel();
+	private JLabel minus=new JLabel();
+	//登录面板
+	private Login login;
+	//总经理面板
+	private ManagerUI manager;
+	//财务
+	private Financial financial;
+	//进销人员
+	private Sale sale;
+	//库管
+	private Stock stock;
+	public JPanel getMainJP() {
+		return mainJP;
+	}
+	public void setMainJP(JPanel mainJP) {
+		this.mainJP = mainJP;
+	}
+	public JLabel getClose() {
+		return close;
+	}
+	public void setClose(JLabel close) {
+		this.close = close;
+	}
+	public JLabel getMinus() {
+		return minus;
+	}
+	public void setMinus(JLabel minus) {
+		this.minus = minus;
+	}
+	public Login getLogin() {
+		return login;
+	}
+	public void setLogin(Login login) {
+		this.login = login;
+	}
+	public ManagerUI getManager() {
+		return manager;
+	}
+	public void setManager(ManagerUI manager) {
+		this.manager = manager;
+	}
+	public Financial getFinancial() {
+		return financial;
+	}
+	public void setFinancial(Financial financial) {
+		this.financial = financial;
+	}
 	public Frame(){
 	
 		// 取得屏幕的宽度
@@ -55,22 +103,52 @@ public class Frame extends JFrame implements MouseListener{
 		mainJP.add(minus,1);
 		
 		
-//		//登录面板
-//		Login login=new Login();
-//		mainJP.add(login,2);
-//		login.setBounds(0, 0, 960, 600);
+		//登录面板
+		login=new Login();
+		login.getFrame(this);
+		mainJP.add(login,2);
+		login.setBounds(0, 0, 960, 600);
 		
-//		ManagerUI manager=new ManagerUI();
-//		mainJP.add(manager,2);
-//		manager.setBounds(0, 0, 960, 600);
+		manager=new ManagerUI();
+		manager.getFrame(this);
+		mainJP.add(manager,3);
+		manager.setVisible(false);
+		manager.setBounds(0, 0, 960, 600);
 		
-		Financial financial=new Financial();
-		mainJP.add(financial,2);
+		financial=new Financial();
+		financial.getFrame(this);
+		mainJP.add(financial,4);
+		financial.setVisible(false);
 		financial.setBounds(0, 0, 960, 600);
+		
+		sale=new Sale();
+		sale.getFrame(this);
+		mainJP.add(sale,5);
+		sale.setVisible(false);
+		sale.setBounds(0, 0, 960, 600);
+		
+		stock=new Stock();
+		stock.getFrame(this);
+		mainJP.add(stock,6);
+		stock.setVisible(false);
+		stock.setBounds(0, 0, 960, 600);
+		
 		//加上监听接口
-//		Login.addMouseListener(this);
+//		financial.addMouseListener(this);
 		//设置窗口可见
 		this.setVisible(true);
+	}
+	public Sale getSale() {
+		return sale;
+	}
+	public void setSale(Sale sale) {
+		this.sale = sale;
+	}
+	public Stock getStock() {
+		return stock;
+	}
+	public void setStock(Stock stock) {
+		this.stock = stock;
 	}
 	public class MouseListenerOfButton implements MouseListener{
 

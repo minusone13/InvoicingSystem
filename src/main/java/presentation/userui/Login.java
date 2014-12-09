@@ -13,6 +13,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import userui.Frame;
 import vo.RM;
 import vo.uservo.UserVO;
 import businesslogic.Role;
@@ -23,8 +24,7 @@ import businesslogicservice.userblservice.StubUserBlService;
 public class Login extends JPanel {
 
 	//操作员信息
-	public static String operator="";//操作员名字
-	public static String IDofOperator="";//操作员ID
+	public static UserVO user;
 	//背景
 	private JLabel bg=new JLabel();
 	//隐藏的注册面板
@@ -35,10 +35,14 @@ public class Login extends JPanel {
 	//两个按钮的监控
 	private MouseListenerOfButton m1=new MouseListenerOfButton(1);
 	private MouseListenerOfButton m2=new MouseListenerOfButton(2);
-	private JTextField username=new JTextField(16);  // 用户名输入框
-    private JPasswordField passwords=new JPasswordField(16); // 密码输入框
+	// 用户名输入框
+	private JTextField username=new JTextField(16);  
+	// 密码输入框
+    private JPasswordField passwords=new JPasswordField(16); 
 	//用户登录与注册接口
     StubUserBlService userService=new UserController();
+    //frame的引用
+    Frame frame;
     public Login(){
 
 		//设置窗口大小
@@ -84,6 +88,10 @@ public class Login extends JPanel {
 		this.add(passwords,4);
 		this.add(bg,5);
 	}
+    /*获取frame引用*/
+    public void getFrame( Frame f){
+    		frame=f;
+    }
 	public class MouseListenerOfButton implements MouseListener{
 
 		private int num;
@@ -105,28 +113,7 @@ public class Login extends JPanel {
 				if(num==1){
 					
 					signIn.setIcon(new ImageIcon("src/image/userUi/sign in2.png")  );
-					//登录
-					String userName=username.getText();
-					String passWords=new String(passwords.getPassword());
-					boolean legal=false;
-					//判断是否输入合法
-					if(!userName.equals("")&&!passWords.equals("")){
-						legal=true;
-					}
-					//如果合法就登录
-					if(legal){
-						UserVO userVO=userService.login(userName,passWords);
-						if(userVO!=null){
-							System.out.println("登录的是："+userVO.getR());
-							//将当前操作员信息赋值给当前登录面板的静态变量
-							operator=userVO.getName();
-							IDofOperator=userVO.getID();
-						}
-						else{
-							System.out.println("用户名或密码错误，请重新输入");
-						}
-						
-					}
+				
 				}
 				else if(num==2){
 					register.setIcon(new ImageIcon("src/image/userUi/register2.png") );
@@ -143,13 +130,62 @@ public class Login extends JPanel {
 				if(num==1){
 					
 					signIn.setIcon(new ImageIcon("src/image/userUi/sign in.png")  );
-					
+					//登录
+					String userName=username.getText();
+					String passWords=new String(passwords.getPassword());
+					boolean legal=false;
+					//判断是否输入合法
+					if(!userName.equals("")&&!passWords.equals("")){
+						legal=true;
+					}
+					//如果合法就登录
+					if(legal){
+						UserVO userVO=userService.login(userName,passWords);
+						if(userVO!=null){
+							System.out.println("登录的是："+userVO.getR());
+							//将当前操作员信息赋值给当前登录面板的静态变量
+							user=userVO;
+							//切换面板
+							switch(userVO.getR()){
+							case ADMINISTRATOR:
+								break;
+							case FINANCIAL_STAFF:
+								Login.this.setVisible(false);
+								frame.getFinancial().setVisible(true);
+								break;
+							case FINANCIAL_MANAGER:
+								break;
+							case MANAGER:
+								Login.this.setVisible(false);
+								frame.getManager().setVisible(true);
+								break;
+							case STOCK_STAFF:
+								Login.this.setVisible(false);
+								frame.getStock().setVisible(true);
+								break;
+							case PURCHASE_SALE_STAFF:
+								Login.this.setVisible(false);
+								frame.getSale().setVisible(true);
+								break;
+							}
+							//清除文本框内容
+							username.setText("");
+							passwords.setText("");
+						}
+						else{
+							System.out.println("用户名或密码错误，请重新输入");
+						}
+						
+					}
 				}
 				else if(num==2){
 					register.setIcon(new ImageIcon("src/image/userUi/register.png") );
 					//取消监控
 				    m1.work=false;
 				    m2.work=false;
+					//清除文本框内容
+					username.setText("");
+					passwords.setText("");
 				}
 			}
 		
@@ -259,6 +295,20 @@ public class Login extends JPanel {
 				case 1:
 					
 					confirm.setIcon(new ImageIcon("src/image/userUi/confirmR.png") );
+				
+					break;
+				case 2:
+					cancel.setIcon(new ImageIcon("src/image/userUi/cancelR.png") );
+				
+					break;
+				}
+			}
+
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				switch(num){
+				case 1:
+					confirm.setIcon(new ImageIcon("src/image/userUi/confirmW.png") );
 					//实现注册
 					String s1=name.getText();
 					String s2=username.getText();
@@ -292,37 +342,32 @@ public class Login extends JPanel {
 						UserVO userVo=new UserVO(role,s2,s3,s1);
 						RM rm=userService.signUp(userVo);
 						System.out.println("注册结果是："+rm);
+						//隐藏注册面板
+						JPregister.this.setVisible(false);
+						//恢复监控
+					    m1.work=true;
+					    m2.work=true;
+					    //清除文本框信息
+						//清除文本框内容
+					    name.setText("");
+						username.setText("");
+						passwords.setText("");
 					}
 					else{
 						System.out.println("输入不合法");
 					}
-					//隐藏注册面板
-					JPregister.this.setVisible(false);
-					//恢复监控
-				    m1.work=true;
-				    m2.work=true;
-					break;
-				case 2:
-					cancel.setIcon(new ImageIcon("src/image/userUi/cancelR.png") );
-					//隐藏注册面板
-					JPregister.this.setVisible(false);
-					//恢复监控
-				    m1.work=true;
-				    m2.work=true;
-					break;
-				}
-			}
-
-			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
-				switch(num){
-				case 1:
-					confirm.setIcon(new ImageIcon("src/image/userUi/confirmW.png") );
+				
 					break;
 				case 2:
 					cancel.setIcon(new ImageIcon("src/image/userUi/cancelW.png") );
+					//隐藏注册面板
+					JPregister.this.setVisible(false);
+					//恢复监控
+				    m1.work=true;
+				    m2.work=true;
 					break;
 				}
+				
 			}
 
 			public void mouseEntered(MouseEvent e) {

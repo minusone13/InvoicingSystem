@@ -8,6 +8,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import presentation.commodityui.JPManagerCom;
+import presentation.saleui.Sale;
+import userui.Frame;
 
 public class ManagerUI extends JPanel {
 
@@ -31,6 +33,26 @@ public class ManagerUI extends JPanel {
 	private JLabel back=new JLabel();
 	//登出
 	private JLabel signout=new JLabel();
+	public JPfunction getFunction() {
+		return function;
+	}
+	public void setFunction(JPfunction function) {
+		this.function = function;
+	}
+	public JPpassBill1 getPassbill1() {
+		return passbill1;
+	}
+	public void setPassbill1(JPpassBill1 passbill1) {
+		this.passbill1 = passbill1;
+	}
+	public JPpassBill2 getPassbill2() {
+		return passbill2;
+	}
+	public void setPassbill2(JPpassBill2 passbill2) {
+		this.passbill2 = passbill2;
+	}
+	//frame的引用
+    Frame frame;
 	public ManagerUI(){
 		//设置窗口大小
 		this.setSize(960, 600);
@@ -51,13 +73,18 @@ public class ManagerUI extends JPanel {
 		navigation.setBounds(0, 165, 960, 35);
 		//功能板
 		function.setLocation(55, 233);
-//		//审批单据1
-//		passbill1.setLocation(55, 233);
+		function.getFrame(frame);
+		//审批单据1
+		passbill1.setLocation(55, 233);
+		passbill1.setVisible(false);
+		passbill1.getFrame(frame);
 		//审批单据2
 		passbill2.setLocation(55, 233);
-		//商品选择test
-		JPManagerCom comodityChooseTest=new JPManagerCom();
-		comodityChooseTest.setLocation(55, 213);
+		passbill2.setVisible(false);
+		passbill2.getFrame(frame);
+//		//商品选择test
+//		JPManagerCom comodityChooseTest=new JPManagerCom();
+//		comodityChooseTest.setLocation(55, 213);
 		//home
 		home.setIcon(new ImageIcon("src/image/home.png") );
 		home.setBounds(690, 165, 90, 32);
@@ -78,9 +105,15 @@ public class ManagerUI extends JPanel {
 		this.add(back,4);
 		this.add(signout,5);
 		this.add(function,6);
-		this.add(bg,7);
+		this.add(passbill1,7);
+		this.add(passbill2,8);
+		this.add(bg,9);
 		
 	}
+	/*获取frame的引用*/
+	public void getFrame( Frame f){
+  		frame=f;
+    }
 	public class MouseListenerOfButton implements MouseListener{
 
 		private int num;
@@ -118,6 +151,9 @@ public class ManagerUI extends JPanel {
 				break;
 			case 3:
 				signout.setIcon(new ImageIcon("src/image/signout1.png"));
+				//实现登出跳转
+				frame.getLogin().setVisible(true);
+				ManagerUI.this.setVisible(false);
 				break;
 			}
 		}

@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import businesslogic.BillState;
+import userui.Frame;
 import vo.financialBillVO.CashPaymentVO;
 
 public class JPpassBill2 extends JPanel {
@@ -39,7 +40,8 @@ public class JPpassBill2 extends JPanel {
 	ImageIcon checkIconR=new ImageIcon("src/image/function/checkR.png");
 	ImageIcon deleteIconR=new ImageIcon("src/image/function/deleteR.png");
 	ImageIcon editIconR=new ImageIcon("src/image/function/editR.png");
-	
+	//frame的引用
+    Frame frame;
 	public JPpassBill2(){
 		//面板大小
 		this.setSize(800, 342);
@@ -113,6 +115,10 @@ public class JPpassBill2 extends JPanel {
 		this.add(edit,5);
 		this.add(bg,6);
 	}
+	/*获取frame的引用*/
+	public void getFrame( Frame f){
+  		frame=f;
+    }
 	public class MouseListenerOfButton implements MouseListener{
 
 		private int num;
