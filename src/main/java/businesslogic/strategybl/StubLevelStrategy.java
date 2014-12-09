@@ -57,7 +57,7 @@ public class StubLevelStrategy implements GetVOandPO{
 		
 		result.setStartTime(this.getStartTime());
 		result.setLastTime(this.getLastTime());
-		return null;
+		return result;
 	}
 
 	public LevelStrategyPO getPO() {
@@ -79,7 +79,7 @@ public class StubLevelStrategy implements GetVOandPO{
 		
 		result.setStartTime(this.getStartTime());
 		result.setLastTime(this.getLastTime());
-		return null;
+		return result;
 	}
 	/*成员变量的设置与获取*/
 	public int getLevel() {

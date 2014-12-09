@@ -31,6 +31,9 @@ import businesslogic.salebillbl.PurBackSheet;
 import businesslogic.salebillbl.PurSheet;
 import businesslogic.salebillbl.SaleBackSheet;
 import businesslogic.salebillbl.SaleSheet;
+import businesslogic.strategybl.StubBarginStrategy;
+import businesslogic.strategybl.StubLevelStrategy;
+import businesslogic.strategybl.StubReachStrategy;
 import businesslogic.strategybl.StubStrategyPool;
 import businesslogicservice.managerblservice.StubManagerBlService;
 
@@ -261,85 +264,8 @@ public class StubManager implements StubManagerBlService{
 		return result;
 
 	}
-	/*需要查看已提交单据*/
-	public ArrayList<VO> getHandedBill (){
-		ArrayList<VO> result=new ArrayList<VO>();
-		//搜索单据池，寻找已提交状态的单据
-		ArrayList<StubGiftBill> alOfGB=billPool.getGiftBill(BillState.SUBMITED);
-		ArrayList<StubSpillsLossBill> alOfSLB=billPool.getSpillsLossBill(BillState.SUBMITED);
-		ArrayList<StubAlertBill> alOfAB=billPool.getAlertBill(BillState.SUBMITED);
-		ArrayList<PurSheet> alOfPS=billPool.getPurSheet(BillState.SUBMITED);
-		ArrayList<PurBackSheet> alOfPBS=billPool.getPurBackSheet(BillState.SUBMITED);
-		ArrayList<SaleSheet> alOfSS=billPool.getSaleSheet(BillState.SUBMITED);
-		ArrayList<SaleBackSheet> alOfSBS=billPool.getSaleBackSheet(BillState.SUBMITED);
-		ArrayList<ReceiptBill> alOfRB=billPool.getReceiptBill(BillState.SUBMITED);
-		ArrayList<PaymentBill> alOfPB=billPool.getPaymentBill(BillState.SUBMITED);
-		ArrayList<CashPaymentBill> alOfCPB=billPool.getCashPaymentBill(BillState.SUBMITED);
 
-		//进行逐个大遍历，返回符合条件单据对应的VO
-		//赠送单
-		if(alOfGB!=null){
-			for(StubGiftBill temp:alOfGB){
-				result.add(temp.getVO());
-			}
-		}
-		//报溢报损单
-		if(alOfSLB!=null){
-			for(StubSpillsLossBill temp:alOfSLB){
-				result.add(temp.getVO());
-			}
-		}
-		//报警单
-		if(alOfAB!=null){
-			for(StubAlertBill temp:alOfAB){
-				result.add(temp.getVO());
-			}
-		}
-		//进货单
-		if(alOfPS!=null){
-			for(PurSheet temp:alOfPS){
-				result.add(temp.getVO());
-			}
-		}
-		//进货退货单
-		if(alOfPBS!=null){
-			for(PurBackSheet temp:alOfPBS){
-				result.add(temp.getVO());
-			}
-		}
-		//销售单
-		if(alOfSS!=null){
-			for(SaleSheet temp:alOfSS){
-				result.add(temp.getVO());
-			}
-		}
-		//销售退货单
-		if(alOfSBS!=null){
-			for(SaleBackSheet temp:alOfSBS){
-				result.add(temp.getVO());
-			}
-		}
-		//收款单
-		if(alOfRB!=null){
-			for(ReceiptBill temp:alOfRB){
-				result.add(temp.getVO());
-			}
-		}
-		//付款单
-		if(alOfPB!=null){
-			for(PaymentBill temp:alOfPB){
-				result.add(temp.getVO());
-			}
-		}
-		//现金费用单
-		if(alOfCPB!=null){
-			for(CashPaymentBill temp:alOfCPB){
-				result.add(temp.getVO());
-			}
-		}
-		return result;	
-	}
-	/*修改密码*/
+	/*修改密码（未实现）*/
 	public boolean modifyPassword (String newpassword){
 		return true;
 		
@@ -390,72 +316,32 @@ public class StubManager implements StubManagerBlService{
 	public void transformState(BillStyle style,String ID,BillState state){
 		billPool.transformState(style, ID, state);
 	}
-	/*通过数组中对应的单据*/
-	public boolean PassBill(ArrayList<VO> billvo){
-		if(billvo!=null){
-			for(VO tempOfVO:billvo){
-				switch(tempOfVO.getBillStyle()){
-				case GiftBill:
-					//获取对应类型的数组
-					ArrayList<StubGiftBill> alOfGB=billPool.getGiftBill(BillState.SUBMITED);
-					for(int i=0;i<alOfGB.size();i++){
-						if(alOfGB.get(i).getID()==tempOfVO.getID()){
-						//将vo对应的真实单据对象的状态改为已审批
-							alOfGB.get(i).setState(BillState.EXAMINED);
-						}
-					}
-					//保存单据信息
-					billPool.save();
-					break;
-				case SpillsLossBill:
-					break;
-				case AlertBill:
-					break;
-				case PurSheet:
-					break;
-				case PurBackSheet:
-					break;
-				case SaleSheet:
-					break;
-				case SaleBackSheet:
-					break;
-				case ReceiptBill:
-					break;
-				case PaymentBill:
-					break;
-				case CashPaymentBill:
-					break;
-				}
-			}
-		}
-
-		return true;
-	}
+	
 	/*返回所有客户分层策略信息*/
-	public ArrayList<VO> ShowLevelStrategy (){
-		ArrayList<VO> result=new ArrayList<VO>();
-//		ArrayList<StubLevelStrategy> alOfLS=strategyPool.getLevelStrategy();
-//		for(int i=0;i<alOfLS.size();i++){
-//			result.add(alOfLS.get(i).getVO());
-//		}
+	public ArrayList<LevelStrategyVO> ShowLevelStrategy (){
+		ArrayList<LevelStrategyVO> result=new ArrayList<LevelStrategyVO>();
+		ArrayList<StubLevelStrategy> alOfLS=strategyPool.getLevelStrategy();
+		for(int i=0;i<alOfLS.size();i++){
+			result.add(alOfLS.get(i).getVO());
+		}
 		return result;
 	}
 	/*返回所有特价包策略信息*/
-	public ArrayList<VO> ShowBarginStrategy (){
-		ArrayList<VO> result=new ArrayList<VO>();
-//		ArrayList<StubBarginStrategy> alOfBS=strategyPool.getBarginStrategy();
-//		for(int i=0;i<alOfBS.size();i++){
-//			result.add(alOfBS.get(i).getVO());
-//		}
+	public ArrayList<BarginStrategyVO> ShowBarginStrategy (){
+		ArrayList<BarginStrategyVO> result=new ArrayList<BarginStrategyVO>();
+		ArrayList<StubBarginStrategy> alOfBS=strategyPool.getBarginStrategy();
+		for(int i=0;i<alOfBS.size();i++){
+			result.add(alOfBS.get(i).getVO());
+		}
 		return result;
 	}
 	/*返回所有满额促销策略信息*/
-	public ArrayList<VO> ShowReachStrategy  (){
-		ArrayList<VO> result=new ArrayList<VO>();
-//		ArrayList<StubReachStrategy> alOfRS=strategyPool.getReachStrategy();
-//		for(int i=0;i<alOfRS.size();i++){
-//			result.add(alOfRS.get(i).getVO());
-//		}
+	public ArrayList<ReachStrategyVO> ShowReachStrategy  (){
+		ArrayList<ReachStrategyVO> result=new ArrayList<ReachStrategyVO>();
+		ArrayList<StubReachStrategy> alOfRS=strategyPool.getReachStrategy();
+		for(int i=0;i<alOfRS.size();i++){
+			result.add(alOfRS.get(i).getVO());
+		}
 		return result;
 	}
 	/*需要删除一条客户分层策略*/
