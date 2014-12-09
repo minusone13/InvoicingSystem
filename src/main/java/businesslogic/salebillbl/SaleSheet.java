@@ -17,7 +17,7 @@ public class SaleSheet extends Bill implements GetVOandPO{
 		private BillStyle billstyle=BillStyle.SaleSheet;
 		Date date;
 		Customer customer;
-		ArrayList sheet;//销售单据，商品名，数量，单价//ArrayList<>在写一个类；
+		ArrayList<commodityInSheet> sheet;//销售单据，商品名，数量，单价//ArrayList<>在写一个类；
 		double money1;//折前总金额
 		double money2;//代金券金额
 		String stock;
@@ -125,11 +125,11 @@ public class SaleSheet extends Bill implements GetVOandPO{
 			this.stock=stock;
 		}
 		
-		public ArrayList getsheet(){
+		public ArrayList<commodityInSheet> getsheet(){
 			return sheet;
 		}
 		
-		public void setsheet(ArrayList sheet){
+		public void setsheet(ArrayList<commodityInSheet> sheet){
 			this.sheet=sheet;
 		}
 		

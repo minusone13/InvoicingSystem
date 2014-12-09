@@ -17,7 +17,7 @@ public class PurBackSheet extends Bill implements GetVOandPO{
 	private BillStyle billstyle=BillStyle.PurBackSheet;
 	Date date;
 	String stock;//仓库？
-	ArrayList sheet;//写了一个commodityInSheet类。
+	ArrayList<commodityInSheet> sheet;//写了一个commodityInSheet类。
 	double money1;//总金额
 	String words;//备注
 	String username;
@@ -98,11 +98,11 @@ public class PurBackSheet extends Bill implements GetVOandPO{
 		this.stock=stock;
 	}
 	
-	public ArrayList getsheet(){
+	public ArrayList<commodityInSheet> getsheet(){
 		return sheet;
 	}
 	
-	public void setsheet(ArrayList sheet){
+	public void setsheet(ArrayList<commodityInSheet> sheet){
 		this.sheet=sheet;
 	}
 	
