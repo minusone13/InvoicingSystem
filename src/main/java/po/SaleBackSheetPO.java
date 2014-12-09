@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import businesslogic.customerbl.Customer;
+import businesslogic.salebillbl.commodityInSheet;
 
 public class SaleBackSheetPO extends PO implements Serializable{
 	Customer customer;
@@ -12,7 +13,7 @@ public class SaleBackSheetPO extends PO implements Serializable{
 	String userid;
 	Date date;
 	String stock;//仓库？
-	ArrayList sheet;//是不是应该是个arraylist<>?
+	ArrayList<commodityInSheet> sheet;//是不是应该是个arraylist<>?
 	double money1;//总金额
 	double money2;
 	double discount;
@@ -101,11 +102,11 @@ public class SaleBackSheetPO extends PO implements Serializable{
 		this.stock=stock;
 	}
 	
-	public ArrayList getsheet(){
+	public ArrayList<commodityInSheet> getsheet(){
 		return sheet;
 	}
 	
-	public void setsheet(ArrayList sheet){
+	public void setsheet(ArrayList<commodityInSheet> sheet){
 		this.sheet=sheet;
 	}
 	

@@ -19,7 +19,7 @@ public class PurSheet extends Bill implements GetVOandPO{
 	private String ID;
 	private String userID;
 	String stock;//仓库？
-	ArrayList sheet;//是不是应该是个arraylist<>?
+	ArrayList<commodityInSheet> sheet;//是不是应该是个arraylist<>?
 	double money1;//总金额
 	String words;//备注
 	String username;
@@ -99,11 +99,11 @@ public class PurSheet extends Bill implements GetVOandPO{
 			this.stock=stock;
 		}
 		
-		public ArrayList getsheet(){
+		public ArrayList<commodityInSheet> getsheet(){
 			return sheet;
 		}
 		
-		public void setsheet(ArrayList sheet){
+		public void setsheet(ArrayList<commodityInSheet> sheet){
 			this.sheet=sheet;
 		}
 		
