@@ -42,9 +42,9 @@ public class CustomerList implements CustomerForFinancial, CustomerBlService{
 			return customerdata.updateCustomer(po);
 		}
 		
-		public ArrayList<CustomerVO> getAllCustomer(){
+		public ArrayList<CustomerVO> getAllCustomer(String address){
 			ArrayList<CustomerVO> listOfCustomerVO = new ArrayList<CustomerVO>();
-			ArrayList<CustomerPO> listOfCustomerPO = customerdata.getAllCustomer();
+			ArrayList<CustomerPO> listOfCustomerPO = customerdata.getAllCustomer(address);
 			for(CustomerPO po: listOfCustomerPO){
 				Customer customer = new Customer();
 				customer.setPO(po);
@@ -53,33 +53,22 @@ public class CustomerList implements CustomerForFinancial, CustomerBlService{
 			}
 			return listOfCustomerVO;
 		}
-		
-		//数据层的那个数据需要读入地址作为参数吗？
-		//感觉是需要的啊。。
-		//这边的命名和梅杰要商量一下；
 
 		public ArrayList<CustomerVO> getCustomer(String address) {
-			ArrayList<CustomerVO> listOfCustomerVO = this.getAllCustomer();
+			ArrayList<CustomerVO> listOfCustomerVO = this.getAllCustomer(address);
 			return listOfCustomerVO;
 		}
 		
-		/*
-		 public void saveAllCustomer(ArrayList<CustomerPO> listOfCustomerPO){
-		 	customerdata.saveAllCustomer(listOfCustomerPO);
-		 } 
-		 
-		//这个方法是把现在ArrayList里的po序列化得保存到目标地址;
-		 
-		 * */
 		public void saveCustomer(String address) {
-			ArrayList<CustomerVO> listOfCustomerVO = this.getAllCustomer();
+			String Address ="Customer.txt";//保存的是一个默认的地址;
+			ArrayList<CustomerVO> listOfCustomerVO = this.getCustomer(Address);
 			ArrayList<CustomerPO> listOfCustomerPO = new ArrayList<CustomerPO>();
 			for(CustomerVO vo:listOfCustomerVO){
 				Customer customer = new Customer(vo);
 				CustomerPO po = customer.getPO();
 				listOfCustomerPO.add(po);
 			}
-			customerdata.saveAllCustomer(listOfCustomerPO);
+			customerdata.saveAllCustomer(listOfCustomerPO,address);
 			//这个方法是把已有的客户整体搬迁到另一个文档里;
 		}
 		

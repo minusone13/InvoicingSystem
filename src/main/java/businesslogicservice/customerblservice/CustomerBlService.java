@@ -16,7 +16,6 @@ public interface CustomerBlService {
 		public boolean updateCustomer(CustomerVO vo);
 		public boolean deleteCustomer(String id);
 		public CustomerVO findCustomer(String id);
-		public ArrayList<CustomerVO> getAllCustomer();
 		
 		//    saveAllCustomer 方法;
 		/*
