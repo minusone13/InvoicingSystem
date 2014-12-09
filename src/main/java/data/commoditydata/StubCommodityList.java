@@ -194,4 +194,15 @@ public class StubCommodityList implements Serializable{
 		}
 		return true;
 	}
+	public ArrayList<CommodityPO> fuzzyFindCommodity(String s)
+	{
+		ArrayList<CommodityPO> h = new ArrayList<CommodityPO>();
+		for(int i=0;i<flatlist.size();i++)
+			for(int j=0;j<s.length();i++)
+				if(flatlist.get(i).contents(s))
+				{
+					h.add(flatlist.get(i).po.clone());
+				}
+		return null;
+	}
 }
