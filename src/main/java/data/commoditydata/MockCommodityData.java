@@ -86,4 +86,8 @@ public class MockCommodityData implements Serializable{
 	public void setPo(CommodityPO po) {
 		this.po = po;
 	}
+	public boolean contents(String s)
+	{
+		return (po.getId().indexOf(s)!=-1 || po.getName().indexOf(s)!=-1 || po.getModel().indexOf(s)!=-1);
+	}
 }

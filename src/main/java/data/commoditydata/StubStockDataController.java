@@ -256,4 +256,8 @@ public class StubStockDataController implements StubCommodityDataService, StockD
 		ArrayList<AdjustmentRecordPO> result = l.getAdjustmentRecords();
 		return result;
 	}
+	public ArrayList<CommodityPO> fuzzyFindCommodity(String s)
+	{
+		return l.fuzzyFindCommodity(s);
+	}
 }
