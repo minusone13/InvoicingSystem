@@ -7,7 +7,7 @@ import junit.framework.TestCase;
 
 public class SaleTest extends TestCase{
 		SaleBillBlService sbbs=new salebillController();
-		
+		/*
 		public void testgetPurBackSheet(){
 			boolean result3=sbbs.getPurBackSheet("131");
 			assertTrue(result3);
@@ -27,6 +27,6 @@ public class SaleTest extends TestCase{
 			boolean result5=sbbs.getSaleSheet("131");
 			assertTrue(result5);
 		}
-		
+		*/
 		
 }

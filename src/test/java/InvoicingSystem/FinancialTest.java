@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import presentation.financialui.FinancialBLDriver;
 import vo.accountVO.AccountVO;
+import vo.financialBillVO.CashPaymentVO;
 import vo.financialBillVO.PaymentVO;
 import vo.financialBillVO.ReceiptVO;
 import businesslogic.BillState;
@@ -36,7 +37,7 @@ public class FinancialTest extends TestCase{
 		assertFalse(result4);
 	}
 	*/
-	
+	/*
 	public void testcreatReceipt() {
 		ReceiptVO vo = new ReceiptVO();
 		vo.setCustomer("MAJOR");
@@ -57,19 +58,20 @@ public class FinancialTest extends TestCase{
 		
 		assertTrue(result5);
 	}
-	
+	*/
+	/*
 	public void testgetReceipt() {
 		ArrayList<ReceiptVO> receipts = financial.getAllOfReceiptBills();
 		ReceiptVO vo = receipts.get(0);
 		assertEquals(1,receipts.size());
-		assertEquals("SKD-20141209-00001", vo.getID());
+		//assertEquals("SKD-20141209-00001", vo.getID());
 		
 		assertEquals("MAJOR", vo.getCustomer());
 		assertEquals("梅杰 001", vo.getOp());
 		assertEquals(600,vo.getTotal());
 		assertEquals(BillState.EXAMINED,vo.getBillState());
 	}
-	
+	*/
 	/*
 	public void testcreatPayment() {
 		PaymentVO vo = new PaymentVO();
@@ -92,4 +94,60 @@ public class FinancialTest extends TestCase{
 		assertTrue(result6);
 	}
 	*/
+	
+	public void testgetPayment() {
+		ArrayList<PaymentVO> payments = financial.getAllOfPaymentBills();
+		PaymentVO vo = payments.get(0);
+		
+		
+		assertEquals(1,payments.size());
+		//assertEquals("FKD-20141209-00001", vo.getID());
+		
+		assertEquals("MAJOR", vo.getCustomer());
+		assertEquals("梅杰 001", vo.getOp());
+				
+		assertEquals(200.0,vo.getTotal());
+		assertEquals(BillState.DRAFT,vo.getBillState());
+		
+	}
+	
+/*
+	public void testcreatCashPayment() {
+		CashPaymentVO vo = new CashPaymentVO();
+		
+		ArrayList<Double> money = new ArrayList<Double>();//转账金额
+		ArrayList<String> item = new ArrayList<String>();
+		ArrayList<String> remark =new ArrayList<String>();
+		
+		item.add("dinner");  money.add(100.00);  remark.add("");
+		
+		vo.setItem(item);
+		vo.setMoney(money);
+		vo.setRemark(remark);
+		vo.setAccount("ICBC");
+		double total=0;
+		for(int i=0;i<money.size();i++) total+=money.get(i);
+		vo.setTotal(total);
+		vo.setBillState(BillState.SUBMITED);
+		boolean result6 = financial.creatCashPayment(vo);  
+		
+		assertTrue(result6);
+	}
+*/	
+
+	public void testgetCashPayment() {
+		ArrayList<CashPaymentVO> cashPayments = financial.getAllOfCashPaymentBills();
+		CashPaymentVO vo = cashPayments.get(0);
+		assertEquals(1,cashPayments.size());
+	//	assertEquals("XJFYD-20141209-00001", vo.getID());
+		System.out.println(cashPayments.size());
+		System.out.println(vo.getID());
+		System.out.println(vo.getAccount());
+		
+		assertEquals("ICBC", vo.getAccount());
+		assertEquals("梅杰 001", vo.getOp());
+		//assertEquals(100.0,vo.getTotal());
+		assertEquals(BillState.SUBMITED,vo.getBillState());
+	}
+	
 }
