@@ -34,9 +34,9 @@ import vo.inquiryVO.InquirySaleVO;
 //1、模糊查找
 //2、完善返回到ui层的内容
 //3、红冲功能，需要各位人员创建单据功能
-
+//4、添加记录步骤
 //5、导出excel表
-//6、金额计算
+//6、根据收款单付款单，修改账户和客户的应收应付
 public class Inquiry {
 	StubBillPool bp = new StubBillPool();
 	public ArrayList<VO> inquirySale(InquirySaleVO isv) {

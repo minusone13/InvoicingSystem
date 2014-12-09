@@ -1,6 +1,8 @@
 package businesslogic.financialbillbl;
 
-public class TransferAccount {
+import java.io.Serializable;
+
+public class TransferAccount implements Serializable{
 	String account;
 	double money;
 	String remark;

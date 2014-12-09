@@ -11,7 +11,6 @@ import java.util.ArrayList;
 
 import po.AccountPO;
 import data.Tool;
-import data.commoditydata.StubCommodityList;
 import dataservice.accountdataservice.StubAccountDataService;
 
 public class AccountData implements StubAccountDataService{

@@ -16,16 +16,18 @@ import vo.VO;
 import vo.financialBillVO.ReceiptVO;
 
 public class ReceiptBill extends Bill implements GetVOandPO{
-	private BillStyle billstyle=BillStyle.ReceiptBill;
+	//userVO修改的
+		private String userID = "001";
+		private String userName = "梅杰";
+		private Role role = Role.FINANCIAL_MANAGER;//权限
 	
-	private String ID;//单据编号
-	private Role role;//权限
+	
+	private BillStyle billstyle=BillStyle.ReceiptBill;
+	private String ID;//单据编号	
 	private double total;//总额
 	private BillState state;//单据状态
 	private Date date;
 	private String customer;
-	private String userID;
-	private String userName;
 	private String op;//操作员 userName+userID
 	ArrayList<TransferAccount> transferlist = new ArrayList<TransferAccount>();
 	
@@ -33,8 +35,6 @@ public class ReceiptBill extends Bill implements GetVOandPO{
 		
 	}
 	public ReceiptBill(ReceiptVO vo) {
-		String customer = vo.getCustomer();
-		double total = vo.getTotal();
 		ArrayList<String> account = vo.getAccounts();
 		ArrayList<Double> money = vo.getMoney();
 		ArrayList<String> remark = vo.getRemark();
@@ -43,11 +43,9 @@ public class ReceiptBill extends Bill implements GetVOandPO{
 			transferlist.add(new TransferAccount(account.get(i), money.get(i), remark.get(i)));
 		}
 		this.date = new Date();
-		this.customer = customer;
-		this.total = total;
-		this.role = vo.getRole();
-		
-		state = BillState.DRAFT;
+		this.customer = vo.getCustomer();
+		this.total = vo.getTotal();
+		state = vo.getBillState();
 		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
 		String currentTime = format.format(new Date());
 		

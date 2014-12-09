@@ -17,16 +17,19 @@ import vo.VO;
 import vo.financialBillVO.PaymentVO;
 
 public class PaymentBill extends Bill implements GetVOandPO{
-	
+	//userVO初始化
+		private Role role = Role.FINANCIAL_MANAGER;
+		private String userID = "001";
+		private String userName = "梅杰";
+		
 	private BillStyle billstyle=BillStyle.PaymentBill;
 	private String ID;
 	private String customer;
-	private Role role;
+	
 	private double total;
 	private BillState state;
 	private Date date;
-	private String userID;
-	private String userName;
+	
 	private String op;//操作员 userName+userID
 	
 	private ArrayList<TransferAccount> transferlist = new ArrayList<TransferAccount>();
@@ -34,8 +37,6 @@ public class PaymentBill extends Bill implements GetVOandPO{
 		
 	}
 	public PaymentBill(PaymentVO vo) {
-		String customer=vo.getCustomer(); 
-		double total=vo.getTotal(); 
 		ArrayList<String> account=vo.getAccounts(); 
 		ArrayList<Double> money=vo.getMoney(); 
 		ArrayList<String> remark=vo.getRemark();
@@ -44,10 +45,10 @@ public class PaymentBill extends Bill implements GetVOandPO{
 		for(int i=0;i<length;i++) {
 			transferlist.add(new TransferAccount(account.get(i), money.get(i), remark.get(i)));
 		}
-		this.customer = customer;
-		this.total = total;
-		this.role = vo.getRole();
-		state = BillState.DRAFT;
+		this.customer = vo.getCustomer(); ;
+		this.total = vo.getTotal(); 
+		
+		state = vo.getBillState();
 		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
 		String currentTime = format.format(new Date());
 		this.date = new Date();

@@ -28,9 +28,11 @@ public class ReceiptVO extends VO{
 	public ReceiptVO() {
 		
 	}
-	public ReceiptVO(String customer, double total) {
-		
+	public ReceiptVO(String customer) {
+		this.customer = customer;
 	}
+	
+	
 	public Date getDate() {
 		return date;
 	}
@@ -110,9 +112,7 @@ public class ReceiptVO extends VO{
 	public void setMoney(ArrayList<Double> money) {
 		this.money = money;
 	}
-	public void setAccount(ArrayList<String> account) {
-		this.accounts = account;
-	}
+	
 	public void setRemark(ArrayList<String> remark) {
 		this.remark = remark;
 	}
