@@ -130,7 +130,19 @@ public class CashPaymentBill extends Bill implements GetVOandPO{
 		vo.setAccount(account);
 		vo.setID(ID);
 		vo.setTotal(total);
-		vo.setItemList(itemList);
+		int size = itemList.size();
+		ArrayList<String> item = new ArrayList<String>();
+		ArrayList<String> remark = new ArrayList<String>();
+		ArrayList<Double> money = new ArrayList<Double>();
+		for(int i=0;i<size;i++) {
+			Item temp = itemList.get(i);
+			item.add(temp.getItemName());
+			money.add(temp.getMoney());
+			remark.add(temp.getRemark());
+		}
+		vo.setItem(item);
+		vo.setMoney(money);
+		vo.setRemark(remark);
 		vo.setRole(role);
 		vo.setBillStyle(billstyle);
 		vo.setBillState(state);	

@@ -45,6 +45,7 @@ public class CustomerList implements CustomerForFinancial, CustomerBlService{
 		public ArrayList<CustomerVO> getAllCustomer(String address){
 			ArrayList<CustomerVO> listOfCustomerVO = new ArrayList<CustomerVO>();
 			ArrayList<CustomerPO> listOfCustomerPO = customerdata.getAllCustomer(address);
+			
 			for(CustomerPO po: listOfCustomerPO){
 				Customer customer = new Customer();
 				customer.setPO(po);

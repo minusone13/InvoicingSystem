@@ -20,7 +20,6 @@ public class CashPaymentVO extends VO{
 	ArrayList<String> remark=new ArrayList<String>();
 	BillState state=BillState.DRAFT;
 	Role role;
-	ArrayList<Item> itemList;
 	Date date;
 	String userID;
 	String userName;
@@ -103,14 +102,6 @@ public class CashPaymentVO extends VO{
 
 	public void setRole(Role r) {
 		this.role = r;
-	}
-
-	public ArrayList<Item> getItemList() {
-		return itemList;
-	}
-
-	public void setItemList(ArrayList<Item> itemList) {
-		this.itemList = itemList;
 	}
 
 	public void setMoney(ArrayList<Double> money) {
