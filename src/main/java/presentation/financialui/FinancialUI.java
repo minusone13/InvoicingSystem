@@ -8,6 +8,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import presentation.managerui.ManagerUI;
 import userui.Frame;
 import vo.financialBillVO.CashPaymentVO;
 import vo.financialBillVO.PaymentVO;
@@ -15,7 +16,7 @@ import vo.financialBillVO.ReceiptVO;
 import businesslogic.BillState;
 import businesslogic.BillStyle;
 
-public class Financial extends JPanel {
+public class FinancialUI extends JPanel {
 	//背景
 	private JLabel bg=new JLabel();
 	//标题栏
@@ -32,9 +33,31 @@ public class Financial extends JPanel {
 	private JLabel back=new JLabel();
 	//登出
 	private JLabel signout=new JLabel();
+	//管理单据选择面板
+	private JPmanageBills1 manageBills1=new JPmanageBills1();
+	//单据管理面板
+	private JPmanageBills2 manageBills2=new JPmanageBills2();
+	public JPfunctions getFunction() {
+		return function;
+	}
+	public void setFunction(JPfunctions function) {
+		this.function = function;
+	}
+	public JPmanageBills1 getManageBills1() {
+		return manageBills1;
+	}
+	public void setManageBills1(JPmanageBills1 manageBills1) {
+		this.manageBills1 = manageBills1;
+	}
+	public JPmanageBills2 getManageBills2() {
+		return manageBills2;
+	}
+	public void setManageBills2(JPmanageBills2 manageBills2) {
+		this.manageBills2 = manageBills2;
+	}
 	//frame的引用
     Frame frame;
-	public Financial(){
+	public FinancialUI(){
 
 			//设置窗口大小
 			this.setSize(960, 600);
@@ -56,29 +79,16 @@ public class Financial extends JPanel {
 			
 			//test区域
 			//功能板
-//			function.setLocation(55, 233);
+			function.setLocation(55, 233);
 			//单据管理板1
-			JPmanageBills1 manageBills=new JPmanageBills1();
-			manageBills.setLocation(55, 233);
 			
-			//测试单据数组
-			ArrayList<CashPaymentVO> test=new ArrayList<CashPaymentVO>();
-			CashPaymentVO bill1=new CashPaymentVO();
-			CashPaymentVO bill2=new CashPaymentVO();
-			CashPaymentVO bill3=new CashPaymentVO();
-			CashPaymentVO bill4=new CashPaymentVO();
-			bill1.setBillState(BillState.DRAFT);
-			bill2.setBillState(BillState.SUBMITED);
-			bill3.setBillState(BillState.EXAMINED);
-			bill4.setBillState(BillState.OVER);
-			test.add(bill1);
-			test.add(bill2);
-			test.add(bill3);
-			test.add(bill4);
+			manageBills1.setVisible(false);
+			manageBills1.setLocation(55, 233);
+			
 			//单据管理板2
-			JPmanageBills2 manageBills2=new JPmanageBills2(BillStyle.CashPaymentBill);
+			
+			manageBills2.setVisible(false);
 			manageBills2.setLocation(55, 233);
-			manageBills2.getBillsList().addCashPaymentBillList(test);//加单据数组
 			
 			//home
 			home.setIcon(new ImageIcon("src/image/home.png") );
@@ -98,13 +108,18 @@ public class Financial extends JPanel {
 			this.add(home,3);
 			this.add(back,4);
 			this.add(signout,5);
-			this.add(manageBills2,6);
-			this.add(bg,7);
+			this.add(function,6);
+			this.add(manageBills1,7);
+			this.add(manageBills2,8);
+			this.add(bg,9);
 			
 		}
     /*获取frame引用*/
     public void getFrame( Frame f){
     		frame=f;
+    		function.getFrame(frame);
+    		manageBills1.getFrame(frame);
+    		manageBills2.getFrame(frame);
     }
 		public class MouseListenerOfButton implements MouseListener{
 
@@ -128,7 +143,6 @@ public class Financial extends JPanel {
 					break;
 				case 3:
 					signout.setIcon(new ImageIcon("src/image/signout2.png"));
-				
 					break;
 				}
 			}
@@ -138,6 +152,9 @@ public class Financial extends JPanel {
 				switch(num){
 				case 1:
 					home.setIcon(new ImageIcon("src/image/home1.png"));
+					FinancialUI.this.getManageBills1().setVisible(false);
+					FinancialUI.this.getManageBills2().setVisible(false);
+					FinancialUI.this.getFunction().setVisible(true);
 					break;
 				case 2:
 					back.setIcon(new ImageIcon("src/image/back1.png"));
@@ -146,7 +163,7 @@ public class Financial extends JPanel {
 					signout.setIcon(new ImageIcon("src/image/signout1.png"));
 					//实现登出跳转
 					frame.getLogin().setVisible(true);
-					Financial.this.setVisible(false);
+					FinancialUI.this.setVisible(false);
 					break;
 				}
 			}

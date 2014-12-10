@@ -10,7 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import presentation.commodityui.Stock;
-import presentation.financialui.Financial;
+import presentation.financialui.FinancialUI;
 import presentation.managerui.ManagerUI;
 import presentation.saleui.Sale;
 import presentation.userui.Login;
@@ -27,7 +27,7 @@ public class Frame extends JFrame implements MouseListener{
 	//总经理面板
 	private ManagerUI manager;
 	//财务
-	private Financial financial;
+	private FinancialUI financial;
 	//进销人员
 	private Sale sale;
 	//库管
@@ -62,10 +62,10 @@ public class Frame extends JFrame implements MouseListener{
 	public void setManager(ManagerUI manager) {
 		this.manager = manager;
 	}
-	public Financial getFinancial() {
+	public FinancialUI getFinancial() {
 		return financial;
 	}
-	public void setFinancial(Financial financial) {
+	public void setFinancial(FinancialUI financial) {
 		this.financial = financial;
 	}
 	public Frame(){
@@ -115,7 +115,7 @@ public class Frame extends JFrame implements MouseListener{
 		manager.setVisible(false);
 		manager.setBounds(0, 0, 960, 600);
 		
-		financial=new Financial();
+		financial=new FinancialUI();
 		financial.getFrame(this);
 		mainJP.add(financial,4);
 		financial.setVisible(false);

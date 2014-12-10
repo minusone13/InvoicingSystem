@@ -1,16 +1,29 @@
 package presentation.managerui;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
+import presentation.financialui.JPmanageBills2.JPanelEdit;
+import presentation.financialui.JPmanageBills2.MouseListenerOfButton;
+import presentation.financialui.JPmanageBills2.JPanelEdit.JPaddList;
+import presentation.financialui.JPmanageBills2.JPanelEdit.TreadOfLeft;
+import presentation.financialui.JPmanageBills2.JPanelEdit.TreadOfRight;
+import presentation.userui.Login;
 import businesslogic.BillState;
+import businesslogic.BillStyle;
 import userui.Frame;
 import vo.financialBillVO.CashPaymentVO;
+import vo.financialBillVO.PaymentVO;
+import vo.financialBillVO.ReceiptVO;
 
 public class JPpassBill2 extends JPanel {
 
@@ -21,13 +34,27 @@ public class JPpassBill2 extends JPanel {
 	//向下
 	private JLabel down=new JLabel();
 	//单据列表
-	JPBillList billList=new JPBillList();
+	private JPBillList billList=new JPBillList();
+	public JPBillList getBillList() {
+		return billList;
+	}
+	public void setBillList(JPBillList billList) {
+		this.billList = billList;
+	}
+	//清单表格
+	private JTableOfList table=new JTableOfList();
 	//审查通过功能按钮
 	private JLabel check=new JLabel();
 	//删除按钮
 	private JLabel delete=new JLabel();
 	//编辑按钮
 	private JLabel edit=new JLabel();
+	//单据类型
+	private BillStyle style;
+	//编辑面板
+	private JPanelEdit JPeditOfGift;
+	private JPanelEdit JPeditOfPur;
+	private JPanelEdit JPeditOfCash;
 	//图片
 	ImageIcon upIconW=new ImageIcon("src/image/upW.png");
 	ImageIcon downIconW=new ImageIcon("src/image/downW.png");
@@ -44,7 +71,7 @@ public class JPpassBill2 extends JPanel {
     Frame frame;
 	public JPpassBill2(){
 		//面板大小
-		this.setSize(800, 342);
+		this.setSize(905, 342);
 		//设置布局
 		this.setLayout(null);
 		//设置面板透明
@@ -62,29 +89,17 @@ public class JPpassBill2 extends JPanel {
 		jpbg.setBounds(0, 0, 261, 301);
 		jpbg.setIcon(new ImageIcon("src/image/passBill/Pb2.png"));
 		
-		
-		//测试数组的初始化
-		ArrayList<CashPaymentVO> test=new ArrayList<CashPaymentVO>();
-		CashPaymentVO bill1=new CashPaymentVO();
-		CashPaymentVO bill2=new CashPaymentVO();
-		CashPaymentVO bill3=new CashPaymentVO();
-		CashPaymentVO bill4=new CashPaymentVO();
-		bill1.setBillState(BillState.DRAFT);
-		bill2.setBillState(BillState.SUBMITED);
-		bill3.setBillState(BillState.EXAMINED);
-		bill4.setBillState(BillState.OVER);
-		test.add(bill1);
-		test.add(bill2);
-		test.add(bill3);
-		test.add(bill4);
-
-		//将测试数组加到单据面板列表
-		billList.addCashPaymentBillList(test);
-
+		//将单据vo数组加到单据面板列表
 		billList.setLocation(0, 0);
 		
+		//将列表加在底板上
 		jp.add(billList,0);
 		jp.add(jpbg,1);
+		
+		//表格
+		table.setLocation(375, 10);
+
+		billList.getTable(table);//将引用传递
 		//向上按钮
 		up.setIcon(upIconW);
 		up.setBounds(281, 20, 32, 32);
@@ -94,31 +109,114 @@ public class JPpassBill2 extends JPanel {
 		down.setBounds(281, 289, 32, 32);
 		down.addMouseListener(new MouseListenerOfButton(2));
 		
-		//审查功能按钮
+		//处理功能按钮
 		check.setIcon(checkIconW);
 		check.setBounds(720, 20, 50, 50);
 		check.addMouseListener(new MouseListenerOfButton(3));
 		//删除功能按钮
 		delete.setIcon(deleteIconW);
-		delete.setBounds(720, 112, 50, 50);
+		delete.setBounds(720, 85, 50, 50);
 		delete.addMouseListener(new MouseListenerOfButton(4));
 		//编辑功能按钮
 		edit.setIcon(editIconW);
-		edit.setBounds(720, 204, 50, 50);
+		edit.setBounds(720, 150, 50, 50);
 		edit.addMouseListener(new MouseListenerOfButton(5));
+		//编辑面板
+		JPeditOfGift=new JPanelEdit(BillStyle.GiftBill);
+		JPeditOfPur=new JPanelEdit(BillStyle.PurSheet);
+		JPeditOfCash=new JPanelEdit(BillStyle.CashPaymentBill);
+		
+		JPeditOfGift.setLocation(905, 36);
+		JPeditOfPur.setLocation(905, 36);
+		JPeditOfCash.setLocation(905, 36);
 		
 		this.add(jp,0);
 		this.add(up,1);
 		this.add(down,2);
-		this.add(check,3);
-		this.add(delete,4);
-		this.add(edit,5);
-		this.add(bg,6);
+		this.add(JPeditOfGift,3);
+		this.add(JPeditOfPur,4);
+		this.add(JPeditOfCash,5);
+		this.add(check,6);
+		this.add(delete,7);
+		this.add(edit,8);
+		this.add(table,9);
+		this.add(bg,10);
+	}
+	/*重新设置类型*/
+	public void setStyle( BillStyle s){
+		style=s;
+		String[] items=null;
+		switch(style){
+		case GiftBill:
+			String[] temp1={"赠品","型号","数量"};
+			items=temp1;
+			table.setColumnNames(items);
+			table.setList(new String[1][3]);
+			table.updateShow();
+			break;
+		case SpillsLossBill:
+			table.setVisible(false);
+			break;
+		case AlertBill:
+			table.setVisible(false);
+			break;
+		case PurBackSheet:
+			String[] temp2={"商品","型号","数量"};
+			items=temp2;
+			table.setColumnNames(items);
+			table.setList(new String[1][3]);
+			table.updateShow();
+			break;
+		case SaleSheet:
+			String[] temp3={"商品","型号","数量"};
+			items=temp3;
+			table.setColumnNames(items);
+			table.setList(new String[1][3]);
+			table.updateShow();
+			break;
+		case SaleBackSheet:
+			String[] temp4={"商品","型号","数量"};
+			items=temp4;
+			table.setColumnNames(items);
+			table.setList(new String[1][3]);
+			table.updateShow();
+			break;
+		case ReceiptBill:
+			String[] temp5={"银行账户","转账金额","备注"};
+			items=temp5;
+			table.setColumnNames(items);
+			table.setList(new String[1][3]);
+			table.updateShow();
+			break;
+		case PaymentBill:
+			String[] temp6={"银行账户","转账金额","备注"};
+			items=temp6;
+			table.setColumnNames(items);
+			table.setList(new String[1][3]);
+			table.updateShow();
+			break;
+		case PurSheet:
+			String[] temp7={"商品","型号","数量"};
+			items=temp7;
+			table.setColumnNames(items);
+			table.setList(new String[1][3]);
+			table.updateShow();
+			break;
+		case CashPaymentBill:
+			String[] temp8={"条目名","金额","备注"};
+			items=temp8;
+			table.setColumnNames(items);
+			table.setList(new String[1][3]);
+			table.updateShow();
+			break;
+		}
+		
 	}
 	/*获取frame的引用*/
 	public void getFrame( Frame f){
   		frame=f;
     }
+	/*按钮的监控*/
 	public class MouseListenerOfButton implements MouseListener{
 
 		private int num;
@@ -153,6 +251,19 @@ public class JPpassBill2 extends JPanel {
 				break;
 			case 5:
 				edit.setIcon(editIconR);
+				switch(style){
+				case GiftBill:
+					JPeditOfGift.leftMove();
+					break;
+				case PurSheet:
+					JPeditOfPur.leftMove();
+					break;
+				case CashPaymentBill:
+					JPeditOfCash.leftMove();
+					break;
+				default:
+					System.out.println("您无权修改此单据");
+				}
 				break;
 			}
 		}
@@ -206,6 +317,311 @@ public class JPpassBill2 extends JPanel {
 				edit.setIcon(editIconW);
 				break;		
 			}
+		}
+		
+	}
+	/*编辑栏面板*/
+	public class JPanelEdit extends JPanel{
+		//辨别单据类型
+		private BillStyle billStyle;
+		//背景
+		private JLabel back=new JLabel();
+		//右移按钮
+		private JLabel right=new JLabel();
+		//确认按钮
+		private JLabel confirm=new JLabel();
+		//图片
+		private ImageIcon right0=new ImageIcon("src/image/function/rightW.png");
+		private ImageIcon right1=new ImageIcon("src/image/function/rightR.png");
+		private ImageIcon add0=new ImageIcon("src/image/function/littleAddW.png");
+		private ImageIcon add1=new ImageIcon("src/image/function/littleAddR.png");
+		private ImageIcon confirm0=new ImageIcon("src/image/function/confirmW.png");
+		private ImageIcon confirm1=new ImageIcon("src/image/function/confirmR.png");
+		
+		//现金费用单的附件
+		private JLabel total=new JLabel("总额");
+		private JTextField totalText=new JTextField(10);
+		//赠送单的附件
+		private JLabel addList=new JLabel();//增加商品按钮
+		private JLabel reason=new JLabel("赠送原因");
+		private JTextField reasonTxt=new JTextField(10);
+		//进货单的附件
+		private JLabel customer=new JLabel("客户");
+		private JLabel warehouse=new JLabel("仓库");
+		private JLabel list=new JLabel("商品清单");
+		private JLabel note=new JLabel("备注");
+		private JComboBox customerCombo;
+		private JComboBox warehouseCombo;
+		private JTextField noteText=new JTextField(10);
+		public JPanelEdit(BillStyle style){
+			//确认种类
+			billStyle=style;
+			//面板大小
+			this.setSize(240,270);
+			//设置布局
+			this.setLayout(null);
+			//设置面板透明
+			this.setOpaque(false);
+			//监控
+			this.addMouseListener(new MouseListenerGetXY());
+			//背景
+			back.setIcon(new ImageIcon("src/image/function/editBlock.png"));
+			back.setBounds(0, 0, 240,270);
+			//右移按钮
+			right.setIcon(right0);
+			right.setBounds(10, 123, 24, 24);
+			right.addMouseListener(new MouseListenerOfButton(1));
+			//确认按钮
+			confirm.setIcon(confirm0);
+			confirm.setBounds(120, 236, 24, 24);
+			confirm.addMouseListener(new MouseListenerOfButton(3));
+			//根据单据种类加上不同的附件
+			switch(style){
+			case GiftBill:
+				//设置标签字体
+				list.setFont(new Font("宋体",Font.BOLD,14));
+				list.setText("赠品清单");
+				reason.setFont(new Font("宋体",Font.BOLD,14));
+				//设置字体颜色
+				list.setForeground(Color.white);
+				reason.setForeground(Color.white);
+				//设置标签大小位置
+				list.setBounds(40, 30, 60, 20);
+				reason.setBounds(40,60, 60, 20);
+				//增加条目按钮
+				addList.setIcon(add0);
+				addList.setBounds(105, 28, 24, 24);
+				addList.addMouseListener(new MouseListenerOfButton(2));
+				//总额文本框
+				reasonTxt.setBounds(110,60, 120, 20);
+				reasonTxt.setOpaque(false);//文本框透明
+				reasonTxt.setForeground(Color.white);//前景色
+				
+				this.add(list,0);
+				this.add(reason,1);
+				this.add(addList,2);
+				this.add(reasonTxt,3);
+				this.add(right,4);
+				this.add(confirm,5);
+				this.add(back,6);
+				break;
+			case PurSheet:
+				//设置标签字体
+				customer.setFont(new Font("宋体",Font.BOLD,14));
+				warehouse.setFont(new Font("宋体",Font.BOLD,14));
+				list.setFont(new Font("宋体",Font.BOLD,14));
+				total.setFont(new Font("宋体",Font.BOLD,14));
+				note.setFont(new Font("宋体",Font.BOLD,14));
+				//设置字体颜色
+				customer.setForeground(Color.white);
+				warehouse.setForeground(Color.white);
+				list.setForeground(Color.white);
+				total.setForeground(Color.white);
+				note.setForeground(Color.white);
+				//设置标签大小位置
+				customer.setBounds(40, 30, 40, 20);
+				warehouse.setBounds(40, 60, 40, 20);
+				list.setBounds(40, 90, 60, 20);
+				total.setBounds(40, 120, 40, 20);
+				note.setBounds(40, 150, 40, 20);
+				//客户选择下拉框
+				customerCombo = new JComboBox();
+				customerCombo.setFont(new Font("宋体",Font.BOLD,14));
+				customerCombo.setBounds(80,30, 150, 20);
+				customerCombo.setBackground(Color.gray);
+				customerCombo.setForeground(Color.white);
+				//仓库选择下拉框
+				warehouseCombo = new JComboBox();
+				warehouseCombo.setFont(new Font("宋体",Font.BOLD,14));
+				warehouseCombo.setBounds(80,60, 150, 20);
+				warehouseCombo.setBackground(Color.gray);
+				warehouseCombo.setForeground(Color.white);
+				//增加条目按钮
+				addList.setIcon(add0);
+				addList.setBounds(105, 88, 24, 24);
+				addList.addMouseListener(new MouseListenerOfButton(2));
+				//总额文本框
+				totalText.setBounds(80,120, 150, 20);
+				totalText.setOpaque(false);//文本框透明
+				totalText.setForeground(Color.white);//前景色
+				//备注文本框
+				noteText.setBounds(80,150, 150, 20);
+				noteText.setOpaque(false);//文本框透明
+				noteText.setForeground(Color.white);//前景色
+				
+				this.add(customer,0);
+				this.add(warehouse,1);
+				this.add(list,2);
+				this.add(total,3);
+				this.add(note,4);
+				this.add(right,5);
+				this.add(customerCombo,6);
+				this.add(warehouseCombo,7);
+				this.add(addList,8);
+				this.add(totalText,9);
+				this.add(noteText,10);
+				this.add(confirm,11);
+				this.add(back,12);
+				break;
+			case CashPaymentBill:
+				//设置标签字体
+				total.setFont(new Font("宋体",Font.BOLD,14));
+				//设置字体颜色
+				total.setForeground(Color.white);
+				//设置标签大小位置
+				total.setBounds(40, 30, 40, 20);
+				//总额文本框
+				totalText.setBounds(80,30, 150, 20);
+				totalText.setOpaque(false);//文本框透明
+				totalText.setForeground(Color.white);//前景色
+				
+				this.add(total,0);
+				this.add(totalText,1);
+				this.add(right,2);
+				this.add(confirm,3);
+				this.add(back,4);
+				break;
+			}
+		}
+		/*返回收款付款单编辑栏的客户选择下拉框*/
+		public void leftMove(){
+			Thread t=new Thread(new TreadOfLeft());
+			t.start();
+		}
+		public void RightMove(){
+			Thread t=new Thread(new TreadOfRight());
+			t.start();
+		}
+		public class MouseListenerOfButton implements MouseListener{
+
+			private int num;//1、右移 2、加号 3、确认
+			public MouseListenerOfButton(int N){
+				num=N;
+			}
+			
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				switch(num){
+				case 1:
+					right.setIcon(right1);
+					//右移
+					RightMove();
+					break;
+				case 2:
+					addList.setIcon(add1);
+					//显示编辑赠品面板
+					switch(billStyle){
+					case GiftBill:
+						break;
+					case PurSheet:
+						break;
+					case CashPaymentBill:
+					}
+					
+					break;
+				case 3:
+					confirm.setIcon(confirm1);
+						switch(billStyle){
+						case ReceiptBill:
+							break;
+						case PaymentBill:
+							break;
+						case CashPaymentBill:
+							break;
+						}
+					break;
+				}
+			}
+
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				switch(num){
+				case 1:
+					right.setIcon(right0);
+					break;
+				case 2:
+					addList.setIcon(add0);
+					break;
+				case 3:
+					confirm.setIcon(confirm0);
+					break;
+				}
+			}
+
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				switch(num){
+				case 1:
+					right.setIcon(right0);
+					break;
+				case 2:
+					addList.setIcon(add0);
+					break;
+				case 3:
+					confirm.setIcon(confirm0);
+					break;
+				}
+			}
+			
+		}
+		public class TreadOfLeft  implements Runnable{
+
+			public void run() {
+				// TODO Auto-generated method stub
+				int x=905;
+				int y=36;
+				while(x!=665){
+					if((x-665)>10){
+						x-=10;
+					}
+					else{
+						x=665;
+					}
+					try {
+						Thread.sleep(50);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					JPanelEdit.this.setLocation(x, y);
+				}
+			}
+			
+		}
+		
+		public class TreadOfRight  implements Runnable{
+
+			public void run() {
+				// TODO Auto-generated method stub
+				int x=665;
+				int y=36;
+				while(x!=905){
+					if((905-x)>10){
+						x+=10;
+					}
+					else{
+						x=905;
+					}
+					try {
+						Thread.sleep(50);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					JPanelEdit.this.setLocation(x, y);
+				}
+			}
+			
 		}
 		
 	}

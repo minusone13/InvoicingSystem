@@ -8,6 +8,11 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import userui.Frame;
+import businesslogic.BillStyle;
+import businesslogic.financialbl.Financial;
+import businesslogicservice.financialblservice.StubFinancialBlService;
+
 
 @SuppressWarnings("serial")
 public class JPmanageBills1 extends JPanel {
@@ -27,6 +32,10 @@ public class JPmanageBills1 extends JPanel {
 	ImageIcon receivebillIcon1=new ImageIcon("src\\image\\bill\\receivebill1.png");
 	ImageIcon paymentbillIcon1=new ImageIcon("src\\image\\bill\\paymentbill1.png");
 	ImageIcon crashbillIcon1=new ImageIcon("src\\image\\bill\\crashbill1.png");
+	//frame的引用
+    Frame frame;
+    //逻辑层的财务人员接口
+    StubFinancialBlService fbl=new Financial();
 	public JPmanageBills1(){
 		//设置窗口大小
 		this.setSize(445, 330);
@@ -58,6 +67,10 @@ public class JPmanageBills1 extends JPanel {
 		
 		add(bg,3);
 	}
+	/*获取frame的引用*/
+	public void getFrame( Frame f){
+  		frame=f;
+    }
 	public class MouseListenOfButton implements MouseListener{
 
 		private int num;
@@ -85,10 +98,40 @@ public class JPmanageBills1 extends JPanel {
 			// TODO Auto-generated method stub
 			switch(num){
 			case 21:receivebill.setIcon(receivebillIcon);
+				//切换
+				JPmanageBills1.this.setVisible(false);
+				//设置单据类型
+				frame.getFinancial().getManageBills2().setStyle(BillStyle.ReceiptBill);
+				//从逻辑层读取单据信息填充单据列表
+				frame.getFinancial().getManageBills2().getBillList().getJPbillList().clear();
+				frame.getFinancial().getManageBills2().getBillList().reHome();
+				frame.getFinancial().getManageBills2().getBillList().addReceiptBillList(fbl.getAllOfReceiptBills());
+				//切换
+				frame.getFinancial().getManageBills2().setVisible(true);
 				break;
 			case 22:paymentbill.setIcon(paymentbillIcon);
+				//切换
+				JPmanageBills1.this.setVisible(false);
+				//设置单据类型
+				frame.getFinancial().getManageBills2().setStyle(BillStyle.PaymentBill);
+				//从逻辑层读取单据信息填充单据列表
+				frame.getFinancial().getManageBills2().getBillList().getJPbillList().clear();
+				frame.getFinancial().getManageBills2().getBillList().reHome();
+				frame.getFinancial().getManageBills2().getBillList().addPaymentBillList(fbl.getAllOfPaymentBills());
+				//切换
+				frame.getFinancial().getManageBills2().setVisible(true);
 				break;
 			case 23:crashbill.setIcon(crashbillIcon);
+				//切换
+				JPmanageBills1.this.setVisible(false);
+				//设置单据类型
+				frame.getFinancial().getManageBills2().setStyle(BillStyle.CashPaymentBill);
+				//从逻辑层读取单据信息填充单据列表
+				frame.getFinancial().getManageBills2().getBillList().getJPbillList().clear();
+				frame.getFinancial().getManageBills2().getBillList().reHome();
+				frame.getFinancial().getManageBills2().getBillList().addCashPaymentBillList(fbl.getAllOfCashPaymentBills());
+				//切换
+				frame.getFinancial().getManageBills2().setVisible(true);
 				break;
 			}
 		}

@@ -435,6 +435,7 @@ public class StubBillPool {
 				//修改仓库
 				alOfPurSheet.get(i).setstock(ps.getstock());
 				//修改操作员
+				alOfPurSheet.get(i).setop(ps.getop());
 				//修改商品清单
 				
 				//修改总金额
@@ -457,6 +458,7 @@ public class StubBillPool {
 				//修改仓库
 				alOfPurBackSheet.get(i).setstock(pbs.getstock());
 				//修改操作员
+				alOfPurBackSheet.get(i).setop(pbs.getop());
 				//修改商品清单
 				
 				//修改总金额
@@ -479,7 +481,9 @@ public class StubBillPool {
 				//修改仓库
 				alOfSaleSheet.get(i).setstock(ss.getstock());
 				//修改操作员
+				alOfSaleSheet.get(i).setop(ss.getop());
 				//修改商品清单
+				
 				//修改总金额
 				alOfSaleSheet.get(i).setmoney1(ss.getmoney1());
 				//修改使用代金券
@@ -506,7 +510,9 @@ public class StubBillPool {
 				//修改仓库
 				alOfSaleBackSheet.get(i).setstock(sbs.getstock());
 				//修改操作员
+				alOfSaleBackSheet.get(i).setop(sbs.getop());
 				//修改商品清单
+				
 				//修改总金额
 				alOfSaleBackSheet.get(i).setmoney1(sbs.getmoney1());
 				//修改使用代金券

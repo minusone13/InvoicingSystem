@@ -11,8 +11,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import presentation.financialui.JPmanageBills2.JPanelEdit;
 import presentation.managerui.JPBillList;
+import presentation.managerui.JTableOfList;
 import presentation.managerui.MouseListenerGetXY;
+import userui.Frame;
+import businesslogic.BillState;
 import businesslogic.BillStyle;
 
 public class JPmanageBills2 extends JPanel {
@@ -23,7 +27,13 @@ public class JPmanageBills2 extends JPanel {
 		//向下
 		private JLabel down=new JLabel();
 		//单据列表
-		JPBillList billList=new JPBillList();
+		private JPBillList billList=new JPBillList();
+		public JPBillList getBillList() {
+			return billList;
+		}
+		public void setBillList(JPBillList billList) {
+			this.billList = billList;
+		}
 		//处理按钮
 		private JLabel done=new JLabel();
 		//删除按钮
@@ -34,8 +44,18 @@ public class JPmanageBills2 extends JPanel {
 		private JLabel submit=new JLabel();
 		//创建按钮
 		private JLabel add=new JLabel();
+		//清单表格
+		private JTableOfList table=new JTableOfList();
 		//编辑面板
-		JPanelEdit JPedit;
+		private JPanelEdit JPeditOfPur;
+		//编辑面板
+		private JPanelEdit JPeditOfPurBack;
+		//编辑面板
+		private JPanelEdit JPeditOfSale;
+		//编辑面板
+		private JPanelEdit JPeditOfSaleBack;
+		//单据类型
+		private BillStyle style;
 		//图片
 		ImageIcon upIconW=new ImageIcon("src/image/upW.png");
 		ImageIcon downIconW=new ImageIcon("src/image/downW.png");
@@ -52,8 +72,9 @@ public class JPmanageBills2 extends JPanel {
 		ImageIcon editIconR=new ImageIcon("src/image/function/editR.png");
 		ImageIcon submitIconR=new ImageIcon("src/image/function/uploadR.png");
 		ImageIcon addIconR=new ImageIcon("src/image/function/addR.png");
-		
-		public JPmanageBills2(BillStyle style){
+		//frame的引用
+	    Frame frame;
+		public JPmanageBills2(){
 			//面板大小
 			this.setSize(905, 342);
 			//设置布局
@@ -79,6 +100,11 @@ public class JPmanageBills2 extends JPanel {
 			//将列表加在底板上
 			jp.add(billList,0);
 			jp.add(jpbg,1);
+			
+			//表格
+			table.setLocation(375, 10);
+			
+			billList.getTable(table);//将引用传递
 			//向上按钮
 			up.setIcon(upIconW);
 			up.setBounds(281, 20, 32, 32);
@@ -109,19 +135,103 @@ public class JPmanageBills2 extends JPanel {
 			add.setBounds(720, 280, 50, 50);
 			add.addMouseListener(new MouseListenerOfButton(7));
 			//编辑面板
-			JPedit=new JPanelEdit(style);//根据单据种类实例化不同的编辑面板
-			JPedit.setLocation(905, 36);
+			JPeditOfPur=new JPanelEdit(BillStyle.PurSheet);
+			JPeditOfPur.setLocation(905, 36);
+			JPeditOfPurBack=new JPanelEdit(BillStyle.PurBackSheet);
+			JPeditOfPurBack.setLocation(905, 36);
+			JPeditOfSale=new JPanelEdit(BillStyle.SaleSheet);
+			JPeditOfSale.setLocation(905, 36);
+			JPeditOfSaleBack=new JPanelEdit(BillStyle.SaleBackSheet);
+			JPeditOfSaleBack.setLocation(905, 36);
 			
 			this.add(jp,0);
 			this.add(up,1);
 			this.add(down,2);
-			this.add(JPedit,3);
+			this.add(JPeditOfPur,3);
+			this.add(JPeditOfPurBack,3);
+			this.add(JPeditOfSale,3);
+			this.add(JPeditOfSaleBack,3);
 			this.add(done,4);
 			this.add(delete,5);
 			this.add(edit,6);
 			this.add(submit,7);
 			this.add(add,8);
+			this.add(table,9);
 			this.add(bg,9);
+		}
+		  /*获取frame引用*/
+	    public void getFrame( Frame f){
+	    		frame=f;
+	    }
+		/*重新设置类型*/
+		public void setStyle( BillStyle s){
+			style=s;
+			String[] items=null;
+			switch(style){
+			case GiftBill:
+				String[] temp1={"赠品","型号","数量"};
+				items=temp1;
+				table.setColumnNames(items);
+				table.setList(new String[1][3]);
+				table.updateShow();
+				break;
+			case SpillsLossBill:
+				table.setVisible(false);
+				break;
+			case AlertBill:
+				table.setVisible(false);
+				break;
+			case PurBackSheet:
+				String[] temp2={"商品","型号","数量"};
+				items=temp2;
+				table.setColumnNames(items);
+				table.setList(new String[1][3]);
+				table.updateShow();
+				break;
+			case SaleSheet:
+				String[] temp3={"商品","型号","数量"};
+				items=temp3;
+				table.setColumnNames(items);
+				table.setList(new String[1][3]);
+				table.updateShow();
+				break;
+			case SaleBackSheet:
+				String[] temp4={"商品","型号","数量"};
+				items=temp4;
+				table.setColumnNames(items);
+				table.setList(new String[1][3]);
+				table.updateShow();
+				break;
+			case ReceiptBill:
+				String[] temp5={"银行账户","转账金额","备注"};
+				items=temp5;
+				table.setColumnNames(items);
+				table.setList(new String[1][3]);
+				table.updateShow();
+				break;
+			case PaymentBill:
+				String[] temp6={"银行账户","转账金额","备注"};
+				items=temp6;
+				table.setColumnNames(items);
+				table.setList(new String[1][3]);
+				table.updateShow();
+				break;
+			case PurSheet:
+				String[] temp7={"商品","型号","数量"};
+				items=temp7;
+				table.setColumnNames(items);
+				table.setList(new String[1][3]);
+				table.updateShow();
+				break;
+			case CashPaymentBill:
+				String[] temp8={"条目名","金额","备注"};
+				items=temp8;
+				table.setColumnNames(items);
+				table.setList(new String[1][3]);
+				table.updateShow();
+				break;
+			}
+			
 		}
 		public JPBillList getBillsList(){
 			return billList;
@@ -159,13 +269,50 @@ public class JPmanageBills2 extends JPanel {
 					break;
 				case 5:
 					edit.setIcon(editIconR);
-					JPedit.leftMove();
+					if(billList.getChosenNum()==1&&billList.stateOfChosen()==BillState.DRAFT){
+						switch(style){
+						case PurSheet:
+//							JPeditOfPur.setIsAdd(false);//不是加单据是修改单据
+							JPeditOfPur.leftMove();//调出编辑板
+							break;
+						case PurBackSheet:
+//							JPeditOfPurBack.setIsAdd(false);//不是加单据是修改单据
+							JPeditOfPurBack.leftMove();//调出编辑板
+							break;
+						case SaleSheet:
+//							JPeditOfSale.setIsAdd(false);//不是加单据是修改单据
+							JPeditOfSale.leftMove();//调出编辑板
+							break;
+						case SaleBackSheet:
+//							JPeditOfSaleBack.setIsAdd(false);//不是加单据是修改单据
+							JPeditOfSaleBack.leftMove();//调出编辑板
+							break;
+						}
+					}
 					break;
 				case 6:
 					submit.setIcon(submitIconR);
 					break;
 				case 7:
 					add.setIcon(addIconR);
+					switch(style){
+					case PurSheet:
+//						JPeditOfPur.setIsAdd(true);//不是加单据是修改单据
+						JPeditOfPur.leftMove();//调出编辑板
+						break;
+					case PurBackSheet:
+//						JPeditOfPurBack.setIsAdd(true);//不是加单据是修改单据
+						JPeditOfPurBack.leftMove();//调出编辑板
+						break;
+					case SaleSheet:
+//						JPeditOfSale.setIsAdd(true);//不是加单据是修改单据
+						JPeditOfSale.leftMove();//调出编辑板
+						break;
+					case SaleBackSheet:
+//						JPeditOfSaleBack.setIsAdd(true);//不是加单据是修改单据
+						JPeditOfSaleBack.leftMove();//调出编辑板
+						break;
+					}
 					break;
 				}
 			}

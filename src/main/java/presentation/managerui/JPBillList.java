@@ -26,7 +26,13 @@ public class JPBillList extends JPanel {
 	//板块移动的纵坐标
 	private int y=0;
 	//单据面板数组
-	ArrayList<JPBill> JPbillList=new ArrayList<JPBill>();
+	private ArrayList<JPBill> JPbillList=new ArrayList<JPBill>();
+	public ArrayList<JPBill> getJPbillList() {
+		return JPbillList;
+	}
+	public void setJPbillList(ArrayList<JPBill> jPbillList) {
+		JPbillList = jPbillList;
+	}
 	//更新板
 	JPanel JPupdate=null;
 	//清单表格
@@ -40,6 +46,10 @@ public class JPBillList extends JPanel {
 		this.setOpaque(false);
 	
 
+	}
+	/*归位*/
+	public void reHome(){
+		this.setLocation(0, 0);
 	}
 	/*单据面板数组根据状态重新排序*/
 	public ArrayList<JPBill> sortBillList(ArrayList<JPBill> bl){
@@ -102,6 +112,7 @@ public class JPBillList extends JPanel {
 		this.setSize(261, JPbillList.size()*93);
 		//把更新板加到底板上
 		this.add(JPupdate);
+		this.repaint();
 	}
 	/*增加赠送单VO数组*/
 	public void addGiftBillList(ArrayList<GiftBillVO> gb){
@@ -363,6 +374,15 @@ public class JPBillList extends JPanel {
 		table=t;
 	}
 
+	/*返回选中的单据VO*/
+	public JPBill getChosen(){
+		for(int i=0;i<JPbillList.size();i++){
+			if(JPbillList.get(i).getChoose()){
+				return JPbillList.get(i);
+			}
+		}
+		return null;
+	}
 	/*通过选中的*/
 	public void passChosen(){
 		if(getChosenNum()>=1&&isTheSameState()&&stateOfChosen()==BillState.SUBMITED){
@@ -455,6 +475,7 @@ public class JPBillList extends JPanel {
 		if(isTheSameState()){//如果选中的单据都是同一个状态
 			for(int i=0;i<JPbillList.size();i++){
 				if(JPbillList.get(i).getChoose()){
+					System.out.println(JPbillList.get(i).getState());
 					return JPbillList.get(i).getState();
 				}
 			}
