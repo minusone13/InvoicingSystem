@@ -5,7 +5,7 @@ import java.util.Date;
 
 import businesslogic.BillStyle;
 import businesslogic.customerbl.Customer;
-import businesslogic.salebillbl.commodityInSheet;
+import businesslogic.salebillbl.commodity;
 
 public class PurSheetVO extends VO{
 	//private BillStyle style=BillStyle.PurSheet;
@@ -14,7 +14,7 @@ public class PurSheetVO extends VO{
 	String userid;
 	Date date;
 	String stock;//仓库？
-	ArrayList<commodityInSheet> sheet;//是不是应该是个arraylist<>?
+	ArrayList<commodity> sheet;//是不是应该是个arraylist<>?
 	double money1;//总金额
 	String words;//备注
 	String username;
@@ -76,11 +76,11 @@ public class PurSheetVO extends VO{
 		this.stock=stock;
 	}
 	
-	public ArrayList<commodityInSheet> getsheet(){
+	public ArrayList<commodity> getsheet(){
 		return sheet;
 	}
 	
-	public void setsheet(ArrayList<commodityInSheet> sheet){
+	public void setsheet(ArrayList<commodity> sheet){
 		this.sheet=sheet;
 	}
 	

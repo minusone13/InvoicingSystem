@@ -2,7 +2,7 @@ package businesslogic.salebillbl;
 
 import businesslogic.commoditybl.MockCommodity;
 
-public class commodityInSheet {
+public class commodity {
 		private MockCommodity commodity;
 		private int num;//商品数量；
 		private double price;//商品单价；
