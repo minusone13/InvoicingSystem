@@ -36,7 +36,7 @@ public class FinancialBLDriver {
 		boolean result5 = fbs.updateAccount("00001", "00100");
 		if(result5==true) System.out.println("UPDATE SUCCESS!");
 		
-		//fbs.buildAccount();
+		fbs.buildAccount();
 
 //		ArrayList<VO> list1 = fbs.inquirySale(new InquirySaleVO());
 //		if(list1 != null) System.out.println("INQUIRY SUCCESS!");

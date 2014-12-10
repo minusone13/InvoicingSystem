@@ -45,7 +45,7 @@ public class CustomerList implements CustomerForFinancial, CustomerBlService{
 		public ArrayList<CustomerVO> getAllCustomer(String address){
 			ArrayList<CustomerVO> listOfCustomerVO = new ArrayList<CustomerVO>();
 			ArrayList<CustomerPO> listOfCustomerPO = customerdata.getAllCustomer(address);
-			
+			if(listOfCustomerPO==null) return null;
 			for(CustomerPO po: listOfCustomerPO){
 				Customer customer = new Customer();
 				customer.setPO(po);
@@ -64,12 +64,15 @@ public class CustomerList implements CustomerForFinancial, CustomerBlService{
 			String Address ="Customer.txt";//保存的是一个默认的地址;
 			ArrayList<CustomerVO> listOfCustomerVO = this.getCustomer(Address);
 			ArrayList<CustomerPO> listOfCustomerPO = new ArrayList<CustomerPO>();
-			for(CustomerVO vo:listOfCustomerVO){
-				Customer customer = new Customer(vo);
-				CustomerPO po = customer.getPO();
-				listOfCustomerPO.add(po);
+			if(listOfCustomerVO !=null) {
+				for(CustomerVO vo:listOfCustomerVO){
+					Customer customer = new Customer(vo);
+					CustomerPO po = customer.getPO();
+					listOfCustomerPO.add(po);
+				}
+				customerdata.saveAllCustomer(listOfCustomerPO,address);
 			}
-			customerdata.saveAllCustomer(listOfCustomerPO,address);
+			else customerdata.saveAllCustomer(null,address);
 			//这个方法是把已有的客户整体搬迁到另一个文档里;
 		}
 		
