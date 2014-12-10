@@ -7,6 +7,7 @@ import po.SaleBackSheetPO;
 import vo.SaleBackSheetVO;
 import businesslogic.BillStyle;
 import businesslogic.GetVOandPO;
+import businesslogic.commoditybl.MockCommodity;
 import businesslogic.customerbl.Customer;
 import businesslogic.examinebl.Bill;
 
@@ -17,7 +18,7 @@ public class SaleBackSheet extends Bill implements GetVOandPO{
 	Date date;
 	Customer customer;
 	String stock;
-	ArrayList<commodity> sheet;//销售单据，商品名，数量，单价
+	ArrayList<MockCommodity> sheet;//销售单据，商品名，数量，单价
 	double money1;//折前总金额
 	double money2;//代金券金额
 	double discount;//折让金额；
@@ -124,11 +125,11 @@ public class SaleBackSheet extends Bill implements GetVOandPO{
 		this.stock=stock;
 	}
 	
-	public ArrayList<commodity> getsheet(){
+	public ArrayList<MockCommodity> getsheet(){
 		return sheet;
 	}
 	
-	public void setsheet(ArrayList<commodity> sheet){
+	public void setsheet(ArrayList<MockCommodity> sheet){
 		this.sheet=sheet;
 	}
 	

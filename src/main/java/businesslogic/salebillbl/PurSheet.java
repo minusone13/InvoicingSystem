@@ -8,6 +8,7 @@ import vo.PurSheetVO;
 import businesslogic.BillState;
 import businesslogic.BillStyle;
 import businesslogic.GetVOandPO;
+import businesslogic.commoditybl.MockCommodity;
 import businesslogic.customerbl.Customer;
 import businesslogic.examinebl.Bill;
 
@@ -19,7 +20,7 @@ public class PurSheet extends Bill implements GetVOandPO{
 	private String ID;
 	private String userID;
 	String stock;//仓库？
-	ArrayList<commodity> sheet;//是不是应该是个arraylist<>?
+	ArrayList<MockCommodity> sheet;//是不是应该是个arraylist<>?
 	double money1;//总金额
 	String words;//备注
 	String username;
@@ -99,11 +100,11 @@ public class PurSheet extends Bill implements GetVOandPO{
 			this.stock=stock;
 		}
 		
-		public ArrayList<commodity> getsheet(){
+		public ArrayList<MockCommodity> getsheet(){
 			return sheet;
 		}
 		
-		public void setsheet(ArrayList<commodity> sheet){
+		public void setsheet(ArrayList<MockCommodity> sheet){
 			this.sheet=sheet;
 		}
 		

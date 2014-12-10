@@ -7,6 +7,7 @@ import po.PurBackSheetPO;
 import vo.PurBackSheetVO;
 import businesslogic.BillStyle;
 import businesslogic.GetVOandPO;
+import businesslogic.commoditybl.MockCommodity;
 import businesslogic.customerbl.Customer;
 import businesslogic.examinebl.Bill;
 
@@ -17,7 +18,7 @@ public class PurBackSheet extends Bill implements GetVOandPO{
 	private BillStyle billstyle=BillStyle.PurBackSheet;
 	Date date;
 	String stock;//仓库？
-	ArrayList<commodity> sheet;//写了一个commodityInSheet类。
+	ArrayList<MockCommodity> sheet;//写了一个commodityInSheet类。
 	double money1;//总金额
 	String words;//备注
 	String username;
@@ -98,11 +99,11 @@ public class PurBackSheet extends Bill implements GetVOandPO{
 		this.stock=stock;
 	}
 	
-	public ArrayList<commodity> getsheet(){
+	public ArrayList<MockCommodity> getsheet(){
 		return sheet;
 	}
 	
-	public void setsheet(ArrayList<commodity> sheet){
+	public void setsheet(ArrayList<MockCommodity> sheet){
 		this.sheet=sheet;
 	}
 	
