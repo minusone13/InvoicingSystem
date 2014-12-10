@@ -6,6 +6,7 @@ public class TransferAccount implements Serializable{
 	String account;
 	double money;
 	String remark;
+	//private static final long serialVersionUID = 869943612335778076;
 	public TransferAccount() {
 		this(null, 0.0, null);
 	}

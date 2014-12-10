@@ -117,7 +117,6 @@ public class Financial implements StubFinancialBlService{
 	}
 	
 	public boolean creatReceipt(ReceiptVO rv) {
-		rv.setRole(role);
 		FinancialBillList financialList = new FinancialBillList();
 		boolean result = financialList.creatReceiptBill(rv);
 		RM rm = RM.unknownerror;
@@ -126,8 +125,14 @@ public class Financial implements StubFinancialBlService{
 		return result;
 	}
 	
+	//修改收款单
+	public void updateReceipt(ReceiptVO vo) {
+		FinancialBillList financialList = new FinancialBillList();
+		financialList.updateReceiptBill(vo);
+	}
+	
+	//创建付款单
 	public boolean creatPayment(PaymentVO pv){
-		pv.setRole(role);
 		FinancialBillList financialList = new FinancialBillList();
 		boolean result = financialList.creatPaymentBill(pv);
 		RM rm = RM.unknownerror;
@@ -135,16 +140,26 @@ public class Financial implements StubFinancialBlService{
 		userSer.addRecord(new OperationRecord(new User(), "Creat a payment", rm));		
 		return result;
 	}
+
+	//修改付款单
+	public void updatePayment(PaymentVO vo) {
+		FinancialBillList financialList = new FinancialBillList();
+		financialList.updatePaymentBill(vo);
+	}
 	
 	//创建现金费用单
 	public boolean creatCashPayment(CashPaymentVO cpv) {
-		cpv.setRole(role);
 		FinancialBillList financialList = new FinancialBillList();
 		boolean result =financialList.creatCashPaymentBill(cpv);
 		RM rm = RM.unknownerror;
 		if(result) rm=RM.done;
 		userSer.addRecord(new OperationRecord(new User(), "Creat a cashpayment", rm));		
 		return result;		
+	}
+	
+	public void updateCashPayment(CashPaymentVO vo) {
+		FinancialBillList financialList = new FinancialBillList();
+		financialList.updateCashPaymentBill(vo);
 	}
 	
 	/*需要从单据池筛选指定状态的所有收款单*/

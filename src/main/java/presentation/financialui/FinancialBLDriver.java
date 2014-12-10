@@ -62,19 +62,18 @@ public class FinancialBLDriver {
 		if(result8==true) System.out.println("creat SUCCESS!");
 		else System.out.println("FAILE!");
 		*/
-		/*	
-		ArrayList<CashPaymentVO> cashPayments = fbs.getAllOfCashPaymentBills();
-		System.out.println(cashPayments.size());
-		CashPaymentVO vo = cashPayments.get(0);
-		//assertEquals(1,cashPayments.size());
-	//	assertEquals("XJFYD-20141209-00001", vo.getID());
+		ArrayList<PaymentVO> payments = fbs.getAllOfPaymentBills();
+		PaymentVO vo = payments.get(0);
 		
+		
+		
+		System.out.println(payments.size());
 		System.out.println(vo.getID());
-		System.out.println(vo.getAccount());
-		System.out.println(vo.getItem());
+		System.out.println( vo.getCustomer());
+		System.out.println( vo.getOp());
+				
+		System.out.println(vo.getTotal());
 		
-		*/
-		//assertEquals(100.0,vo.getTotal());
 		
 	}
 }
