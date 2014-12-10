@@ -28,15 +28,15 @@ public class JPfunction extends JPanel {
 		bg.setIcon(new ImageIcon("src/image/block/blockForFunctions.png"));
 		bg.setBounds(0, 0, 522, 325);
 		//功能1
-		function1.setIcon(new ImageIcon("src/image/stockUI/Commodity0.jpg"));
+		function1.setIcon(new ImageIcon("src/image/stockUI/Commodity0.png"));
 		function1.setBounds(21, 22, 160, 277);
 		function1.addMouseListener(new MouseListenerOfButton(1));
 		//功能2
-		function2.setIcon(new ImageIcon("src/image/stockUI/Bill0.jpg"));
+		function2.setIcon(new ImageIcon("src/image/stockUI/Bill0.png"));
 		function2.setBounds(181, 22, 160, 277);
 		function2.addMouseListener(new MouseListenerOfButton(2));
 		//功能3
-		function3.setIcon(new ImageIcon("src/image/stockUI/Read0.jpg"));
+		function3.setIcon(new ImageIcon("src/image/stockUI/Read0.png"));
 		function3.setBounds(341, 22, 160, 277);
 		function3.addMouseListener(new MouseListenerOfButton(3));
 		this.add(function1,0);
@@ -60,13 +60,13 @@ public class JPfunction extends JPanel {
 			// TODO Auto-generated method stub
 			switch(num){
 			case 1:
-				function1.setIcon(new ImageIcon("src/image/stockUI/Commodity1.jpg"));
+				function1.setIcon(new ImageIcon("src/image/stockUI/Commodity1.png"));
 				break;
 			case 2:
-				function2.setIcon(new ImageIcon("src/image/stockUI/Bill1.jpg"));
+				function2.setIcon(new ImageIcon("src/image/stockUI/Bill1.png"));
 				break;
 			case 3:
-				function3.setIcon(new ImageIcon("src/image/stockUI/Read1.jpg"));
+				function3.setIcon(new ImageIcon("src/image/stockUI/Read1.png"));
 				break;
 			}
 		}
@@ -75,13 +75,13 @@ public class JPfunction extends JPanel {
 			// TODO Auto-generated method stub
 			switch(num){
 			case 1:
-				function1.setIcon(new ImageIcon("src/image/stockUI/Commodity.jpg"));
+				function1.setIcon(new ImageIcon("src/image/stockUI/Commodity.png"));
 				break;
 			case 2:
-				function2.setIcon(new ImageIcon("src/image/stockUI/Bill.jpg"));
+				function2.setIcon(new ImageIcon("src/image/stockUI/Bill.png"));
 				break;
 			case 3:
-				function3.setIcon(new ImageIcon("src/image/stockUI/Read.jpg"));
+				function3.setIcon(new ImageIcon("src/image/stockUI/Read.png"));
 				break;
 			}
 		}
@@ -90,13 +90,13 @@ public class JPfunction extends JPanel {
 			// TODO Auto-generated method stub
 			switch(num){
 			case 1:
-				function1.setIcon(new ImageIcon("src/image/stockUI/Commodity.jpg"));
+				function1.setIcon(new ImageIcon("src/image/stockUI/Commodity.png"));
 				break;
 			case 2:
-				function2.setIcon(new ImageIcon("src/image/stockUI/Bill.jpg"));
+				function2.setIcon(new ImageIcon("src/image/stockUI/Bill.png"));
 				break;
 			case 3:
-				function3.setIcon(new ImageIcon("src/image/stockUI/Read.jpg"));
+				function3.setIcon(new ImageIcon("src/image/stockUI/Read.png"));
 				break;
 			}
 		}
@@ -105,13 +105,13 @@ public class JPfunction extends JPanel {
 			// TODO Auto-generated method stub
 			switch(num){
 			case 1:
-				function1.setIcon(new ImageIcon("src/image/stockUI/Commodity0.jpg"));
+				function1.setIcon(new ImageIcon("src/image/stockUI/Commodity0.png"));
 				break;
 			case 2:
-				function2.setIcon(new ImageIcon("src/image/stockUI/Bill0.jpg"));
+				function2.setIcon(new ImageIcon("src/image/stockUI/Bill0.png"));
 				break;
 			case 3:
-				function3.setIcon(new ImageIcon("src/image/stockUI/Read0.jpg"));
+				function3.setIcon(new ImageIcon("src/image/stockUI/Read0.png"));
 				break;
 			}
 		}
