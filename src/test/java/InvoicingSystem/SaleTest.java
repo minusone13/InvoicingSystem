@@ -7,6 +7,9 @@ import junit.framework.TestCase;
 
 public class SaleTest extends TestCase{
 		SaleBillBlService sbbs=new salebillController();
+		public void testTrue(){//added by lhw
+			assertTrue(true);
+		}
 		/*
 		public void testgetPurBackSheet(){
 			boolean result3=sbbs.getPurBackSheet("131");
