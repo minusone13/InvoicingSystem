@@ -3,6 +3,7 @@ package businesslogicservice.salebillblservice;
 import java.util.ArrayList;
 import java.util.Date;
 
+import businesslogic.BillState;
 import vo.CustomerVO;
 import vo.PurBackSheetVO;
 import vo.PurSheetVO;
@@ -32,33 +33,36 @@ public interface SaleBillBlService {
 		public boolean getSaleSheet(String id);
 		public boolean getSaleBackSheet(String id);
 		
-		/*public boolean changeState_PurSheet();
-		public boolean changeState_PurBackSheet();
-		public boolean changeState_Salesheet();
-		public boolean changeState_SaleBackSheet();*/
+		public void changeState_PurSheet(String ID,BillState state);
+		public void changeState_PurBackSheet(String ID,BillState state);
+		public void changeState_Salesheet(String ID,BillState state);
+		public void changeState_SaleBackSheet(String ID,BillState state);
 		
 		//更新的具体实现我还没有想好；
-		public boolean updatePurSheet();
-		public boolean updatePurBackSheet();
-		public boolean updateSaleSheet();
-		public boolean updateSaleBackSheet();
-		
-		//删除的实现我也没有想好；
-		public boolean deletePurSheet();
-		public boolean deletePurBackSheet();
-		public boolean deleteSaleSheet();
-		public boolean deleteSaleBackSheet();
-		
-		public ArrayList<PurSheetVO> getAllPurSheet();
-		public ArrayList<PurBackSheetVO> getAllPurBackSheet();
-		public ArrayList<SaleSheetVO> getAllSaleSheet();
-		public ArrayList<SaleBackSheetVO> getAllSaleBackSheet();
+		public void updatePurSheet(PurSheetVO vo);
+		public void updatePurBackSheet(PurBackSheetVO vo);
+		public void updateSaleSheet(SaleSheetVO vo);
+		public void updateSaleBackSheet(SaleBackSheetVO vo);
 		
 		public PurSheetVO findPurSheet(String id);
 		public PurBackSheetVO findPurBackSheet(String id);
 		public SaleSheetVO findSaleSheet(String id);
 		public SaleBackSheetVO findSaleBackSheet(String id);
 		
+		//删除的实现我也没有想好；
+		/*public boolean deletePurSheet();
+		public boolean deletePurBackSheet();
+		public boolean deleteSaleSheet();
+		public boolean deleteSaleBackSheet();*/
+		
+		public ArrayList<PurSheetVO> getAllPurSheet();
+		public ArrayList<PurBackSheetVO> getAllPurBackSheet();
+		public ArrayList<SaleSheetVO> getAllSaleSheet();
+		public ArrayList<SaleBackSheetVO> getAllSaleBackSheet();
+		
+
+		
+
 
 		
 }

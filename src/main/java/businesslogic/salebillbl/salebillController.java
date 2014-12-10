@@ -9,6 +9,8 @@ import vo.PurSheetVO;
 import vo.SaleBackSheetVO;
 import vo.SaleSheetVO;
 import vo.financialBillVO.ReceiptVO;
+import businesslogic.BillState;
+import businesslogic.BillStyle;
 import businesslogic.examinebl.StubBillPool;
 import businesslogic.financialbillbl.ReceiptBill;
 import businesslogic.salebillServicec.salebillForFinancial;
@@ -58,7 +60,6 @@ public class salebillController implements SaleBillBlService,salebillForFinancia
 		
 		//等等这边有个逻辑上的问题，我怎么得到的是个boolean型...
 		public boolean getPurSheet(String id) {
-			// TODO Auto-generated method stub
 			StubBillPool pool = new StubBillPool();
 			ArrayList<PurSheet> listOfPurSheet= new ArrayList<PurSheet>();
 			listOfPurSheet=pool.getPurSheet();
@@ -73,7 +74,6 @@ public class salebillController implements SaleBillBlService,salebillForFinancia
 		}
 
 		public boolean getPurBackSheet(String id) {
-			// TODO Auto-generated method stub
 			StubBillPool pool = new StubBillPool();
 			ArrayList<PurBackSheet> listOfPurBackSheet= new ArrayList<PurBackSheet>();
 			listOfPurBackSheet=pool.getPurBackSheet();
@@ -88,7 +88,6 @@ public class salebillController implements SaleBillBlService,salebillForFinancia
 		}
 
 		public boolean getSaleSheet(String id) {
-			// TODO Auto-generated method stub
 			StubBillPool pool = new StubBillPool();
 			ArrayList<SaleSheet> listOfSaleSheet= new ArrayList<SaleSheet>();
 			listOfSaleSheet=pool.getSaleSheet();
@@ -103,7 +102,6 @@ public class salebillController implements SaleBillBlService,salebillForFinancia
 		}
 
 		public boolean getSaleBackSheet(String id) {
-			// TODO Auto-generated method stub
 			StubBillPool pool = new StubBillPool();
 			ArrayList<SaleBackSheet> listOfSaleBackSheet= new ArrayList<SaleBackSheet>();
 			listOfSaleBackSheet=pool.getSaleBackSheet();
@@ -161,67 +159,44 @@ public class salebillController implements SaleBillBlService,salebillForFinancia
 			return result;
 		}
 		
-		//public boolean changeState_PurSheet() {
-			// TODO Auto-generated method stub
-			//return false;
-		//}
-
-		/*public boolean changeState_PurBackSheet() {
-			// TODO Auto-generated method stub
-			return false;
+		public void changeState_PurSheet(String ID,BillState state) {
+			StubBillPool pool = new StubBillPool();
+			pool.transformState(BillStyle.PurSheet, ID, state);
 		}
 
-		public boolean changeState_Salesheet() {
-			// TODO Auto-generated method stub
-			return false;
+		public void changeState_PurBackSheet(String ID,BillState state) {
+			StubBillPool pool = new StubBillPool();
+			pool.transformState(BillStyle.PurBackSheet, ID, state);
 		}
 
-		public boolean changeState_SaleBackSheet() {
-			// TODO Auto-generated method stub
-			return false;
-		}*/
-		
-		//改变状态这个方法需要调用单据池里面写完了的的就好了；
-		//感觉还是不能删，只是调用就行；
-
-		public boolean updatePurSheet() {
-			// TODO Auto-generated method stub
-			return false;
+		public void changeState_Salesheet(String ID,BillState state) {
+			StubBillPool pool = new StubBillPool();
+			pool.transformState(BillStyle.SaleSheet, ID, state);
 		}
 
-		public boolean updatePurBackSheet() {
-			// TODO Auto-generated method stub
-			return false;
+		public void changeState_SaleBackSheet(String ID,BillState state) {
+			StubBillPool pool = new StubBillPool();
+			pool.transformState(BillStyle.SaleBackSheet, ID, state);
 		}
 
-		public boolean updateSaleSheet() {
-			// TODO Auto-generated method stub
-			return false;
+		public void updatePurSheet(PurSheetVO vo) {
+			StubBillPool pool = new StubBillPool();
+			pool.change(vo);
 		}
 
-		public boolean updateSaleBackSheet() {
-			// TODO Auto-generated method stub
-			return false;
+		public void updatePurBackSheet(PurBackSheetVO vo) {
+			StubBillPool pool = new StubBillPool();
+			pool.change(vo);
 		}
 
-		public boolean deletePurSheet() {
-			// TODO Auto-generated method stub
-			return false;
+		public void updateSaleSheet(SaleSheetVO vo) {
+			StubBillPool pool = new StubBillPool();
+			pool.change(vo);
 		}
 
-		public boolean deletePurBackSheet() {
-			// TODO Auto-generated method stub
-			return false;
-		}
-
-		public boolean deleteSaleSheet() {
-			// TODO Auto-generated method stub
-			return false;
-		}
-
-		public boolean deleteSaleBackSheet() {
-			// TODO Auto-generated method stub
-			return false;
+		public void updateSaleBackSheet(SaleBackSheetVO vo) {
+			StubBillPool pool = new StubBillPool();
+			pool.change(vo);
 		}
 
 		public PurSheetVO findPurSheet(String id) {
@@ -348,7 +323,14 @@ public class salebillController implements SaleBillBlService,salebillForFinancia
 			StubBillPool pool = new StubBillPool();
 			ArrayList<PurSheet> listOfPurSheet =new ArrayList<PurSheet>();
 			listOfPurSheet=pool.getPurSheet();
-			
+			ArrayList<PurBackSheet> listOfPurBackSheet =new ArrayList<PurBackSheet>();
+			listOfPurBackSheet=pool.getPurBackSheet();
+			for(PurSheet pursheet:listOfPurSheet){
+				number += pursheet.getmoney1();
+			}
+			for(PurBackSheet purbacksheet:listOfPurBackSheet){
+				number -= purbacksheet.getmoney1();
+			}
 			return number;
 		}
 	
