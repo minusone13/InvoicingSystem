@@ -14,6 +14,7 @@ import presentation.saleui.JPmanageBills2;
 import presentation.WarningPanel;
 import presentation.saleui.JPmanageBills2;
 import presentation.financialui.BusinessConditionPanel;
+import presentation.financialui.Financial;
 import presentation.financialui.InitialInfoPanel;
 import presentation.managerui.MouseListenerGetXY;
 
@@ -39,7 +40,7 @@ public class TestFrame extends JFrame {
 	}
 	public static void main(String[] args) {
 
-		TestFrame testJP=new TestFrame(new Sale());
+		TestFrame testJP=new TestFrame(new Financial());
 
 
 	}

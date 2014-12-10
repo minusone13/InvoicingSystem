@@ -118,7 +118,7 @@ public class salebillController implements SaleBillBlService,salebillForFinancia
 		}
 
 		/*获取所有的进货单*/
-		public ArrayList<PurSheetVO> getAllOfPurSheet (){
+		public ArrayList<PurSheetVO> getAllPurSheet (){
 			StubBillPool billPool = new StubBillPool();
 			ArrayList<PurSheetVO> result=new ArrayList<PurSheetVO>();
 			ArrayList<PurSheet> billList=billPool.getPurSheet();
@@ -129,7 +129,7 @@ public class salebillController implements SaleBillBlService,salebillForFinancia
 		}
 		
 		/*获取所有的进货退货单*/
-		public ArrayList<PurBackSheetVO> getAllOfPurBackSheet (){
+		public ArrayList<PurBackSheetVO> getAllPurBackSheet (){
 			StubBillPool billPool = new StubBillPool();
 			ArrayList<PurBackSheetVO> result=new ArrayList<PurBackSheetVO>();
 			ArrayList<PurBackSheet> billList=billPool.getPurBackSheet();
@@ -140,7 +140,7 @@ public class salebillController implements SaleBillBlService,salebillForFinancia
 		}
 		
 		/*获取所有的销售单*/
-		public ArrayList<SaleSheetVO> getAllOfSaleSheet (){
+		public ArrayList<SaleSheetVO> getAllSaleSheet (){
 			StubBillPool billPool = new StubBillPool();
 			ArrayList<SaleSheetVO> result=new ArrayList<SaleSheetVO>();
 			ArrayList<SaleSheet> billList=billPool.getSaleSheet();
@@ -151,7 +151,7 @@ public class salebillController implements SaleBillBlService,salebillForFinancia
 		}
 		
 		/*获取所有的销售退货单*/
-		public ArrayList<SaleBackSheetVO> getAllOfSaleBackSheet (){
+		public ArrayList<SaleBackSheetVO> getAllSaleBackSheet (){
 			StubBillPool billPool = new StubBillPool();
 			ArrayList<SaleBackSheetVO> result=new ArrayList<SaleBackSheetVO>();
 			ArrayList<SaleBackSheet> billList=billPool.getSaleBackSheet();
@@ -222,26 +222,6 @@ public class salebillController implements SaleBillBlService,salebillForFinancia
 		public boolean deleteSaleBackSheet() {
 			// TODO Auto-generated method stub
 			return false;
-		}
-
-		public ArrayList<PurSheetVO> getAllPurSheet() {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		public ArrayList<PurBackSheetVO> getAllPurBackSheet() {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		public ArrayList<SaleSheetVO> getAllSaleSheet() {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		public ArrayList<SaleBackSheetVO> getAllSaleBackSheet() {
-			// TODO Auto-generated method stub
-			return null;
 		}
 
 		public PurSheetVO findPurSheet(String id) {
