@@ -45,11 +45,8 @@ public class JPmanageBills2 extends JPanel {
 		//创建按钮
 		private JLabel add=new JLabel();
 		//编辑面板
-		private JPanelEdit JPeditOfCash;
-		//编辑面板
-		private JPanelEdit JPeditOfPay;
-		//编辑面板
-		private JPanelEdit JPeditOfRec;
+		private JPanelEdit JPeditOfSpoil;
+	
 		public JPBillList getBillList() {
 			return billList;
 		}
@@ -126,38 +123,32 @@ public class JPmanageBills2 extends JPanel {
 			delete.addMouseListener(new MouseListenerOfButton(4));
 			//编辑功能按钮
 			edit.setIcon(editIconW);
-			edit.setBounds(720, 150, 50, 50);
+			edit.setBounds(720, 215, 50, 50);
 			edit.addMouseListener(new MouseListenerOfButton(5));
 			//提交功能按钮
 			submit.setIcon(submitIconW);
-			submit.setBounds(720, 215, 50, 50);
+			submit.setBounds(720, 150, 50, 50);
 			submit.addMouseListener(new MouseListenerOfButton(6));
 			//创建功能按钮
 			add.setIcon(addIconW);
 			add.setBounds(720, 280, 50, 50);
 			add.addMouseListener(new MouseListenerOfButton(7));
 			//编辑面板
-			JPeditOfCash=new JPanelEdit(BillStyle.CashPaymentBill);
-			JPeditOfRec=new JPanelEdit(BillStyle.ReceiptBill);
-			JPeditOfPay=new JPanelEdit(BillStyle.PaymentBill);
+			JPeditOfSpoil=new JPanelEdit(BillStyle.SpillsLossBill);
 			
-			JPeditOfCash.setLocation(905, 36);
-			JPeditOfRec.setLocation(905, 36);
-			JPeditOfPay.setLocation(905, 36);
+			JPeditOfSpoil.setLocation(905, 36);
 			
 			this.add(jp,0);
 			this.add(up,1);
 			this.add(down,2);
-			this.add(JPeditOfCash,3);
-			this.add(JPeditOfRec,4);
-			this.add(JPeditOfPay,5);
-			this.add(done,6);
-			this.add(delete,7);
-			this.add(edit,8);
-			this.add(submit,9);
-			this.add(add,10);
-			this.add(table,11);
-			this.add(bg,12);
+			this.add(JPeditOfSpoil,3);
+			this.add(done,4);
+			this.add(delete,5);
+			this.add(edit,6);
+			this.add(submit,7);
+			this.add(add,8);
+			this.add(table,9);
+			this.add(bg,10);
 		}
 		  /*获取frame引用*/
 	    public void getFrame( Frame f){
@@ -174,12 +165,16 @@ public class JPmanageBills2 extends JPanel {
 				table.setColumnNames(items);
 				table.setList(new String[1][3]);
 				table.updateShow();
+				add.setVisible(false);
+				edit.setVisible(false);
 				break;
 			case SpillsLossBill:
 				table.setVisible(false);
 				break;
 			case AlertBill:
 				table.setVisible(false);
+				add.setVisible(false);
+				edit.setVisible(false);
 				break;
 			case PurBackSheet:
 				String[] temp2={"商品","型号","数量"};
@@ -272,22 +267,8 @@ public class JPmanageBills2 extends JPanel {
 				case 5:
 					edit.setIcon(editIconR);
 					if(billList.getChosenNum()==1&&billList.stateOfChosen()==BillState.DRAFT){
-						switch(style){
-						case CashPaymentBill:
-							JPeditOfCash.setIsAdd(false);//不是加单据是修改单据
-							JPeditOfCash.leftMove();//调出编辑板
-							break;
-						case PaymentBill:
-							JPeditOfPay.setIsAdd(false);//不是加单据是修改单据
-							JPeditOfPay.leftMove();//调出编辑板
-							break;
-						case ReceiptBill:
-							JPeditOfRec.setIsAdd(false);//不是加单据是修改单据
-							JPeditOfRec.leftMove();//调出编辑板
-							break;
-						}
-						
-						
+						JPeditOfSpoil.setIsAdd(false);//不是加单据是修改单据
+						JPeditOfSpoil.leftMove();//调出编辑板
 					}
 					else{
 						System.out.println("只能修改一张草稿状态的单据");
@@ -299,20 +280,8 @@ public class JPmanageBills2 extends JPanel {
 					break;
 				case 7:
 					add.setIcon(addIconR);
-					switch(style){
-					case CashPaymentBill:
-						JPeditOfCash.setIsAdd(true);//不是加单据是修改单据
-						JPeditOfCash.leftMove();//调出编辑板
-						break;
-					case PaymentBill:
-						JPeditOfPay.setIsAdd(true);//不是加单据是修改单据
-						JPeditOfPay.leftMove();//调出编辑板
-						break;
-					case ReceiptBill:
-						JPeditOfRec.setIsAdd(true);//不是加单据是修改单据
-						JPeditOfRec.leftMove();//调出编辑板
-						break;
-					}
+					JPeditOfSpoil.setIsAdd(true);//不是加单据是修改单据
+					JPeditOfSpoil.leftMove();//调出编辑板
 				}
 			}
 
@@ -400,21 +369,14 @@ public class JPmanageBills2 extends JPanel {
 			private ImageIcon confirm0=new ImageIcon("src/image/function/confirmW.png");
 			private ImageIcon confirm1=new ImageIcon("src/image/function/confirmR.png");
 			
-			//现金费用单的附件
-			private JLabel account=new JLabel("账户");
-			private JLabel list=new JLabel("条目");
-			private JLabel total=new JLabel("总额");
+			//报溢报损单的附件
+			private JLabel commodity=new JLabel("商品");
+			private JLabel style=new JLabel("型号");
+			private JLabel num=new JLabel("数量");
 			private JLabel addList=new JLabel();//增加条目按钮
-			private JTextField accountText=new JTextField(10);
-			private JTextField totalText=new JTextField(10);
-			private JPaddList ListEdit=new JPaddList(BillStyle.CashPaymentBill);//隐藏的条目编辑面板
-			//付款收款单
-			private JLabel customer=new JLabel("客户");
-			private JLabel tranList=new JLabel("转账列表");
-			private JLabel tranTotal=new JLabel("总额");
-			private JComboBox customerCombo;
-			private JTextField tranTotalText=new JTextField(10);
-			private JPaddList tranListEdit=new JPaddList(BillStyle.PaymentBill);//隐藏的条目编辑面板
+			private JTextField commodityText=new JTextField(10);
+			private JTextField styleText=new JTextField(10);
+			private JTextField numText=new JTextField(10);
 			public JPanelEdit(BillStyle style){
 				//确认种类
 				billStyle=style;
@@ -438,135 +400,6 @@ public class JPmanageBills2 extends JPanel {
 				confirm.setBounds(120, 236, 24, 24);
 				confirm.addMouseListener(new MouseListenerOfButton(3));
 				//根据单据种类加上不同的附件
-				switch(style){
-				case ReceiptBill:
-					//设置标签字体
-					customer.setFont(new Font("宋体",Font.BOLD,14));
-					tranList.setFont(new Font("宋体",Font.BOLD,14));
-					tranTotal.setFont(new Font("宋体",Font.BOLD,14));
-					//设置字体颜色
-					customer.setForeground(Color.white);
-					tranList.setForeground(Color.white);
-					tranTotal.setForeground(Color.white);
-					//设置标签大小位置
-					customer.setBounds(40, 30, 40, 20);
-					tranList.setBounds(40, 60, 60, 20);
-					tranTotal.setBounds(40, 90, 40, 20);
-					//客户选择下拉框
-					customerCombo = new JComboBox();
-					customerCombo.setFont(new Font("宋体",Font.BOLD,14));
-					customerCombo.setBounds(80,28, 150, 20);
-					customerCombo.setBackground(Color.gray);
-					customerCombo.setForeground(Color.white);
-					//总额文本框
-					tranTotalText.setBounds(80,90, 150, 20);
-					tranTotalText.setOpaque(false);//文本框透明
-					tranTotalText.setForeground(Color.white);//前景色
-					//增加条目按钮
-					addList.setIcon(add0);
-					addList.setBounds(100, 58, 24, 24);
-					addList.addMouseListener(new MouseListenerOfButton(2));
-					//隐藏的条目编辑面板
-					tranListEdit.setLocation(59, 56);
-					tranListEdit.setVisible(false);
-					
-					this.add(tranListEdit,0);
-					this.add(customer,1);
-					this.add(tranList,2);
-					this.add(tranTotal,3);
-					this.add(right,4);
-					this.add(customerCombo,5);
-					this.add(tranTotalText,6);
-					this.add(addList,7);
-					this.add(confirm,8);
-					this.add(back,9);
-					break;
-				case PaymentBill:
-					//设置标签字体
-					customer.setFont(new Font("宋体",Font.BOLD,14));
-					tranList.setFont(new Font("宋体",Font.BOLD,14));
-					tranTotal.setFont(new Font("宋体",Font.BOLD,14));
-					//设置字体颜色
-					customer.setForeground(Color.white);
-					tranList.setForeground(Color.white);
-					tranTotal.setForeground(Color.white);
-					//设置标签大小位置
-					customer.setBounds(40, 30, 40, 20);
-					tranList.setBounds(40, 60, 60, 20);
-					tranTotal.setBounds(40, 90, 40, 20);
-					//客户选择下拉框
-					customerCombo = new JComboBox();
-					customerCombo.setFont(new Font("宋体",Font.BOLD,14));
-					customerCombo.setBounds(80,28, 150, 20);
-					customerCombo.setBackground(Color.gray);
-					customerCombo.setForeground(Color.white);
-					//总额文本框
-					tranTotalText.setBounds(80,90, 150, 20);
-					tranTotalText.setOpaque(false);//文本框透明
-					tranTotalText.setForeground(Color.white);//前景色
-					//增加条目按钮
-					addList.setIcon(add0);
-					addList.setBounds(100, 58, 24, 24);
-					addList.addMouseListener(new MouseListenerOfButton(2));
-					//隐藏的条目编辑面板
-					tranListEdit.setLocation(59, 56);
-					tranListEdit.setVisible(false);
-					
-					this.add(tranListEdit,0);
-					this.add(customer,1);
-					this.add(tranList,2);
-					this.add(tranTotal,3);
-					this.add(right,4);
-					this.add(customerCombo,5);
-					this.add(tranTotalText,6);
-					this.add(addList,7);
-					this.add(confirm,8);
-					this.add(back,9);
-					break;
-				case CashPaymentBill:
-					//设置标签字体
-					account.setFont(new Font("宋体",Font.BOLD,14));
-					list.setFont(new Font("宋体",Font.BOLD,14));
-					total.setFont(new Font("宋体",Font.BOLD,14));
-					//设置字体颜色
-					account.setForeground(Color.white);
-					list.setForeground(Color.white);
-					total.setForeground(Color.white);
-					//设置标签大小位置
-					account.setBounds(40, 30, 40, 20);
-					list.setBounds(40, 60, 40, 20);
-					total.setBounds(40, 90, 40, 20);
-					//文本框
-					accountText.setBounds(80,28, 150, 20);
-					accountText.setOpaque(false);//文本框透明
-					accountText.setForeground(Color.white);//前景色
-					totalText.setBounds(80,90, 150, 20);
-					totalText.setOpaque(false);//文本框透明
-					totalText.setForeground(Color.white);//前景色
-					//增加条目按钮
-					addList.setIcon(add0);
-					addList.setBounds(80, 58, 24, 24);
-					addList.addMouseListener(new MouseListenerOfButton(2));
-					//隐藏的条目编辑面板
-					ListEdit.setLocation(59, 56);
-					ListEdit.setVisible(false);
-					
-					this.add(ListEdit,0);
-					this.add(account,1);
-					this.add(list,2);
-					this.add(total,3);
-					this.add(right,4);
-					this.add(accountText,5);
-					this.add(totalText,6);
-					this.add(addList,7);
-					this.add(confirm,8);
-					this.add(back,9);
-					break;
-				}
-			}
-			/*返回收款付款单编辑栏的客户选择下拉框*/
-			public JComboBox getCustomerCombo(){
-				return customerCombo;
 			}
 			public void leftMove(){
 				Thread t=new Thread(new TreadOfLeft());
@@ -604,275 +437,10 @@ public class JPmanageBills2 extends JPanel {
 						break;
 					case 2:
 						addList.setIcon(add1);
-						//显示编辑条目面板
-						switch(billStyle){
-						case ReceiptBill:
-							tranListEdit.setVisible(true);
-							break;
-						case PaymentBill:
-							tranListEdit.setVisible(true);
-							break;
-						case CashPaymentBill:
-							ListEdit.setVisible(true);
-						}
 						
 						break;
 					case 3:
 						confirm.setIcon(confirm1);
-						//判断是加单据还是修改单据
-						if(isAdd){//如果是加单据
-							switch(billStyle){
-							case ReceiptBill:
-								if(customerCombo.getSelectedItem()==null){
-									System.out.println("没有客户，不能创建单据");
-								}
-								else{
-									boolean legal=false;
-									boolean customerIsEmpty=customerCombo.getSelectedItem().toString().equals("");
-									boolean totalIsEmpty=tranTotalText.getText().equals("");
-									boolean listIsEmpty=tranListEdit.getListArray().isEmpty();
-									
-									if(!customerIsEmpty&&!totalIsEmpty&&!listIsEmpty){
-										legal=true;
-									}
-									if(legal){
-										//生成新的单据加入到billList
-										System.out.println("生成了一张收款单");
-										ReceiptVO newRec=new ReceiptVO();
-										//传入单据数据
-										newRec.setCustomer(customerCombo.getSelectedItem().toString());
-										newRec.setTotal(Double.parseDouble(tranTotalText.getText()));
-										newRec.setAccounts(tranListEdit.getListArray());
-										newRec.setMoney(tranListEdit.getMoneyArray());
-										newRec.setRemark(tranListEdit.getNoteArray());
-										//将设置好数据的单据VO加到billList
-										billList.addReceiptBill(newRec);
-										//清空信息
-										tranTotalText.setText("");
-										tranListEdit.getListArray().clear();//清空三个数组
-										tranListEdit.getMoneyArray().clear();
-										tranListEdit.getNoteArray().clear();
-									}
-									else{
-										System.out.println("单据信息不完整，请检查是否填写了转账列表");
-									}
-								}
-								break;
-							case PaymentBill:
-								if(customerCombo.getSelectedItem()==null){
-									System.out.println("没有客户，不能创建单据");
-								}
-								else{
-									boolean legal2=false;
-									boolean customerIsEmpty2=customerCombo.getSelectedItem().toString().equals("");
-									boolean totalIsEmpty2=tranTotalText.getText().equals("");
-									boolean listIsEmpty2=tranListEdit.getListArray().isEmpty();
-									
-									if(!customerIsEmpty2&&!totalIsEmpty2&&!listIsEmpty2){
-										legal2=true;
-									}
-									if(legal2){
-										//生成新的单据加入到billList
-										System.out.println("生成了一张付款单");
-										PaymentVO newPay=new PaymentVO();
-										//传入单据数据
-										newPay.setCustomer(customerCombo.getSelectedItem().toString());
-										newPay.setTotal(Double.parseDouble(tranTotalText.getText()));
-										newPay.setAccounts(tranListEdit.getListArray());
-										newPay.setMoney(tranListEdit.getMoneyArray());
-										newPay.setRemark(tranListEdit.getNoteArray());
-										//将设置好数据的单据VO加到billList
-										billList.addPaymentBill(newPay);
-										//清空信息
-										tranTotalText.setText("");
-										tranListEdit.getListArray().clear();//清空三个数组
-										tranListEdit.getMoneyArray().clear();
-										tranListEdit.getNoteArray().clear();
-									}
-									else{
-										System.out.println("单据信息不完整，请检查是否填写了转账列表");
-									}
-								}
-								break;
-							case CashPaymentBill:
-								boolean legal3=false;
-								boolean accountIsEmpty=accountText.getText().equals("");
-								boolean totalIsEmpty3=totalText.getText().equals("");
-								boolean listIsEmpty3=ListEdit.getListArray().isEmpty();
-								
-								if(!accountIsEmpty&&!totalIsEmpty3&&!listIsEmpty3){
-									legal3=true;
-								}
-								if(legal3){
-									//生成新的单据加入到billList
-									//设置单据数据
-									System.out.println("生成了一张现金费用单");
-									CashPaymentVO newCash=new CashPaymentVO();
-									
-									System.out.println("银行账户是："+accountText.getText());
-									newCash.setAccount(accountText.getText());
-									
-									for(int i=0;i<ListEdit.getListArray().size();i++){
-										System.out.println("条目名"+(i+1)+":"+ListEdit.getListArray().get(i));
-										newCash.getItem().add(ListEdit.getListArray().get(i));
-										
-										System.out.println("金额"+(i+1)+":"+ListEdit.getMoneyArray().get(i));
-										newCash.getMoney().add(ListEdit.getMoneyArray().get(i));
-										
-										System.out.println("备注"+(i+1)+":"+ListEdit.getNoteArray().get(i));
-										newCash.getRemark().add(ListEdit.getNoteArray().get(i));
-									}
-									System.out.println("总额是："+totalText.getText());
-									newCash.setTotal(Double.parseDouble(totalText.getText()));
-									
-									//操作员
-									newCash.setOp("临时操作员");
-									//将设置好数据的单据VO加到billList
-									billList.addCashPaymentBill(newCash);
-									//清空信息
-									accountText.setText("");
-									totalText.setText("");
-									ListEdit.getListArray().clear();//清空三个数组
-									ListEdit.getMoneyArray().clear();
-									ListEdit.getNoteArray().clear();
-								}
-								else{
-									System.out.println("单据信息不完整，请检查是否填写了转账列表");
-								}
-								break;
-							}
-						}
-						else{//是修改单据
-							switch(billStyle){
-							case ReceiptBill:
-								if(customerCombo.getSelectedItem()==null){
-									System.out.println("没有客户，不能创建单据");
-								}
-								else{
-									boolean legal=false;
-									boolean customerIsEmpty=customerCombo.getSelectedItem().toString().equals("");
-									boolean totalIsEmpty=tranTotalText.getText().equals("");
-									boolean listIsEmpty=tranListEdit.getListArray().isEmpty();
-									ReceiptVO newRec=billList.getChosen().getReceiptVO();
-									
-									if(!customerIsEmpty||!totalIsEmpty||!listIsEmpty){
-										legal=true;
-									}
-									if(legal){
-										if(!listIsEmpty){
-											newRec.setAccounts(tranListEdit.getListArray());
-											newRec.setMoney(tranListEdit.getMoneyArray());
-											newRec.setRemark(tranListEdit.getNoteArray());
-										}
-										if(!customerIsEmpty){
-											//传入单据数据
-											newRec.setCustomer(customerCombo.getSelectedItem().toString());
-										}
-										if(!totalIsEmpty){
-											newRec.setTotal(Double.parseDouble(tranTotalText.getText()));
-										}
-										newRec.setOp(Login.user.getName()+Login.user.getID());//修改操作员
-										//修改billList中被选中的单据
-										billList.changeChosen(newRec);
-										//清空信息
-										tranTotalText.setText("");
-										tranListEdit.getListArray().clear();//清空三个数组
-										tranListEdit.getMoneyArray().clear();
-										tranListEdit.getNoteArray().clear();
-									}
-									else{
-										System.out.println("请输入修改数据");
-									}
-								}
-								break;
-							case PaymentBill:
-								if(customerCombo.getSelectedItem()==null){
-									System.out.println("没有客户，不能创建单据");
-								}
-								else{
-									boolean legal2=false;
-									boolean customerIsEmpty2=customerCombo.getSelectedItem().toString().equals("");
-									boolean totalIsEmpty2=tranTotalText.getText().equals("");
-									boolean listIsEmpty2=tranListEdit.getListArray().isEmpty();
-									
-									if(!customerIsEmpty2||!totalIsEmpty2||!listIsEmpty2){
-										legal2=true;
-									}
-									if(legal2){
-										//生成新的单据加入到billList
-										PaymentVO newPay=billList.getChosen().getPayVO();
-										//传入单据数据
-										if(!customerIsEmpty2){
-											newPay.setCustomer(customerCombo.getSelectedItem().toString());
-										}
-										if(!totalIsEmpty2){
-											newPay.setTotal(Double.parseDouble(tranTotalText.getText()));
-										}
-										if(!listIsEmpty2){
-											newPay.setAccounts(tranListEdit.getListArray());
-											newPay.setMoney(tranListEdit.getMoneyArray());
-											newPay.setRemark(tranListEdit.getNoteArray());
-										}
-										newPay.setOp(Login.user.getName()+Login.user.getID());//修改操作员
-										//修改billList中被选中的单据
-										billList.changeChosen(newPay);
-										//清空信息
-										tranTotalText.setText("");
-										tranListEdit.getListArray().clear();//清空三个数组
-										tranListEdit.getMoneyArray().clear();
-										tranListEdit.getNoteArray().clear();
-									}
-									else{
-										System.out.println("请输入修改数据");
-									}
-								}
-								break;
-							case CashPaymentBill:
-								boolean legal3=false;
-								boolean accountIsEmpty=accountText.getText().equals("");
-								boolean totalIsEmpty3=totalText.getText().equals("");
-								boolean listIsEmpty3=ListEdit.getListArray().isEmpty();
-								
-								if(!accountIsEmpty||!totalIsEmpty3||!listIsEmpty3){
-									legal3=true;
-								}
-								if(legal3){
-									//生成新的单据加入到billList
-									//设置单据数据
-									CashPaymentVO newCash=billList.getChosen().getCashVO();
-									
-									if(!accountIsEmpty){
-										newCash.setAccount(accountText.getText());
-									}
-									if(!totalIsEmpty3){
-										newCash.setTotal(Double.parseDouble(totalText.getText()));
-									}
-									if(!listIsEmpty3){
-										for(int i=0;i<ListEdit.getListArray().size();i++){
-											newCash.getItem().add(ListEdit.getListArray().get(i));
-											
-											newCash.getMoney().add(ListEdit.getMoneyArray().get(i));
-											
-											newCash.getRemark().add(ListEdit.getNoteArray().get(i));
-										}
-									}
-									
-									newCash.setOp(Login.user.getName()+Login.user.getID());//修改操作员
-									//修改billList中被选中的单据
-									billList.changeChosen(newCash);
-									//清空信息
-									accountText.setText("");
-									totalText.setText("");
-									ListEdit.getListArray().clear();//清空三个数组
-									ListEdit.getMoneyArray().clear();
-									ListEdit.getNoteArray().clear();
-								}
-								else{
-									System.out.println("请输入修改数据");
-								}
-								break;
-							}
-						}
 						break;
 					}
 				}
@@ -962,210 +530,7 @@ public class JPmanageBills2 extends JPanel {
 				}
 				
 			}
-			public class JPaddList extends JPanel{
-				//背景
-				private JLabel bg=new JLabel();
-				//确认按钮
-				private JLabel confirm=new JLabel();
-				//文本框（现金费用单）
-				private JTextField listTxt=new JTextField(10);
-				private JTextField moneyTxt=new JTextField(10);
-				private JTextField noteTxt=new JTextField(10);
-				//文本框（付款收款单）
-				private JTextField tranListTxt=new JTextField(10);
-				private JTextField tranMoneyTxt=new JTextField(10);
-				private JTextField tranNoteTxt=new JTextField(10);
-				//图片
-				private ImageIcon confirmW=new ImageIcon("src/image/function/confirmW.png");
-				private ImageIcon confirmR=new ImageIcon("src/image/function/confirmR.png");
-				//储存信息的数组
-				private ArrayList<String> listArray=new ArrayList<String>();
-				private ArrayList<Double> moneyArray=new ArrayList<Double>();
-				private ArrayList<String> noteArray=new ArrayList<String>();
-				
-				/*条目编辑面板*/
-				public JPaddList(BillStyle style){
-					//面板大小
-					this.setSize(181,157);
-					//设置布局
-					this.setLayout(null);
-					//设置面板透明
-					this.setOpaque(false);
-					//监控
-					this.addMouseListener(new MouseListenerGetXY());
-					//背景
-					this.bg.setIcon(new ImageIcon("src/image/function/editList.png"));
-					this.bg.setBounds(0, 0, 181,157);
-					//确认按钮
-					this.confirm.setIcon(confirmW);
-					this.confirm.setBounds(78, 123, 24,24);
-					this.confirm.addMouseListener(new MouseListenerOfButton());
-					//根据单据种类加上不同的附件
-					
-					switch(style){
-					case ReceiptBill:
-					case PaymentBill:
-						//现金费用单的附件
-						JLabel tranListName=new JLabel("账户");
-						JLabel tranMoney=new JLabel("金额");
-						JLabel tranNote=new JLabel("备注");
-						//设置标签字体
-						tranListName.setFont(new Font("宋体",Font.BOLD,14));
-						tranMoney.setFont(new Font("宋体",Font.BOLD,14));
-						tranNote.setFont(new Font("宋体",Font.BOLD,14));
-						//设置字体颜色
-						tranListName.setForeground(Color.white);
-						tranMoney.setForeground(Color.white);
-						tranNote.setForeground(Color.white);
-						//设置标签大小位置
-						tranListName.setBounds(25, 30, 40, 20);
-						tranMoney.setBounds(25, 60, 40, 20);
-						tranNote.setBounds(25, 90, 40, 20);
-						//文本框
-						tranListTxt.setBounds(70,30, 100, 20);
-						tranListTxt.setOpaque(false);//文本框透明
-						tranListTxt.setForeground(Color.white);//前景色
-						tranMoneyTxt.setBounds(70,60, 100, 20);
-						tranMoneyTxt.setOpaque(false);//文本框透明
-						tranMoneyTxt.setForeground(Color.white);//前景色
-						tranNoteTxt.setBounds(70,90, 100, 20);
-						tranNoteTxt.setOpaque(false);//文本框透明
-						tranNoteTxt.setForeground(Color.white);//前景色
-						
-						this.add(tranListName,0);
-						this.add(tranMoney,1);
-						this.add(tranNote,2);
-						this.add(tranListTxt,3);
-						this.add(tranMoneyTxt,4);
-						this.add(tranNoteTxt,5);
-						this.add(confirm,6);
-						this.add(bg,7);
-						break;
-					case CashPaymentBill:
-						//现金费用单的附件
-						JLabel listName=new JLabel("条目");
-						JLabel money=new JLabel("金额");
-						JLabel note=new JLabel("备注");
-						//设置标签字体
-						listName.setFont(new Font("宋体",Font.BOLD,14));
-						money.setFont(new Font("宋体",Font.BOLD,14));
-						note.setFont(new Font("宋体",Font.BOLD,14));
-						//设置字体颜色
-						listName.setForeground(Color.white);
-						money.setForeground(Color.white);
-						note.setForeground(Color.white);
-						//设置标签大小位置
-						listName.setBounds(25, 30, 40, 20);
-						money.setBounds(25, 60, 40, 20);
-						note.setBounds(25, 90, 40, 20);
-						//文本框
-						listTxt.setBounds(70,30, 100, 20);
-						listTxt.setOpaque(false);//文本框透明
-						listTxt.setForeground(Color.white);//前景色
-						moneyTxt.setBounds(70,60, 100, 20);
-						moneyTxt.setOpaque(false);//文本框透明
-						moneyTxt.setForeground(Color.white);//前景色
-						noteTxt.setBounds(70,90, 100, 20);
-						noteTxt.setOpaque(false);//文本框透明
-						noteTxt.setForeground(Color.white);//前景色
-						
-						this.add(listName,0);
-						this.add(money,1);
-						this.add(note,2);
-						this.add(listTxt,3);
-						this.add(moneyTxt,4);
-						this.add(noteTxt,5);
-						this.add(confirm,6);
-						this.add(bg,7);
-						break;
-					}
-					
-					
-				}
-				//返回信息数组
-				public ArrayList<String> getListArray(){
-					return listArray;
-				}
-				//返回信息数组
-				public ArrayList<Double> getMoneyArray(){
-					return moneyArray;
-				}
-				//返回信息数组
-				public ArrayList<String> getNoteArray(){
-					return noteArray;
-				}
-				public class MouseListenerOfButton implements MouseListener{
-
-					
-					public void mouseClicked(MouseEvent e) {
-						// TODO Auto-generated method stub
-						
-					}
-
-					public void mousePressed(MouseEvent e) {
-						// TODO Auto-generated method stub
-						//图片变化
-						JPaddList.this.confirm.setIcon(confirmR);
-					
-					}
-
-					public void mouseReleased(MouseEvent e) {
-						// TODO Auto-generated method stub
-						JPaddList.this.confirm.setIcon(confirmW);
-						//功能
-						String list=listTxt.getText();
-						String money=moneyTxt.getText();
-						String note=noteTxt.getText();
-						boolean legal=false;
-						if(!list.equals("")&&!money.equals("")&&!note.equals("")){
-							legal=true;
-						}
-						
-						if(legal){
-							//合法则将信息加入到数组
-							double mon=Double.parseDouble(money);
-							listArray.add(list);
-							moneyArray.add(mon);
-							noteArray.add(note);
-							//清空文本框
-							listTxt.setText("");
-							moneyTxt.setText("");
-							noteTxt.setText("");
-							//计算总额
-							double totalMoney=0;
-							for(int i=0;i<moneyArray.size();i++){
-								totalMoney+=moneyArray.get(i);
-							}
-							switch(billStyle){
-							case ReceiptBill:
-							case PaymentBill:
-								tranTotalText.setText(String.valueOf(totalMoney));
-								break;
-							case CashPaymentBill:
-								totalText.setText(String.valueOf(totalMoney));
-							}
-							//合法操作才隐藏板块
-							JPaddList.this.setVisible(false);
-						}
-						else{
-							System.out.println("请完整输入信息，若无备注请填写“无”！");
-						}
-						
-						
-					}
-
-					public void mouseEntered(MouseEvent e) {
-						// TODO Auto-generated method stub
-						
-					}
-
-					public void mouseExited(MouseEvent e) {
-						// TODO Auto-generated method stub
-						JPaddList.this.confirm.setIcon(confirmW);
-					}
-					
-				}
-			}
+	
 
 		}
 }

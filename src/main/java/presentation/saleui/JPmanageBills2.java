@@ -148,16 +148,16 @@ public class JPmanageBills2 extends JPanel {
 			this.add(up,1);
 			this.add(down,2);
 			this.add(JPeditOfPur,3);
-			this.add(JPeditOfPurBack,3);
-			this.add(JPeditOfSale,3);
-			this.add(JPeditOfSaleBack,3);
-			this.add(done,4);
-			this.add(delete,5);
-			this.add(edit,6);
-			this.add(submit,7);
-			this.add(add,8);
-			this.add(table,9);
-			this.add(bg,9);
+			this.add(JPeditOfPurBack,4);
+			this.add(JPeditOfSale,5);
+			this.add(JPeditOfSaleBack,6);
+			this.add(done,7);
+			this.add(delete,8);
+			this.add(edit,9);
+			this.add(submit,10);
+			this.add(add,11);
+			this.add(table,12);
+			this.add(bg,13);
 		}
 		  /*获取frame引用*/
 	    public void getFrame( Frame f){
