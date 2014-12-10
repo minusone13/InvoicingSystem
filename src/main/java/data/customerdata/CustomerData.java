@@ -1,5 +1,6 @@
 package data.customerdata;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -10,6 +11,7 @@ import java.util.ArrayList;
 
 import po.CustomerPO;
 import po.SaleBackSheetPO;
+import data.Tool;
 import dataservice.customerdataservice.CustomerDataService;
 
 public class CustomerData implements CustomerDataService{
@@ -66,10 +68,10 @@ public class CustomerData implements CustomerDataService{
 		return null;
 	}
 
-	public ArrayList<CustomerPO> getAllCustomer(String address) {
+	public ArrayList<CustomerPO> getAllCustomer(String addre) {
 		ArrayList<CustomerPO> listOfCustomerPO = new ArrayList<CustomerPO>();
 		ObjectInputStream ois=null;
-		
+		File address = Tool.Opendoc(addre);
 		try {
 			ois = new ObjectInputStream(new FileInputStream(address));
 		} catch (FileNotFoundException e) {

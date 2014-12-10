@@ -31,8 +31,6 @@ public class Financial implements StubFinancialBlService{
 	String name;
 	String password;
 	Role role;
-	
-	
 
 	UserService userSer= new UserController();
 	
@@ -131,16 +129,22 @@ public class Financial implements StubFinancialBlService{
 	public boolean creatPayment(PaymentVO pv){
 		pv.setRole(role);
 		FinancialBillList financialList = new FinancialBillList();
-		return financialList.creatPaymentBill(pv);
-	
+		boolean result = financialList.creatPaymentBill(pv);
+		RM rm = RM.unknownerror;
+		if(result) rm=RM.done;
+		userSer.addRecord(new OperationRecord(new User(), "Creat a payment", rm));		
+		return result;
 	}
 	
 	//创建现金费用单
 	public boolean creatCashPayment(CashPaymentVO cpv) {
 		cpv.setRole(role);
 		FinancialBillList financialList = new FinancialBillList();
-		return financialList.creatCashPaymentBill(cpv);
-		
+		boolean result =financialList.creatCashPaymentBill(cpv);
+		RM rm = RM.unknownerror;
+		if(result) rm=RM.done;
+		userSer.addRecord(new OperationRecord(new User(), "Creat a cashpayment", rm));		
+		return result;		
 	}
 	
 	/*需要从单据池筛选指定状态的所有收款单*/

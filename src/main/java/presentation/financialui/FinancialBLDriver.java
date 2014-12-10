@@ -10,6 +10,7 @@ import vo.financialBillVO.ReceiptVO;
 import vo.inquiryVO.BusinessSituationVO;
 import vo.inquiryVO.InquiryProcessVO;
 import vo.inquiryVO.InquirySaleVO;
+import businesslogic.BillState;
 import businesslogic.financialbillbl.CashPaymentBill;
 import businesslogic.financialbillbl.PaymentBill;
 import businesslogic.financialbillbl.ReceiptBill;
@@ -35,7 +36,7 @@ public class FinancialBLDriver {
 		boolean result5 = fbs.updateAccount("00001", "00100");
 		if(result5==true) System.out.println("UPDATE SUCCESS!");
 		
-		fbs.buildAccount();
+		//fbs.buildAccount();
 
 //		ArrayList<VO> list1 = fbs.inquirySale(new InquirySaleVO());
 //		if(list1 != null) System.out.println("INQUIRY SUCCESS!");
@@ -61,6 +62,19 @@ public class FinancialBLDriver {
 		if(result8==true) System.out.println("creat SUCCESS!");
 		else System.out.println("FAILE!");
 		*/
-			
+		/*	
+		ArrayList<CashPaymentVO> cashPayments = fbs.getAllOfCashPaymentBills();
+		System.out.println(cashPayments.size());
+		CashPaymentVO vo = cashPayments.get(0);
+		//assertEquals(1,cashPayments.size());
+	//	assertEquals("XJFYD-20141209-00001", vo.getID());
+		
+		System.out.println(vo.getID());
+		System.out.println(vo.getAccount());
+		System.out.println(vo.getItem());
+		
+		*/
+		//assertEquals(100.0,vo.getTotal());
+		
 	}
 }
