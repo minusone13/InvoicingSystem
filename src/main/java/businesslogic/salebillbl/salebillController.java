@@ -309,27 +309,67 @@ public class salebillController implements SaleBillBlService,salebillForFinancia
 			listOfSaleSheet=pool.getSaleSheet();
 			ArrayList<SaleBackSheet> listOfSaleBackSheet= new ArrayList<SaleBackSheet>();
 			listOfSaleBackSheet=pool.getSaleBackSheet();
-			return 0;
+			for(SaleSheet salesheet:listOfSaleSheet){
+				number += salesheet.getmoney2();
+			}
+			for(SaleBackSheet salebacksheet:listOfSaleBackSheet){
+				number -= salebacksheet.getmoney2();
+			}
+			return number;
 		}
 
 		public double getAllVoucherBonus(Date start, Date end) {
-			// TODO Auto-generated method stub
-			return 0;
+			double number=0.0;
+			StubBillPool pool = new StubBillPool();
+			ArrayList<SaleSheet> listOfSaleSheet= new ArrayList<SaleSheet>();
+			listOfSaleSheet=pool.getSaleSheet();
+			for(SaleSheet salesheet:listOfSaleSheet){
+				if(salesheet.getmoney1()<=salesheet.getmoney2()){
+					number += (salesheet.getmoney2()-salesheet.getmoney1());
+				}
+			}
+			return number;
 		}
 
 		public double getAllSalesIncome(Date start,Date end) {
-			// TODO Auto-generated method stub
-			return 0;
+			double number=0.0;
+			StubBillPool pool = new StubBillPool();
+			ArrayList<SaleSheet> listOfSaleSheet= new ArrayList<SaleSheet>();
+			listOfSaleSheet=pool.getSaleSheet();
+			ArrayList<SaleBackSheet> listOfSaleBackSheet= new ArrayList<SaleBackSheet>();
+			listOfSaleBackSheet=pool.getSaleBackSheet();
+			for(SaleSheet salesheet:listOfSaleSheet){
+				number += salesheet.getpmoney();
+			}
+			for(SaleBackSheet salebacksheet:listOfSaleBackSheet){
+				number -= salebacksheet.getpmoney();
+			}
+			return number;
 		}
 
 		public double getAllSalesDiscount(Date start,Date end) {
-			// TODO Auto-generated method stub
-			return 0;
+			double number=0.0;
+			StubBillPool pool = new StubBillPool();
+			ArrayList<SaleSheet> listOfSaleSheet= new ArrayList<SaleSheet>();
+			listOfSaleSheet=pool.getSaleSheet();
+			ArrayList<SaleBackSheet> listOfSaleBackSheet= new ArrayList<SaleBackSheet>();
+			listOfSaleBackSheet=pool.getSaleBackSheet();
+			for(SaleSheet salesheet:listOfSaleSheet){
+				number += salesheet.getdiscount();
+			}
+			for(SaleBackSheet salebacksheet:listOfSaleBackSheet){
+				number -= salebacksheet.getdiscount();
+			}
+			return number;
 		}
 
 		public double getAllPurMoney(Date start, Date end) {
-			// TODO Auto-generated method stub
-			return 0;
+			double number =0.0;
+			StubBillPool pool = new StubBillPool();
+			ArrayList<PurSheet> listOfPurSheet =new ArrayList<PurSheet>();
+			listOfPurSheet=pool.getPurSheet();
+			
+			return number;
 		}
 	
 }
