@@ -23,6 +23,14 @@ public class StubCommodityList {//商品列表 haha
 		ArrayList <CommodityVO> vos=toVOs(coms);
 		return vos;
 	}
+	public ArrayList<CommodityVO> fuzzyFindCommodity(String s, int precision)
+	{//precision 先默认给1，可以达到王雨城所说的算法。若取数字越高，精确度越高，搜索结果数量也就越少
+		ArrayList<CommodityPO> pos = comdata.fuzzyFindCommodity(s,precision);
+		ArrayList<CommodityVO> result = new ArrayList<CommodityVO>();
+		for(int i=0;i<pos.size();i++)
+			result.add(new MockCommodity(pos.get(i)).toVO());
+		return result;
+	}
 	public boolean addPack(ArrayList<MockCommodity> commodityarray,int quantity, double discount)
 	{
 		//comdata.a

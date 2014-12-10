@@ -1,13 +1,17 @@
 package businesslogicservice.commodityblservice;
 import java.util.ArrayList;
 
+import po.stockpo.CommodityPO;
 import dataservice.commoditydataservice.*;
 import vo.*;
 import vo.stockvo.*;
 import vo.uservo.UserVO;
 public interface StubCommodityBlService {
 	public ArrayList<CommodityVO> findCommodity(String name);//输入商品名称，返回一系列具有同样名称的商品 need to be changed to mohuchazhao
-	//find by id
+	public ArrayList<CommodityVO> fuzzyFindCommodity(String s, int precision);
+	//precision 先默认给1，可以达到王雨城所说的算法。若取数字越高，精确度越高，搜索结果数量也就越少
+	
+	
 	public RM addCommodity(CommodityVO vo);
 	public RM addCategory(CategoryVO vo);
 	public RM updateCommodity(CommodityVO vo);//只有进价和售价是可以更改的

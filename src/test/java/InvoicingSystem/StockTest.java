@@ -44,9 +44,15 @@ public class StockTest{
 		data.insert(new CategoryPO("1", "门"));
 		CommodityVO mockvo=new CommodityVO("1\\门","好好防盗门","fdm02",200,300,10);
 		CommodityVO mockvo1=new CommodityVO("1\\门","好好防盗门","fdm05",100,200,15);
+		CommodityVO mockvo2=new CommodityVO("1\\门","迪迪防盗门","dd02",100,200,15);
+		CommodityVO mockvo3=new CommodityVO("1\\门","迪迪防盗门","dd05",100,200,15);
+		CommodityVO mockvo4=new CommodityVO("1\\门","防火门","fire05",100,200,15);
 		StubCommodityBlService combl=smd.getCombl();
 		combl.addCommodity(mockvo);
 		combl.addCommodity(mockvo1);
+		combl.addCommodity(mockvo2);
+		combl.addCommodity(mockvo3);
+		combl.addCommodity(mockvo4);
 		StubStockController contro=new StubStockController();
 		contro.checkIn("JHD-20141204-00001", "好好防盗门", "fdm05", 50, 150);
 	}
@@ -134,11 +140,15 @@ public class StockTest{
 	@Test
 	public void testdeleteCommodity2()
 	{
-		RM result=combl.deleteCommodity("好好防盗门","fdm02");
 		StubCommodityBlService combl=smd.getCombl();
 		ArrayList<StockVO> vos=combl.openCategory("1");
 		vos=combl.openCategory(vos.get(2).getCat().getId());
-		assertEquals(1,vos.size());
+		int oldsize = vos.size();
+		RM result=combl.deleteCommodity("好好防盗门","fdm02");
+		assertEquals(RM.done,result);
+		vos=combl.openCategory("1");
+		vos=combl.openCategory(vos.get(2).getCat().getId());
+		assertEquals(oldsize-1,vos.size());
 	}
 	
 	@Test
@@ -328,5 +338,20 @@ public class StockTest{
 		d2.setYear(200);
 		double result = sf.getAdjustmentTotal(d1, d2);
 		assertEquals(-500,(int)result);
+	}
+	
+	@Test
+	public void testFuzzyFind()
+	{
+		ArrayList<CommodityVO> h = combl.fuzzyFindCommodity("好好门fd", 1);
+		assertEquals(2,h.size());
+		h = combl.fuzzyFindCommodity("门", 1);
+		assertEquals(5,h.size());
+		h = combl.fuzzyFindCommodity("15", 1);
+		assertEquals(3,h.size());
+		h = combl.fuzzyFindCommodity("防盗门", 1);
+		assertEquals(4,h.size());
+		h = combl.fuzzyFindCommodity("日光灯", 1);
+		assertEquals(0,h.size());
 	}
 }
