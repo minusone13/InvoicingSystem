@@ -27,6 +27,10 @@ public class UserController implements StubUserBlService, UserService{
 	{
 		return l.changePassword(vo);
 	}
+	public RM changePassword(UserVO vo, String oldPassword)
+	{//跟改密码，新密码位于UserVO中的password属性
+		return l.changePassword(vo, oldPassword);
+	}
 	
 	public void setdataobject(StubUserDataService data)
 	{
