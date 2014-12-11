@@ -60,9 +60,4 @@ public interface SaleBillBlService {
 		public ArrayList<SaleSheetVO> getAllSaleSheet();
 		public ArrayList<SaleBackSheetVO> getAllSaleBackSheet();
 		
-
-		
-
-
-		
 }
