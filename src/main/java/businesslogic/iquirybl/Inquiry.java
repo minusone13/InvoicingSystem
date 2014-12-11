@@ -5,13 +5,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-import businesslogic.BillState;
-import businesslogic.BillStyle;
 import businesslogic.commoditybillbl.StubAlertBill;
-import businesslogic.commoditybillbl.StubCommodityBill;
 import businesslogic.commoditybillbl.StubGiftBill;
 import businesslogic.commoditybillbl.StubSpillsLossBill;
-import businesslogic.examinebl.Bill;
+import businesslogic.commoditybl.MockCommodity;
 import businesslogic.examinebl.StubBillPool;
 import businesslogic.financialbillbl.CashPaymentBill;
 import businesslogic.financialbillbl.PaymentBill;
@@ -20,7 +17,6 @@ import businesslogic.salebillServicec.salebillForFinancial;
 import businesslogic.salebillbl.SaleBackSheet;
 import businesslogic.salebillbl.PurBackSheet;
 import businesslogic.salebillbl.PurSheet;
-import businesslogic.salebillbl.SaleBackSheet;
 import businesslogic.salebillbl.SaleSheet;
 import businesslogic.salebillbl.salebillController;
 import businesslogic.stockmanagerbl.StubStockController;
@@ -66,9 +62,18 @@ public class Inquiry {
 				else continue;
 			}
 			
-			//商品名
+			//商品名，商品清单包含多个商品
 			if(isv.getCommodityName()!=null) {
-				
+				ArrayList<MockCommodity> sheet = sale.getsheet();
+				int size = sheet.size();
+				int j=0,tag=0;//tag表示遍历完以后没有符合的就置为1
+				for(;j<size;j++) {//遍历商品清单
+					MockCommodity temp = sheet.get(j);
+					String comName = temp.getName();
+					if(comName.equals(isv.getCommodityName())) {break;}//如果有满足条件的商品，跳出内循环
+					if(j==size-1) tag=1;
+				}
+				if(tag==1) continue;//如果遍历完商品后后没有符合的，换下一个单据
 			}
 			
 			//客户
@@ -87,6 +92,7 @@ public class Inquiry {
 		return saleSheetVO;
 	}
 	
+	//销售明细表的销售退货单
 	public ArrayList<SaleBackSheetVO> getSaleSaleBackSheet(InquirySaleVO isv) {
 		ArrayList<SaleBackSheet> saleBackSheet = bp.getSaleBackSheet();
 		ArrayList<SaleBackSheetVO> saleBackSheetVO = new ArrayList<SaleBackSheetVO>();
@@ -111,9 +117,19 @@ public class Inquiry {
 				else continue;
 			}
 			
-			//商品名
+			
+			//商品名，商品清单包含多个商品
 			if(isv.getCommodityName()!=null) {
-				
+				ArrayList<MockCommodity> sheet = saleback.getsheet();
+				int size = sheet.size();
+				int j=0,tag=0;//tag表示遍历完以后没有符合的就置为1
+				for(;j<size;j++) {//遍历商品清单
+					MockCommodity temp = sheet.get(j);
+					String comName = temp.getName();
+					if(comName.equals(isv.getCommodityName())) {break;}//如果有满足条件的商品，跳出内循环
+					if(j==size-1) tag=1;
+				}
+				if(tag==1) continue;//如果遍历完商品后后没有符合的，换下一个单据
 			}
 			
 			//客户
@@ -131,7 +147,43 @@ public class Inquiry {
 		return saleBackSheetVO;
 	}
 	
-	
+	public ArrayList<GiftBillVO> getProcessGift(InquiryProcessVO ipv) {
+		ArrayList<StubGiftBill> gift = bp.getGiftBill();
+		ArrayList<GiftBillVO> giftVO = new ArrayList<GiftBillVO>();
+		Date dateBefore=null;
+		Date dateAfter=null;
+		SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+		
+		try {
+			dateBefore = format.parse(ipv.getTimeBefore());
+			dateAfter = format.parse(ipv.getTimeAfter());
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		int size = gift.size();
+		
+		for(int i=0;i<size;i++) {
+			StubGiftBill g = gift.get(i);
+			
+			if(dateBefore!=null) {
+				if(g.getDate().compareTo(dateBefore)>=0&&
+						g.getDate().compareTo(dateAfter)<=0){}
+				else continue;
+			}
+			
+			if(ipv.getBillstyle()!=null) {
+				if(g.getBillstyle().equals(ipv.getBillstyle())){}
+				else continue;
+			}
+			
+			if(ipv.getUserID()!=null) {
+				if(g.getUserID().equals(ipv.getUserID())){}
+				else continue;				
+			}
+			giftVO.add(g.getVO());
+		}
+		return giftVO;
+	}
 	
 	public ArrayList<VO> inquiryProcess(InquiryProcessVO ipv) {
 		ArrayList<VO> list = new ArrayList<VO>();
