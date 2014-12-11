@@ -58,18 +58,21 @@ public class MockCommodity {
 	public MockCommodity(){}
 	public MockCommodity(CommodityPO po)
 	{
-		parent=po.getParent();
-		name=po.getName();
-		id=parent+"\\"+name;
-		model=po.getModel();
-		number=po.getNumber();
-		in=po.getIn();
-		out=po.getOut();
-		lastin=po.getLastIn();
-		lastout=po.getLastOut();
-		alertLine=po.getAlertLine();
-		record=posToCom(po.getRecord());
-		prepareRecord=posToCom(po.getPrepareRecord());
+		if(po!=null)
+		{
+			parent=po.getParent();
+			name=po.getName();
+			id=parent+"\\"+name;
+			model=po.getModel();
+			number=po.getNumber();
+			in=po.getIn();
+			out=po.getOut();
+			lastin=po.getLastIn();
+			lastout=po.getLastOut();
+			alertLine=po.getAlertLine();
+			record=posToCom(po.getRecord());
+			prepareRecord=posToCom(po.getPrepareRecord());
+		}
 	}
 	public MockCommodity(CommodityVO vo)
 	{
