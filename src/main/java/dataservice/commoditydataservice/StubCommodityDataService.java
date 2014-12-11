@@ -24,4 +24,5 @@ public interface StubCommodityDataService {
 	public ArrayList<StockPO> openCategory(String id);
 	
 	public ArrayList<AdjustmentRecordPO> getAdjustmentRecords();
+	public ArrayList<CommodityPO> getAllCommodity();//用于库存盘点
 }

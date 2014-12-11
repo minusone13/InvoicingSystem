@@ -36,4 +36,7 @@ public interface StubCommodityBlService {
 	public ArrayList<GiftBillVO> showGiftBills();
 	public ArrayList<SpillsLossBillVO> showSpillsLossBills();
 	public ArrayList<AlertBillVO> showAlertBills();
+	
+	public CountVO count();//库存盘点
+	public ArrayList<CommodityRecordVO> getRecords();//库存查看
 }

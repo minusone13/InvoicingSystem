@@ -216,4 +216,14 @@ public class StubStockController implements StubCommodityBlService, StockBlForSa
 			result.add(h.get(i).getVO());
 		return result;
 	}
+	
+	public CountVO count()
+	{//库存盘点
+		return new CountVO();
+	}
+	
+	public ArrayList<CommodityRecordVO> getRecords()
+	{//库存查看
+		return new ArrayList<CommodityRecordVO>();
+	}
 }

@@ -321,4 +321,17 @@ public class StubCommodityList {//商品列表 haha
 		}
 		return income;
 	}
+	public CountVO count()
+	{//库存盘点
+		ArrayList<CommodityPO> temp = comdata.getAllCommodity();
+		ArrayList<CommodityVO> result = new ArrayList<CommodityVO>();
+		for(int i=0;i<temp.size();i++)
+			result.add(new MockCommodity(temp.get(i)).toVO());
+		return new CountVO();
+	}
+	
+	public ArrayList<CommodityRecordVO> getRecords()
+	{//库存查看
+		return new ArrayList<CommodityRecordVO>();
+	}
 }
