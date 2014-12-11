@@ -6,6 +6,11 @@ public class AccountPO implements Serializable{
 	String name;
 	String newName;
 	double balance;
+	
+	public boolean contents(String s)
+	{
+		return getName().indexOf(s)!=-1 ;
+	}
 	public String getNewName() {
 		return newName;
 	}
