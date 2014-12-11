@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import presentation.financialui.JPmanageBills2.JPanelEdit.MouseListenerOfButton;
 import presentation.managerui.JPBillList;
 import presentation.managerui.JTableOfList;
 import presentation.managerui.MouseListenerGetXY;
@@ -364,18 +365,19 @@ public class JPmanageBills2 extends JPanel {
 			//图片
 			private ImageIcon right0=new ImageIcon("src/image/function/rightW.png");
 			private ImageIcon right1=new ImageIcon("src/image/function/rightR.png");
-			private ImageIcon add0=new ImageIcon("src/image/function/littleAddW.png");
-			private ImageIcon add1=new ImageIcon("src/image/function/littleAddR.png");
+			private ImageIcon scan0=new ImageIcon("src/image/function/littleScanW.png");
+			private ImageIcon scan1=new ImageIcon("src/image/function/littleScanR.png");
 			private ImageIcon confirm0=new ImageIcon("src/image/function/confirmW.png");
 			private ImageIcon confirm1=new ImageIcon("src/image/function/confirmR.png");
 			
 			//报溢报损单的附件
 			private JLabel commodity=new JLabel("商品");
-			private JLabel style=new JLabel("型号");
+			private JLabel type=new JLabel("型号");
 			private JLabel num=new JLabel("数量");
-			private JLabel addList=new JLabel();//增加条目按钮
+			private JLabel scan=new JLabel("浏览");
+			private JLabel scanButton=new JLabel();//增加条目按钮
 			private JTextField commodityText=new JTextField(10);
-			private JTextField styleText=new JTextField(10);
+			private JTextField typeText=new JTextField(10);
 			private JTextField numText=new JTextField(10);
 			public JPanelEdit(BillStyle style){
 				//确认种类
@@ -399,7 +401,51 @@ public class JPmanageBills2 extends JPanel {
 				confirm.setIcon(confirm0);
 				confirm.setBounds(120, 236, 24, 24);
 				confirm.addMouseListener(new MouseListenerOfButton(3));
-				//根据单据种类加上不同的附件
+			
+				//设置标签字体
+				scan.setFont(new Font("宋体",Font.BOLD,14));
+				commodity.setFont(new Font("宋体",Font.BOLD,14));
+				type.setFont(new Font("宋体",Font.BOLD,14));
+				num.setFont(new Font("宋体",Font.BOLD,14));
+				//设置字体颜色
+				scan.setForeground(Color.white);
+				commodity.setForeground(Color.white);
+				type.setForeground(Color.white);
+				num.setForeground(Color.white);
+				//设置标签大小位置
+				scan.setBounds(40, 30, 40, 20);
+				commodity.setBounds(40, 60, 40, 20);
+				type.setBounds(40, 90, 40, 20);
+				num.setBounds(40, 120, 40, 20);
+				//浏览按钮
+				scanButton.setIcon(scan0);
+				scanButton.setBounds(100, 28, 24, 24);
+				scanButton.addMouseListener(new MouseListenerOfButton(2));
+				//商品名文本框
+				commodityText.setBounds(80,60, 150, 20);
+				commodityText.setOpaque(false);//文本框透明
+				commodityText.setForeground(Color.white);//前景色
+				//型号文本框
+				typeText.setBounds(80,90, 150, 20);
+				typeText.setOpaque(false);//文本框透明
+				typeText.setForeground(Color.white);//前景色
+				//数量文本框
+				numText.setBounds(80,120, 150, 20);
+				numText.setOpaque(false);//文本框透明
+				numText.setForeground(Color.white);//前景色
+				
+				this.add(right,0);
+				this.add(confirm,1);
+				this.add(scan,2);
+				this.add(commodity,3);
+				this.add(right,4);
+				this.add(type,5);
+				this.add(num,6);
+				this.add(scanButton,7);
+				this.add(commodityText,8);
+				this.add(typeText,9);
+				this.add(numText,10);
+				this.add(back,11);
 			}
 			public void leftMove(){
 				Thread t=new Thread(new TreadOfLeft());
@@ -417,7 +463,7 @@ public class JPmanageBills2 extends JPanel {
 			}
 			public class MouseListenerOfButton implements MouseListener{
 
-				private int num;//1、右移 2、加号 3、确认
+				private int num;//1、右移 2、浏览 3、确认
 				public MouseListenerOfButton(int N){
 					num=N;
 				}
@@ -436,7 +482,7 @@ public class JPmanageBills2 extends JPanel {
 						RightMove();
 						break;
 					case 2:
-						addList.setIcon(add1);
+						scanButton.setIcon(scan1);
 						
 						break;
 					case 3:
@@ -452,7 +498,7 @@ public class JPmanageBills2 extends JPanel {
 						right.setIcon(right0);
 						break;
 					case 2:
-						addList.setIcon(add0);
+						scanButton.setIcon(scan0);
 						break;
 					case 3:
 						confirm.setIcon(confirm0);
@@ -472,7 +518,7 @@ public class JPmanageBills2 extends JPanel {
 						right.setIcon(right0);
 						break;
 					case 2:
-						addList.setIcon(add0);
+						scanButton.setIcon(scan0);
 						break;
 					case 3:
 						confirm.setIcon(confirm0);

@@ -105,13 +105,13 @@ public class JPmanageBills1 extends JPanel {
 				//切换
 				JPmanageBills1.this.setVisible(false);
 				//设置单据类型
-				frame.getFinancial().getManageBills2().setStyle(BillStyle.ReceiptBill);
+				frame.getStock().getManageBills2().setStyle(BillStyle.GiftBill);
 				//从逻辑层读取单据信息填充单据列表
-				frame.getFinancial().getManageBills2().getBillList().getJPbillList().clear();
-				frame.getFinancial().getManageBills2().getBillList().reHome();
-				frame.getFinancial().getManageBills2().getBillList().addReceiptBillList(fbl.getAllOfReceiptBills());
+				frame.getStock().getManageBills2().getBillList().getJPbillList().clear();
+				frame.getStock().getManageBills2().getBillList().reHome();
+//				frame.getStock().getManageBills2().getBillList().addGiftBillList(fbl.getAllOfReceiptBills());
 				//切换
-				frame.getFinancial().getManageBills2().setVisible(true);
+				frame.getStock().getManageBills2().setVisible(true);
 				break;
 			case 12:alertBill.setIcon(alertBillIcon);
 				//切换

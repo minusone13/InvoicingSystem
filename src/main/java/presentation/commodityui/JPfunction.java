@@ -7,6 +7,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import presentation.financialui.JPfunctions;
+import userui.Frame;
+
 public class JPfunction extends JPanel {
 
 	//背景
@@ -17,6 +20,8 @@ public class JPfunction extends JPanel {
 	JLabel function2=new JLabel();
 	//功能3
 	JLabel function3=new JLabel();
+	//frame的引用
+    Frame frame;
 	public JPfunction(){
 		//设置窗口大小
 		this.setSize(522, 325);
@@ -45,6 +50,10 @@ public class JPfunction extends JPanel {
 		this.add(bg,3);
 
 	}
+	/*获取frame的引用*/
+	public void getFrame( Frame f){
+  		frame=f;
+    }
 	public class MouseListenerOfButton implements MouseListener{
 
 		private int num;
@@ -79,6 +88,8 @@ public class JPfunction extends JPanel {
 				break;
 			case 2:
 				function2.setIcon(new ImageIcon("src/image/stockUI/Bill.png"));
+				JPfunction.this.setVisible(false);
+				frame.getStock().getManageBills().setVisible(true);
 				break;
 			case 3:
 				function3.setIcon(new ImageIcon("src/image/stockUI/Read.png"));
