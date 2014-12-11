@@ -75,6 +75,8 @@ public class StubCommodityBill
 		else
 		{
 			String s = sls.get(sls.size()-1).getID();
+			if(s==null)
+				return RM.outsideStockError;
 			String a[]=s.split("-");
 			if(currentTime.equals(a[1]))//日期相同，继续编号
 			{

@@ -8,5 +8,6 @@ public enum RM {
 		done,//成功
 		treeerror,//商品树错误
 		invalid,//不合法，用于验证密码或者ID
-		alreadyHaveUnremoveableContents//已有记录或子分类或子商品，不可删除
+		alreadyHaveUnremoveableContents,//已有记录或子分类或子商品，不可删除
+		outsideStockError
 }
