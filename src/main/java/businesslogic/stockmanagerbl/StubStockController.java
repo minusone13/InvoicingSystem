@@ -192,4 +192,28 @@ public class StubStockController implements StubCommodityBlService, StockBlForSa
 	{
 		return RM.done;
 	}
+	public ArrayList<GiftBillVO> showGiftBills()
+	{
+		ArrayList<StubGiftBill> h = pool.getGiftBill();
+		ArrayList<GiftBillVO> result = new ArrayList<GiftBillVO>();
+		for(int i=0; i<h.size();i++)
+			result.add(h.get(i).getVO());
+		return result;
+	}
+	public ArrayList<SpillsLossBillVO> showSpillsLossBills()
+	{
+		ArrayList<StubSpillsLossBill> h = pool.getSpillsLossBill();
+		ArrayList<SpillsLossBillVO> result = new ArrayList<SpillsLossBillVO>();
+		for(int i=0; i<h.size();i++)
+			result.add(h.get(i).getVO());
+		return result;
+	}
+	public ArrayList<AlertBillVO> showAlertBills()
+	{
+		ArrayList<StubAlertBill> h = pool.getAlertBill();
+		ArrayList<AlertBillVO> result = new ArrayList<AlertBillVO>();
+		for(int i=0; i<h.size();i++)
+			result.add(h.get(i).getVO());
+		return result;
+	}
 }
