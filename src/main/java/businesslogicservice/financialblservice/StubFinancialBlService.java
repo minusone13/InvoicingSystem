@@ -33,7 +33,7 @@ public interface StubFinancialBlService {
 	//得到期初建账保存的客户信息
 	public ArrayList<CustomerVO> getOldCustomersInfo(String version);
 	
-	public ArrayList<VO> inquirySale(InquirySaleVO isv) ;
+	
 	
 	public ArrayList<VO> inquiryProcess (InquiryProcessVO ipv);
 	

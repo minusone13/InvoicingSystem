@@ -101,10 +101,7 @@ public class Financial implements StubFinancialBlService{
 		return a.getOldAccountsInfo(version);
 	}
 	
-	public ArrayList<VO> inquirySale(InquirySaleVO isv) {
-		Inquiry i = new Inquiry();
-		return i.inquirySale(isv);
-	}
+	
 	
 	public ArrayList<VO> inquiryProcess (InquiryProcessVO ipv) {
 		Inquiry i = new Inquiry();
