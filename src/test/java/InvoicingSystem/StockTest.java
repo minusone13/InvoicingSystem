@@ -353,5 +353,7 @@ public class StockTest{
 		assertEquals(4,h.size());
 		h = combl.fuzzyFindCommodity("日光灯", 1);
 		assertEquals(0,h.size());
+		h = combl.fuzzyFindCommodity("好好防盗门fdm05", 1);
+		assertEquals(1,h.size());
 	}
 }

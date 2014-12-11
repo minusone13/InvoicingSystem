@@ -30,7 +30,7 @@ public class StubCommodityBill
 			{
 				int count=Integer.parseInt(a[2]);
 				count++;
-				bill.setID("YSD-"+currentTime+"-"+String.format("%05d", Integer.toString(count)));
+				bill.setID("YSD-"+currentTime+"-"+String.format("%05d", count));
 			}
 			else
 				bill.setID("YSD-"+currentTime+"-00001");

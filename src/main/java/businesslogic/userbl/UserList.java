@@ -25,7 +25,7 @@ public class UserList {
 		UserPO po = data.login(account, string2MD5(password));
 		if(po==null)
 			return null;
-		UserVO vo = new UserVO(po.getR(),po.getAccount(),po.getName());
+		UserVO vo = new UserVO(po.getID(),po.getR(),po.getAccount(),po.getPassword(),po.getName());
 		return vo;
 	}
 	public RM deleteUser(UserVO vo)
@@ -43,43 +43,54 @@ public class UserList {
 			return RM.redundance;
 		else
 		{
-			char c=0;
-			switch(vo.getR()){//自动生成ID，详见Data层的UserList类
-				case MANAGER: c='M';break;
-				case ADMINISTRATOR: c='A';break;
-				case FINANCIAL_STAFF: ;
-				case FINANCIAL_MANAGER:c='F';break;
-				case STOCK_STAFF: c='I';break;//抱歉只能用I咯，S和下面的进货人员重了；
-				case PURCHASE_SALE_STAFF: c='S';break;
-				default: return RM.unknownerror;
-			}
-			int x=data.count(c);
-			x++;
-			String result=Integer.toString(x);
-			switch(result.length())
-			{//编号前面补零，补成4位
-				case 1:result="000"+result;
-				case 2:result="00"+result;
-				case 3:result="0"+result;
-			}
-			result=c+result;
+			String result = generateID(vo);
+			if(result == null)
+				return RM.unknownerror;
 			data.insert(new UserPO(result,vo.getR(),vo.getAccount(),string2MD5(vo.getPassword()),vo.getName()));
 			return RM.done;
 		}
 	}
-	
+	public String generateID(UserVO vo)
+	{
+		char c=0;
+		switch(vo.getR()){//自动生成ID，详见Data层的UserList类
+			case MANAGER: c='M';break;
+			case ADMINISTRATOR: c='A';break;
+			case FINANCIAL_STAFF: ;
+			case FINANCIAL_MANAGER:c='F';break;
+			case STOCK_STAFF: c='I';break;//抱歉只能用I咯，S和下面的进货人员重了；
+			case PURCHASE_SALE_STAFF: c='S';break;
+			default: return null;
+		}
+		int x=data.count(c);
+		x++;
+		String result=String.format("%04d", x);
+		result=c+result;
+		return result;
+	}
 	public RM changePassword(UserVO vo)
 	{
 		RM result = data.updatePassword(new UserPO(vo.getID(),vo.getR(),vo.getAccount(),string2MD5(vo.getPassword()),vo.getName()));
 		return result;
 	}
+	public RM changePassword(UserVO vo, String oldPassword)
+	{//跟改密码，新密码位于UserVO中的password属性
+		UserVO temp = login(vo.getAccount(),oldPassword);
+		if(temp == null)
+			return RM.invalid;
+		return changePassword(vo);
+	}
+	
 	public RM changeRole(UserVO vo,Role newRole)
 	{
 		RM result = deleteUser(vo);//delete old account,because stuff ID relates to the kind of job
 		if(result!=RM.done)
 			return result;
 		vo.setR(newRole);//changeRole
-		result = signUp(vo);//signUp new account
+		String s = generateID(vo);
+		if(s==null)
+			return RM.unknownerror;
+		data.insert(new UserPO(s,vo.getR(),vo.getAccount(),vo.getPassword(),vo.getName()));
 		return result;
 	}
 	public ArrayList<UserVO> showUsers()
