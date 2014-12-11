@@ -11,7 +11,7 @@ public class GiftBillPO extends PO implements Serializable{
 	private BillStyle style = BillStyle.GiftBill;
 	private String ID;//订单编号
 	private Date date;
-	String userID;
+	String operator;
 	private String[] remark;//赠送原因（销售单据编号或手动），赠送客户。分别位于remark[0],remark[1]
 	private ArrayList<CommodityPO> coms;//一系列赠送商品，商品内的数量为
 	private BillState state=BillState.DRAFT;//订单状态
@@ -37,14 +37,14 @@ public class GiftBillPO extends PO implements Serializable{
 	public GiftBillPO(){}
 	public GiftBillPO(String userID,String ID, ArrayList<CommodityPO> coms, String[] remark)
 	{
-		this.userID=userID;
+		this.operator=userID;
 		this.ID=ID;
 		this.coms=coms;
 		this.remark=remark;
 	}
 	public GiftBillPO(String userID,String ID, ArrayList<CommodityPO> coms, String[] remark,BillState state)
 	{
-		this.userID=userID;
+		this.operator=userID;
 		this.ID=ID;
 		this.coms=coms;
 		this.remark=remark;
@@ -53,7 +53,7 @@ public class GiftBillPO extends PO implements Serializable{
 	public GiftBillPO(Date date,String userID,String ID, ArrayList<CommodityPO> coms, String[] remark,BillState state)
 	{
 		this.date=date;
-		this.userID=userID;
+		this.operator=userID;
 		this.ID=ID;
 		this.coms=coms;
 		this.remark=remark;
@@ -71,11 +71,11 @@ public class GiftBillPO extends PO implements Serializable{
 	public void setState(BillState state) {
 		this.state = state;
 	}
-	public String getUserID() {
-		return userID;
+	public String getOperator() {
+		return operator;
 	}
-	public void setUserID(String userID) {
-		this.userID = userID;
+	public void setOperator(String userID) {
+		this.operator = userID;
 	}
 	public Date getDate() {
 		return date;

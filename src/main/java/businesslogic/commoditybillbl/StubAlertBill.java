@@ -13,7 +13,7 @@ public class StubAlertBill extends Bill implements GetVOandPO
 {//报警单对象，统一进入单据池管理和存储
 	Date date;
 	String ID;
-	String userID;
+	String operator;
 	MockCommodity com;
 	int shortage;
 	BillStyle style=BillStyle.AlertBill;
@@ -25,22 +25,22 @@ public class StubAlertBill extends Bill implements GetVOandPO
 	public StubAlertBill(String userID,MockCommodity com, int shortage)
 	{
 		date = new Date();
-		this.userID=userID;
+		this.operator=userID;
 		this.com=com;
 		this.shortage=shortage;
 	}
 	public AlertBillVO getVO()
 	{
-		return new AlertBillVO(date,userID,ID,new CommodityVO(),shortage,state);
+		return new AlertBillVO(date,operator,ID,new CommodityVO(),shortage,state);
 	}
 	public AlertBillPO getPO()
 	{
-		return new AlertBillPO(date,userID,ID,com.toPO(),shortage,state);
+		return new AlertBillPO(date,operator,ID,com.toPO(),shortage,state);
 	}
 	public void setPO(AlertBillPO po)
 	{
 		date=po.getDate();
-		userID=po.getUserID();
+		operator=po.getOperator();
 		com=new MockCommodity(po.getCommodity());
 		shortage=po.getshortage();
 		ID=po.getID();
@@ -50,7 +50,7 @@ public class StubAlertBill extends Bill implements GetVOandPO
 	public void setVO(AlertBillVO vo)
 	{
 		date=vo.getDate();
-		userID=vo.getUserID();
+		operator=vo.getOperator();
 		com=new MockCommodity(vo.getCommodity());
 		shortage=vo.getshortage();
 		ID=vo.getID();
@@ -93,10 +93,10 @@ public class StubAlertBill extends Bill implements GetVOandPO
 	public  void setDate(Date date) {
 		this.date = date;
 	}
-	public String getUserID() {
-		return userID;
+	public String getOperator() {
+		return operator;
 	}
-	public void setUserID(String userID) {
-		this.userID = userID;
+	public void setOperator(String userID) {
+		this.operator = userID;
 	}
 }

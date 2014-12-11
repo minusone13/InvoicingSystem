@@ -7,6 +7,10 @@ public class Initial {
 		new InitialStock();
 		new InitialUser();
 	}
+	public void initialTest()
+	{
+		new InitialTestStock();
+	}
 	public void initialStock()
 	{
 		new InitialStock();

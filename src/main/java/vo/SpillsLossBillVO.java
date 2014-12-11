@@ -11,7 +11,7 @@ import businesslogic.BillStyle;
 
 public class SpillsLossBillVO extends VO{
 	private BillStyle billstyle=BillStyle.SpillsLossBill;//订单种类
-	private String userID;
+	private String operator;
 	private String ID;//单据编号
 	private Date date;
 	private Type t;//溢出、损坏种类
@@ -37,14 +37,14 @@ public class SpillsLossBillVO extends VO{
 	}
 	public SpillsLossBillVO(String userID,String ID,Type t, CommodityVO com)
 	{
-		this.userID=userID;
+		this.operator=userID;
 		this.ID=ID;
 		this.t=t;
 		this.com=com;
 	}
 	public SpillsLossBillVO(String userID,String ID,Type t, CommodityVO com,BillState state)
 	{
-		this.userID=userID;
+		this.operator=userID;
 		this.ID=ID;
 		this.t=t;
 		this.com=com;
@@ -53,7 +53,7 @@ public class SpillsLossBillVO extends VO{
 	public SpillsLossBillVO(Date date,String userID,String ID,Type t, CommodityVO com,BillState state)
 	{
 		this.date=date;
-		this.userID=userID;
+		this.operator=userID;
 		this.ID=ID;
 		this.t=t;
 		this.com=com;
@@ -71,11 +71,11 @@ public class SpillsLossBillVO extends VO{
 	public void setState(BillState state) {
 		this.state = state;
 	}
-	public String getUserID() {
-		return userID;
+	public String getOperator() {
+		return operator;
 	}
-	public void setUserID(String userID) {
-		this.userID = userID;
+	public void setOperator(String userID) {
+		this.operator = userID;
 	}
 	public Date getDate() {
 		return date;

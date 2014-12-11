@@ -18,7 +18,7 @@ public class StubGiftBill extends Bill implements GetVOandPO
 {//赠送单类，统一进入单据池管理和存储
 	Date date;
 	private BillStyle billstyle=BillStyle.GiftBill;
-	String userID;
+	String operator;
 	private String ID;
 	ArrayList<MockCommodity> coms;
 	BillState state=BillState.DRAFT;
@@ -28,14 +28,14 @@ public class StubGiftBill extends Bill implements GetVOandPO
 		ArrayList<CommodityVO> result=new ArrayList<CommodityVO>();
 		for(int i=0;i<coms.size();i++)
 			result.add(coms.get(i).toVO());
-		return new GiftBillVO(date,userID,ID,result,remark,state);
+		return new GiftBillVO(date,operator,ID,result,remark,state);
 	}
 	public GiftBillPO getPO()
 	{
 		ArrayList<CommodityPO> result=new ArrayList<CommodityPO>();
 		for(int i=0;i<coms.size();i++)
 			result.add(coms.get(i).toPO());
-		return new GiftBillPO(date,userID,ID,result,remark,state);//bug may appear
+		return new GiftBillPO(date,operator,ID,result,remark,state);//bug may appear
 	}
 	public void setPO(GiftBillPO po)
 	{
@@ -46,7 +46,7 @@ public class StubGiftBill extends Bill implements GetVOandPO
 		remark=po.getRemark();
 		date=po.getDate();
 		billstyle=BillStyle.GiftBill;
-		userID=po.getUserID();
+		operator=po.getOperator();
 		ID=po.getID();
 		remark=po.getRemark();
 	}
@@ -59,7 +59,7 @@ public class StubGiftBill extends Bill implements GetVOandPO
 		remark=vo.getRemark();
 		date=vo.getDate();
 		billstyle=BillStyle.GiftBill;
-		userID=vo.getUserID();
+		operator=vo.getOperator();
 		ID=vo.getID();
 		remark=vo.getRemark();
 	}
@@ -101,10 +101,10 @@ public class StubGiftBill extends Bill implements GetVOandPO
 	public void setDate(Date date) {
 		this.date = date;
 	}
-	public String getUserID() {
-		return userID;
+	public String getOperator() {
+		return operator;
 	}
-	public void setUserID(String userID) {
-		this.userID = userID;
+	public void setOperator(String userID) {
+		this.operator = userID;
 	}
 }

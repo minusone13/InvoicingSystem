@@ -10,7 +10,7 @@ import businesslogic.BillStyle;
 public class GiftBillVO extends VO{
 	private BillStyle billstyle=BillStyle.GiftBill;//订单种类
 	private String ID;//订单编号
-	private String userID;
+	private String operator;
 	private Date date;
 	private String[] remark;//赠送原因（销售单据编号或手动），赠送客户。分别位于remark[0],remark[1]
 	private ArrayList<CommodityVO> coms;//一系列赠送商品，商品内的数量为
@@ -37,14 +37,14 @@ public class GiftBillVO extends VO{
 	}
 	public GiftBillVO(String userID,String ID, ArrayList<CommodityVO> coms, String[] remark)
 	{
-		this.userID=userID;
+		this.operator=userID;
 		this.ID=ID;
 		this.coms=coms;
 		this.remark=remark;
 	}
 	public GiftBillVO(String userID,String ID, ArrayList<CommodityVO> coms, String[] remark,BillState state)
 	{
-		this.userID=userID;
+		this.operator=userID;
 		this.ID=ID;
 		this.coms=coms;
 		this.remark=remark;
@@ -53,7 +53,7 @@ public class GiftBillVO extends VO{
 	public GiftBillVO(Date date,String userID,String ID, ArrayList<CommodityVO> coms, String[] remark,BillState state)
 	{
 		this.date=date;
-		this.userID=userID;
+		this.operator=userID;
 		this.ID=ID;
 		this.coms=coms;
 		this.remark=remark;
@@ -71,11 +71,11 @@ public class GiftBillVO extends VO{
 	public void setState(BillState state) {
 		this.state = state;
 	}
-	public String getUserID() {
-		return userID;
+	public String getOperator() {
+		return operator;
 	}
-	public void setUserID(String userID) {
-		this.userID = userID;
+	public void setOperator(String userID) {
+		this.operator = userID;
 	}
 	public Date getDate() {
 		return date;

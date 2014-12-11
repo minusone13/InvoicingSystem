@@ -177,7 +177,7 @@ public class Inquiry {
 			}
 			
 			if(ipv.getUserID()!=null) {
-				if(g.getUserID().equals(ipv.getUserID())){}
+				if(g.getOperator().equals(ipv.getUserID())){}
 				else continue;				
 			}
 			giftVO.add(g.getVO());
@@ -223,7 +223,7 @@ public class Inquiry {
 			}
 			
 			if(ipv.getUserID()!=null) {
-				if(g.getUserID().equals(ipv.getUserID())){}
+				if(g.getOperator().equals(ipv.getUserID())){}
 				else continue;				
 			}
 			
@@ -293,7 +293,7 @@ public class Inquiry {
 			}
 			
 			if(ipv.getUserID()!=null) {
-				if(spillLossBill.getUserID().equals(ipv.getUserID())){}
+				if(spillLossBill.getOperator().equals(ipv.getUserID())){}
 				else continue;				
 			}
 			list.add(spillLossBill.getVO());
@@ -316,7 +316,7 @@ public class Inquiry {
 			}
 			
 			if(ipv.getUserID()!=null) {
-				if(alertBill.getUserID().equals(ipv.getUserID())){}
+				if(alertBill.getOperator().equals(ipv.getUserID())){}
 				else continue;				
 			}
 			

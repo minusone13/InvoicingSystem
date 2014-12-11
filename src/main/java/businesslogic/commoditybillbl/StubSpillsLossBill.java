@@ -15,7 +15,7 @@ import businesslogic.examinebl.Bill;
 public class StubSpillsLossBill extends Bill implements GetVOandPO
 {//报溢报损单，统一进入单据池管理和存储
 	Date date;
-	String userID;
+	String operator;
 	private BillStyle style=BillStyle.SpillsLossBill;
 	private MockCommodity com;
 	String ID;
@@ -23,16 +23,16 @@ public class StubSpillsLossBill extends Bill implements GetVOandPO
 	BillState state=BillState.DRAFT;
 	public SpillsLossBillVO getVO()
 	{
-		return new SpillsLossBillVO(userID,ID,t,new CommodityVO(),state);
+		return new SpillsLossBillVO(operator,ID,t,new CommodityVO(),state);
 	}
 	public SpillsLossBillPO getPO()
 	{
-		return new SpillsLossBillPO(userID,ID,t,com.toPO().clone(),state);
+		return new SpillsLossBillPO(operator,ID,t,com.toPO().clone(),state);
 	}
 	public void setPO(SpillsLossBillPO po)
 	{
 		date=po.getDate();
-		userID=po.getUserID();
+		operator=po.getOperator();
 		com=new MockCommodity(po.getComPO());
 		style=BillStyle.SpillsLossBill;
 		t=po.getT();
@@ -43,7 +43,7 @@ public class StubSpillsLossBill extends Bill implements GetVOandPO
 	public void setVO(SpillsLossBillVO vo)
 	{
 		date=vo.getDate();
-		userID=vo.getUserID();
+		operator=vo.getOperator();
 		com=new MockCommodity(vo.getCom());
 		style=BillStyle.SpillsLossBill;
 		t=vo.getT();
@@ -95,10 +95,10 @@ public class StubSpillsLossBill extends Bill implements GetVOandPO
 	public  void setDate(Date date) {
 		this.date = date;
 	}
-	public String getUserID() {
-		return userID;
+	public String getOperator() {
+		return operator;
 	}
-	public void setUserID(String userID) {
-		this.userID = userID;
+	public void setOperator(String userID) {
+		this.operator = userID;
 	}
 }
