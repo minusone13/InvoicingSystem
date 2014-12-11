@@ -10,6 +10,7 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 import po.AccountPO;
+import po.stockpo.CommodityPO;
 import data.Tool;
 import dataservice.accountdataservice.StubAccountDataService;
 
@@ -23,9 +24,30 @@ public class AccountData implements StubAccountDataService{
 		return accountList.get(index);
 	}
 
+	public ArrayList<AccountPO> fuzzyFindAccount(String s, int precision)
+	{//precision 先默认给1，可以达到王雨城所说的算法。若取数字越高，精确度越高，搜索结果数量也就越少
+		ArrayList<AccountPO> result = new ArrayList<AccountPO>();//CommodityPO is changeable
+		ArrayList<AccountPO> accountList = reader();
+		ArrayList<Boolean> h = new ArrayList<Boolean>();
+		if(precision>s.length())
+			precision = s.length();
+		for(int i=0;i<accountList.size();i++)//accountList is changeable
+			h.add(true);
+		for(int i=0;i<accountList.size();i++)
+			for(int j=0;j<=s.length()-precision;j++)
+				if(!accountList.get(i).contents(s.substring(j, j+precision)))//the elements in the list must implement function: boolean contents(s)
+					h.set(i, false);
+		for(int i=0;i<h.size();i++)
+			if(h.get(i)==true)
+				result.add(accountList.get(i));//here can also be changed
+		return result;
+	}
 	public boolean add(AccountPO apo) {
 		ArrayList<AccountPO> accountList = reader();
-		if(accountList == null) accountList = new ArrayList<AccountPO>();
+		if(accountList == null) {
+			
+			accountList = new ArrayList<AccountPO>();
+		}
 		int index = traversal(accountList, apo.getName());
 		if(index != -1) return false;
 		else accountList.add(apo);

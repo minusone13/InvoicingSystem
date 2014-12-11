@@ -13,7 +13,7 @@ import vo.inquiryVO.InquiryConditionVO;
 import vo.inquiryVO.InquiryProcessVO;
 import vo.inquiryVO.InquirySaleVO;
 import businesslogic.Role;
-import businesslogic.accountbl.StubAccount;
+import businesslogic.accountbl.Account;
 import businesslogic.accountbl.AccountList;
 import businesslogic.financialbillbl.CashPaymentBill;
 import businesslogic.financialbillbl.FinancialBillList;
@@ -30,7 +30,7 @@ import businesslogicservice.financialblservice.StubFinancialBlService;
 public class Financial implements StubFinancialBlService{
 	String name;
 	String password;
-	Role role;
+	Role role = Role.FINANCIAL_MANAGER;
 
 	UserService userSer= new UserController();
 	
@@ -44,10 +44,10 @@ public class Financial implements StubFinancialBlService{
 		role = r;
 	}
 	
-	public boolean addAccount(String name) {
-		if(role != Role.FINANCIAL_MANAGER) return false;
+	public boolean addAccount(String name, double iniMoney) {
 		AccountList a = new AccountList();
-		boolean result = a.addAccount(new StubAccount(name));
+		boolean result = a.addAccount(new Account(name, iniMoney));
+		
 		RM rm = RM.unknownerror;
 		if(result) rm=RM.done;
 		userSer.addRecord(new OperationRecord(new User(), "Add a account", rm));		
@@ -55,9 +55,9 @@ public class Financial implements StubFinancialBlService{
 	}
 	
 	public boolean deleteAccount(String name) {
-		if(role != Role.FINANCIAL_MANAGER) return false;
+		
 		AccountList a = new AccountList();
-		boolean result = a.deleteAccount(new StubAccount(name));
+		boolean result = a.deleteAccount(new Account(name));
 		RM rm = RM.unknownerror;
 		if(result) rm=RM.done;
 		userSer.addRecord(new OperationRecord(new User(), "Delete a account", rm));		
@@ -65,10 +65,15 @@ public class Financial implements StubFinancialBlService{
 	}
 	
 	//模糊搜索
-	public AccountVO findAccount(String name) {
-		if(role != Role.FINANCIAL_MANAGER) return null;
+	
+	public ArrayList<AccountVO> fuzzyFindAccount(String s , int precision) {
 		AccountList a = new AccountList();
-		AccountVO result = a.findAccount(new StubAccount(name));
+		return a.fuzzyFindAccount(s, precision);
+	}
+	
+	public AccountVO findAccount(String name) {
+		AccountList a = new AccountList();
+		AccountVO result = a.findAccount(new Account(name));
 		RM rm = RM.unknownerror;
 		if(result!=null) rm=RM.done;
 		userSer.addRecord(new OperationRecord(new User(), "Find a account", rm));		
@@ -78,7 +83,7 @@ public class Financial implements StubFinancialBlService{
 	public boolean updateAccount(String oldname, String newname) {
 		if(role != Role.FINANCIAL_MANAGER) return false;
 		AccountList a = new AccountList();
-		boolean result = a.updateAccount(new StubAccount(oldname),newname);
+		boolean result = a.updateAccount(new Account(oldname),newname);
 		RM rm = RM.unknownerror;
 		if(result) rm=RM.done;
 		userSer.addRecord(new OperationRecord(new User(), "Update a account", rm));		

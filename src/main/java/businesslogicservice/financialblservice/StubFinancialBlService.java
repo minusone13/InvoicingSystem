@@ -17,11 +17,13 @@ import vo.inquiryVO.InquirySaleVO;
 public interface StubFinancialBlService {
 	
 	
-	public boolean addAccount(String name) ;
+	public boolean addAccount(String name, double iniMoney) ;
 	
 	public boolean deleteAccount(String name) ;
 	
-	public AccountVO findAccount(String name);
+	public ArrayList<AccountVO> fuzzyFindAccount(String s , int precision);
+	
+	public AccountVO findAccount(String s);
 	
 	public boolean updateAccount(String oldname, String newname);
 	//期初建账

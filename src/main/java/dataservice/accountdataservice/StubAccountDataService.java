@@ -14,6 +14,9 @@ public interface StubAccountDataService {
 	public boolean delete(AccountPO apo);
 	
 	public boolean update(AccountPO apo);
+	
+	public ArrayList<AccountPO> fuzzyFindAccount(String s, int precision);
+	
 	public ArrayList<AccountPO> getAllAcountInfo ();
 	
 	public void saveAccount(String filename);
