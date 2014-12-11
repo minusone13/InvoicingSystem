@@ -1,5 +1,6 @@
 package businesslogicservice.commodityblservice;
 import java.util.ArrayList;
+import java.util.Date;
 
 import po.stockpo.CommodityPO;
 import dataservice.commoditydataservice.*;
@@ -38,5 +39,5 @@ public interface StubCommodityBlService {
 	public ArrayList<AlertBillVO> showAlertBills();
 	
 	public CountVO count();//库存盘点
-	public ArrayList<CommodityRecordVO> getRecords();//库存查看
+	public ArrayList<CommodityRecordVO> getRecords(Date d1, Date d2);//库存查看
 }
