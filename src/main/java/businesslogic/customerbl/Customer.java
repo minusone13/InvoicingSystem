@@ -3,7 +3,7 @@ package businesslogic.customerbl;
 import po.CustomerPO;
 import vo.CustomerVO;
 
-public class Customer {
+public class Customer{
 	private int type;//客户的级别
 	private String name;//客户的姓名
 	private String id;//客户编号；
