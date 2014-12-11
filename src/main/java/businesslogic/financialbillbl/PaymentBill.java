@@ -136,7 +136,20 @@ public class PaymentBill extends Bill implements GetVOandPO{
 		vo.setTotal(total);
 		vo.setRole(role);
 		vo.setState(state);
-		vo.setTransferlist(transferlist);
+		int size = transferlist.size();
+		TransferAccount temp=null;
+		ArrayList<String> accounts = vo.getAccounts();
+		ArrayList<Double> money = vo.getMoney();
+		ArrayList<String> remark = vo.getRemark();		
+		for(int i=0;i<size;i++){
+			temp = transferlist.get(i);
+			accounts.add(temp.getAccount());
+			money.add(temp.getMoney());
+			remark.add(temp.getRemark());
+		}
+		vo.setAccounts(accounts);
+		vo.setMoney(money);
+		vo.setRemark(remark);
 		vo.setBillStyle(billstyle);
 		vo.setDate(date);
 		vo.setUserID(userID);

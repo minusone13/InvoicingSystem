@@ -39,6 +39,10 @@ public class StubStockController implements StubCommodityBlService, StockBlForSa
 	{
 		return l.findCommodity(name);
 	}
+	public ArrayList<CommodityVO> fuzzyFindCommodity(String s, int precision)
+	{//precision 先默认给1，可以达到王雨城所说的算法。若取数字越高，精确度越高，搜索结果数量也就越少
+		return l.fuzzyFindCommodity(s, precision);
+	}
 	public boolean addPack(ArrayList<MockCommodity> commodityarray,int quantity, double discount)
 	{
 		return l.addPack(commodityarray, quantity, discount);

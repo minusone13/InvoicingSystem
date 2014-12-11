@@ -7,7 +7,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import presentation.financialui.Financial;
+import presentation.financialui.FinancialUI;
+import presentation.saleui.JPmanageBills1;
+import presentation.saleui.JPmanageBills2;
 import userui.Frame;
 
 public class Sale extends JPanel{
@@ -23,7 +25,34 @@ public class Sale extends JPanel{
 		private JLabel back = new JLabel();
 		private JLabel signout = new JLabel();
 		//frame的引用
-	    Frame frame;
+		private Frame frame;
+	 	public JPfunctions getFunction() {
+			return function;
+		}
+
+		public void setFunction(JPfunctions function) {
+			this.function = function;
+		}
+
+		public JPmanageBills1 getManageBills1() {
+			return manageBills1;
+		}
+
+		public void setManageBills1(JPmanageBills1 manageBills1) {
+			this.manageBills1 = manageBills1;
+		}
+
+		public JPmanageBills2 getManageBills2() {
+			return manageBills2;
+		}
+
+		public void setManageBills2(JPmanageBills2 manageBills2) {
+			this.manageBills2 = manageBills2;
+		}
+		//管理单据选择面板
+		private JPmanageBills1 manageBills1=new JPmanageBills1();
+		//单据管理面板
+		private JPmanageBills2 manageBills2=new JPmanageBills2();
 		public Sale(){
 
 			//设置窗口大小
@@ -56,6 +85,15 @@ public class Sale extends JPanel{
 			signout.addMouseListener(new MouseListenerOfButton(3));
 			
 			function.setLocation(55, 233);//测试其他版时可以直接注释掉这一行
+			//单据管理板1
+			
+			manageBills1.setVisible(false);
+			manageBills1.setLocation(55, 233);
+			
+			//单据管理板2
+			
+			manageBills2.setVisible(false);
+			manageBills2.setLocation(55, 233);
 			
 			this.add(title,0);
 			this.add(sign,1);
@@ -64,12 +102,17 @@ public class Sale extends JPanel{
 			this.add(back,4);
 			this.add(signout,5);
 			this.add(function,6);
-			this.add(bg,7);
+			this.add(manageBills1,7);
+			this.add(manageBills2,8);
+			this.add(bg,9);
 		}
 
 	    /*获取frame引用*/
 	    public void getFrame( Frame f){
 	    		frame=f;
+	    		function.getFrame(frame);
+	    		manageBills1.getFrame(frame);
+	    		manageBills2.getFrame(frame);
 	    }
 		public class MouseListenerOfButton implements MouseListener{
 
@@ -102,6 +145,9 @@ public class Sale extends JPanel{
 				switch(num){
 				case 1:
 					home.setIcon(new ImageIcon("src/image/home1.png"));
+					Sale.this.getManageBills1().setVisible(false);
+					Sale.this.getManageBills2().setVisible(false);
+					Sale.this.getFunction().setVisible(true);
 					break;
 				case 2:
 					back.setIcon(new ImageIcon("src/image/back1.png"));

@@ -2,19 +2,12 @@ package presentation.commodityui;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import presentation.financialui.Financial;
 import userui.Frame;
-import vo.financialBillVO.CashPaymentVO;
-import vo.financialBillVO.PaymentVO;
-import vo.financialBillVO.ReceiptVO;
-import businesslogic.BillState;
-import businesslogic.BillStyle;
 
 public class Stock extends JPanel {
 	//背景
@@ -27,8 +20,30 @@ public class Stock extends JPanel {
 	private JLabel navigation=new JLabel();
 	//功能板 
 	private JPfunction function=new JPfunction();
+	//管理单据选择面板
+	private JPmanageBills1 manageBills1=new JPmanageBills1();
+	//单据管理面板
+	private JPmanageBills2 manageBills2=new JPmanageBills2();
 	//home
 	private JLabel home=new JLabel();
+	public JPfunction getFunction() {
+		return function;
+	}
+	public void setFunction(JPfunction function) {
+		this.function = function;
+	}
+	public JPmanageBills1 getManageBills() {
+		return manageBills1;
+	}
+	public void setManageBills(JPmanageBills1 manageBills) {
+		this.manageBills1 = manageBills;
+	}
+	public JPmanageBills2 getManageBills2() {
+		return manageBills2;
+	}
+	public void setManageBills2(JPmanageBills2 manageBills2) {
+		this.manageBills2 = manageBills2;
+	}
 	//后退
 	private JLabel back=new JLabel();
 	//登出
@@ -56,17 +71,15 @@ public class Stock extends JPanel {
 			navigation.setBounds(0, 165, 960, 35);
 			
 			//test区域
-//			功能板
+			//功能板
 			function.setLocation(55, 233);
 			//单据管理板1
-			//JPmanageBills1 manageBills=new JPmanageBills1();
-			//manageBills.setLocation(55, 233);
-			
+			manageBills1.setLocation(55, 233);
+			manageBills1.setVisible(false);
 
 			//单据管理板2
-		//	JPmanageBills2 manageBills2=new JPmanageBills2(BillStyle.CashPaymentBill);
-		//	manageBills2.setLocation(55, 233);
-		//	manageBills2.getBillsList().addCashPaymentBillList(test);//加单据数组
+			manageBills2.setLocation(55, 233);
+			manageBills2.setLocation(55, 233);
 			
 			//home
 			home.setIcon(new ImageIcon("src/image/home.png") );
@@ -87,12 +100,17 @@ public class Stock extends JPanel {
 			this.add(back,4);
 			this.add(signout,5);
 			this.add(function,6);
-			this.add(bg,7);
+			this.add(manageBills1,7);
+			this.add(manageBills2,8);
+			this.add(bg,9);
 			
 		}
     /*获取frame引用*/
     public void getFrame( Frame f){
     		frame=f;
+    		function.getFrame(frame);
+    		manageBills1.getFrame(frame);
+    		manageBills2.getFrame(frame);
     }
 		public class MouseListenerOfButton implements MouseListener{
 
@@ -126,6 +144,7 @@ public class Stock extends JPanel {
 				switch(num){
 				case 1:
 					home.setIcon(new ImageIcon("src/image/home1.png"));
+					
 					break;
 				case 2:
 					back.setIcon(new ImageIcon("src/image/back1.png"));

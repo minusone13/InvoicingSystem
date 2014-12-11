@@ -20,7 +20,7 @@ public class PaymentVO extends VO{
 	ArrayList<String> accounts = new ArrayList<String>();
 	ArrayList<String> remark =new ArrayList<String>();
 	private BillState state = BillState.DRAFT;
-	ArrayList<TransferAccount> transferlist = new ArrayList<TransferAccount>();
+	
 	String userID;
 	String userName;
 	String op;
@@ -63,12 +63,7 @@ public class PaymentVO extends VO{
 	public void setBillState(BillState state) {
 		this.state = state;
 	}
-	public ArrayList<TransferAccount> getTransferlist() {
-		return transferlist;
-	}
-	public void setTransferlist(ArrayList<TransferAccount> transferlist) {
-		this.transferlist = transferlist;
-	}
+	
 	public BillStyle getBillStyle() {
 		return billstyle;
 	}

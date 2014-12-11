@@ -8,6 +8,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import userui.Frame;
+import businesslogic.BillStyle;
+import businesslogic.managerbl.StubManager;
+import businesslogicservice.managerblservice.StubManagerBlService;
 
 public class JPpassBill1 extends JPanel {
 
@@ -25,6 +28,8 @@ public class JPpassBill1 extends JPanel {
 	private JLabel salebackbill = new JLabel("New label");
 	//frame的引用
     Frame frame;
+    //逻辑层接口
+    StubManagerBlService mbl=new StubManager();
 	public JPpassBill1(){
 		//设置窗口大小
 		this.setSize(445, 330);
@@ -147,24 +152,125 @@ public class JPpassBill1 extends JPanel {
 			switch(num){
 			case 11:
 				giftBill.setIcon(new ImageIcon("src\\image\\bill\\giftbill.png"));
+				//切换
+				JPpassBill1.this.setVisible(false);
+				//设置单据类型
+				frame.getManager().getPassbill2().setStyle(BillStyle.GiftBill);
+				//从逻辑层读取单据信息填充单据列表
+				frame.getManager().getPassbill2().getBillList().getJPbillList().clear();
+				frame.getManager().getPassbill2().getBillList().reHome();
+				frame.getManager().getPassbill2().getBillList().addGiftBillList(mbl.getGiftBill());
+				//切换
+				frame.getManager().getPassbill2().setVisible(true);
 				break;
-			case 12:alertBill.setIcon(new ImageIcon("src\\image\\bill\\alertbill.png"));
+			case 12:
+				alertBill.setIcon(new ImageIcon("src\\image\\bill\\alertbill.png"));
+				//切换
+				JPpassBill1.this.setVisible(false);
+				//设置单据类型
+				frame.getManager().getPassbill2().setStyle(BillStyle.AlertBill);
+				//从逻辑层读取单据信息填充单据列表
+				frame.getManager().getPassbill2().getBillList().getJPbillList().clear();
+				frame.getManager().getPassbill2().getBillList().reHome();
+				frame.getManager().getPassbill2().getBillList().addAlertBillList(mbl.getAlertBill());
+				//切换
+				frame.getManager().getPassbill2().setVisible(true);
 				break;
 			case 13:spoilbill.setIcon(new ImageIcon("src\\image\\bill\\spoilbill.png"));
+				//切换
+				JPpassBill1.this.setVisible(false);
+				//设置单据类型
+				frame.getManager().getPassbill2().setStyle(BillStyle.SpillsLossBill);
+				//从逻辑层读取单据信息填充单据列表
+				frame.getManager().getPassbill2().getBillList().getJPbillList().clear();
+				frame.getManager().getPassbill2().getBillList().reHome();
+				frame.getManager().getPassbill2().getBillList().addSpillsLossBillList(mbl.getSpillsLossBill());
+				//切换
+				frame.getManager().getPassbill2().setVisible(true);
 				break;
 			case 21:receivebill.setIcon(new ImageIcon("src\\image\\bill\\receivebill.png"));
+				//切换
+				JPpassBill1.this.setVisible(false);
+				//设置单据类型
+				frame.getManager().getPassbill2().setStyle(BillStyle.ReceiptBill);
+				//从逻辑层读取单据信息填充单据列表
+				frame.getManager().getPassbill2().getBillList().getJPbillList().clear();
+				frame.getManager().getPassbill2().getBillList().reHome();
+				frame.getManager().getPassbill2().getBillList().addReceiptBillList(mbl.getReceiptBill());
+				//切换
+				frame.getManager().getPassbill2().setVisible(true);
 				break;
 			case 22:paymentbill.setIcon(new ImageIcon("src\\image\\bill\\paymentbill.png"));
+				//切换
+				JPpassBill1.this.setVisible(false);
+				//设置单据类型
+				frame.getManager().getPassbill2().setStyle(BillStyle.PaymentBill);
+				//从逻辑层读取单据信息填充单据列表
+				frame.getManager().getPassbill2().getBillList().getJPbillList().clear();
+				frame.getManager().getPassbill2().getBillList().reHome();
+				frame.getManager().getPassbill2().getBillList().addPaymentBillList(mbl.getPaymentBill());
+				//切换
+				frame.getManager().getPassbill2().setVisible(true);
 				break;
 			case 23:crashbill.setIcon(new ImageIcon("src\\image\\bill\\crashbill.png"));
+				//切换
+				JPpassBill1.this.setVisible(false);
+				//设置单据类型
+				frame.getManager().getPassbill2().setStyle(BillStyle.CashPaymentBill);
+				//从逻辑层读取单据信息填充单据列表
+				frame.getManager().getPassbill2().getBillList().getJPbillList().clear();
+				frame.getManager().getPassbill2().getBillList().reHome();
+				frame.getManager().getPassbill2().getBillList().addCashPaymentBillList(mbl.getCashPaymentBill());
+				//切换
+				frame.getManager().getPassbill2().setVisible(true);
 				break;
 			case 31:purchasebill.setIcon(new ImageIcon("src\\image\\bill\\purchasebill.png"));
+				//切换
+				JPpassBill1.this.setVisible(false);
+				//设置单据类型
+				frame.getManager().getPassbill2().setStyle(BillStyle.PurSheet);
+				//从逻辑层读取单据信息填充单据列表
+				frame.getManager().getPassbill2().getBillList().getJPbillList().clear();
+				frame.getManager().getPassbill2().getBillList().reHome();
+				frame.getManager().getPassbill2().getBillList().addPurSheetList(mbl.getPurSheet());
+				//切换
+				frame.getManager().getPassbill2().setVisible(true);
 				break;
 			case 32:purchasebackbill.setIcon(new ImageIcon("src\\image\\bill\\purchasebackbill.png"));
+				//切换
+				JPpassBill1.this.setVisible(false);
+				//设置单据类型
+				frame.getManager().getPassbill2().setStyle(BillStyle.PurBackSheet);
+				//从逻辑层读取单据信息填充单据列表
+				frame.getManager().getPassbill2().getBillList().getJPbillList().clear();
+				frame.getManager().getPassbill2().getBillList().reHome();
+				frame.getManager().getPassbill2().getBillList().addPurBackSheetList(mbl.getPurBackSheet());
+				//切换
+				frame.getManager().getPassbill2().setVisible(true);
 				break;
 			case 33:salebill.setIcon(new ImageIcon("src\\image\\bill\\salebill.png"));
+				//切换
+				JPpassBill1.this.setVisible(false);
+				//设置单据类型
+				frame.getManager().getPassbill2().setStyle(BillStyle.SaleSheet);
+				//从逻辑层读取单据信息填充单据列表
+				frame.getManager().getPassbill2().getBillList().getJPbillList().clear();
+				frame.getManager().getPassbill2().getBillList().reHome();
+				frame.getManager().getPassbill2().getBillList().addSaleSheetList(mbl.getSaleSheet());
+				//切换
+				frame.getManager().getPassbill2().setVisible(true);
 				break;
 			case 34:salebackbill.setIcon(new ImageIcon("src\\image\\bill\\salebackbill.png"));
+				//切换
+				JPpassBill1.this.setVisible(false);
+				//设置单据类型
+				frame.getManager().getPassbill2().setStyle(BillStyle.SaleBackSheet);
+				//从逻辑层读取单据信息填充单据列表
+				frame.getManager().getPassbill2().getBillList().getJPbillList().clear();
+				frame.getManager().getPassbill2().getBillList().reHome();
+				frame.getManager().getPassbill2().getBillList().addSaleBackSheetList(mbl.getSaleBackSheet());
+				//切换
+				frame.getManager().getPassbill2().setVisible(true);
 				break;
 			}
 		}

@@ -3,6 +3,7 @@ package data.commoditydata;
 import java.io.*;
 import java.util.*;
 
+import data.Tool;
 import po.*;
 import po.stockpo.*;
 import vo.RM;
@@ -194,15 +195,21 @@ public class StubCommodityList implements Serializable{
 		}
 		return true;
 	}
-	public ArrayList<CommodityPO> fuzzyFindCommodity(String s)
-	{
-		ArrayList<CommodityPO> h = new ArrayList<CommodityPO>();
+	public ArrayList<CommodityPO> fuzzyFindCommodity(String s, int precision)
+	{//precision 先默认给1，可以达到王雨城所说的算法。若取数字越高，精确度越高，搜索结果数量也就越少
+		ArrayList<CommodityPO> result = new ArrayList<CommodityPO>();//CommodityPO is changeable
+		ArrayList<Boolean> h = new ArrayList<Boolean>();
+		if(precision>s.length())
+			precision = s.length();
+		for(int i=0;i<flatlist.size();i++)//flatlist is changeable
+			h.add(true);
 		for(int i=0;i<flatlist.size();i++)
-			for(int j=0;j<s.length();i++)
-				if(flatlist.get(i).contents(s))
-				{
-					h.add(flatlist.get(i).po.clone());
-				}
-		return null;
+			for(int j=0;j<=s.length()-precision;j++)
+				if(!flatlist.get(i).contents(s.substring(j, j+precision)))//the elements in the list must implement function: boolean contents(s)
+					h.set(i, false);
+		for(int i=0;i<h.size();i++)
+			if(h.get(i)==true)
+				result.add(flatlist.get(i).po.clone());//here can also be change
+		return result;
 	}
 }

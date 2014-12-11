@@ -15,7 +15,7 @@ public interface StubCommodityDataService {
 	
 	public CommodityListPO getAll();
 	public ArrayList<CommodityPO> findCommodity(String name);
-	public ArrayList<CommodityPO> fuzzyFindCommodity(String s);
+	public ArrayList<CommodityPO> fuzzyFindCommodity(String s,int precision);
 	public RM deleteCommodity(String name, String model);
 	public RM deleteCategory(String id);
 	public boolean update(CommodityPO po);

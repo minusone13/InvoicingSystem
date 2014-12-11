@@ -1,4 +1,4 @@
-package presentation.financialui;
+package presentation.commodityui;
 
 
 import java.awt.event.MouseEvent;
@@ -19,19 +19,21 @@ public class JPmanageBills1 extends JPanel {
 
 	
 	//单据标签
-	private JLabel receivebill = new JLabel("New label");
-	private JLabel paymentbill = new JLabel("New label");
-	private JLabel crashbill = new JLabel("New label");
+	private JLabel giftBill = new JLabel("New label");
+	private JLabel alertBill = new JLabel("New label");
+	private JLabel spoilbill = new JLabel("New label");
 	//图片
-	ImageIcon receivebillIcon0=new ImageIcon("src\\image\\bill\\receivebill0.png");
-	ImageIcon paymentbillIcon0=new ImageIcon("src\\image\\bill\\paymentbill0.png");
-	ImageIcon crashbillIcon0=new ImageIcon("src\\image\\bill\\crashbill0.png");
-	ImageIcon receivebillIcon=new ImageIcon("src\\image\\bill\\receivebill.png");
-	ImageIcon paymentbillIcon=new ImageIcon("src\\image\\bill\\paymentbill.png");
-	ImageIcon crashbillIcon=new ImageIcon("src\\image\\bill\\crashbill.png");
-	ImageIcon receivebillIcon1=new ImageIcon("src\\image\\bill\\receivebill1.png");
-	ImageIcon paymentbillIcon1=new ImageIcon("src\\image\\bill\\paymentbill1.png");
-	ImageIcon crashbillIcon1=new ImageIcon("src\\image\\bill\\crashbill1.png");
+	ImageIcon giftBillIcon0=new ImageIcon("src\\image\\bill\\giftBill0.png");
+	ImageIcon alertBillIcon0=new ImageIcon("src\\image\\bill\\alertBill0.png");
+	ImageIcon spoilbillIcon0=new ImageIcon("src\\image\\bill\\spoilbill0.png");
+	
+	ImageIcon giftBillIcon=new ImageIcon("src\\image\\bill\\giftBill.png");
+	ImageIcon alertBillIcon=new ImageIcon("src\\image\\bill\\alertBill.png");
+	ImageIcon spoilbillIcon=new ImageIcon("src\\image\\bill\\spoilbill.png");
+	
+	ImageIcon giftBillIcon1=new ImageIcon("src\\image\\bill\\giftBill1.png");
+	ImageIcon alertBillIcon1=new ImageIcon("src\\image\\bill\\alertBill1.png");
+	ImageIcon spoilbillIcon1=new ImageIcon("src\\image\\bill\\spoilbill1.png");
 	//frame的引用
     Frame frame;
     //逻辑层的财务人员接口
@@ -48,22 +50,23 @@ public class JPmanageBills1 extends JPanel {
 		bg.setIcon(new ImageIcon("src\\image\\passBill\\passBillBlock1.png"));
 		bg.setBounds(0, 0, 445, 330);
 	
-		receivebill.setIcon(receivebillIcon0);
-		receivebill.setBounds(10, 15, 100, 100);
-		receivebill.addMouseListener(new MouseListenOfButton(21));
-		add(receivebill,0);
+		
+		giftBill.setIcon(giftBillIcon0);
+		giftBill.setBounds(10, 15, 100, 100);
+		giftBill.addMouseListener(new MouseListenOfButton(11));
+		add(giftBill,0);
 		
 		
-		paymentbill.setIcon(paymentbillIcon0);
-		paymentbill.setBounds(115, 15, 100, 100);
-		paymentbill.addMouseListener(new MouseListenOfButton(22));
-		add(paymentbill,1);
+		alertBill.setIcon(alertBillIcon0);
+		alertBill.setBounds(115, 15, 100, 100);
+		alertBill.addMouseListener(new MouseListenOfButton(12));
+		add(alertBill,1);
 		
 		
-		crashbill.setIcon(crashbillIcon0);
-		crashbill.setBounds(220, 15, 100, 100);
-		crashbill.addMouseListener(new MouseListenOfButton(23));
-		add(crashbill,2);
+		spoilbill.setIcon(spoilbillIcon0);
+		spoilbill.setBounds(220, 15, 100, 100);
+		spoilbill.addMouseListener(new MouseListenOfButton(13));
+		add(spoilbill,2);
 		
 		add(bg,3);
 	}
@@ -85,11 +88,12 @@ public class JPmanageBills1 extends JPanel {
 		public void mousePressed(MouseEvent e) {
 			// TODO Auto-generated method stub
 			switch(num){
-			case 21:receivebill.setIcon(receivebillIcon1);
+			case 11:
+				giftBill.setIcon(giftBillIcon1);
 				break;
-			case 22:paymentbill.setIcon(paymentbillIcon1);
+			case 12:alertBill.setIcon(alertBillIcon1);
 				break;
-			case 23:crashbill.setIcon(crashbillIcon1);
+			case 13:spoilbill.setIcon(spoilbillIcon1);
 				break;
 			}
 		}
@@ -97,19 +101,19 @@ public class JPmanageBills1 extends JPanel {
 		public void mouseReleased(MouseEvent e) {
 			// TODO Auto-generated method stub
 			switch(num){
-			case 21:receivebill.setIcon(receivebillIcon);
+			case 11:giftBill.setIcon(giftBillIcon);
 				//切换
 				JPmanageBills1.this.setVisible(false);
 				//设置单据类型
-				frame.getFinancial().getManageBills2().setStyle(BillStyle.ReceiptBill);
+				frame.getStock().getManageBills2().setStyle(BillStyle.GiftBill);
 				//从逻辑层读取单据信息填充单据列表
-				frame.getFinancial().getManageBills2().getBillList().getJPbillList().clear();
-				frame.getFinancial().getManageBills2().getBillList().reHome();
-				frame.getFinancial().getManageBills2().getBillList().addReceiptBillList(fbl.getAllOfReceiptBills());
+				frame.getStock().getManageBills2().getBillList().getJPbillList().clear();
+				frame.getStock().getManageBills2().getBillList().reHome();
+//				frame.getStock().getManageBills2().getBillList().addGiftBillList(fbl.getAllOfReceiptBills());
 				//切换
-				frame.getFinancial().getManageBills2().setVisible(true);
+				frame.getStock().getManageBills2().setVisible(true);
 				break;
-			case 22:paymentbill.setIcon(paymentbillIcon);
+			case 12:alertBill.setIcon(alertBillIcon);
 				//切换
 				JPmanageBills1.this.setVisible(false);
 				//设置单据类型
@@ -121,7 +125,7 @@ public class JPmanageBills1 extends JPanel {
 				//切换
 				frame.getFinancial().getManageBills2().setVisible(true);
 				break;
-			case 23:crashbill.setIcon(crashbillIcon);
+			case 13:spoilbill.setIcon(spoilbillIcon);
 				//切换
 				JPmanageBills1.this.setVisible(false);
 				//设置单据类型
@@ -139,11 +143,12 @@ public class JPmanageBills1 extends JPanel {
 		public void mouseEntered(MouseEvent e) {
 			// TODO Auto-generated method stub
 			switch(num){
-			case 21:receivebill.setIcon(receivebillIcon);
+			case 11:
+				giftBill.setIcon(giftBillIcon);
 				break;
-			case 22:paymentbill.setIcon(paymentbillIcon);
+			case 12:alertBill.setIcon(alertBillIcon);
 				break;
-			case 23:crashbill.setIcon(crashbillIcon);
+			case 13:spoilbill.setIcon(spoilbillIcon);
 				break;
 			}
 		}
@@ -151,11 +156,12 @@ public class JPmanageBills1 extends JPanel {
 		public void mouseExited(MouseEvent e) {
 			// TODO Auto-generated method stub
 			switch(num){
-			case 21:receivebill.setIcon(receivebillIcon0);
+			case 11:
+				giftBill.setIcon(giftBillIcon0);
 				break;
-			case 22:paymentbill.setIcon(paymentbillIcon0);
+			case 12:alertBill.setIcon(alertBillIcon0);
 				break;
-			case 23:crashbill.setIcon(crashbillIcon0);
+			case 13:spoilbill.setIcon(spoilbillIcon0);
 				break;
 			}
 		}

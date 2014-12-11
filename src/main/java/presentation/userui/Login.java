@@ -117,7 +117,7 @@ public class Login extends JPanel {
 				}
 				else if(num==2){
 					register.setIcon(new ImageIcon("src/image/userUi/register2.png") );
-					jpRegister.setVisible(true);//显示注册面板
+					
 				
 				}
 			}
@@ -177,6 +177,9 @@ public class Login extends JPanel {
 						}
 						
 					}
+					else{
+						System.out.println("请输入用户名和密码");
+					}
 				}
 				else if(num==2){
 					register.setIcon(new ImageIcon("src/image/userUi/register.png") );
@@ -186,6 +189,7 @@ public class Login extends JPanel {
 					//清除文本框内容
 					username.setText("");
 					passwords.setText("");
+					jpRegister.setVisible(true);//显示注册面板
 				}
 			}
 		

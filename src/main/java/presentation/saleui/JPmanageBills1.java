@@ -7,7 +7,10 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import presentation.financialui.JPmanageBills1.MouseListenOfButton;
+import userui.Frame;
+import businesslogic.BillStyle;
+import businesslogic.salebillbl.salebillController;
+import businesslogicservice.salebillblservice.SaleBillBlService;
 
 public class JPmanageBills1  extends JPanel {
 	//单据标签
@@ -28,7 +31,10 @@ public class JPmanageBills1  extends JPanel {
 	ImageIcon SaleBackSheetIcon=new ImageIcon("src\\image\\bill\\salebackbill.png");
 	ImageIcon SaleBackSheetIcon0=new ImageIcon("src\\image\\bill\\salebackbill0.png");
 	ImageIcon SaleBackSheetIcon1=new ImageIcon("src\\image\\bill\\salebackbill1.png");
-	
+	//frame的引用
+    Frame frame;
+    //逻辑层进销人员的接口
+    SaleBillBlService sbl=new salebillController();
 	public JPmanageBills1(){
 		//设置窗口大小
 		this.setSize(445, 330);
@@ -63,7 +69,10 @@ public class JPmanageBills1  extends JPanel {
 		
 		add(bg,4);
 	}
-	
+	  /*获取frame引用*/
+    public void getFrame( Frame f){
+    		frame=f;
+    }
 	public class MouseListenOfButton implements MouseListener{
 
 		private int num;
@@ -93,12 +102,52 @@ public class JPmanageBills1  extends JPanel {
 			// TODO Auto-generated method stub
 			switch(num){
 			case 21:PurSheet.setIcon(PurSheetIcon);
+				//切换
+				JPmanageBills1.this.setVisible(false);
+				//设置单据类型
+				frame.getSale().getManageBills2().setStyle(BillStyle.PurSheet);
+				//从逻辑层读取单据信息填充单据列表
+				frame.getSale().getManageBills2().getBillList().getJPbillList().clear();
+				frame.getSale().getManageBills2().getBillList().reHome();
+				frame.getSale().getManageBills2().getBillList().addPurSheetList(sbl.getAllPurSheet());
+				//切换
+				frame.getSale().getManageBills2().setVisible(true);
 			break;
 			case 22:PurBackSheet.setIcon(PurBackSheetIcon);
+				//切换
+				JPmanageBills1.this.setVisible(false);
+				//设置单据类型
+				frame.getSale().getManageBills2().setStyle(BillStyle.PurBackSheet);
+				//从逻辑层读取单据信息填充单据列表
+				frame.getSale().getManageBills2().getBillList().getJPbillList().clear();
+				frame.getSale().getManageBills2().getBillList().reHome();
+				frame.getSale().getManageBills2().getBillList().addPurBackSheetList(sbl.getAllPurBackSheet());
+				//切换
+				frame.getSale().getManageBills2().setVisible(true);
 			break;
 			case 23:SaleSheet.setIcon(SaleSheetIcon);
+				//切换
+				JPmanageBills1.this.setVisible(false);
+				//设置单据类型
+				frame.getSale().getManageBills2().setStyle(BillStyle.SaleSheet);
+				//从逻辑层读取单据信息填充单据列表
+				frame.getSale().getManageBills2().getBillList().getJPbillList().clear();
+				frame.getSale().getManageBills2().getBillList().reHome();
+				frame.getSale().getManageBills2().getBillList().addSaleSheetList(sbl.getAllSaleSheet());
+				//切换
+				frame.getSale().getManageBills2().setVisible(true);
 			break;
 			case 24:SaleBackSheet.setIcon(SaleBackSheetIcon);
+				//切换
+				JPmanageBills1.this.setVisible(false);
+				//设置单据类型
+				frame.getSale().getManageBills2().setStyle(BillStyle.SaleBackSheet);
+				//从逻辑层读取单据信息填充单据列表
+				frame.getSale().getManageBills2().getBillList().getJPbillList().clear();
+				frame.getSale().getManageBills2().getBillList().reHome();
+				frame.getSale().getManageBills2().getBillList().addSaleBackSheetList(sbl.getAllSaleBackSheet());
+				//切换
+				frame.getSale().getManageBills2().setVisible(true);
 			break;
 			}
 		}

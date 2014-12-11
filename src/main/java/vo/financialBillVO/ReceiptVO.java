@@ -19,7 +19,6 @@ public class ReceiptVO extends VO{
 	ArrayList<String> accounts = new ArrayList<String>();
 	ArrayList<String> remark =new ArrayList<String>();
 
-	ArrayList<TransferAccount> transferlist = new ArrayList<TransferAccount>();
 	BillState state=BillState.DRAFT;
 	private String userID;
 	private String userName;
@@ -83,12 +82,6 @@ public class ReceiptVO extends VO{
 		this.state = state;
 	}
 	
-	public ArrayList<TransferAccount> getTransferlist() {
-		return transferlist;
-	}
-	public void setTransferlist(ArrayList<TransferAccount> transferlist) {
-		this.transferlist = transferlist;
-	}
 	public BillStyle getBillStyle() {
 		return billstyle;
 	}

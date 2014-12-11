@@ -40,6 +40,85 @@ public class JPBill extends JPanel {
 	private boolean choose=false;
 	//查看清单按钮
 	JLabel showList=new	JLabel();
+	//对应的单据VO
+	private GiftBillVO giftVO;
+	private AlertBillVO alertVO;
+	private SpillsLossBillVO spillsLossVO;
+	private PurSheetVO purVO;
+	private PurBackSheetVO purbackVO;
+	private SaleSheetVO saleVO;
+	private CashPaymentVO cashVO;
+	private PaymentVO payVO;
+	private ReceiptVO receiptVO;
+	private SaleBackSheetVO salebackVO;
+	
+	public JLabel getRight() {
+		return right;
+	}
+	public void setRight(JLabel right) {
+		this.right = right;
+	}
+	public GiftBillVO getGiftVO() {
+		return giftVO;
+	}
+	public void setGiftVO(GiftBillVO giftVO) {
+		this.giftVO = giftVO;
+	}
+	public AlertBillVO getAlertVO() {
+		return alertVO;
+	}
+	public void setAlertVO(AlertBillVO alertVO) {
+		this.alertVO = alertVO;
+	}
+	public SpillsLossBillVO getSpillsLossVO() {
+		return spillsLossVO;
+	}
+	public void setSpillsLossVO(SpillsLossBillVO spillsLossVO) {
+		this.spillsLossVO = spillsLossVO;
+	}
+	public PurSheetVO getPurVO() {
+		return purVO;
+	}
+	public void setPurVO(PurSheetVO purVO) {
+		this.purVO = purVO;
+	}
+	public PurBackSheetVO getPurbackVO() {
+		return purbackVO;
+	}
+	public void setPurbackVO(PurBackSheetVO purbackVO) {
+		this.purbackVO = purbackVO;
+	}
+	public SaleSheetVO getSaleVO() {
+		return saleVO;
+	}
+	public void setSaleVO(SaleSheetVO saleVO) {
+		this.saleVO = saleVO;
+	}
+	public CashPaymentVO getCashVO() {
+		return cashVO;
+	}
+	public void setCashVO(CashPaymentVO cashVO) {
+		this.cashVO = cashVO;
+	}
+	public PaymentVO getPayVO() {
+		return payVO;
+	}
+	public void setPayVO(PaymentVO payVO) {
+		this.payVO = payVO;
+	}
+	public ReceiptVO getReceiptVO() {
+		return receiptVO;
+	}
+	public void setReceiptVO(ReceiptVO receiptVO) {
+		this.receiptVO = receiptVO;
+	}
+	public SaleBackSheetVO getSalebackVO() {
+		return salebackVO;
+	}
+	public void setSalebackVO(SaleBackSheetVO salebackVO) {
+		this.salebackVO = salebackVO;
+	}
+
 	//逻辑层的接口
 //	StubManagerBlService mbl=new StubManager();
 	//现金费用单的标签
@@ -136,6 +215,8 @@ public class JPBill extends JPanel {
 		state=rb.getBillState();
 		style=rb.getBillStyle();
 		ID=rb.getID();
+		//传递VO
+		receiptVO=rb;
 		//面板大小
 		this.setSize(522, 93);
 		//设置布局
@@ -183,6 +264,8 @@ public class JPBill extends JPanel {
 		state=pb.getBillState();
 		style=pb.getBillStyle();
 		ID=pb.getID();
+		//传递VO
+		payVO=pb;
 		//面板大小
 		this.setSize(522, 93);
 		//设置布局
@@ -230,6 +313,8 @@ public class JPBill extends JPanel {
 		state=cb.getBillState();
 		style=cb.getBillStyle();
 		ID=cb.getID();
+		//传递VO
+		cashVO=cb;
 		//面板大小
 		this.setSize(522, 93);
 		//设置布局
@@ -376,6 +461,7 @@ public class JPBill extends JPanel {
 		//界面层
 		state=st;
 		//修改背景
+		System.out.println("修改后状态"+state);
 		setBillBg(style,state,2);
 	}
 	/*根据条件生成地址给单据上背景*/
@@ -494,6 +580,7 @@ public class JPBill extends JPanel {
 					table.setColumnNames(itemOfCas);
 					table.setList(listOfCas);
 					table.updateShow();
+					System.out.println("!");
 					break;
 				}
 			    break;
@@ -604,6 +691,7 @@ public class JPBill extends JPanel {
 		public void mousePressed(MouseEvent e) {
 			// TODO Auto-generated method stub
 			choose=!choose;//选中与取消选中
+			System.out.println(state);
 			if(choose){
 				setBillBg(st,state,3);
 			}

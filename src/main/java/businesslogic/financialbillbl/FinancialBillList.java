@@ -21,6 +21,14 @@ public class FinancialBillList {
 		return true;
 	}
 	
+	public void updateReceiptBill(ReceiptVO vo) {
+		if(vo==null) return;
+		StubBillPool pool = new StubBillPool();
+		pool.change(vo);
+	}
+	
+	
+	
 	public boolean creatPaymentBill(PaymentVO vo) {		
 		StubBillPool pool = new StubBillPool();
 		if(vo==null) return false;
@@ -29,12 +37,24 @@ public class FinancialBillList {
 		return true;
 	}
 	
+	public void updatePaymentBill(PaymentVO vo) {
+		if(vo==null) return;
+		StubBillPool pool = new StubBillPool();
+		pool.change(vo);
+	}
+	
 	public boolean creatCashPaymentBill(CashPaymentVO vo) {		
 		StubBillPool pool = new StubBillPool();
 		if(vo==null) return false;
 		CashPaymentBill cash = new CashPaymentBill(vo);
 		pool.add(cash);
 		return true;
+	}
+	
+	public void updateCashPaymentBill(CashPaymentVO vo) {
+		if(vo==null) return;
+		StubBillPool pool = new StubBillPool();
+		pool.change(vo);
 	}
 	
 	/*需要从单据池筛选指定状态的所有收款单*/

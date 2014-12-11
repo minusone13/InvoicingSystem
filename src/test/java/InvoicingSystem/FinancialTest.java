@@ -95,15 +95,16 @@ public class FinancialTest extends TestCase{
 		assertTrue(result6);
 	}
 	*/
-/*
+
 	public void testgetPayment() {
 		ArrayList<PaymentVO> payments = financial.getAllOfPaymentBills();
 		PaymentVO vo = payments.get(0);
 		
 		
 		assertEquals(1,payments.size());
-		//assertEquals("FKD-20141209-00001", vo.getID());
-		
+		assertEquals("FKD-20141210-00001", vo.getID());
+		System.out.println(payments.size());
+		System.out.println(vo.getID());
 		assertEquals("MAJOR", vo.getCustomer());
 		assertEquals("梅杰 001", vo.getOp());
 				
@@ -112,7 +113,7 @@ public class FinancialTest extends TestCase{
 		
 	}
 	
-*/
+
 	/*
 	public void testcreatCashPayment() {
 		CashPaymentVO vo = new CashPaymentVO();
@@ -137,6 +138,7 @@ public class FinancialTest extends TestCase{
 	}
 	
 */
+	/*
 	public void testgetCashPayment() {
 		ArrayList<CashPaymentVO> cashPayments = financial.getAllOfCashPaymentBills();
 		System.out.println(cashPayments.size());
@@ -153,5 +155,7 @@ public class FinancialTest extends TestCase{
 		//assertEquals(100.0,vo.getTotal());
 		assertEquals(BillState.SUBMITED,vo.getBillState());
 	}
+	*/
+	
 	
 }

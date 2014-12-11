@@ -73,15 +73,15 @@ public class ManagerUI extends JPanel {
 		navigation.setBounds(0, 165, 960, 35);
 		//功能板
 		function.setLocation(55, 233);
-		function.getFrame(frame);
+		
 		//审批单据1
 		passbill1.setLocation(55, 233);
 		passbill1.setVisible(false);
-		passbill1.getFrame(frame);
+		
 		//审批单据2
 		passbill2.setLocation(55, 233);
 		passbill2.setVisible(false);
-		passbill2.getFrame(frame);
+	
 //		//商品选择test
 //		JPManagerCom comodityChooseTest=new JPManagerCom();
 //		comodityChooseTest.setLocation(55, 213);
@@ -113,6 +113,9 @@ public class ManagerUI extends JPanel {
 	/*获取frame的引用*/
 	public void getFrame( Frame f){
   		frame=f;
+  		function.getFrame(frame);
+  		passbill1.getFrame(frame);
+  		passbill2.getFrame(frame);
     }
 	public class MouseListenerOfButton implements MouseListener{
 
@@ -145,6 +148,9 @@ public class ManagerUI extends JPanel {
 			switch(num){
 			case 1:
 				home.setIcon(new ImageIcon("src/image/home1.png"));
+				ManagerUI.this.getPassbill1().setVisible(false);
+				ManagerUI.this.getPassbill2().setVisible(false);
+				ManagerUI.this.getFunction().setVisible(true);
 				break;
 			case 2:
 				back.setIcon(new ImageIcon("src/image/back1.png"));

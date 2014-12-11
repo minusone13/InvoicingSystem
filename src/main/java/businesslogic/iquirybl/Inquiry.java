@@ -39,10 +39,11 @@ import vo.inquiryVO.InquirySaleVO;
 //6、根据收款单付款单，修改账户和客户的应收应付
 public class Inquiry {
 	StubBillPool bp = new StubBillPool();
-	public ArrayList<VO> inquirySale(InquirySaleVO isv) {
-		ArrayList<VO> list = new ArrayList<VO>();
+	
+	//得到销售明细表中的销售单
+	public ArrayList<SaleSheetVO> getSaleSaleSheet(InquirySaleVO isv) {
 		ArrayList<SaleSheet> saleSheet = bp.getSaleSheet();
-		ArrayList<SaleBackSheet> saleBackSheet = bp.getSaleBackSheet();
+		ArrayList<SaleSheetVO> saleSheetVO = new ArrayList<SaleSheetVO>();
 		Date dateBefore=null;
 		Date dateAfter=null;
 		SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
@@ -69,18 +70,37 @@ public class Inquiry {
 			if(isv.getCommodityName()!=null) {
 				
 			}
+			
 			//客户
 			if(isv.getCustomer()!=null) {
 				if(sale.getcustomer().getname().equals(isv.getCustomer())){} 
 				else continue;
 			}
+			
             //业务员
 			if(isv.getUserID()!=null) {
 				if(sale.getUserID().equals(sale.getUserID())){}
 				else continue;				
 			}
-			
+			saleSheetVO.add(sale.getVO());
 		}
+		return saleSheetVO;
+	}
+	
+	public ArrayList<SaleBackSheetVO> getSaleSaleBackSheet(InquirySaleVO isv) {
+		ArrayList<SaleBackSheet> saleBackSheet = bp.getSaleBackSheet();
+		ArrayList<SaleBackSheetVO> saleBackSheetVO = new ArrayList<SaleBackSheetVO>();
+		Date dateBefore=null;
+		Date dateAfter=null;
+		SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+		
+		try {
+			dateBefore = format.parse(isv.getTimeBefore());
+			dateAfter = format.parse(isv.getTimeAfter());
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
 		int size2 = saleBackSheet.size();
 		for(int i=0;i<size2;i++) {
 			SaleBackSheet saleback = saleBackSheet.get(i);
@@ -91,15 +111,27 @@ public class Inquiry {
 				else continue;
 			}
 			
+			//商品名
+			if(isv.getCommodityName()!=null) {
+				
+			}
+			
+			//客户
+			if(isv.getCustomer()!=null) {
+				if(saleback.getcustomer().getname().equals(isv.getCustomer())){} 
+				else continue;
+			}
 			//业务员
 			if(isv.getUserID()!=null) {
 				if(saleback.getUserID().equals(saleback.getUserID())){}
 				else continue;				
 			}
-			list.add(saleback.getVO());
+			saleBackSheetVO.add(saleback.getVO());
 		}
-		return list;
+		return saleBackSheetVO;
 	}
+	
+	
 	
 	public ArrayList<VO> inquiryProcess(InquiryProcessVO ipv) {
 		ArrayList<VO> list = new ArrayList<VO>();

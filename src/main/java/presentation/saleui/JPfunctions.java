@@ -7,6 +7,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import presentation.saleui.JPfunctions;
+import userui.Frame;
+
 public class JPfunctions extends JPanel{
 	//background
 	JLabel bg = new JLabel();
@@ -20,7 +23,8 @@ public class JPfunctions extends JPanel{
 	ImageIcon Imagefun20 = new ImageIcon("src/image/saleUI/salebillIndex0.png");
 	ImageIcon Imagefun11 = new ImageIcon("src/image/saleUI/customerIndex1.png");
 	ImageIcon Imagefun21 = new ImageIcon("src/image/saleUI/salebillIndex1.png");
-	
+	//frame的引用
+    Frame frame;
 	public JPfunctions(){
 		//设置窗口大小
 		this.setSize(522, 325);
@@ -43,7 +47,10 @@ public class JPfunctions extends JPanel{
 		this.add(function2,1);
 		this.add(bg,2);
 	}
-	
+	  /*获取frame引用*/
+    public void getFrame( Frame f){
+    		frame=f;
+    }
 	public class MouseListenerOfButton implements MouseListener{
 
 		private int num;
@@ -75,6 +82,8 @@ public class JPfunctions extends JPanel{
 				break;
 			case 2:
 				function2.setIcon(Imagefun2);
+				JPfunctions.this.setVisible(false);
+				frame.getSale().getManageBills1().setVisible(true);
 				break;
 			}
 		}
