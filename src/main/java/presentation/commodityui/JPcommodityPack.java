@@ -7,6 +7,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+
+import vo.stockvo.CommodityVO;
 /**
  * 显示子节点商品的板块
  * @author wyc
@@ -26,7 +28,7 @@ public class JPcommodityPack extends JPanel {
 		//背景
 		JLabel back=new JLabel();
 		back.setIcon(new ImageIcon("src/image/ChooseCom/back.png"));
-		back.setBounds(0, 0, 450, 300);
+		back.setBounds(0, 0, 467, 300);
 		
 		SCR = new JScrollPane();
 		SCR.setBounds(0, 0, 467, 300);
@@ -48,13 +50,13 @@ public class JPcommodityPack extends JPanel {
 		
 		int lines=(int)Math.ceil(commodities.size()/5.0);//行数
 		
-		pack.setSize(450,20+lines*125);
+		pack.setSize(450,20+lines*110);
 		//scrollPane是根据里面的子控件的preferredSize来确定滚动条的
-		pack.setPreferredSize(new Dimension(450,20+lines*125));
+		pack.setPreferredSize(new Dimension(450,20+lines*110));
 		int num=0;
 		for(int i=0;i<lines;i++){
 			for(int j=0;j<5;j++){
-				commodities.get(num).setLocation(j*90, 20+i*125);
+				commodities.get(num).setLocation(j*90, 20+i*110);
 				pack.add(commodities.get(num),num);
 				num++;
 				if(num==commodities.size()){
@@ -64,11 +66,20 @@ public class JPcommodityPack extends JPanel {
 		}
 		SCR.setViewportView(pack);
 	}
-	public void addCommodities(){
-		JPcommodity com1=new JPcommodity("公牛日光灯","dsfsd",10);
-		JPcommodity com2=new JPcommodity("母牛日光灯","dsfsd",10);
-		JPcommodity com3=new JPcommodity("母猪日光灯","dsfsd",10);
-		JPcommodity com4=new JPcommodity("光灯日母猪","dsfsd",10);
+	/*增加一系列商品*/
+	public void addCommodities(ArrayList<CommodityVO> coms){
+//		for(CommodityVO temp:coms){
+//			commodities.add(new JPcommodity(temp));
+//		}
+		
+		CommodityVO test=new CommodityVO();
+		test.setName("dsfs");
+		test.setModel("sdf0000");
+		test.setNumber(89);
+		JPcommodity com1=new JPcommodity(test);
+		JPcommodity com2=new JPcommodity("母牛日光灯灯","dsfsd",10);
+		JPcommodity com3=new JPcommodity("母猪日光灯日光灯","dsfsd",10);
+		JPcommodity com4=new JPcommodity("光灯日母猪灯日母猪","dsfsd",10);
 		JPcommodity com5=new JPcommodity("公牛日母猪","dsfsd",10);
 		JPcommodity com6=new JPcommodity("我去你妈的","dsfsd",10);
 		JPcommodity com7=new JPcommodity("公牛日光灯","dsfsd",10);
@@ -114,11 +125,50 @@ public class JPcommodityPack extends JPanel {
 		commodities.add(com22);
 		commodities.add(com23);
 		commodities.add(com24);
+		update();
 		
 	}
-	public void addCommodity(){
-		
+	/*增加商品*/
+	public void addCommodity(CommodityVO com){
+		commodities.add(new JPcommodity(com));
+		update();
 	}
+	/*返回选中的商品*/
+	public ArrayList<CommodityVO> getAllChosen(){
+		ArrayList<CommodityVO> result=new ArrayList<CommodityVO>();
+		for(JPcommodity temp:commodities){
+			if(temp.isChosen()){
+				result.add(temp.getCommodity());
+			}
+		}
+		return result;
+	}
+	/*删除选中的商品*/
+	public void removeChose(){
+		for(JPcommodity temp:commodities){
+			if(temp.isChosen()){
+				commodities.remove(temp);
+			}
+		}
+		update();
+	}
+	/*返回选中商品的数量*/
+	public int getChosenNum(){
+		int i=0;
+		for(JPcommodity temp:commodities){
+			if(temp.isChosen()){
+				i++;
+			}
+		}
+		return i;
+	}
+	public ArrayList<JPcommodity> getCommodities() {
+		return commodities;
+	}
+	public void setCommodities(ArrayList<JPcommodity> commodities) {
+		this.commodities = commodities;
+	}
+
 	public static void main(String[] args) {
 	}
 }
