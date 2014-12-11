@@ -1,5 +1,8 @@
 package InvoicingSystem;
 
+import vo.CustomerVO;
+import vo.SaleSheetVO;
+import businesslogic.customerbl.Customer;
 import businesslogic.salebillbl.salebillController;
 import businesslogicservice.customerblservice.CustomerBlService;
 import businesslogicservice.salebillblservice.SaleBillBlService;
@@ -9,6 +12,15 @@ public class SaleTest extends TestCase{
 		SaleBillBlService sbbs=new salebillController();
 		public void testTrue(){//added by lhw
 			assertTrue(true);
+		}
+		
+		public void testCreatSaleSheet() {
+			SaleSheetVO vo = new SaleSheetVO();
+			Customer customer = new Customer();
+			customer.setname("梅少");
+			vo.setCustomer(customer);
+			vo.setuserid("002");
+			
 		}
 		/*
 		public void testgetPurBackSheet(){
