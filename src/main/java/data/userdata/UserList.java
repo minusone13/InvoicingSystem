@@ -73,7 +73,7 @@ public class UserList implements Serializable{
 		if(i!=-1)
 		{
 			UserPO user=users.get(i);
-			return user.clone();
+			return user;
 		}
 		else
 		 return null;

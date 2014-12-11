@@ -11,26 +11,32 @@ import javax.swing.border.EmptyBorder;
 
 public class JPManagerCom extends JPanel{
 
+	//树状结果目录
+	JPtreeContent content=new JPtreeContent();
+	//商品显示面板
+	JPcommodityPack commodities=new JPcommodityPack();
+	//head
+	JPanel head=new JPanel();
+	//head的搜索框
+    JTextField findCom=new JTextField(16);
+    //bottom
+	JPanel bottom=new JPanel();
 	public JPManagerCom(){
 		this.setSize(617, 370);
 		this.setLayout(null);
 		//设置面板透明
 		this.setOpaque(false);
 		
-		JPtreeContent content=new JPtreeContent();
-		JPcommodityPack commodities=new JPcommodityPack();
-		commodities.addCommodities();
-		commodities.update();
+		
 		content.setLocation(0, 40);
 		commodities.setLocation(150, 40);
-		//head
-		JPanel head=new JPanel();
+		commodities.addCommodities(null);
+		
 		head.setBounds(0, 0, 617, 40);
 		head.setLayout(null);
 		head.setOpaque(false);
 
-		//head的搜索框
-	    JTextField findCom=new JTextField(16);
+		
 		findCom.setBounds(417, 5, 150, 30);
 		findCom.setOpaque(false);//文本框透明
 		findCom.setForeground(Color.white);//前景色
@@ -47,8 +53,7 @@ public class JPManagerCom extends JPanel{
 		JLabel bgOfHead=new JLabel();
 		bgOfHead.setBounds(0, 0, 617, 40);
 		bgOfHead.setIcon(new ImageIcon("src/image/ChooseCom/head.png") );
-		//bottom
-		JPanel bottom=new JPanel();
+		
 		bottom.setBounds(0, 340, 617, 30);
 		bottom.setLayout(null);
 		bottom.setOpaque(false);

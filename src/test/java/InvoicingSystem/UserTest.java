@@ -94,6 +94,7 @@ public class UserTest{
 		assertEquals(RM.notfound,result);
 	}
 	
+	@Test
 	public void testchangeRole()
 	{
 		UserVO vo = ubl.login("stock", "stock");
@@ -101,5 +102,47 @@ public class UserTest{
 		assertEquals(RM.done,result);
 		vo = ubl.login("stock", "stock");
 		assertEquals("A0002",vo.getID());
+	}
+	
+	@Test
+	public void testchangePassword()
+	{
+		UserVO vo = ubl.login("stock", "stock");
+		vo.setPassword("newStockPassword");
+		RM result = ubl.changePassword(vo);
+		assertEquals(RM.done,result);
+		vo = ubl.login("stock", "stock");
+		assertEquals(null,vo);//用原密码登录失败
+		vo = ubl.login("stock", "newStockPassword");
+		assertEquals("stock",vo.getAccount());
+		assertEquals("Helen",vo.getName());
+	}
+	
+	@Test
+	public void testchangePassword2()
+	{
+		UserVO vo = ubl.login("stock", "stock");
+		vo.setPassword("newStockPassword");
+		RM result = ubl.changePassword(vo,"stock");
+		assertEquals(RM.done,result);
+		vo = ubl.login("stock", "stock");
+		assertEquals(null,vo);//用原密码登录失败
+		vo = ubl.login("stock", "newStockPassword");
+		assertEquals("stock",vo.getAccount());
+		assertEquals("Helen",vo.getName());
+	}
+	
+	@Test
+	public void testchangePassword3()
+	{
+		UserVO vo = ubl.login("stock", "stock");
+		vo.setPassword("newStockPassword");
+		RM result = ubl.changePassword(vo,"stock1");//原密码错误，修改密码失败
+		assertEquals(RM.invalid,result);
+		vo = ubl.login("stock", "stock");
+		assertEquals("stock",vo.getAccount());
+		assertEquals("Helen",vo.getName());
+		vo = ubl.login("stock", "stock1");
+		assertEquals(null,vo);//用新密码登录失败
 	}
 }

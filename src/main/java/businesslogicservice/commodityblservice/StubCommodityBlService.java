@@ -32,4 +32,8 @@ public interface StubCommodityBlService {
 	public RM submit(GiftBillVO vo);
 	public RM submit(SpillsLossBillVO vo);
 	public RM submit(AlertBillVO vo);
+	
+	public ArrayList<GiftBillVO> showGiftBills();
+	public ArrayList<SpillsLossBillVO> showSpillsLossBills();
+	public ArrayList<AlertBillVO> showAlertBills();
 }
