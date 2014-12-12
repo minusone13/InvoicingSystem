@@ -30,10 +30,10 @@ public class InitialInfoPanel extends JPanel{
 		pane = new JScrollPane(table);
 		box = new JComboBox();
 		this.add(pane);
-		pane.setBounds(100, 100, 700, 400);
+		pane.setBounds(100, 300, 750, 250);
 		
 		this.add(box);
-		box.setBounds(100, 50, 80, 20);
+		box.setBounds(100, 270, 80, 20);
 		
 		box.addItem("aa");
 		box.addItem("bb");
