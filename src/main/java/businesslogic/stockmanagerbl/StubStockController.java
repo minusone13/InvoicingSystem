@@ -31,7 +31,6 @@ public class StubStockController implements StubCommodityBlService, StockBlForSa
 		if(temp!=null)
 		{
 			user = new User(temp);
-			System.out.println("从Login中读取的用户为NULL,使用默认库存人员 StubStockController");
 		}
 		l.setUser(user);
 		bl.setUser(user);
