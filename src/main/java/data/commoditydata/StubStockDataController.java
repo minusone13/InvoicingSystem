@@ -52,7 +52,7 @@ public class StubStockDataController implements StubCommodityDataService, StockD
         	if (temp!=null)
         		l=temp;
         	else
-        		System.out.println("对象序列化错误");
+        		System.out.println("CommodityList读取为NULL，可能在初始化时出现");
         	try {
 				ois.close();
 			} catch (IOException e) {
