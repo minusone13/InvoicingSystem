@@ -1,6 +1,7 @@
 package businesslogic.commoditybl;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import po.*;
 import po.stockpo.CommodityPO;
@@ -22,6 +23,19 @@ public class MockCommodity {
 	int alertLine;
 	ArrayList<CommodityRecord> record=new ArrayList<CommodityRecord>();
 	ArrayList<CommodityRecord> prepareRecord=new ArrayList<CommodityRecord>();
+	public void computeRecordsTotal(Date d1,Date d2)
+	{//用于库存查看
+		ArrayList<CommodityRecord> result = new ArrayList<CommodityRecord>();
+		CommodityRecord temp = new CommodityRecord(0,0,0,0);
+		for(int i=0; i<record.size(); i++)
+		{
+			CommodityRecord r = record.get(i);
+			if(r.getDate().after(d1) && r.getDate().before(d2))
+				temp.plus(r);
+		}
+		result.add(temp);
+		record = result;
+	}
 	public int checkAlert()
 	{
 		return alertLine-number;
