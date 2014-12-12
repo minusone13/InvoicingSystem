@@ -251,150 +251,147 @@ public class JPBill extends JPanel {
 		this.add(bg,3);
 	}
 	public JPBill(PurSheetVO ps){
-//		//设置单据编号，状态，种类
-//		state=ps.get;
-//		style=ps.getBillStyle();
-//		ID=ps.getID();
-//		//传递VO
-//		cashVO=ps;
-//		//面板大小
-//		this.setSize(522, 93);
-//		//设置布局
-//		this.setLayout(null);
-//		//设置面板透明
-//		this.setOpaque(false);
-//		//背景
-//		setBillBg(BillStyle.PurSheet,ps.getBillState(),0);
-//		bg.setBounds(0, 0, 522, 93);
-//		bg.addMouseListener(new MouseListenerOfBill(BillStyle.PurSheet));
-//		bg.addMouseListener(new MouseListenerGetXY());
-//		//向右
-//		right.setIcon(new ImageIcon("src/image/right.png"));
-//		right.setBounds(221, 26, 40, 40);
-//		right.addMouseListener(new MouseListenerOfButton(1));
-//		//向左
-//		left.setIcon(new ImageIcon("src/image/left.png"));
-//		left.setBounds(482, 26, 40, 40);
-//		left.addMouseListener(new MouseListenerOfButton(2));
-//		//单据信息
-//		JLabel ID=new JLabel("ID:"+ps.getID(),JLabel.CENTER);
-//		ID.setBounds(31,5, 200, 20);
-//		
-//		//将组件加到面板上
-//		this.add(right,0);
-//		this.add(left,1);
-//		this.add(ID,2);
-//		this.add(bg,3);
+		//设置单据编号，状态，种类
+		state=ps.getState();
+		style=ps.getBillStyle();
+		ID=ps.getID();
+		//传递VO
+		purVO=ps;
+		//面板大小
+		this.setSize(522, 93);
+		//设置布局
+		this.setLayout(null);
+		//设置面板透明
+		this.setOpaque(false);
+		//背景
+		setBillBg(BillStyle.PurSheet,ps.getState(),0);
+		bg.setBounds(0, 0, 522, 93);
+		bg.addMouseListener(new MouseListenerOfBill(BillStyle.PurSheet));
+		bg.addMouseListener(new MouseListenerGetXY());
+		//向右
+		right.setIcon(new ImageIcon("src/image/right.png"));
+		right.setBounds(221, 26, 40, 40);
+		right.addMouseListener(new MouseListenerOfButton(1));
+		//向左
+		left.setIcon(new ImageIcon("src/image/left.png"));
+		left.setBounds(482, 26, 40, 40);
+		left.addMouseListener(new MouseListenerOfButton(2));
+		//单据信息
+		JLabel ID=new JLabel("ID:"+ps.getID(),JLabel.CENTER);
+		ID.setBounds(31,5, 200, 20);
+		
+		//将组件加到面板上
+		this.add(right,0);
+		this.add(left,1);
+		this.add(ID,2);
+		this.add(bg,3);
 	}
 	public JPBill(PurBackSheetVO pbs){
-//		//设置单据编号，状态，种类
-//		state=pbs.getBillState();
-//		style=pbs.getBillStyle();
-//		ID=pbs.getID();
-//		//传递VO
-//		cashVO=pbs;
-//		//面板大小
-//		this.setSize(522, 93);
-//		//设置布局
-//		this.setLayout(null);
-//		//设置面板透明
-//		this.setOpaque(false);
-//		//背景
-//		setBillBg(BillStyle.CashPaymentBill,pbs.getBillState(),0);
-//		bg.setBounds(0, 0, 522, 93);
-//		bg.addMouseListener(new MouseListenerOfBill(BillStyle.CashPaymentBill));
-//		bg.addMouseListener(new MouseListenerGetXY());
-//		//向右
-//		right.setIcon(new ImageIcon("src/image/right.png"));
-//		right.setBounds(221, 26, 40, 40);
-//		right.addMouseListener(new MouseListenerOfButton(1));
-//		//向左
-//		left.setIcon(new ImageIcon("src/image/left.png"));
-//		left.setBounds(482, 26, 40, 40);
-//		left.addMouseListener(new MouseListenerOfButton(2));
-//		//单据信息
-//		JLabel ID=new JLabel("ID:"+pbs.getID(),JLabel.CENTER);
-//		ID.setBounds(31,5, 200, 20);
-//		//将组件加到面板上
-//		this.add(right,0);
-//		this.add(left,1);
-//		this.add(ID,5);
-//		this.add(bg,6);
+		//设置单据编号，状态，种类
+		state=pbs.getState();
+		style=pbs.getBillStyle();
+		ID=pbs.getID();
+		//传递VO
+		purbackVO=pbs;
+		//面板大小
+		this.setSize(522, 93);
+		//设置布局
+		this.setLayout(null);
+		//设置面板透明
+		this.setOpaque(false);
+		//背景
+		setBillBg(BillStyle.PurBackSheet,pbs.getState(),0);
+		bg.setBounds(0, 0, 522, 93);
+		bg.addMouseListener(new MouseListenerOfBill(BillStyle.PurBackSheet));
+		bg.addMouseListener(new MouseListenerGetXY());
+		//向右
+		right.setIcon(new ImageIcon("src/image/right.png"));
+		right.setBounds(221, 26, 40, 40);
+		right.addMouseListener(new MouseListenerOfButton(1));
+		//向左
+		left.setIcon(new ImageIcon("src/image/left.png"));
+		left.setBounds(482, 26, 40, 40);
+		left.addMouseListener(new MouseListenerOfButton(2));
+		//单据信息
+		JLabel ID=new JLabel("ID:"+pbs.getID(),JLabel.CENTER);
+		ID.setBounds(31,5, 200, 20);
+		//将组件加到面板上
+		this.add(right,0);
+		this.add(left,1);
+		this.add(ID,2);
+		this.add(bg,3);
 	}
 	public JPBill(SaleSheetVO ss){
-//		//设置单据编号，状态，种类
-//		state=ss.getBillState();
-//		style=ss.getBillStyle();
-//		ID=ss.getID();
-//		//传递VO
-//		cashVO=ss;
-//		//面板大小
-//		this.setSize(522, 93);
-//		//设置布局
-//		this.setLayout(null);
-//		//设置面板透明
-//		this.setOpaque(false);
-//		//背景
-//		setBillBg(BillStyle.CashPaymentBill,ss.getBillState(),0);
-//		bg.setBounds(0, 0, 522, 93);
-//		bg.addMouseListener(new MouseListenerOfBill(BillStyle.CashPaymentBill));
-//		bg.addMouseListener(new MouseListenerGetXY());
-//		//向右
-//		right.setIcon(new ImageIcon("src/image/right.png"));
-//		right.setBounds(221, 26, 40, 40);
-//		right.addMouseListener(new MouseListenerOfButton(1));
-//		//向左
-//		left.setIcon(new ImageIcon("src/image/left.png"));
-//		left.setBounds(482, 26, 40, 40);
-//		left.addMouseListener(new MouseListenerOfButton(2));
-//		//单据信息
-//		JLabel ID=new JLabel("ID:"+ss.getID(),JLabel.CENTER);
-//		ID.setBounds(31,5, 200, 20);
-//		
-//		//将组件加到面板上
-//		this.add(right,0);
-//		this.add(left,1);
-//		this.add(operatorOfCas,2);
-//		this.add(accountOfCas,3);
-//		this.add(moneyOfCas,4);
-//		this.add(ID,5);
-//		this.add(bg,6);
+		//设置单据编号，状态，种类
+		state=ss.getState();
+		style=ss.getBillStyle();
+		ID=ss.getID();
+		//传递VO
+		saleVO=ss;
+		//面板大小
+		this.setSize(522, 93);
+		//设置布局
+		this.setLayout(null);
+		//设置面板透明
+		this.setOpaque(false);
+		//背景
+		setBillBg(BillStyle.SaleSheet,ss.getState(),0);
+		bg.setBounds(0, 0, 522, 93);
+		bg.addMouseListener(new MouseListenerOfBill(BillStyle.SaleSheet));
+		bg.addMouseListener(new MouseListenerGetXY());
+		//向右
+		right.setIcon(new ImageIcon("src/image/right.png"));
+		right.setBounds(221, 26, 40, 40);
+		right.addMouseListener(new MouseListenerOfButton(1));
+		//向左
+		left.setIcon(new ImageIcon("src/image/left.png"));
+		left.setBounds(482, 26, 40, 40);
+		left.addMouseListener(new MouseListenerOfButton(2));
+		//单据信息
+		JLabel ID=new JLabel("ID:"+ss.getID(),JLabel.CENTER);
+		ID.setBounds(31,5, 200, 20);
+		
+		//将组件加到面板上
+		this.add(right,0);
+		this.add(left,1);
+		this.add(ID,2);
+		this.add(bg,3);
 	}
 	public JPBill(SaleBackSheetVO sbs){
-//		//设置单据编号，状态，种类
-//		state=sbs.getBillState();
-//		style=sbs.getBillStyle();
-//		ID=sbs.getID();
-//		//传递VO
-//		cashVO=sbs;
-//		//面板大小
-//		this.setSize(522, 93);
-//		//设置布局
-//		this.setLayout(null);
-//		//设置面板透明
-//		this.setOpaque(false);
-//		//背景
-//		setBillBg(BillStyle.CashPaymentBill,sbs.getBillState(),0);
-//		bg.setBounds(0, 0, 522, 93);
-//		bg.addMouseListener(new MouseListenerOfBill(BillStyle.CashPaymentBill));
-//		bg.addMouseListener(new MouseListenerGetXY());
-//		//向右
-//		right.setIcon(new ImageIcon("src/image/right.png"));
-//		right.setBounds(221, 26, 40, 40);
-//		right.addMouseListener(new MouseListenerOfButton(1));
-//		//向左
-//		left.setIcon(new ImageIcon("src/image/left.png"));
-//		left.setBounds(482, 26, 40, 40);
-//		left.addMouseListener(new MouseListenerOfButton(2));
-//		//单据信息
-//		JLabel ID=new JLabel("ID:"+sbs.getID(),JLabel.CENTER);
-//		ID.setBounds(31,5, 200, 20);
-//		
-//		//将组件加到面板上
-//		this.add(right,0);
-//		this.add(left,1);
-//		this.add(ID,5);
-//		this.add(bg,6);
+		//设置单据编号，状态，种类
+		state=sbs.getState();
+		style=sbs.getBillStyle();
+		ID=sbs.getID();
+		//传递VO
+		salebackVO=sbs;
+		//面板大小
+		this.setSize(522, 93);
+		//设置布局
+		this.setLayout(null);
+		//设置面板透明
+		this.setOpaque(false);
+		//背景
+		setBillBg(BillStyle.SaleBackSheet,sbs.getState(),0);
+		bg.setBounds(0, 0, 522, 93);
+		bg.addMouseListener(new MouseListenerOfBill(BillStyle.SaleBackSheet));
+		bg.addMouseListener(new MouseListenerGetXY());
+		//向右
+		right.setIcon(new ImageIcon("src/image/right.png"));
+		right.setBounds(221, 26, 40, 40);
+		right.addMouseListener(new MouseListenerOfButton(1));
+		//向左
+		left.setIcon(new ImageIcon("src/image/left.png"));
+		left.setBounds(482, 26, 40, 40);
+		left.addMouseListener(new MouseListenerOfButton(2));
+		//单据信息
+		JLabel ID=new JLabel("ID:"+sbs.getID(),JLabel.CENTER);
+		ID.setBounds(31,5, 200, 20);
+		
+		//将组件加到面板上
+		this.add(right,0);
+		this.add(left,1);
+		this.add(ID,2);
+		this.add(bg,3);
 	}
 	/*收款单构造界面*/
 	public JPBill(ReceiptVO rb){
@@ -848,25 +845,100 @@ public class JPBill extends JPanel {
 			//悬停显示单据清单数据
 			switch(style){
 			case GiftBill:
+				String[] temp1={"赠品","型号","数量"};
+				table.setColumnNames(temp1);
+				String[][] list1=new String[giftVO.getComs().size()][3];
+				for(int i=0;i<giftVO.getComs().size();i++){
+					list1[i][0]=giftVO.getComs().get(i).getName();
+					list1[i][1]=giftVO.getComs().get(i).getModel();
+					list1[i][2]=String.valueOf(giftVO.getComs().get(i).getNumber());
+				}
+				table.setList(list1);
+				table.updateShow();
 				break;
 			case SpillsLossBill:
 				break;
 			case AlertBill:
 				break;
 			case PurSheet:
+				String[] temp2={"编号","名称","型号","数量","单价","金额","备注"};
+				table.setColumnNames(temp2);
+				String[][] list2=new String[purVO.getsheet().size()][7];
+				for(int i=0;i<purVO.getsheet().size();i++){
+					list2[i][0]=purVO.getsheet().get(i).getId();
+					list2[i][1]=purVO.getsheet().get(i).getName();
+					list2[i][2]=purVO.getsheet().get(i).getModel();
+					list2[i][3]=String.valueOf(purVO.getsheet().get(i).getNumber());
+					list2[i][4]=String.valueOf(purVO.getsheet().get(i).getIn());
+					list2[i][5]=String.valueOf(purVO.getsheet().get(i).getIn()*purVO.getsheet().get(i).getNumber());
+//					list2[i][6]=purVO.getsheet().get(i);
+				}
+				table.setList(list2);
+				table.updateShow();
 				break;
 			case PurBackSheet:
+				String[] temp3={"编号","名称","型号","数量","单价","金额","备注"};
+				table.setColumnNames(temp3);
+				String[][] list3=new String[purbackVO.getsheet().size()][7];
+				for(int i=0;i<purVO.getsheet().size();i++){
+					list3[i][0]=purVO.getsheet().get(i).getId();
+					list3[i][1]=purVO.getsheet().get(i).getName();
+					list3[i][2]=purVO.getsheet().get(i).getModel();
+					list3[i][3]=String.valueOf(purVO.getsheet().get(i).getNumber());
+					list3[i][4]=String.valueOf(purVO.getsheet().get(i).getIn());
+					list3[i][5]=String.valueOf(purVO.getsheet().get(i).getIn()*purVO.getsheet().get(i).getNumber());
+//					list3[i][6]=purVO.getsheet().get(i);
+				}
+				table.setList(list3);
+				table.updateShow();
 				break;
 			case SaleSheet:
+				String[] temp4={"编号","名称","型号","数量","单价","金额","备注"};
+				table.setColumnNames(temp4);
+				String[][] list4=new String[saleVO.getsheet().size()][7];
+				for(int i=0;i<purVO.getsheet().size();i++){
+					list4[i][0]=purVO.getsheet().get(i).getId();
+					list4[i][1]=purVO.getsheet().get(i).getName();
+					list4[i][2]=purVO.getsheet().get(i).getModel();
+					list4[i][3]=String.valueOf(purVO.getsheet().get(i).getNumber());
+					list4[i][4]=String.valueOf(purVO.getsheet().get(i).getOut());
+					list4[i][5]=String.valueOf(purVO.getsheet().get(i).getOut()*purVO.getsheet().get(i).getNumber());
+//					list4[i][6]=purVO.getsheet().get(i);
+				}
+				table.setList(list4);
+				table.updateShow();
 				break;
 			case SaleBackSheet:
+				String[] temp5={"编号","名称","型号","数量","单价","金额","备注"};
+				table.setColumnNames(temp5);
+				String[][] list5=new String[salebackVO.getsheet().size()][7];
+				for(int i=0;i<purVO.getsheet().size();i++){
+					list5[i][0]=purVO.getsheet().get(i).getId();
+					list5[i][1]=purVO.getsheet().get(i).getName();
+					list5[i][2]=purVO.getsheet().get(i).getModel();
+					list5[i][3]=String.valueOf(purVO.getsheet().get(i).getNumber());
+					list5[i][4]=String.valueOf(purVO.getsheet().get(i).getOut());
+					list5[i][5]=String.valueOf(purVO.getsheet().get(i).getOut()*purVO.getsheet().get(i).getNumber());
+//					list5[i][6]=purVO.getsheet().get(i);
+				}
+				table.setList(list5);
+				table.updateShow();
 				break;
 			case ReceiptBill:
+				String[] temp6={"银行账户","转账金额","备注"};
+				table.setColumnNames(temp6);
+				table.setList(listOfPR);
+				table.updateShow();
 				break;
 			case PaymentBill:
+				String[] temp7={"银行账户","转账金额","备注"};
+				table.setColumnNames(temp7);
+				table.setList(listOfPR);
+				table.updateShow();
 				break;
 			case CashPaymentBill:
-				table.setColumnNames(itemOfCas);
+				String[] temp8={"条目名","金额","备注"};
+				table.setColumnNames(temp8);
 				table.setList(listOfCas);
 				table.updateShow();
 				break;
