@@ -212,4 +212,11 @@ public class StubCommodityList implements Serializable{
 				result.add(flatlist.get(i).po.clone());//here can also be change
 		return result;
 	}
+	public ArrayList<CommodityPO> getAllCommodity()
+	{
+		ArrayList<CommodityPO> result = new ArrayList<CommodityPO>();
+		for(int i=0;i<flatlist.size();i++)
+			result.add(flatlist.get(i).getPo().clone());
+		return result;
+	}
 }

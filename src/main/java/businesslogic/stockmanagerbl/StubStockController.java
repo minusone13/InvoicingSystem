@@ -2,6 +2,7 @@ package businesslogic.stockmanagerbl;
 
 import java.util.*;
 
+import presentation.userui.Login;
 import dataservice.commoditydataservice.*;
 import businesslogic.Role;
 import businesslogic.commoditybillbl.*;
@@ -20,10 +21,21 @@ import vo.uservo.UserVO;
 public class StubStockController implements StubCommodityBlService, StockBlForSalesMen, StockBlForManager,StockBlForFinancial
 {//负责与界面及其他程序员的交互
 	StubCommodityList l=new StubCommodityList();
+	StubCommodityBill bl=new StubCommodityBill();
 	UserService us=new UserController();
 	static StubCommodityDataService comdata;
-	User user=new User("I0001",Role.STOCK_STAFF,"default","default","default");
-	
+	User user=new User("I0000",Role.STOCK_STAFF,"DefaultStock","default","Liu");
+	public StubStockController()
+	{
+		UserVO temp = Login.user;
+		if(temp!=null)
+		{
+			user = new User(temp);
+			System.out.println("从Login中读取的用户为NULL,使用默认库存人员 StubStockController");
+		}
+		l.setUser(user);
+		bl.setUser(user);
+	}
 	StubBillPool pool = new StubBillPool();
 	public StubCommodityList getCommodityList ()
 	{
@@ -144,7 +156,6 @@ public class StubStockController implements StubCommodityBlService, StockBlForSa
 		return l.updateCategory(vo);
 	}
 	
-	StubCommodityBill bl=new StubCommodityBill();
 	public RM creat(GiftBillVO vo)
 	{
 		StubGiftBill gb=new StubGiftBill();
@@ -215,5 +226,15 @@ public class StubStockController implements StubCommodityBlService, StockBlForSa
 		for(int i=0; i<h.size();i++)
 			result.add(h.get(i).getVO());
 		return result;
+	}
+	
+	public CountVO count()
+	{//库存盘点
+		return new CountVO();
+	}
+	
+	public ArrayList<CommodityRecordVO> getRecords(Date d1, Date d2)
+	{//库存查看
+		return new ArrayList<CommodityRecordVO>();
 	}
 }

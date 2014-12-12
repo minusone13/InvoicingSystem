@@ -15,7 +15,7 @@ import vo.RM;
 
 public class StubCommodityList {//商品列表 haha
 	static StubCommodityDataService comdata;
-	User user=new User("I0001",Role.STOCK_STAFF,"default","default","default");
+	User user;
 	public ArrayList<CommodityVO> findCommodity(String name)
 	{
 		ArrayList <CommodityPO> pos=comdata.findCommodity(name);
@@ -320,5 +320,18 @@ public class StubCommodityList {//商品列表 haha
 				income+=po.getIncome();
 		}
 		return income;
+	}
+	public CountVO count()
+	{//库存盘点
+		ArrayList<CommodityPO> temp = comdata.getAllCommodity();
+		ArrayList<CommodityVO> result = new ArrayList<CommodityVO>();
+		for(int i=0;i<temp.size();i++)
+			result.add(new MockCommodity(temp.get(i)).toVO());
+		return new CountVO();
+	}
+	
+	public ArrayList<CommodityRecordVO> getRecords(Date d1, Date d2)
+	{//库存查看
+		return new ArrayList<CommodityRecordVO>();
 	}
 }

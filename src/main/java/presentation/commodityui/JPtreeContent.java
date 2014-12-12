@@ -18,6 +18,7 @@ import javax.swing.tree.TreePath;
 public class JPtreeContent extends JPanel {
 
 	private JScrollPane SCR;
+	private JPManagerCom JPmanagerCom;
 	public JPtreeContent(){
 		this.setSize(150, 350);
 		this.setLayout(null);
@@ -81,5 +82,11 @@ public class JPtreeContent extends JPanel {
         
 		add(SCR,0);
 		add(back,1);
+	}
+	public JPManagerCom getJPmanagerCom() {
+		return JPmanagerCom;
+	}
+	public void setJPmanagerCom(JPManagerCom jPmanagerCom) {
+		JPmanagerCom = jPmanagerCom;
 	}
 }

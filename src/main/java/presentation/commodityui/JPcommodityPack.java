@@ -19,6 +19,7 @@ public class JPcommodityPack extends JPanel {
 	private JScrollPane SCR;
 	private JPanel pack=null;
 	private ArrayList<JPcommodity> commodities=new ArrayList<JPcommodity>();
+	private JPManagerCom JPmanagerCom;
 	public JPcommodityPack(){
 		this.setSize(467, 300);
 		//设置布局
@@ -56,6 +57,8 @@ public class JPcommodityPack extends JPanel {
 		int num=0;
 		for(int i=0;i<lines;i++){
 			for(int j=0;j<5;j++){
+				//传递引用
+				commodities.get(num).setJPmanagerCom(JPmanagerCom);
 				commodities.get(num).setLocation(j*90, 20+i*110);
 				pack.add(commodities.get(num),num);
 				num++;
@@ -170,5 +173,11 @@ public class JPcommodityPack extends JPanel {
 	}
 
 	public static void main(String[] args) {
+	}
+	public JPManagerCom getJPmanagerCom() {
+		return JPmanagerCom;
+	}
+	public void setJPmanagerCom(JPManagerCom jPmanagerCom) {
+		JPmanagerCom = jPmanagerCom;
 	}
 }

@@ -7,20 +7,24 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.border.EmptyBorder;
+
+import presentation.managerui.MouseListenerGetXY;
+import businesslogic.Role;
 
 public class JPManagerCom extends JPanel{
 
 	//树状结果目录
-	JPtreeContent content=new JPtreeContent();
+	private JPtreeContent content=new JPtreeContent();
 	//商品显示面板
-	JPcommodityPack commodities=new JPcommodityPack();
+	private JPcommodityPack commodities=new JPcommodityPack();
 	//head
-	JPanel head=new JPanel();
+	private JPanel head=new JPanel();
 	//head的搜索框
-    JTextField findCom=new JTextField(16);
+	private JTextField findCom=new JTextField(16);
     //bottom
-	JPanel bottom=new JPanel();
+	private JPanel bottom=new JPanel();
+	//标记是谁用商品选择面板
+	private Role role;
 	public JPManagerCom(){
 		this.setSize(617, 370);
 		this.setLayout(null);
@@ -30,6 +34,9 @@ public class JPManagerCom extends JPanel{
 		
 		content.setLocation(0, 40);
 		commodities.setLocation(150, 40);
+		//传递引用
+		content.setJPmanagerCom(this);
+		commodities.setJPmanagerCom(this);
 		commodities.addCommodities(null);
 		
 		head.setBounds(0, 0, 617, 40);
@@ -78,7 +85,13 @@ public class JPManagerCom extends JPanel{
 		this.add(content,1);
 		this.add(head,2);
 		this.add(bottom,3);
-		
+		this.addMouseListener(new MouseListenerGetXY());
+	}
+	public Role getRole() {
+		return role;
+	}
+	public void setRole(Role role) {
+		this.role = role;
 	}
 	
 }

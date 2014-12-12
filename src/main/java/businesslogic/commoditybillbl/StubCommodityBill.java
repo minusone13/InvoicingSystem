@@ -7,6 +7,7 @@ import java.util.Date;
 import businesslogic.BillState;
 import businesslogic.commoditybl.MockCommodity;
 import businesslogic.examinebl.StubBillPool;
+import businesslogic.userbl.User;
 import vo.*;
 
 public class StubCommodityBill 
@@ -15,6 +16,7 @@ public class StubCommodityBill
 	ArrayList<StubGiftBill> gifts;
 	ArrayList<StubSpillsLossBill> sls;
 	StubBillPool pool=new StubBillPool();
+	User user;
 	public RM add(StubSpillsLossBill bill)
 	{
 		sls=pool.getSpillsLossBill();
@@ -35,6 +37,7 @@ public class StubCommodityBill
 			else
 				bill.setID("YSD-"+currentTime+"-00001");
 		}
+		bill.setOperator(user.getID()+user.getName());
 		pool.add(bill);
 		return RM.done;
 	}
@@ -58,6 +61,7 @@ public class StubCommodityBill
 			else
 				bill.setID("ZSD-"+currentTime+"-00001");
 		}
+		bill.setOperator(user.getID()+user.getName());
 		pool.add(bill);
 		return RM.done;
 	}
@@ -71,6 +75,8 @@ public class StubCommodityBill
 		else
 		{
 			String s = sls.get(sls.size()-1).getID();
+			if(s==null)
+				return RM.outsideStockError;
 			String a[]=s.split("-");
 			if(currentTime.equals(a[1]))//日期相同，继续编号
 			{
@@ -81,6 +87,7 @@ public class StubCommodityBill
 			else
 				bill.setID("BJD-"+currentTime+"-00001");
 		}
+		bill.setOperator(user.getID()+user.getName());
 		pool.add(bill);
 		return RM.done;
 	}
@@ -128,6 +135,12 @@ public class StubCommodityBill
 			}
 		}
 		return sum;
+	}
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
 	}
 }
 
