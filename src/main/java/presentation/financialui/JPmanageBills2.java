@@ -860,6 +860,7 @@ public class JPmanageBills2 extends JPanel {
 									newCash.setOp(Login.user.getName()+Login.user.getID());//修改操作员
 									//修改billList中被选中的单据
 									billList.changeChosen(newCash);
+									System.out.println("修改cash");
 									//清空信息
 									accountText.setText("");
 									totalText.setText("");

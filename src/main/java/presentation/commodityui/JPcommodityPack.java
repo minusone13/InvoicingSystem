@@ -153,11 +153,12 @@ public class JPcommodityPack extends JPanel {
 		return null;
 	}
 	/*删除选中的商品*/
-	public void removeChose(){
+	public void removeChosen(){
 		if(getChosenNum()>=1){
-			for(JPcommodity temp:commodities){
-				if(temp.isChosen()){
-					commodities.remove(temp);
+			for(int i=0;i<commodities.size();i++){
+				if(commodities.get(i).isChosen()){
+					commodities.remove(commodities.get(i));
+					i--;
 				}
 			}
 			update();

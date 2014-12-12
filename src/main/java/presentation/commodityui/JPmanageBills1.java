@@ -10,8 +10,8 @@ import javax.swing.JPanel;
 
 import userui.Frame;
 import businesslogic.BillStyle;
-import businesslogic.financialbl.Financial;
-import businesslogicservice.financialblservice.StubFinancialBlService;
+import businesslogic.stockmanagerbl.StubStockController;
+import businesslogicservice.commodityblservice.StubCommodityBlService;
 
 
 @SuppressWarnings("serial")
@@ -36,8 +36,8 @@ public class JPmanageBills1 extends JPanel {
 	ImageIcon spoilbillIcon1=new ImageIcon("src\\image\\bill\\spoilbill1.png");
 	//frame的引用
     Frame frame;
-    //逻辑层的财务人员接口
-    StubFinancialBlService fbl=new Financial();
+    //逻辑层的库管人员接口
+    StubCommodityBlService stcokbl=new StubStockController();
 	public JPmanageBills1(){
 		//设置窗口大小
 		this.setSize(445, 330);
@@ -109,7 +109,7 @@ public class JPmanageBills1 extends JPanel {
 				//从逻辑层读取单据信息填充单据列表
 				frame.getStock().getManageBills2().getBillList().getJPbillList().clear();
 				frame.getStock().getManageBills2().getBillList().reHome();
-//				frame.getStock().getManageBills2().getBillList().addGiftBillList(fbl.getAllOfReceiptBills());
+				frame.getStock().getManageBills2().getBillList().addGiftBillList(stcokbl.showGiftBills());
 				//切换
 				frame.getStock().getManageBills2().setVisible(true);
 				break;
@@ -117,25 +117,25 @@ public class JPmanageBills1 extends JPanel {
 				//切换
 				JPmanageBills1.this.setVisible(false);
 				//设置单据类型
-				frame.getFinancial().getManageBills2().setStyle(BillStyle.PaymentBill);
+				frame.getStock().getManageBills2().setStyle(BillStyle.AlertBill);
 				//从逻辑层读取单据信息填充单据列表
-				frame.getFinancial().getManageBills2().getBillList().getJPbillList().clear();
-				frame.getFinancial().getManageBills2().getBillList().reHome();
-				frame.getFinancial().getManageBills2().getBillList().addPaymentBillList(fbl.getAllOfPaymentBills());
+				frame.getStock().getManageBills2().getBillList().getJPbillList().clear();
+				frame.getStock().getManageBills2().getBillList().reHome();
+				frame.getStock().getManageBills2().getBillList().addAlertBillList(stcokbl.showAlertBills());
 				//切换
-				frame.getFinancial().getManageBills2().setVisible(true);
+				frame.getStock().getManageBills2().setVisible(true);
 				break;
 			case 13:spoilbill.setIcon(spoilbillIcon);
 				//切换
 				JPmanageBills1.this.setVisible(false);
 				//设置单据类型
-				frame.getFinancial().getManageBills2().setStyle(BillStyle.CashPaymentBill);
+				frame.getStock().getManageBills2().setStyle(BillStyle.SpillsLossBill);
 				//从逻辑层读取单据信息填充单据列表
-				frame.getFinancial().getManageBills2().getBillList().getJPbillList().clear();
-				frame.getFinancial().getManageBills2().getBillList().reHome();
-				frame.getFinancial().getManageBills2().getBillList().addCashPaymentBillList(fbl.getAllOfCashPaymentBills());
+				frame.getStock().getManageBills2().getBillList().getJPbillList().clear();
+				frame.getStock().getManageBills2().getBillList().reHome();
+				frame.getStock().getManageBills2().getBillList().addSpillsLossBillList(stcokbl.showSpillsLossBills());
 				//切换
-				frame.getFinancial().getManageBills2().setVisible(true);
+				frame.getStock().getManageBills2().setVisible(true);
 				break;
 			}
 		}

@@ -2,6 +2,8 @@ package presentation.commodityui;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -37,6 +39,10 @@ public class JPManagerCom extends JPanel{
 	private JPanel bottom=new JPanel();
 	//标记是谁用商品选择面板
 	private Role role;
+	//确认
+	JLabel comfirm;
+	//查询
+	JLabel findIcon;
 	public JPManagerCom(){
 		this.setSize(617, 370);
 		this.setLayout(null);
@@ -65,9 +71,10 @@ public class JPManagerCom extends JPanel{
 		find.setForeground(Color.white);
 		find.setFont(new Font("宋体",Font.BOLD,14));
 		//搜索按钮
-		JLabel findIcon=new JLabel();
-		findIcon.setIcon(new ImageIcon("src/image/ChooseCom/findIcon.png") );
+		findIcon=new JLabel();
+		findIcon.setIcon(new ImageIcon("src/image/ChooseCom/littleScan.png") );
 		findIcon.setBounds(575, 8, 24, 24);
+		findIcon.addMouseListener(new MouseListenerOfButton(1));
 		//head背景
 		JLabel bgOfHead=new JLabel();
 		bgOfHead.setBounds(0, 0, 617, 40);
@@ -81,9 +88,10 @@ public class JPManagerCom extends JPanel{
 		bgOfBottom.setBounds(0, 0, 617, 30);
 		bgOfBottom.setIcon(new ImageIcon("src/image/ChooseCom/bottom.png") );
 		//确认标签
-		JLabel comfirm=new JLabel();
+		comfirm=new JLabel();
 		comfirm.setBounds(575, 3, 24, 24);
 		comfirm.setIcon(new ImageIcon("src/image/ChooseCom/confirm.png") );
+		comfirm.addMouseListener(new MouseListenerOfButton(2));
 		
 		head.add(findCom,0);
 		head.add(find,1);
@@ -98,6 +106,71 @@ public class JPManagerCom extends JPanel{
 		this.add(head,2);
 		this.add(bottom,3);
 		this.addMouseListener(new MouseListenerGetXY());
+	}
+	public JPtreeContent getContent() {
+		return content;
+	}
+	public void setContent(JPtreeContent content) {
+		this.content = content;
+	}
+	public JPcommodityPack getCommodities() {
+		return commodities;
+	}
+	public void setCommodities(JPcommodityPack commodities) {
+		this.commodities = commodities;
+	}
+	public class MouseListenerOfButton implements MouseListener{
+		private int num;//1、查询 2、确认
+		public MouseListenerOfButton(int N){
+			num=N;
+		}
+		public void mouseClicked(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+		public void mousePressed(MouseEvent e) {
+			// TODO Auto-generated method stub
+			switch(num){
+			case 1:
+				findIcon.setIcon(new ImageIcon("src/image/function/littleScanR.png") );
+				break;
+			case 2:
+				comfirm.setIcon(new ImageIcon("src/image/function/confirmR.png") );
+				break;
+			}
+		}
+		public void mouseReleased(MouseEvent e) {
+			// TODO Auto-generated method stub
+			switch(num){
+			case 1:
+				findIcon.setIcon(new ImageIcon("src/image/ChooseCom/littleScan.png") );
+				break;
+			case 2:
+				comfirm.setIcon(new ImageIcon("src/image/ChooseCom/confirm.png") );
+				break;
+			}
+		}
+		public void mouseEntered(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+		public void mouseExited(MouseEvent e) {
+			// TODO Auto-generated method stub
+			switch(num){
+			case 1:
+				findIcon.setIcon(new ImageIcon("src/image/ChooseCom/littleScan.png") );
+				break;
+			case 2:
+				comfirm.setIcon(new ImageIcon("src/image/ChooseCom/confirm.png") );
+				break;
+			}
+		}
+	}
+	public JLabel getComfirm() {
+		return comfirm;
+	}
+	public void setComfirm(JLabel comfirm) {
+		this.comfirm = comfirm;
 	}
 	public Role getRole() {
 		return role;

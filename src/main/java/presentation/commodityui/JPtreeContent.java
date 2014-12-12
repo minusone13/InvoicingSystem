@@ -99,11 +99,24 @@ public class JPtreeContent extends JPanel {
 	}
 	/*删除当前选中的节点*/
 	public void removeChosen(){
-		removeTreeNode((DefaultMutableTreeNode) tree.getLastSelectedPathComponent());
+		DefaultMutableTreeNode lastSelected=(DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
+		if(lastSelected!=null){
+			removeTreeNode(lastSelected);
+		}
+		else{
+			System.out.println("请选择要删除的分类");
+		}
 	}
 	/*增加新节点到当前选中的节点*/
 	public void addTreeNodeToChosen(DefaultMutableTreeNode newChild){
-		addTreeNode(newChild,(DefaultMutableTreeNode) tree.getLastSelectedPathComponent());
+		DefaultMutableTreeNode lastSelected=(DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
+		if(lastSelected!=null){
+			addTreeNode(newChild,lastSelected);
+		}
+		else{
+			System.out.println("请选择父节点分类");
+		}
+		
 	}
 	
 	/*获取和给予管理商品界面的引用*/

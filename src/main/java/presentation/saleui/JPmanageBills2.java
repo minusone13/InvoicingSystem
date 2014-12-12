@@ -174,6 +174,7 @@ public class JPmanageBills2 extends JPanel {
 				table.setColumnNames(items);
 				table.setList(new String[1][3]);
 				table.updateShow();
+				table.setVisible(true);
 				break;
 			case SpillsLossBill:
 				table.setVisible(false);
@@ -182,25 +183,28 @@ public class JPmanageBills2 extends JPanel {
 				table.setVisible(false);
 				break;
 			case PurBackSheet:
-				String[] temp2={"商品","型号","数量"};
+				String[] temp2={"编号","名称","型号","数量","单价","金额","备注"};
 				items=temp2;
 				table.setColumnNames(items);
-				table.setList(new String[1][3]);
+				table.setList(new String[1][7]);
 				table.updateShow();
+				table.setVisible(true);
 				break;
 			case SaleSheet:
-				String[] temp3={"商品","型号","数量"};
+				String[] temp3={"编号","名称","型号","数量","单价","金额","备注"};
 				items=temp3;
 				table.setColumnNames(items);
-				table.setList(new String[1][3]);
+				table.setList(new String[1][7]);
 				table.updateShow();
+				table.setVisible(true);
 				break;
 			case SaleBackSheet:
-				String[] temp4={"商品","型号","数量"};
+				String[] temp4={"编号","名称","型号","数量","单价","金额","备注"};
 				items=temp4;
 				table.setColumnNames(items);
-				table.setList(new String[1][3]);
+				table.setList(new String[1][7]);
 				table.updateShow();
+				table.setVisible(true);
 				break;
 			case ReceiptBill:
 				String[] temp5={"银行账户","转账金额","备注"};
@@ -208,6 +212,7 @@ public class JPmanageBills2 extends JPanel {
 				table.setColumnNames(items);
 				table.setList(new String[1][3]);
 				table.updateShow();
+				table.setVisible(true);
 				break;
 			case PaymentBill:
 				String[] temp6={"银行账户","转账金额","备注"};
@@ -215,13 +220,15 @@ public class JPmanageBills2 extends JPanel {
 				table.setColumnNames(items);
 				table.setList(new String[1][3]);
 				table.updateShow();
+				table.setVisible(true);
 				break;
 			case PurSheet:
-				String[] temp7={"商品","型号","数量"};
+				String[] temp7={"编号","名称","型号","数量","单价","金额","备注"};
 				items=temp7;
 				table.setColumnNames(items);
-				table.setList(new String[1][3]);
+				table.setList(new String[1][7]);
 				table.updateShow();
+				table.setVisible(true);
 				break;
 			case CashPaymentBill:
 				String[] temp8={"条目名","金额","备注"};
@@ -229,6 +236,7 @@ public class JPmanageBills2 extends JPanel {
 				table.setColumnNames(items);
 				table.setList(new String[1][3]);
 				table.updateShow();
+				table.setVisible(true);
 				break;
 			}
 			
