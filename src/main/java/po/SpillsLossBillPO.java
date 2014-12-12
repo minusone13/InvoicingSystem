@@ -15,7 +15,7 @@ public class SpillsLossBillPO extends PO implements Serializable{
 	}
 	private BillStyle style = BillStyle.SpillsLossBill;//订单种类
 	private Date date;
-	String userID;
+	String operator;
 	private String ID;//单据编号
 	private Type t;//溢出or损坏种类
 	private CommodityPO comPO;//报告的商品，商品中的数量为溢出损坏数量
@@ -34,14 +34,14 @@ public class SpillsLossBillPO extends PO implements Serializable{
 	}
 	public SpillsLossBillPO(String userID,String ID,Type t, CommodityPO comPO)
 	{
-		this.userID=userID;
+		this.operator=userID;
 		this.ID=ID;
 		this.t=t;
 		this.comPO=comPO;
 	}
 	public SpillsLossBillPO(String userID,String ID,Type t, CommodityPO comPO,BillState state)
 	{
-		this.userID=userID;
+		this.operator=userID;
 		this.ID=ID;
 		this.t=t;
 		this.comPO=comPO;
@@ -50,12 +50,13 @@ public class SpillsLossBillPO extends PO implements Serializable{
 	public SpillsLossBillPO(Date date,String userID,String ID,Type t, CommodityPO comPO,BillState state)
 	{
 		this.date=date;
-		this.userID=userID;
+		this.operator=userID;
 		this.ID=ID;
 		this.t=t;
 		this.comPO=comPO;
 		this.state=state;
 	}
+	public SpillsLossBillPO(){}
 	public BillStyle getStyle() {
 		return style;
 	}
@@ -74,11 +75,11 @@ public class SpillsLossBillPO extends PO implements Serializable{
 	public void setState(BillState state) {
 		this.state = state;
 	}
-	public String getUserID() {
-		return userID;
+	public String getOperator() {
+		return operator;
 	}
-	public void setUserID(String userID) {
-		this.userID = userID;
+	public void setOperator(String userID) {
+		this.operator = userID;
 	}
 	public Date getDate() {
 		return date;

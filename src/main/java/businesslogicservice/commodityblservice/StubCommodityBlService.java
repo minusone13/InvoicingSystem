@@ -1,5 +1,6 @@
 package businesslogicservice.commodityblservice;
 import java.util.ArrayList;
+import java.util.Date;
 
 import po.stockpo.CommodityPO;
 import dataservice.commoditydataservice.*;
@@ -36,4 +37,7 @@ public interface StubCommodityBlService {
 	public ArrayList<GiftBillVO> showGiftBills();
 	public ArrayList<SpillsLossBillVO> showSpillsLossBills();
 	public ArrayList<AlertBillVO> showAlertBills();
+	
+	public CountVO count();//库存盘点
+	public ArrayList<CommodityVO> getRecords(Date d1, Date d2);//库存查看,当中的ArrayList<CommodityRecordVO> 只有第零项有值，是查看的数据
 }

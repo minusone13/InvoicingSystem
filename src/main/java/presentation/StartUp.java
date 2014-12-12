@@ -19,10 +19,11 @@ public class StartUp {
 	{
 		Initial initial= new Initial();
 		initial.initialAll();
+		initial.initialTest();//向单据文件写入一些单据
 		//总经理的驱动程序
-//		StubManagerBlService manager = new StubManager();
-//		ManagerBLDriver managerDriver = new ManagerBLDriver(manager);
-//		managerDriver.drive();
+		StubManagerBlService manager = new StubManager();
+		ManagerBLDriver managerDriver = new ManagerBLDriver(manager);
+		managerDriver.drive();
 		//财务人员的驱动程序
 		StubFinancialBlService financial = new Financial();
 		FinancialBLDriver driver = new FinancialBLDriver(financial);

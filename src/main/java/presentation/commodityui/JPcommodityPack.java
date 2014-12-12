@@ -19,6 +19,7 @@ public class JPcommodityPack extends JPanel {
 	private JScrollPane SCR;
 	private JPanel pack=null;
 	private ArrayList<JPcommodity> commodities=new ArrayList<JPcommodity>();
+	private JPManagerCom JPmanagerCom;
 	public JPcommodityPack(){
 		this.setSize(467, 300);
 		//设置布局
@@ -56,6 +57,8 @@ public class JPcommodityPack extends JPanel {
 		int num=0;
 		for(int i=0;i<lines;i++){
 			for(int j=0;j<5;j++){
+				//传递引用
+				commodities.get(num).setJPmanagerCom(JPmanagerCom);
 				commodities.get(num).setLocation(j*90, 20+i*110);
 				pack.add(commodities.get(num),num);
 				num++;
@@ -135,22 +138,34 @@ public class JPcommodityPack extends JPanel {
 	}
 	/*返回选中的商品*/
 	public ArrayList<CommodityVO> getAllChosen(){
-		ArrayList<CommodityVO> result=new ArrayList<CommodityVO>();
-		for(JPcommodity temp:commodities){
-			if(temp.isChosen()){
-				result.add(temp.getCommodity());
+		if(getChosenNum()>=1){
+			ArrayList<CommodityVO> result=new ArrayList<CommodityVO>();
+			for(JPcommodity temp:commodities){
+				if(temp.isChosen()){
+					result.add(temp.getCommodity());
+				}
 			}
+			return result;
 		}
-		return result;
+		else{
+			System.out.println("没有选择任何商品");
+		}
+		return null;
 	}
 	/*删除选中的商品*/
 	public void removeChose(){
-		for(JPcommodity temp:commodities){
-			if(temp.isChosen()){
-				commodities.remove(temp);
+		if(getChosenNum()>=1){
+			for(JPcommodity temp:commodities){
+				if(temp.isChosen()){
+					commodities.remove(temp);
+				}
 			}
+			update();
 		}
-		update();
+		else{
+			System.out.println("请选择你要删除的商品");
+		}
+	
 	}
 	/*返回选中商品的数量*/
 	public int getChosenNum(){
@@ -162,6 +177,20 @@ public class JPcommodityPack extends JPanel {
 		}
 		return i;
 	}
+	/*修改选中的商品*/
+	public void changeChosen(CommodityVO vo){
+		if(getChosenNum()==1){//如果只选中了一个商品
+			for(JPcommodity temp:commodities){
+				if(temp.isChosen()){
+					temp.change(vo);
+				}
+			}
+		}
+		else{
+			System.out.println("只能同时修改一个商品");
+		}
+		
+	}
 	public ArrayList<JPcommodity> getCommodities() {
 		return commodities;
 	}
@@ -170,5 +199,11 @@ public class JPcommodityPack extends JPanel {
 	}
 
 	public static void main(String[] args) {
+	}
+	public JPManagerCom getJPmanagerCom() {
+		return JPmanagerCom;
+	}
+	public void setJPmanagerCom(JPManagerCom jPmanagerCom) {
+		JPmanagerCom = jPmanagerCom;
 	}
 }

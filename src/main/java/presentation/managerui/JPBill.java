@@ -469,19 +469,19 @@ public class JPBill extends JPanel {
 		String s1="";
 		String s2="";
 		switch(style){
-		case GiftBill:
+		case GiftBill:s1="GiftBill";
 			break;
-		case SpillsLossBill:
+		case SpillsLossBill:s1="SpillsLossBill";
 			break;
-		case AlertBill:
+		case AlertBill:s1="AlertBill";
 			break;
-		case PurSheet:
+		case PurSheet:s1="PurSheet";
 			break;
-		case PurBackSheet:
+		case PurBackSheet:s1="PurBackSheet";
 			break;
-		case SaleSheet:
+		case SaleSheet:s1="SaleSheet";
 			break;
-		case SaleBackSheet:
+		case SaleBackSheet:s1="SaleBackSheet";
 			break;
 		case ReceiptBill:s1="Receiptbill";
 			break;

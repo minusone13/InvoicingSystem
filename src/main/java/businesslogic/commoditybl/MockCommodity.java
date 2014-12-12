@@ -1,11 +1,10 @@
 package businesslogic.commoditybl;
 
 import java.util.ArrayList;
+import java.util.Date;
 
-import po.*;
 import po.stockpo.CommodityPO;
 import po.stockpo.CommodityRecordPO;
-import vo.*;
 import vo.stockvo.CommodityRecordVO;
 import vo.stockvo.CommodityVO;
 
@@ -22,6 +21,19 @@ public class MockCommodity {
 	int alertLine;
 	ArrayList<CommodityRecord> record=new ArrayList<CommodityRecord>();
 	ArrayList<CommodityRecord> prepareRecord=new ArrayList<CommodityRecord>();
+	public void computeRecordsTotal(Date d1,Date d2)
+	{//用于库存查看
+		ArrayList<CommodityRecord> result = new ArrayList<CommodityRecord>();
+		CommodityRecord temp = new CommodityRecord(0,0,0,0);
+		for(int i=0; i<record.size(); i++)
+		{
+			CommodityRecord r = record.get(i);
+			if(r.getDate().after(d1) && r.getDate().before(d2))
+				temp.plus(r);
+		}
+		result.add(temp);
+		record = result;
+	}
 	public int checkAlert()
 	{
 		return alertLine-number;
@@ -52,24 +64,27 @@ public class MockCommodity {
 	{
 		double temp=0;
 		for(int i=0;i<record.size();i++)
-			temp+=record.get(i).getOutquantity()*record.get(i).getOutamount();
+			temp+=record.get(i).getOutamount();
 		return temp;
 	}
 	public MockCommodity(){}
 	public MockCommodity(CommodityPO po)
 	{
-		parent=po.getParent();
-		name=po.getName();
-		id=parent+"\\"+name;
-		model=po.getModel();
-		number=po.getNumber();
-		in=po.getIn();
-		out=po.getOut();
-		lastin=po.getLastIn();
-		lastout=po.getLastOut();
-		alertLine=po.getAlertLine();
-		record=posToCom(po.getRecord());
-		prepareRecord=posToCom(po.getPrepareRecord());
+		if(po!=null)
+		{
+			parent=po.getParent();
+			name=po.getName();
+			id=parent+"\\"+name;
+			model=po.getModel();
+			number=po.getNumber();
+			in=po.getIn();
+			out=po.getOut();
+			lastin=po.getLastIn();
+			lastout=po.getLastOut();
+			alertLine=po.getAlertLine();
+			record=posToCom(po.getRecord());
+			prepareRecord=posToCom(po.getPrepareRecord());
+		}
 	}
 	public MockCommodity(CommodityVO vo)
 	{

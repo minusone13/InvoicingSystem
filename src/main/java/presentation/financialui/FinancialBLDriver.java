@@ -24,13 +24,13 @@ public class FinancialBLDriver {
 	
 	public void drive() {
 		
-		boolean result2 = fbs.addAccount("ICBC", 100);
-		if(result2==true) System.out.println("ADD SUCCESS!");
-		
-		
-		
-		boolean result3 = fbs.addAccount("BC", 100);
-		if(result2==true) System.out.println("ADD SUCCESS!");
+//		boolean result2 = fbs.addAccount("ICBC", 100);
+//		if(result2==true) System.out.println("ADD SUCCESS!");
+//		
+//		
+//		
+//		boolean result3 = fbs.addAccount("BC", 100);
+//		if(result2==true) System.out.println("ADD SUCCESS!");
 		
 		//boolean result5 = fbs.updateAccount("00001", "00100");
 		//if(result5==true) System.out.println("UPDATE SUCCESS!");
@@ -64,19 +64,22 @@ public class FinancialBLDriver {
 		if(result8==true) System.out.println("creat SUCCESS!");
 		else System.out.println("FAILE!");
 		*/
-		/*
+		
 		ArrayList<PaymentVO> payments = fbs.getAllOfPaymentBills();
-		PaymentVO vo = payments.get(0);
+		if(!payments.isEmpty()){
+			PaymentVO vo = payments.get(0);
+			
+			
+			
+			System.out.println(payments.size());
+			System.out.println(vo.getID());
+			System.out.println( vo.getCustomer());
+			System.out.println( vo.getOp());
+					
+			System.out.println(vo.getTotal());
+		}
 		
-		
-		
-		System.out.println(payments.size());
-		System.out.println(vo.getID());
-		System.out.println( vo.getCustomer());
-		System.out.println( vo.getOp());
-				
-		System.out.println(vo.getTotal());
-		*/
+	
 		
 	}
 }

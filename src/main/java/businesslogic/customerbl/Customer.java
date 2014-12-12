@@ -1,9 +1,11 @@
 package businesslogic.customerbl;
 
+import java.io.Serializable;
+
 import po.CustomerPO;
 import vo.CustomerVO;
 
-public class Customer {
+public class Customer{
 	private int type;//客户的级别
 	private String name;//客户的姓名
 	private String id;//客户编号；
@@ -28,7 +30,18 @@ public class Customer {
 		this.shouldPay=vo.getShouldPay();
 		this.deSaler=vo.getdeSaler();
 	};
-	
+	public Customer(CustomerPO po){
+		this.type=po.gettype();
+		this.name=po.getname();
+		this.id=po.getid();
+		this.address=po.getaddress();
+		this.phonenumber=po.getphonenumber();
+		this.postcode=po.getpostcode();
+		this.maxOwe=po.getmaxOwe();
+		this.shouldGive=po.getShouldGive();
+		this.shouldPay=po.getShouldPay();
+		this.deSaler=po.getdeSaler();
+	};
 	
 	public String getid(){
 		return this.id;

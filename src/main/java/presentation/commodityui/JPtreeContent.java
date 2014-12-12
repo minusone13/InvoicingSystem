@@ -2,6 +2,8 @@ package presentation.commodityui;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -18,6 +20,10 @@ import javax.swing.tree.TreePath;
 public class JPtreeContent extends JPanel {
 
 	private JScrollPane SCR;
+	private JPManagerCom JPmanagerCom;//整个商品管理界面的引用
+	private DefaultTreeModel treeModel;//树模型
+	private final JTree tree ;//树
+	DefaultMutableTreeNode top ;
 	public JPtreeContent(){
 		this.setSize(150, 350);
 		this.setLayout(null);
@@ -45,13 +51,15 @@ public class JPtreeContent extends JPanel {
         node2.add(new DefaultMutableTreeNode("小雯"));
         node2.add(new DefaultMutableTreeNode("小夏"));
  
-        DefaultMutableTreeNode top = new DefaultMutableTreeNode("职员管理");
+        top= new DefaultMutableTreeNode("职员管理");
  
         top.add(new DefaultMutableTreeNode("总经理"));
         top.add(node1);
         top.add(node2);
-        DefaultTreeModel treeModel=new DefaultTreeModel(top);//通过树节点对象创建树模型对象
-        final JTree tree = new JTree(treeModel);//通过树模型对象创建树对象
+        
+        treeModel=new DefaultTreeModel(top);//通过树节点对象创建树模型对象
+        tree= new JTree(treeModel);//通过树模型对象创建树对象
+        tree.setEditable(true);//设置树可编辑
         //设置树透明
         tree.setOpaque(false); 
         //设置树节点透明
@@ -68,18 +76,41 @@ public class JPtreeContent extends JPanel {
         tree.addTreeSelectionListener(new TreeSelectionListener(){
 
         public void valueChanged(TreeSelectionEvent e) {
-
+//        	JPmanagerCom.addMouseListener(JPtreeContent.this);
         TreePath treePath=e.getPath();
-
          System.out.println("path="+treePath.getPath()[0]+"\ntreePath"+treePath);
+         //取得新节点的父节点
 
         }
         });
-        //返回当前选择的节点
-        //DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
+        
         SCR.setViewportView(tree);
         
 		add(SCR,0);
 		add(back,1);
+	}
+	/*删除树节点*/
+	public void removeTreeNode(DefaultMutableTreeNode node){
+		treeModel.removeNodeFromParent(node);
+	}
+	/*增加新节点*/
+	public void addTreeNode(DefaultMutableTreeNode newChild,DefaultMutableTreeNode parent){
+		treeModel.insertNodeInto(newChild, parent, parent.getChildCount());
+	}
+	/*删除当前选中的节点*/
+	public void removeChosen(){
+		removeTreeNode((DefaultMutableTreeNode) tree.getLastSelectedPathComponent());
+	}
+	/*增加新节点到当前选中的节点*/
+	public void addTreeNodeToChosen(DefaultMutableTreeNode newChild){
+		addTreeNode(newChild,(DefaultMutableTreeNode) tree.getLastSelectedPathComponent());
+	}
+	
+	/*获取和给予管理商品界面的引用*/
+	public JPManagerCom getJPmanagerCom() {
+		return JPmanagerCom;
+	}
+	public void setJPmanagerCom(JPManagerCom jPmanagerCom) {
+		JPmanagerCom = jPmanagerCom;
 	}
 }

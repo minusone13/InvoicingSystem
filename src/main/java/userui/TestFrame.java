@@ -6,7 +6,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 
+
 import businesslogic.BillStyle;
+import businesslogic.Role;
 import presentation.WarningPanel;
 import presentation.saleui.JPfunctions;
 import presentation.saleui.JPmanageBills1;
@@ -40,10 +42,9 @@ public class TestFrame extends JFrame {
 		this.addMouseListener(new MouseListenerGetXY());
 	}
 	public static void main(String[] args) {
-		TestFrame testJP=new TestFrame(new Sale());
-
-
-
+		JPManagerCom test=new JPManagerCom();
+		test.setRole(Role.STOCK_STAFF);
+		TestFrame testJP=new TestFrame(test);
 	}
 
 }

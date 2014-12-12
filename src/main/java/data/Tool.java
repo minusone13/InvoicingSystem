@@ -28,4 +28,19 @@ public class Tool {
 	    }
 		return f;
 	}
+	public static void Clean(String s)
+	{
+		File f = new File(s);
+		try
+	    {
+	        f.createNewFile();
+	        ObjectOutputStream oos=new ObjectOutputStream(new FileOutputStream(f));
+	        oos.writeObject(null);
+	        oos.close();
+	    }
+	    catch(IOException e)
+	    {
+	        System.out.println(e);
+	    }
+	}
 }

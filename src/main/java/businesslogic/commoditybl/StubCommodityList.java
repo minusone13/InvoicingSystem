@@ -15,7 +15,7 @@ import vo.RM;
 
 public class StubCommodityList {//商品列表 haha
 	static StubCommodityDataService comdata;
-	User user=new User("I0001",Role.STOCK_STAFF,"default","default","default");
+	User user;
 	public ArrayList<CommodityVO> findCommodity(String name)
 	{
 		ArrayList <CommodityPO> pos=comdata.findCommodity(name);
@@ -78,7 +78,11 @@ public class StubCommodityList {//商品列表 haha
 			quantitytemp+=quantity;
 			com.setIn(total/quantitytemp);
 		}
-		CommodityRecord r = new CommodityRecord(id,new Date(),0,quantity,0,price,0,quantity,0,price);
+		CommodityRecord r;
+		if(price!=0)
+			r = new CommodityRecord(id,new Date(),0,quantity,0,quantity*price,0,quantity,0,quantity*price);
+		else
+			r = new CommodityRecord(id,new Date(),0,quantity,0,0,0,0,0,0);
 		com.setNumber(num+quantity);
 		com.add(r);
 		com.prepareDelete(r);
@@ -97,6 +101,7 @@ public class StubCommodityList {//商品列表 haha
 		int num = com.getNumber();
 		if(num<quantity)
 			return RM.insufficient;
+		CommodityRecord r;
 		if(price!=0)
 		{
 			com.setLastout(price);
@@ -111,9 +116,11 @@ public class StubCommodityList {//商品列表 haha
 				quantitytemp+=quantity;
 				com.setOut(total/quantitytemp);
 			}
+			r = new CommodityRecord(id,new Date(),quantity,0,quantity*price,0,quantity,0,quantity*price,0);
 		}
+		else
+			r = new CommodityRecord(id,new Date(),quantity,0,0,0,0,0,0,0);//报损不改变销售数量和金额
 		com.setNumber(num-quantity);
-		CommodityRecord r = new CommodityRecord(id,new Date(),quantity,0,price,0,quantity,0,price,0);
 		com.add(r);
 		com.prepareDelete(r);
 		boolean result = comdata.update(com.toPO());
@@ -138,7 +145,7 @@ public class StubCommodityList {//商品列表 haha
 		int num = com.getPotential();
 		if(num<quantity)
 			return RM.insufficient;
-		CommodityRecord r = new CommodityRecord(id,new Date(),0,quantity,0,price,0,quantity,0,price);
+		CommodityRecord r = new CommodityRecord(id,new Date(),0,quantity,0,quantity*price,0,quantity,0,quantity*price);
 		com.prepareAdd(r);
 		boolean result = comdata.update(com.toPO());
 		if(result)
@@ -154,7 +161,7 @@ public class StubCommodityList {//商品列表 haha
 		MockCommodity com=new MockCommodity(po);
 		if(com.getPotential()<quantity)
 			return RM.insufficient;
-		CommodityRecord r = new CommodityRecord(id,new Date(),quantity,0,price,0,quantity,0,price,0);
+		CommodityRecord r = new CommodityRecord(id,new Date(),quantity,0,quantity*price,0,quantity,0,quantity*price,0);
 		com.prepareAdd(r);
 		boolean result = comdata.update(com.toPO());
 		if(result)
@@ -178,7 +185,7 @@ public class StubCommodityList {//商品列表 haha
 		quantitytemp-=quantity;
 		if(quantitytemp!=0)
 			com.setIn(total/quantitytemp);
-		CommodityRecord r = new CommodityRecord(id,new Date(),0,quantity,0,price,0,quantity,0,price);
+		CommodityRecord r = new CommodityRecord(id,new Date(),0,quantity,0,quantity*price,0,quantity,0,quantity*price);
 		com.setNumber(num-quantity);
 		com.add(r);
 		com.prepareDelete(r);
@@ -202,6 +209,7 @@ public class StubCommodityList {//商品列表 haha
 			return RM.notfound;
 		MockCommodity com=new MockCommodity(po);
 		int num = com.getNumber();
+		CommodityRecord r;
 		if(price!=0)
 		{
 			//下面调整平均进价
@@ -216,9 +224,11 @@ public class StubCommodityList {//商品列表 haha
 				if(quantitytemp!=0)
 					com.setOut(total/quantitytemp);
 			}
+			r = new CommodityRecord(id,new Date(),quantity,0,quantity*price,0,quantity,0,quantity*price,0);
 		}
+		else
+			r = new CommodityRecord(id,new Date(),quantity,0,0,0,0,0,0,0);
 		com.setNumber(num+quantity);
-		CommodityRecord r = new CommodityRecord(id,new Date(),quantity,0,price,0,quantity,0,price,0);
 		com.add(r);
 		com.prepareDelete(r);
 		boolean result = comdata.update(com.toPO());
@@ -320,5 +330,26 @@ public class StubCommodityList {//商品列表 haha
 				income+=po.getIncome();
 		}
 		return income;
+	}
+	public CountVO count()
+	{//库存盘点
+		ArrayList<CommodityPO> temp = comdata.getAllCommodity();
+		ArrayList<CommodityVO> result = new ArrayList<CommodityVO>();
+		for(int i=0;i<temp.size();i++)
+			result.add(new MockCommodity(temp.get(i)).toVO());
+		return new CountVO(result,new Date(),1);
+	}
+	
+	public ArrayList<CommodityVO> getRecords(Date d1, Date d2)
+	{//库存查看
+		ArrayList<CommodityVO> result = new ArrayList<CommodityVO>();
+		ArrayList<CommodityPO> temp = comdata.getAllCommodity();
+		for(int i=0; i<temp.size();i++)
+		{
+			MockCommodity com = new MockCommodity(temp.get(i));
+			com.computeRecordsTotal(d1, d2);
+			result.add(com.toVO());
+		}
+		return result;
 	}
 }

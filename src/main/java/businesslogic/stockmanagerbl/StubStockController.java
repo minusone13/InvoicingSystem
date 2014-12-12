@@ -2,6 +2,7 @@ package businesslogic.stockmanagerbl;
 
 import java.util.*;
 
+import presentation.userui.Login;
 import dataservice.commoditydataservice.*;
 import businesslogic.Role;
 import businesslogic.commoditybillbl.*;
@@ -20,10 +21,20 @@ import vo.uservo.UserVO;
 public class StubStockController implements StubCommodityBlService, StockBlForSalesMen, StockBlForManager,StockBlForFinancial
 {//负责与界面及其他程序员的交互
 	StubCommodityList l=new StubCommodityList();
+	StubCommodityBill bl=new StubCommodityBill();
 	UserService us=new UserController();
 	static StubCommodityDataService comdata;
-	User user=new User("I0001",Role.STOCK_STAFF,"default","default","default");
-	
+	User user=new User("I0000",Role.STOCK_STAFF,"DefaultStock","default","Liu");
+	public StubStockController()
+	{
+		UserVO temp = Login.user;
+		if(temp!=null)
+		{
+			user = new User(temp);
+		}
+		l.setUser(user);
+		bl.setUser(user);
+	}
 	StubBillPool pool = new StubBillPool();
 	public StubCommodityList getCommodityList ()
 	{
@@ -137,14 +148,17 @@ public class StubStockController implements StubCommodityBlService, StockBlForSa
 	
 	public RM updateCommodity(CommodityVO vo)
 	{
-		return l.updateCommodity(vo);
+		RM result = l.updateCommodity(vo);
+		us.addRecord(new OperationRecord(user,"updateCommodity",result));
+		return result;
 	}
 	public RM updateCategory(CategoryVO vo)
 	{
-		return l.updateCategory(vo);
+		RM result = l.updateCategory(vo);
+		us.addRecord(new OperationRecord(user,"updateCategory",result));
+		return result;
 	}
 	
-	StubCommodityBill bl=new StubCommodityBill();
 	public RM creat(GiftBillVO vo)
 	{
 		StubGiftBill gb=new StubGiftBill();
@@ -215,5 +229,15 @@ public class StubStockController implements StubCommodityBlService, StockBlForSa
 		for(int i=0; i<h.size();i++)
 			result.add(h.get(i).getVO());
 		return result;
+	}
+	
+	public CountVO count()
+	{//库存盘点
+		return l.count();
+	}
+	
+	public ArrayList<CommodityVO> getRecords(Date d1, Date d2)
+	{//库存查看
+		return l.getRecords(d1, d2);
 	}
 }

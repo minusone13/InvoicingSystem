@@ -1,6 +1,8 @@
 package po;
 
-public class CustomerPO {
+import java.io.Serializable;
+
+public class CustomerPO implements Serializable{
 	int type;
 	String name;
 	String id;

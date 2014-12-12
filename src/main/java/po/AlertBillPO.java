@@ -11,7 +11,7 @@ import po.stockpo.CommodityPO;
 public class AlertBillPO extends PO implements Serializable{
 	private BillStyle style = BillStyle.AlertBill;
 	private Date date;
-	String userID;
+	String operator;
 	private String ID;
 	private CommodityPO comPO;
 	private int shortage;
@@ -21,7 +21,7 @@ public class AlertBillPO extends PO implements Serializable{
 	public AlertBillPO(Date date,String userID,String ID,CommodityPO comPO, int shortage,BillState state)
 	{
 		this.date=date;
-		this.userID=userID;
+		this.operator=userID;
 		this.ID=ID;
 		this.comPO=comPO;
 		this.shortage=shortage;
@@ -29,7 +29,7 @@ public class AlertBillPO extends PO implements Serializable{
 	}
 	public AlertBillPO(String userID,String ID,CommodityPO comPO, int shortage,BillState state)
 	{
-		this.userID=userID;
+		this.operator=userID;
 		this.ID=ID;
 		this.comPO=comPO;
 		this.shortage=shortage;
@@ -37,7 +37,7 @@ public class AlertBillPO extends PO implements Serializable{
 	}
 	public AlertBillPO(String userID,String ID, CommodityPO comPO, int shortage)
 	{
-		this.userID=userID;
+		this.operator=userID;
 		this.ID=ID;
 		this.comPO=comPO;
 		this.shortage=shortage;
@@ -90,12 +90,12 @@ public class AlertBillPO extends PO implements Serializable{
 		this.state = state;
 	}
 
-	public String getUserID() {
-		return userID;
+	public String getOperator() {
+		return operator;
 	}
 
-	public void setUserID(String userID) {
-		this.userID = userID;
+	public void setOperator(String userID) {
+		this.operator = userID;
 	}
 
 	public Date getDate() {
