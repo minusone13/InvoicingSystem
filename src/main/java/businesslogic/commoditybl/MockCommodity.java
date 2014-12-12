@@ -2,10 +2,8 @@ package businesslogic.commoditybl;
 
 import java.util.ArrayList;
 
-import po.*;
 import po.stockpo.CommodityPO;
 import po.stockpo.CommodityRecordPO;
-import vo.*;
 import vo.stockvo.CommodityRecordVO;
 import vo.stockvo.CommodityVO;
 

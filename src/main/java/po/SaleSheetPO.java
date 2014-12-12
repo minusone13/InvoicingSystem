@@ -1,20 +1,18 @@
 package po;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
-import businesslogic.commoditybl.MockCommodity;
-import businesslogic.customerbl.Customer;
+import po.stockpo.CommodityPO;
 
 
-public class SaleSheetPO extends PO implements Serializable{
-	Customer customer;
+public class SaleSheetPO extends PO{
+	CustomerPO customer;
 	String id;
 	String userid;
 	Date date;
 	String stock;//仓库？
-	ArrayList<MockCommodity> sheet;//是不是应该是个arraylist<>?
+	ArrayList<CommodityPO> sheet;//是不是应该是个arraylist<>?
 	double money1;//总金额
 	double money2;
 	double discount;
@@ -79,11 +77,11 @@ public class SaleSheetPO extends PO implements Serializable{
 		this.pmoney=pmoney;
 	}
 	
-	public Customer getcustomer(){
+	public CustomerPO getcustomer(){
 		return customer;
 	}
 	
-	public void setCustomer(Customer customer){
+	public void setCustomer(CustomerPO customer){
 		this.customer=customer;
 	}
 	
@@ -103,11 +101,11 @@ public class SaleSheetPO extends PO implements Serializable{
 		this.stock=stock;
 	}
 	
-	public ArrayList<MockCommodity> getsheet(){
+	public ArrayList<CommodityPO> getsheet(){
 		return sheet;
 	}
 	
-	public void setsheet(ArrayList<MockCommodity> sheet){
+	public void setsheet(ArrayList<CommodityPO> sheet){
 		this.sheet=sheet;
 	}
 	

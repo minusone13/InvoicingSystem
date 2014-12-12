@@ -66,16 +66,19 @@ public class FinancialBLDriver {
 		*/
 		
 		ArrayList<PaymentVO> payments = fbs.getAllOfPaymentBills();
-		PaymentVO vo = payments.get(0);
+		if(!payments.isEmpty()){
+			PaymentVO vo = payments.get(0);
+			
+			
+			
+			System.out.println(payments.size());
+			System.out.println(vo.getID());
+			System.out.println( vo.getCustomer());
+			System.out.println( vo.getOp());
+					
+			System.out.println(vo.getTotal());
+		}
 		
-		
-		
-		System.out.println(payments.size());
-		System.out.println(vo.getID());
-		System.out.println( vo.getCustomer());
-		System.out.println( vo.getOp());
-				
-		System.out.println(vo.getTotal());
 	
 		
 	}

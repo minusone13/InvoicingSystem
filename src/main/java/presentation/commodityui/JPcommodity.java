@@ -166,9 +166,9 @@ public class JPcommodity extends JPanel implements MouseListener{
 		bgOfshowOfStock.setBounds(0, 0, 90, 95);
 		//已选标记
 		JLabel Chosen=new JLabel("已选",JLabel.CENTER);
-		Chosen.setFont(new Font("黑体",Font.BOLD,30));
+		Chosen.setFont(new Font("黑体",Font.BOLD,20));
 		Chosen.setForeground(Color.white);
-		Chosen.setBounds(25,30,40,30);
+		Chosen.setBounds(20,25,50,40);
 		
 		showOfStock.add(Chosen,0);
 		showOfStock.add(bgOfshowOfStock,1);
@@ -286,6 +286,14 @@ public class JPcommodity extends JPanel implements MouseListener{
 			}
 			break;
 		case STOCK_STAFF:
+			if(chosen==false){
+				showOfStock.setVisible(true);
+				chosen=true;
+			}
+			else{
+				showOfStock.setVisible(false);
+				chosen=false;
+			}
 			break;
 		}
 		

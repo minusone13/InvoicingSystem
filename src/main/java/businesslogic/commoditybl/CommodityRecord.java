@@ -5,7 +5,7 @@ import java.util.Date;
 import po.stockpo.CommodityRecordPO;
 import vo.stockvo.CommodityRecordVO;
 
-public class CommodityRecord {
+public class CommodityRecord{
 	public CommodityRecord(String id,Date date, int outquantity, int inquantity,
 			double outamount, double inamount, int salequantity,
 			int importquantity, double saleamount, double importamount) {
