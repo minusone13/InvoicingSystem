@@ -6,6 +6,7 @@ public class Initial {
 	{
 		new InitialStock();
 		new InitialUser();
+		new InitialTestStock();
 	}
 	public void initialTest()
 	{
