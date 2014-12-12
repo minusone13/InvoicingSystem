@@ -31,7 +31,6 @@ public class StubStockController implements StubCommodityBlService, StockBlForSa
 		if(temp!=null)
 		{
 			user = new User(temp);
-			System.out.println("从Login中读取的用户为NULL,使用默认库存人员 StubStockController");
 		}
 		l.setUser(user);
 		bl.setUser(user);
@@ -149,11 +148,15 @@ public class StubStockController implements StubCommodityBlService, StockBlForSa
 	
 	public RM updateCommodity(CommodityVO vo)
 	{
-		return l.updateCommodity(vo);
+		RM result = l.updateCommodity(vo);
+		us.addRecord(new OperationRecord(user,"updateCommodity",result));
+		return result;
 	}
 	public RM updateCategory(CategoryVO vo)
 	{
-		return l.updateCategory(vo);
+		RM result = l.updateCategory(vo);
+		us.addRecord(new OperationRecord(user,"updateCategory",result));
+		return result;
 	}
 	
 	public RM creat(GiftBillVO vo)
@@ -230,11 +233,11 @@ public class StubStockController implements StubCommodityBlService, StockBlForSa
 	
 	public CountVO count()
 	{//库存盘点
-		return new CountVO();
+		return l.count();
 	}
 	
-	public ArrayList<CommodityRecordVO> getRecords(Date d1, Date d2)
+	public ArrayList<CommodityVO> getRecords(Date d1, Date d2)
 	{//库存查看
-		return new ArrayList<CommodityRecordVO>();
+		return l.getRecords(d1, d2);
 	}
 }

@@ -138,22 +138,35 @@ public class JPcommodityPack extends JPanel {
 	}
 	/*返回选中的商品*/
 	public ArrayList<CommodityVO> getAllChosen(){
-		ArrayList<CommodityVO> result=new ArrayList<CommodityVO>();
-		for(JPcommodity temp:commodities){
-			if(temp.isChosen()){
-				result.add(temp.getCommodity());
+		if(getChosenNum()>=1){
+			ArrayList<CommodityVO> result=new ArrayList<CommodityVO>();
+			for(JPcommodity temp:commodities){
+				if(temp.isChosen()){
+					result.add(temp.getCommodity());
+				}
 			}
+			return result;
 		}
-		return result;
+		else{
+			System.out.println("没有选择任何商品");
+		}
+		return null;
 	}
 	/*删除选中的商品*/
-	public void removeChose(){
-		for(JPcommodity temp:commodities){
-			if(temp.isChosen()){
-				commodities.remove(temp);
+	public void removeChosen(){
+		if(getChosenNum()>=1){
+			for(int i=0;i<commodities.size();i++){
+				if(commodities.get(i).isChosen()){
+					commodities.remove(commodities.get(i));
+					i--;
+				}
 			}
+			update();
 		}
-		update();
+		else{
+			System.out.println("请选择你要删除的商品");
+		}
+	
 	}
 	/*返回选中商品的数量*/
 	public int getChosenNum(){
@@ -164,6 +177,20 @@ public class JPcommodityPack extends JPanel {
 			}
 		}
 		return i;
+	}
+	/*修改选中的商品*/
+	public void changeChosen(CommodityVO vo){
+		if(getChosenNum()==1){//如果只选中了一个商品
+			for(JPcommodity temp:commodities){
+				if(temp.isChosen()){
+					temp.change(vo);
+				}
+			}
+		}
+		else{
+			System.out.println("只能同时修改一个商品");
+		}
+		
 	}
 	public ArrayList<JPcommodity> getCommodities() {
 		return commodities;

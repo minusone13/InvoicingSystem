@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import po.stockpo.CommodityPO;
 import businesslogic.LevelStrategyStyle;
 import businesslogic.StrategyStyle;
-import businesslogic.commoditybl.MockCommodity;
 
 public class LevelStrategyPO extends PO{
 	private StrategyStyle strategystyle=StrategyStyle.LevelStrategy;

@@ -175,7 +175,7 @@ public class UserDataController implements StubUserDataService{
         	if (temp!=null)
         		l=temp;
         	else
-        		System.out.println("UserList对象序列化错误");
+        		System.out.println("UserList读取为NULL，可能在初始化时出现");
         	try {
 				ois.close();
 			} catch (IOException e) {

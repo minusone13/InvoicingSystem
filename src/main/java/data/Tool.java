@@ -1,6 +1,7 @@
 package data;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -27,5 +28,20 @@ public class Tool {
 	        System.out.println(e);
 	    }
 		return f;
+	}
+	public static void Clean(String s)
+	{
+		File f = new File(s);
+		try
+	    {
+	        f.createNewFile();
+	        ObjectOutputStream oos=new ObjectOutputStream(new FileOutputStream(f));
+	        oos.writeObject(null);
+	        oos.close();
+	    }
+	    catch(IOException e)
+	    {
+	        System.out.println(e);
+	    }
 	}
 }

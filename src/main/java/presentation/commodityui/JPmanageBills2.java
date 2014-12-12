@@ -171,6 +171,8 @@ public class JPmanageBills2 extends JPanel {
 				break;
 			case SpillsLossBill:
 				table.setVisible(false);
+				add.setVisible(true);
+				edit.setVisible(true);
 				break;
 			case AlertBill:
 				table.setVisible(false);
@@ -438,14 +440,13 @@ public class JPmanageBills2 extends JPanel {
 				this.add(confirm,1);
 				this.add(scan,2);
 				this.add(commodity,3);
-				this.add(right,4);
-				this.add(type,5);
-				this.add(num,6);
-				this.add(scanButton,7);
-				this.add(commodityText,8);
-				this.add(typeText,9);
-				this.add(numText,10);
-				this.add(back,11);
+				this.add(type,4);
+				this.add(num,5);
+				this.add(scanButton,6);
+				this.add(commodityText,7);
+				this.add(typeText,8);
+				this.add(numText,9);
+				this.add(back,10);
 			}
 			public void leftMove(){
 				Thread t=new Thread(new TreadOfLeft());

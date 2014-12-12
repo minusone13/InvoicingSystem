@@ -14,6 +14,10 @@ import vo.stockvo.CommodityVO;
 
 public class JPcommodity extends JPanel implements MouseListener{
 
+	//界面显示的三个信息标签
+	private JLabel jlType;
+	private JLabel jlname;
+	private JLabel jlnum;
 	
 	private JPanel editOfManager=new JPanel();//输入数量面板
 	private JPanel showOfManager=new JPanel();//显示数量面板
@@ -57,16 +61,16 @@ public class JPcommodity extends JPanel implements MouseListener{
 		JLabel bg=new JLabel();
 		bg.setBounds(15, 0, 60, 60);
 		bg.setIcon(new ImageIcon("src/image/commodity.png"));
-		JLabel jlname=new JLabel("<html>"+name+"</html>",JLabel.CENTER);
+		jlname=new JLabel("<html>"+name+"</html>",JLabel.CENTER);
 		jlname.setFont(new Font("宋体",Font.BOLD,11));
 		jlname.setBounds(0, 60, 90, 15);
 		jlname.setForeground(Color.white);
 		
-		JLabel jlID=new JLabel(ID,JLabel.CENTER);
-		jlID.setBounds(0, 75, 90, 10);
-		jlID.setForeground(Color.white);
+		jlType=new JLabel(ID,JLabel.CENTER);
+		jlType.setBounds(0, 75, 90, 10);
+		jlType.setForeground(Color.white);
 		
-		JLabel jlnum=new JLabel("num:"+String.valueOf(num),JLabel.CENTER);
+		jlnum=new JLabel("num:"+String.valueOf(num),JLabel.CENTER);
 		jlnum.setBounds(0, 85, 90, 10);
 		jlnum.setForeground(Color.white);
 		
@@ -166,9 +170,9 @@ public class JPcommodity extends JPanel implements MouseListener{
 		bgOfshowOfStock.setBounds(0, 0, 90, 95);
 		//已选标记
 		JLabel Chosen=new JLabel("已选",JLabel.CENTER);
-		Chosen.setFont(new Font("黑体",Font.BOLD,30));
+		Chosen.setFont(new Font("黑体",Font.BOLD,20));
 		Chosen.setForeground(Color.white);
-		Chosen.setBounds(25,30,40,30);
+		Chosen.setBounds(20,25,50,40);
 		
 		showOfStock.add(Chosen,0);
 		showOfStock.add(bgOfshowOfStock,1);
@@ -180,7 +184,7 @@ public class JPcommodity extends JPanel implements MouseListener{
 		this.add(editOfSale,3);
 		this.add(bg,4);
 		this.add(jlname,5);
-		this.add(jlID,6);
+		this.add(jlType,6);
 		this.add(jlnum,7);
 		
 		this.addMouseListener(this);
@@ -190,6 +194,16 @@ public class JPcommodity extends JPanel implements MouseListener{
 		this(com.getName(),com.getModel(),com.getNumber());
 		commodity=com;
 	}
+	/*修改商品*/
+	public void change(CommodityVO commodity){
+		//修改对应商品VO
+		setCommodity(commodity);
+		//修改信息显示
+		jlname.setText(commodity.getName());
+		jlType.setText(commodity.getModel());
+		jlnum.setText(String.valueOf(commodity.getNumber()));
+	}
+	
 	public class MouseListenerOfComfirm implements MouseListener{
 
 		private int num;//1、总经理编辑面板  2、进销人员编辑面板
@@ -286,6 +300,14 @@ public class JPcommodity extends JPanel implements MouseListener{
 			}
 			break;
 		case STOCK_STAFF:
+			if(chosen==false){
+				showOfStock.setVisible(true);
+				chosen=true;
+			}
+			else{
+				showOfStock.setVisible(false);
+				chosen=false;
+			}
 			break;
 		}
 		

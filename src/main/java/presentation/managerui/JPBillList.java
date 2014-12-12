@@ -15,6 +15,14 @@ import vo.financialBillVO.CashPaymentVO;
 import vo.financialBillVO.PaymentVO;
 import vo.financialBillVO.ReceiptVO;
 import businesslogic.BillState;
+import businesslogic.financialbl.Financial;
+import businesslogic.managerbl.StubManager;
+import businesslogic.salebillbl.salebillController;
+import businesslogic.stockmanagerbl.StubStockController;
+import businesslogicservice.commodityblservice.StubCommodityBlService;
+import businesslogicservice.financialblservice.StubFinancialBlService;
+import businesslogicservice.managerblservice.StubManagerBlService;
+import businesslogicservice.salebillblservice.SaleBillBlService;
 
 public class JPBillList extends JPanel {
 
@@ -37,6 +45,11 @@ public class JPBillList extends JPanel {
 	JPanel JPupdate=null;
 	//清单表格
 	JTableOfList table;//表格的引用
+	//四个逻辑层接口
+	StubManagerBlService mbl=new StubManager();
+	StubFinancialBlService fbl=new Financial();
+	 SaleBillBlService sbl=new salebillController();
+	 StubCommodityBlService stockbl=new StubStockController();
 	public JPBillList(){
 		//面板大小
 		this.setSize(261, 0);
@@ -127,9 +140,11 @@ public class JPBillList extends JPanel {
 	}
 	/*增加赠送单*/
 	public void addGiftBill(GiftBillVO gb){
-		JPbillList.add(new JPBill(gb));
-		//更新到面板上
-		updateJP();
+		//调用逻辑层
+		stockbl.creat(gb);
+		//从逻辑层读取数据更新界面
+		JPbillList.clear();
+		this.addGiftBillList(stockbl.showGiftBills());
 	}
 	/*增加报警单VO数组*/
 	public void addAlertBillList(ArrayList<AlertBillVO> ab){
@@ -144,9 +159,11 @@ public class JPBillList extends JPanel {
 	}
 	/*增加报警单*/
 	public void addAlertBill(AlertBillVO ab){
-		JPbillList.add(new JPBill(ab));
-		//更新到面板上
-		updateJP();
+//		//调用逻辑层
+//		stockbl.
+//		//从逻辑层读取数据更新界面
+//		JPbillList.clear();
+//		this.addPurSheetList(sbl.getAllPurSheet());
 	}
 	/*增加进货单VO数组*/
 	public void addPurSheetList(ArrayList<PurSheetVO> ps){
@@ -159,9 +176,11 @@ public class JPBillList extends JPanel {
 	}
 	/*增加进货单*/
 	public void addPurSheet(PurSheetVO ps){
-		JPbillList.add(new JPBill(ps));
-		//更新到面板上
-		updateJP();
+		//调用逻辑层
+		sbl.createPurSheet(ps);
+		//从逻辑层读取数据更新界面
+		JPbillList.clear();
+		this.addPurSheetList(sbl.getAllPurSheet());
 	}
 	/*增加进货退货单VO数组*/
 	public void addPurBackSheetList(ArrayList<PurBackSheetVO> pbs){
@@ -176,9 +195,11 @@ public class JPBillList extends JPanel {
 	}
 	/*增加进货退货单*/
 	public void addPurBackSheet(PurBackSheetVO pbs){
-		JPbillList.add(new JPBill(pbs));
-		//更新到面板上
-		updateJP();
+		//调用逻辑层
+		sbl.createPurBackSheet(pbs);
+		//从逻辑层读取数据更新界面
+		JPbillList.clear();
+		this.addPurBackSheetList(sbl.getAllPurBackSheet());
 	}
 	/*增加销售单VO数组*/
 	public void addSaleSheetList(ArrayList<SaleSheetVO> ss){
@@ -191,9 +212,11 @@ public class JPBillList extends JPanel {
 	}
 	/*增加销售单*/
 	public void addSaleSheet(SaleSheetVO ss){
-		JPbillList.add(new JPBill(ss));
-		//更新到面板上
-		updateJP();
+		//调用逻辑层
+		sbl.createSaleSheet(ss);
+		//从逻辑层读取数据更新界面
+		JPbillList.clear();
+		this.addSaleSheetList(sbl.getAllSaleSheet());
 	}
 	/*增加销售退货单VO数组*/
 	public void addSaleBackSheetList(ArrayList<SaleBackSheetVO> sbs){
@@ -209,9 +232,11 @@ public class JPBillList extends JPanel {
 	}
 	/*增加销售退货单*/
 	public void addSaleBackSheet(SaleBackSheetVO sbs){
-		JPbillList.add(new JPBill(sbs));
-		//更新到面板上
-		updateJP();
+		//调用逻辑层
+		sbl.createSaleBackSheet(sbs);
+		//从逻辑层读取数据更新界面
+		JPbillList.clear();
+		this.addSaleBackSheetList(sbl.getAllSaleBackSheet());
 	}
 	/*增加收款单VO数组*/
 	public void addReceiptBillList(ArrayList<ReceiptVO> rb){
@@ -227,9 +252,11 @@ public class JPBillList extends JPanel {
 	}
 	/*增加收款单*/
 	public void addReceiptBill(ReceiptVO rb){
-		JPbillList.add(new JPBill(rb));
-		//更新到面板上
-		updateJP();
+		//调用逻辑层
+		fbl.creatReceipt(rb);
+		//从逻辑层读取数据更新界面
+		JPbillList.clear();
+		this.addReceiptBillList(fbl.getAllOfReceiptBills());
 	}
 	/*增加付款单VO数组*/
 	public void addPaymentBillList(ArrayList<PaymentVO> pb){
@@ -245,9 +272,11 @@ public class JPBillList extends JPanel {
 	}
 	/*增加付款单*/
 	public void addPaymentBill(PaymentVO pb){
-		JPbillList.add(new JPBill(pb));
-		//更新到面板上
-		updateJP();
+		//调用逻辑层
+		fbl.creatPayment(pb);
+		//从逻辑层读取数据更新界面
+		JPbillList.clear();
+		this.addPaymentBillList(fbl.getAllOfPaymentBills());
 	}
 	/*增加现金费用单VO数组*/
 	public void addCashPaymentBillList(ArrayList<CashPaymentVO> spb){
@@ -262,9 +291,11 @@ public class JPBillList extends JPanel {
 	}
 	/*增加现金费用单*/
 	public void addCashPaymentBill(CashPaymentVO spb){
-		JPbillList.add(new JPBill(spb));
-		//更新到面板上
-		updateJP();
+		//调用逻辑层
+		fbl.creatCashPayment(spb);
+		//从逻辑层读取数据更新界面
+		JPbillList.clear();
+		this.addCashPaymentBillList(fbl.getAllOfCashPaymentBills());
 	}
 	/*增加报溢报损单VO数组*/
 	public void addSpillsLossBillList(ArrayList<SpillsLossBillVO> slb){
@@ -278,9 +309,11 @@ public class JPBillList extends JPanel {
 	}
 	/*增加报溢报损单*/
 	public void addSpillsLossBill(SpillsLossBillVO slb){
-		JPbillList.add(new JPBill(slb));
-		//更新到面板上
-		updateJP();
+		//调用逻辑层
+		stockbl.creat(slb);
+		//从逻辑层读取数据更新界面
+		JPbillList.clear();
+		this.addSpillsLossBillList(stockbl.showSpillsLossBills());
 	}
 	
 	/*修改选中的*/
@@ -288,6 +321,9 @@ public class JPBillList extends JPanel {
 		for(int i=0;i<JPbillList.size();i++){
 			if(JPbillList.get(i).getChoose()){
 				JPbillList.get(i).change(gb);
+				//从逻辑层读取数据更新界面
+				JPbillList.clear();
+				this.addGiftBillList(stockbl.showGiftBills());
 				break;
 			}
 		}
@@ -296,6 +332,9 @@ public class JPBillList extends JPanel {
 		for(int i=0;i<JPbillList.size();i++){
 			if(JPbillList.get(i).getChoose()){
 				JPbillList.get(i).change(slb);
+				//从逻辑层读取数据更新界面
+				JPbillList.clear();
+				this.addSpillsLossBillList(stockbl.showSpillsLossBills());
 				break;
 			}
 		}
@@ -304,6 +343,9 @@ public class JPBillList extends JPanel {
 		for(int i=0;i<JPbillList.size();i++){
 			if(JPbillList.get(i).getChoose()){
 				JPbillList.get(i).change(ab);
+				//从逻辑层读取数据更新界面
+				JPbillList.clear();
+				this.addAlertBillList(stockbl.showAlertBills());
 				break;
 			}
 		}
@@ -312,6 +354,9 @@ public class JPBillList extends JPanel {
 		for(int i=0;i<JPbillList.size();i++){
 			if(JPbillList.get(i).getChoose()){
 				JPbillList.get(i).change(ps);
+				//从逻辑层读取数据更新界面
+				JPbillList.clear();
+				this.addPurSheetList(sbl.getAllPurSheet());
 				break;
 			}
 		}
@@ -320,6 +365,9 @@ public class JPBillList extends JPanel {
 		for(int i=0;i<JPbillList.size();i++){
 			if(JPbillList.get(i).getChoose()){
 				JPbillList.get(i).change(pbs);
+				//从逻辑层读取数据更新界面
+				JPbillList.clear();
+				this.addPurBackSheetList(sbl.getAllPurBackSheet());
 				break;
 			}
 		}
@@ -328,6 +376,9 @@ public class JPBillList extends JPanel {
 		for(int i=0;i<JPbillList.size();i++){
 			if(JPbillList.get(i).getChoose()){
 				JPbillList.get(i).change(ss);
+				//从逻辑层读取数据更新界面
+				JPbillList.clear();
+				this.addSaleSheetList(sbl.getAllSaleSheet());
 				break;
 			}
 		}
@@ -336,6 +387,9 @@ public class JPBillList extends JPanel {
 		for(int i=0;i<JPbillList.size();i++){
 			if(JPbillList.get(i).getChoose()){
 				JPbillList.get(i).change(sbs);
+				//从逻辑层读取数据更新界面
+				JPbillList.clear();
+				this.addSaleBackSheetList(sbl.getAllSaleBackSheet());
 				break;
 			}
 		}
@@ -344,6 +398,9 @@ public class JPBillList extends JPanel {
 		for(int i=0;i<JPbillList.size();i++){
 			if(JPbillList.get(i).getChoose()){
 				JPbillList.get(i).change(rb);
+				//从逻辑层读取数据更新界面
+				JPbillList.clear();
+				this.addReceiptBillList(fbl.getAllOfReceiptBills());
 				break;
 			}
 		}
@@ -352,6 +409,9 @@ public class JPBillList extends JPanel {
 		for(int i=0;i<JPbillList.size();i++){
 			if(JPbillList.get(i).getChoose()){
 				JPbillList.get(i).change(pb);
+				//从逻辑层读取数据更新界面
+				JPbillList.clear();
+				this.addPaymentBillList(fbl.getAllOfPaymentBills());
 				break;
 			}
 		}
@@ -360,6 +420,9 @@ public class JPBillList extends JPanel {
 		for(int i=0;i<JPbillList.size();i++){
 			if(JPbillList.get(i).getChoose()){
 				JPbillList.get(i).change(cb);
+				//从逻辑层读取数据更新界面
+				JPbillList.clear();
+				this.addCashPaymentBillList(fbl.getAllOfCashPaymentBills());
 				break;
 			}
 		}

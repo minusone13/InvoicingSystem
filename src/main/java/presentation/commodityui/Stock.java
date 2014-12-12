@@ -7,6 +7,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import presentation.financialui.FinancialUI;
 import userui.Frame;
 
 public class Stock extends JPanel {
@@ -79,7 +80,7 @@ public class Stock extends JPanel {
 
 			//单据管理板2
 			manageBills2.setLocation(55, 233);
-			manageBills2.setLocation(55, 233);
+			manageBills2.setVisible(false);
 			
 			//home
 			home.setIcon(new ImageIcon("src/image/home.png") );
@@ -144,7 +145,9 @@ public class Stock extends JPanel {
 				switch(num){
 				case 1:
 					home.setIcon(new ImageIcon("src/image/home1.png"));
-					
+					Stock.this.getManageBills().setVisible(false);
+					Stock.this.getManageBills2().setVisible(false);
+					Stock.this.getFunction().setVisible(true);
 					break;
 				case 2:
 					back.setIcon(new ImageIcon("src/image/back1.png"));

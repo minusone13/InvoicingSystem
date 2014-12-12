@@ -5,18 +5,7 @@ import java.awt.Toolkit;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-
-import businesslogic.BillStyle;
-import presentation.WarningPanel;
-import presentation.saleui.JPfunctions;
-import presentation.saleui.JPmanageBills1;
-import presentation.saleui.Sale;
-import presentation.saleui.JPmanageBills2;
-import presentation.WarningPanel;
-import presentation.saleui.JPmanageBills2;
-import presentation.financialui.BusinessConditionPanel;
-import presentation.financialui.InitialInfoPanel;
-import presentation.commodityui.JPManagerCom;
+import presentation.commodityui.JPManagerComOfStock;
 import presentation.managerui.MouseListenerGetXY;
 
 
@@ -40,7 +29,10 @@ public class TestFrame extends JFrame {
 		this.addMouseListener(new MouseListenerGetXY());
 	}
 	public static void main(String[] args) {
-		TestFrame testJP=new TestFrame(new Sale());
+//		JPManagerCom test=new JPManagerCom();
+//		test.setRole(Role.STOCK_STAFF);
+		JPManagerComOfStock test=new JPManagerComOfStock();
+		TestFrame testJP=new TestFrame(test);
 	}
 
 }

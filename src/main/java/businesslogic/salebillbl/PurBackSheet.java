@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import po.PurBackSheetPO;
+import po.stockpo.CommodityPO;
 import vo.PurBackSheetVO;
+import businesslogic.BillState;
 import businesslogic.BillStyle;
 import businesslogic.GetVOandPO;
 import businesslogic.commoditybl.MockCommodity;
@@ -16,6 +18,7 @@ public class PurBackSheet extends Bill implements GetVOandPO{
 	private String ID;
 	private String userID;
 	private BillStyle billstyle=BillStyle.PurBackSheet;
+	private BillState billstate=BillState.DRAFT;
 	Date date;
 	String stock;//仓库？
 	ArrayList<MockCommodity> sheet;//写了一个commodityInSheet类。
@@ -36,6 +39,15 @@ public class PurBackSheet extends Bill implements GetVOandPO{
 		this.words=vo.getwords();
 		this.op=vo.getop();
 		this.username=vo.getusername();
+		this.billstate=vo.getState();
+	}
+	
+	public  BillState getState(){
+		return this.billstate;
+	}
+	
+	public  void setState(BillState billstate){
+		this.billstate= billstate;
 	}
 	
 	public String getop(){
@@ -135,35 +147,47 @@ public class PurBackSheet extends Bill implements GetVOandPO{
 		vo.setwords(words);
 		vo.setop(op);
 		vo.setusername(username);
+		vo.setState(billstate);
 		return vo;
 	}
 	
 	public PurBackSheetPO getPO() {
 		PurBackSheetPO po= new PurBackSheetPO();
-		po.setCustomer(customer);
+		po.setCustomer(customer.getPO());
 		po.setdate(date);
 		po.setid(ID);
 		po.setuserid(userID);
 		po.setmoney1(money1);
-		po.setsheet(sheet);
+		//转换成PO数组
+		ArrayList<CommodityPO> temp=new ArrayList<CommodityPO>();
+		for(int i=0;i<sheet.size();i++){
+			temp.add(sheet.get(i).toPO());
+		}
+		po.setsheet(temp);
 		po.setstock(stock);
 		po.setwords(words);
 		po.setop(op);
 		po.setusername(username);
+		po.setState(billstate);
 		return po;
 	}
 	
 	public void setPO(PurBackSheetPO po){
-		this.customer=po.getcustomer();
+		this.customer=new Customer(po.getcustomer());
 		this.userID=po.getuserid();
 		this.date=po.getdate();
 		this.stock=po.getstock();
 		this.ID=po.getid();
-		this.sheet=po.getsheet();
+		ArrayList<MockCommodity> temp=new ArrayList<MockCommodity>();
+		for(int i=0;i<po.getsheet().size();i++){
+			temp.add(new MockCommodity(po.getsheet().get(i)));
+		}
+		this.sheet=temp;
 		this.money1=po.getmoney1();
 		this.words=po.getwords();
 		this.op=po.getop();
 		this.username=po.getusername();
+		this.billstate=po.getState();
 	}
 	
 	

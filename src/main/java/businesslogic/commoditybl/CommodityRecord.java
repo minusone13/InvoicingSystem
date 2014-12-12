@@ -5,7 +5,7 @@ import java.util.Date;
 import po.stockpo.CommodityRecordPO;
 import vo.stockvo.CommodityRecordVO;
 
-public class CommodityRecord {
+public class CommodityRecord{
 	public CommodityRecord(String id,Date date, int outquantity, int inquantity,
 			double outamount, double inamount, int salequantity,
 			int importquantity, double saleamount, double importamount) {
@@ -24,6 +24,17 @@ public class CommodityRecord {
 			double outamount, double inamount) {
 		this.id=id;
 		this.date = date;
+		this.outquantity = outquantity;
+		this.inquantity = inquantity;
+		this.outamount = outamount;
+		this.inamount = inamount;
+		this.salequantity = outquantity;
+		this.importquantity = inquantity;
+		this.saleamount = outamount;
+		this.importamount = inamount;
+	}
+	public CommodityRecord(int outquantity, int inquantity,
+			double outamount, double inamount) {
 		this.outquantity = outquantity;
 		this.inquantity = inquantity;
 		this.outamount = outamount;
@@ -140,6 +151,17 @@ public class CommodityRecord {
 	public boolean equals(CommodityRecord r)
 	{
 		return (id.equals(r.getId()));
+	}
+	public void plus(CommodityRecord r)
+	{
+		outquantity+=r.getOutquantity();
+		inquantity+=r.getInquantity();
+		outamount+=r.getOutamount();
+		inamount+=r.getInamount();
+		salequantity+=r.getSalequantity();
+		importquantity+=r.getImportquantity();
+		saleamount+=r.getSaleamount();
+		importamount+=r.getImportamount();
 	}
 	public Date getDate() {
 		return date;

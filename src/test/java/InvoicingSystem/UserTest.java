@@ -1,6 +1,9 @@
 package InvoicingSystem;
 
 import static org.junit.Assert.*;
+
+import java.util.ArrayList;
+
 import po.stockpo.CategoryPO;
 import presentation.commodityui.StockManagerDriver;
 import presentation.userui.UserDriver;
@@ -8,7 +11,9 @@ import data.commoditydata.StubStockDataController;
 import data.initial.Initial;
 import data.userdata.UserDataController;
 import vo.RM;
+import vo.stockvo.CategoryVO;
 import vo.stockvo.CommodityVO;
+import vo.uservo.OperationRecordVO;
 import vo.uservo.UserVO;
 
 import org.junit.*;
@@ -144,5 +149,18 @@ public class UserTest{
 		assertEquals("Helen",vo.getName());
 		vo = ubl.login("stock", "stock1");
 		assertEquals(null,vo);//用新密码登录失败
+	}
+	
+	@Ignore
+	public void testkeyRecord()
+	{
+		StubCommodityBlService combl = new StubStockController();
+		combl.addCategory(new CategoryVO("1\\灯","日光灯"));
+		combl.addCategory(new CategoryVO("1\\灯","白炽灯"));
+		ArrayList<OperationRecordVO> records = ubl.showRecords();
+		assertEquals(2,records.size());
+		assertEquals(RM.redundance,records.get(0).getResult());
+		assertEquals(RM.done,records.get(1).getResult());
+		assertEquals("I0000",records.get(0).getUser().getID());
 	}
 }

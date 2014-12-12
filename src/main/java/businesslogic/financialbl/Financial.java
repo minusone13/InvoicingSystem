@@ -33,7 +33,7 @@ public class Financial implements StubFinancialBlService{
 	Role role = Role.FINANCIAL_MANAGER;
 
 	UserService userSer= new UserController();
-	
+	FinancialBillList financialList = new FinancialBillList();
 	public Financial() {
 		this(null, null, null);
 	}
@@ -119,7 +119,7 @@ public class Financial implements StubFinancialBlService{
 	}
 	
 	public boolean creatReceipt(ReceiptVO rv) {
-		FinancialBillList financialList = new FinancialBillList();
+		
 		boolean result = financialList.creatReceiptBill(rv);
 		RM rm = RM.unknownerror;
 		if(result) rm=RM.done;
@@ -129,13 +129,11 @@ public class Financial implements StubFinancialBlService{
 	
 	//修改收款单
 	public void updateReceipt(ReceiptVO vo) {
-		FinancialBillList financialList = new FinancialBillList();
 		financialList.updateReceiptBill(vo);
 	}
 	
 	//创建付款单
 	public boolean creatPayment(PaymentVO pv){
-		FinancialBillList financialList = new FinancialBillList();
 		boolean result = financialList.creatPaymentBill(pv);
 		RM rm = RM.unknownerror;
 		if(result) rm=RM.done;
@@ -145,13 +143,11 @@ public class Financial implements StubFinancialBlService{
 
 	//修改付款单
 	public void updatePayment(PaymentVO vo) {
-		FinancialBillList financialList = new FinancialBillList();
 		financialList.updatePaymentBill(vo);
 	}
 	
 	//创建现金费用单
 	public boolean creatCashPayment(CashPaymentVO cpv) {
-		FinancialBillList financialList = new FinancialBillList();
 		boolean result =financialList.creatCashPaymentBill(cpv);
 		RM rm = RM.unknownerror;
 		if(result) rm=RM.done;
@@ -160,25 +156,21 @@ public class Financial implements StubFinancialBlService{
 	}
 	
 	public void updateCashPayment(CashPaymentVO vo) {
-		FinancialBillList financialList = new FinancialBillList();
 		financialList.updateCashPaymentBill(vo);
 	}
 	
 	/*需要从单据池筛选指定状态的所有收款单*/
 	public ArrayList<ReceiptVO> getAllOfReceiptBills () {
-		FinancialBillList financialList = new FinancialBillList();
 		return financialList.getAllOfReceiptBills();
 	}
 	
 	/*需要从单据池筛选指定状态的所有付款单*/
 	public ArrayList<PaymentVO> getAllOfPaymentBills () {
-		FinancialBillList financialList = new FinancialBillList();
 		return financialList.getAllOfPaymentBills();
 	}
 	
 	/*需要从单据池筛选指定状态的所有现金费用单*/
 	public ArrayList<CashPaymentVO> getAllOfCashPaymentBills () {
-		FinancialBillList financialList = new FinancialBillList();
 		return financialList.getAllOfCashPaymentBills();
 	}
 	
