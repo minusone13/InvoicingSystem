@@ -356,4 +356,28 @@ public class StockTest{
 		h = combl.fuzzyFindCommodity("好好防盗门fdm05", 1);
 		assertEquals(1,h.size());
 	}
+	
+	@Test
+	public void testCount()
+	{
+		CountVO coms = combl.count();
+		assertEquals(5,coms.getList().size());
+	}
+	
+	@Test
+	public void testKuCunChaKan()
+	{
+		ArrayList<CommodityVO> coms = combl.getRecords(new Date(), new Date());
+		assertEquals(5,coms.size());
+		Date d1 = new Date(107,1,1);
+		Date d2 = new Date(120,1,1);
+		coms = combl.getRecords(d1, d2);
+		CommodityVO com1 = coms.get(1);
+		assertEquals(7500,com1.getRecord().get(0).getImportamount(),0.01);
+		assertEquals(7500,com1.getRecord().get(0).getInamount(),0.01);
+		assertEquals(50,com1.getRecord().get(0).getImportquantity());
+		assertEquals(50,com1.getRecord().get(0).getInquantity());
+		assertEquals(0,coms.get(0).getRecord().get(0).getInquantity());
+		assertEquals(0,coms.get(0).getRecord().get(0).getOutquantity());
+	}
 }
