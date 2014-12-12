@@ -13,6 +13,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import presentation.financialui.FinancialUI;
 import userui.Frame;
 import vo.RM;
 import vo.uservo.UserVO;
@@ -150,22 +151,38 @@ public class Login extends JPanel {
 							case ADMINISTRATOR:
 								break;
 							case FINANCIAL_STAFF:
+								
+								frame.getFinancial().getManageBills1().setVisible(false);
+								frame.getFinancial().getManageBills2().setVisible(false);
+								frame.getFinancial().getFunction().setVisible(true);
 								Login.this.setVisible(false);
 								frame.getFinancial().setVisible(true);
 								break;
 							case FINANCIAL_MANAGER:
 								break;
 							case MANAGER:
+								
+								frame.getManager().getPassbill1().setVisible(false);
+								frame.getManager().getPassbill2().setVisible(false);
+								frame.getManager().getFunction().setVisible(true);
 								Login.this.setVisible(false);
 								frame.getManager().setVisible(true);
 								break;
 							case STOCK_STAFF:
-								Login.this.setVisible(false);
+								
+								frame.getStock().getManageBills().setVisible(false);
+								frame.getStock().getManageBills2().setVisible(false);
+								frame.getStock().getFunction().setVisible(true);
 								frame.getStock().setVisible(true);
+								Login.this.setVisible(false);
 								break;
 							case PURCHASE_SALE_STAFF:
-								Login.this.setVisible(false);
+								
+								frame.getSale().getManageBills1().setVisible(false);
+								frame.getSale().getManageBills2().setVisible(false);
+								frame.getSale().getFunction().setVisible(true);
 								frame.getSale().setVisible(true);
+								Login.this.setVisible(false);
 								break;
 							}
 							//清除文本框内容

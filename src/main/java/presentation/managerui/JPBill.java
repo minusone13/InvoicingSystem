@@ -1,7 +1,5 @@
 package presentation.managerui;
 
-import java.awt.Color;
-import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -21,6 +19,14 @@ import vo.financialBillVO.PaymentVO;
 import vo.financialBillVO.ReceiptVO;
 import businesslogic.BillState;
 import businesslogic.BillStyle;
+import businesslogic.financialbl.Financial;
+import businesslogic.managerbl.StubManager;
+import businesslogic.salebillbl.salebillController;
+import businesslogic.stockmanagerbl.StubStockController;
+import businesslogicservice.commodityblservice.StubCommodityBlService;
+import businesslogicservice.financialblservice.StubFinancialBlService;
+import businesslogicservice.managerblservice.StubManagerBlService;
+import businesslogicservice.salebillblservice.SaleBillBlService;
 
 public class JPBill extends JPanel {
 
@@ -38,8 +44,6 @@ public class JPBill extends JPanel {
 	private JLabel left=new JLabel();
 	//选中标记
 	private boolean choose=false;
-	//查看清单按钮
-	JLabel showList=new	JLabel();
 	//对应的单据VO
 	private GiftBillVO giftVO;
 	private AlertBillVO alertVO;
@@ -120,7 +124,10 @@ public class JPBill extends JPanel {
 	}
 
 	//逻辑层的接口
-//	StubManagerBlService mbl=new StubManager();
+	StubManagerBlService mbl=new StubManager();
+	StubFinancialBlService fbl=new Financial();
+	 SaleBillBlService sbl=new salebillController();
+	 StubCommodityBlService stockbl=new StubStockController();
 	//现金费用单的标签
 	JLabel operatorOfCas=new JLabel("操作员");
 	JLabel accountOfCas=new JLabel("帐户");
@@ -137,6 +144,12 @@ public class JPBill extends JPanel {
 	//清单表格的引用
 	JTableOfList table;
 	public JPBill(GiftBillVO gb){
+		//设置单据编号，状态，种类
+		state=gb.getState();
+		style=gb.getBillStyle();
+		ID=gb.getID();
+		//传递VO
+		giftVO=gb;
 		//面板大小
 		this.setSize(522, 93);
 		//设置布局
@@ -144,9 +157,10 @@ public class JPBill extends JPanel {
 		//设置面板透明
 		this.setOpaque(false);
 		//背景
-		bg.setIcon(new ImageIcon("src/image/sample.jpg"));
+		setBillBg(BillStyle.GiftBill,gb.getState(),0);
 		bg.setBounds(0, 0, 522, 93);
-		
+		bg.addMouseListener(new MouseListenerOfBill(BillStyle.GiftBill));
+		bg.addMouseListener(new MouseListenerGetXY());
 		//向右
 		right.setIcon(new ImageIcon("src/image/right.png"));
 		right.setBounds(221, 26, 40, 40);
@@ -155,59 +169,232 @@ public class JPBill extends JPanel {
 		left.setIcon(new ImageIcon("src/image/left.png"));
 		left.setBounds(482, 26, 40, 40);
 		left.addMouseListener(new MouseListenerOfButton(2));
+		//单据信息
+		JLabel ID=new JLabel("ID:"+gb.getID(),JLabel.CENTER);
+		ID.setBounds(31,5, 200, 20);
+		
+		//单据信息未完
 		//将组件加到面板上
 		this.add(right,0);
 		this.add(left,1);
-		this.add(bg,2);
-		
+		this.add(ID,2);
+		this.add(bg,3);
 	}
 	public JPBill(SpillsLossBillVO slb){
+		//设置单据编号，状态，种类
+		state=slb.getState();
+		style=slb.getBillStyle();
+		ID=slb.getID();
+		//传递VO
+		spillsLossVO=slb;
 		//面板大小
 		this.setSize(522, 93);
 		//设置布局
 		this.setLayout(null);
 		//设置面板透明
 		this.setOpaque(false);
+		//背景
+		setBillBg(BillStyle.SpillsLossBill,slb.getState(),0);
+		bg.setBounds(0, 0, 522, 93);
+		bg.addMouseListener(new MouseListenerOfBill(BillStyle.SpillsLossBill));
+		bg.addMouseListener(new MouseListenerGetXY());
+		//向右
+		right.setIcon(new ImageIcon("src/image/right.png"));
+		right.setBounds(221, 26, 40, 40);
+		right.addMouseListener(new MouseListenerOfButton(1));
+		//向左
+		left.setIcon(new ImageIcon("src/image/left.png"));
+		left.setBounds(482, 26, 40, 40);
+		left.addMouseListener(new MouseListenerOfButton(2));
+		//单据信息
+		JLabel ID=new JLabel("ID:"+slb.getID(),JLabel.CENTER);
+		ID.setBounds(31,5, 200, 20);
+		//将组件加到面板上
+		this.add(right,0);
+		this.add(left,1);
+		this.add(ID,2);
+		this.add(bg,3);
 	}
 	public JPBill(AlertBillVO ab){
+		//设置单据编号，状态，种类
+		state=ab.getState();
+		style=ab.getBillStyle();
+		ID=ab.getID();
+		//传递VO
+		alertVO=ab;
 		//面板大小
 		this.setSize(522, 93);
 		//设置布局
 		this.setLayout(null);
 		//设置面板透明
 		this.setOpaque(false);
+		//背景
+		setBillBg(BillStyle.AlertBill,ab.getState(),0);
+		bg.setBounds(0, 0, 522, 93);
+		bg.addMouseListener(new MouseListenerOfBill(BillStyle.AlertBill));
+		bg.addMouseListener(new MouseListenerGetXY());
+		//向右
+		right.setIcon(new ImageIcon("src/image/right.png"));
+		right.setBounds(221, 26, 40, 40);
+		right.addMouseListener(new MouseListenerOfButton(1));
+		//向左
+		left.setIcon(new ImageIcon("src/image/left.png"));
+		left.setBounds(482, 26, 40, 40);
+		left.addMouseListener(new MouseListenerOfButton(2));
+		//单据信息
+		JLabel ID=new JLabel("ID:"+ab.getID(),JLabel.CENTER);
+		ID.setBounds(31,5, 200, 20);
+		//将组件加到面板上
+		this.add(right,0);
+		this.add(left,1);
+		this.add(ID,2);
+		this.add(bg,3);
 	}
 	public JPBill(PurSheetVO ps){
-		//面板大小
-		this.setSize(522, 93);
-		//设置布局
-		this.setLayout(null);
-		//设置面板透明
-		this.setOpaque(false);
+//		//设置单据编号，状态，种类
+//		state=ps.get;
+//		style=ps.getBillStyle();
+//		ID=ps.getID();
+//		//传递VO
+//		cashVO=ps;
+//		//面板大小
+//		this.setSize(522, 93);
+//		//设置布局
+//		this.setLayout(null);
+//		//设置面板透明
+//		this.setOpaque(false);
+//		//背景
+//		setBillBg(BillStyle.PurSheet,ps.getBillState(),0);
+//		bg.setBounds(0, 0, 522, 93);
+//		bg.addMouseListener(new MouseListenerOfBill(BillStyle.PurSheet));
+//		bg.addMouseListener(new MouseListenerGetXY());
+//		//向右
+//		right.setIcon(new ImageIcon("src/image/right.png"));
+//		right.setBounds(221, 26, 40, 40);
+//		right.addMouseListener(new MouseListenerOfButton(1));
+//		//向左
+//		left.setIcon(new ImageIcon("src/image/left.png"));
+//		left.setBounds(482, 26, 40, 40);
+//		left.addMouseListener(new MouseListenerOfButton(2));
+//		//单据信息
+//		JLabel ID=new JLabel("ID:"+ps.getID(),JLabel.CENTER);
+//		ID.setBounds(31,5, 200, 20);
+//		
+//		//将组件加到面板上
+//		this.add(right,0);
+//		this.add(left,1);
+//		this.add(ID,2);
+//		this.add(bg,3);
 	}
 	public JPBill(PurBackSheetVO pbs){
-		//面板大小
-		this.setSize(522, 93);
-		//设置布局
-		this.setLayout(null);
-		//设置面板透明
-		this.setOpaque(false);
+//		//设置单据编号，状态，种类
+//		state=pbs.getBillState();
+//		style=pbs.getBillStyle();
+//		ID=pbs.getID();
+//		//传递VO
+//		cashVO=pbs;
+//		//面板大小
+//		this.setSize(522, 93);
+//		//设置布局
+//		this.setLayout(null);
+//		//设置面板透明
+//		this.setOpaque(false);
+//		//背景
+//		setBillBg(BillStyle.CashPaymentBill,pbs.getBillState(),0);
+//		bg.setBounds(0, 0, 522, 93);
+//		bg.addMouseListener(new MouseListenerOfBill(BillStyle.CashPaymentBill));
+//		bg.addMouseListener(new MouseListenerGetXY());
+//		//向右
+//		right.setIcon(new ImageIcon("src/image/right.png"));
+//		right.setBounds(221, 26, 40, 40);
+//		right.addMouseListener(new MouseListenerOfButton(1));
+//		//向左
+//		left.setIcon(new ImageIcon("src/image/left.png"));
+//		left.setBounds(482, 26, 40, 40);
+//		left.addMouseListener(new MouseListenerOfButton(2));
+//		//单据信息
+//		JLabel ID=new JLabel("ID:"+pbs.getID(),JLabel.CENTER);
+//		ID.setBounds(31,5, 200, 20);
+//		//将组件加到面板上
+//		this.add(right,0);
+//		this.add(left,1);
+//		this.add(ID,5);
+//		this.add(bg,6);
 	}
 	public JPBill(SaleSheetVO ss){
-		//面板大小
-		this.setSize(522, 93);
-		//设置布局
-		this.setLayout(null);
-		//设置面板透明
-		this.setOpaque(false);
+//		//设置单据编号，状态，种类
+//		state=ss.getBillState();
+//		style=ss.getBillStyle();
+//		ID=ss.getID();
+//		//传递VO
+//		cashVO=ss;
+//		//面板大小
+//		this.setSize(522, 93);
+//		//设置布局
+//		this.setLayout(null);
+//		//设置面板透明
+//		this.setOpaque(false);
+//		//背景
+//		setBillBg(BillStyle.CashPaymentBill,ss.getBillState(),0);
+//		bg.setBounds(0, 0, 522, 93);
+//		bg.addMouseListener(new MouseListenerOfBill(BillStyle.CashPaymentBill));
+//		bg.addMouseListener(new MouseListenerGetXY());
+//		//向右
+//		right.setIcon(new ImageIcon("src/image/right.png"));
+//		right.setBounds(221, 26, 40, 40);
+//		right.addMouseListener(new MouseListenerOfButton(1));
+//		//向左
+//		left.setIcon(new ImageIcon("src/image/left.png"));
+//		left.setBounds(482, 26, 40, 40);
+//		left.addMouseListener(new MouseListenerOfButton(2));
+//		//单据信息
+//		JLabel ID=new JLabel("ID:"+ss.getID(),JLabel.CENTER);
+//		ID.setBounds(31,5, 200, 20);
+//		
+//		//将组件加到面板上
+//		this.add(right,0);
+//		this.add(left,1);
+//		this.add(operatorOfCas,2);
+//		this.add(accountOfCas,3);
+//		this.add(moneyOfCas,4);
+//		this.add(ID,5);
+//		this.add(bg,6);
 	}
 	public JPBill(SaleBackSheetVO sbs){
-		//面板大小
-		this.setSize(522, 93);
-		//设置布局
-		this.setLayout(null);
-		//设置面板透明
-		this.setOpaque(false);
+//		//设置单据编号，状态，种类
+//		state=sbs.getBillState();
+//		style=sbs.getBillStyle();
+//		ID=sbs.getID();
+//		//传递VO
+//		cashVO=sbs;
+//		//面板大小
+//		this.setSize(522, 93);
+//		//设置布局
+//		this.setLayout(null);
+//		//设置面板透明
+//		this.setOpaque(false);
+//		//背景
+//		setBillBg(BillStyle.CashPaymentBill,sbs.getBillState(),0);
+//		bg.setBounds(0, 0, 522, 93);
+//		bg.addMouseListener(new MouseListenerOfBill(BillStyle.CashPaymentBill));
+//		bg.addMouseListener(new MouseListenerGetXY());
+//		//向右
+//		right.setIcon(new ImageIcon("src/image/right.png"));
+//		right.setBounds(221, 26, 40, 40);
+//		right.addMouseListener(new MouseListenerOfButton(1));
+//		//向左
+//		left.setIcon(new ImageIcon("src/image/left.png"));
+//		left.setBounds(482, 26, 40, 40);
+//		left.addMouseListener(new MouseListenerOfButton(2));
+//		//单据信息
+//		JLabel ID=new JLabel("ID:"+sbs.getID(),JLabel.CENTER);
+//		ID.setBounds(31,5, 200, 20);
+//		
+//		//将组件加到面板上
+//		this.add(right,0);
+//		this.add(left,1);
+//		this.add(ID,5);
+//		this.add(bg,6);
 	}
 	/*收款单构造界面*/
 	public JPBill(ReceiptVO rb){
@@ -334,13 +521,10 @@ public class JPBill extends JPanel {
 		left.setIcon(new ImageIcon("src/image/left.png"));
 		left.setBounds(482, 26, 40, 40);
 		left.addMouseListener(new MouseListenerOfButton(2));
-		//查看清单按钮
-		showList.setText("条目清单");
-		showList.setFont(new Font("隶书",Font.BOLD,18));
-		showList.setBounds(275,60,80, 30);
-		showList.setForeground(Color.white);
-		showList.addMouseListener(new MouseListenerOfButton(3));
 		//单据信息
+		JLabel ID=new JLabel("ID:"+cb.getID(),JLabel.CENTER);
+		ID.setBounds(31,5, 200, 20);
+		
 		operatorOfCas.setBounds(345, 15, 150, 16);
 		accountOfCas.setBounds(360, 33, 150, 16);
 		moneyOfCas.setBounds(330, 49, 150, 16);
@@ -360,104 +544,86 @@ public class JPBill extends JPanel {
 		this.add(operatorOfCas,2);
 		this.add(accountOfCas,3);
 		this.add(moneyOfCas,4);
-		this.add(showList,5);
+		this.add(ID,5);
 		this.add(bg,6);
 	}
 	public void change(GiftBillVO gb){
 	
 		//调用逻辑层修改对应单据的数据
-		gb.setID(ID);//设置对应单据的编号
-//		mbl.change(gb);
-		//根据内存中单据的数据重新设置面板界面
-	
+		mbl.change(gb);
 	}
 	public void change(SpillsLossBillVO slb){
 		//调用逻辑层修改对应单据的数据
-		slb.setID(ID);//设置对应单据的编号
-//		mbl.change(slb);
-		//根据内存中单据的数据重新设置面板界面
+		mbl.change(slb);
 	}
 	public void change(AlertBillVO ab){
 		//调用逻辑层修改对应单据的数据
-		ab.setID(ID);//设置对应单据的编号
-//		mbl.change(ab);
-		//根据内存中单据的数据重新设置面板界面
+		mbl.change(ab);
 	}
 	public void change(PurSheetVO ps){
 		//调用逻辑层修改对应单据的数据
-		ps.setID(ID);//设置对应单据的编号
-//		mbl.change(ps);
-		//根据内存中单据的数据重新设置面板界面
+		mbl.change(ps);
 	}
 	public void change(PurBackSheetVO pbs){
 		//调用逻辑层修改对应单据的数据
-		pbs.setID(ID);//设置对应单据的编号
-//		mbl.change(pbs);
-		//根据内存中单据的数据重新设置面板界面
+		mbl.change(pbs);
 	}
 	public void change(SaleSheetVO ss){
 		//调用逻辑层修改对应单据的数据
-		ss.setID(ID);//设置对应单据的编号
-//		mbl.change(ss);
-		//根据内存中单据的数据重新设置面板界面
+		mbl.change(ss);
 	}
 	public void change(SaleBackSheetVO sbs){
 		//调用逻辑层修改对应单据的数据
-		sbs.setID(ID);//设置对应单据的编号
-//		mbl.change(sbs);
-		//根据内存中单据的数据重新设置面板界面
+		mbl.change(sbs);
 	}
 	public void change(ReceiptVO rb){
 		//调用逻辑层修改对应单据的数据
-		rb.setID(ID);//设置对应单据的编号
-//		mbl.change(rb);
-		//根据内存中单据的数据重新设置面板界面
-		if(!rb.getOp().equals("")){
-			 operatorOfPR.setText(rb.getOp());
-		}
-		 if(!rb.getCustomer().equals("")){//如果vo对象里的账户属性不为空
-			 customerOfPR.setText(rb.getCustomer());
-		 }
-		 if(rb.getTotal()!=0){//如果vo对象里的账户属性不为空
-			 moneyOfPR.setText(String.valueOf(rb.getTotal()));
-		 }
+		mbl.change(rb);
+//		if(!rb.getOp().equals("")){
+//			 operatorOfPR.setText(rb.getOp());
+//		}
+//		 if(!rb.getCustomer().equals("")){//如果vo对象里的账户属性不为空
+//			 customerOfPR.setText(rb.getCustomer());
+//		 }
+//		 if(rb.getTotal()!=0){//如果vo对象里的账户属性不为空
+//			 moneyOfPR.setText(String.valueOf(rb.getTotal()));
+//		 }
 	}
 	public void change(PaymentVO pb){
 		//调用逻辑层修改对应单据的数据
-		pb.setID(ID);//设置对应单据的编号
-//		mbl.change(pb);
+		mbl.change(pb);
 		//根据内存中单据的数据重新设置面板界面
-		if(!pb.getOp().equals("")){
-			 operatorOfPR.setText(pb.getOp());
-		}
-		 if(!pb.getCustomer().equals("")){//如果vo对象里的账户属性不为空
-			 customerOfPR.setText(pb.getCustomer());
-		 }
-		 if(pb.getTotal()!=0){//如果vo对象里的账户属性不为空
-			 moneyOfPR.setText(String.valueOf(pb.getTotal()));
-		 }
+//		if(!pb.getOp().equals("")){
+//			 operatorOfPR.setText(pb.getOp());
+//		}
+//		 if(!pb.getCustomer().equals("")){//如果vo对象里的账户属性不为空
+//			 customerOfPR.setText(pb.getCustomer());
+//		 }
+//		 if(pb.getTotal()!=0){//如果vo对象里的账户属性不为空
+//			 moneyOfPR.setText(String.valueOf(pb.getTotal()));
+//		 }
 	}
 	public void change(CashPaymentVO cb){
 		//调用逻辑层修改对应单据的数据
-		cb.setID(ID);//设置对应单据的编号
-//		mbl.change(cb);
+		mbl.change(cb);
 		//根据内存中单据的数据重新设置面板界面
-		if(!cb.getOp().equals("")){
-			 operatorOfCas.setText(cb.getOp());
-		}
-		 if(!cb.getAccount().equals("")){//如果vo对象里的账户属性不为空
-			 accountOfCas.setText(cb.getAccount());
-		 }
-		 if(cb.getTotal()!=0){//如果vo对象里的账户属性不为空
-			 moneyOfCas.setText(String.valueOf(cb.getTotal()));
-		 }
+		
+//		if(!cb.getOp().equals("")){
+//			 operatorOfCas.setText(cb.getOp());
+//		}
+//		 if(!cb.getAccount().equals("")){//如果vo对象里的账户属性不为空
+//			 accountOfCas.setText(cb.getAccount());
+//		 }
+//		 if(cb.getTotal()!=0){//如果vo对象里的账户属性不为空
+//			 moneyOfCas.setText(String.valueOf(cb.getTotal()));
+//		 }
 		 
 		 
 	}
 	/*修改状态*/
 	public void transformState(BillState st){
 		//修改逻辑层的数据
-		//mbl.transformState(style, ID, st);
+		mbl.transformState(style, ID, st);
 		//界面层
 		state=st;
 		//修改背景
@@ -534,7 +700,7 @@ public class JPBill extends JPanel {
 	}
 	public class MouseListenerOfButton implements MouseListener{
 
-		private int num;//1、右 2、左 3、清单
+		private int num;//1、右 2、左 
 		public MouseListenerOfButton(int N){
 			num=N;
 		}
@@ -555,35 +721,6 @@ public class JPBill extends JPanel {
 			    //显示简
 			    showBrief();
 				break;
-			case 3:
-				showList.setForeground(Color.red);
-				switch(style){
-				case GiftBill:
-					break;
-				case SpillsLossBill:
-					break;
-				case AlertBill:
-					break;
-				case PurSheet:
-					break;
-				case PurBackSheet:
-					break;
-				case SaleSheet:
-					break;
-				case SaleBackSheet:
-					break;
-				case ReceiptBill:
-					break;
-				case PaymentBill:
-					break;
-				case CashPaymentBill:
-					table.setColumnNames(itemOfCas);
-					table.setList(listOfCas);
-					table.updateShow();
-					System.out.println("!");
-					break;
-				}
-			    break;
 			}
 	
 		}
@@ -597,9 +734,6 @@ public class JPBill extends JPanel {
 				break;
 			case 2:left.setIcon(new ImageIcon("src/image/left.png"));
 				break;
-			case 3:
-				showList.setForeground(Color.white);
-			    break;
 			}
 		}
 
@@ -616,9 +750,6 @@ public class JPBill extends JPanel {
 				break;
 			case 2:left.setIcon(new ImageIcon("src/image/left.png"));
 				break;
-			case 3:
-				showList.setForeground(Color.white);
-			    break;
 			}
 			
 		}
@@ -713,6 +844,32 @@ public class JPBill extends JPanel {
 			}
 			else{
 				setBillBg(st,state,1);
+			}
+			//悬停显示单据清单数据
+			switch(style){
+			case GiftBill:
+				break;
+			case SpillsLossBill:
+				break;
+			case AlertBill:
+				break;
+			case PurSheet:
+				break;
+			case PurBackSheet:
+				break;
+			case SaleSheet:
+				break;
+			case SaleBackSheet:
+				break;
+			case ReceiptBill:
+				break;
+			case PaymentBill:
+				break;
+			case CashPaymentBill:
+				table.setColumnNames(itemOfCas);
+				table.setList(listOfCas);
+				table.updateShow();
+				break;
 			}
 		}
 

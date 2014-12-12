@@ -587,7 +587,9 @@ public class StubBillPool {
 		this.save();
 	}
 	public void change(CashPaymentVO cb){
+		System.out.println("进入单据池修改");
 		for(int i=0;i<alOfCashPaymentBill.size();i++){
+			System.out.println(alOfCashPaymentBill.get(i).getID()+":"+cb.getID());
 			if(alOfCashPaymentBill.get(i).getID().equals(cb.getID())){//寻找相同编号
 				//进行修改
 				//修改银行账户
@@ -607,6 +609,7 @@ public class StubBillPool {
 				}
 				alOfCashPaymentBill.get(i).setItemList(itemList);
 				//修改完毕
+				System.out.println("现金费用单修改完毕");
 				break;
 			}
 		}

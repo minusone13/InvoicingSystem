@@ -171,6 +171,8 @@ public class JPmanageBills2 extends JPanel {
 				break;
 			case SpillsLossBill:
 				table.setVisible(false);
+				add.setVisible(true);
+				edit.setVisible(true);
 				break;
 			case AlertBill:
 				table.setVisible(false);
