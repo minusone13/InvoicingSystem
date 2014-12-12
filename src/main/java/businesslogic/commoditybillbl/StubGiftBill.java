@@ -37,8 +37,13 @@ public class StubGiftBill extends Bill implements GetVOandPO
 			result.add(coms.get(i).toPO());
 		return new GiftBillPO(date,operator,ID,result,remark,state);//bug may appear
 	}
-	public void setPO(GiftBillPO po)
+	public boolean setPO(GiftBillPO po)
 	{
+		if(po==null)
+		{
+			System.out.println("赠送单PO为NULL");
+			return false;
+		}
 		for(int i=0;i<po.getComs().size();i++)
 			coms.add(new MockCommodity(po.getComs().get(i)));
 		ID=po.getID();
@@ -49,9 +54,15 @@ public class StubGiftBill extends Bill implements GetVOandPO
 		operator=po.getOperator();
 		ID=po.getID();
 		remark=po.getRemark();
+		return true;
 	}
-	public void setVO(GiftBillVO vo)
+	public boolean setVO(GiftBillVO vo)
 	{
+		if(vo==null)
+		{
+			System.out.println("赠送单VO为NULL");
+			return false;
+		}
 		for(int i=0;i<vo.getComs().size();i++)
 			coms.add(new MockCommodity(vo.getComs().get(i)));
 		ID=vo.getID();
@@ -62,6 +73,7 @@ public class StubGiftBill extends Bill implements GetVOandPO
 		operator=vo.getOperator();
 		ID=vo.getID();
 		remark=vo.getRemark();
+		return true;
 	}
 	
 	public BillStyle getBillstyle() {

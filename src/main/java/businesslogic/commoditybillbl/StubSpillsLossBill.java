@@ -29,8 +29,13 @@ public class StubSpillsLossBill extends Bill implements GetVOandPO
 	{
 		return new SpillsLossBillPO(operator,ID,t,com.toPO().clone(),state);
 	}
-	public void setPO(SpillsLossBillPO po)
+	public boolean setPO(SpillsLossBillPO po)
 	{
+		if(po==null)
+		{
+			System.out.println("溢损单PO为NULL");
+			return false;
+		}
 		date=po.getDate();
 		operator=po.getOperator();
 		com=new MockCommodity(po.getComPO());
@@ -39,9 +44,15 @@ public class StubSpillsLossBill extends Bill implements GetVOandPO
 		ID=po.getID();
 		state=po.getState();
 		t=po.getT();
+		return true;
 	}
-	public void setVO(SpillsLossBillVO vo)
+	public boolean setVO(SpillsLossBillVO vo)
 	{
+		if(vo==null)
+		{
+			System.out.println("溢损单VO为NULL");
+			return false;
+		}
 		date=vo.getDate();
 		operator=vo.getOperator();
 		com=new MockCommodity(vo.getCom());
@@ -50,6 +61,7 @@ public class StubSpillsLossBill extends Bill implements GetVOandPO
 		ID=vo.getID();
 		state=vo.getState();
 		t=vo.getT();
+		return true;
 	}
 	public BillStyle getStyle() {
 		return style;

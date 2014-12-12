@@ -13,7 +13,7 @@ public class GiftBillPO extends PO implements Serializable{
 	private Date date;
 	String operator;
 	private String[] remark;//赠送原因（销售单据编号或手动），赠送客户。分别位于remark[0],remark[1]
-	private ArrayList<CommodityPO> coms;//一系列赠送商品，商品内的数量为
+	private ArrayList<CommodityPO> coms = new ArrayList<CommodityPO>();//一系列赠送商品，商品内的数量为
 	private BillState state=BillState.DRAFT;//订单状态
 	public ArrayList<CommodityPO> getComs()
 	{

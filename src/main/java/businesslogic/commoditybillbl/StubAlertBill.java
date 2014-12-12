@@ -37,8 +37,13 @@ public class StubAlertBill extends Bill implements GetVOandPO
 	{
 		return new AlertBillPO(date,operator,ID,com.toPO(),shortage,state);
 	}
-	public void setPO(AlertBillPO po)
+	public boolean setPO(AlertBillPO po)
 	{
+		if(po==null)
+		{
+			System.out.println("报警单PO为NULL");
+			return false;
+		}
 		date=po.getDate();
 		operator=po.getOperator();
 		com=new MockCommodity(po.getCommodity());
@@ -46,9 +51,15 @@ public class StubAlertBill extends Bill implements GetVOandPO
 		ID=po.getID();
 		style=po.getStyle();
 		state=po.getState();
+		return true;
 	}
-	public void setVO(AlertBillVO vo)
+	public boolean setVO(AlertBillVO vo)
 	{
+		if(vo==null)
+		{
+			System.out.println("报警单VO为NULL");
+			return false;
+		}
 		date=vo.getDate();
 		operator=vo.getOperator();
 		com=new MockCommodity(vo.getCommodity());
@@ -56,6 +67,7 @@ public class StubAlertBill extends Bill implements GetVOandPO
 		ID=vo.getID();
 		style=vo.getBillstyle();
 		state=vo.getState();
+		return true;
 	}
 	public MockCommodity getCom() {
 		return com;

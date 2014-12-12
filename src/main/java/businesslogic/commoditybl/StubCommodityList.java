@@ -15,7 +15,7 @@ import vo.RM;
 
 public class StubCommodityList {//商品列表 haha
 	static StubCommodityDataService comdata;
-	User user=new User("I0001",Role.STOCK_STAFF,"default","default","default");
+	User user;
 	public ArrayList<CommodityVO> findCommodity(String name)
 	{
 		ArrayList <CommodityPO> pos=comdata.findCommodity(name);
