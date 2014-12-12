@@ -22,7 +22,15 @@ public class PurSheetPO extends PO implements Serializable{
 	//关于状态的东西我还没有写；
 	String username;
 	String op;
+	private BillState billstate=BillState.DRAFT;
 	
+	public  BillState getState(){
+		return this.billstate;
+	}
+	
+	public  void setState(BillState billstate){
+		this.billstate= billstate;
+	}
 	public String getop(){
 		return this.op;
 	}

@@ -3,6 +3,7 @@ package po;
 import java.util.ArrayList;
 import java.util.Date;
 
+import businesslogic.BillState;
 import po.stockpo.CommodityPO;
 
 
@@ -20,7 +21,15 @@ public class SaleSheetPO extends PO{
 	String words;//备注
 	String username;
 	String op;
+	private BillState billstate=BillState.DRAFT;
 	
+	public  BillState getState(){
+		return this.billstate;
+	}
+	
+	public  void setState(BillState billstate){
+		this.billstate= billstate;
+	}
 	public String getop(){
 		return this.op;
 	}

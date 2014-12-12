@@ -39,6 +39,15 @@ public class PurSheet extends Bill implements GetVOandPO{
 		this.words=vo.getwords();
 		this.op=vo.getop();
 		this.username=vo.getusername();
+		this.billstate=vo.getState();
+	}
+	
+	public  BillState getState(){
+		return this.billstate;
+	}
+	
+	public  void setState(BillState billstate){
+		this.billstate= billstate;
 	}
 	
 	public String getop(){
@@ -137,6 +146,7 @@ public class PurSheet extends Bill implements GetVOandPO{
 			vo.setwords(words);
 			vo.setop(op);
 			vo.setusername(username);
+			vo.setState(billstate);
 			return vo;
 		}
 		
@@ -157,6 +167,7 @@ public class PurSheet extends Bill implements GetVOandPO{
 			po.setwords(words);
 			po.setop(op);
 			po.setusername(username);
+			po.setState(billstate);
 			return po;
 		}
 		
@@ -175,6 +186,7 @@ public class PurSheet extends Bill implements GetVOandPO{
 			this.words=po.getwords();
 			this.op=po.getop();
 			this.username=po.getusername();
+			this.billstate=po.getState();
 		}
 		
 		
