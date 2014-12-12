@@ -41,9 +41,6 @@ public class TestFrame extends JFrame {
 	}
 	public static void main(String[] args) {
 		TestFrame testJP=new TestFrame(new Sale());
-
-
-
 	}
 
 }

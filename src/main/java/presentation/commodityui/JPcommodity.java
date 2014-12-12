@@ -15,11 +15,24 @@ import vo.stockvo.CommodityVO;
 public class JPcommodity extends JPanel implements MouseListener{
 
 	
-	private JPanel inputNum=new JPanel();//输入数量面板
-	private JPanel Numjp=new JPanel();//显示数量面板
-	private JLabel numJL=new JLabel("",JLabel.CENTER);//显示数量标签
-	private JTextField jtnum=new JTextField(4);
+	private JPanel editOfManager=new JPanel();//输入数量面板
+	private JPanel showOfManager=new JPanel();//显示数量面板
+	
+	private JLabel showNumOfManager=new JLabel("",JLabel.CENTER);//显示数量标签
+	private JTextField inputNumTxtOfManager=new JTextField(4);
+	
+	private JPanel editOfSale=new JPanel();//输入数量单价备注
+	private JLabel inputNumOfSale=new JLabel("数量");
+	private JLabel inputPriceOfSale=new JLabel("单价");
+	private JLabel inputNoteOfSale=new JLabel("备注");
+	private JTextField inputNumTxtOfSale=new JTextField(4);
+	private JTextField inputPriceTxtOfSale=new JTextField(4);
+	private JTextField inputNoteTxtOfSale=new JTextField(4);
+	private JLabel comfirmOfSale=new JLabel();//进销人员编辑面板的确认按钮
+	private JPanel showOfStock=new JPanel();//显示已选
+	
 	private CommodityVO commodity;//对应的VO
+	private JPManagerCom JPmanagerCom;//引用
 	public CommodityVO getCommodity() {
 		return commodity;
 	}
@@ -58,51 +71,117 @@ public class JPcommodity extends JPanel implements MouseListener{
 		jlnum.setForeground(Color.white);
 		
 	
-		inputNum.setBounds(0, 0, 90, 95);
-		inputNum.setLayout(null);
-		inputNum.setOpaque(false);
+		editOfManager.setBounds(0, 0, 90, 95);
+		editOfManager.setLayout(null);
+		editOfManager.setOpaque(false);
 		//输入数量面板的背景
 		JLabel bgOfInputNum=new JLabel();
 		bgOfInputNum.setIcon(new ImageIcon("src/image/commodity/inputNum.png") );
 		bgOfInputNum.setBounds(0, 0, 90, 95);
 		//输入数量面板的文本框
-		
-		jtnum.setBounds(20,37, 50, 20);
-		jtnum.setOpaque(false);//文本框透明
-		jtnum.setForeground(Color.white);//前景色
+		inputNumTxtOfManager.setBounds(20,37, 50, 20);
+		inputNumTxtOfManager.setOpaque(false);//文本框透明
+		inputNumTxtOfManager.setForeground(Color.white);//前景色
 		//输入数量面板的确认按钮
-		JLabel confirm=new JLabel();
-		confirm.setIcon(new ImageIcon("src/image/ChooseCom/confirm.png") );
-		confirm.setBounds(33, 60, 24, 24);
-		confirm.addMouseListener(new MouseListenerOfComfirm());
+		JLabel comfirmOfManager=new JLabel();
+		comfirmOfManager.setIcon(new ImageIcon("src/image/ChooseCom/confirm.png") );
+		comfirmOfManager.setBounds(33, 60, 24, 24);
+		comfirmOfManager.addMouseListener(new MouseListenerOfComfirm(1));
 		
-		inputNum.add(jtnum,0);
-		inputNum.add(confirm,1);
-		inputNum.add(bgOfInputNum,2);
-		inputNum.setVisible(false);
+		editOfManager.add(inputNumTxtOfManager,0);
+		editOfManager.add(comfirmOfManager,1);
+		editOfManager.add(bgOfInputNum,2);
+		editOfManager.setVisible(false);
 
-		Numjp.setBounds(0, 0, 90, 95);
-		Numjp.setLayout(null);
-		Numjp.setOpaque(false);
-		//输入数量面板的背景
+		showOfManager.setBounds(0, 0, 90, 95);
+		showOfManager.setLayout(null);
+		showOfManager.setOpaque(false);
+		//背景
 		JLabel bgOfNumjp=new JLabel();
 		bgOfNumjp.setIcon(new ImageIcon("src/image/commodity/purAndSale.png") );
 		bgOfNumjp.setBounds(0, 0, 90, 95);
 		
-		numJL.setFont(new Font("黑体",Font.BOLD,30));
-		numJL.setBounds(25,30,40,30);
-		numJL.setForeground(Color.white);
+		showNumOfManager.setFont(new Font("黑体",Font.BOLD,30));
+		showNumOfManager.setBounds(25,30,40,30);
+		showNumOfManager.setForeground(Color.white);
 		
-		Numjp.add(numJL,0);
-		Numjp.add(bgOfNumjp,1);
-		Numjp.setVisible(false);
+		showOfManager.add(showNumOfManager,0);
+		showOfManager.add(bgOfNumjp,1);
+		showOfManager.setVisible(false);
 		
-		this.add(inputNum,0);
-		this.add(Numjp,1);
-		this.add(bg,2);
-		this.add(jlname,3);
-		this.add(jlID,4);
-		this.add(jlnum,5);
+		//进销人员的编辑面板
+		editOfSale.setBounds(0, 0, 90, 95);
+		editOfSale.setLayout(null);
+		editOfSale.setOpaque(false);
+		//背景
+		JLabel bgOfeditOfSale=new JLabel();
+		bgOfeditOfSale.setIcon(new ImageIcon("src/image/commodity/purAndSale.png") );
+		bgOfeditOfSale.setBounds(0, 0, 90, 95);
+		//设置标签字体
+		inputNumOfSale.setFont(new Font("宋体",Font.BOLD,14));
+		inputPriceOfSale.setFont(new Font("宋体",Font.BOLD,14));
+		inputNoteOfSale.setFont(new Font("宋体",Font.BOLD,14));
+		//设置字体颜色
+		inputNumOfSale.setForeground(Color.white);
+		inputPriceOfSale.setForeground(Color.white);
+		inputNoteOfSale.setForeground(Color.white);
+		//设置标签大小位置
+		inputNumOfSale.setBounds(5, 10, 30, 15);
+		inputPriceOfSale.setBounds(5, 30, 30, 15);
+		inputNoteOfSale.setBounds(5, 50, 30, 15);
+		//文本框
+		inputNumTxtOfSale.setBounds(40,10,40, 15);
+		inputNumTxtOfSale.setOpaque(false);//文本框透明
+		inputNumTxtOfSale.setForeground(Color.white);//前景色
+		
+		inputPriceTxtOfSale.setBounds(40,30,40, 15);
+		inputPriceTxtOfSale.setOpaque(false);//文本框透明
+		inputPriceTxtOfSale.setForeground(Color.white);//前景色
+		
+		inputNoteTxtOfSale.setBounds(40,50,40,15);
+		inputNoteTxtOfSale.setOpaque(false);//文本框透明
+		inputNoteTxtOfSale.setForeground(Color.white);//前景色
+	
+		comfirmOfSale.setIcon(new ImageIcon("src/image/ChooseCom/confirm.png") );
+		comfirmOfSale.setBounds(33,68, 24, 24);
+		comfirmOfSale.addMouseListener(new MouseListenerOfComfirm(2));
+		
+		editOfSale.add(inputNumOfSale,0);
+		editOfSale.add(inputPriceOfSale,1);
+		editOfSale.add(inputNoteOfSale,2);
+		editOfSale.add(inputNumTxtOfSale,3);
+		editOfSale.add(inputPriceTxtOfSale,4);
+		editOfSale.add(inputNoteTxtOfSale,5);
+		editOfSale.add(comfirmOfSale,6);
+		editOfSale.add(bgOfeditOfSale,7);
+		editOfSale.setVisible(false);
+		
+		//库管人员的编辑面板
+		showOfStock.setBounds(0, 0, 90, 95);
+		showOfStock.setLayout(null);
+		showOfStock.setOpaque(false);
+		//背景
+		JLabel bgOfshowOfStock=new JLabel();
+		bgOfshowOfStock.setIcon(new ImageIcon("src/image/commodity/purAndSale.png") );
+		bgOfshowOfStock.setBounds(0, 0, 90, 95);
+		//已选标记
+		JLabel Chosen=new JLabel("已选",JLabel.CENTER);
+		Chosen.setFont(new Font("黑体",Font.BOLD,30));
+		Chosen.setForeground(Color.white);
+		Chosen.setBounds(25,30,40,30);
+		
+		showOfStock.add(Chosen,0);
+		showOfStock.add(bgOfshowOfStock,1);
+		showOfStock.setVisible(false);
+		
+		this.add(editOfManager,0);
+		this.add(showOfManager,1);
+		this.add(showOfStock,2);
+		this.add(editOfSale,3);
+		this.add(bg,4);
+		this.add(jlname,5);
+		this.add(jlID,6);
+		this.add(jlnum,7);
 		
 		this.addMouseListener(this);
 		
@@ -113,6 +192,10 @@ public class JPcommodity extends JPanel implements MouseListener{
 	}
 	public class MouseListenerOfComfirm implements MouseListener{
 
+		private int num;//1、总经理编辑面板  2、进销人员编辑面板
+		public MouseListenerOfComfirm(int N){
+			num=N;
+		}
 		public void mouseClicked(MouseEvent e) {
 			// TODO Auto-generated method stub
 			
@@ -120,18 +203,34 @@ public class JPcommodity extends JPanel implements MouseListener{
 
 		public void mousePressed(MouseEvent e) {
 			// TODO Auto-generated method stub
-			//隐藏输入面板
-			inputNum.setVisible(false);
-			//标记选中
-			chosen=true;
-			//显示数字在标签上
-			numJL.setText(jtnum.getText());
-			//改变VO对象的数量信息
-			commodity.setNumber(Integer.parseInt(jtnum.getText()));
-			//显示选中面板
-			Numjp.setVisible(true);
-			//清空输入框
-			jtnum.setText("");
+			switch(num){
+			case 1:
+				//隐藏输入面板
+				editOfManager.setVisible(false);
+				//标记选中
+				chosen=true;
+				//显示数字在标签上
+				showNumOfManager.setText(inputNumTxtOfManager.getText());
+				//改变VO对象的数量信息
+				commodity.setNumber(Integer.parseInt(inputNumTxtOfManager.getText()));
+				//显示选中面板
+				showOfManager.setVisible(true);
+				//清空输入框
+				inputNumTxtOfManager.setText("");
+				break;
+			case 2:
+				//设置不可编辑
+				inputNumTxtOfSale.setEditable(false);
+				inputPriceTxtOfSale.setEditable(false);
+				inputNoteTxtOfSale.setEditable(false);
+				//隐藏确认按钮
+				comfirmOfSale.setVisible(false);
+				//标记选中
+				chosen=true;
+				//改变VO的数据
+				break;
+			}
+		
 		}
 
 		public void mouseReleased(MouseEvent e) {
@@ -156,12 +255,38 @@ public class JPcommodity extends JPanel implements MouseListener{
 	}
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
-		if(chosen==false){
-			inputNum.setVisible(true);
-		}
-		else{
-			Numjp.setVisible(false);
-			chosen=false;
+		switch(JPmanagerCom.getRole()){
+		case MANAGER:
+			if(chosen==false){
+				editOfManager.setVisible(true);
+			}
+			else{
+				showOfManager.setVisible(false);
+				chosen=false;
+			}
+			break;
+		case PURCHASE_SALE_STAFF:
+			if(chosen==false){
+				//清空内容
+				inputNumTxtOfSale.setText("");
+				inputPriceTxtOfSale.setText("");
+				inputNoteTxtOfSale.setText("");
+				//恢复编辑
+				inputNumTxtOfSale.setEditable(true);
+				inputPriceTxtOfSale.setEditable(true);
+				inputNoteTxtOfSale.setEditable(true);
+				//显示确认按钮
+				comfirmOfSale.setVisible(true);
+				//显示编辑面板
+				editOfSale.setVisible(true);
+			}
+			else{
+				editOfSale.setVisible(false);
+				chosen=false;
+			}
+			break;
+		case STOCK_STAFF:
+			break;
 		}
 		
 	}
@@ -176,6 +301,12 @@ public class JPcommodity extends JPanel implements MouseListener{
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
+	}
+	public JPManagerCom getJPmanagerCom() {
+		return JPmanagerCom;
+	}
+	public void setJPmanagerCom(JPManagerCom jPmanagerCom) {
+		JPmanagerCom = jPmanagerCom;
 	}
 
 
