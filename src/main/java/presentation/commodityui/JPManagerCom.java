@@ -13,6 +13,18 @@ import businesslogic.Role;
 
 public class JPManagerCom extends JPanel{
 
+	public JPanel getHead() {
+		return head;
+	}
+	public void setHead(JPanel head) {
+		this.head = head;
+	}
+	public JPanel getBottom() {
+		return bottom;
+	}
+	public void setBottom(JPanel bottom) {
+		this.bottom = bottom;
+	}
 	//树状结果目录
 	private JPtreeContent content=new JPtreeContent();
 	//商品显示面板
