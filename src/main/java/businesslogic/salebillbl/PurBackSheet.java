@@ -6,6 +6,7 @@ import java.util.Date;
 import po.PurBackSheetPO;
 import po.stockpo.CommodityPO;
 import vo.PurBackSheetVO;
+import businesslogic.BillState;
 import businesslogic.BillStyle;
 import businesslogic.GetVOandPO;
 import businesslogic.commoditybl.MockCommodity;
@@ -17,6 +18,7 @@ public class PurBackSheet extends Bill implements GetVOandPO{
 	private String ID;
 	private String userID;
 	private BillStyle billstyle=BillStyle.PurBackSheet;
+	private BillState billstate=BillState.DRAFT;
 	Date date;
 	String stock;//仓库？
 	ArrayList<MockCommodity> sheet;//写了一个commodityInSheet类。
@@ -37,6 +39,15 @@ public class PurBackSheet extends Bill implements GetVOandPO{
 		this.words=vo.getwords();
 		this.op=vo.getop();
 		this.username=vo.getusername();
+		this.billstate=vo.getState();
+	}
+	
+	public  BillState getState(){
+		return this.billstate;
+	}
+	
+	public  void setState(BillState billstate){
+		this.billstate= billstate;
 	}
 	
 	public String getop(){
@@ -136,6 +147,7 @@ public class PurBackSheet extends Bill implements GetVOandPO{
 		vo.setwords(words);
 		vo.setop(op);
 		vo.setusername(username);
+		vo.setState(billstate);
 		return vo;
 	}
 	
@@ -156,6 +168,7 @@ public class PurBackSheet extends Bill implements GetVOandPO{
 		po.setwords(words);
 		po.setop(op);
 		po.setusername(username);
+		po.setState(billstate);
 		return po;
 	}
 	
@@ -174,6 +187,7 @@ public class PurBackSheet extends Bill implements GetVOandPO{
 		this.words=po.getwords();
 		this.op=po.getop();
 		this.username=po.getusername();
+		this.billstate=po.getState();
 	}
 	
 	

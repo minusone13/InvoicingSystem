@@ -6,6 +6,7 @@ import java.util.Date;
 import po.SaleSheetPO;
 import po.stockpo.CommodityPO;
 import vo.SaleSheetVO;
+import businesslogic.BillState;
 import businesslogic.BillStyle;
 import businesslogic.GetVOandPO;
 import businesslogic.commoditybl.MockCommodity;
@@ -17,6 +18,7 @@ public class SaleSheet extends Bill implements GetVOandPO{
 		private String ID;
 		private String userID;
 		private BillStyle billstyle=BillStyle.SaleSheet;
+		private BillState billstate=BillState.DRAFT;
 		Date date;
 		Customer customer;
 		ArrayList<MockCommodity> sheet;//销售单据，商品名，数量，单价//ArrayList<>在写一个类；
@@ -43,7 +45,16 @@ public class SaleSheet extends Bill implements GetVOandPO{
 			this.username=vo.getusername();
 			this.op=vo.getop();
 			this.date=vo.getdate();
+			this.billstate=vo.getState();
 		};
+		
+		public  BillState getState(){
+			return this.billstate;
+		}
+		
+		public  void setState(BillState billstate){
+			this.billstate= billstate;
+		}
 		
 		public String getop(){
 			return this.op;
@@ -165,6 +176,7 @@ public class SaleSheet extends Bill implements GetVOandPO{
 			vo.setwords(words);
 			vo.setop(op);
 			vo.setusername(username);
+			vo.setState(billstate);
 			return vo;
 		}
 		
@@ -186,6 +198,7 @@ public class SaleSheet extends Bill implements GetVOandPO{
 			po.setwords(words);
 			po.setop(op);
 			po.setusername(username);
+			
 			return po;
 		}
 		
@@ -206,5 +219,6 @@ public class SaleSheet extends Bill implements GetVOandPO{
 			this.username=po.getusername();
 			this.op=po.getop();
 			this.date=po.getdate();
+			this.billstate=po.getState();
 		}
 }

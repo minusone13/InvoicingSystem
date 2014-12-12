@@ -3,6 +3,7 @@ package vo;
 import java.util.ArrayList;
 import java.util.Date;
 
+import businesslogic.BillState;
 import businesslogic.BillStyle;
 import businesslogic.commoditybl.MockCommodity;
 import businesslogic.customerbl.Customer;
@@ -20,6 +21,15 @@ public class PurBackSheetVO extends VO{
 	String words;//备注
 	String username;
 	String op;
+	private BillState billstate=BillState.DRAFT;
+	
+	public  BillState getState(){
+		return this.billstate;
+	}
+	
+	public  void setState(BillState billstate){
+		this.billstate= billstate;
+	}
 	
 	public String getop(){
 		return this.op;

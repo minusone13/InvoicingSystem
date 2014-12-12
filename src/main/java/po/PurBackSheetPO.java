@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import po.stockpo.CommodityPO;
+import businesslogic.BillState;
 import businesslogic.commoditybl.MockCommodity;
 import businesslogic.customerbl.Customer;
 
@@ -19,6 +20,15 @@ public class PurBackSheetPO extends PO implements Serializable{
 	String words;//备注
 	String username;
 	String op;
+	private BillState billstate=BillState.DRAFT;
+	
+	public  BillState getState(){
+		return this.billstate;
+	}
+	
+	public  void setState(BillState billstate){
+		this.billstate= billstate;
+	}
 	
 	public String getop(){
 		return this.op;
