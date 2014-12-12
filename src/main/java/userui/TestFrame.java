@@ -6,6 +6,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import presentation.commodityui.JPManagerComOfStock;
+import presentation.financialui.BusinessConditionPanel;
+import presentation.financialui.InitialInfoPanel;
 import presentation.managerui.MouseListenerGetXY;
 
 
@@ -32,7 +34,7 @@ public class TestFrame extends JFrame {
 //		JPManagerCom test=new JPManagerCom();
 //		test.setRole(Role.STOCK_STAFF);
 		JPManagerComOfStock test=new JPManagerComOfStock();
-		TestFrame testJP=new TestFrame(test);
+		TestFrame testJP=new TestFrame(new BusinessConditionPanel());
 	}
 
 }

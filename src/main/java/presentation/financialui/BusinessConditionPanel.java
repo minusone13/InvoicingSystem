@@ -35,15 +35,15 @@ public class BusinessConditionPanel extends JPanel{
 		
 		paneOfEarn = new JScrollPane(tableOfEarn);
 		this.add(paneOfEarn);
-		paneOfEarn.setBounds(100, 100, 700, 100);
+		paneOfEarn.setBounds(100, 230, 700, 100);
 		
 		paneOfPay = new JScrollPane(tableOfPay);
 		this.add(paneOfPay);
-		paneOfPay.setBounds(100, 230, 300, 100);
+		paneOfPay.setBounds(100, 360, 300, 100);
 		
 		paneOfProfit = new JScrollPane(tableOfProfit);
 		this.add(paneOfProfit);
-		paneOfProfit.setBounds(100, 360, 60, 100);
+		paneOfProfit.setBounds(430, 360, 60, 100);
 		
 		
 	}
