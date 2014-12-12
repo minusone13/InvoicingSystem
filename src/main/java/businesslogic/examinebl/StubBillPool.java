@@ -28,6 +28,7 @@ import businesslogic.commoditybillbl.StubAlertBill;
 import businesslogic.commoditybillbl.StubGiftBill;
 import businesslogic.commoditybillbl.StubSpillsLossBill;
 import businesslogic.commoditybl.MockCommodity;
+import businesslogic.customerbl.Customer;
 import businesslogic.financialbillbl.CashPaymentBill;
 import businesslogic.financialbillbl.Item;
 import businesslogic.financialbillbl.PaymentBill;
@@ -433,7 +434,7 @@ public class StubBillPool {
 			if(alOfPurSheet.get(i).getID().equals(ps.getID())){//寻找相同编号
 				//进行修改
 				//修改客户
-				alOfPurSheet.get(i).setCustomer(ps.getcustomer());
+				alOfPurSheet.get(i).setCustomer(new Customer(ps.getcustomer()));//阿超改动了一下；如有问题，快来告诉我;
 				//修改仓库
 				alOfPurSheet.get(i).setstock(ps.getstock());
 				//修改操作员
@@ -456,7 +457,7 @@ public class StubBillPool {
 			if(alOfPurBackSheet.get(i).getID().equals(pbs.getID())){//寻找相同编号
 				//进行修改
 				//修改客户
-				alOfPurBackSheet.get(i).setCustomer(pbs.getcustomer());
+				alOfPurBackSheet.get(i).setCustomer(new Customer(pbs.getcustomer()));//阿超改动了一下；如有问题，快来告诉我;
 				//修改仓库
 				alOfPurBackSheet.get(i).setstock(pbs.getstock());
 				//修改操作员
@@ -479,7 +480,7 @@ public class StubBillPool {
 			if(alOfSaleSheet.get(i).getID().equals(ss.getID())){//寻找相同编号
 				//进行修改
 				//修改客户
-				alOfSaleSheet.get(i).setCustomer(ss.getcustomer());
+				alOfSaleSheet.get(i).setCustomer(new Customer(ss.getcustomer()));//阿超改动了一下；如有问题，快来告诉我;
 				//修改仓库
 				alOfSaleSheet.get(i).setstock(ss.getstock());
 				//修改操作员
@@ -508,7 +509,7 @@ public class StubBillPool {
 			if(alOfSaleBackSheet.get(i).getID().equals(sbs.getID())){//寻找相同编号
 				//进行修改
 				//修改客户
-				alOfSaleBackSheet.get(i).setCustomer(sbs.getcustomer());
+				alOfSaleBackSheet.get(i).setCustomer(new Customer(sbs.getcustomer()));//阿超改动了一下；如有问题，快来告诉我;
 				//修改仓库
 				alOfSaleBackSheet.get(i).setstock(sbs.getstock());
 				//修改操作员

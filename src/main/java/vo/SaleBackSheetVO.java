@@ -3,6 +3,7 @@ package vo;
 import java.util.ArrayList;
 import java.util.Date;
 
+import vo.stockvo.CommodityVO;
 import businesslogic.BillState;
 import businesslogic.BillStyle;
 import businesslogic.commoditybl.MockCommodity;
@@ -11,12 +12,12 @@ import businesslogic.customerbl.Customer;
 
 public class SaleBackSheetVO extends VO{
 	private BillStyle style=BillStyle.SaleBackSheet;
-	Customer customer;
+	CustomerVO customer;
 	String id;
 	String userid;
 	Date date;
 	String commodity;//仓库？
-	ArrayList<MockCommodity> sheet;//是不是应该是个arraylist<>?
+	ArrayList<CommodityVO> sheet;//是不是应该是个arraylist<>?
 	double money1;//总金额
 	double money2;
 	double discount;
@@ -89,11 +90,11 @@ public class SaleBackSheetVO extends VO{
 		this.pmoney=pmoney;
 	}
 	
-	public Customer getcustomer(){
+	public CustomerVO getcustomer(){
 		return customer;
 	}
 	
-	public void setCustomer(Customer customer){
+	public void setCustomer(CustomerVO customer){
 		this.customer=customer;
 	}
 	
@@ -113,11 +114,11 @@ public class SaleBackSheetVO extends VO{
 		this.commodity=commodity;
 	}
 	
-	public ArrayList<MockCommodity> getsheet(){
+	public ArrayList<CommodityVO> getsheet(){
 		return sheet;
 	}
 	
-	public void setsheet(ArrayList<MockCommodity> sheet){
+	public void setsheet(ArrayList<CommodityVO> sheet){
 		this.sheet=sheet;
 	}
 	

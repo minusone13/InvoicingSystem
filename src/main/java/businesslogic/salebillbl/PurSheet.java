@@ -6,6 +6,7 @@ import java.util.Date;
 import po.PurSheetPO;
 import po.stockpo.CommodityPO;
 import vo.PurSheetVO;
+import vo.stockvo.CommodityVO;
 import businesslogic.BillState;
 import businesslogic.BillStyle;
 import businesslogic.GetVOandPO;
@@ -29,12 +30,16 @@ public class PurSheet extends Bill implements GetVOandPO{
 	
 	public PurSheet(){};
 	public PurSheet(PurSheetVO vo){
-		this.customer=vo.getcustomer();
+		this.customer=new Customer(vo.getcustomer());
 		this.userID=vo.getuserid();
 		this.date=vo.getdate();
 		this.stock=vo.getstock();
 		this.ID=vo.getid();
-		this.sheet=vo.getsheet();
+		ArrayList<MockCommodity> temp=new ArrayList<MockCommodity>();
+		for(int i=0;i<sheet.size();i++){
+			temp.add(new MockCommodity(vo.getsheet().get(i)));
+		}
+		this.sheet=temp;
 		this.money1=vo.getmoney1();
 		this.words=vo.getwords();
 		this.op=vo.getop();
@@ -136,12 +141,17 @@ public class PurSheet extends Bill implements GetVOandPO{
 		
 		public PurSheetVO getVO() {
 			PurSheetVO vo = new PurSheetVO();
-			vo.setCustomer(customer);
+			vo.setCustomer(customer.getVO());
 			vo.setdate(date);
 			vo.setid(ID);
 			vo.setuserid(userID);
 			vo.setmoney1(money1);
-			vo.setsheet(sheet);
+			//转换成VO数组
+			ArrayList<CommodityVO> temp=new ArrayList<CommodityVO>();
+			for(int i=0;i<sheet.size();i++){
+				temp.add(sheet.get(i).toVO());
+			}
+			vo.setsheet(temp);
 			vo.setstock(stock);
 			vo.setwords(words);
 			vo.setop(op);

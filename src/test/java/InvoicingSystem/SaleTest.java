@@ -6,6 +6,7 @@ import java.util.Date;
 import vo.CustomerVO;
 import vo.SaleBackSheetVO;
 import vo.SaleSheetVO;
+import vo.stockvo.CommodityVO;
 import businesslogic.commoditybl.MockCommodity;
 import businesslogic.customerbl.Customer;
 import businesslogic.salebillbl.salebillController;
@@ -23,7 +24,7 @@ public class SaleTest extends TestCase{
 			SaleSheetVO vo = new SaleSheetVO();
 			Customer customer = new Customer(); 
 			customer.setname("梅少");
-			vo.setCustomer(customer);
+			vo.setCustomer(customer.getVO());
 			vo.setuserid("002");
 			vo.setdate(new Date());
 			vo.setdiscount(20.0);
@@ -34,7 +35,7 @@ public class SaleTest extends TestCase{
 			vo.setusername("学长");
 			vo.setuserid("208");
 			vo.setop("学长208");
-			vo.setsheet(new ArrayList<MockCommodity>());
+			vo.setsheet(new ArrayList<CommodityVO>());
 			vo.setwords("我是备注");
 			salebillController controller = new salebillController();
 			boolean result1 = controller.createSaleSheet(vo);

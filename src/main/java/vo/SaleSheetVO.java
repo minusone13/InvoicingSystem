@@ -3,6 +3,7 @@ package vo;
 import java.util.ArrayList;
 import java.util.Date;
 
+import vo.stockvo.CommodityVO;
 import businesslogic.BillState;
 import businesslogic.BillStyle;
 import businesslogic.commoditybl.MockCommodity;
@@ -11,13 +12,12 @@ import businesslogic.customerbl.Customer;
 
 public class SaleSheetVO extends VO{
 	private BillStyle style=BillStyle.SaleSheet;
-
-	Customer customer;
+	CustomerVO customer;
 	String id;
 	String userid;
 	Date date;
 	String stock;//仓库？
-	ArrayList<MockCommodity> sheet;//是不是应该是个arraylist<>?
+	ArrayList<CommodityVO> sheet;//是不是应该是个arraylist<>?
 	double money1;//总金额
 	double money2;
 	double discount;
@@ -50,6 +50,7 @@ public class SaleSheetVO extends VO{
 	public void setusername(String username){
 		this.username=username;
 	}
+	
 	public Date getdate(){
 		return date;
 	}
@@ -90,11 +91,11 @@ public class SaleSheetVO extends VO{
 		this.pmoney=pmoney;
 	}
 	
-	public Customer getcustomer(){
+	public CustomerVO getcustomer(){
 		return customer;
 	}
 	
-	public void setCustomer(Customer customer){
+	public void setCustomer(CustomerVO customer){
 		this.customer=customer;
 	}
 	
@@ -114,11 +115,11 @@ public class SaleSheetVO extends VO{
 		this.stock=stock;
 	}
 	
-	public ArrayList<MockCommodity> getsheet(){
+	public ArrayList<CommodityVO> getsheet(){
 		return sheet;
 	}
 	
-	public void setsheet(ArrayList<MockCommodity> sheet){
+	public void setsheet(ArrayList<CommodityVO> sheet){
 		this.sheet=sheet;
 	}
 	
@@ -137,6 +138,4 @@ public class SaleSheetVO extends VO{
 	public void setwords(String words){
 		this.words=words;
 	}
-
-		
 }
