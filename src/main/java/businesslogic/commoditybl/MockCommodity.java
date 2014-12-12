@@ -66,7 +66,7 @@ public class MockCommodity {
 	{
 		double temp=0;
 		for(int i=0;i<record.size();i++)
-			temp+=record.get(i).getOutquantity()*record.get(i).getOutamount();
+			temp+=record.get(i).getOutamount();
 		return temp;
 	}
 	public MockCommodity(){}
