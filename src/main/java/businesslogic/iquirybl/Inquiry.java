@@ -22,10 +22,9 @@ import businesslogic.salebillbl.salebillController;
 import businesslogic.stockmanagerbl.StubStockController;
 import businesslogic.stockservice.StockBlForFinancial;
 import vo.*;
-import vo.inquiryVO.BusinessSituationVO;
-import vo.inquiryVO.InquiryConditionVO;
-import vo.inquiryVO.InquiryProcessVO;
-import vo.inquiryVO.InquirySaleVO;
+import vo.financialBillVO.*;
+
+import vo.inquiryVO.*;
 
 //1、模糊查找
 //2、完善返回到ui层的内容
@@ -40,23 +39,24 @@ public class Inquiry {
 	public ArrayList<SaleSheetVO> getSaleSaleSheet(InquirySaleVO isv) {
 		ArrayList<SaleSheet> saleSheet = bp.getSaleSheet();
 		ArrayList<SaleSheetVO> saleSheetVO = new ArrayList<SaleSheetVO>();
-		Date dateBefore=null;
-		Date dateAfter=null;
-		SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
 		
-		try {
-			dateBefore = format.parse(isv.getTimeBefore());
-			dateAfter = format.parse(isv.getTimeAfter());
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
 		
 		int size1 = saleSheet.size();
 		for(int i=0;i<size1;i++) {		
 			SaleSheet sale = saleSheet.get(i);
 			//根据条件筛选单据
 			//时间区间
-			if(dateBefore!=null) {
+			if((isv.getTimeBefore()!=null)&&(isv.getTimeAfter()!=null)) {
+				Date dateBefore=null;
+				Date dateAfter=null;
+				SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+				
+				try {
+					dateBefore = format.parse(isv.getTimeBefore());
+					dateAfter = format.parse(isv.getTimeAfter());
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
 				if(sale.getDate().compareTo(dateBefore)>=0&&
 						sale.getDate().compareTo(dateAfter)<=0){}
 				else continue;
@@ -96,22 +96,23 @@ public class Inquiry {
 	public ArrayList<SaleBackSheetVO> getSaleSaleBackSheet(InquirySaleVO isv) {
 		ArrayList<SaleBackSheet> saleBackSheet = bp.getSaleBackSheet();
 		ArrayList<SaleBackSheetVO> saleBackSheetVO = new ArrayList<SaleBackSheetVO>();
-		Date dateBefore=null;
-		Date dateAfter=null;
-		SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
 		
-		try {
-			dateBefore = format.parse(isv.getTimeBefore());
-			dateAfter = format.parse(isv.getTimeAfter());
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
 		
 		int size2 = saleBackSheet.size();
 		for(int i=0;i<size2;i++) {
 			SaleBackSheet saleback = saleBackSheet.get(i);
 			//时间区间
-			if(dateBefore!=null) {
+			if((isv.getTimeBefore()!=null)&&(isv.getTimeAfter()!=null)) {
+				Date dateBefore=null;
+				Date dateAfter=null;
+				SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+				
+				try {
+					dateBefore = format.parse(isv.getTimeBefore());
+					dateAfter = format.parse(isv.getTimeAfter());
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
 				if(saleback.getDate().compareTo(dateBefore)>=0&&
 						saleback.getDate().compareTo(dateAfter)<=0){}
 				else continue;
@@ -147,25 +148,27 @@ public class Inquiry {
 		return saleBackSheetVO;
 	}
 	
+	//得到经营历程表的赠送单
 	public ArrayList<GiftBillVO> getProcessGift(InquiryProcessVO ipv) {
 		ArrayList<StubGiftBill> gift = bp.getGiftBill();
 		ArrayList<GiftBillVO> giftVO = new ArrayList<GiftBillVO>();
-		Date dateBefore=null;
-		Date dateAfter=null;
-		SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
 		
-		try {
-			dateBefore = format.parse(ipv.getTimeBefore());
-			dateAfter = format.parse(ipv.getTimeAfter());
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
 		int size = gift.size();
 		
 		for(int i=0;i<size;i++) {
 			StubGiftBill g = gift.get(i);
 			
-			if(dateBefore!=null) {
+			if((ipv.getTimeBefore()!=null)&&(ipv.getTimeAfter()!=null)) {
+				Date dateBefore=null;
+				Date dateAfter=null;
+				SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+				
+				try {
+					dateBefore = format.parse(ipv.getTimeBefore());
+					dateAfter = format.parse(ipv.getTimeAfter());
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
 				if(g.getDate().compareTo(dateBefore)>=0&&
 						g.getDate().compareTo(dateAfter)<=0){}
 				else continue;
@@ -185,6 +188,121 @@ public class Inquiry {
 		return giftVO;
 	}
 	
+	//得到经营历程表的收款单
+	public ArrayList<ReceiptVO> getProcessReceipt(InquiryProcessVO ipv) {
+		ArrayList<ReceiptBill> receipt = bp.getReceiptBill();
+		ArrayList<ReceiptVO> receiptVO = new ArrayList<ReceiptVO>();
+		
+		int size = receipt.size();
+		for(int i=0;i<size;i++) {
+			ReceiptBill re = receipt.get(i);
+			
+			if((ipv.getTimeBefore()!=null)&&(ipv.getTimeAfter()!=null)) {
+				Date dateBefore=null;
+				Date dateAfter=null;
+				SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+				
+				try {
+					dateBefore = format.parse(ipv.getTimeBefore());
+					dateAfter = format.parse(ipv.getTimeAfter());
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+				if(re.getDate().compareTo(dateBefore)>=0&&
+						re.getDate().compareTo(dateAfter)<=0){}
+				else continue;
+			}
+			
+			if(ipv.getCustomer()!=null) {
+				
+				if(re.getCustomer().equals(ipv.getCustomer())){}
+				else continue;
+			}
+			
+			if(ipv.getUserID()!=null) {
+				if(re.getUserID().equals(ipv.getUserID())){}
+				else continue;				
+			}
+			
+			receiptVO.add(re.getVO());
+		}
+		return receiptVO;
+	}
+	
+	//得到经营历程表的付款单
+	public ArrayList<PaymentVO> getProcessPayment(InquiryProcessVO ipv) {
+		ArrayList<PaymentBill> payment = bp.getPaymentBill();
+		ArrayList<PaymentVO> paymentVO = new ArrayList<PaymentVO>();
+		
+			
+		int size = payment.size();
+		for(int i=0;i<size;i++) {
+			PaymentBill pa = payment.get(i);
+			
+			if((ipv.getTimeBefore()!=null)&&(ipv.getTimeAfter()!=null)) {
+				Date dateBefore=null;
+				Date dateAfter=null;
+				SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+				
+				try {
+					dateBefore = format.parse(ipv.getTimeBefore());
+					dateAfter = format.parse(ipv.getTimeAfter());
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+				if(pa.getDate().compareTo(dateBefore)>=0&&
+						pa.getDate().compareTo(dateAfter)<=0){}
+				else continue;
+			}
+			
+			if(ipv.getCustomer()!=null) {
+				if(pa.getCustomer().equals(ipv.getCustomer())){}
+				else continue;
+			}
+			
+			if(ipv.getUserID()!=null) {
+				if(pa.getUserID().equals(ipv.getUserID())){}
+				else continue;				
+			}
+			
+			paymentVO.add(pa.getVO());
+		}
+		return paymentVO;
+	}
+	
+	//得到经营历程表的现金费用单
+		public ArrayList<CashPaymentVO> getProcessCashPayment(InquiryProcessVO ipv) {
+			ArrayList<CashPaymentBill> cashPayment = bp.getCashPaymentBill();
+			ArrayList<CashPaymentVO> cashPaymentVO = new ArrayList<CashPaymentVO>();
+			
+			int size = cashPayment.size();
+			for(int i=0;i<size;i++) {
+				CashPaymentBill ca = cashPayment.get(i);
+				
+				if((ipv.getTimeBefore()!=null)&&(ipv.getTimeAfter()!=null)) {
+					Date dateBefore=null;
+					Date dateAfter=null;
+					SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+					
+					try {
+						dateBefore = format.parse(ipv.getTimeBefore());
+						dateAfter = format.parse(ipv.getTimeAfter());
+					} catch (ParseException e) {
+						e.printStackTrace();
+					}
+					if(ca.getDate().compareTo(dateBefore)>=0&&
+							ca.getDate().compareTo(dateAfter)<=0){}
+					else continue;
+				}
+				
+				if(ipv.getUserID()!=null) {
+					if(ca.getUserID().equals(ipv.getUserID())){}
+					else continue;				
+				}
+				cashPaymentVO.add(ca.getVO());
+			}
+			return cashPaymentVO;
+		}
 	public ArrayList<VO> inquiryProcess(InquiryProcessVO ipv) {
 		ArrayList<VO> list = new ArrayList<VO>();
 		ArrayList<StubGiftBill> gift = bp.getGiftBill();

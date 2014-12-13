@@ -35,11 +35,14 @@ public interface StubFinancialBlService {
 	//得到期初建账保存的客户信息
 	public ArrayList<CustomerVO> getOldCustomersInfo(String version);
 	
+	//得到经营历程表的收款单
+	public ArrayList<ReceiptVO> getProcessReceipt(InquiryProcessVO ipv) ;
 	
+	//得到经营历程表的付款单
+	public ArrayList<PaymentVO> getProcessPayment(InquiryProcessVO ipv);
 	
-	public ArrayList<VO> inquiryProcess (InquiryProcessVO ipv);
-	
-	public BusinessSituationVO inquiryCondition(InquiryConditionVO vo);
+	//得到经营历程表的现金费用单
+	public ArrayList<CashPaymentVO> getProcessCashPayment(InquiryProcessVO ipv);
 	
 	//创建收款单
 	public boolean creatReceipt(ReceiptVO rv);

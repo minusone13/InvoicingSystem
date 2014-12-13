@@ -37,49 +37,145 @@ public class FinancialBLDriver {
 		
 		//fbs.buildAccount();
 		
-		ArrayList<AccountVO> volist= fbs.fuzzyFindAccount("BC", 1);
-		System.out.println(volist.size());
 		
-//		ArrayList<VO> list1 = fbs.inquirySale(new InquirySaleVO());
-//		if(list1 != null) System.out.println("INQUIRY SUCCESS!");
-//		else System.out.println("INQUIRY FAILE!");
-//		
-//		ArrayList<VO> list2 = fbs.inquiryProcess(new InquiryProcessVO());
-//		if(list2 != null) System.out.println("INQUIRY SUCCESS!");
-//		else System.out.println("INQUIRY FAILE!");
-//		
-//		BusinessSituationVO bsv = fbs.inquiryCondition("12", "income");
-//		if(bsv !=null) System.out.println("INQUIRY SUCCESS");
-//		else System.out.println("INQUIRY FAILE!");
+		//testcreatReceipt();
+		///testcreatPayment("MAJOR") ;
+		//testcreatPayment("M") ;
+		
+		//testcreatCashPayment();
 		/*
-		boolean result6 = fbs.creatReceipt(new ReceiptVO());
-		if(result6==true) System.out.println("creat SUCCESS!");
-		else System.out.println("FAILE!");
-			
-		boolean result7 = fbs.creatPayment(new PaymentVO());
-		if(result7==true) System.out.println("creat SUCCESS!");
-		else System.out.println("FAILE!");
-		
-		boolean result8 = fbs.creatCashPayment(new CashPaymentVO());
-		if(result8==true) System.out.println("creat SUCCESS!");
-		else System.out.println("FAILE!");
+		testgetReceipt();
+		testgetPayment();
+		testgetCashPayment();
 		*/
-		
-		ArrayList<PaymentVO> payments = fbs.getAllOfPaymentBills();
-		if(!payments.isEmpty()) {
-			PaymentVO vo = payments.get(0);
-			
-			
-			
-			System.out.println(payments.size());
-			System.out.println(vo.getID());
-			System.out.println( vo.getCustomer());
-			System.out.println( vo.getOp());
-					
-			System.out.println(vo.getTotal());
-		}
-		
+		testInquiry01();
+	}
 	
+	public void testInquiry01() {
+		InquiryProcessVO ipv = new InquiryProcessVO();
+		//ipv.setTimeBefore("2014/12/13");
+		//ipv.setTimeAfter("2014/12/14");
+		ipv.setCustomer("MAJOR");
 		
+		ArrayList<PaymentVO> cp = fbs.getProcessPayment(ipv);
+		System.out.println("Inquiry-------------------------");
+		System.out.println(cp.size());
+		PaymentVO vo = cp.get(0);
+		
+		System.out.println("Payment:　"+vo.getID());
+		System.out.println("Payment:　"+vo.getCustomer());
+		System.out.println("Payment:　"+ vo.getOp());
+				
+		System.out.println("Payment:　"+vo.getTotal());
+		System.out.println("Payment:　"+vo.getBillState());
+	}
+	public void testcreatReceipt() {
+		ReceiptVO vo = new ReceiptVO();
+		vo.setCustomer("MAJOR");
+		ArrayList<Double> money = new ArrayList<Double>();//转账金额
+		ArrayList<String> accounts = new ArrayList<String>();
+		ArrayList<String> remark =new ArrayList<String>();
+		
+		accounts.add("ICBC");  money.add(100.00);  remark.add("");
+		accounts.add("BC");  money.add(500.00);  remark.add("dinner");
+		vo.setAccounts(accounts);
+		vo.setMoney(money);
+		vo.setRemark(remark);
+		double total=0;
+		for(int i=0;i<money.size();i++) total+=money.get(i);
+		vo.setTotal(total);
+		vo.setBillState(BillState.SUBMITED);
+		boolean result5 = fbs.creatReceipt(vo);  
+		
+		
+	}
+
+	public void testgetReceipt() {
+		ArrayList<ReceiptVO> receipts = fbs.getAllOfReceiptBills();
+		ReceiptVO vo = receipts.get(0);
+		System.out.println("Receipt: "+receipts.size());
+		//assertEquals("SKD-20141209-00001", vo.getID());
+		
+		System.out.println("Receipt: "+vo.getCustomer());
+		System.out.println("Receipt: "+vo.getOp());
+		System.out.println("Receipt: "+vo.getTotal());
+		System.out.println("Receipt: "+vo.getBillState());
+	}
+	
+	
+	public void testcreatPayment(String s) {
+		PaymentVO vo = new PaymentVO();
+		vo.setCustomer(s);
+		ArrayList<Double> money = new ArrayList<Double>();//转账金额
+		ArrayList<String> accounts = new ArrayList<String>();
+		ArrayList<String> remark =new ArrayList<String>();
+		
+		accounts.add("ICBC");  money.add(100.00);  remark.add("");
+		accounts.add("BC");  money.add(100.00);  remark.add("dinner");
+		vo.setAccounts(accounts);
+		vo.setMoney(money);
+		vo.setRemark(remark);
+		double total=0;
+		for(int i=0;i<money.size();i++) total+=money.get(i);
+		vo.setTotal(total);
+		vo.setBillState(BillState.DRAFT);
+		boolean result6 = fbs.creatPayment(vo);  
+		
+	}
+	
+	public void testgetPayment() {
+		ArrayList<PaymentVO> payments = fbs.getAllOfPaymentBills();	
+		if(payments.size() == 0) return;
+		PaymentVO vo = payments.get(0);
+		
+		
+		//assertEquals(1,payments.size());
+		System.out.println("Payment:　" +vo.getID());
+		System.out.println("Payment:　"+payments.size());
+		System.out.println("Payment:　"+vo.getID());
+		System.out.println("Payment:　"+vo.getCustomer());
+		System.out.println("Payment:　"+ vo.getOp());
+				
+		System.out.println("Payment:　"+vo.getTotal());
+		System.out.println("Payment:　"+vo.getBillState());
+		
+	}
+	
+	public void testcreatCashPayment() {
+		CashPaymentVO vo = new CashPaymentVO();
+		
+		ArrayList<Double> money = new ArrayList<Double>();//转账金额
+		ArrayList<String> item = new ArrayList<String>();
+		ArrayList<String> remark =new ArrayList<String>();
+		
+		item.add("dinner");  money.add(100.00);  remark.add("");
+		
+		vo.setItem(item);
+		vo.setMoney(money);
+		vo.setRemark(remark);
+		vo.setAccount("ICBC");
+		double total=0;
+		for(int i=0;i<money.size();i++) total+=money.get(i);
+		vo.setTotal(total);
+		vo.setBillState(BillState.SUBMITED);
+		boolean result6 = fbs.creatCashPayment(vo);  
+		
+	}
+	
+	public void testgetCashPayment() {
+		ArrayList<CashPaymentVO> cashPayments = fbs.getAllOfCashPaymentBills();
+		System.out.println(cashPayments.size());
+		CashPaymentVO vo = cashPayments.get(0);
+		//assertEquals(1,cashPayments.size());
+	//	assertEquals("XJFYD-20141209-00001", vo.getID());
+		
+		System.out.println("CashPayment: "+vo.getID());
+		System.out.println("CashPayment: "+vo.getAccount());
+		System.out.println("CashPayment: "+vo.getItem());
+		
+		System.out.println("CashPayment: "+vo.getAccount());
+		System.out.println("CashPayment: "+vo.getOp());
+		//assertEquals(100.0,vo.getTotal());
+		System.out.println("CashPayment: "+vo.getBillState());
 	}
 }

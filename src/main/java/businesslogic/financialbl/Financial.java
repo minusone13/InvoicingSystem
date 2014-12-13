@@ -106,11 +106,21 @@ public class Financial implements StubFinancialBlService{
 		return a.getOldAccountsInfo(version);
 	}
 	
-	
-	
-	public ArrayList<VO> inquiryProcess (InquiryProcessVO ipv) {
+	//得到经营历程表的收款单
+		public ArrayList<ReceiptVO> getProcessReceipt(InquiryProcessVO ipv) {
+			Inquiry i = new Inquiry();
+			return i.getProcessReceipt(ipv);
+		}
+	//得到经营历程表的付款单
+	public ArrayList<PaymentVO> getProcessPayment(InquiryProcessVO ipv) {
 		Inquiry i = new Inquiry();
-		return i.inquiryProcess(ipv);
+		return i.getProcessPayment(ipv);
+	}
+	
+	//得到经营历程表的现金费用单
+	public ArrayList<CashPaymentVO> getProcessCashPayment(InquiryProcessVO ipv) {
+		Inquiry i = new Inquiry();
+		return i.getProcessCashPayment(ipv);
 	}
 	
 	
@@ -126,7 +136,7 @@ public class Financial implements StubFinancialBlService{
 		RM rm = RM.unknownerror;
 		if(result) rm=RM.done;
 		userSer.addRecord(new OperationRecord(new User(), "Creat a receipt", rm));		
-		return result;
+		return result; 
 	}
 	
 	//修改收款单
