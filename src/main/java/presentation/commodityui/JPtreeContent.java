@@ -118,6 +118,17 @@ public class JPtreeContent extends JPanel {
 		}
 		
 	}
+	/*增加已命名的新节点到当前选中的节点*/
+	public void addTreeNodeToChosen(){
+		DefaultMutableTreeNode lastSelected=(DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
+		if(lastSelected!=null){
+			addTreeNode(new DefaultMutableTreeNode("未命名"),lastSelected);
+		}
+		else{
+			System.out.println("请选择父节点分类");
+		}
+		
+	}
 	
 	/*获取和给予管理商品界面的引用*/
 	public JPManagerCom getJPmanagerCom() {
