@@ -34,6 +34,7 @@ public class SaleSheet extends Bill implements GetVOandPO{
 		
 		public SaleSheet(){};
 		public SaleSheet(SaleSheetVO vo){
+			this.customer=new Customer(vo.getcustomer());//王雨城加
 			this.ID=vo.getid();
 			ArrayList<MockCommodity> temp=new ArrayList<MockCommodity>();
 			for(int i=0;i<vo.getsheet().size();i++){
