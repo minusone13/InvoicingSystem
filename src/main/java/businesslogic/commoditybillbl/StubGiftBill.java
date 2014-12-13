@@ -20,7 +20,7 @@ public class StubGiftBill extends Bill implements GetVOandPO
 	private BillStyle billstyle=BillStyle.GiftBill;
 	String operator;
 	private String ID;
-	ArrayList<MockCommodity> coms;
+	ArrayList<MockCommodity> coms=new ArrayList<MockCommodity>();//王雨城加
 	BillState state=BillState.DRAFT;
 	String remark[];
 	public GiftBillVO getVO()

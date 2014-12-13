@@ -38,7 +38,7 @@ public class FinancialTest extends TestCase{
 		assertFalse(result4);
 	}
 	*/
-	/*
+
 	public void testcreatReceipt() {
 		ReceiptVO vo = new ReceiptVO();
 		vo.setCustomer("MAJOR");
@@ -59,7 +59,7 @@ public class FinancialTest extends TestCase{
 		
 		assertTrue(result5);
 	}
-	*/
+
 	/*
 	public void testgetReceipt() {
 		ArrayList<ReceiptVO> receipts = financial.getAllOfReceiptBills();
@@ -73,7 +73,7 @@ public class FinancialTest extends TestCase{
 		assertEquals(BillState.EXAMINED,vo.getBillState());
 	}
 	*/
-	/*
+	
 	public void testcreatPayment() {
 		PaymentVO vo = new PaymentVO();
 		vo.setCustomer("MAJOR");
@@ -94,10 +94,11 @@ public class FinancialTest extends TestCase{
 		
 		assertTrue(result6);
 	}
-	*/
+	
 
 	public void testgetPayment() {
-		ArrayList<PaymentVO> payments = financial.getAllOfPaymentBills();
+		ArrayList<PaymentVO> payments = financial.getAllOfPaymentBills();	
+		if(payments.size() == 0) return;
 		PaymentVO vo = payments.get(0);
 		
 		
@@ -114,7 +115,7 @@ public class FinancialTest extends TestCase{
 	}
 	
 
-	/*
+	
 	public void testcreatCashPayment() {
 		CashPaymentVO vo = new CashPaymentVO();
 		
@@ -137,7 +138,7 @@ public class FinancialTest extends TestCase{
 		assertTrue(result6);
 	}
 	
-*/
+
 	/*
 	public void testgetCashPayment() {
 		ArrayList<CashPaymentVO> cashPayments = financial.getAllOfCashPaymentBills();

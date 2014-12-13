@@ -66,7 +66,7 @@ public class FinancialBLDriver {
 		*/
 		
 		ArrayList<PaymentVO> payments = fbs.getAllOfPaymentBills();
-		if(!payments.isEmpty()){
+		if(!payments.isEmpty()) {
 			PaymentVO vo = payments.get(0);
 			
 			

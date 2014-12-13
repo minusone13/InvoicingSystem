@@ -66,7 +66,8 @@ public class StubBillPool {
 		CommodityBillSaverService cbs=new CommodityBillSaver();
 		
 		//清除保存的记录
-		save();
+		//save();
+		
 		//将返回的PO对象的信息传入真正的单据对象
 		//赠送单
 		ArrayList<GiftBillPO> GiftBillListPO=cbs.getGiftBill();

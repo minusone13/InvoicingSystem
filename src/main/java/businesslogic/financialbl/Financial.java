@@ -113,11 +113,13 @@ public class Financial implements StubFinancialBlService{
 		return i.inquiryProcess(ipv);
 	}
 	
+	
 	public BusinessSituationVO inquiryCondition(InquiryConditionVO vo) {
 		Inquiry i = new Inquiry();
 		return i.inquiryCondition(vo);
 	}
 	
+	//创建收款单
 	public boolean creatReceipt(ReceiptVO rv) {
 		
 		boolean result = financialList.creatReceiptBill(rv);
@@ -155,6 +157,7 @@ public class Financial implements StubFinancialBlService{
 		return result;		
 	}
 	
+	//修改现金费用单
 	public void updateCashPayment(CashPaymentVO vo) {
 		financialList.updateCashPaymentBill(vo);
 	}
