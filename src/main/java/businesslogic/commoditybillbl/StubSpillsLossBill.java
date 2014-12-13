@@ -91,9 +91,16 @@ public class StubSpillsLossBill extends Bill implements GetVOandPO
 		return state;
 	}
 	public void setState(BillState state) {
-		if(this.state==BillState.SUBMITED && state==BillState.EXAMINED)
+		StubCommodityList l= new StubCommodityList();
+		if(this.state==BillState.DRAFT &&  state==BillState.SUBMITED)
+		{
+			if(t==Type.Loss)
+				l.readyForOut(ID, com.getName(), com.getModel(), com.getNumber(), 0);
+			else
+				l.readyForIn(ID, com.getName(), com.getModel(), com.getNumber(), 0);
+		}
+		if(this.state==BillState.EXAMINED && state==BillState.OVER)
 		{//当审批订单后，实现系统中的库存数量修改
-			StubCommodityList l= new StubCommodityList();
 			if(t==Type.Loss)
 				l.checkOut(ID, com.getName(), com.getModel(), com.getNumber(), 0);//最后一个参数是价格，报溢报损为无费用的
 			else

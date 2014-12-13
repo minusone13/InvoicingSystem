@@ -26,6 +26,16 @@ public class SaleSheetVO extends VO{
 	String username;
 	String op;
 	private BillState billstate=BillState.DRAFT;
+	ArrayList<String> commoditywords;//每项商品的备注;
+	
+	public ArrayList<String> getcommoditywords(){
+		return this.commoditywords;
+	}
+	
+	public void setcommoditywords(ArrayList<String> words){
+		this.commoditywords=words;
+	}
+	
 	
 	public  BillState getState(){
 		return this.billstate;

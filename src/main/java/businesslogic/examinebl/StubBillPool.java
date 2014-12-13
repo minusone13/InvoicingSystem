@@ -48,9 +48,12 @@ import dataservice.billdataservice.SaleBillSaverService;
 public class StubBillPool {
 
 
-	private ArrayList<StubGiftBill> alOfGiftBill=new ArrayList<StubGiftBill>();
-	private ArrayList<StubSpillsLossBill> alOfSpillsLossBill=new ArrayList<StubSpillsLossBill>();
-	private ArrayList<StubAlertBill> alOfAlertBill=new ArrayList<StubAlertBill>();
+	//private ArrayList<StubGiftBill> alOfGiftBill=new ArrayList<StubGiftBill>();
+	private static ArrayList<StubGiftBill> alOfGiftBill=new ArrayList<StubGiftBill>();//modify by lhw
+	//private ArrayList<StubSpillsLossBill> alOfSpillsLossBill=new ArrayList<StubSpillsLossBill>();
+	private static ArrayList<StubSpillsLossBill> alOfSpillsLossBill=new ArrayList<StubSpillsLossBill>();//modify by lhw
+	//private ArrayList<StubAlertBill> alOfAlertBill=new ArrayList<StubAlertBill>();
+	private static ArrayList<StubAlertBill> alOfAlertBill=new ArrayList<StubAlertBill>();//modify by lhw
 	private ArrayList<PurSheet> alOfPurSheet=new ArrayList<PurSheet>();
 	private ArrayList<PurBackSheet> alOfPurBackSheet=new ArrayList<PurBackSheet>();
 	private ArrayList<SaleSheet> alOfSaleSheet=new ArrayList<SaleSheet>();
@@ -66,7 +69,7 @@ public class StubBillPool {
 		CommodityBillSaverService cbs=new CommodityBillSaver();
 		
 		//清除保存的记录
-		//save();
+		save();
 		
 		//将返回的PO对象的信息传入真正的单据对象
 		//赠送单

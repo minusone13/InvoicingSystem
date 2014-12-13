@@ -31,6 +31,16 @@ public class SaleSheet extends Bill implements GetVOandPO{
 		String words;//备注
 		String username;
 		String op;
+		ArrayList<String> commoditywords;//每项商品的备注;
+		
+		public ArrayList<String> getcommoditywords(){
+			return this.commoditywords;
+		}
+		
+		public void setcommoditywords(ArrayList<String> words){
+			this.commoditywords=words;
+		}
+		
 		
 		public SaleSheet(){};
 		public SaleSheet(SaleSheetVO vo){
@@ -51,6 +61,7 @@ public class SaleSheet extends Bill implements GetVOandPO{
 			this.op=vo.getop();
 			this.date=vo.getdate();
 			this.billstate=vo.getState();
+			this.commoditywords=vo.getcommoditywords();
 		};
 		
 		public  BillState getState(){
@@ -187,6 +198,7 @@ public class SaleSheet extends Bill implements GetVOandPO{
 			vo.setop(op);
 			vo.setusername(username);
 			vo.setState(billstate);
+			vo.setcommoditywords(commoditywords);
 			return vo;
 		}
 		
@@ -208,7 +220,8 @@ public class SaleSheet extends Bill implements GetVOandPO{
 			po.setwords(words);
 			po.setop(op);
 			po.setusername(username);
-			
+			po.setState(billstate);
+			po.setcommoditywords(commoditywords);
 			return po;
 		}
 		
@@ -230,5 +243,6 @@ public class SaleSheet extends Bill implements GetVOandPO{
 			this.op=po.getop();
 			this.date=po.getdate();
 			this.billstate=po.getState();
+			this.commoditywords=po.getcommoditywords();
 		}
 }

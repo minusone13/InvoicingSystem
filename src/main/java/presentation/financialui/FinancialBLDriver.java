@@ -48,7 +48,7 @@ public class FinancialBLDriver {
 		testgetPayment();
 		testgetCashPayment();
 		*/
-		testInquiry01();
+		//testInquiry01();
 	}
 	
 	public void testInquiry01() {

@@ -27,6 +27,16 @@ public class PurBackSheet extends Bill implements GetVOandPO{
 	String words;//备注
 	String username;
 	String op;
+	ArrayList<String> commoditywords;//每项商品的备注;
+	
+	public ArrayList<String> getcommoditywords(){
+		return this.commoditywords;
+	}
+	
+	public void setcommoditywords(ArrayList<String> words){
+		this.commoditywords=words;
+	}
+	
 	
 	public PurBackSheet(){};
 	public PurBackSheet(PurBackSheetVO vo){
@@ -46,6 +56,7 @@ public class PurBackSheet extends Bill implements GetVOandPO{
 		this.op=vo.getop();
 		this.username=vo.getusername();
 		this.billstate=vo.getState();
+		this.commoditywords=vo.getcommoditywords();
 	}
 	
 	public  BillState getState(){
@@ -159,6 +170,7 @@ public class PurBackSheet extends Bill implements GetVOandPO{
 		vo.setop(op);
 		vo.setusername(username);
 		vo.setState(billstate);
+		vo.setcommoditywords(commoditywords);
 		return vo;
 	}
 	
@@ -180,6 +192,7 @@ public class PurBackSheet extends Bill implements GetVOandPO{
 		po.setop(op);
 		po.setusername(username);
 		po.setState(billstate);
+		po.setcommoditywords(commoditywords);
 		return po;
 	}
 	
@@ -199,6 +212,7 @@ public class PurBackSheet extends Bill implements GetVOandPO{
 		this.op=po.getop();
 		this.username=po.getusername();
 		this.billstate=po.getState();
+		this.commoditywords=po.getcommoditywords();
 	}
 	
 	
