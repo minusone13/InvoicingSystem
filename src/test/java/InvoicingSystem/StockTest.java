@@ -8,11 +8,13 @@ import java.util.Date;
 import org.junit.*;
 
 import po.stockpo.*;
+import po.stockpo.StockPO.Type;
 import presentation.commodityui.StockManagerDriver;
 import businesslogic.BillState;
 import businesslogic.BillStyle;
 import businesslogic.commoditybillbl.StubAlertBill;
 import businesslogic.commoditybillbl.StubGiftBill;
+import businesslogic.commoditybillbl.StubSpillsLossBill;
 import businesslogic.commoditybl.MockCommodity;
 import businesslogic.examinebl.StubBillPool;
 import businesslogic.stockmanagerbl.StubStockController;
@@ -246,6 +248,40 @@ public class StockTest{
 		assertEquals(RM.done,result);
 		po = data.findCommodity("好好防盗门", "fdm05");
 		assertEquals(40,po.getNumber());
+	}
+	
+	@Test
+	public void SpillsLossBillSpill()
+	{
+		boolean b;
+		SpillsLossBillVO vo = new SpillsLossBillVO();
+		CommodityPO compo = data.findCommodity("好好防盗门", "fdm05");
+		CommodityVO com = new MockCommodity(compo).toVO();
+		com.setNumber(10);
+		vo.setCom(com);
+		vo.setT(po.SpillsLossBillPO.Type.Loss);
+		
+		
+		RM result = combl.creat(vo);
+		assertEquals(RM.done,result);
+		StockBlForSalesMen sc=new StubStockController();
+		b = sc.isEnough("好好防盗门", "fdm05", 41);
+		assertTrue(b);
+		
+		StubSpillsLossBill gb = pool.getSpillsLossBill().get(pool.getSpillsLossBill().size()-1);
+		result = combl.submit(gb.getVO());
+		assertEquals(RM.done,result);
+		b = sc.isEnough("好好防盗门", "fdm05", 40);
+		assertTrue(b);
+		b = sc.isEnough("好好防盗门", "fdm05", 41);
+		assertTrue(!b);
+		
+		gb = pool.getSpillsLossBill().get(pool.getSpillsLossBill().size()-1);
+		pool.transformState(BillStyle.SpillsLossBill, gb.getID(), BillState.EXAMINED);
+		result = combl.over(gb.getVO());
+		assertEquals(RM.done,result);
+		compo = data.findCommodity("好好防盗门", "fdm05");
+		assertEquals(40,compo.getNumber());
 	}
 	
 	@Test
