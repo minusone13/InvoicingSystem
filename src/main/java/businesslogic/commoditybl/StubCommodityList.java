@@ -339,7 +339,7 @@ public class StubCommodityList {//商品列表 haha
 		ArrayList<CommodityVO> result = new ArrayList<CommodityVO>();
 		for(int i=0;i<temp.size();i++)
 			result.add(new MockCommodity(temp.get(i)).toVO());
-		return new CountVO(result,new Date(),1);
+		return new CountVO(result,new Date(),comdata.getCountNo());
 	}
 	
 	public ArrayList<CommodityVO> getRecords(Date d1, Date d2)

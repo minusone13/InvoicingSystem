@@ -585,6 +585,11 @@ public class StockTest{
 	{
 		CountVO coms = combl.count();
 		assertEquals(5,coms.getList().size());
+		assertEquals(1,coms.getNo());
+		coms = combl.count();
+		assertEquals(2,coms.getNo());
+		coms = combl.count();
+		assertEquals(3,coms.getNo());
 	}
 	
 	@Test
