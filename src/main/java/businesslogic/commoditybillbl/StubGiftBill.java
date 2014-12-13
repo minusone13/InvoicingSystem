@@ -112,7 +112,7 @@ public class StubGiftBill extends Bill implements GetVOandPO
 		{
 			for(int i=0; i<coms.size(); i++)
 			{
-				MockCommodity com = new MockCommodity();
+				MockCommodity com = coms.get(i);
 				l.readyForOut(ID, com.getName(), com.getModel(), com.getNumber(), 0);
 			}
 		}
@@ -120,7 +120,7 @@ public class StubGiftBill extends Bill implements GetVOandPO
 		{//当审批订单后，实现系统中的库存数量修改
 			for(int i=0; i<coms.size(); i++)
 			{
-				MockCommodity com = new MockCommodity();
+				MockCommodity com = coms.get(i);
 				l.checkOut(ID, com.getName(), com.getModel(), com.getNumber(), 0);
 			}
 		}

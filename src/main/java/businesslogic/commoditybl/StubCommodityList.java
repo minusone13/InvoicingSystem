@@ -242,7 +242,7 @@ public class StubCommodityList {//商品列表 haha
 		CommodityPO po=comdata.findCommodity(name, model);
 		MockCommodity com=new MockCommodity(po);
 		int potential = com.getPotential();
-		return(n<potential);
+		return(n<=potential);
 	}
 	public ArrayList<MockCommodity> posToCom(ArrayList<CommodityPO> h)
 	{
