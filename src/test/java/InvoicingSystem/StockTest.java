@@ -2,6 +2,7 @@ package InvoicingSystem;
 
 import static org.junit.Assert.*;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -328,6 +329,102 @@ public class StockTest{
 		assertEquals(compo.getOut(),compo1.getOut(),0.01);
 		assertEquals(compo.getLastin(),compo1.getLastIn(),0.01);
 		assertEquals(compo.getLastOut(),compo1.getLastOut(),0.01);
+	}
+	
+	@Test 
+	public void testAlertBillID()
+	{
+		StockBlForSalesMen sc=new StubStockController();
+		RM result=sc.checkOut("XSD-20141206-00001", "好好防盗门", "fdm05", 41, 300);
+		assertEquals(RM.done,result);
+		result=sc.checkOut("XSD-20141206-00001", "好好防盗门", "fdm05", 1, 300);
+		assertEquals(RM.done,result);
+		result=sc.checkOut("XSD-20141206-00001", "好好防盗门", "fdm05", 1, 300);
+		assertEquals(RM.done,result);
+		result=sc.checkOut("XSD-20141206-00001", "好好防盗门", "fdm05", 1, 300);
+		assertEquals(RM.done,result);
+		ArrayList<StubAlertBill> h2 = pool.getAlertBill();
+		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+		String currentTime = format.format(new Date());
+		for(int i=0; i<h2.size(); i++)
+		{
+			String s = h2.get(i).getID();
+			String a[] = s.split("-");
+			assertTrue(a[0].equals("BJD"));
+			assertTrue(a[1].equals(currentTime));
+			assertTrue(a[2].equals(String.format("%05d", i+1)));
+		}
+	}
+	
+	@Test
+	public void testSpillsLossBillID()
+	{
+		SpillsLossBillVO vo = new SpillsLossBillVO();
+		CommodityPO compo = data.findCommodity("好好防盗门", "fdm05");
+		CommodityVO com = new MockCommodity(compo).toVO();
+		com.setNumber(20);
+		vo.setCom(com);
+		vo.setT(po.SpillsLossBillPO.Type.Spills);
+		
+		
+		RM result = combl.creat(vo);
+		assertEquals(RM.done,result);
+		result = combl.creat(vo);
+		assertEquals(RM.done,result);
+		result = combl.creat(vo);
+		assertEquals(RM.done,result);
+		result = combl.creat(vo);
+		assertEquals(RM.done,result);
+		result = combl.creat(vo);
+		assertEquals(RM.done,result);
+		
+		ArrayList<StubSpillsLossBill> h2 = pool.getSpillsLossBill();
+		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+		String currentTime = format.format(new Date());
+		for(int i=0; i<h2.size(); i++)
+		{
+			String s = h2.get(i).getID();
+			String a[] = s.split("-");
+			assertTrue(a[0].equals("YSD"));
+			assertTrue(a[1].equals(currentTime));
+			assertTrue(a[2].equals(String.format("%05d", i+1)));
+		}
+	}
+	
+	@Test
+	public void testgiftBillID()
+	{
+		GiftBillVO vo = new GiftBillVO();
+		ArrayList<CommodityVO> coms = new ArrayList<CommodityVO>();
+		CommodityPO po = data.findCommodity("好好防盗门", "fdm05");
+		CommodityVO com = new MockCommodity(po).toVO();
+		com.setNumber(10);
+		coms.add(com);
+		vo.setComs(coms);
+		
+		
+		RM result = combl.creat(vo);
+		assertEquals(RM.done,result);
+		result = combl.creat(vo);
+		assertEquals(RM.done,result);
+		result = combl.creat(vo);
+		assertEquals(RM.done,result);
+		result = combl.creat(vo);
+		assertEquals(RM.done,result);
+		result = combl.creat(vo);
+		assertEquals(RM.done,result);
+		
+		ArrayList<StubGiftBill> h2 = pool.getGiftBill();
+		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+		String currentTime = format.format(new Date());
+		for(int i=0; i<h2.size(); i++)
+		{
+			String s = h2.get(i).getID();
+			String a[] = s.split("-");
+			assertTrue(a[0].equals("ZSD"));
+			assertTrue(a[1].equals(currentTime));
+			assertTrue(a[2].equals(String.format("%05d", i+1)));
+		}
 	}
 	
 	@Test
