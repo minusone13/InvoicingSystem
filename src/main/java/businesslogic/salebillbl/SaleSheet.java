@@ -22,7 +22,7 @@ public class SaleSheet extends Bill implements GetVOandPO{
 		private BillState billstate=BillState.DRAFT;
 		Date date;
 		Customer customer;
-		ArrayList<MockCommodity> sheet;//销售单据，商品名，数量，单价//ArrayList<>在写一个类；
+		ArrayList<MockCommodity> sheet=new ArrayList<MockCommodity>();//销售单据，商品名，数量，单价//ArrayList<>在写一个类；
 		double money1;//折前总金额
 		double money2;//代金券金额
 		String stock;
@@ -36,7 +36,7 @@ public class SaleSheet extends Bill implements GetVOandPO{
 		public SaleSheet(SaleSheetVO vo){
 			this.ID=vo.getid();
 			ArrayList<MockCommodity> temp=new ArrayList<MockCommodity>();
-			for(int i=0;i<sheet.size();i++){
+			for(int i=0;i<vo.getsheet().size();i++){
 				temp.add(new MockCommodity(vo.getsheet().get(i)));
 			}
 			this.sheet=temp;
