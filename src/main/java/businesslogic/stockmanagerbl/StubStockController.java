@@ -4,6 +4,7 @@ import java.util.*;
 
 import presentation.userui.Login;
 import dataservice.commoditydataservice.*;
+import businesslogic.BillState;
 import businesslogic.Role;
 import businesslogic.commoditybillbl.*;
 import businesslogic.commoditybl.*;
@@ -163,47 +164,74 @@ public class StubStockController implements StubCommodityBlService, StockBlForSa
 	{
 		StubGiftBill gb=new StubGiftBill();
 		gb.setVO(vo);
-		bl.add(gb);
-		return RM.done;
+		RM result = bl.add(gb);
+		return result;
 	}
 	public RM creat(SpillsLossBillVO vo)
 	{
 		StubSpillsLossBill gb=new StubSpillsLossBill();
 		gb.setVO(vo);
-		bl.add(gb);
-		return RM.done;
+		RM result = bl.add(gb);
+		return result;
 	}
 	public RM creat(AlertBillVO vo)
 	{
 		StubAlertBill gb=new StubAlertBill();
 		gb.setVO(vo);
-		bl.add(gb);
-		return RM.done;
+		RM result = bl.add(gb);
+		return result;
 	}
 	
 	public RM update(GiftBillVO vo)
 	{
+		pool.change(vo);
 		return RM.done;
 	}
 	public RM update(SpillsLossBillVO vo)
 	{
+		pool.change(vo);
 		return RM.done;
 	}
 	public RM update(AlertBillVO vo)
 	{
+		pool.change(vo);
 		return RM.done;
 	}
 	
 	public RM submit(GiftBillVO vo)
 	{
+		for(int i=0;i<vo.getComs().size();i++)
+		{
+			MockCommodity com = new MockCommodity(vo.getComs().get(i));
+			if(!isEnough(com.getName(), com.getModel(),com.getNumber()))
+				return RM.insufficient;
+		}
+		pool.transformState(vo.getBillstyle(), vo.getID(), BillState.SUBMITED);
 		return RM.done;
 	}
 	public RM submit(SpillsLossBillVO vo)
 	{
+		MockCommodity com = new MockCommodity(vo.getCom());
+		if(!isEnough(com.getName(), com.getModel(),com.getNumber()))
+			return RM.insufficient;
+		pool.transformState(vo.getBillstyle(), vo.getID(), BillState.SUBMITED);
 		return RM.done;
 	}
 	public RM submit(AlertBillVO vo)
 	{
+		pool.transformState(vo.getBillstyle(), vo.getID(), BillState.SUBMITED);
+		return RM.done;
+	}
+	
+	public RM over(GiftBillVO vo)
+	{
+		pool.transformState(vo.getBillstyle(), vo.getID(), BillState.OVER);
+		return RM.done;
+	}
+	
+	public RM over(SpillsLossBillVO vo)
+	{
+		pool.transformState(vo.getBillstyle(), vo.getID(), BillState.OVER);
 		return RM.done;
 	}
 	public ArrayList<GiftBillVO> showGiftBills()

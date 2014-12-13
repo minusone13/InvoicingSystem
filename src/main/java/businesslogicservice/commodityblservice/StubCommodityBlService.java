@@ -2,6 +2,7 @@ package businesslogicservice.commodityblservice;
 import java.util.ArrayList;
 import java.util.Date;
 
+import businesslogic.BillState;
 import po.stockpo.CommodityPO;
 import dataservice.commoditydataservice.*;
 import vo.*;
@@ -33,6 +34,9 @@ public interface StubCommodityBlService {
 	public RM submit(GiftBillVO vo);
 	public RM submit(SpillsLossBillVO vo);
 	public RM submit(AlertBillVO vo);
+	
+	public RM over(GiftBillVO vo);
+	public RM over(SpillsLossBillVO vo);
 	
 	public ArrayList<GiftBillVO> showGiftBills();
 	public ArrayList<SpillsLossBillVO> showSpillsLossBills();
