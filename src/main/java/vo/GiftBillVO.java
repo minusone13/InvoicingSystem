@@ -21,7 +21,7 @@ public class GiftBillVO extends VO{
 		return coms;
 	}
 	public String getID() {
-		return ID;
+		return this.ID;
 	}
 	public void setID(String iD) {
 		ID = iD;

@@ -9,7 +9,10 @@ import org.junit.*;
 
 import po.stockpo.*;
 import presentation.commodityui.StockManagerDriver;
+import businesslogic.BillState;
+import businesslogic.BillStyle;
 import businesslogic.commoditybillbl.StubAlertBill;
+import businesslogic.commoditybillbl.StubGiftBill;
 import businesslogic.commoditybl.MockCommodity;
 import businesslogic.examinebl.StubBillPool;
 import businesslogic.stockmanagerbl.StubStockController;
@@ -210,7 +213,7 @@ public class StockTest{
 		assertEquals(h1+1,h2.size());
 	}
 	
-	@Ignore
+	@Test
 	public void testGiftBill()
 	{
 		boolean b;
@@ -229,15 +232,17 @@ public class StockTest{
 		b = sc.isEnough("好好防盗门", "fdm05", 41);
 		assertTrue(b);
 		
-		
-		result = combl.submit(vo);
+		StubGiftBill gb = pool.getGiftBill().get(pool.getGiftBill().size()-1);
+		result = combl.submit(gb.getVO());
 		assertEquals(RM.done,result);
 		b = sc.isEnough("好好防盗门", "fdm05", 40);
 		assertTrue(b);
 		b = sc.isEnough("好好防盗门", "fdm05", 41);
 		assertTrue(!b);
 		
-		result = combl.over(vo);
+		gb = pool.getGiftBill().get(pool.getGiftBill().size()-1);
+		pool.transformState(BillStyle.GiftBill, gb.getID(), BillState.EXAMINED);
+		result = combl.over(gb.getVO());
 		assertEquals(RM.done,result);
 		po = data.findCommodity("好好防盗门", "fdm05");
 		assertEquals(40,po.getNumber());
