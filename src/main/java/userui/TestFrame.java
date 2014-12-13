@@ -34,7 +34,7 @@ public class TestFrame extends JFrame {
 //		JPManagerCom test=new JPManagerCom();
 //		test.setRole(Role.STOCK_STAFF);
 		JPManagerComOfStock test=new JPManagerComOfStock();
-		TestFrame testJP=new TestFrame(new BusinessConditionPanel());
+		TestFrame testJP=new TestFrame(test);
 	}
 
 }

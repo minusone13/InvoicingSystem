@@ -108,6 +108,7 @@ public class JPManagerComOfStock extends JPanel {
 			switch(num){
 			case 1:
 				addFolder.setIcon(addFolderR);
+				manageCom.getContent().addTreeNodeToChosen();
 				break;
 			case 2:
 				deleteFolder.setIcon(deleteFolderR);
