@@ -17,14 +17,14 @@ public class StubCommodityBill
 	ArrayList<StubAlertBill> alerts;
 	ArrayList<StubGiftBill> gifts;
 	ArrayList<StubSpillsLossBill> sls;
-	StubBillPool pool=new StubBillPool();
+	static StubBillPool pool=new StubBillPool();
 	User user = new User("I0000",Role.STOCK_STAFF,"stockdefault","default","Liu");
 	public RM add(StubSpillsLossBill bill)
 	{
 		sls=pool.getSpillsLossBill();
 		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
 		String currentTime = format.format(new Date());
-		if(sls.size()==0)
+		if(sls.size()==0 || sls.get(sls.size()-1).getID()==null)//后面的一个表达式是为了增加程序的坚固性
 			bill.setID("YSD-"+currentTime+"-00001");
 		else
 		{
@@ -48,17 +48,17 @@ public class StubCommodityBill
 		gifts=pool.getGiftBill();
 		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
 		String currentTime = format.format(new Date());
-		if(sls.size()==0)
+		if(gifts.size()==0 || gifts.get(gifts.size()-1).getID()==null)//后面的一个表达式是为了增加程序的坚固性
 			bill.setID("ZSD-"+currentTime+"-00001");
 		else
 		{
-			String s = sls.get(sls.size()-1).getID();
+			String s = gifts.get(gifts.size()-1).getID();
 			String a[]=s.split("-");
 			if(currentTime.equals(a[1]))//日期相同，继续编号
 			{
 				int count=Integer.parseInt(a[2]);
 				count++;
-				bill.setID("ZSD-"+currentTime+"-"+String.format("%05d", Integer.toString(count)));
+				bill.setID("ZSD-"+currentTime+"-"+String.format("%05d", count));
 			}
 			else
 				bill.setID("ZSD-"+currentTime+"-00001");
@@ -69,14 +69,14 @@ public class StubCommodityBill
 	}
 	public RM add(StubAlertBill bill)
 	{
-		sls=pool.getSpillsLossBill();
+		alerts=pool.getAlertBill();
 		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
 		String currentTime = format.format(new Date());
-		if(sls.size()==0)
+		if(alerts.size()==0 || alerts.get(alerts.size()-1).getID()==null)//后面的一个表达式是为了增加程序的坚固性
 			bill.setID("BJD-"+currentTime+"-00001");
 		else
 		{
-			String s = sls.get(sls.size()-1).getID();
+			String s = alerts.get(alerts.size()-1).getID();
 			if(s==null)
 				return RM.outsideStockError;
 			String a[]=s.split("-");
@@ -84,7 +84,7 @@ public class StubCommodityBill
 			{
 				int count=Integer.parseInt(a[2]);
 				count++;
-				bill.setID("BJD-"+currentTime+"-"+String.format("%05d", Integer.toString(count)));
+				bill.setID("BJD-"+currentTime+"-"+String.format("%05d", count));
 			}
 			else
 				bill.setID("BJD-"+currentTime+"-00001");
@@ -143,6 +143,12 @@ public class StubCommodityBill
 	}
 	public void setUser(User user) {
 		this.user = user;
+	}
+	public StubBillPool getPool() {
+		return pool;
+	}
+	public void setPool(StubBillPool pool) {
+		this.pool = pool;
 	}
 }
 

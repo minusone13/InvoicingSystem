@@ -25,6 +25,7 @@ public class StubStockController implements StubCommodityBlService, StockBlForSa
 	StubCommodityBill bl=new StubCommodityBill();
 	UserService us=new UserController();
 	static StubCommodityDataService comdata;
+	static StubBillPool pool = new StubBillPool();
 	User user=new User("I0000",Role.STOCK_STAFF,"DefaultStock","default","Liu");
 	public StubStockController()
 	{
@@ -35,8 +36,8 @@ public class StubStockController implements StubCommodityBlService, StockBlForSa
 		}
 		l.setUser(user);
 		bl.setUser(user);
+		bl.setPool(pool);
 	}
-	StubBillPool pool = new StubBillPool();
 	public StubCommodityList getCommodityList ()
 	{
 		return l;
@@ -90,7 +91,8 @@ public class StubStockController implements StubCommodityBlService, StockBlForSa
 	}
 	public RM checkOut(String id, String name, String model, int quantity, double price)
 	{
-		return l.checkOut(id, name, model, quantity, price);
+		RM result = l.checkOut(id, name, model, quantity, price);
+		return result;
 	}
 	public RM readyForIn(String id,String name, String model, int quantity, double price)
 	{//当进货单或销售退货单提交后，请调用
@@ -267,5 +269,11 @@ public class StubStockController implements StubCommodityBlService, StockBlForSa
 	public ArrayList<CommodityVO> getRecords(Date d1, Date d2)
 	{//库存查看
 		return l.getRecords(d1, d2);
+	}
+	public StubBillPool getPool() {
+		return pool;
+	}
+	public void setPool(StubBillPool pool) {
+		this.pool = pool;
 	}
 }
