@@ -251,7 +251,7 @@ public class StockTest{
 	}
 	
 	@Test
-	public void SpillsLossBillSpill()
+	public void SpillsLossBillLoss()
 	{
 		boolean b;
 		SpillsLossBillVO vo = new SpillsLossBillVO();
@@ -280,8 +280,54 @@ public class StockTest{
 		pool.transformState(BillStyle.SpillsLossBill, gb.getID(), BillState.EXAMINED);
 		result = combl.over(gb.getVO());
 		assertEquals(RM.done,result);
-		compo = data.findCommodity("好好防盗门", "fdm05");
-		assertEquals(40,compo.getNumber());
+		CommodityPO compo1 = data.findCommodity("好好防盗门", "fdm05");
+		assertEquals(40,compo1.getNumber());
+		assertEquals(compo.getAlertLine(),compo1.getAlertLine());
+		assertEquals(compo.getIn(),compo1.getIn(),0.001);
+		assertEquals(compo.getOut(),compo1.getOut(),0.01);
+		assertEquals(compo.getLastin(),compo1.getLastIn(),0.01);
+		assertEquals(compo.getLastOut(),compo1.getLastOut(),0.01);
+	}
+	
+	@Test
+	public void SpillsLossBillSpills()
+	{
+		boolean b;
+		SpillsLossBillVO vo = new SpillsLossBillVO();
+		CommodityPO compo = data.findCommodity("好好防盗门", "fdm05");
+		CommodityVO com = new MockCommodity(compo).toVO();
+		com.setNumber(20);
+		vo.setCom(com);
+		vo.setT(po.SpillsLossBillPO.Type.Spills);
+		
+		
+		RM result = combl.creat(vo);
+		assertEquals(RM.done,result);
+		StockBlForSalesMen sc=new StubStockController();
+		b = sc.isEnough("好好防盗门", "fdm05", 50);
+		assertTrue(b);
+		
+		StubSpillsLossBill gb = pool.getSpillsLossBill().get(pool.getSpillsLossBill().size()-1);
+		result = combl.submit(gb.getVO());
+		assertEquals(RM.done,result);
+		b = sc.isEnough("好好防盗门", "fdm05", 50);
+		assertTrue(b);
+		b = sc.isEnough("好好防盗门", "fdm05", 60);
+		assertTrue(!b);
+		
+		gb = pool.getSpillsLossBill().get(pool.getSpillsLossBill().size()-1);
+		pool.transformState(BillStyle.SpillsLossBill, gb.getID(), BillState.EXAMINED);
+		result = combl.over(gb.getVO());
+		assertEquals(RM.done,result);
+		b = sc.isEnough("好好防盗门", "fdm05", 70);
+		assertTrue(b);
+		CommodityPO compo1 = data.findCommodity("好好防盗门", "fdm05");
+		assertEquals(70,compo1.getNumber());
+		assertEquals(compo.getAlertLine(),compo1.getAlertLine());
+		assertEquals(compo.getIn(),compo1.getIn(),0.001);
+		assertEquals(compo.getOut(),compo1.getOut(),0.01);
+		assertEquals(compo.getLastin(),compo1.getLastIn(),0.01);
+		assertEquals(compo.getLastOut(),compo1.getLastOut(),0.01);
 	}
 	
 	@Test

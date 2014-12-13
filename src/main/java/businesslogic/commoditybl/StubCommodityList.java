@@ -66,21 +66,23 @@ public class StubCommodityList {//商品列表 haha
 			return RM.notfound;
 		MockCommodity com=new MockCommodity(po);
 		int num = com.getNumber();
-		com.setLastin(price);
-		//下面调整平均进价
-		if(!com.hasIn())
-			com.setIn(price);//如果没有记录，进价仍然是添加商品时填写的，此时失去意义
-		else
-		{
-			double total=com.getIn()*com.getNumber();
-			total+=quantity*price;
-			int quantitytemp=com.getNumber();
-			quantitytemp+=quantity;
-			com.setIn(total/quantitytemp);
-		}
 		CommodityRecord r;
 		if(price!=0)
+		{
+			com.setLastin(price);
+			//下面调整平均进价
+			if(!com.hasIn())
+				com.setIn(price);//如果没有记录，进价仍然是添加商品时填写的，此时失去意义
+			else
+			{
+				double total=com.getIn()*com.getNumber();
+				total+=quantity*price;
+				int quantitytemp=com.getNumber();
+				quantitytemp+=quantity;
+				com.setIn(total/quantitytemp);
+			}
 			r = new CommodityRecord(id,new Date(),0,quantity,0,quantity*price,0,quantity,0,quantity*price);
+		}
 		else
 			r = new CommodityRecord(id,new Date(),0,quantity,0,0,0,0,0,0);
 		com.setNumber(num+quantity);
