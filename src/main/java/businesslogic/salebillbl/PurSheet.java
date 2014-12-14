@@ -46,7 +46,7 @@ public class PurSheet extends Bill implements GetVOandPO{
 		this.stock=vo.getstock();
 		this.ID=vo.getid();
 		ArrayList<MockCommodity> temp=new ArrayList<MockCommodity>();
-		for(int i=0;i<sheet.size();i++){
+		for(int i=0;i<vo.getsheet().size();i++){
 			temp.add(new MockCommodity(vo.getsheet().get(i)));
 		}
 		this.sheet=temp;

@@ -6,18 +6,23 @@ import po.CustomerPO;
 import vo.CustomerVO;
 
 public class Customer{
-	private int type;//客户的级别
+	private int type;//客户类型
 	private String name;//客户的姓名
+	private int level;//客户级别
 	private String id;//客户编号；
 	private String phonenumber;//电话号码
 	private String address;//地址
-	private String postcode;//邮箱
+	private String postcode;//邮编
+	private String email;//电子邮箱；
 	private double maxOwe;//最大赊账（应付）
 	private double shouldPay;//应付
 	private double shouldGive;//应收
 	private String deSaler;//默认销售人员
 	
 	public Customer(){};
+	public Customer(String name){
+		this.name=name;
+	}
 	public Customer(CustomerVO vo){
 		this.type=vo.gettype();
 		this.name=vo.getname();
@@ -29,6 +34,8 @@ public class Customer{
 		this.shouldGive=vo.getShouldGive();
 		this.shouldPay=vo.getShouldPay();
 		this.deSaler=vo.getdeSaler();
+		this.level=vo.getlevel();
+		this.email=vo.getemail();
 	};
 	public Customer(CustomerPO po){
 		this.type=po.gettype();
@@ -41,7 +48,26 @@ public class Customer{
 		this.shouldGive=po.getShouldGive();
 		this.shouldPay=po.getShouldPay();
 		this.deSaler=po.getdeSaler();
+		this.level=po.getlevel();
+		this.email=po.getemail();
 	};
+	
+	public int getlevel(){
+		return this.level;
+	}
+	
+	public void setlevel(int level){
+		this.level = level;
+	}
+	
+	public String getemail(){
+		return this.email;
+	}
+	
+	public void setemail(String email){
+		this.email=email;
+	}
+	
 	
 	public String getid(){
 		return this.id;
@@ -134,6 +160,8 @@ public class Customer{
 		this.shouldGive=po.getShouldGive();
 		this.shouldPay=po.getShouldPay();
 		this.deSaler=po.getdeSaler();
+		this.level=po.getlevel();
+		this.email=po.getemail();
 	}
 	
 	public CustomerPO getPO(){
@@ -148,6 +176,8 @@ public class Customer{
 		po.setShouldGive(this.shouldGive);
 		po.setShouldPay(this.shouldPay);
 		po.setdeSaler(this.deSaler);
+		po.setlevel(this.level);
+		po.setemail(this.email);
 		return po;
 	}
 	
@@ -163,6 +193,8 @@ public class Customer{
 		vo.setShouldGive(this.shouldGive);
 		vo.setShouldPay(this.shouldPay);
 		vo.setdeSaler(this.deSaler);
+		vo.setlevel(this.level);
+		vo.setemail(this.email);
 		return vo;
 	}
 	

@@ -13,6 +13,24 @@ public class CustomerPO implements Serializable{
 	double shouldPay;
 	double shouldGive;
 	String deSaler;
+	private String email;//电子邮箱；
+	private int level;//客户级别
+	
+	public int getlevel(){
+		return this.level;
+	}
+	
+	public void setlevel(int level){
+		this.level = level;
+	}
+	
+	public String getemail(){
+		return this.email;
+	}
+	
+	public void setemail(String email){
+		this.email=email;
+	}
 	
 	public String getid(){
 		return this.id;
