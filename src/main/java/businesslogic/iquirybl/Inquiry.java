@@ -846,6 +846,11 @@ public class Inquiry {
 		bsVO.setDiscount(discount);
 		
 		//销售成本
+		double cost = sale.getAllPurMoney(dateBefore, dateAfter);
+		bsVO.setCost(cost);
+		
+		double profit = adjustmentTotal+spillsTotal+bonusTotal+saleTotal-cost-lossTotal;
+		bsVO.setProfit(profit);
 		return bsVO;
 	}
 	
