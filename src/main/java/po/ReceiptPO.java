@@ -15,7 +15,10 @@ public class ReceiptPO extends PO implements Serializable{
 	String customer;
 	double total;
 	BillState state;
-	ArrayList<TransferAccount> transferlist;
+	ArrayList<String> accounts;
+	ArrayList<String> remark;
+	ArrayList<Double> money;
+	
 	BillStyle style;
 	private String userID;
 	private String userName;
@@ -52,12 +55,6 @@ public class ReceiptPO extends PO implements Serializable{
 	public void setStyle(BillStyle style) {
 		this.style = style;
 	}
-	public ArrayList<TransferAccount> getTransferlist() {
-		return transferlist;
-	}
-	public void setTransferlist(ArrayList<TransferAccount> transferlist) {
-		this.transferlist = transferlist;
-	}
 	public BillState getState() {
 		return state;
 	}
@@ -88,5 +85,22 @@ public class ReceiptPO extends PO implements Serializable{
 	public void setTotal(double total) {
 		this.total = total;
 	}
-	
+	public ArrayList<String> getAccounts() {
+		return accounts;
+	}
+	public void setAccounts(ArrayList<String> accounts) {
+		this.accounts = accounts;
+	}
+	public ArrayList<String> getRemark() {
+		return remark;
+	}
+	public void setRemark(ArrayList<String> remark) {
+		this.remark = remark;
+	}
+	public ArrayList<Double> getMoney() {
+		return money;
+	}
+	public void setMoney(ArrayList<Double> money) {
+		this.money = money;
+	}
 }

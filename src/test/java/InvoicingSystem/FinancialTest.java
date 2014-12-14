@@ -10,13 +10,13 @@ import vo.financialBillVO.ReceiptVO;
 import businesslogic.BillState;
 import businesslogic.financialbillbl.Item;
 import businesslogic.financialbl.Financial;
-import businesslogicservice.financialblservice.StubFinancialBlService;
+import businesslogicservice.financialblservice.FinancialBlService;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 public class FinancialTest extends TestCase{
-	StubFinancialBlService financial = new Financial();
+	FinancialBlService financial = new Financial();
 /*
 	public void testaddAccount() {		
 		boolean result1 = financial.addAccount("周润发");

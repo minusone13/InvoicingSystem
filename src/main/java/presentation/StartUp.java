@@ -8,7 +8,7 @@ import presentation.userui.Login;
 import businesslogic.financialbl.Financial;
 import businesslogic.managerbl.StubManager;
 import businesslogic.stockmanagerbl.StubStockController;
-import businesslogicservice.financialblservice.StubFinancialBlService;
+import businesslogicservice.financialblservice.FinancialBlService;
 import businesslogicservice.managerblservice.StubManagerBlService;
 import data.commoditydata.StubStockDataController;
 import data.initial.Initial;
@@ -25,7 +25,7 @@ public class StartUp {
 		ManagerBLDriver managerDriver = new ManagerBLDriver(manager);
 		managerDriver.drive();
 		//财务人员的驱动程序
-		StubFinancialBlService financial = new Financial();
+		FinancialBlService financial = new Financial();
 		FinancialBLDriver driver = new FinancialBLDriver(financial);
 		driver.drive();
 		

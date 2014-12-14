@@ -167,7 +167,20 @@ public class ReceiptBill extends Bill implements GetVOandPO{
 		po.setRole(role);
 		po.setState(state);
 		po.setTotal(total);
-		po.setTransferlist(transferlist);
+		int size = transferlist.size();
+		TransferAccount temp=null;
+		ArrayList<String> accounts = po.getAccounts();
+		ArrayList<Double> money = po.getMoney();
+		ArrayList<String> remark = po.getRemark();		
+		for(int i=0;i<size;i++){
+			temp = transferlist.get(i);
+			accounts.add(temp.getAccount());
+			money.add(temp.getMoney());
+			remark.add(temp.getRemark());
+		}
+		po.setAccounts(accounts);
+		po.setMoney(money);
+		po.setRemark(remark);
 		po.setStyle(billstyle);
 		po.setOp(op);
 		po.setUserID(userID);
@@ -180,7 +193,13 @@ public class ReceiptBill extends Bill implements GetVOandPO{
 		customer = po.getCustomer();
 		total = po.getTotal();
 		state = po.getState();
-		transferlist = po.getTransferlist();
+		ArrayList<String> account = po.getAccounts();
+		ArrayList<Double> money = po.getMoney();
+		ArrayList<String> remark = po.getRemark();
+		int length = account.size();
+		for(int i=0;i<length;i++) {
+			transferlist.add(new TransferAccount(account.get(i), money.get(i), remark.get(i)));
+		}
 		role = po.getRole();
 		billstyle = po.getStyle();
 		op = po.getOp();

@@ -14,11 +14,11 @@ import businesslogic.BillState;
 import businesslogic.financialbillbl.CashPaymentBill;
 import businesslogic.financialbillbl.PaymentBill;
 import businesslogic.financialbillbl.ReceiptBill;
-import businesslogicservice.financialblservice.StubFinancialBlService;
+import businesslogicservice.financialblservice.FinancialBlService;
 
 public class FinancialBLDriver {
-	StubFinancialBlService fbs;
-	public FinancialBLDriver (StubFinancialBlService fbs) {
+	FinancialBlService fbs;
+	public FinancialBLDriver (FinancialBlService fbs) {
 		this.fbs = fbs;
 	}
 	
@@ -35,7 +35,7 @@ public class FinancialBLDriver {
 		//boolean result5 = fbs.updateAccount("00001", "00100");
 		//if(result5==true) System.out.println("UPDATE SUCCESS!");
 		
-		//fbs.buildAccount();
+		fbs.buildAccount();
 		
 		
 		//testcreatReceipt();
