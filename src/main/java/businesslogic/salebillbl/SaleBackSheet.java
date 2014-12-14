@@ -47,7 +47,7 @@ public class SaleBackSheet extends Bill implements GetVOandPO{
 		this.ID=vo.getid();
 		this.customer=new Customer(vo.getcustomer());
 		ArrayList<MockCommodity> temp=new ArrayList<MockCommodity>();
-		for(int i=0;i<sheet.size();i++){
+		for(int i=0;i<vo.getsheet().size();i++){
 			temp.add(new MockCommodity(vo.getsheet().get(i)));
 		}
 		this.sheet=temp;
