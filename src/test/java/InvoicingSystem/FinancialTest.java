@@ -115,7 +115,7 @@ public class FinancialTest extends TestCase{
 	}*/
 	
 
-	
+	/*
 	public void testcreatCashPayment() {
 		CashPaymentVO vo = new CashPaymentVO();
 		
@@ -138,7 +138,7 @@ public class FinancialTest extends TestCase{
 		assertTrue(result6);
 	}
 	
-
+*/
 /*
 	public void testgetCashPayment() {
 		ArrayList<CashPaymentVO> cashPayments = financial.getAllOfCashPaymentBills();
