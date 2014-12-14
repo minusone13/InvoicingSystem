@@ -7,7 +7,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import presentation.financialui.FinancialUI;
 import userui.Frame;
 
 public class Stock extends JPanel {
@@ -25,6 +24,8 @@ public class Stock extends JPanel {
 	private JPmanageBills1 manageBills1=new JPmanageBills1();
 	//单据管理面板
 	private JPmanageBills2 manageBills2=new JPmanageBills2();
+	//商品管理
+	JPManagerComOfStock managerComs=new JPManagerComOfStock();
 	//home
 	private JLabel home=new JLabel();
 	public JPfunction getFunction() {
@@ -82,6 +83,9 @@ public class Stock extends JPanel {
 			manageBills2.setLocation(55, 233);
 			manageBills2.setVisible(false);
 			
+			//商品管理
+			managerComs.setLocation(55, 210);
+			managerComs.setVisible(false);
 			//home
 			home.setIcon(new ImageIcon("src/image/home.png") );
 			home.setBounds(690, 165, 90, 32);
@@ -103,10 +107,17 @@ public class Stock extends JPanel {
 			this.add(function,6);
 			this.add(manageBills1,7);
 			this.add(manageBills2,8);
-			this.add(bg,9);
+			this.add(managerComs,9);
+			this.add(bg,10);
 			
 		}
-    /*获取frame引用*/
+    public JPManagerComOfStock getManagerComs() {
+		return managerComs;
+	}
+	public void setManagerComs(JPManagerComOfStock managerComs) {
+		this.managerComs = managerComs;
+	}
+	/*获取frame引用*/
     public void getFrame( Frame f){
     		frame=f;
     		function.getFrame(frame);
