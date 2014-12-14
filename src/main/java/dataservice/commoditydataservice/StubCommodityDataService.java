@@ -25,4 +25,6 @@ public interface StubCommodityDataService {
 	
 	public ArrayList<AdjustmentRecordPO> getAdjustmentRecords();
 	public ArrayList<CommodityPO> getAllCommodity();//用于库存盘点
+	
+	public int getCountNo();//盘点序号
 }

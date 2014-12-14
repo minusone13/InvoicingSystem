@@ -1,6 +1,7 @@
 package data.commoditydata;
 
 import java.io.*;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import data.Tool;
@@ -14,6 +15,8 @@ public class StubCommodityList implements Serializable{
 	ArrayList<AdjustmentRecordPO> adjusts;
 	StubCategoryData cat;//=cats.get(0);
 	ArrayList <MockCommodityData> flatlist;//平铺式的商品列表，便于搜索操作。注意商品增删时候的同步操作
+	Date countDate = new Date();
+	int countNo=0;
 	public boolean initial()
 	{//初始化方法，程序第一次运行或测试与调试阶段使用
 		cats=new ArrayList<StubCategoryData>();
@@ -214,9 +217,23 @@ public class StubCommodityList implements Serializable{
 	}
 	public ArrayList<CommodityPO> getAllCommodity()
 	{
+		//计算盘点序号
+		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+		String currentTime = format.format(new Date());
+		String lastCountTime = format.format(countDate);
+		if(lastCountTime.equals(currentTime))
+			countNo++;
+		else
+		{
+			countDate = new Date();
+			countNo=1;
+		}
 		ArrayList<CommodityPO> result = new ArrayList<CommodityPO>();
 		for(int i=0;i<flatlist.size();i++)
 			result.add(flatlist.get(i).getPo().clone());
 		return result;
+	}
+	public int getCountNo() {
+		return countNo;
 	}
 }

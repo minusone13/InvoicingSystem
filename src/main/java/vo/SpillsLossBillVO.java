@@ -35,6 +35,7 @@ public class SpillsLossBillVO extends VO{
 	public void setCom(CommodityVO com) {
 		this.com = com;
 	}
+	public SpillsLossBillVO(){}
 	public SpillsLossBillVO(String userID,String ID,Type t, CommodityVO com)
 	{
 		this.operator=userID;

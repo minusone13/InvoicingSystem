@@ -2,17 +2,20 @@ package InvoicingSystem;
 
 import static org.junit.Assert.*;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
 import org.junit.*;
 
 import po.stockpo.*;
+import po.stockpo.StockPO.Type;
 import presentation.commodityui.StockManagerDriver;
 import businesslogic.BillState;
 import businesslogic.BillStyle;
 import businesslogic.commoditybillbl.StubAlertBill;
 import businesslogic.commoditybillbl.StubGiftBill;
+import businesslogic.commoditybillbl.StubSpillsLossBill;
 import businesslogic.commoditybl.MockCommodity;
 import businesslogic.examinebl.StubBillPool;
 import businesslogic.stockmanagerbl.StubStockController;
@@ -249,6 +252,182 @@ public class StockTest{
 	}
 	
 	@Test
+	public void SpillsLossBillLoss()
+	{
+		boolean b;
+		SpillsLossBillVO vo = new SpillsLossBillVO();
+		CommodityPO compo = data.findCommodity("好好防盗门", "fdm05");
+		CommodityVO com = new MockCommodity(compo).toVO();
+		com.setNumber(10);
+		vo.setCom(com);
+		vo.setT(po.SpillsLossBillPO.Type.Loss);
+		
+		
+		RM result = combl.creat(vo);
+		assertEquals(RM.done,result);
+		StockBlForSalesMen sc=new StubStockController();
+		b = sc.isEnough("好好防盗门", "fdm05", 41);
+		assertTrue(b);
+		
+		StubSpillsLossBill gb = pool.getSpillsLossBill().get(pool.getSpillsLossBill().size()-1);
+		result = combl.submit(gb.getVO());
+		assertEquals(RM.done,result);
+		b = sc.isEnough("好好防盗门", "fdm05", 40);
+		assertTrue(b);
+		b = sc.isEnough("好好防盗门", "fdm05", 41);
+		assertTrue(!b);
+		
+		gb = pool.getSpillsLossBill().get(pool.getSpillsLossBill().size()-1);
+		pool.transformState(BillStyle.SpillsLossBill, gb.getID(), BillState.EXAMINED);
+		result = combl.over(gb.getVO());
+		assertEquals(RM.done,result);
+		CommodityPO compo1 = data.findCommodity("好好防盗门", "fdm05");
+		assertEquals(40,compo1.getNumber());
+		assertEquals(compo.getAlertLine(),compo1.getAlertLine());
+		assertEquals(compo.getIn(),compo1.getIn(),0.001);
+		assertEquals(compo.getOut(),compo1.getOut(),0.01);
+		assertEquals(compo.getLastin(),compo1.getLastIn(),0.01);
+		assertEquals(compo.getLastOut(),compo1.getLastOut(),0.01);
+	}
+	
+	@Test
+	public void SpillsLossBillSpills()
+	{
+		boolean b;
+		SpillsLossBillVO vo = new SpillsLossBillVO();
+		CommodityPO compo = data.findCommodity("好好防盗门", "fdm05");
+		CommodityVO com = new MockCommodity(compo).toVO();
+		com.setNumber(20);
+		vo.setCom(com);
+		vo.setT(po.SpillsLossBillPO.Type.Spills);
+		
+		
+		RM result = combl.creat(vo);
+		assertEquals(RM.done,result);
+		StockBlForSalesMen sc=new StubStockController();
+		b = sc.isEnough("好好防盗门", "fdm05", 50);
+		assertTrue(b);
+		
+		StubSpillsLossBill gb = pool.getSpillsLossBill().get(pool.getSpillsLossBill().size()-1);
+		result = combl.submit(gb.getVO());
+		assertEquals(RM.done,result);
+		b = sc.isEnough("好好防盗门", "fdm05", 50);
+		assertTrue(b);
+		b = sc.isEnough("好好防盗门", "fdm05", 60);
+		assertTrue(!b);
+		
+		gb = pool.getSpillsLossBill().get(pool.getSpillsLossBill().size()-1);
+		pool.transformState(BillStyle.SpillsLossBill, gb.getID(), BillState.EXAMINED);
+		result = combl.over(gb.getVO());
+		assertEquals(RM.done,result);
+		b = sc.isEnough("好好防盗门", "fdm05", 70);
+		assertTrue(b);
+		CommodityPO compo1 = data.findCommodity("好好防盗门", "fdm05");
+		assertEquals(70,compo1.getNumber());
+		assertEquals(compo.getAlertLine(),compo1.getAlertLine());
+		assertEquals(compo.getIn(),compo1.getIn(),0.001);
+		assertEquals(compo.getOut(),compo1.getOut(),0.01);
+		assertEquals(compo.getLastin(),compo1.getLastIn(),0.01);
+		assertEquals(compo.getLastOut(),compo1.getLastOut(),0.01);
+	}
+	
+	@Test 
+	public void testAlertBillID()
+	{
+		StockBlForSalesMen sc=new StubStockController();
+		RM result=sc.checkOut("XSD-20141206-00001", "好好防盗门", "fdm05", 41, 300);
+		assertEquals(RM.done,result);
+		result=sc.checkOut("XSD-20141206-00001", "好好防盗门", "fdm05", 1, 300);
+		assertEquals(RM.done,result);
+		result=sc.checkOut("XSD-20141206-00001", "好好防盗门", "fdm05", 1, 300);
+		assertEquals(RM.done,result);
+		result=sc.checkOut("XSD-20141206-00001", "好好防盗门", "fdm05", 1, 300);
+		assertEquals(RM.done,result);
+		ArrayList<StubAlertBill> h2 = pool.getAlertBill();
+		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+		String currentTime = format.format(new Date());
+		for(int i=0; i<h2.size(); i++)
+		{
+			String s = h2.get(i).getID();
+			String a[] = s.split("-");
+			assertTrue(a[0].equals("BJD"));
+			assertTrue(a[1].equals(currentTime));
+			assertTrue(a[2].equals(String.format("%05d", i+1)));
+		}
+	}
+	
+	@Test
+	public void testSpillsLossBillID()
+	{
+		SpillsLossBillVO vo = new SpillsLossBillVO();
+		CommodityPO compo = data.findCommodity("好好防盗门", "fdm05");
+		CommodityVO com = new MockCommodity(compo).toVO();
+		com.setNumber(20);
+		vo.setCom(com);
+		vo.setT(po.SpillsLossBillPO.Type.Spills);
+		
+		
+		RM result = combl.creat(vo);
+		assertEquals(RM.done,result);
+		result = combl.creat(vo);
+		assertEquals(RM.done,result);
+		result = combl.creat(vo);
+		assertEquals(RM.done,result);
+		result = combl.creat(vo);
+		assertEquals(RM.done,result);
+		result = combl.creat(vo);
+		assertEquals(RM.done,result);
+		
+		ArrayList<StubSpillsLossBill> h2 = pool.getSpillsLossBill();
+		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+		String currentTime = format.format(new Date());
+		for(int i=0; i<h2.size(); i++)
+		{
+			String s = h2.get(i).getID();
+			String a[] = s.split("-");
+			assertTrue(a[0].equals("YSD"));
+			assertTrue(a[1].equals(currentTime));
+			assertTrue(a[2].equals(String.format("%05d", i+1)));
+		}
+	}
+	
+	@Test
+	public void testgiftBillID()
+	{
+		GiftBillVO vo = new GiftBillVO();
+		ArrayList<CommodityVO> coms = new ArrayList<CommodityVO>();
+		CommodityPO po = data.findCommodity("好好防盗门", "fdm05");
+		CommodityVO com = new MockCommodity(po).toVO();
+		com.setNumber(10);
+		coms.add(com);
+		vo.setComs(coms);
+		
+		
+		RM result = combl.creat(vo);
+		assertEquals(RM.done,result);
+		result = combl.creat(vo);
+		assertEquals(RM.done,result);
+		result = combl.creat(vo);
+		assertEquals(RM.done,result);
+		result = combl.creat(vo);
+		assertEquals(RM.done,result);
+		result = combl.creat(vo);
+		assertEquals(RM.done,result);
+		
+		ArrayList<StubGiftBill> h2 = pool.getGiftBill();
+		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+		String currentTime = format.format(new Date());
+		for(int i=0; i<h2.size(); i++)
+		{
+			String s = h2.get(i).getID();
+			String a[] = s.split("-");
+			assertTrue(a[0].equals("ZSD"));
+			assertTrue(a[1].equals(currentTime));
+			assertTrue(a[2].equals(String.format("%05d", i+1)));
+		}
+	}
+	
+	@Test
 	public void testreadyForCheckOut()
 	{
 		StockBlForSalesMen sc=new StubStockController();
@@ -406,6 +585,11 @@ public class StockTest{
 	{
 		CountVO coms = combl.count();
 		assertEquals(5,coms.getList().size());
+		assertEquals(1,coms.getNo());
+		coms = combl.count();
+		assertEquals(2,coms.getNo());
+		coms = combl.count();
+		assertEquals(3,coms.getNo());
 	}
 	
 	@Test

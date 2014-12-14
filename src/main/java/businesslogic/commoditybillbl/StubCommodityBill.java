@@ -39,6 +39,7 @@ public class StubCommodityBill
 			else
 				bill.setID("YSD-"+currentTime+"-00001");
 		}
+		bill.setDate(new Date());
 		bill.setOperator(user.getID()+user.getName());
 		pool.add(bill);
 		return RM.done;
@@ -63,6 +64,7 @@ public class StubCommodityBill
 			else
 				bill.setID("ZSD-"+currentTime+"-00001");
 		}
+		bill.setDate(new Date());
 		bill.setOperator(user.getID()+user.getName());
 		pool.add(bill);
 		return RM.done;
@@ -89,6 +91,7 @@ public class StubCommodityBill
 			else
 				bill.setID("BJD-"+currentTime+"-00001");
 		}
+		bill.setDate(new Date());
 		bill.setOperator(user.getID()+user.getName());
 		pool.add(bill);
 		return RM.done;
