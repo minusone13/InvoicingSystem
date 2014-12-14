@@ -11,6 +11,7 @@ import vo.SaleSheetVO;
 import vo.stockvo.CommodityVO;
 import businesslogic.commoditybl.MockCommodity;
 import businesslogic.customerbl.Customer;
+import businesslogic.customerbl.CustomerList;
 import businesslogic.salebillbl.salebillController;
 import businesslogicservice.customerblservice.CustomerBlService;
 import businesslogicservice.salebillblservice.SaleBillBlService;
@@ -135,16 +136,42 @@ public class SaleTest extends TestCase{
 			assertTrue(result5);
 		}
 		
-		/*
-		public void testgetSaleBackSheet(){
-			boolean result5=sbbs.getSaleBackSheet("131");
-			assertTrue(result5);
+		public void testgetPurBackSheet(){
+			salebillController controller = new salebillController();
+			boolean result6 = controller.getPurBackSheet("JHTHD-2014-12-14-00009");
+			assertTrue(result6);
 		}
 		
+
 		public void testgetSaleSheet(){
-			boolean result5=sbbs.getSaleSheet("131");
-			assertTrue(result5);
+			salebillController controller = new salebillController();
+			boolean result7 = controller.getSaleSheet("XSD-2014-12-14-00009");
+			assertTrue(result7);
 		}
-		*/
+	
+		public void testgetSaleBackSheet(){
+			salebillController controller = new salebillController();
+			boolean result8 = controller.getSaleBackSheet("XSTHD-2014-12-14-00009");
+			assertTrue(result8);
+		}
+		
+		public void testaddCustomer(){
+			CustomerList customerlist = new CustomerList();
+			Customer customer = new Customer(); 
+			customer.settype(1);
+			customer.setname("小虎");
+			customer.setid("customer22");
+			customer.setaddress("南通市海门中学");
+			customer.setphonenumber("136666");
+			customer.setpostcode("226300");
+			customer.setmaxOwe(5000.0);
+			customer.setShouldGive(1000.0);
+			customer.setShouldPay(200.0);
+			customer.setdeSaler("学长");
+			customer.setlevel(2);
+			customer.setemail("xxh13@software.nju.edu.cn");
+			boolean result9 = customerlist.addCustomer(customer);
+			assertTrue(result9);
+		}
 		
 }
