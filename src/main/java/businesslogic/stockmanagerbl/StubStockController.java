@@ -4,6 +4,7 @@ import java.util.*;
 
 import presentation.userui.Login;
 import dataservice.commoditydataservice.*;
+import businesslogic.BillState;
 import businesslogic.Role;
 import businesslogic.commoditybillbl.*;
 import businesslogic.commoditybl.*;
@@ -24,6 +25,7 @@ public class StubStockController implements StubCommodityBlService, StockBlForSa
 	StubCommodityBill bl=new StubCommodityBill();
 	UserService us=new UserController();
 	static StubCommodityDataService comdata;
+	static StubBillPool pool = new StubBillPool();
 	User user=new User("I0000",Role.STOCK_STAFF,"DefaultStock","default","Liu");
 	public StubStockController()
 	{
@@ -34,8 +36,8 @@ public class StubStockController implements StubCommodityBlService, StockBlForSa
 		}
 		l.setUser(user);
 		bl.setUser(user);
+		bl.setPool(pool);
 	}
-	StubBillPool pool = new StubBillPool();
 	public StubCommodityList getCommodityList ()
 	{
 		return l;
@@ -89,7 +91,8 @@ public class StubStockController implements StubCommodityBlService, StockBlForSa
 	}
 	public RM checkOut(String id, String name, String model, int quantity, double price)
 	{
-		return l.checkOut(id, name, model, quantity, price);
+		RM result = l.checkOut(id, name, model, quantity, price);
+		return result;
 	}
 	public RM readyForIn(String id,String name, String model, int quantity, double price)
 	{//当进货单或销售退货单提交后，请调用
@@ -163,47 +166,74 @@ public class StubStockController implements StubCommodityBlService, StockBlForSa
 	{
 		StubGiftBill gb=new StubGiftBill();
 		gb.setVO(vo);
-		bl.add(gb);
-		return RM.done;
+		RM result = bl.add(gb);
+		return result;
 	}
 	public RM creat(SpillsLossBillVO vo)
 	{
 		StubSpillsLossBill gb=new StubSpillsLossBill();
 		gb.setVO(vo);
-		bl.add(gb);
-		return RM.done;
+		RM result = bl.add(gb);
+		return result;
 	}
 	public RM creat(AlertBillVO vo)
 	{
 		StubAlertBill gb=new StubAlertBill();
 		gb.setVO(vo);
-		bl.add(gb);
-		return RM.done;
+		RM result = bl.add(gb);
+		return result;
 	}
 	
 	public RM update(GiftBillVO vo)
 	{
+		pool.change(vo);
 		return RM.done;
 	}
 	public RM update(SpillsLossBillVO vo)
 	{
+		pool.change(vo);
 		return RM.done;
 	}
 	public RM update(AlertBillVO vo)
 	{
+		pool.change(vo);
 		return RM.done;
 	}
 	
 	public RM submit(GiftBillVO vo)
 	{
+		for(int i=0;i<vo.getComs().size();i++)
+		{
+			MockCommodity com = new MockCommodity(vo.getComs().get(i));
+			if(!isEnough(com.getName(), com.getModel(),com.getNumber()))
+				return RM.insufficient;
+		}
+		pool.transformState(vo.getBillstyle(), vo.getID(), BillState.SUBMITED);
 		return RM.done;
 	}
 	public RM submit(SpillsLossBillVO vo)
 	{
+		MockCommodity com = new MockCommodity(vo.getCom());
+		if(!isEnough(com.getName(), com.getModel(),com.getNumber()))
+			return RM.insufficient;
+		pool.transformState(vo.getBillstyle(), vo.getID(), BillState.SUBMITED);
 		return RM.done;
 	}
 	public RM submit(AlertBillVO vo)
 	{
+		pool.transformState(vo.getBillstyle(), vo.getID(), BillState.SUBMITED);
+		return RM.done;
+	}
+	
+	public RM over(GiftBillVO vo)
+	{
+		pool.transformState(vo.getBillstyle(), vo.getID(), BillState.OVER);
+		return RM.done;
+	}
+	
+	public RM over(SpillsLossBillVO vo)
+	{
+		pool.transformState(vo.getBillstyle(), vo.getID(), BillState.OVER);
 		return RM.done;
 	}
 	public ArrayList<GiftBillVO> showGiftBills()
@@ -239,5 +269,11 @@ public class StubStockController implements StubCommodityBlService, StockBlForSa
 	public ArrayList<CommodityVO> getRecords(Date d1, Date d2)
 	{//库存查看
 		return l.getRecords(d1, d2);
+	}
+	public StubBillPool getPool() {
+		return pool;
+	}
+	public void setPool(StubBillPool pool) {
+		this.pool = pool;
 	}
 }

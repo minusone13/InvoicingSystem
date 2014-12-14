@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import vo.CustomerVO;
+import vo.PurBackSheetVO;
+import vo.PurSheetVO;
 import vo.SaleBackSheetVO;
 import vo.SaleSheetVO;
 import vo.stockvo.CommodityVO;
@@ -20,12 +22,12 @@ public class SaleTest extends TestCase{
 			assertTrue(true);
 		}
 		
-		public void testCreatSaleSheet() {
+		public void testCreateSaleSheet() {
 			SaleSheetVO vo = new SaleSheetVO();
 			Customer customer = new Customer(); 
+			vo.setCustomer(customer.getVO());
 			customer.setname("梅少");
 			vo.setCustomer(customer.getVO());
-			vo.setuserid("002");
 			vo.setdate(new Date());
 			vo.setdiscount(20.0);
 			vo.setmoney1(100.0);
@@ -35,19 +37,25 @@ public class SaleTest extends TestCase{
 			vo.setusername("学长");
 			vo.setuserid("208");
 			vo.setop("学长208");
-			vo.setsheet(new ArrayList<CommodityVO>());
+			ArrayList<CommodityVO> sheet = new ArrayList<CommodityVO>();
+			CommodityVO mockvo=new CommodityVO("1\\门","好好防盗门","fdm02",200,300,10);
+			sheet.add(mockvo);
+			vo.setsheet(sheet);
+			ArrayList<String> wordslist = new ArrayList<String>();
+			wordslist.add("aaa");
+			vo.setcommoditywords(wordslist);
 			vo.setwords("我是备注");
 			salebillController controller = new salebillController();
 			boolean result1 = controller.createSaleSheet(vo);
 			assertTrue(result1);
 		}
 		
-		/*public void testCreatSaleBackSheet() {
+		public void testCreateSaleBackSheet() {
 			SaleBackSheetVO vo = new SaleBackSheetVO();
-			Customer customer = new Customer();
+			Customer customer = new Customer(); 
+			vo.setCustomer(customer.getVO());
 			customer.setname("梅少");
-			vo.setCustomer(customer);
-			vo.setuserid("002");
+			vo.setCustomer(customer.getVO());
 			vo.setdate(new Date());
 			vo.setdiscount(20.0);
 			vo.setmoney1(100.0);
@@ -57,24 +65,73 @@ public class SaleTest extends TestCase{
 			vo.setusername("学长");
 			vo.setuserid("208");
 			vo.setop("学长208");
-			vo.setsheet(new ArrayList<MockCommodity>());
+			ArrayList<CommodityVO> sheet = new ArrayList<CommodityVO>();
+			CommodityVO mockvo=new CommodityVO("1\\门","好好防盗门","fdm02",200,300,10);
+			sheet.add(mockvo);
+			vo.setsheet(sheet);
+			ArrayList<String> wordslist = new ArrayList<String>();
+			wordslist.add("aaa");
+			vo.setcommoditywords(wordslist);
 			vo.setwords("我是备注");
 			salebillController controller = new salebillController();
-			boolean result1 = controller.createSaleBackSheet(vo);
-			assertTrue(result1);
-		}*/
+			boolean result2 = controller.createSaleBackSheet(vo);
+			assertTrue(result2);
+		}
 		
-		/*
-		public void testgetPurBackSheet(){
-			boolean result3=sbbs.getPurBackSheet("131");
+		public void testCreatePurSheet(){
+			PurSheetVO vo = new PurSheetVO();
+			salebillController controller = new salebillController();
+			Customer customer = new Customer("CC"); 
+			vo.setCustomer(customer.getVO());
+			vo.setdate(new Date());
+			vo.setstock("1");
+			vo.setusername("学长");
+			vo.setuserid("208");
+			vo.setop("学长208");
+			ArrayList<CommodityVO> sheet = new ArrayList<CommodityVO>();
+			CommodityVO mockvo=new CommodityVO("1\\门","好好防盗门","fdm02",200,300,10);
+			sheet.add(mockvo);
+			vo.setsheet(sheet);
+			ArrayList<String> wordslist = new ArrayList<String>();
+			wordslist.add("aaa");
+			vo.setcommoditywords(wordslist);
+			vo.setwords("我是备注");
+			vo.setmoney1(100.0);
+			boolean result3 = controller.createPurSheet(vo);
 			assertTrue(result3);
 		}
 		
-		public void testgetPurSheet(){
-			boolean result4=sbbs.getPurSheet("131");
-			assertTrue(result4);
+		public void testCreatePurBackSheet(){
+			PurBackSheetVO vo = new PurBackSheetVO();
+			salebillController controller = new salebillController();
+			Customer customer = new Customer("CC"); 
+			vo.setCustomer(customer.getVO());
+			vo.setdate(new Date());
+			vo.setstock("1");
+			vo.setusername("学长");
+			vo.setuserid("208");
+			vo.setop("学长208");
+			ArrayList<CommodityVO> sheet = new ArrayList<CommodityVO>();
+			CommodityVO mockvo=new CommodityVO("1\\门","好好防盗门","fdm02",200,300,10);
+			sheet.add(mockvo);
+			vo.setsheet(sheet);
+			ArrayList<String> wordslist = new ArrayList<String>();
+			wordslist.add("aaa");
+			vo.setcommoditywords(wordslist);
+			vo.setwords("我是备注");
+			vo.setmoney1(100.0);
+			boolean result3 = controller.createPurBackSheet(vo);
+			assertTrue(result3);
 		}
 		
+
+		/*public void testgetPurSheet(){
+			salebillController controller = new salebillController();
+			boolean result3 = controller.getPurBackSheet();
+			assertTrue(result4);
+		}*/
+		
+		/*
 		public void testgetSaleBackSheet(){
 			boolean result5=sbbs.getSaleBackSheet("131");
 			assertTrue(result5);

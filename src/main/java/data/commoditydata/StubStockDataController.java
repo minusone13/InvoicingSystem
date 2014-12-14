@@ -122,7 +122,9 @@ public class StubStockDataController implements StubCommodityDataService, StockD
 	public ArrayList<CommodityPO> getAllCommodity()
 	{
 		read();
-		return l.getAllCommodity();
+		ArrayList<CommodityPO> result = l.getAllCommodity();
+		save();
+		return result;
 	}
 	public CommodityPO findCommodity(String name, String model)
 	{
@@ -235,5 +237,9 @@ public class StubStockDataController implements StubCommodityDataService, StockD
 	{
 		read();
 		return l.fuzzyFindCommodity(s, precision);
+	}
+	public int getCountNo() {
+		read();
+		return l.getCountNo();
 	}
 }

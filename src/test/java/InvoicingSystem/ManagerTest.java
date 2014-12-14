@@ -1,8 +1,9 @@
 package InvoicingSystem;
 
+import static org.junit.Assert.*;//added by lhw
 import java.util.ArrayList;
 
-import org.junit.Test;
+import org.junit.*;//change from org.junit.test to org.junit.* by lhw;
 
 import junit.framework.TestCase;
 import vo.BarginStrategyVO;
@@ -15,14 +16,15 @@ import businesslogic.BillStyle;
 import businesslogic.managerbl.StubManager;
 import businesslogicservice.managerblservice.StubManagerBlService;
 
-public class ManagerTest extends TestCase{
+public class ManagerTest{
 
-	StubManagerBlService mbl=new StubManager();
-	
+	//StubManagerBlService mbl=new StubManager(); deleted by lhw
+	static StubManagerBlService mbl=new StubManager();
 
 	/*修改密码*/
 	@Test
-	public void testmodifyPassword (String newpassword){
+	//public void testmodifyPassword (String newpassword){//delete parameter by lhw
+	public void testmodifyPassword (){
 		boolean result=mbl.modifyPassword("newpassword");
 		assertTrue(result);
 	}
@@ -37,7 +39,8 @@ public class ManagerTest extends TestCase{
 //	}
 	/*需要制定一个折让客户分层策略*/
 	@Test
-	public void testaddDiscountLevelStrategy (LevelStrategyVO lsvo){
+	//public void testaddDiscountLevelStrategy (LevelStrategyVO lsvo){//delete parameter by lhw
+	public void testaddDiscountLevelStrategy (){
 		System.out.println("oooo");
 		LevelStrategyVO DiscountLevelStrategyTest=new LevelStrategyVO();
 		DiscountLevelStrategyTest.setLevel(4);
@@ -65,7 +68,8 @@ public class ManagerTest extends TestCase{
 //	}
 	/*需要制定一条赠送代金券的满额促销策略*/
 	@Test
-	public void testaddCouponReachStrategy (ReachStrategyVO rsvo){
+	//public void testaddCouponReachStrategy (ReachStrategyVO rsvo){////delete parameter by lhw
+	public void testaddCouponReachStrategy (){
 		ReachStrategyVO CouponReachStrategyTest=new ReachStrategyVO();
 		CouponReachStrategyTest.setLimit(1000);
 		CouponReachStrategyTest.setCouponrate(0.1);
@@ -113,19 +117,22 @@ public class ManagerTest extends TestCase{
 	}
 	/*需要删除一条客户分层策略*/
 	@Test
-	public void testRemove (LevelStrategyVO ls){
+	//public void testRemove (LevelStrategyVO ls){//delete parameter by lhw
+	public void testRemove1 (){
 		boolean result=mbl.Remove(new LevelStrategyVO());
 		assertTrue(result);
 	}
 	/*需要删除一条特价包策略*/
 	@Test
-	public void testRemove (BarginStrategyVO bs){
+	//public void testRemove (BarginStrategyVO bs){//delete parameter by lhw
+	public void testRemove2 (){
 		boolean result=mbl.Remove(new BarginStrategyVO());
 		assertTrue(result);
 	}
 	/*需要删除一条满额促销策略*/
 	@Test
-	public void testRemove (ReachStrategyVO rs){
+	//public void testRemove (ReachStrategyVO rs){//delete parameter by lhw
+	public void testRemove3 (){
 		boolean result=mbl.Remove(new ReachStrategyVO());
 		assertTrue(result);
 	}

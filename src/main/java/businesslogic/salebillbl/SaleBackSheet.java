@@ -30,6 +30,16 @@ public class SaleBackSheet extends Bill implements GetVOandPO{
 	String words;//备注
 	String username;
 	String op;
+	ArrayList<String> commoditywords;//每项商品的备注;
+	
+	public ArrayList<String> getcommoditywords(){
+		return this.commoditywords;
+	}
+	
+	public void setcommoditywords(ArrayList<String> words){
+		this.commoditywords=words;
+	}
+	
 	
 	public SaleBackSheet(){};
 	public SaleBackSheet(SaleBackSheetVO vo){
@@ -37,7 +47,7 @@ public class SaleBackSheet extends Bill implements GetVOandPO{
 		this.ID=vo.getid();
 		this.customer=new Customer(vo.getcustomer());
 		ArrayList<MockCommodity> temp=new ArrayList<MockCommodity>();
-		for(int i=0;i<sheet.size();i++){
+		for(int i=0;i<vo.getsheet().size();i++){
 			temp.add(new MockCommodity(vo.getsheet().get(i)));
 		}
 		this.sheet=temp;
@@ -50,6 +60,7 @@ public class SaleBackSheet extends Bill implements GetVOandPO{
 		this.username=vo.getusername();
 		this.op=vo.getop();
 		this.billstate=vo.getState();
+		this.commoditywords=vo.getcommoditywords();
 	};
 	
 	public  BillState getState(){
@@ -184,6 +195,7 @@ public class SaleBackSheet extends Bill implements GetVOandPO{
 		this.username=po.getusername();
 		this.op=po.getop();
 		this.billstate=po.getState();
+		this.commoditywords=po.getcommoditywords();
 	}
 	
 	public SaleBackSheetVO getVO() {
@@ -205,6 +217,7 @@ public class SaleBackSheet extends Bill implements GetVOandPO{
 		vo.setop(op);
 		vo.setusername(username);
 		vo.setState(billstate);
+		vo.setcommoditywords(commoditywords);
 		return vo;
 	}
 	public SaleBackSheetPO getPO() {
@@ -226,6 +239,7 @@ public class SaleBackSheet extends Bill implements GetVOandPO{
 		po.setop(op);
 		po.setusername(username);
 		po.setState(billstate);
+		po.setcommoditywords(commoditywords);
 		return po;
 	}
 	

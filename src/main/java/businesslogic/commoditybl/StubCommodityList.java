@@ -66,21 +66,23 @@ public class StubCommodityList {//商品列表 haha
 			return RM.notfound;
 		MockCommodity com=new MockCommodity(po);
 		int num = com.getNumber();
-		com.setLastin(price);
-		//下面调整平均进价
-		if(!com.hasIn())
-			com.setIn(price);//如果没有记录，进价仍然是添加商品时填写的，此时失去意义
-		else
-		{
-			double total=com.getIn()*com.getNumber();
-			total+=quantity*price;
-			int quantitytemp=com.getNumber();
-			quantitytemp+=quantity;
-			com.setIn(total/quantitytemp);
-		}
 		CommodityRecord r;
 		if(price!=0)
+		{
+			com.setLastin(price);
+			//下面调整平均进价
+			if(!com.hasIn())
+				com.setIn(price);//如果没有记录，进价仍然是添加商品时填写的，此时失去意义
+			else
+			{
+				double total=com.getIn()*com.getNumber();
+				total+=quantity*price;
+				int quantitytemp=com.getNumber();
+				quantitytemp+=quantity;
+				com.setIn(total/quantitytemp);
+			}
 			r = new CommodityRecord(id,new Date(),0,quantity,0,quantity*price,0,quantity,0,quantity*price);
+		}
 		else
 			r = new CommodityRecord(id,new Date(),0,quantity,0,0,0,0,0,0);
 		com.setNumber(num+quantity);
@@ -242,7 +244,7 @@ public class StubCommodityList {//商品列表 haha
 		CommodityPO po=comdata.findCommodity(name, model);
 		MockCommodity com=new MockCommodity(po);
 		int potential = com.getPotential();
-		return(n<potential);
+		return(n<=potential);
 	}
 	public ArrayList<MockCommodity> posToCom(ArrayList<CommodityPO> h)
 	{
@@ -337,7 +339,7 @@ public class StubCommodityList {//商品列表 haha
 		ArrayList<CommodityVO> result = new ArrayList<CommodityVO>();
 		for(int i=0;i<temp.size();i++)
 			result.add(new MockCommodity(temp.get(i)).toVO());
-		return new CountVO(result,new Date(),1);
+		return new CountVO(result,new Date(),comdata.getCountNo());
 	}
 	
 	public ArrayList<CommodityVO> getRecords(Date d1, Date d2)

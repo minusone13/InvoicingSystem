@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import po.*;
+import po.SpillsLossBillPO.Type;
 import po.stockpo.CommodityPO;
 import vo.GiftBillVO;
 import vo.VO;
@@ -12,6 +13,7 @@ import businesslogic.BillState;
 import businesslogic.BillStyle;
 import businesslogic.GetVOandPO;
 import businesslogic.commoditybl.MockCommodity;
+import businesslogic.commoditybl.StubCommodityList;
 import businesslogic.examinebl.Bill;
 
 public class StubGiftBill extends Bill implements GetVOandPO
@@ -20,7 +22,7 @@ public class StubGiftBill extends Bill implements GetVOandPO
 	private BillStyle billstyle=BillStyle.GiftBill;
 	String operator;
 	private String ID;
-	ArrayList<MockCommodity> coms;
+	ArrayList<MockCommodity> coms=new ArrayList<MockCommodity>();//王雨城加
 	BillState state=BillState.DRAFT;
 	String remark[];
 	public GiftBillVO getVO()
@@ -105,6 +107,23 @@ public class StubGiftBill extends Bill implements GetVOandPO
 		return state;
 	}
 	public void setState(BillState state) {
+		StubCommodityList l= new StubCommodityList();
+		if(this.state==BillState.DRAFT &&  state==BillState.SUBMITED)
+		{
+			for(int i=0; i<coms.size(); i++)
+			{
+				MockCommodity com = coms.get(i);
+				l.readyForOut(ID, com.getName(), com.getModel(), com.getNumber(), 0);
+			}
+		}
+		if(this.state==BillState.EXAMINED && state==BillState.OVER)
+		{//当审批订单后，实现系统中的库存数量修改
+			for(int i=0; i<coms.size(); i++)
+			{
+				MockCommodity com = coms.get(i);
+				l.checkOut(ID, com.getName(), com.getModel(), com.getNumber(), 0);
+			}
+		}
 		this.state = state;
 	}
 	public Date getDate() {

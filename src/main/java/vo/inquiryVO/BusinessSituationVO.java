@@ -9,10 +9,17 @@ public class BusinessSituationVO {
 	private double bonusTotal;//代金券与实际收款差额收入
 	private double saleTotal;//折让后收入
 	private double discount;//折让
-	//销售成本
-	private double profit;//利润
-	public int tempForTest=0;
+	private double cost;//销售成本
 	
+	private double profit;//利润
+
+	
+	public double getCost() {
+		return cost;
+	}
+	public void setCost(double cost) {
+		this.cost = cost;
+	}
 	
 	public double getBonusTotal() {
 		return bonusTotal;
@@ -32,12 +39,7 @@ public class BusinessSituationVO {
 	public void setDiscount(double discount) {
 		this.discount = discount;
 	}
-	public int getTempForTest() {
-		return tempForTest;
-	}
-	public void setTempForTest(int tempForTest) {
-		this.tempForTest = tempForTest;
-	}
+	
 	
 	
 	public double getAdjustmentTotal() {

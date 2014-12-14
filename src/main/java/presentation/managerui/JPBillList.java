@@ -23,7 +23,7 @@ import businesslogic.managerbl.StubManager;
 import businesslogic.salebillbl.salebillController;
 import businesslogic.stockmanagerbl.StubStockController;
 import businesslogicservice.commodityblservice.StubCommodityBlService;
-import businesslogicservice.financialblservice.StubFinancialBlService;
+import businesslogicservice.financialblservice.FinancialBlService;
 import businesslogicservice.managerblservice.StubManagerBlService;
 import businesslogicservice.salebillblservice.SaleBillBlService;
 
@@ -50,7 +50,7 @@ public class JPBillList extends JPanel {
 	JTableOfList table;//表格的引用
 	//四个逻辑层接口
 	StubManagerBlService mbl=new StubManager();
-	StubFinancialBlService fbl=new Financial();
+	FinancialBlService fbl=new Financial();
 	 SaleBillBlService sbl=new salebillController();
 	 StubCommodityBlService stockbl=new StubStockController();
 	public JPBillList(){

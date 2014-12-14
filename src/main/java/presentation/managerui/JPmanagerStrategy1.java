@@ -7,11 +7,10 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import presentation.financialui.JPmanageBills1.MouseListenOfButton;
 import userui.Frame;
 import businesslogic.BillStyle;
 import businesslogic.financialbl.Financial;
-import businesslogicservice.financialblservice.StubFinancialBlService;
+import businesslogicservice.financialblservice.FinancialBlService;
 
 public class JPmanagerStrategy1 extends JPanel {
 
@@ -33,7 +32,7 @@ public class JPmanagerStrategy1 extends JPanel {
 	//frame的引用
     Frame frame;
     //逻辑层的财务人员接口
-    StubFinancialBlService fbl=new Financial();
+    FinancialBlService fbl=new Financial();
 	public JPmanagerStrategy1(){
 		//设置窗口大小
 		this.setSize(445, 330);
