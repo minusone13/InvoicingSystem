@@ -8,9 +8,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import vo.AlertBillVO;
+import vo.BarginStrategyVO;
 import vo.GiftBillVO;
+import vo.LevelStrategyVO;
 import vo.PurBackSheetVO;
 import vo.PurSheetVO;
+import vo.ReachStrategyVO;
 import vo.SaleBackSheetVO;
 import vo.SaleSheetVO;
 import vo.SpillsLossBillVO;
@@ -19,6 +22,7 @@ import vo.financialBillVO.PaymentVO;
 import vo.financialBillVO.ReceiptVO;
 import businesslogic.BillState;
 import businesslogic.BillStyle;
+import businesslogic.StrategyStyle;
 import businesslogic.financialbl.Financial;
 import businesslogic.managerbl.StubManager;
 import businesslogic.salebillbl.salebillController;
@@ -34,6 +38,8 @@ public class JPBill extends JPanel {
 	private String ID;
 	//单据类型
 	private BillStyle style;
+	//单据类型
+	private StrategyStyle strategyStyle;
 	//单据状态
 	private BillState state;
 	//背景
@@ -55,6 +61,10 @@ public class JPBill extends JPanel {
 	private PaymentVO payVO;
 	private ReceiptVO receiptVO;
 	private SaleBackSheetVO salebackVO;
+	
+	private LevelStrategyVO levelStrategyVO;
+	private BarginStrategyVO barginStrategyVO;
+	private ReachStrategyVO reachStrategyVO;
 	
 	public JLabel getRight() {
 		return right;
@@ -143,6 +153,233 @@ public class JPBill extends JPanel {
 	String[][] listOfPR;
 	//清单表格的引用
 	JTableOfList table;
+	public JPBill(LevelStrategyVO ls){
+	
+		//传递VO
+		levelStrategyVO=ls;
+		//面板大小
+		this.setSize(522, 93);
+		//设置布局
+		this.setLayout(null);
+		//设置面板透明
+		this.setOpaque(false);
+		//背景
+		bg.setIcon(new ImageIcon("src/image/strategy/LevelStrategy1.png"));
+		bg.setBounds(0, 0, 522, 93);
+		bg.addMouseListener(new MLofStartegy(1));
+		//向右
+		right.setIcon(new ImageIcon("src/image/right.png"));
+		right.setBounds(221, 26, 40, 40);
+		right.addMouseListener(new MouseListenerOfButton(1));
+		//向左
+		left.setIcon(new ImageIcon("src/image/left.png"));
+		left.setBounds(482, 26, 40, 40);
+		left.addMouseListener(new MouseListenerOfButton(2));
+		//单据信息
+		JLabel ID=new JLabel("ID:"+ls.getID(),JLabel.CENTER);
+		ID.setBounds(31,5, 200, 20);
+		
+		//单据信息未完
+		//将组件加到面板上
+		this.add(right,0);
+		this.add(left,1);
+		this.add(ID,2);
+		this.add(bg,3);
+	}
+	public JPBill(BarginStrategyVO bs){
+		
+		//传递VO
+		barginStrategyVO=bs;
+		//面板大小
+		this.setSize(522, 93);
+		//设置布局
+		this.setLayout(null);
+		//设置面板透明
+		this.setOpaque(false);
+		//背景
+		bg.setIcon(new ImageIcon("src/image/strategy/BarginStrategy1.png"));
+		bg.setBounds(0, 0, 522, 93);
+		bg.addMouseListener(new MLofStartegy(2));
+		//向右
+		right.setIcon(new ImageIcon("src/image/right.png"));
+		right.setBounds(221, 26, 40, 40);
+		right.addMouseListener(new MouseListenerOfButton(1));
+		//向左
+		left.setIcon(new ImageIcon("src/image/left.png"));
+		left.setBounds(482, 26, 40, 40);
+		left.addMouseListener(new MouseListenerOfButton(2));
+		//单据信息
+		JLabel ID=new JLabel("ID:"+bs.getID(),JLabel.CENTER);
+		ID.setBounds(31,5, 200, 20);
+		
+		//单据信息未完
+		//将组件加到面板上
+		this.add(right,0);
+		this.add(left,1);
+		this.add(ID,2);
+		this.add(bg,3);
+	}
+	public JPBill(ReachStrategyVO rs){
+		
+		//传递VO
+		reachStrategyVO=rs;
+		//面板大小
+		this.setSize(522, 93);
+		//设置布局
+		this.setLayout(null);
+		//设置面板透明
+		this.setOpaque(false);
+		//背景
+		bg.setIcon(new ImageIcon("src/image/strategy/ReachStrategy1.png"));
+		bg.setBounds(0, 0, 522, 93);
+		bg.addMouseListener(new MLofStartegy(3));
+		//向右
+		right.setIcon(new ImageIcon("src/image/right.png"));
+		right.setBounds(221, 26, 40, 40);
+		right.addMouseListener(new MouseListenerOfButton(1));
+		//向左
+		left.setIcon(new ImageIcon("src/image/left.png"));
+		left.setBounds(482, 26, 40, 40);
+		left.addMouseListener(new MouseListenerOfButton(2));
+		//单据信息
+		JLabel ID=new JLabel("ID:"+rs.getID(),JLabel.CENTER);
+		ID.setBounds(31,5, 200, 20);
+		
+		//单据信息未完
+		//将组件加到面板上
+		this.add(right,0);
+		this.add(left,1);
+		this.add(ID,2);
+		this.add(bg,3);
+	}
+	public LevelStrategyVO getLevelStrategyVO() {
+		return levelStrategyVO;
+	}
+	public void setLevelStrategyVO(LevelStrategyVO levelStrategyVO) {
+		this.levelStrategyVO = levelStrategyVO;
+	}
+	public BarginStrategyVO getBarginStrategyVO() {
+		return barginStrategyVO;
+	}
+	public void setBarginStrategyVO(BarginStrategyVO barginStrategyVO) {
+		this.barginStrategyVO = barginStrategyVO;
+	}
+	public ReachStrategyVO getReachStrategyVO() {
+		return reachStrategyVO;
+	}
+	public void setReachStrategyVO(ReachStrategyVO reachStrategyVO) {
+		this.reachStrategyVO = reachStrategyVO;
+	}
+	public class MLofStartegy implements MouseListener{
+
+		private int num;//1、客户策略2、特价包策略3、满额策略
+		public MLofStartegy(int N){
+			num=N;
+		}
+		public void mouseClicked(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		public void mousePressed(MouseEvent e) {
+			// TODO Auto-generated method stub
+			choose=!choose;
+			if(choose){
+				switch(num){
+				case 1:
+					bg.setIcon(new ImageIcon("src/image/strategy/LevelStrategy4.png"));
+					break;
+				case 2:
+					bg.setIcon(new ImageIcon("src/image/strategy/BarginStrategy4.png"));
+					break;
+				case 3:
+					bg.setIcon(new ImageIcon("src/image/strategy/ReachStrategy4.png"));
+					break;
+					
+				}
+			}
+			else{
+				switch(num){
+				case 1:
+					bg.setIcon(new ImageIcon("src/image/strategy/LevelStrategy3.png"));
+					break;
+				case 2:
+					bg.setIcon(new ImageIcon("src/image/strategy/BarginStrategy3.png"));
+					break;
+				case 3:
+					bg.setIcon(new ImageIcon("src/image/strategy/ReachStrategy3.png"));
+					break;
+				}
+			}
+		}
+
+		public void mouseReleased(MouseEvent e) {
+			// TODO Auto-generated method stub
+		}
+
+		public void mouseEntered(MouseEvent e) {
+			// TODO Auto-generated method stub
+			if(choose){
+				switch(num){
+				case 1:
+					bg.setIcon(new ImageIcon("src/image/strategy/LevelStrategy4.png"));
+					break;
+				case 2:
+					bg.setIcon(new ImageIcon("src/image/strategy/BarginStrategy4.png"));
+					break;
+				case 3:
+					bg.setIcon(new ImageIcon("src/image/strategy/ReachStrategy4.png"));
+					break;
+					
+				}
+			}
+			else{
+				switch(num){
+				case 1:
+					bg.setIcon(new ImageIcon("src/image/strategy/LevelStrategy3.png"));
+					break;
+				case 2:
+					bg.setIcon(new ImageIcon("src/image/strategy/BarginStrategy3.png"));
+					break;
+				case 3:
+					bg.setIcon(new ImageIcon("src/image/strategy/ReachStrategy3.png"));
+					break;
+				}
+			}
+		}
+
+		public void mouseExited(MouseEvent e) {
+			// TODO Auto-generated method stub
+			if(choose){
+				switch(num){
+				case 1:
+					bg.setIcon(new ImageIcon("src/image/strategy/LevelStrategy2.png"));
+					break;
+				case 2:
+					bg.setIcon(new ImageIcon("src/image/strategy/BarginStrategy2.png"));
+					break;
+				case 3:
+					bg.setIcon(new ImageIcon("src/image/strategy/ReachStrategy2.png"));
+					break;
+					
+				}
+			}
+			else{
+				switch(num){
+				case 1:
+					bg.setIcon(new ImageIcon("src/image/strategy/LevelStrategy1.png"));
+					break;
+				case 2:
+					bg.setIcon(new ImageIcon("src/image/strategy/BarginStrategy1.png"));
+					break;
+				case 3:
+					bg.setIcon(new ImageIcon("src/image/strategy/ReachStrategy1.png"));
+					break;
+				}
+			}
+		}
+		
+	}
 	public JPBill(GiftBillVO gb){
 		//设置单据编号，状态，种类
 		state=gb.getState();

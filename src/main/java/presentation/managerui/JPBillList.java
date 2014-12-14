@@ -5,9 +5,12 @@ import java.util.ArrayList;
 import javax.swing.JPanel;
 
 import vo.AlertBillVO;
+import vo.BarginStrategyVO;
 import vo.GiftBillVO;
+import vo.LevelStrategyVO;
 import vo.PurBackSheetVO;
 import vo.PurSheetVO;
+import vo.ReachStrategyVO;
 import vo.SaleBackSheetVO;
 import vo.SaleSheetVO;
 import vo.SpillsLossBillVO;
@@ -126,6 +129,81 @@ public class JPBillList extends JPanel {
 		//把更新板加到底板上
 		this.add(JPupdate);
 		this.repaint();
+	}
+	/*增加赠送单VO数组*/
+	public void addLevelStrategyList(ArrayList<LevelStrategyVO> ls){
+
+	
+		//遍历单据vo数组把单据加到单据面板数组
+		for(int i=0;i<ls.size();i++){
+			JPbillList.add(new JPBill(ls.get(i)));
+		}
+		//更新面板
+		updateJP();
+	}
+	/*增加赠送单*/
+	public void addLevelStrategy(LevelStrategyVO ls){
+		//调用逻辑层
+		switch(ls.getLevel_strategy_style()){
+		case Gift:
+			mbl.addGiftLevelStrategy(ls);
+			break;
+		case Discount:
+			mbl.addDiscountLevelStrategy(ls);
+			break;
+		case Coupon:
+			mbl.addCouponLevelStrategy(ls);
+			break;
+		}
+		
+		//从逻辑层读取数据更新界面
+		JPbillList.clear();
+		this.addLevelStrategyList(mbl.ShowLevelStrategy());
+	}
+	/*增加赠送单VO数组*/
+	public void addBarginStrategyList(ArrayList<BarginStrategyVO> bs){
+
+	
+		//遍历单据vo数组把单据加到单据面板数组
+		for(int i=0;i<bs.size();i++){
+			JPbillList.add(new JPBill(bs.get(i)));
+		}
+		//更新面板
+		updateJP();
+	}
+	/*增加赠送单*/
+	public void addBarginStrategy(BarginStrategyVO bs){
+		//调用逻辑层
+		mbl.addBarginStrategy(bs);
+		//从逻辑层读取数据更新界面
+		JPbillList.clear();
+		this.addBarginStrategyList(mbl.ShowBarginStrategy());
+	}
+	/*增加赠送单VO数组*/
+	public void addReachStrategyList(ArrayList<ReachStrategyVO> rs){
+
+	
+		//遍历单据vo数组把单据加到单据面板数组
+		for(int i=0;i<rs.size();i++){
+			JPbillList.add(new JPBill(rs.get(i)));
+		}
+		//更新面板
+		updateJP();
+	}
+	/*增加赠送单*/
+	public void addReachStrategy(ReachStrategyVO rs){
+		//调用逻辑层
+		switch(rs.getReach_strategy_style()){
+		case Gift:
+			mbl.addGiftReachStrategy(rs);
+			break;
+		case Coupon:
+			mbl.addCouponReachStrategy(rs);
+			break;
+		}
+		//从逻辑层读取数据更新界面
+		JPbillList.clear();
+		this.addReachStrategyList(mbl.ShowReachStrategy());
 	}
 	/*增加赠送单VO数组*/
 	public void addGiftBillList(ArrayList<GiftBillVO> gb){
@@ -497,6 +575,18 @@ public class JPBillList extends JPanel {
 		if(isTheSameState()&&stateOfChosen()==BillState.OVER){//如果是同一个状态且是已处理状态
 			for(int i=0;i<JPbillList.size();i++){
 				if(JPbillList.get(i).getChoose()){
+					//如果是策略，要从数据库中删除
+					if(JPbillList.get(i).getLevelStrategyVO()!=null||JPbillList.get(i).getBarginStrategyVO()!=null||JPbillList.get(i).getReachStrategyVO()!=null){
+						if(JPbillList.get(i).getLevelStrategyVO()!=null){
+							mbl.Remove(JPbillList.get(i).getLevelStrategyVO());
+						}
+						if(JPbillList.get(i).getBarginStrategyVO()!=null){
+							mbl.Remove(JPbillList.get(i).getBarginStrategyVO());
+						}
+						if(JPbillList.get(i).getReachStrategyVO()!=null){
+							mbl.Remove(JPbillList.get(i).getReachStrategyVO());
+						}
+					}
 					JPbillList.remove(i);
 					i--;
 				}
