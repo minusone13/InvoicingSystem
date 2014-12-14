@@ -380,7 +380,7 @@ public class Inquiry {
 			return purSheetVO;
 			
 		}
-		//得到经营历程表的进货单
+		//得到经营历程表的进货退货单
 		public ArrayList<PurBackSheetVO> getProcessPurBackSheet(InquiryProcessVO ipv) {
 			ArrayList<PurBackSheet> purBackSheet = bp.getPurBackSheet();
 			ArrayList<PurBackSheetVO> purBackSheetVO = new ArrayList<PurBackSheetVO>();

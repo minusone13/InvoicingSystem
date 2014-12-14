@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 import userui.Frame;
 import businesslogic.BillStyle;
 import businesslogic.financialbl.Financial;
-import businesslogicservice.financialblservice.StubFinancialBlService;
+import businesslogicservice.financialblservice.FinancialBlService;
 
 
 @SuppressWarnings("serial")
@@ -35,7 +35,7 @@ public class JPmanageBills1 extends JPanel {
 	//frame的引用
     Frame frame;
     //逻辑层的财务人员接口
-    StubFinancialBlService fbl=new Financial();
+    FinancialBlService fbl=new Financial();
 	public JPmanageBills1(){
 		//设置窗口大小
 		this.setSize(445, 330);

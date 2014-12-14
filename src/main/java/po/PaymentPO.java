@@ -14,14 +14,36 @@ public class PaymentPO extends PO implements Serializable{
 	Role role;
 	String customer;
 	double total;
-	String account;//账户
-	double money;//转账金额
+	
 	BillStyle style;
-	ArrayList<TransferAccount> transferlist;
+	ArrayList<String> accounts;
+	ArrayList<String> remark;
+	ArrayList<Double> money;
+	
 	Date date;
 	String userID;
 	String userName;
 	String op;
+	
+	public ArrayList<String> getAccounts() {
+		return accounts;
+	}
+	public void setAccounts(ArrayList<String> accounts) {
+		this.accounts = accounts;
+	}
+	public ArrayList<String> getRemark() {
+		return remark;
+	}
+	public void setRemark(ArrayList<String> remark) {
+		this.remark = remark;
+	}
+	public ArrayList<Double> getMoney() {
+		return money;
+	}
+	public void setMoney(ArrayList<Double> money) {
+		this.money = money;
+	}
+	
 	public Date getDate() {
 		return date;
 	}
@@ -52,12 +74,7 @@ public class PaymentPO extends PO implements Serializable{
 	public void setStyle(BillStyle style) {
 		this.style = style;
 	}
-	public ArrayList<TransferAccount> getTransferlist() {
-		return transferlist;
-	}
-	public void setTransferlist(ArrayList<TransferAccount> transferlist) {
-		this.transferlist = transferlist;
-	}
+	
 	public BillState getState() {
 		return state;
 	}
@@ -90,16 +107,5 @@ public class PaymentPO extends PO implements Serializable{
 	public void setTotal(double total) {
 		this.total = total;
 	}
-	public String getAccount() {
-		return account;
-	}
-	public void setAccount(String account) {
-		this.account = account;
-	}
-	public double getMoney() {
-		return money;
-	}
-	public void setMoney(double money) {
-		this.money = money;
-	}
+	
 }

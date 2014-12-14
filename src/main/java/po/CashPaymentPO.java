@@ -15,7 +15,11 @@ public class CashPaymentPO extends PO implements Serializable{
 	String account;//账户
 	String ID;
 	Role role;
-	ArrayList<Item> itemList;
+	
+	ArrayList<String> items;
+	ArrayList<String> remark;
+	ArrayList<Double> money;
+	
 	BillState state;
 	Date date;
 	private String userID;
@@ -57,12 +61,7 @@ public class CashPaymentPO extends PO implements Serializable{
 	public void setStyle(BillStyle style) {
 		this.style = style;
 	}
-	public ArrayList<Item> getItemList() {
-		return itemList;
-	}
-	public void setItemList(ArrayList<Item> itemList) {
-		this.itemList = itemList;
-	}
+	
 	public String getID() {
 		return ID;
 	}
@@ -88,5 +87,22 @@ public class CashPaymentPO extends PO implements Serializable{
 	public void setAccount(String account) {
 		this.account = account;
 	}
-
+	public ArrayList<String> getItems() {
+		return items;
+	}
+	public void setItems(ArrayList<String> items) {
+		this.items = items;
+	}
+	public ArrayList<String> getRemark() {
+		return remark;
+	}
+	public void setRemark(ArrayList<String> remark) {
+		this.remark = remark;
+	}
+	public ArrayList<Double> getMoney() {
+		return money;
+	}
+	public void setMoney(ArrayList<Double> money) {
+		this.money = money;
+	}
 }

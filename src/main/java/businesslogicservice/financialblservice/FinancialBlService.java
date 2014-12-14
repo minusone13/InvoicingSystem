@@ -2,7 +2,14 @@ package businesslogicservice.financialblservice;
 
 import java.util.ArrayList;
 
+import vo.AlertBillVO;
 import vo.CustomerVO;
+import vo.GiftBillVO;
+import vo.PurBackSheetVO;
+import vo.PurSheetVO;
+import vo.SaleBackSheetVO;
+import vo.SaleSheetVO;
+import vo.SpillsLossBillVO;
 import vo.VO;
 import vo.accountVO.AccountVO;
 import vo.financialBillVO.CashPaymentVO;
@@ -14,7 +21,7 @@ import vo.inquiryVO.InquiryProcessVO;
 import vo.inquiryVO.InquirySaleVO;
 
 
-public interface StubFinancialBlService {
+public interface FinancialBlService {
 	
 	
 	public boolean addAccount(String name, double iniMoney) ;
@@ -29,12 +36,42 @@ public interface StubFinancialBlService {
 	//期初建账
 	public void buildAccount() ;
 	
+	//得到版本编号
+	public ArrayList<String> getVersions();
+		
 	//得到期初建账保存的账户信息
 	public ArrayList<AccountVO> getOldAccountsInfo(String version);
 	
 	//得到期初建账保存的客户信息
 	public ArrayList<CustomerVO> getOldCustomersInfo(String version);
 	
+	//得到销售明细表中的销售单
+	public ArrayList<SaleSheetVO> getSaleSaleSheet(InquirySaleVO isv);
+	
+	//销售明细表的销售退货单
+	public ArrayList<SaleBackSheetVO> getSaleSaleBackSheet(InquirySaleVO isv);
+	
+	//得到经营历程表的赠送单
+	public ArrayList<GiftBillVO> getProcessGift(InquiryProcessVO ipv);
+	
+	//得到经营历程表的报溢报损单
+	public ArrayList<SpillsLossBillVO> getProcessSpillLoss(InquiryProcessVO ipv);
+	
+	//得到经营历程表的报警单
+	public ArrayList<AlertBillVO> getProcessAlert(InquiryProcessVO ipv);
+	
+	//得到经营历程表的销售单
+	public ArrayList<SaleSheetVO> getProcessSaleSheet(InquiryProcessVO ipv);
+	
+	//得到经营历程表的销售退货单
+	public ArrayList<SaleBackSheetVO> getProcessSaleBackSheet(InquiryProcessVO ipv);
+			
+	//得到经营历程表的进货单
+	public ArrayList<PurSheetVO> getProcessPurSheet(InquiryProcessVO ipv);
+	
+	//得到经营历程表的进货退货单
+	public ArrayList<PurBackSheetVO> getProcessPurBackSheet(InquiryProcessVO ipv);
+				
 	//得到经营历程表的收款单
 	public ArrayList<ReceiptVO> getProcessReceipt(InquiryProcessVO ipv) ;
 	

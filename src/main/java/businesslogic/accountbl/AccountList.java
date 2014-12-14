@@ -74,6 +74,10 @@ public class AccountList {
 		build.saveVersion();
 	}
 	
+	public ArrayList<String> getVersions() {
+		AccountBuild build = new AccountBuild();
+		return build.getVersion();
+	}
 	public ArrayList<CustomerVO> getOldCustomersInfo(String version) {
 		CustomerForFinancial cff = new CustomerList();
 		return cff.getCustomer(version);
