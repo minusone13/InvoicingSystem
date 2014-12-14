@@ -174,11 +174,6 @@ public class Inquiry {
 				else continue;
 			}
 			
-			if(ipv.getBillstyle()!=null) {
-				if(g.getBillstyle().equals(ipv.getBillstyle())){}
-				else continue;
-			}
-			
 			if(ipv.getUserID()!=null) {
 				if(g.getOperator().equals(ipv.getUserID())){}
 				else continue;				
@@ -188,6 +183,245 @@ public class Inquiry {
 		return giftVO;
 	}
 	
+	//得到经营历程表的报溢报损单
+		public ArrayList<SpillsLossBillVO> getProcessSpillLoss(InquiryProcessVO ipv) {
+			ArrayList<StubSpillsLossBill> spillsLoss = bp.getSpillsLossBill();
+			ArrayList<SpillsLossBillVO> spillsLossVO = new ArrayList<SpillsLossBillVO>();
+			
+			int size = spillsLoss.size();
+			
+			for(int i=0;i<size;i++) {
+				StubSpillsLossBill sl = spillsLoss.get(i);
+				
+				if((ipv.getTimeBefore()!=null)&&(ipv.getTimeAfter()!=null)) {
+					Date dateBefore=null;
+					Date dateAfter=null;
+					SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+					
+					try {
+						dateBefore = format.parse(ipv.getTimeBefore());
+						dateAfter = format.parse(ipv.getTimeAfter());
+					} catch (ParseException e) {
+						e.printStackTrace();
+					}
+					if(sl.getDate().compareTo(dateBefore)>=0&&
+							sl.getDate().compareTo(dateAfter)<=0){}
+					else continue;
+				}
+				
+				if(ipv.getUserID()!=null) {
+					if(sl.getOperator().equals(ipv.getUserID())){}
+					else continue;				
+				}
+				spillsLossVO.add(sl.getVO());
+			}
+			return spillsLossVO;
+		}
+		
+		//得到经营历程表的报警单
+		public ArrayList<AlertBillVO> getProcessAlert(InquiryProcessVO ipv) {
+			ArrayList<StubAlertBill> alert  =bp.getAlertBill();	
+			ArrayList<AlertBillVO> alertVO = new ArrayList<AlertBillVO>();
+			int size = alert.size();
+			
+			for(int i=0;i<size;i++) {
+				StubAlertBill a = alert.get(i);
+				
+				if((ipv.getTimeBefore()!=null)&&(ipv.getTimeAfter()!=null)) {
+					Date dateBefore=null;
+					Date dateAfter=null;
+					SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+					
+					try {
+						dateBefore = format.parse(ipv.getTimeBefore());
+						dateAfter = format.parse(ipv.getTimeAfter());
+					} catch (ParseException e) {
+						e.printStackTrace();
+					}
+					if(a.getDate().compareTo(dateBefore)>=0&&
+							a.getDate().compareTo(dateAfter)<=0){}
+					else continue;
+				}
+				
+				if(ipv.getUserID()!=null) {
+					if(a.getOperator().equals(ipv.getUserID())){}
+					else continue;				
+				}
+				alertVO.add(a.getVO());
+			}
+			return alertVO;
+		}
+				
+	//得到经营历程表的销售单
+	public ArrayList<SaleSheetVO> getProcessSaleSheet(InquiryProcessVO ipv) {
+		ArrayList<SaleSheet> saleSheet = bp.getSaleSheet();
+		ArrayList<SaleSheetVO> saleSheetVO = new ArrayList<SaleSheetVO>();
+		
+		int size = saleSheet.size();			
+		for(int i=0;i<size;i++) {
+			SaleSheet sale = saleSheet.get(i);
+			
+			if((ipv.getTimeBefore()!=null)&&(ipv.getTimeAfter()!=null)) {
+				Date dateBefore=null;
+				Date dateAfter=null;
+				SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+				
+				try {
+					dateBefore = format.parse(ipv.getTimeBefore());
+					dateAfter = format.parse(ipv.getTimeAfter());
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+				if(sale.getDate().compareTo(dateBefore)>=0&&
+						sale.getDate().compareTo(dateAfter)<=0){}
+				else continue;
+			}
+			
+			//客户
+			if(ipv.getCustomer()!=null) {
+				if(sale.getcustomer().getname().equals(ipv.getCustomer())){} 
+				else continue;
+			}
+			
+			if(ipv.getUserID()!=null) {
+				if(sale.getUserID().equals(ipv.getUserID())){}
+				else continue;				
+			}
+			
+			saleSheetVO.add(sale.getVO());
+		}
+		
+		return saleSheetVO;
+		
+	}
+		
+		//得到经营历程表的销售退货单
+		public ArrayList<SaleBackSheetVO> getProcessSaleBackSheet(InquiryProcessVO ipv) {
+			ArrayList<SaleBackSheet> saleBackSheet = bp.getSaleBackSheet();
+			ArrayList<SaleBackSheetVO> saleBackSheetVO = new ArrayList<SaleBackSheetVO>();
+			
+			int size = saleBackSheet.size();			
+			for(int i=0;i<size;i++) {
+				SaleBackSheet saleBack = saleBackSheet.get(i);
+				
+				if((ipv.getTimeBefore()!=null)&&(ipv.getTimeAfter()!=null)) {
+					Date dateBefore=null;
+					Date dateAfter=null;
+					SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+					
+					try {
+						dateBefore = format.parse(ipv.getTimeBefore());
+						dateAfter = format.parse(ipv.getTimeAfter());
+					} catch (ParseException e) {
+						e.printStackTrace();
+					}
+					if(saleBack.getDate().compareTo(dateBefore)>=0&&
+							saleBack.getDate().compareTo(dateAfter)<=0){}
+					else continue;
+				}
+				
+				//客户
+				if(ipv.getCustomer()!=null) {
+					if(saleBack.getcustomer().getname().equals(ipv.getCustomer())){} 
+					else continue;
+				}
+				
+				if(ipv.getUserID()!=null) {
+					if(saleBack.getUserID().equals(ipv.getUserID())){}
+					else continue;				
+				}
+				
+				saleBackSheetVO.add(saleBack.getVO());
+			}
+			
+			return saleBackSheetVO;
+			
+		}
+		
+		//得到经营历程表的进货单
+		public ArrayList<PurSheetVO> getProcessPurSheet(InquiryProcessVO ipv) {
+			ArrayList<PurSheet> purSheet = bp.getPurSheet();
+			ArrayList<PurSheetVO> purSheetVO = new ArrayList<PurSheetVO>();
+			
+			int size = purSheet.size();			
+			for(int i=0;i<size;i++) {
+				PurSheet pur = purSheet.get(i);
+				
+				if((ipv.getTimeBefore()!=null)&&(ipv.getTimeAfter()!=null)) {
+					Date dateBefore=null;
+					Date dateAfter=null;
+					SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+					
+					try {
+						dateBefore = format.parse(ipv.getTimeBefore());
+						dateAfter = format.parse(ipv.getTimeAfter());
+					} catch (ParseException e) {
+						e.printStackTrace();
+					}
+					if(pur.getDate().compareTo(dateBefore)>=0&&
+							pur.getDate().compareTo(dateAfter)<=0){}
+					else continue;
+				}
+				
+				//客户
+				if(ipv.getCustomer()!=null) {
+					if(pur.getcustomer().getname().equals(ipv.getCustomer())){} 
+					else continue;
+				}
+				
+				if(ipv.getUserID()!=null) {
+					if(pur.getUserID().equals(ipv.getUserID())){}
+					else continue;				
+				}
+				
+				purSheetVO.add(pur.getVO());
+			}
+			
+			return purSheetVO;
+			
+		}
+		//得到经营历程表的进货单
+		public ArrayList<PurBackSheetVO> getProcessPurBackSheet(InquiryProcessVO ipv) {
+			ArrayList<PurBackSheet> purBackSheet = bp.getPurBackSheet();
+			ArrayList<PurBackSheetVO> purBackSheetVO = new ArrayList<PurBackSheetVO>();
+			
+			int size = purBackSheet.size();			
+			for(int i=0;i<size;i++) {
+				PurBackSheet purBack = purBackSheet.get(i);
+				
+				if((ipv.getTimeBefore()!=null)&&(ipv.getTimeAfter()!=null)) {
+					Date dateBefore=null;
+					Date dateAfter=null;
+					SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+					
+					try {
+						dateBefore = format.parse(ipv.getTimeBefore());
+						dateAfter = format.parse(ipv.getTimeAfter());
+					} catch (ParseException e) {
+						e.printStackTrace();
+					}
+					if(purBack.getDate().compareTo(dateBefore)>=0&&
+							purBack.getDate().compareTo(dateAfter)<=0){}
+					else continue;
+				}
+				
+				//客户
+				if(ipv.getCustomer()!=null) {
+					if(purBack.getcustomer().getname().equals(ipv.getCustomer())){} 
+					else continue;
+				}
+				
+				if(ipv.getUserID()!=null) {
+					if(purBack.getUserID().equals(ipv.getUserID())){}
+					else continue;				
+				}
+				
+				purBackSheetVO.add(purBack.getVO());
+			}
+			
+			return purBackSheetVO;
+			
+		}	
 	//得到经营历程表的收款单
 	public ArrayList<ReceiptVO> getProcessReceipt(InquiryProcessVO ipv) {
 		ArrayList<ReceiptBill> receipt = bp.getReceiptBill();
@@ -304,6 +538,7 @@ public class Inquiry {
 			return cashPaymentVO;
 		}
 	public ArrayList<VO> inquiryProcess(InquiryProcessVO ipv) {
+		
 		ArrayList<VO> list = new ArrayList<VO>();
 		ArrayList<StubGiftBill> gift = bp.getGiftBill();
 		ArrayList<SaleSheet> saleSheet = bp.getSaleSheet();
