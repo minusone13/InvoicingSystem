@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class Tool {
 	//提供读文件工具，并可保存文件名，统一保存，便于修改
-	public static String user = "User.ser";
+	public static String user = "UserTest.ser";
 	public static String stock = "Stock.ser";
 
 	public static File Opendoc(String s)
@@ -18,8 +18,8 @@ public class Tool {
 	    if(!f.exists())//若文件不存在，自动创建
 	    try
 	    {
-	    	
-	    	//f.getParentFile().mkdirs();
+	    	if(f.getParentFile() != null)
+	    		f.getParentFile().mkdirs();
 	        f.createNewFile();
 	        ObjectOutputStream oos=new ObjectOutputStream(new FileOutputStream(f));
 	        oos.writeObject(null);
