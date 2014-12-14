@@ -18,8 +18,8 @@ public class Tool {
 	    if(!f.exists())//若文件不存在，自动创建
 	    try
 	    {
-	    	
-	    	//f.getParentFile().mkdirs();
+	    	if(f.getParentFile() != null)
+	    		f.getParentFile().mkdirs();
 	        f.createNewFile();
 	        ObjectOutputStream oos=new ObjectOutputStream(new FileOutputStream(f));
 	        oos.writeObject(null);
