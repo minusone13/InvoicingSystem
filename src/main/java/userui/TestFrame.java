@@ -36,7 +36,7 @@ public class TestFrame extends JFrame {
 		JPManagerComOfStock test=new JPManagerComOfStock();
 		InitialInfoPanel t = new InitialInfoPanel();
 		t.update(2);
-		TestFrame testJP=new TestFrame(t);
+		TestFrame testJP=new TestFrame(new BusinessConditionPanel());
 	}
 
 }

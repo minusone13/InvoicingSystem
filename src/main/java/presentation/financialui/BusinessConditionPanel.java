@@ -22,6 +22,8 @@ public class BusinessConditionPanel extends JPanel{
 	JTable tableOfProfit = new JTable(modelOfProfit);
 	JScrollPane paneOfProfit;
 	
+	JTextField year, month, day;
+	JLabel ye, mo, da;
 	public BusinessConditionPanel() {
 		initial();
 	}
@@ -43,8 +45,16 @@ public class BusinessConditionPanel extends JPanel{
 		
 		paneOfProfit = new JScrollPane(tableOfProfit);
 		this.add(paneOfProfit);
-		paneOfProfit.setBounds(430, 360, 60, 100);
+		paneOfProfit.setBounds(430, 360, 60, 100);		
 		
+		year = new JTextField(4);
+		ye = new JLabel("年");
+		month = new JTextField(2);
+		mo = new JLabel("月");
+		day = new JTextField(2);
+		da = new JLabel("日");
 		
+		add(year);
+		year.setBounds(0, 0, 5, 10);
 	}
 }
