@@ -85,6 +85,8 @@ public class JPfunction extends JPanel {
 			switch(num){
 			case 1:
 				function1.setIcon(new ImageIcon("src/image/stockUI/Commodity.png"));
+				JPfunction.this.setVisible(false);
+				frame.getStock().getManagerComs().setVisible(true);
 				break;
 			case 2:
 				function2.setIcon(new ImageIcon("src/image/stockUI/Bill.png"));
