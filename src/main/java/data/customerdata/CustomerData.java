@@ -89,7 +89,7 @@ public class CustomerData implements CustomerDataService{
 		}
 		
 		if(listOfCustomerPO!=null) return listOfCustomerPO;
-		else return null;
+		else return new ArrayList<CustomerPO>();
 	}
 
 	public void saveAllCustomer(ArrayList<CustomerPO> listOfCustomerPO,String address) {

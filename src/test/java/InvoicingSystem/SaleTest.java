@@ -174,4 +174,11 @@ public class SaleTest extends TestCase{
 			assertTrue(result9);
 		}
 		
+		public void testdeleteCustomer(){
+			CustomerList customerlist = new CustomerList();
+			boolean result10=customerlist.deleteCustomer("小虎");
+			assertTrue(result10);
+		}
+
+		
 }
