@@ -16,7 +16,7 @@ public class SaleBackSheetVO extends VO{
 	String id;
 	String userid;
 	Date date;
-	String commodity;//仓库？
+	//String commodity;//仓库？
 	ArrayList<CommodityVO> sheet;//是不是应该是个arraylist<>?
 	double money1;//总金额
 	double money2;
@@ -114,14 +114,6 @@ public class SaleBackSheetVO extends VO{
 	
 	public void setid(String id){
 		this.id=id;
-	}
-	
-	public String getcommodity(){
-		return commodity;
-	}
-	
-	public void setcommodity(String commodity){
-		this.commodity=commodity;
 	}
 	
 	public ArrayList<CommodityVO> getsheet(){
