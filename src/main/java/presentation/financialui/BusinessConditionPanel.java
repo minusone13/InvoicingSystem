@@ -104,6 +104,32 @@ public class BusinessConditionPanel extends JPanel{
 		sure.setIcon(sureIcon0);
 		sure.addMouseListener(new MouseListenOfButton(0));
 	}
+	
+	public void update(String before, String after) {
+		InquiryConditionVO icv = new InquiryConditionVO();
+		icv.setTimeAfter(after);
+		icv.setTimeBefore(before);
+		BusinessSituationVO vo = financial.inquiryCondition(icv);
+		Object[][] data1 = new Object[1][];
+		Object[][] data2 = new Object[1][];
+		Object[][] data3 = new Object[1][];
+		
+		Object[] temp1 = {vo.getSaleTotal(), vo.getDiscount(), vo.getSpillsTotal(), vo.getAdjustmentTotal(), vo.getBonusTotal()};
+		data1[0] = temp1;
+		Object[] temp2 = {vo.getCost(), vo.getLossTotal(), vo.getGiftTotal()};
+		data2[0] = temp2;
+		Object[] temp3 ={vo.getProfit()};
+		data3[0] = temp3;
+		modelOfEarn.setDataVector(data1, earn);
+		tableOfEarn.updateUI();
+		
+		modelOfPay.setDataVector(data2, pay);
+		tableOfPay.updateUI();
+				
+		modelOfProfit.setDataVector(data3, profit);
+		tableOfProfit.updateUI();
+	}
+	
 	public class MouseListenOfButton implements MouseListener{
 
 		private int num;
@@ -125,12 +151,7 @@ public class BusinessConditionPanel extends JPanel{
 			String d2 = day2.getText();
 			String timeBefore = y1+"/"+m1+"/"+d1;
 			String timeAfter = y2+"/"+m2+"/"+d2;
-			InquiryConditionVO icv = new InquiryConditionVO();
-			icv.setTimeAfter(timeAfter);
-			icv.setTimeBefore(timeBefore);
-			BusinessSituationVO vo = financial.inquiryCondition(icv);
-			
-			
+			update(timeBefore, timeAfter);				
 			break;
 				
 			}
