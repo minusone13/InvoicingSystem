@@ -138,9 +138,9 @@ public class PaymentBill extends Bill implements GetVOandPO{
 		vo.setState(state);
 		int size = transferlist.size();
 		TransferAccount temp=null;
-		ArrayList<String> accounts = vo.getAccounts();
-		ArrayList<Double> money = vo.getMoney();
-		ArrayList<String> remark = vo.getRemark();		
+		ArrayList<String> accounts = new ArrayList<String>();
+		ArrayList<Double> money = new ArrayList<Double>();
+		ArrayList<String> remark = new ArrayList<String>();			
 		for(int i=0;i<size;i++){
 			temp = transferlist.get(i);
 			accounts.add(temp.getAccount());
@@ -167,9 +167,9 @@ public class PaymentBill extends Bill implements GetVOandPO{
 		po.setTotal(total);
 		int size = transferlist.size();
 		TransferAccount temp=null;
-		ArrayList<String> accounts = po.getAccounts();
-		ArrayList<Double> money = po.getMoney();
-		ArrayList<String> remark = po.getRemark();		
+		ArrayList<String> accounts = new ArrayList<String>();
+		ArrayList<Double> money = new ArrayList<Double>();
+		ArrayList<String> remark = new ArrayList<String>();		
 		for(int i=0;i<size;i++){
 			temp = transferlist.get(i);
 			accounts.add(temp.getAccount());

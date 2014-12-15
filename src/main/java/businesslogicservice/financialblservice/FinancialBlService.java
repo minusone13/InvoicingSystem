@@ -81,6 +81,8 @@ public interface FinancialBlService {
 	//得到经营历程表的现金费用单
 	public ArrayList<CashPaymentVO> getProcessCashPayment(InquiryProcessVO ipv);
 	
+	
+	public BusinessSituationVO inquiryCondition(InquiryConditionVO vo);
 	//创建收款单
 	public boolean creatReceipt(ReceiptVO rv);
 	
