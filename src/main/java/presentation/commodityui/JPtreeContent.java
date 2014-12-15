@@ -9,6 +9,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTree;
+import javax.swing.event.CellEditorListener;
+import javax.swing.event.ChangeEvent;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -17,12 +19,13 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
 
-import data.commoditydata.StubStockDataController;
+import vo.RM;
 import vo.stockvo.CategoryVO;
 import vo.stockvo.StockVO;
 import vo.stockvo.StockVO.Type;
 import businesslogic.stockmanagerbl.StubStockController;
 import businesslogicservice.commodityblservice.StubCommodityBlService;
+import data.commoditydata.StubStockDataController;
 
 public class JPtreeContent extends JPanel {
 
@@ -32,8 +35,14 @@ public class JPtreeContent extends JPanel {
 	private final JTree tree ;//树
 	DefaultMutableTreeNode top ;
 	//逻辑层接口
-	StubCommodityBlService stockbl=new StubStockController();
+	private StubCommodityBlService stockbl=new StubStockController();
 	
+	public StubCommodityBlService getStockbl() {
+		return stockbl;
+	}
+	public void setStockbl(StubCommodityBlService stockbl) {
+		this.stockbl = stockbl;
+	}
 	public JPtreeContent(){
 		//逻辑层接口
 		StockManagerDriver smd=new StockManagerDriver();
@@ -90,14 +99,26 @@ public class JPtreeContent extends JPanel {
         TreePath treePath=e.getPath();
          System.out.println("path="+treePath.getPath()[0]+"\ntreePath"+treePath);
          //取得新节点的父节点
+         
         }
         });
+        tree.getCellEditor().addCellEditorListener(new CellEditorAction());  
+//        tree.startEditingAtPath(tree.getSelectionPath());  
         
         SCR.setViewportView(tree);
         
 		add(SCR,0);
 		add(back,1);
 	}
+	private class CellEditorAction implements CellEditorListener{  
+        public void editingCanceled(ChangeEvent e) {  
+            System.out.println("编辑取消");  
+        }  
+        public void editingStopped(ChangeEvent e) {  
+        	
+            System.out.println("编辑结束");  
+        }  
+    }  
 	/*返回逻辑层对应路径*/
 	public String rePath(DefaultMutableTreeNode node){
 		//路径转换成逻辑层的对应格式
@@ -132,7 +153,13 @@ public class JPtreeContent extends JPanel {
 	public void removeTreeNode(DefaultMutableTreeNode node){
 		treeModel.removeNodeFromParent(node);
 		//调用逻辑层
-		stockbl.deleteCategory(rePath(node));
+		RM rm=stockbl.deleteCategory(rePath(node));
+		if(rm==RM.done){
+			System.out.println("已成功删除");
+		}
+		else{
+			System.out.println("删除失败，已有子分类或者商品");
+		}
 	}
 	/*返回最后选择的节点*/
 	public DefaultMutableTreeNode reLastSelectedNode(){
@@ -143,9 +170,9 @@ public class JPtreeContent extends JPanel {
 	public void addTreeNode(DefaultMutableTreeNode newChild,DefaultMutableTreeNode parent){
 		treeModel.insertNodeInto(newChild, parent, parent.getChildCount());
 		//调用逻辑层
-		CategoryVO newCategory=new CategoryVO(parent.getUserObject().toString(),newChild.getUserObject().toString());
+		CategoryVO newCategory=new CategoryVO(rePath(parent),newChild.getUserObject().toString());
 		stockbl.addCategory(newCategory);
-		System.out.println("增加分类");
+		System.out.println("增加分类到"+rePath(parent));
 		
 	}
 	/*删除当前选中的节点*/

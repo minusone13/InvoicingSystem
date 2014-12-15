@@ -40,9 +40,11 @@ public class JPManagerCom extends JPanel{
 	//标记是谁用商品选择面板
 	private Role role;
 	//确认
-	JLabel comfirm;
+	private JLabel comfirm;
 	//查询
-	JLabel findIcon;
+	private JLabel findIcon;
+	//查询
+	private JTextField detail=new JTextField(16);
 	public JPManagerCom(){
 		this.setSize(617, 370);
 		this.setLayout(null);
@@ -93,19 +95,31 @@ public class JPManagerCom extends JPanel{
 		comfirm.setIcon(new ImageIcon("src/image/ChooseCom/confirm.png") );
 		comfirm.addMouseListener(new MouseListenerOfButton(2));
 		
+		detail.setBounds(15, 5, 550, 20);
+		detail.setOpaque(false);//文本框透明
+		detail.setBorder(null);
+		detail.setForeground(Color.white);//前景色
+		detail.setFont(new Font("宋体",Font.BOLD,14));
+		
 		head.add(findCom,0);
 		head.add(find,1);
 		head.add(findIcon,2);
 		head.add(bgOfHead,3);
 		
 		bottom.add(comfirm,0);
-		bottom.add(bgOfBottom,1);
+		bottom.add(detail,1);
+		bottom.add(bgOfBottom,2);
 		
 		this.add(commodities,0);
 		this.add(content,1);
 		this.add(head,2);
 		this.add(bottom,3);
 		this.addMouseListener(new MouseListenerGetXY());
+	}
+	/*底部显示信息*/
+	public void showDetail(String s){
+		detail.setText(s);
+		System.out.println("showDetail");
 	}
 	public JPtreeContent getContent() {
 		return content;

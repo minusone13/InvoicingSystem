@@ -254,7 +254,7 @@ public class JPcommodity extends JPanel implements MouseListener{
 
 		public void mouseEntered(MouseEvent e) {
 			// TODO Auto-generated method stub
-			
+
 		}
 
 		public void mouseExited(MouseEvent e) {
@@ -318,7 +318,14 @@ public class JPcommodity extends JPanel implements MouseListener{
 	}
 	public void mouseEntered(MouseEvent e) {
 		// TODO Auto-generated method stub
+		String s="";
+		String in=String.valueOf(commodity.getIn());
+		String out=String.valueOf(commodity.getOut());
+		String lastin=String.valueOf(commodity.getLastin());
+		String lastout=String.valueOf(commodity.getLastout());
 		
+		s="进价："+in+" 售价："+out+" 最近进价："+lastin+" 最近售价"+lastout;
+		JPmanagerCom.showDetail(s);
 	}
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub

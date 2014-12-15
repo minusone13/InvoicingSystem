@@ -8,7 +8,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import vo.RM;
 import vo.stockvo.CommodityVO;
+import businesslogic.stockmanagerbl.StubStockController;
+import businesslogicservice.commodityblservice.StubCommodityBlService;
+import data.commoditydata.StubStockDataController;
 /**
  * 显示子节点商品的板块
  * @author wyc
@@ -20,7 +24,12 @@ public class JPcommodityPack extends JPanel {
 	private JPanel pack=null;
 	private ArrayList<JPcommodity> commodities=new ArrayList<JPcommodity>();
 	private JPManagerCom JPmanagerCom;
+	//逻辑层接口
+		private StubCommodityBlService stockbl=new StubStockController();
 	public JPcommodityPack(){
+		//逻辑层接口
+		StockManagerDriver smd=new StockManagerDriver();
+		smd.start(stockbl,StubStockDataController.getInstance());
 		this.setSize(467, 300);
 		//设置布局
 		this.setLayout(null);
@@ -134,6 +143,8 @@ public class JPcommodityPack extends JPanel {
 	/*增加商品*/
 	public void addCommodity(CommodityVO com){
 		commodities.add(new JPcommodity(com));
+		//增加商品
+		System.out.println("增加商品");
 		update();
 	}
 	/*返回选中的商品*/
@@ -157,7 +168,18 @@ public class JPcommodityPack extends JPanel {
 		if(getChosenNum()>=1){
 			for(int i=0;i<commodities.size();i++){
 				if(commodities.get(i).isChosen()){
-					commodities.remove(commodities.get(i));
+					//删除逻辑层
+					RM rm=stockbl.deleteCommodity(commodities.get(i).getCommodity().getName(), commodities.get(i).getCommodity().getModel());
+					if(rm==RM.done){
+						System.out.println("已成功删除");
+						//删除界面层
+						commodities.remove(commodities.get(i));
+					}
+					else{
+						System.out.println("删除失败，已有进出记录");
+					}
+					
+				
 					i--;
 				}
 			}
