@@ -172,6 +172,7 @@ public class Login extends JPanel {
 								
 								frame.getStock().getManageBills().setVisible(false);
 								frame.getStock().getManageBills2().setVisible(false);
+								frame.getStock().getManagerComs().setVisible(false);
 								frame.getStock().getFunction().setVisible(true);
 								frame.getStock().setVisible(true);
 								Login.this.setVisible(false);
