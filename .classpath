@@ -23,6 +23,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
-	<classpathentry kind="lib" path="D:/eclipse/JDK/jre/lib/ext/jxl.jar"/>
+	<classpathentry kind="lib" path="D:/学习/软工/jxl.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
