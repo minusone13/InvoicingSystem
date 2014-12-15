@@ -10,14 +10,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import businesslogic.BillState;
-import businesslogic.BillStyle;
-import businesslogic.Role;
-import presentation.commodityui.JPmanageBills2.JPanelEdit;
-import presentation.commodityui.JPmanageBills2.MouseListenerOfButton;
-import presentation.commodityui.JPmanageBills2.JPanelEdit.TreadOfLeft;
-import presentation.commodityui.JPmanageBills2.JPanelEdit.TreadOfRight;
 import presentation.managerui.MouseListenerGetXY;
+import vo.stockvo.CommodityVO;
+import businesslogic.Role;
 
 public class JPManagerComOfStock extends JPanel {
 
@@ -209,15 +204,15 @@ public class JPManagerComOfStock extends JPanel {
 		//商品编辑栏的附件
 		private JLabel name=new JLabel("名称");
 		private JLabel type=new JLabel("型号");
-		private JLabel num=new JLabel("数量");
 		private JLabel inprice=new JLabel("进价");
 		private JLabel outprice=new JLabel("售价");
+		private JLabel alert=new JLabel("警戒值");
 		
 		private JTextField nameText=new JTextField(10);
 		private JTextField typeText=new JTextField(10);
-		private JTextField numText=new JTextField(10);
 		private JTextField inpriceText=new JTextField(10);
 		private JTextField outpriceText=new JTextField(10);
+		private JTextField alertText=new JTextField(10);
 		public JPanelEdit(){
 			//面板大小
 			this.setSize(240,270);
@@ -242,21 +237,21 @@ public class JPManagerComOfStock extends JPanel {
 			//设置标签字体
 			name.setFont(new Font("宋体",Font.BOLD,14));
 			type.setFont(new Font("宋体",Font.BOLD,14));
-			num.setFont(new Font("宋体",Font.BOLD,14));
 			inprice.setFont(new Font("宋体",Font.BOLD,14));
 			outprice.setFont(new Font("宋体",Font.BOLD,14));
+			alert.setFont(new Font("宋体",Font.BOLD,14));
 			//设置字体颜色
 			name.setForeground(Color.white);
 			type.setForeground(Color.white);
-			num.setForeground(Color.white);
 			inprice.setForeground(Color.white);
 			outprice.setForeground(Color.white);
+			alert.setForeground(Color.white);
 			//设置标签大小位置
 			name.setBounds(40, 30, 40, 20);
 			type.setBounds(40, 60, 40, 20);
-			num.setBounds(40, 90, 40, 20);
-			inprice.setBounds(40, 120, 40, 20);
-			outprice.setBounds(40, 150, 40, 20);
+			inprice.setBounds(40, 90, 40, 20);
+			outprice.setBounds(40, 120, 40, 20);
+			alert.setBounds(40, 150, 60, 20);
 			//商品名文本框
 			nameText.setBounds(80,30, 150, 20);
 			nameText.setOpaque(false);//文本框透明
@@ -265,31 +260,31 @@ public class JPManagerComOfStock extends JPanel {
 			typeText.setBounds(80,60, 150, 20);
 			typeText.setOpaque(false);//文本框透明
 			typeText.setForeground(Color.white);//前景色
-			//数量文本框
-			numText.setBounds(80,90, 150, 20);
-			numText.setOpaque(false);//文本框透明
-			numText.setForeground(Color.white);//前景色
 			//进价文本框
-			inpriceText.setBounds(80,120, 150, 20);
+			inpriceText.setBounds(80,90, 150, 20);
 			inpriceText.setOpaque(false);//文本框透明
 			inpriceText.setForeground(Color.white);//前景色
 			//售价文本框
-			outpriceText.setBounds(80,150, 150, 20);
+			outpriceText.setBounds(80,120, 150, 20);
 			outpriceText.setOpaque(false);//文本框透明
 			outpriceText.setForeground(Color.white);//前景色
+			//警戒值文本框
+			alertText.setBounds(95,150, 135, 20);
+			alertText.setOpaque(false);//文本框透明
+			alertText.setForeground(Color.white);//前景色
 			
 			this.add(right,0);
 			this.add(confirm,1);
 			this.add(name,2);
 			this.add(inprice,3);
 			this.add(type,4);
-			this.add(num,5);
-			this.add(outprice,6);
-			this.add(nameText,7);
-			this.add(typeText,8);
-			this.add(numText,9);
-			this.add(inpriceText,10);
-			this.add(outpriceText,11);
+			this.add(outprice,5);
+			this.add(nameText,6);
+			this.add(typeText,7);
+			this.add(inpriceText,8);
+			this.add(outpriceText,9);
+			this.add(alert,10);
+			this.add(alertText,11);
 			this.add(back,12);
 		}
 		public void leftMove(){
@@ -331,7 +326,35 @@ public class JPManagerComOfStock extends JPanel {
 					break;
 				case 3:
 					confirm.setIcon(confirm1);
-					//生成商品
+					if(isAdd){
+						//生成商品
+						boolean legal=false;
+						if(!nameText.getText().equals("")
+								&&!typeText.getText().equals("")
+								&&!inpriceText.getText().equals("")
+								&&!outpriceText.getText().equals("")
+								&&!alertText.getText().equals("")){
+							legal=true;
+						}
+						if(legal){
+							//加到逻辑层
+							if(manageCom.getContent().reLastSelectedNode()!=null){
+								String path=manageCom.getContent().rePath(manageCom.getContent().reLastSelectedNode());
+								CommodityVO commmodity=new CommodityVO(path,nameText.getText(),
+										typeText.getText(),
+										Double.parseDouble(inpriceText.getText()),
+										Double.parseDouble(outpriceText.getText()),
+										Integer.parseInt(alertText.getText()));
+								manageCom.getContent().getStockbl().addCommodity(commmodity);
+							
+								//加到界面层
+								manageCom.getCommodities().addCommodity(commmodity);
+							}
+							else{
+								System.out.println("请选择分类");
+							}
+						}
+					}
 					
 					break;
 				}
