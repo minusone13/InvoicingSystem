@@ -2,7 +2,10 @@ package presentation.financialui;
 
 import java.util.ArrayList;
 import java.util.Date;
-
+import po.stockpo.CategoryPO;
+import presentation.commodityui.StockManagerDriver;
+import data.commoditydata.StubStockDataController;
+import data.initial.Initial;
 import vo.PurBackSheetVO;
 import vo.PurSheetVO;
 import vo.SaleBackSheetVO;
@@ -16,16 +19,36 @@ import vo.inquiryVO.BusinessSituationVO;
 import vo.inquiryVO.InquiryProcessVO;
 import vo.inquiryVO.InquirySaleVO;
 import vo.stockvo.CommodityVO;
+
 import businesslogic.BillState;
 import businesslogic.customerbl.Customer;
+import businesslogic.examinebl.StubBillPool;
 import businesslogic.financialbillbl.CashPaymentBill;
 import businesslogic.financialbillbl.PaymentBill;
 import businesslogic.financialbillbl.ReceiptBill;
 import businesslogic.salebillbl.salebillController;
+import businesslogic.stockmanagerbl.StubStockController;
+import businesslogicservice.commodityblservice.StubCommodityBlService;
 import businesslogicservice.financialblservice.FinancialBlService;
 
 public class FinancialBLDriver {
 	FinancialBlService fbs;
+	
+	static StockManagerDriver smd=new StockManagerDriver();
+	static StubStockDataController data=StubStockDataController.getInstance();
+	static StubCommodityBlService combl;
+	static StubStockController controller;
+	static StubBillPool pool;
+	static
+	{
+		Initial initial=new Initial();
+		initial.initialAll();
+		controller = new StubStockController();
+		pool = controller.getPool();
+		smd.start(controller,data);
+		combl=smd.getCombl();
+	}
+	
 	public FinancialBLDriver (FinancialBlService fbs) {
 		this.fbs = fbs;
 	}
@@ -43,8 +66,15 @@ public class FinancialBLDriver {
 		//boolean result5 = fbs.updateAccount("00001", "00100");
 		//if(result5==true) System.out.println("UPDATE SUCCESS!");
 		
-		
-		
+//		
+//		test.initial();
+//		test.testGiftBill();
+//		test.initial();
+//		test.SpillsLossBillLoss();
+//		test.initial();
+//		test.SpillsLossBillSpills();
+//		test.initial();
+//		test.testAlertBillID();
 		
 		testcreatReceipt();
 		testcreatPayment("MAJOR") ;
@@ -65,6 +95,30 @@ public class FinancialBLDriver {
 		*/
 		//testInquiry01();
 	}
+	
+	public void initial()
+	{
+		Initial initial=new Initial();
+		initial.initialAll();
+		smd.start(new StubStockController(),data);
+		data.insert(new CategoryPO("1", "灯"));
+		data.insert(new CategoryPO("1\\灯","日光灯"));
+		data.insert(new CategoryPO("1\\灯\\日光灯","纯白日光灯"));
+		data.insert(new CategoryPO("1", "门"));
+		CommodityVO mockvo=new CommodityVO("1\\门","好好防盗门","fdm02",200,300,10);
+		CommodityVO mockvo1=new CommodityVO("1\\门","好好防盗门","fdm05",100,200,15);
+		CommodityVO mockvo2=new CommodityVO("1\\门","迪迪防盗门","dd02",100,200,15);
+		CommodityVO mockvo3=new CommodityVO("1\\门","迪迪防盗门","dd05",100,200,15);
+		CommodityVO mockvo4=new CommodityVO("1\\门","防火门","fire05",100,200,15);
+		StubCommodityBlService combl=smd.getCombl();
+		combl.addCommodity(mockvo);
+		combl.addCommodity(mockvo1);
+		combl.addCommodity(mockvo2);
+		combl.addCommodity(mockvo3);
+		combl.addCommodity(mockvo4);
+		controller.checkIn("JHD-20141204-00001", "好好防盗门", "fdm05", 50, 150);
+	}
+	
 	public void testCreateSaleSheet() {
 		SaleSheetVO vo = new SaleSheetVO();
 		Customer customer = new Customer(); 
