@@ -41,10 +41,16 @@ public class AccountBuild{
 		CustomerForFinancial cff = new CustomerList();
 		cff.saveCustomer("accountBuild\\customerInfo\\"+version+".ser");
 	}
-	public void saveVersion () {
+	public void saveVersion() {
 		ArrayList<String> versions = getVersion();
 		if(versions==null) versions = new ArrayList<String>();
-		versions.add(version);
+		int size = versions.size();
+		String temp="";
+		if(size!=0) {
+			temp = versions.get(size-1);
+		} 
+		if(!temp.equals(version))
+			versions.add(version);
 		String filename = "version.ser";
 		ObjectOutputStream oos = null;
 		try {
