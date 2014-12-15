@@ -1,7 +1,12 @@
 package presentation.financialui;
 
 import java.util.ArrayList;
+import java.util.Date;
 
+import vo.PurBackSheetVO;
+import vo.PurSheetVO;
+import vo.SaleBackSheetVO;
+import vo.SaleSheetVO;
 import vo.VO;
 import vo.accountVO.AccountVO;
 import vo.financialBillVO.CashPaymentVO;
@@ -10,10 +15,13 @@ import vo.financialBillVO.ReceiptVO;
 import vo.inquiryVO.BusinessSituationVO;
 import vo.inquiryVO.InquiryProcessVO;
 import vo.inquiryVO.InquirySaleVO;
+import vo.stockvo.CommodityVO;
 import businesslogic.BillState;
+import businesslogic.customerbl.Customer;
 import businesslogic.financialbillbl.CashPaymentBill;
 import businesslogic.financialbillbl.PaymentBill;
 import businesslogic.financialbillbl.ReceiptBill;
+import businesslogic.salebillbl.salebillController;
 import businesslogicservice.financialblservice.FinancialBlService;
 
 public class FinancialBLDriver {
@@ -35,14 +43,21 @@ public class FinancialBLDriver {
 		//boolean result5 = fbs.updateAccount("00001", "00100");
 		//if(result5==true) System.out.println("UPDATE SUCCESS!");
 		
+		
+		
+		
+		testcreatReceipt();
+		testcreatPayment("MAJOR") ;
+		testcreatPayment("M");
+		testcreatCashPayment();
+		
+		testCreateSaleSheet();
+		testCreateSaleBackSheet();
+		testCreatePurSheet();
+		testCreatePurBackSheet();
+		
 		fbs.buildAccount();
 		
-		
-		//testcreatReceipt();
-		///testcreatPayment("MAJOR") ;
-		//testcreatPayment("M") ;
-		
-		//testcreatCashPayment();
 		/*
 		testgetReceipt();
 		testgetPayment();
@@ -50,7 +65,107 @@ public class FinancialBLDriver {
 		*/
 		//testInquiry01();
 	}
+	public void testCreateSaleSheet() {
+		SaleSheetVO vo = new SaleSheetVO();
+		Customer customer = new Customer(); 
+		vo.setCustomer(customer.getVO());
+		customer.setname("梅少");
+		vo.setid("XSD-2014-12-14-00009");
+		vo.setCustomer(customer.getVO());
+		vo.setdate(new Date());
+		vo.setdiscount(20.0);
+		vo.setmoney1(100.0);
+		vo.setmoney2(10.0);
+		vo.setpmoney(70.0);
+		vo.setstock("1");
+		vo.setusername("学长");
+		vo.setuserid("208");
+		vo.setop("学长208");
+		ArrayList<CommodityVO> sheet = new ArrayList<CommodityVO>();
+		CommodityVO mockvo=new CommodityVO("1\\门","好好防盗门","fdm02",200,300,10);
+		sheet.add(mockvo);
+		vo.setsheet(sheet);
+		ArrayList<String> wordslist = new ArrayList<String>();
+		wordslist.add("aaa");
+		vo.setcommoditywords(wordslist);
+		vo.setwords("我是备注");
+		salebillController controller = new salebillController();
+		boolean result1 = controller.createSaleSheet(vo);
+	}
 	
+	public void testCreateSaleBackSheet() {
+		SaleBackSheetVO vo = new SaleBackSheetVO();
+		Customer customer = new Customer(); 
+		vo.setCustomer(customer.getVO());
+		customer.setname("梅少");
+		vo.setCustomer(customer.getVO());
+		vo.setid("XSTHD-2014-12-14-00009");
+		vo.setdate(new Date());
+		vo.setdiscount(20.0);
+		vo.setmoney1(100.0);
+		vo.setmoney2(10.0);
+		vo.setpmoney(70.0);
+		vo.setstock("1");
+		vo.setusername("学长");
+		vo.setuserid("208");
+		vo.setop("学长208");
+		ArrayList<CommodityVO> sheet = new ArrayList<CommodityVO>();
+		CommodityVO mockvo=new CommodityVO("1\\门","好好防盗门","fdm02",200,300,10);
+		sheet.add(mockvo);
+		vo.setsheet(sheet);
+		ArrayList<String> wordslist = new ArrayList<String>();
+		wordslist.add("aaa");
+		vo.setcommoditywords(wordslist);
+		vo.setwords("我是备注");
+		salebillController controller = new salebillController();
+		boolean result2 = controller.createSaleBackSheet(vo);
+	}
+	
+	public void testCreatePurSheet(){
+		PurSheetVO vo = new PurSheetVO();
+		salebillController controller = new salebillController();
+		Customer customer = new Customer("CC"); 
+		vo.setCustomer(customer.getVO());
+		vo.setdate(new Date());
+		vo.setstock("1");
+		vo.setusername("学长");
+		vo.setid("JHD-2014-12-14-00009");
+		vo.setuserid("208");
+		vo.setop("学长208");
+		ArrayList<CommodityVO> sheet = new ArrayList<CommodityVO>();
+		CommodityVO mockvo=new CommodityVO("1\\门","好好防盗门","fdm02",200,300,10);
+		sheet.add(mockvo);
+		vo.setsheet(sheet);
+		ArrayList<String> wordslist = new ArrayList<String>();
+		wordslist.add("aaa");
+		vo.setcommoditywords(wordslist);
+		vo.setwords("我是备注");
+		vo.setmoney1(100.0);
+		boolean result3 = controller.createPurSheet(vo);
+	}
+	
+	public void testCreatePurBackSheet(){
+		PurBackSheetVO vo = new PurBackSheetVO();
+		salebillController controller = new salebillController();
+		Customer customer = new Customer("CC"); 
+		vo.setCustomer(customer.getVO());
+		vo.setdate(new Date());
+		vo.setid("JHTHD-2014-12-14-00009");
+		vo.setstock("1");
+		vo.setusername("学长");
+		vo.setuserid("208");
+		vo.setop("学长208");
+		ArrayList<CommodityVO> sheet = new ArrayList<CommodityVO>();
+		CommodityVO mockvo=new CommodityVO("1\\门","好好防盗门","fdm02",200,300,10);
+		sheet.add(mockvo);
+		vo.setsheet(sheet);
+		ArrayList<String> wordslist = new ArrayList<String>();
+		wordslist.add("aaa");
+		vo.setcommoditywords(wordslist);
+		vo.setwords("我是备注");
+		vo.setmoney1(100.0);
+		boolean result3 = controller.createPurBackSheet(vo);
+	}
 	public void testInquiry01() {
 		InquiryProcessVO ipv = new InquiryProcessVO();
 		//ipv.setTimeBefore("2014/12/13");

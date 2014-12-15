@@ -35,8 +35,8 @@ public class TestFrame extends JFrame {
 //		JPManagerCom test=new JPManagerCom();
 //		test.setRole(Role.STOCK_STAFF);
 	
-		InitialInfoPanel t = new InitialInfoPanel();
-		t.update(2);
+	//	InitialInfoPanel t = new InitialInfoPanel();
+		//t.update(2);
 		TestFrame testJP=new TestFrame(new BusinessConditionPanel());
 		JPmanagerStrategy2 test=new JPmanagerStrategy2();
 		test.setStyle(StrategyStyle.ReachStrategy);
