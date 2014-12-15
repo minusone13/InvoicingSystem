@@ -331,6 +331,8 @@ public class JPManagerComOfStock extends JPanel {
 					break;
 				case 3:
 					confirm.setIcon(confirm1);
+					//生成商品
+					
 					break;
 				}
 			}

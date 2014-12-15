@@ -2,8 +2,7 @@ package presentation.commodityui;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -15,7 +14,15 @@ import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
+
+import data.commoditydata.StubStockDataController;
+import vo.stockvo.CategoryVO;
+import vo.stockvo.StockVO;
+import vo.stockvo.StockVO.Type;
+import businesslogic.stockmanagerbl.StubStockController;
+import businesslogicservice.commodityblservice.StubCommodityBlService;
 
 public class JPtreeContent extends JPanel {
 
@@ -24,7 +31,14 @@ public class JPtreeContent extends JPanel {
 	private DefaultTreeModel treeModel;//树模型
 	private final JTree tree ;//树
 	DefaultMutableTreeNode top ;
+	//逻辑层接口
+	StubCommodityBlService stockbl=new StubStockController();
+	
 	public JPtreeContent(){
+		//逻辑层接口
+		StockManagerDriver smd=new StockManagerDriver();
+		smd.start(stockbl,StubStockDataController.getInstance());
+		
 		this.setSize(150, 350);
 		this.setLayout(null);
 		//设置面板透明
@@ -40,26 +54,25 @@ public class JPtreeContent extends JPanel {
 		SCR.getViewport().setOpaque(false);//设置透明
 		SCR.setBorder(null);
 		
-		//tree test
-		DefaultMutableTreeNode node1 = new DefaultMutableTreeNode("软件部");
-        node1.add(new DefaultMutableTreeNode("小花"));
-        node1.add(new DefaultMutableTreeNode("小虎"));
-        node1.add(new DefaultMutableTreeNode("小龙"));
- 
-        DefaultMutableTreeNode node2 = new DefaultMutableTreeNode("销售部");
-        node2.add(new DefaultMutableTreeNode("小叶"));
-        node2.add(new DefaultMutableTreeNode("小雯"));
-        node2.add(new DefaultMutableTreeNode("小夏"));
- 
-        top= new DefaultMutableTreeNode("职员管理");
- 
-        top.add(new DefaultMutableTreeNode("总经理"));
-        top.add(node1);
-        top.add(node2);
-        
-        treeModel=new DefaultTreeModel(top);//通过树节点对象创建树模型对象
-        tree= new JTree(treeModel);//通过树模型对象创建树对象
-        tree.setEditable(true);//设置树可编辑
+        top= new DefaultMutableTreeNode("商品分类");
+        //通过树节点对象创建树模型对象
+        treeModel=new DefaultTreeModel(top);
+        //通过树模型对象创建树对象
+        tree= new JTree(treeModel);
+       //根据逻辑层数据构建树
+        ArrayList<StockVO> stockList=stockbl.openCategory("1");
+        if(stockList.size()!=0){
+        	 if(stockList.get(0).getT()==Type.Category){
+           	  for(StockVO temp:stockList){
+           		  DefaultMutableTreeNode child=new DefaultMutableTreeNode(temp.getCat().getName());
+           		  treeModel.insertNodeInto(child, top, top.getChildCount());
+           		  addCategory(child);//递归加子分类
+           	  }
+           }
+        }
+      
+        //设置树可编辑
+        tree.setEditable(true);
         //设置树透明
         tree.setOpaque(false); 
         //设置树节点透明
@@ -71,16 +84,12 @@ public class JPtreeContent extends JPanel {
         tree.setRowHeight(28);
         tree.setFont(new Font("宋体",Font.BOLD,16));//设置节点的字体样式
 
-      //事件监听
-
+       //事件监听
         tree.addTreeSelectionListener(new TreeSelectionListener(){
-
         public void valueChanged(TreeSelectionEvent e) {
-//        	JPmanagerCom.addMouseListener(JPtreeContent.this);
         TreePath treePath=e.getPath();
          System.out.println("path="+treePath.getPath()[0]+"\ntreePath"+treePath);
          //取得新节点的父节点
-
         }
         });
         
@@ -89,13 +98,55 @@ public class JPtreeContent extends JPanel {
 		add(SCR,0);
 		add(back,1);
 	}
+	/*返回逻辑层对应路径*/
+	public String rePath(DefaultMutableTreeNode node){
+		//路径转换成逻辑层的对应格式
+		TreeNode[] nodePath=node.getPath();
+		String path="";
+		for(int i=0;i<nodePath.length-1;i++){
+			path+=(((DefaultMutableTreeNode)nodePath[i]).getUserObject().toString()+"\\");
+		}
+		path+=node.getUserObject().toString();
+		return path;
+	}
+	/*递归构建树*/
+	public void addCategory(DefaultMutableTreeNode parent){
+		//路径转换成逻辑层的对应格式
+		String path=rePath(parent);
+		//通过路径找到子分类
+		ArrayList<StockVO> stockList=stockbl.openCategory(path);
+		//如果有子分类又不是商品就加到界面父节点下
+		if(stockList.size()!=0){
+			 if(stockList.get(0).getT()==Type.Category){
+	        	  for(StockVO temp:stockList){
+	        		  CategoryVO category=temp.getCat();
+	        		  String name=category.getName();
+	        		  DefaultMutableTreeNode child=new DefaultMutableTreeNode(name);
+	        		  treeModel.insertNodeInto(child, parent, parent.getChildCount());
+	        		  addCategory(child);
+	              }
+	        }
+		}
+	}
 	/*删除树节点*/
 	public void removeTreeNode(DefaultMutableTreeNode node){
 		treeModel.removeNodeFromParent(node);
+		//调用逻辑层
+		stockbl.deleteCategory(rePath(node));
+	}
+	/*返回最后选择的节点*/
+	public DefaultMutableTreeNode reLastSelectedNode(){
+		DefaultMutableTreeNode lastSelectedNode=(DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
+		return lastSelectedNode;
 	}
 	/*增加新节点*/
 	public void addTreeNode(DefaultMutableTreeNode newChild,DefaultMutableTreeNode parent){
 		treeModel.insertNodeInto(newChild, parent, parent.getChildCount());
+		//调用逻辑层
+		CategoryVO newCategory=new CategoryVO(parent.getUserObject().toString(),newChild.getUserObject().toString());
+		stockbl.addCategory(newCategory);
+		System.out.println("增加分类");
+		
 	}
 	/*删除当前选中的节点*/
 	public void removeChosen(){
