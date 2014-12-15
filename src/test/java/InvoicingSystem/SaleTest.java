@@ -155,6 +155,7 @@ public class SaleTest extends TestCase{
 			assertTrue(result8);
 		}
 		
+		
 		public void testaddCustomer(){
 			CustomerList customerlist = new CustomerList();
 			Customer customer = new Customer(); 
@@ -179,6 +180,15 @@ public class SaleTest extends TestCase{
 			boolean result10=customerlist.deleteCustomer("小虎");
 			assertTrue(result10);
 		}
+		
+		/*public void testfindCustomer(){
+			CustomerList customerlist = new CustomerList();
+			CustomerVO tempvo = customerlist.findCustomer("小虎");
+			boolean result11 = tempvo.getaddress().equals("南通市海门中学");
+			System.out.println(tempvo.getphonenumber());
+			assertTrue(result11);
+		}*/
 
+		
 		
 }

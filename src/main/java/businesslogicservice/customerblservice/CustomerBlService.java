@@ -14,8 +14,8 @@ public interface CustomerBlService {
 	
 		public boolean addCustomer(Customer newCustomer);
 		public boolean updateCustomer(CustomerVO vo);
-		public boolean deleteCustomer(String id);
-		public CustomerVO findCustomer(String id);
+		public boolean deleteCustomer(String name);
+		public CustomerVO findCustomer(String name);
 		
 		//    saveAllCustomer 方法;
 		/*

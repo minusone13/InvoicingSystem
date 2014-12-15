@@ -1,5 +1,6 @@
 package dataservice.billdataservice;
 
+import java.rmi.Remote;
 import java.util.ArrayList;
 
 import po.PurBackSheetPO;
@@ -7,7 +8,7 @@ import po.PurSheetPO;
 import po.SaleBackSheetPO;
 import po.SaleSheetPO;
 
-public interface SaleBillSaverService {
+public interface SaleBillSaverService extends Remote{
 	/*保存进货单*/
 	public void savePurSheet(ArrayList<PurSheetPO> ps);
 	/*保存进货退货单*/
