@@ -25,7 +25,7 @@ public class SaleSheet extends Bill implements GetVOandPO{
 		ArrayList<MockCommodity> sheet=new ArrayList<MockCommodity>();//销售单据，商品名，数量，单价//ArrayList<>在写一个类；
 		double money1;//折前总金额
 		double money2;//代金券金额
-		String stock;
+		String stock;//仓库；
 		double discount;//折让金额；
 		double pmoney;//最终金额
 		String words;//备注
@@ -51,6 +51,7 @@ public class SaleSheet extends Bill implements GetVOandPO{
 				temp.add(new MockCommodity(vo.getsheet().get(i)));
 			}
 			this.sheet=temp;
+			this.stock=vo.getstock();
 			this.discount=vo.getdiscount();
 			this.money1=vo.getmoney1();
 			this.money2=vo.getmoney2();
@@ -233,6 +234,7 @@ public class SaleSheet extends Bill implements GetVOandPO{
 				temp.add(new MockCommodity(po.getsheet().get(i)));
 			}
 			this.sheet=temp;
+			this.stock=po.getstock();
 			this.discount=po.getdiscount();
 			this.money1=po.getmoney1();
 			this.money2=po.getmoney2();

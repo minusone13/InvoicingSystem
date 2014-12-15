@@ -46,4 +46,16 @@ public class Tool {
 	        System.out.println(e);
 	    }
 	}
+	public static String getUser() {
+		return user;
+	}
+	public static void setUser(String user) {
+		Tool.user = user;
+	}
+	public static String getStock() {
+		return stock;
+	}
+	public static void setStock(String stock) {
+		Tool.stock = stock;
+	}
 }

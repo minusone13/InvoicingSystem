@@ -143,6 +143,13 @@ public class SaleSheetPO extends PO{
 	public void setwords(String words){
 		this.words=words;
 	}
+
+	public String getstock() {
+		return this.stock;
+	}
 		
+	public void getstock(String stock) {
+		this.stock=stock;
+	}
 		
 }

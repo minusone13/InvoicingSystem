@@ -56,6 +56,7 @@ public class SaleBackSheet extends Bill implements GetVOandPO{
 		this.money2=vo.getmoney2();
 		this.pmoney=vo.getpmoney();
 		this.words=vo.getwords();
+		this.stock=vo.getstock();
 		this.userID=vo.getuserid();
 		this.username=vo.getusername();
 		this.op=vo.getop();
@@ -196,6 +197,7 @@ public class SaleBackSheet extends Bill implements GetVOandPO{
 		this.op=po.getop();
 		this.billstate=po.getState();
 		this.commoditywords=po.getcommoditywords();
+		this.stock=po.getstock();
 	}
 	
 	public SaleBackSheetVO getVO() {
