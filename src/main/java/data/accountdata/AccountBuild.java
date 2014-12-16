@@ -41,6 +41,7 @@ public class AccountBuild{
 		CustomerForFinancial cff = new CustomerList();
 		cff.saveCustomer("accountBuild\\customerInfo\\"+version+".ser");
 	}
+	
 	public void saveVersion() {
 		ArrayList<String> versions = getVersion();
 		if(versions==null) versions = new ArrayList<String>();
