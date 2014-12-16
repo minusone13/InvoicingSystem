@@ -14,7 +14,6 @@ import data.commoditydata.StubStockDataController;
 import data.initial.Initial;
 
 public class StartUp {
-
 	public static void main(String args[])
 	{
 		Initial initial= new Initial();
