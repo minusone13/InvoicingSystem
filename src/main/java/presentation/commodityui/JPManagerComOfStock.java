@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import presentation.managerui.MouseListenerGetXY;
+import vo.RM;
 import vo.stockvo.CommodityVO;
 import businesslogic.Role;
 
@@ -111,8 +112,9 @@ public class JPManagerComOfStock extends JPanel {
 				break;	
 			case 3:
 				addCom.setIcon(addComR);
+				JPeditOfCom.setIsAdd(true);
 				JPeditOfCom.leftMove();
-				JPeditOfCom.isAdd=true;
+				
 				break;
 			case 4:
 				deleteCom.setIcon(deleteComR);
@@ -121,8 +123,9 @@ public class JPManagerComOfStock extends JPanel {
 			case 5:
 				editCom.setIcon(editComR);
 				if(manageCom.getCommodities().getChosenNum()==1){
+					JPeditOfCom.setIsAdd(false);
 					JPeditOfCom.leftMove();
-					JPeditOfCom.isAdd=false;
+					
 				}
 				else if(manageCom.getCommodities().getChosenNum()==0){
 					
@@ -300,6 +303,32 @@ public class JPManagerComOfStock extends JPanel {
 		}
 		public void setIsAdd(boolean isAdd) {
 			this.isAdd = isAdd;
+			if(isAdd){
+				name.setVisible(true);
+				type.setVisible(true);
+				nameText.setVisible(true);
+				typeText.setVisible(true);
+				inprice.setBounds(40, 90, 40, 20);
+				outprice.setBounds(40, 120, 40, 20);
+				alert.setBounds(40, 150, 60, 20);
+				
+				inpriceText.setBounds(80,90, 150, 20);
+				outpriceText.setBounds(80,120, 150, 20);
+				alertText.setBounds(95,150, 135, 20);
+			}
+			else{
+				name.setVisible(false);
+				type.setVisible(false);
+				nameText.setVisible(false);
+				typeText.setVisible(false);
+				inprice.setBounds(40, 30, 40, 20);
+				outprice.setBounds(40, 60, 40, 20);
+				alert.setBounds(40, 90, 60, 20);
+				
+				inpriceText.setBounds(80,30, 150, 20);
+				outpriceText.setBounds(80,60, 150, 20);
+				alertText.setBounds(95,90, 135, 20);
+			}
 		}
 		public class MouseListenerOfButton implements MouseListener{
 
@@ -338,21 +367,67 @@ public class JPManagerComOfStock extends JPanel {
 						}
 						if(legal){
 							//加到逻辑层
-							if(manageCom.getContent().reLastSelectedNode()!=null){
+							if(manageCom.getContent().reLastSelectedNode()!=null){//选择了父节点
 								String path=manageCom.getContent().rePath(manageCom.getContent().reLastSelectedNode());
 								CommodityVO commmodity=new CommodityVO(path,nameText.getText(),
 										typeText.getText(),
 										Double.parseDouble(inpriceText.getText()),
 										Double.parseDouble(outpriceText.getText()),
 										Integer.parseInt(alertText.getText()));
-								manageCom.getContent().getStockbl().addCommodity(commmodity);
+								RM rm=manageCom.getContent().getStockbl().addCommodity(commmodity);
 							
-								//加到界面层
-								manageCom.getCommodities().addCommodity(commmodity);
+								if(rm==RM.done){
+									//加到界面层
+									manageCom.getCommodities().addCommodity(commmodity);
+								}
+								else if(rm==RM.redundance){
+									System.out.println("商品重复");
+								}
+								else if(rm==RM.treeerror){
+									System.out.println("分类下已有分类，不能添加商品");
+								}
 							}
 							else{
 								System.out.println("请选择分类");
 							}
+						}
+					}
+					else{
+						//修改商品
+						//获取商品VO
+						CommodityVO modifyVO=manageCom.getCommodities().getChosen();
+						
+						boolean legal=false;
+						if(
+								
+								!inpriceText.getText().equals("")
+								||!outpriceText.getText().equals("")
+								||!alertText.getText().equals("")){
+							legal=true;
+						}
+						if(legal){
+							//修改VO数据
+							if(!inpriceText.getText().equals("")){
+								modifyVO.setIn(Double.parseDouble(inpriceText.getText()));
+							}
+							if(!outpriceText.getText().equals("")){
+								modifyVO.setOut(Double.parseDouble(outpriceText.getText()));
+							}
+							if(!alertText.getText().equals("")){
+								modifyVO.setAlertLine(Integer.parseInt(alertText.getText()));
+							}
+							
+							//调用逻辑层
+							RM rm=manageCom.getContent().getStockbl().updateCommodity(modifyVO);
+							if(rm==RM.done){
+								manageCom.getCommodities().changeChosen(modifyVO);
+							}
+							else{
+								System.out.println("修改结果是"+rm);
+							}
+						}
+						else{
+							System.out.println("请至少填写一个修改项进行修改");
 						}
 					}
 					
