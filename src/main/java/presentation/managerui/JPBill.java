@@ -1,5 +1,7 @@
 package presentation.managerui;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -179,7 +181,45 @@ public class JPBill extends JPanel {
 		JLabel ID=new JLabel("ID:"+ls.getID(),JLabel.CENTER);
 		ID.setBounds(31,5, 200, 20);
 		
+		JLabel strategyType=new JLabel();
+		JLabel level=new JLabel();
+		JLabel limit=new JLabel();
+		JLabel gift=new JLabel();
+		JLabel discount=new JLabel();
+		JLabel coupon=new JLabel();
+		JLabel start=new JLabel();
+		JLabel last=new JLabel();
+		
+		//设置标签字体
+		strategyType.setFont(new Font("宋体",Font.BOLD,14));
+		level.setFont(new Font("宋体",Font.BOLD,14));
+		limit.setFont(new Font("宋体",Font.BOLD,14));
+		gift.setFont(new Font("宋体",Font.BOLD,14));
+		discount.setFont(new Font("宋体",Font.BOLD,14));
+		coupon.setFont(new Font("宋体",Font.BOLD,14));
+		start.setFont(new Font("宋体",Font.BOLD,14));
+		last.setFont(new Font("宋体",Font.BOLD,14));
+		
+		
+		//设置字体颜色
+		strategyType.setForeground(Color.white);
+		level.setForeground(Color.white);
+		limit.setForeground(Color.white);
+		gift.setForeground(Color.white);
+		discount.setForeground(Color.white);
+		coupon.setForeground(Color.white);
+		start.setForeground(Color.white);
+		last.setForeground(Color.white);
+		
 		//单据信息未完
+		switch(ls.getLevel_strategy_style()){
+		case Gift:
+			break;
+		case Discount://打折
+			break;
+		case Coupon://代金券
+			break;
+		}
 		//将组件加到面板上
 		this.add(right,0);
 		this.add(left,1);
@@ -213,6 +253,27 @@ public class JPBill extends JPanel {
 		ID.setBounds(31,5, 200, 20);
 		
 		//单据信息未完
+		JLabel commodity=new JLabel();
+		JLabel originalTotalPrice=new JLabel();
+		JLabel decreasePrice=new JLabel();
+		JLabel num=new JLabel();
+		JLabel start=new JLabel();
+		JLabel last=new JLabel();
+		//字体
+		commodity.setFont(new Font("宋体",Font.BOLD,14));
+		originalTotalPrice.setFont(new Font("宋体",Font.BOLD,14));
+		decreasePrice.setFont(new Font("宋体",Font.BOLD,14));
+		num.setFont(new Font("宋体",Font.BOLD,14));
+		start.setFont(new Font("宋体",Font.BOLD,14));
+		last.setFont(new Font("宋体",Font.BOLD,14));
+		//字体颜色
+		commodity.setForeground(Color.white);
+		originalTotalPrice.setForeground(Color.white);
+		decreasePrice.setForeground(Color.white);
+		num.setForeground(Color.white);
+		start.setForeground(Color.white);
+		last.setForeground(Color.white);
+		
 		//将组件加到面板上
 		this.add(right,0);
 		this.add(left,1);
@@ -246,6 +307,27 @@ public class JPBill extends JPanel {
 		ID.setBounds(31,5, 200, 20);
 		
 		//单据信息未完
+		JLabel strategyType=new JLabel();
+		JLabel limit=new JLabel();
+		JLabel gift=new JLabel();
+		JLabel coupon=new JLabel();
+		JLabel start=new JLabel();
+		JLabel last=new JLabel();
+		//设置标签字体
+		strategyType.setFont(new Font("宋体",Font.BOLD,14));
+		limit.setFont(new Font("宋体",Font.BOLD,14));
+		gift.setFont(new Font("宋体",Font.BOLD,14));
+		coupon.setFont(new Font("宋体",Font.BOLD,14));
+		start.setFont(new Font("宋体",Font.BOLD,14));
+		last.setFont(new Font("宋体",Font.BOLD,14));
+		
+		//设置字体颜色
+		strategyType.setForeground(Color.white);
+		limit.setForeground(Color.white);
+		gift.setForeground(Color.white);
+		coupon.setForeground(Color.white);
+		start.setForeground(Color.white);
+		last.setForeground(Color.white);
 		//将组件加到面板上
 		this.add(right,0);
 		this.add(left,1);
@@ -411,6 +493,10 @@ public class JPBill extends JPanel {
 		ID.setBounds(31,5, 200, 20);
 		
 		//单据信息未完
+		String[] remark=gb.getRemark();
+		JLabel reason=new JLabel(remark[0]);
+		JLabel customer=new JLabel(remark[1]);
+		
 		//将组件加到面板上
 		this.add(right,0);
 		this.add(left,1);
@@ -446,6 +532,19 @@ public class JPBill extends JPanel {
 		//单据信息
 		JLabel ID=new JLabel("ID:"+slb.getID(),JLabel.CENTER);
 		ID.setBounds(31,5, 200, 20);
+		
+		String Type="";
+		switch(slb.getT()){
+		case Spills:Type="报溢单";
+			break;
+		case Loss:Type="报损单";
+			break;
+		}
+		JLabel type=new JLabel(Type);
+		JLabel commodity=new JLabel(slb.getCom().getName());
+		JLabel model=new JLabel(slb.getCom().getModel());
+		JLabel num=new JLabel(String.valueOf(slb.getCom().getNumber()));
+		
 		//将组件加到面板上
 		this.add(right,0);
 		this.add(left,1);
@@ -481,6 +580,12 @@ public class JPBill extends JPanel {
 		//单据信息
 		JLabel ID=new JLabel("ID:"+ab.getID(),JLabel.CENTER);
 		ID.setBounds(31,5, 200, 20);
+		
+		JLabel commodity=new JLabel(ab.getCom().getName());
+		JLabel model=new JLabel(ab.getCom().getModel());
+		JLabel num=new JLabel(String.valueOf(ab.getCom().getNumber()));
+		
+		
 		//将组件加到面板上
 		this.add(right,0);
 		this.add(left,1);
@@ -517,6 +622,12 @@ public class JPBill extends JPanel {
 		JLabel ID=new JLabel("ID:"+ps.getID(),JLabel.CENTER);
 		ID.setBounds(31,5, 200, 20);
 		
+		JLabel customer=new JLabel(ps.getcustomer().getname());
+		JLabel warehouse=new JLabel(ps.getstock());
+		JLabel totalMoney=new JLabel(String.valueOf(ps.getmoney1()));
+		JLabel note=new JLabel(ps.getwords());
+		JLabel operator=new JLabel(ps.getop());
+		
 		//将组件加到面板上
 		this.add(right,0);
 		this.add(left,1);
@@ -552,6 +663,13 @@ public class JPBill extends JPanel {
 		//单据信息
 		JLabel ID=new JLabel("ID:"+pbs.getID(),JLabel.CENTER);
 		ID.setBounds(31,5, 200, 20);
+		
+		JLabel customer=new JLabel(pbs.getcustomer().getname());
+		JLabel warehouse=new JLabel(pbs.getstock());
+		JLabel totalMoney=new JLabel(String.valueOf(pbs.getmoney1()));
+		JLabel note=new JLabel(pbs.getwords());
+		JLabel operator=new JLabel(pbs.getop());
+		
 		//将组件加到面板上
 		this.add(right,0);
 		this.add(left,1);
@@ -588,6 +706,14 @@ public class JPBill extends JPanel {
 		JLabel ID=new JLabel("ID:"+ss.getID(),JLabel.CENTER);
 		ID.setBounds(31,5, 200, 20);
 		
+		JLabel customer=new JLabel(ss.getcustomer().getname());
+		JLabel totalMoney=new JLabel(String.valueOf(ss.getmoney1()));
+		JLabel discount=new JLabel(String.valueOf(ss.getdiscount()));
+		JLabel warehouse=new JLabel(ss.getstock());
+		JLabel note=new JLabel(ss.getwords());
+		JLabel operator=new JLabel(ss.getop());
+		JLabel coupon=new JLabel(String.valueOf(ss.getmoney2()));
+		JLabel finalMoney=new JLabel(String.valueOf(ss.getpmoney()));
 		//将组件加到面板上
 		this.add(right,0);
 		this.add(left,1);
@@ -624,6 +750,14 @@ public class JPBill extends JPanel {
 		JLabel ID=new JLabel("ID:"+sbs.getID(),JLabel.CENTER);
 		ID.setBounds(31,5, 200, 20);
 		
+		JLabel customer=new JLabel(sbs.getcustomer().getname());
+		JLabel totalMoney=new JLabel(String.valueOf(sbs.getmoney1()));
+		JLabel discount=new JLabel(String.valueOf(sbs.getdiscount()));
+		JLabel warehouse=new JLabel(sbs.getstock());
+		JLabel note=new JLabel(sbs.getwords());
+		JLabel operator=new JLabel(sbs.getop());
+		JLabel coupon=new JLabel(String.valueOf(sbs.getmoney2()));
+		JLabel finalMoney=new JLabel(String.valueOf(sbs.getpmoney()));
 		//将组件加到面板上
 		this.add(right,0);
 		this.add(left,1);
