@@ -196,7 +196,7 @@ public class SaleTest extends TestCase{
 		public void testsureReachStrategy(){
 			salebillController controller = new salebillController();
 			String words = controller.sureLevelStrategy(2, 3000, "208", LevelStrategyStyle.Discount);
-			System.out.println(words);
+			System.out.println("?");
 			boolean result12=false;
 			assertTrue(result12);
 		}

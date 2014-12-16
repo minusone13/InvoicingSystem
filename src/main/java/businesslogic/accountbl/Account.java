@@ -1,5 +1,7 @@
 package businesslogic.accountbl;
 
+import po.AccountPO;
+
 public class Account {
 	String name;//账户名
 	double balance;//余额
@@ -33,4 +35,15 @@ public class Account {
 		this.balance = balance;
 	}
 
+	public void fromPOtoAccount(AccountPO po) {
+		this.name = po.getName();
+		this.balance = po.getBalance();
+	}
+	
+	public AccountPO toPO() {
+		AccountPO po = new AccountPO();
+		po.setBalance(balance);
+		po.setName(name);
+		return po;
+	}
 }

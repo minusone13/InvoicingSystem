@@ -75,5 +75,19 @@ public class CustomerList implements CustomerForFinancial, CustomerBlService{
 			else customerdata.saveAllCustomer(null,address);
 			//这个方法是把已有的客户整体搬迁到另一个文档里;
 		}
+
+		public void changeShouldPay(String name, double hadPay) {
+			CustomerVO vo = this.findCustomer(name);
+			vo.setShouldPay(vo.getShouldPay()-hadPay);
+			this.updateCustomer(vo);
+			
+		}//修改应收;对应于收款单;hadpay是客户给了多少，对应于收款单;
+
+		public void changeShouldgive(String name, double hadGive) {
+			CustomerVO vo = this.findCustomer(name);
+			vo.setShouldGive(vo.getShouldGive()-hadGive);
+			this.updateCustomer(vo);
+			
+		}//修改应付;对应于收款单;hadgive是给了客户多少钱，对应与付款单;
 		
 }
