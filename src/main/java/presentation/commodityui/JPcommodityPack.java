@@ -80,63 +80,9 @@ public class JPcommodityPack extends JPanel {
 	}
 	/*增加一系列商品*/
 	public void addCommodities(ArrayList<CommodityVO> coms){
-//		for(CommodityVO temp:coms){
-//			commodities.add(new JPcommodity(temp));
-//		}
-		
-		CommodityVO test=new CommodityVO();
-		test.setName("dsfs");
-		test.setModel("sdf0000");
-		test.setNumber(89);
-		JPcommodity com1=new JPcommodity(test);
-		JPcommodity com2=new JPcommodity("母牛日光灯灯","dsfsd",10);
-		JPcommodity com3=new JPcommodity("母猪日光灯日光灯","dsfsd",10);
-		JPcommodity com4=new JPcommodity("光灯日母猪灯日母猪","dsfsd",10);
-		JPcommodity com5=new JPcommodity("公牛日母猪","dsfsd",10);
-		JPcommodity com6=new JPcommodity("我去你妈的","dsfsd",10);
-		JPcommodity com7=new JPcommodity("公牛日光灯","dsfsd",10);
-		JPcommodity com8=new JPcommodity("母牛日光灯","dsfsd",10);
-		JPcommodity com9=new JPcommodity("母猪日光灯","dsfsd",10);
-		JPcommodity com10=new JPcommodity("光灯日母猪","dsfsd",10);
-		JPcommodity com11=new JPcommodity("公牛日母猪","dsfsd",10);
-		JPcommodity com12=new JPcommodity("我去你妈的","dsfsd",10);
-		JPcommodity com13=new JPcommodity("公牛日光灯","dsfsd",10);
-		JPcommodity com14=new JPcommodity("母牛日光灯","dsfsd",10);
-		JPcommodity com15=new JPcommodity("母猪日光灯","dsfsd",10);
-		JPcommodity com16=new JPcommodity("光灯日母猪","dsfsd",10);
-		JPcommodity com17=new JPcommodity("公牛日母猪","dsfsd",10);
-		JPcommodity com18=new JPcommodity("我去你妈的","dsfsd",10);
-		JPcommodity com19=new JPcommodity("公牛日光灯","dsfsd",10);
-		JPcommodity com20=new JPcommodity("母牛日光灯","dsfsd",10);
-		JPcommodity com21=new JPcommodity("母猪日光灯","dsfsd",10);
-		JPcommodity com22=new JPcommodity("光灯日母猪","dsfsd",10);
-		JPcommodity com23=new JPcommodity("公牛日母猪","dsfsd",10);
-		JPcommodity com24=new JPcommodity("我去你妈的","dsfsd",10);
-		
-		commodities.add(com1);
-		commodities.add(com2);
-		commodities.add(com3);
-		commodities.add(com4);
-		commodities.add(com5);
-		commodities.add(com6);
-		commodities.add(com7);
-		commodities.add(com8);
-		commodities.add(com9);
-		commodities.add(com10);
-		commodities.add(com11);
-		commodities.add(com12);
-		commodities.add(com13);
-		commodities.add(com14);
-		commodities.add(com15);
-		commodities.add(com16);
-		commodities.add(com17);
-		commodities.add(com18);
-		commodities.add(com19);
-		commodities.add(com20);
-		commodities.add(com21);
-		commodities.add(com22);
-		commodities.add(com23);
-		commodities.add(com24);
+		for(CommodityVO temp:coms){
+			commodities.add(new JPcommodity(temp));
+		}
 		update();
 		
 	}
@@ -146,6 +92,18 @@ public class JPcommodityPack extends JPanel {
 		//增加商品
 		System.out.println("增加商品");
 		update();
+	}
+	/*返回选中的要修改的商品的VO*/
+	public CommodityVO getChosen(){
+		if(getChosenNum()==1){
+			for(JPcommodity temp:commodities){
+				if(temp.isChosen()){
+					return temp.getCommodity();
+				}
+			}
+		}
+		return null;
+		
 	}
 	/*返回选中的商品*/
 	public ArrayList<CommodityVO> getAllChosen(){
@@ -208,6 +166,9 @@ public class JPcommodityPack extends JPanel {
 					temp.change(vo);
 				}
 			}
+		}
+		else if(getChosenNum()==0){
+			System.out.println("请选择你要修改的商品");
 		}
 		else{
 			System.out.println("只能同时修改一个商品");

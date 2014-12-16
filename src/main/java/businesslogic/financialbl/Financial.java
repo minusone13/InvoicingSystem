@@ -251,6 +251,54 @@ public class Financial implements FinancialBlService{
 		return financialList.getAllOfCashPaymentBills();
 	}
 	
+	//收款单修改金额
+	public void updateReceiptMoney(String customer, String account, double money) {
+		AccountList a = new AccountList();
+		ArrayList<Account> accounts = a.getAllAccountInfo();
+		int size = accounts.size();
+		for(int i=0;i<size;i++) {
+			Account temp = accounts.get(i);
+			if(temp.getName().equals(account)) {
+				double balance = accounts.get(i).getBalance();
+				accounts.get(i).setBalance(balance+money);
+				break;
+			}
+		}
+		a.saveAccounts(accounts);
+	}
+	
+	//付款单修改金额
+	public void updatePaymentMoney(String customer, String account, double money) {
+		AccountList a = new AccountList();
+		ArrayList<Account> accounts = a.getAllAccountInfo();
+		int size = accounts.size();
+		for(int i=0;i<size;i++) {
+			Account temp = accounts.get(i);
+			if(temp.getName().equals(account)) {
+				double balance = accounts.get(i).getBalance();
+				accounts.get(i).setBalance(balance-money);
+				break;
+			}
+		}
+		a.saveAccounts(accounts);
+	}
+	//现金费用单修改账户
+	public void updateCashPaymentMoney(String account, double money) {
+		AccountList a = new AccountList();
+		ArrayList<Account> accounts = a.getAllAccountInfo();
+		int size = accounts.size();
+		for(int i=0;i<size;i++) {
+			Account temp = accounts.get(i);
+			if(temp.getName().equals(account)) {
+				double balance = accounts.get(i).getBalance();
+				accounts.get(i).setBalance(balance-money);
+				break;
+			}
+		}
+		a.saveAccounts(accounts);
+	}
+	
+	
 	public String getName() {
 		return name;
 	}

@@ -13,6 +13,8 @@ public interface StubCommodityBlService {
 	public ArrayList<CommodityVO> fuzzyFindCommodity(String s, int precision);
 	//precision 先默认给1，可以达到王雨城所说的算法。若取数字越高，精确度越高，搜索结果数量也就越少
 	
+	public CommodityVO findCommodity(String name, String model);//返回结果为null为没找到
+	public CommodityVO findCommodity(CommodityVO vo);//返回结果为null为没找到
 	
 	public RM addCommodity(CommodityVO vo);
 	public RM addCategory(CategoryVO vo);

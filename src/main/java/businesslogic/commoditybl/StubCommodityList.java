@@ -16,6 +16,16 @@ import vo.RM;
 public class StubCommodityList {//商品列表 haha
 	static StubCommodityDataService comdata;
 	User user;
+	public CommodityVO findCommodity(String name, String model)
+	{
+		MockCommodity com = new MockCommodity(comdata.findCommodity(name, model));
+		return com.toVO();
+	}
+	
+	public CommodityVO findCommodity(CommodityVO vo)
+	{
+		return findCommodity(vo.getName(), vo.getModel());
+	}
 	public ArrayList<CommodityVO> findCommodity(String name)
 	{
 		ArrayList <CommodityPO> pos=comdata.findCommodity(name);

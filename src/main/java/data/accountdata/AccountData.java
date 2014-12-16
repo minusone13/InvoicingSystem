@@ -125,7 +125,7 @@ public class AccountData  implements StubAccountDataService{
 	}
 	
 	//以序列化方式存储账户列表
-	private void writer (ArrayList<AccountPO> accountList) {
+	public void writer (ArrayList<AccountPO> accountList) {
 		String filename = "account.txt";
 		ObjectOutputStream oos = null;
 		try {

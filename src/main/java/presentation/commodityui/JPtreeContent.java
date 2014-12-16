@@ -17,10 +17,10 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeNode;
-import javax.swing.tree.TreePath;
 
 import vo.RM;
 import vo.stockvo.CategoryVO;
+import vo.stockvo.CommodityVO;
 import vo.stockvo.StockVO;
 import vo.stockvo.StockVO.Type;
 import businesslogic.stockmanagerbl.StubStockController;
@@ -75,7 +75,7 @@ public class JPtreeContent extends JPanel {
            	  for(StockVO temp:stockList){
            		  DefaultMutableTreeNode child=new DefaultMutableTreeNode(temp.getCat().getName());
            		  treeModel.insertNodeInto(child, top, top.getChildCount());
-           		  addCategory(child);//递归加子分类
+           		 addCategory(child);//递归加子分类
            	  }
            }
         }
@@ -96,10 +96,26 @@ public class JPtreeContent extends JPanel {
        //事件监听
         tree.addTreeSelectionListener(new TreeSelectionListener(){
         public void valueChanged(TreeSelectionEvent e) {
-        TreePath treePath=e.getPath();
-         System.out.println("path="+treePath.getPath()[0]+"\ntreePath"+treePath);
-         //取得新节点的父节点
-         
+         DefaultMutableTreeNode thisNode=(DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
+        //判断当前节点下有没有商品
+         if(thisNode!=null){
+        	 ArrayList<StockVO> stockvo= stockbl.openCategory(rePath(thisNode));
+             if(stockvo.size()!=0){//如果有分类或者商品
+            	 if(stockvo.get(0).getT()==Type.Commodity){//如果是商品
+            		 ArrayList<CommodityVO> temp=new ArrayList<CommodityVO>();
+            		 for(int i=0;i<stockvo.size();i++){
+            			 temp.add(stockvo.get(i).getCom());
+            		 }
+            		 JPmanagerCom.getCommodities().getCommodities().clear();
+            		 JPmanagerCom.getCommodities().addCommodities(temp);
+            	 }
+             }
+             else{
+            	 JPmanagerCom.getCommodities().getCommodities().clear();
+            	 JPmanagerCom.getCommodities().update();
+             }
+         }
+        
         }
         });
         tree.getCellEditor().addCellEditorListener(new CellEditorAction());  
@@ -110,24 +126,33 @@ public class JPtreeContent extends JPanel {
 		add(SCR,0);
 		add(back,1);
 	}
+	/*节点编辑监听*/
 	private class CellEditorAction implements CellEditorListener{  
         public void editingCanceled(ChangeEvent e) {  
             System.out.println("编辑取消");  
         }  
-        public void editingStopped(ChangeEvent e) {  
-        	
-            System.out.println("编辑结束");  
+        public void editingStopped(ChangeEvent e) {
+        	DefaultMutableTreeNode thisNode=(DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
+        	String parentID=rePath((DefaultMutableTreeNode)thisNode.getParent());
+        	CategoryVO categryvo=new CategoryVO(parentID,thisNode.getUserObject().toString());
+        	RM rm=stockbl.updateCategory(categryvo);
+            System.out.println("编辑结束,结果是"+rm);  
         }  
     }  
 	/*返回逻辑层对应路径*/
 	public String rePath(DefaultMutableTreeNode node){
 		//路径转换成逻辑层的对应格式
+		String path;
 		TreeNode[] nodePath=node.getPath();
-		String path="";
-		for(int i=0;i<nodePath.length-1;i++){
+		if(nodePath.length==1){
+			return "1";
+		}
+		 path="1\\";
+		for(int i=1;i<nodePath.length-1;i++){
 			path+=(((DefaultMutableTreeNode)nodePath[i]).getUserObject().toString()+"\\");
 		}
 		path+=node.getUserObject().toString();
+		
 		return path;
 	}
 	/*递归构建树*/
@@ -145,17 +170,18 @@ public class JPtreeContent extends JPanel {
 	        		  DefaultMutableTreeNode child=new DefaultMutableTreeNode(name);
 	        		  treeModel.insertNodeInto(child, parent, parent.getChildCount());
 	        		  addCategory(child);
+	        		 
 	              }
 	        }
 		}
 	}
 	/*删除树节点*/
 	public void removeTreeNode(DefaultMutableTreeNode node){
-		treeModel.removeNodeFromParent(node);
 		//调用逻辑层
 		RM rm=stockbl.deleteCategory(rePath(node));
 		if(rm==RM.done){
 			System.out.println("已成功删除");
+			treeModel.removeNodeFromParent(node);
 		}
 		else{
 			System.out.println("删除失败，已有子分类或者商品");
@@ -171,8 +197,8 @@ public class JPtreeContent extends JPanel {
 		treeModel.insertNodeInto(newChild, parent, parent.getChildCount());
 		//调用逻辑层
 		CategoryVO newCategory=new CategoryVO(rePath(parent),newChild.getUserObject().toString());
-		stockbl.addCategory(newCategory);
-		System.out.println("增加分类到"+rePath(parent));
+		RM rm=stockbl.addCategory(newCategory);
+		System.out.println("结果是"+rm);
 		
 	}
 	/*删除当前选中的节点*/

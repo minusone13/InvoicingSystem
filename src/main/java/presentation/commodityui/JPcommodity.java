@@ -329,7 +329,7 @@ public class JPcommodity extends JPanel implements MouseListener{
 	}
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+		JPmanagerCom.showDetail("");
 	}
 	public JPManagerCom getJPmanagerCom() {
 		return JPmanagerCom;
