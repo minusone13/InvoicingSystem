@@ -9,6 +9,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import presentation.commodityui.StockManagerDriver;
+import data.commoditydata.StubStockDataController;
 import vo.AlertBillVO;
 import vo.BarginStrategyVO;
 import vo.GiftBillVO;
@@ -156,7 +158,9 @@ public class JPBill extends JPanel {
 	//清单表格的引用
 	JTableOfList table;
 	public JPBill(LevelStrategyVO ls){
-	
+		//逻辑层接口
+		StockManagerDriver smd=new StockManagerDriver();
+		smd.start(stockbl,StubStockDataController.getInstance());
 		//传递VO
 		levelStrategyVO=ls;
 		//面板大小
@@ -181,20 +185,20 @@ public class JPBill extends JPanel {
 		JLabel ID=new JLabel("ID:"+ls.getID(),JLabel.CENTER);
 		ID.setBounds(31,5, 200, 20);
 		
-		JLabel strategyType=new JLabel();
 		JLabel level=new JLabel();
 		JLabel limit=new JLabel();
-		JLabel gift=new JLabel();
 		JLabel discount=new JLabel();
 		JLabel coupon=new JLabel();
 		JLabel start=new JLabel();
 		JLabel last=new JLabel();
 		
+		JLabel levelTxt=new JLabel(String.valueOf(ls.getLevel()));
+		JLabel startTxt=new JLabel(ls.getStartTime());
+		JLabel lastTxt=new JLabel(String.valueOf(ls.getLastTime()));
+		
 		//设置标签字体
-		strategyType.setFont(new Font("宋体",Font.BOLD,14));
 		level.setFont(new Font("宋体",Font.BOLD,14));
 		limit.setFont(new Font("宋体",Font.BOLD,14));
-		gift.setFont(new Font("宋体",Font.BOLD,14));
 		discount.setFont(new Font("宋体",Font.BOLD,14));
 		coupon.setFont(new Font("宋体",Font.BOLD,14));
 		start.setFont(new Font("宋体",Font.BOLD,14));
@@ -202,10 +206,8 @@ public class JPBill extends JPanel {
 		
 		
 		//设置字体颜色
-		strategyType.setForeground(Color.white);
 		level.setForeground(Color.white);
 		limit.setForeground(Color.white);
-		gift.setForeground(Color.white);
 		discount.setForeground(Color.white);
 		coupon.setForeground(Color.white);
 		start.setForeground(Color.white);
@@ -214,10 +216,13 @@ public class JPBill extends JPanel {
 		//单据信息未完
 		switch(ls.getLevel_strategy_style()){
 		case Gift:
+			JLabel limitTxt=new JLabel(String.valueOf(ls.getLimit()));
 			break;
 		case Discount://打折
+			JLabel discountTxt=new JLabel(String.valueOf(ls.getDiscountrate()));
 			break;
 		case Coupon://代金券
+			JLabel couponTxt=new JLabel(String.valueOf(ls.getCouponrate()));
 			break;
 		}
 		//将组件加到面板上
@@ -253,21 +258,29 @@ public class JPBill extends JPanel {
 		ID.setBounds(31,5, 200, 20);
 		
 		//单据信息未完
-		JLabel commodity=new JLabel();
 		JLabel originalTotalPrice=new JLabel();
 		JLabel decreasePrice=new JLabel();
 		JLabel num=new JLabel();
 		JLabel start=new JLabel();
 		JLabel last=new JLabel();
+		
+		int originalTotal=0;
+		for(int i=0;i<bs.getAlOfCommodity().size();i++){
+			originalTotal+=bs.getAlOfCommodity().get(i).getOut();
+		}
+		//单据信息未完
+		JLabel originalTotalPriceTxt=new JLabel(String.valueOf(originalTotal));
+		JLabel decreasePriceTxt=new JLabel(String.valueOf(bs.getDiscount()));
+		JLabel numTxt=new JLabel(String.valueOf(bs.getNum()));
+		JLabel startTxt=new JLabel(bs.getStartTime());
+		JLabel lastTxt=new JLabel(String.valueOf(bs.getLastTime()));
 		//字体
-		commodity.setFont(new Font("宋体",Font.BOLD,14));
 		originalTotalPrice.setFont(new Font("宋体",Font.BOLD,14));
 		decreasePrice.setFont(new Font("宋体",Font.BOLD,14));
 		num.setFont(new Font("宋体",Font.BOLD,14));
 		start.setFont(new Font("宋体",Font.BOLD,14));
 		last.setFont(new Font("宋体",Font.BOLD,14));
 		//字体颜色
-		commodity.setForeground(Color.white);
 		originalTotalPrice.setForeground(Color.white);
 		decreasePrice.setForeground(Color.white);
 		num.setForeground(Color.white);
@@ -307,27 +320,35 @@ public class JPBill extends JPanel {
 		ID.setBounds(31,5, 200, 20);
 		
 		//单据信息未完
-		JLabel strategyType=new JLabel();
 		JLabel limit=new JLabel();
-		JLabel gift=new JLabel();
 		JLabel coupon=new JLabel();
 		JLabel start=new JLabel();
 		JLabel last=new JLabel();
+		
+		JLabel limitTxt=new JLabel(String.valueOf(rs.getLimit()));
+		
+		JLabel startTxt=new JLabel(rs.getStartTime());
+		JLabel lastTxt=new JLabel(String.valueOf(rs.getLastTime()));
 		//设置标签字体
-		strategyType.setFont(new Font("宋体",Font.BOLD,14));
 		limit.setFont(new Font("宋体",Font.BOLD,14));
-		gift.setFont(new Font("宋体",Font.BOLD,14));
 		coupon.setFont(new Font("宋体",Font.BOLD,14));
 		start.setFont(new Font("宋体",Font.BOLD,14));
 		last.setFont(new Font("宋体",Font.BOLD,14));
 		
 		//设置字体颜色
-		strategyType.setForeground(Color.white);
 		limit.setForeground(Color.white);
-		gift.setForeground(Color.white);
 		coupon.setForeground(Color.white);
 		start.setForeground(Color.white);
 		last.setForeground(Color.white);
+		
+		switch(rs.getReach_strategy_style()){
+		case Gift://赠品
+			
+			break;
+		case Coupon://代金券
+			JLabel couponTxt=new JLabel(String.valueOf(rs.getCouponrate()));
+			break;
+		}
 		//将组件加到面板上
 		this.add(right,0);
 		this.add(left,1);
@@ -918,11 +939,11 @@ public class JPBill extends JPanel {
 	public void change(GiftBillVO gb){
 	
 		//调用逻辑层修改对应单据的数据
-		mbl.change(gb);
+		stockbl.update(gb);
 	}
 	public void change(SpillsLossBillVO slb){
 		//调用逻辑层修改对应单据的数据
-		mbl.change(slb);
+		stockbl.update(slb);
 	}
 	public void change(AlertBillVO ab){
 		//调用逻辑层修改对应单据的数据
@@ -930,63 +951,31 @@ public class JPBill extends JPanel {
 	}
 	public void change(PurSheetVO ps){
 		//调用逻辑层修改对应单据的数据
-		mbl.change(ps);
+		sbl.updatePurSheet(ps);
 	}
 	public void change(PurBackSheetVO pbs){
 		//调用逻辑层修改对应单据的数据
-		mbl.change(pbs);
+		sbl.updatePurBackSheet(pbs);
 	}
 	public void change(SaleSheetVO ss){
 		//调用逻辑层修改对应单据的数据
-		mbl.change(ss);
+		sbl.updateSaleSheet(ss);
 	}
 	public void change(SaleBackSheetVO sbs){
 		//调用逻辑层修改对应单据的数据
-		mbl.change(sbs);
+		sbl.updateSaleBackSheet(sbs);
 	}
 	public void change(ReceiptVO rb){
 		//调用逻辑层修改对应单据的数据
-		mbl.change(rb);
-//		if(!rb.getOp().equals("")){
-//			 operatorOfPR.setText(rb.getOp());
-//		}
-//		 if(!rb.getCustomer().equals("")){//如果vo对象里的账户属性不为空
-//			 customerOfPR.setText(rb.getCustomer());
-//		 }
-//		 if(rb.getTotal()!=0){//如果vo对象里的账户属性不为空
-//			 moneyOfPR.setText(String.valueOf(rb.getTotal()));
-//		 }
+		fbl.updateReceipt(rb);
 	}
 	public void change(PaymentVO pb){
 		//调用逻辑层修改对应单据的数据
-		mbl.change(pb);
-		//根据内存中单据的数据重新设置面板界面
-//		if(!pb.getOp().equals("")){
-//			 operatorOfPR.setText(pb.getOp());
-//		}
-//		 if(!pb.getCustomer().equals("")){//如果vo对象里的账户属性不为空
-//			 customerOfPR.setText(pb.getCustomer());
-//		 }
-//		 if(pb.getTotal()!=0){//如果vo对象里的账户属性不为空
-//			 moneyOfPR.setText(String.valueOf(pb.getTotal()));
-//		 }
+		fbl.updatePayment(pb);
 	}
 	public void change(CashPaymentVO cb){
 		//调用逻辑层修改对应单据的数据
-		mbl.change(cb);
-		//根据内存中单据的数据重新设置面板界面
-		
-//		if(!cb.getOp().equals("")){
-//			 operatorOfCas.setText(cb.getOp());
-//		}
-//		 if(!cb.getAccount().equals("")){//如果vo对象里的账户属性不为空
-//			 accountOfCas.setText(cb.getAccount());
-//		 }
-//		 if(cb.getTotal()!=0){//如果vo对象里的账户属性不为空
-//			 moneyOfCas.setText(String.valueOf(cb.getTotal()));
-//		 }
-		 
-		 
+		fbl.updateCashPayment(cb);
 	}
 	/*修改状态*/
 	public void transformState(BillState st){

@@ -11,6 +11,18 @@ public class ReachStrategyVO extends VO{
 	private StrategyStyle strategystyle=StrategyStyle.ReachStrategy;
 	private ReachStrategyStyle reach_strategy_style=ReachStrategyStyle.Default;
 	
+	public StrategyStyle getStrategystyle() {
+		return strategystyle;
+	}
+	public void setStrategystyle(StrategyStyle strategystyle) {
+		this.strategystyle = strategystyle;
+	}
+	public ReachStrategyStyle getReach_strategy_style() {
+		return reach_strategy_style;
+	}
+	public void setReach_strategy_style(ReachStrategyStyle reach_strategy_style) {
+		this.reach_strategy_style = reach_strategy_style;
+	}
 	private String ID="0000";
 	private double Limit;//消费金额下限
 	
