@@ -16,6 +16,8 @@ public interface CustomerBlService {
 		public boolean updateCustomer(CustomerVO vo);
 		public boolean deleteCustomer(String name);
 		public CustomerVO findCustomer(String name);
+		public void changeShouldPay(String name,double hadPay);
+		public void changeShouldgive(String name,double hadGive);
 		
 		//    saveAllCustomer 方法;
 		/*

@@ -393,7 +393,6 @@ public class salebillController implements SaleBillBlService,salebillForFinancia
 					}
 				}
 			}
-
 			return words;
 		}
 		
