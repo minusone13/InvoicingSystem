@@ -9,6 +9,7 @@ import javax.swing.table.DefaultTableModel;
 
 import businesslogic.financialbl.Financial;
 import businesslogicservice.financialblservice.FinancialBlService;
+import tool.Export;
 import vo.CustomerVO;
 import vo.SaleBackSheetVO;
 import vo.SaleSheetVO;
@@ -23,9 +24,8 @@ public class SaleDetailPanel extends JPanel{
 	JTable table = new JTable(model);
 	JScrollPane pane;
 	
-	public SaleDetailPanel() {
+	public SaleDetailPanel(){
 		initial();
-		
 	}
 	
 	private void initial() {
@@ -45,7 +45,7 @@ public class SaleDetailPanel extends JPanel{
 		
 		data = getSaleDetail(isv);
 		model.setDataVector(data, names);
-		table.updateUI();		
+		table.updateUI();
 	}
 	private Object[][] getSaleDetail(InquirySaleVO isv) {
 		ArrayList<SaleSheetVO> saleSheet = financial.getSaleSaleSheet(isv);
@@ -84,5 +84,26 @@ public class SaleDetailPanel extends JPanel{
 			 data[i] = temp;
 		 }
 		return data;
+	}
+	
+	public String[][] getSaleDetailExport() {
+		
+		
+		int size = table.getRowCount();
+		String[][] data = new String[size+1][];
+		data[0] = names;	
+		for(int i=0;i<size;i++) {
+			 String[] temp = {table.getValueAt(i, 0).toString(), table.getValueAt(i, 1).toString(),
+					 table.getValueAt(i, 2).toString(),table.getValueAt(i, 3).toString(), 
+					 table.getValueAt(i, 4).toString(), table.getValueAt(i, 5).toString()};
+			
+			 data[i+1] = temp;
+		 }
+		return data;
+	}
+	
+	public void export() {
+		String[][] data = getSaleDetailExport();
+		Export printer = new Export("销售明细表",data);
 	}
 }
