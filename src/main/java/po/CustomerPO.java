@@ -16,12 +16,19 @@ public class CustomerPO implements Serializable{
 	private String email;//电子邮箱；
 	private int level;//客户级别
 	
+	public CustomerPO(){}
+	
+	public CustomerPO(String name){
+		this.name=name;
+	}
+	
 	public int getlevel(){
 		return this.level;
 	}
 	
 	public void setlevel(int level){
 		this.level = level;
+		this.setmaxOwe(this.level*2000);
 	}
 	
 	public String getemail(){

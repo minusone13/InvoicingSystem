@@ -58,6 +58,7 @@ public class Customer{
 	
 	public void setlevel(int level){
 		this.level = level;
+		this.setmaxOwe(this.level*2000);
 	}
 	
 	public String getemail(){

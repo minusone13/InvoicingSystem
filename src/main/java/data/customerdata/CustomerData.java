@@ -65,7 +65,7 @@ public class CustomerData implements CustomerDataService{
 				return po;
 			}
 		}
-		return null;
+		return new CustomerPO("没人");
 	}
 
 	public ArrayList<CustomerPO> getAllCustomer(String addre) {
