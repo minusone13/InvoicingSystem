@@ -17,6 +17,10 @@ import junit.framework.TestSuite;
 
 public class FinancialTest extends TestCase{
 	FinancialBlService financial = new Financial();
+	public void testaddAccount() {		
+		assertFalse(false);			
+	}
+	
 /*
 	public void testaddAccount() {		
 		boolean result1 = financial.addAccount("周润发");

@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import businesslogic.StrategyStyle;
 import presentation.financialui.BusinessConditionPanel;
 import presentation.financialui.InitialInfoPanel;
+import presentation.financialui.SaleDetailPanel;
 import presentation.managerui.JPmanagerStrategy2;
 import presentation.managerui.MouseListenerGetXY;
 
@@ -37,7 +38,7 @@ public class TestFrame extends JFrame {
 	
 		InitialInfoPanel t = new InitialInfoPanel();
 		t.update(2);
-		TestFrame testJP=new TestFrame(new BusinessConditionPanel());
+		TestFrame testJP=new TestFrame(new SaleDetailPanel());
 		JPmanagerStrategy2 test=new JPmanagerStrategy2();
 		test.setStyle(StrategyStyle.ReachStrategy);
 		
