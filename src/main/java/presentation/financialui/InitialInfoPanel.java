@@ -101,7 +101,7 @@ public class InitialInfoPanel extends JPanel{
 			 CustomerVO vo = customer.get(i);
 			 Object[] temp ={vo.getname(), vo.getid(), vo.gettype(), vo.getlevel(),
 					 vo.getphonenumber(), vo.getaddress(),vo.getpostcode(), vo.getemail(),
-					 vo.getmaxOwe(), vo.getShouldGive(), vo.getShouldPay(), vo.getdeSaler()};
+					 vo.getmaxOwe(), vo.getShouldTake(), vo.getShouldPay(), vo.getdeSaler()};
 			 data[i] = temp;
 		 }
 		return data;

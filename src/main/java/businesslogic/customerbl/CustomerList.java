@@ -83,9 +83,9 @@ public class CustomerList implements CustomerForFinancial, CustomerBlService{
 			
 		}//修改应收;对应于收款单;hadpay是客户给了多少，对应于收款单;
 
-		public void changeShouldgive(String name, double hadGive) {
+		public void changeShouldTake(String name, double hadGive) {
 			CustomerVO vo = this.findCustomer(name);
-			vo.setShouldGive(vo.getShouldGive()-hadGive);
+			vo.setShouldTake(vo.getShouldTake()-hadGive);
 			this.updateCustomer(vo);
 			
 		}//修改应付;对应于收款单;hadgive是给了客户多少钱，对应与付款单;

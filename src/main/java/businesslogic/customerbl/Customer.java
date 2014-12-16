@@ -16,7 +16,7 @@ public class Customer{
 	private String email;//电子邮箱；
 	private double maxOwe;//最大赊账（应付）
 	private double shouldPay;//应付
-	private double shouldGive;//应收
+	private double shouldTake;//应收
 	private String deSaler;//默认销售人员
 	
 	public Customer(){};
@@ -31,7 +31,7 @@ public class Customer{
 		this.phonenumber=vo.getphonenumber();
 		this.postcode=vo.getpostcode();
 		this.maxOwe=vo.getmaxOwe();
-		this.shouldGive=vo.getShouldGive();
+		this.shouldTake=vo.getShouldTake();
 		this.shouldPay=vo.getShouldPay();
 		this.deSaler=vo.getdeSaler();
 		this.level=vo.getlevel();
@@ -45,7 +45,7 @@ public class Customer{
 		this.phonenumber=po.getphonenumber();
 		this.postcode=po.getpostcode();
 		this.maxOwe=po.getmaxOwe();
-		this.shouldGive=po.getShouldGive();
+		this.shouldTake=po.getShouldTake();
 		this.shouldPay=po.getShouldPay();
 		this.deSaler=po.getdeSaler();
 		this.level=po.getlevel();
@@ -110,8 +110,8 @@ public class Customer{
 		return this.shouldPay;
 	}	
 	
-	public double getShouldGive(){
-		return this.shouldGive;
+	public double getShouldTake(){
+		return this.shouldTake;
 	}
 	
 	public void settype(int type){
@@ -146,8 +146,8 @@ public class Customer{
 		this.shouldPay=ShouldPay;
 	}	
 	
-	public void setShouldGive(double shouleGive){
-		this.shouldGive=shouleGive;
+	public void setShouldTake(double shouleGive){
+		this.shouldTake=shouleGive;
 	}
 	
 	public void setPO(CustomerPO po){
@@ -158,7 +158,7 @@ public class Customer{
 		this.phonenumber=po.getphonenumber();
 		this.postcode=po.getpostcode();
 		this.maxOwe=po.getmaxOwe();
-		this.shouldGive=po.getShouldGive();
+		this.shouldTake=po.getShouldTake();
 		this.shouldPay=po.getShouldPay();
 		this.deSaler=po.getdeSaler();
 		this.level=po.getlevel();
@@ -174,7 +174,7 @@ public class Customer{
 		po.setphonenumber(this.phonenumber);
 		po.setpostcode(this.postcode);
 		po.setmaxOwe(this.maxOwe);
-		po.setShouldGive(this.shouldGive);
+		po.setShouldTake(this.shouldTake);
 		po.setShouldPay(this.shouldPay);
 		po.setdeSaler(this.deSaler);
 		po.setlevel(this.level);
@@ -191,7 +191,7 @@ public class Customer{
 		vo.setphonenumber(this.phonenumber);
 		vo.setpostcode(this.postcode);
 		vo.setmaxOwe(this.maxOwe);
-		vo.setShouldGive(this.shouldGive);
+		vo.setShouldTake(this.shouldTake);
 		vo.setShouldPay(this.shouldPay);
 		vo.setdeSaler(this.deSaler);
 		vo.setlevel(this.level);

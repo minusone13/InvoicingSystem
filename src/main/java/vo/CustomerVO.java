@@ -8,7 +8,7 @@ public class CustomerVO {
 	String postcode;
 	double maxOwe;
 	double shouldPay;
-	double shouldGive;
+	double shouldTake;
 	String deSaler;
 	private String id;
 	private String email;//电子邮箱；
@@ -64,8 +64,8 @@ public class CustomerVO {
 		return this.shouldPay;
 	}	
 	
-	public double getShouldGive(){
-		return this.shouldGive;
+	public double getShouldTake(){
+		return this.shouldTake;
 	}
 	
 	public void settype(int type){
@@ -100,8 +100,8 @@ public class CustomerVO {
 		this.shouldPay=ShouldPay;
 	}	
 	
-	public void setShouldGive(double shouleGive){
-		this.shouldGive=shouleGive;
+	public void setShouldTake(double shouleGive){
+		this.shouldTake=shouleGive;
 	}
 
 	public void setid(String id) {

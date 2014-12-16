@@ -11,7 +11,7 @@ public class CustomerPO implements Serializable{
 	String postcode;
 	double maxOwe;
 	double shouldPay;
-	double shouldGive;
+	double shouldTake;
 	String deSaler;
 	private String email;//电子邮箱；
 	private int level;//客户级别
@@ -79,8 +79,8 @@ public class CustomerPO implements Serializable{
 		return this.shouldPay;
 	}	
 	
-	public double getShouldGive(){
-		return this.shouldGive;
+	public double getShouldTake(){
+		return this.shouldTake;
 	}
 	
 	public void settype(int type){
@@ -115,7 +115,7 @@ public class CustomerPO implements Serializable{
 		this.shouldPay=ShouldPay;
 	}	
 	
-	public void setShouldGive(double shouleGive){
-		this.shouldGive=shouleGive;
+	public void setShouldTake(double shouleGive){
+		this.shouldTake=shouleGive;
 	}
 }

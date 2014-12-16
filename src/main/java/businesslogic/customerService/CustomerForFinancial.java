@@ -9,6 +9,6 @@ public interface CustomerForFinancial {
 	public ArrayList<CustomerVO> getCustomer(String address);
 	public void saveCustomer(String address);
 	public void changeShouldPay(String name,double hadPay);
-	public void changeShouldgive(String name,double hadGive);
+	public void changeShouldTake(String name,double hadGive);
 	
 }
