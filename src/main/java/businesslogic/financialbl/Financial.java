@@ -251,6 +251,10 @@ public class Financial implements FinancialBlService{
 		return financialList.getAllOfCashPaymentBills();
 	}
 	
+	//收款单修改金额
+	public void updateReceiptMoney(String customer, String account, double money) {
+		
+	}
 	public String getName() {
 		return name;
 	}
