@@ -9,6 +9,8 @@ import vo.PurSheetVO;
 import vo.SaleBackSheetVO;
 import vo.SaleSheetVO;
 import vo.stockvo.CommodityVO;
+import businesslogic.LevelStrategyStyle;
+import businesslogic.ReachStrategyStyle;
 import businesslogic.commoditybl.MockCommodity;
 import businesslogic.customerbl.Customer;
 import businesslogic.customerbl.CustomerList;
@@ -23,7 +25,7 @@ public class SaleTest extends TestCase{
 			assertTrue(true);
 		}
 		
-		public void testCreateSaleSheet() {
+		/*public void testCreateSaleSheet() {
 			SaleSheetVO vo = new SaleSheetVO();
 			Customer customer = new Customer(); 
 			vo.setCustomer(customer.getVO());
@@ -129,7 +131,6 @@ public class SaleTest extends TestCase{
 			assertTrue(result3);
 		}
 		
-
 		public void testgetPurSheet(){
 			salebillController controller = new salebillController();
 			boolean result5 = controller.getPurSheet("JHD-2014-12-14-00009");
@@ -142,7 +143,6 @@ public class SaleTest extends TestCase{
 			assertTrue(result6);
 		}
 		
-
 		public void testgetSaleSheet(){
 			salebillController controller = new salebillController();
 			boolean result7 = controller.getSaleSheet("XSD-2014-12-14-00009");
@@ -153,10 +153,9 @@ public class SaleTest extends TestCase{
 			salebillController controller = new salebillController();
 			boolean result8 = controller.getSaleBackSheet("XSTHD-2014-12-14-00009");
 			assertTrue(result8);
-		}
-		
-		
-		public void testaddCustomer(){
+		}*/
+				
+		/*public void testaddCustomer(){
 			CustomerList customerlist = new CustomerList();
 			Customer customer = new Customer(); 
 			customer.settype(1);
@@ -173,22 +172,35 @@ public class SaleTest extends TestCase{
 			customer.setemail("xxh13@software.nju.edu.cn");
 			boolean result9 = customerlist.addCustomer(customer);
 			assertTrue(result9);
-		}
+		}*/
 		
-		public void testdeleteCustomer(){
+		/*public void testdeleteCustomer(){
 			CustomerList customerlist = new CustomerList();
 			boolean result10=customerlist.deleteCustomer("小虎");
 			assertTrue(result10);
-		}
+		}*/
 		
 		/*public void testfindCustomer(){
 			CustomerList customerlist = new CustomerList();
 			CustomerVO tempvo = customerlist.findCustomer("小虎");
-			boolean result11 = tempvo.getaddress().equals("南通市海门中学");
+			boolean result11;
+			if(tempvo.getname().equals("没人")){
+				result11=false;
+			}else{
+				result11 = tempvo.getaddress().equals("南通市海门中学");
+			}
 			System.out.println(tempvo.getphonenumber());
 			assertTrue(result11);
 		}*/
 
+		public void testsureReachStrategy(){
+			salebillController controller = new salebillController();
+			String words = controller.sureLevelStrategy(2, 3000, "208", LevelStrategyStyle.Discount);
+			System.out.println(words);
+			boolean result12=false;
+			assertTrue(result12);
+		}
+		
 		
 		
 }

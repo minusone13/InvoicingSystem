@@ -48,6 +48,15 @@ public class StubStockController implements StubCommodityBlService, StockBlForSa
 		us.addRecord(new OperationRecord(user,"addCommodity",result));
 		return result;
 	}
+	public CommodityVO findCommodity(String name, String model)
+	{
+		return l.findCommodity(name, model);
+	}
+	
+	public CommodityVO findCommodity(CommodityVO vo)
+	{
+		return l.findCommodity(vo);
+	}
 	public ArrayList<CommodityVO> findCommodity(String name)
 	{
 		return l.findCommodity(name);
