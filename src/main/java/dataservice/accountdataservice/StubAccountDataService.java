@@ -21,4 +21,6 @@ public interface StubAccountDataService extends Remote{
 	public ArrayList<AccountPO> getAllAcountInfo ();
 	
 	public void saveAccount(String filename);
+	
+	public void writer (ArrayList<AccountPO> accountList);
 }

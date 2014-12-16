@@ -94,8 +94,25 @@ public class AccountList {
 		}
 		return accountsVO;
 	}
-	public ArrayList<AccountPO> getAllAccountInfo() {
+	public ArrayList<Account> getAllAccountInfo() {
 		ArrayList<AccountPO> accList = a.getAllAcountInfo();
-		return accList;
+		ArrayList<Account> accounts = new ArrayList<Account>();
+		int size = accList.size();
+		for(int i=0;i<size;i++) {
+			AccountPO temp = accList.get(i);
+			Account a = new Account();
+			a.fromPOtoAccount(temp);
+			accounts.add(a);
+		}
+		return accounts;
+	}
+	
+	public void saveAccounts(ArrayList<Account> accounts) {
+		ArrayList<AccountPO> poList = new ArrayList<AccountPO>();
+		int size = accounts.size();
+		for(int i=0;i<size;i++) {
+			poList.add(accounts.get(i).toPO());			
+		}
+		a.writer(poList);
 	}
 }
