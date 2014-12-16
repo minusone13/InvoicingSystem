@@ -1,0 +1,705 @@
+package presentation.saleui;
+
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
+import javax.swing.ImageIcon;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+import presentation.commodityui.JPmanageBills2.JPanelEdit;
+import presentation.commodityui.JPmanageBills2.JPanelEdit.MouseListenerOfButton;
+import presentation.commodityui.JPmanageBills2.JPanelEdit.TreadOfLeft;
+import presentation.commodityui.JPmanageBills2.JPanelEdit.TreadOfRight;
+import presentation.managerui.JPBillList;
+import presentation.managerui.MouseListenerGetXY;
+import userui.Frame;
+import businesslogic.BillState;
+import businesslogic.BillStyle;
+
+public class JPmanageCustomer extends JPanel {
+
+	  //背景
+			private JLabel bg=new JLabel();
+			//向上
+			private JLabel up=new JLabel();
+			//向下
+			private JLabel down=new JLabel();
+			//单据列表
+			private JPBillList billList=new JPBillList();
+			//查询按钮
+			private JLabel inquire=new JLabel();
+			//删除按钮
+			private JLabel delete=new JLabel();
+			//编辑按钮
+			private JLabel edit=new JLabel();
+			//创建按钮
+			private JLabel add=new JLabel();
+			//编辑面板
+			private JPanelEdit JPedit;
+			//查找面板
+			private JPanelSearch JPsearch;
+			public JPBillList getBillList() {
+				return billList;
+			}
+			public void setBillList(JPBillList billList) {
+				this.billList = billList;
+			}
+			//图片
+			ImageIcon upIconW=new ImageIcon("src/image/upW.png");
+			ImageIcon downIconW=new ImageIcon("src/image/downW.png");
+			ImageIcon searchIconW=new ImageIcon("src/image/function/searchW.png");
+			ImageIcon deleteIconW=new ImageIcon("src/image/function/deleteW.png");
+			ImageIcon editIconW=new ImageIcon("src/image/function/editW.png");
+			ImageIcon addIconW=new ImageIcon("src/image/function/addW.png");
+			
+			ImageIcon upIconR=new ImageIcon("src/image/upR.png");
+			ImageIcon downIconR=new ImageIcon("src/image/downR.png");
+			ImageIcon searchIconR=new ImageIcon("src/image/function/searchR.png");
+			ImageIcon deleteIconR=new ImageIcon("src/image/function/deleteR.png");
+			ImageIcon editIconR=new ImageIcon("src/image/function/editR.png");
+			ImageIcon addIconR=new ImageIcon("src/image/function/addR.png");
+			//frame的引用
+		    Frame frame;
+			public JPmanageCustomer(){//参数决定编辑板的类型
+				//面板大小
+				this.setSize(905, 342);
+				//设置布局
+				this.setLayout(null);
+				//设置面板透明
+				this.setOpaque(false);
+				//该面板背景
+				bg.setIcon(new ImageIcon("src/image/passBill/PassBillblock2.png"));
+				bg.setBounds(0, 0, 345, 342);
+				//底板
+				JPanel jp=new JPanel();
+				jp.setLayout(null);
+				jp.setBounds(20,20,261, 93*3+22);
+				jp.setOpaque(false);
+				//底板的灰色背景
+				JLabel jpbg=new JLabel();
+				jpbg.setBounds(0, 0, 261, 301);
+				jpbg.setIcon(new ImageIcon("src/image/passBill/Pb2.png"));
+				
+				//将单据vo数组加到单据面板列表
+				billList.setLocation(0, 0);
+				
+				//将列表加在底板上
+				jp.add(billList,0);
+				jp.add(jpbg,1);
+				
+				
+				//向上按钮
+				up.setIcon(upIconW);
+				up.setBounds(281, 20, 32, 32);
+				up.addMouseListener(new MouseListenerOfButton(1));
+				//向下按钮
+				down.setIcon(downIconW);
+				down.setBounds(281, 289, 32, 32);
+				down.addMouseListener(new MouseListenerOfButton(2));
+				
+				//创建功能按钮
+				add.setIcon(addIconW);
+				add.setBounds(720, 20, 50, 50);
+				add.addMouseListener(new MouseListenerOfButton(7));
+				//删除功能按钮
+				delete.setIcon(deleteIconW);
+				delete.setBounds(720, 85, 50, 50);
+				delete.addMouseListener(new MouseListenerOfButton(4));
+				//编辑功能按钮
+				edit.setIcon(editIconW);
+				edit.setBounds(720, 150, 50, 50);
+				edit.addMouseListener(new MouseListenerOfButton(5));
+				//处理功能按钮
+				inquire.setIcon(searchIconW);
+				inquire.setBounds(720, 215, 50, 50);
+				inquire.addMouseListener(new MouseListenerOfButton(3));
+				//编辑面板
+				JPedit=new JPanelEdit();
+				JPedit.setLocation(905, 36);
+				//查找面板
+				JPsearch=new JPanelSearch();
+				JPsearch.setLocation(905, 36);
+				
+				this.add(jp,0);
+				this.add(up,1);
+				this.add(down,2);
+				this.add(JPedit,3);
+				this.add(JPsearch,4);
+				this.add(inquire,5);
+				this.add(delete,6);
+				this.add(edit,7);
+				this.add(add,8);
+				this.add(bg,9);
+			}
+			  /*获取frame引用*/
+		    public void getFrame( Frame f){
+		    		frame=f;
+		    }
+			public JPBillList getBillsList(){
+				return billList;
+			}
+			public class MouseListenerOfButton implements MouseListener{
+
+				private int num;
+				public MouseListenerOfButton(int N){
+					num=N;
+				}
+				public void mouseClicked(MouseEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				//点击功能按键
+				public void mousePressed(MouseEvent e) {
+					// TODO Auto-generated method stub
+					switch(num){
+					case 1:
+						up.setIcon(upIconR);
+						//向上
+						billList.startUp();
+						break;
+					case 2:
+						down.setIcon(downIconR);
+						//向下
+						billList.startDown();
+						break;	
+					case 3:
+						inquire.setIcon(searchIconR);
+						JPsearch.leftMove();
+						break;
+					case 4:
+						delete.setIcon(deleteIconR);
+						billList.removeChosen();//删除选中的
+						break;
+					case 5:
+						edit.setIcon(editIconR);
+						if(billList.getChosenNum()==1){
+							JPedit.setIsAdd(false);//不是加单据是修改单据
+							JPedit.leftMove();//调出编辑板
+						}
+						else{
+							System.out.println("只能修改一个客户的信息");
+						}
+						break;
+					case 7:
+						add.setIcon(addIconR);
+						JPedit.setIsAdd(true);//不是加单据是修改单据
+						JPedit.leftMove();//调出编辑板
+					}
+				}
+
+				public void mouseReleased(MouseEvent e) {
+					// TODO Auto-generated method stub
+					switch(num){
+					case 1:
+					up.setIcon(upIconW);
+					//向上停止
+					billList.stop();
+						break;
+					case 2:
+					down.setIcon(downIconW);
+					//向上停止
+					billList.stop();
+						break;	
+					case 3:
+						inquire.setIcon(searchIconW);
+						break;
+					case 4:
+						delete.setIcon(deleteIconW);
+						break;
+					case 5:
+						edit.setIcon(editIconW);
+						break;				
+					case 7:
+						add.setIcon(addIconW);
+						break;
+					}
+				}
+
+				public void mouseEntered(MouseEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				public void mouseExited(MouseEvent e) {
+					// TODO Auto-generated method stub
+					switch(num){
+					case 1:
+						up.setIcon(upIconW);
+						break;
+					case 2:
+						down.setIcon(downIconW);
+						break;	
+					case 3:
+						inquire.setIcon(searchIconW);
+						break;
+					case 4:
+						delete.setIcon(deleteIconW);
+						break;
+					case 5:
+						edit.setIcon(editIconW);
+						break;		
+					case 7:
+						add.setIcon(addIconW);
+						break;
+					}
+				}
+				
+			}
+			/*编辑栏面板*/
+			public class JPanelEdit extends JPanel{
+				//判断是加客户还是编辑客户
+				private boolean isAdd=true;//默认是加单据
+				//背景
+				private JLabel back=new JLabel();
+				//右移按钮
+				private JLabel right=new JLabel();
+				//确认按钮
+				private JLabel confirm=new JLabel();
+				//图片
+				private ImageIcon right0=new ImageIcon("src/image/function/rightW.png");
+				private ImageIcon right1=new ImageIcon("src/image/function/rightR.png");
+				private ImageIcon scan0=new ImageIcon("src/image/function/littleScanW.png");
+				private ImageIcon scan1=new ImageIcon("src/image/function/littleScanR.png");
+				private ImageIcon confirm0=new ImageIcon("src/image/function/confirmW.png");
+				private ImageIcon confirm1=new ImageIcon("src/image/function/confirmR.png");
+				
+				//报溢报损单的附件
+				private JLabel category=new JLabel("分类");
+				private JLabel rank=new JLabel("级别");
+				private JLabel name=new JLabel("姓名");
+				private JLabel phoneNumber=new JLabel("电话");
+				private JLabel address=new JLabel("地址");
+				private JLabel email=new JLabel("邮箱");
+				private JLabel postcode=new JLabel("邮编");
+				private JLabel saleman=new JLabel("默认业务员");
+				private JComboBox  categoryCombo;
+				private JComboBox  rankCombo;
+				private JTextField nameText=new JTextField(10);
+				private JTextField phoneNumberText=new JTextField(10);
+				private JTextField addressText=new JTextField(10);
+				private JTextField emailText=new JTextField(10);
+				private JTextField postcodeText=new JTextField(10);
+				private JTextField salemanText=new JTextField(10);
+				public JPanelEdit(){
+					//面板大小
+					this.setSize(240,270);
+					//设置布局
+					this.setLayout(null);
+					//设置面板透明
+					this.setOpaque(false);
+					//监控
+					this.addMouseListener(new MouseListenerGetXY());
+					//背景
+					back.setIcon(new ImageIcon("src/image/function/editBlock.png"));
+					back.setBounds(0, 0, 240,270);
+					//右移按钮
+					right.setIcon(right0);
+					right.setBounds(10, 123, 24, 24);
+					right.addMouseListener(new MouseListenerOfButton(1));
+					//确认按钮
+					confirm.setIcon(confirm0);
+					confirm.setBounds(120, 236, 24, 24);
+					confirm.addMouseListener(new MouseListenerOfButton(3));
+				
+					//设置标签字体
+					phoneNumber.setFont(new Font("宋体",Font.BOLD,14));
+					category.setFont(new Font("宋体",Font.BOLD,14));
+					rank.setFont(new Font("宋体",Font.BOLD,14));
+					name.setFont(new Font("宋体",Font.BOLD,14));
+					address.setFont(new Font("宋体",Font.BOLD,14));
+					email.setFont(new Font("宋体",Font.BOLD,14));
+					postcode.setFont(new Font("宋体",Font.BOLD,14));
+					saleman.setFont(new Font("宋体",Font.BOLD,14));
+					//设置字体颜色
+					phoneNumber.setForeground(Color.white);
+					category.setForeground(Color.white);
+					rank.setForeground(Color.white);
+					name.setForeground(Color.white);
+					address.setForeground(Color.white);
+					email.setForeground(Color.white);
+					postcode.setForeground(Color.white);
+					saleman.setForeground(Color.white);
+					//设置标签大小位置
+					category.setBounds(40, 20, 40, 20);
+					rank.setBounds(40, 45, 40, 20);
+					name.setBounds(40, 70, 40, 20);
+					saleman.setBounds(40, 95,120, 20);
+					phoneNumber.setBounds(40,120, 40, 20);
+					email.setBounds(40,145, 40, 20);
+					postcode.setBounds(40,170, 40, 20);
+					address.setBounds(40,195, 40, 20);
+					
+					//客户等级选择下拉框
+					String[] categorycomb={"销售商","进货商"};
+					categoryCombo = new JComboBox(categorycomb);
+					categoryCombo.setFont(new Font("宋体",Font.BOLD,14));
+					categoryCombo.setBounds(80,20, 150, 20);
+					categoryCombo.setBackground(Color.gray);
+					categoryCombo.setForeground(Color.white);
+					
+					//客户等级选择下拉框
+					String[] levelcomb={"一级","二级","三级","四级","五级"};
+					rankCombo = new JComboBox(levelcomb);
+					rankCombo.setFont(new Font("宋体",Font.BOLD,14));
+					rankCombo.setBounds(80,45, 150, 20);
+					rankCombo.setBackground(Color.gray);
+					rankCombo.setForeground(Color.white);
+					
+					//姓名文本框
+					nameText.setBounds(80,70, 150, 20);
+					nameText.setOpaque(false);//文本框透明
+					nameText.setForeground(Color.white);//前景色
+					//业务员文本框
+					salemanText.setBounds(125,95,105, 20);
+					salemanText.setOpaque(false);//文本框透明
+					salemanText.setForeground(Color.white);//前景色
+					//电话文本框
+					phoneNumberText.setBounds(80,120, 150, 20);
+					phoneNumberText.setOpaque(false);//文本框透明
+					phoneNumberText.setForeground(Color.white);//前景色
+					//邮箱文本框
+					emailText.setBounds(80,145, 150, 20);
+					emailText.setOpaque(false);//文本框透明
+					emailText.setForeground(Color.white);//前景色
+					//邮编文本框
+					postcodeText.setBounds(80,170, 150, 20);
+					postcodeText.setOpaque(false);//文本框透明
+					postcodeText.setForeground(Color.white);//前景色
+					//地址文本框
+					addressText.setBounds(80,195, 150, 20);
+					addressText.setOpaque(false);//文本框透明
+					addressText.setForeground(Color.white);//前景色
+					
+					this.add(right,0);
+					this.add(confirm,1);
+					this.add(phoneNumber,2);
+					this.add(category,3);
+					this.add(rank,4);
+					this.add(name,5);
+					this.add(saleman,6);
+					this.add(email,7);
+					this.add(postcode,8);
+					this.add(address,9);
+					this.add(categoryCombo,10);
+					this.add(rankCombo,11);
+					this.add(nameText,12);
+					this.add(salemanText,13);
+					this.add(phoneNumberText,14);
+					this.add(emailText,15);
+					this.add(postcodeText,16);
+					this.add(addressText,17);
+					this.add(back,18);
+				}
+				public void leftMove(){
+					Thread t=new Thread(new TreadOfLeft());
+					t.start();
+				}
+				public void RightMove(){
+					Thread t=new Thread(new TreadOfRight());
+					t.start();
+				}
+				public boolean getIsAdd() {
+					return isAdd;
+				}
+				public void setIsAdd(boolean isAdd) {
+					this.isAdd = isAdd;
+				}
+				public class MouseListenerOfButton implements MouseListener{
+
+					private int num;//1、右移 2、浏览 3、确认
+					public MouseListenerOfButton(int N){
+						num=N;
+					}
+					
+					public void mouseClicked(MouseEvent e) {
+						// TODO Auto-generated method stub
+						
+					}
+
+					public void mousePressed(MouseEvent e) {
+						// TODO Auto-generated method stub
+						switch(num){
+						case 1:
+							right.setIcon(right1);
+							//右移
+							RightMove();
+							break;
+						case 2:
+							break;
+						case 3:
+							confirm.setIcon(confirm1);
+							break;
+						}
+					}
+
+					public void mouseReleased(MouseEvent e) {
+						// TODO Auto-generated method stub
+						switch(num){
+						case 1:
+							right.setIcon(right0);
+							break;
+						case 2:
+							break;
+						case 3:
+							confirm.setIcon(confirm0);
+							break;
+						}
+					}
+
+					public void mouseEntered(MouseEvent e) {
+						// TODO Auto-generated method stub
+						
+					}
+
+					public void mouseExited(MouseEvent e) {
+						// TODO Auto-generated method stub
+						switch(num){
+						case 1:
+							right.setIcon(right0);
+							break;
+						case 2:
+							break;
+						case 3:
+							confirm.setIcon(confirm0);
+							break;
+						}
+					}
+					
+				}
+				public class TreadOfLeft  implements Runnable{
+
+					public void run() {
+						// TODO Auto-generated method stub
+						int x=905;
+						int y=36;
+						while(x!=665){
+							if((x-665)>10){
+								x-=10;
+							}
+							else{
+								x=665;
+							}
+							try {
+								Thread.sleep(50);
+							} catch (InterruptedException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							JPanelEdit.this.setLocation(x, y);
+						}
+					}
+					
+				}
+				
+				public class TreadOfRight  implements Runnable{
+
+					public void run() {
+						// TODO Auto-generated method stub
+						int x=665;
+						int y=36;
+						while(x!=905){
+							if((905-x)>10){
+								x+=10;
+							}
+							else{
+								x=905;
+							}
+							try {
+								Thread.sleep(50);
+							} catch (InterruptedException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							JPanelEdit.this.setLocation(x, y);
+						}
+					}
+					
+				}
+		
+
+			}
+			/*编辑栏面板*/
+			public class JPanelSearch extends JPanel{
+				//背景
+				private JLabel back=new JLabel();
+				//右移按钮
+				private JLabel right=new JLabel();
+				//确认按钮
+				private JLabel searchButton=new JLabel();
+				//图片
+				private ImageIcon right0=new ImageIcon("src/image/function/rightW.png");
+				private ImageIcon right1=new ImageIcon("src/image/function/rightR.png");
+				private ImageIcon search0=new ImageIcon("src/image/function/littleScanW.png");
+				private ImageIcon search1=new ImageIcon("src/image/function/littleScanR.png");
+				
+				//报溢报损单的附件
+				private JLabel searchjl=new JLabel("查找 ");
+				private JTextField searchTxt=new JTextField(10);
+				public JPanelSearch(){
+					//面板大小
+					this.setSize(240,270);
+					//设置布局
+					this.setLayout(null);
+					//设置面板透明
+					this.setOpaque(false);
+					//监控
+					this.addMouseListener(new MouseListenerGetXY());
+					//背景
+					back.setIcon(new ImageIcon("src/image/function/editBlock.png"));
+					back.setBounds(0, 0, 240,270);
+					//右移按钮
+					right.setIcon(right0);
+					right.setBounds(10, 123, 24, 24);
+					right.addMouseListener(new MouseListenerOfButton(1));
+					//确认按钮
+					searchButton.setIcon(search0);
+					searchButton.setBounds(120, 236, 24, 24);
+					searchButton.addMouseListener(new MouseListenerOfButton(3));
+				
+					//设置标签字体
+					searchjl.setFont(new Font("宋体",Font.BOLD,14));
+					//设置字体颜色
+					searchjl.setForeground(Color.white);
+					//设置标签大小位置
+					searchjl.setBounds(40, 30, 40, 20);
+					//数量文本框
+					searchTxt.setBounds(80,30, 140, 20);
+					searchTxt.setOpaque(false);//文本框透明
+					searchTxt.setForeground(Color.white);//前景色
+					
+					this.add(right,0);
+					this.add(searchButton,1);
+					this.add(searchjl,2);
+					this.add(searchTxt,3);
+					this.add(back,4);
+				}
+				public void leftMove(){
+					Thread t=new Thread(new TreadOfLeft());
+					t.start();
+				}
+				public void RightMove(){
+					Thread t=new Thread(new TreadOfRight());
+					t.start();
+				}
+				public class MouseListenerOfButton implements MouseListener{
+
+					private int num;//1、右移 2、浏览 3、确认
+					public MouseListenerOfButton(int N){
+						num=N;
+					}
+					
+					public void mouseClicked(MouseEvent e) {
+						// TODO Auto-generated method stub
+						
+					}
+
+					public void mousePressed(MouseEvent e) {
+						// TODO Auto-generated method stub
+						switch(num){
+						case 1:
+							right.setIcon(right1);
+							//右移
+							RightMove();
+							break;
+						case 2:
+							break;
+						case 3:
+							searchButton.setIcon(search1);
+							break;
+						}
+					}
+
+					public void mouseReleased(MouseEvent e) {
+						// TODO Auto-generated method stub
+						switch(num){
+						case 1:
+							right.setIcon(right0);
+							break;
+						case 2:
+							break;
+						case 3:
+							searchButton.setIcon(search0);
+							break;
+						}
+					}
+
+					public void mouseEntered(MouseEvent e) {
+						// TODO Auto-generated method stub
+						
+					}
+
+					public void mouseExited(MouseEvent e) {
+						// TODO Auto-generated method stub
+						switch(num){
+						case 1:
+							right.setIcon(right0);
+							break;
+						case 2:
+							break;
+						case 3:
+							searchButton.setIcon(search0);
+							break;
+						}
+					}
+					
+				}
+				public class TreadOfLeft  implements Runnable{
+
+					public void run() {
+						// TODO Auto-generated method stub
+						int x=905;
+						int y=36;
+						while(x!=665){
+							if((x-665)>10){
+								x-=10;
+							}
+							else{
+								x=665;
+							}
+							try {
+								Thread.sleep(50);
+							} catch (InterruptedException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							JPanelSearch.this.setLocation(x, y);
+						}
+					}
+					
+				}
+				
+				public class TreadOfRight  implements Runnable{
+
+					public void run() {
+						// TODO Auto-generated method stub
+						int x=665;
+						int y=36;
+						while(x!=905){
+							if((905-x)>10){
+								x+=10;
+							}
+							else{
+								x=905;
+							}
+							try {
+								Thread.sleep(50);
+							} catch (InterruptedException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							JPanelSearch.this.setLocation(x, y);
+						}
+					}
+					
+				}
+		
+
+			}
+	
+}
