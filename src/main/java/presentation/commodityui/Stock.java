@@ -158,6 +158,7 @@ public class Stock extends JPanel {
 					home.setIcon(new ImageIcon("src/image/home1.png"));
 					Stock.this.getManageBills().setVisible(false);
 					Stock.this.getManageBills2().setVisible(false);
+					Stock.this.getManagerComs().setVisible(false);
 					Stock.this.getFunction().setVisible(true);
 					break;
 				case 2:
