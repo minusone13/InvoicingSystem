@@ -88,7 +88,6 @@ public class SaleDetailPanel extends JPanel{
 	
 	public String[][] getSaleDetailExport() {
 		
-		
 		int size = table.getRowCount();
 		String[][] data = new String[size+1][];
 		data[0] = names;	
@@ -104,6 +103,6 @@ public class SaleDetailPanel extends JPanel{
 	
 	public void export() {
 		String[][] data = getSaleDetailExport();
-		Export printer = new Export("销售明细表",data);
+		new Export("销售明细表",data);
 	}
 }

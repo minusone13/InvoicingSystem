@@ -9,6 +9,7 @@ import javax.swing.table.DefaultTableModel;
 import businesslogic.financialbl.Financial;
 import businesslogicservice.financialblservice.FinancialBlService;
 import presentation.financialui.InitialInfoPanel.versionItemListener;
+import tool.Export;
 import vo.inquiryVO.BusinessSituationVO;
 import vo.inquiryVO.InquiryConditionVO;
 
@@ -130,6 +131,18 @@ public class BusinessConditionPanel extends JPanel{
 		tableOfProfit.updateUI();
 	}
 	
+	public void export() {
+		String[] names = {"折让后总收入","折让","商品报溢收入","成本调价收入","代金券与实际收款差额收入","销售成本","商品报损","商品赠出","利润"};
+		String[][] data = new String[2][];
+		data[0] = names;
+		String[] temp = {tableOfEarn.getValueAt(0, 0).toString(),tableOfEarn.getValueAt(0, 1).toString(), 
+				tableOfEarn.getValueAt(0, 2).toString(), tableOfEarn.getValueAt(0, 3).toString(), 
+				tableOfEarn.getValueAt(0, 4).toString(), tableOfPay.getValueAt(0, 0).toString(), 
+				tableOfPay.getValueAt(0, 1).toString(), tableOfPay.getValueAt(0, 2).toString(),
+				tableOfProfit.getValueAt(0, 0).toString()};
+		data[1] = temp;
+		new Export("经营情况表", data);
+	} 
 	public class MouseListenOfButton implements MouseListener{
 
 		private int num;
