@@ -57,7 +57,6 @@ public class JPManagerCom extends JPanel{
 		//传递引用
 		content.setJPmanagerCom(this);
 		commodities.setJPmanagerCom(this);
-		commodities.addCommodities(null);
 		
 		head.setBounds(0, 0, 617, 40);
 		head.setLayout(null);
@@ -119,7 +118,6 @@ public class JPManagerCom extends JPanel{
 	/*底部显示信息*/
 	public void showDetail(String s){
 		detail.setText(s);
-		System.out.println("showDetail");
 	}
 	public JPtreeContent getContent() {
 		return content;
