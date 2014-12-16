@@ -23,6 +23,10 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+<<<<<<< HEAD
+	<classpathentry kind="lib" path="C:/Users/user/Documents/Tencent Files/275838287/FileRecv/jxl.jar"/>
+=======
 	<classpathentry kind="lib" path="D:/学习/软工/jxl.jar"/>
+>>>>>>> branch 'master' of git@github.com:minusone13/InvoicingSystem.git
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

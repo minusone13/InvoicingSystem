@@ -7,6 +7,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
 import po.AccountPO;
@@ -14,7 +16,7 @@ import po.stockpo.CommodityPO;
 import data.Tool;
 import dataservice.accountdataservice.StubAccountDataService;
 
-public class AccountData implements StubAccountDataService{
+public class AccountData  implements StubAccountDataService{
 	
 
 	public AccountPO find(AccountPO a) {

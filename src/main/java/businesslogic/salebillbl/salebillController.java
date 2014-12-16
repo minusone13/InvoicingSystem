@@ -1,19 +1,30 @@
 package businesslogic.salebillbl;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
 import vo.CustomerVO;
+import vo.LevelStrategyVO;
 import vo.PurBackSheetVO;
 import vo.PurSheetVO;
+import vo.ReachStrategyVO;
 import vo.SaleBackSheetVO;
 import vo.SaleSheetVO;
 import vo.financialBillVO.ReceiptVO;
+import vo.stockvo.CommodityVO;
 import businesslogic.BillState;
 import businesslogic.BillStyle;
+import businesslogic.LevelStrategyStyle;
+import businesslogic.commoditybillbl.StubGiftBill;
+import businesslogic.commoditybl.MockCommodity;
+import businesslogic.customerbl.CustomerList;
 import businesslogic.examinebl.StubBillPool;
 import businesslogic.financialbillbl.ReceiptBill;
+import businesslogic.managerbl.StubManager;
 import businesslogic.salebillServicec.salebillForFinancial;
+import businesslogicservice.customerblservice.CustomerBlService;
+import businesslogicservice.managerblservice.StubManagerBlService;
 import businesslogicservice.salebillblservice.SaleBillBlService;
 
 public class salebillController implements SaleBillBlService,salebillForFinancial{
@@ -334,5 +345,100 @@ public class salebillController implements SaleBillBlService,salebillForFinancia
 			}
 			return number;
 		}
-	
+		
+		public String sureLevelStrategy(int level,int money1,String operatorid,LevelStrategyStyle style){
+			String words = new String();
+			StubManagerBlService straController = new StubManager();
+			ArrayList<LevelStrategyVO> lsvo = straController.ShowLevelStrategy();
+			double discount = 0.0;
+			double givemoney2 =0.0;
+			double currentlimit=0.0;
+			ArrayList<CommodityVO> givelist =new ArrayList<CommodityVO>();
+			for(LevelStrategyVO tempvo:lsvo){
+				if(level==tempvo.getLevel()){
+					if(currentlimit<tempvo.getLimit()){
+						if(money1>=tempvo.getLimit()){
+							currentlimit=tempvo.getLimit();
+							//根据传入的类型来决定促销策略;
+							switch(style){
+								case Gift	 :givelist=tempvo.getAlOfCommodity();
+											 StubBillPool pool = new StubBillPool();
+										      StubGiftBill giftbill = new StubGiftBill();
+										      giftbill.setDate(new Date());
+										      ArrayList<MockCommodity> coms = new ArrayList<MockCommodity>();
+										      for(CommodityVO temp:givelist){
+										    	  coms.add(new MockCommodity(temp));
+										      }
+										      giftbill.setComs(coms);
+										      SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+										      String currentTime = format.format(new Date());
+										      ArrayList<StubGiftBill> list=pool.getGiftBill();
+										      giftbill.setID("XJFYD-"+currentTime+"-"+String.format("%05d", list.size()+1));
+										      giftbill.setRemark(null);
+										      giftbill.setOperator(operatorid);
+										      pool.add(giftbill); 
+										      words="具体赠品请查看赠品单";
+										      break;
+								case Discount:discount=tempvo.getDiscountrate()*money1;
+											  words="折扣金额:"+String.valueOf(discount);
+										      break;
+								case Coupon  :givemoney2=((int)(Math.floor(money1*tempvo.getCouponrate())/10)*10);
+											  words="赠送代金券:"+String.valueOf(givemoney2);
+											  break;
+								case Default :words="无促销";
+											  break;
+							}
+							
+						}
+					}
+				}
+			}
+
+			return words;
+		}
+		
+		public String sureReachStrategy(String nameOfCustomer,double pmoney,String operatorid,LevelStrategyStyle style){
+			String words = new String();
+			CustomerBlService custController = new CustomerList();
+			CustomerVO customervo = custController.findCustomer(nameOfCustomer);
+			StubManagerBlService straController = new StubManager();;
+			ArrayList<ReachStrategyVO> rsvo = straController.ShowReachStrategy();
+			//满额策略能够提供些什么;
+			double currentlimit=0.0;
+			int givemoney2=0;
+			ArrayList<CommodityVO> givelist =new ArrayList<CommodityVO>();
+			for(ReachStrategyVO tempvo:rsvo){
+				if(currentlimit<tempvo.getLimit()){
+					if(pmoney>=tempvo.getLimit()){
+						currentlimit=tempvo.getLimit();
+						switch(style){
+							case Gift    :givelist=tempvo.getAlOfCommodity();
+										  StubBillPool pool = new StubBillPool();
+										  StubGiftBill giftbill = new StubGiftBill();
+										  giftbill.setDate(new Date());
+										  ArrayList<MockCommodity> coms = new ArrayList<MockCommodity>();
+										  for(CommodityVO temp:givelist){
+											  coms.add(new MockCommodity(temp));
+										  }
+										  giftbill.setComs(coms);
+										  SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+										  String currentTime = format.format(new Date());
+										  ArrayList<StubGiftBill> list=pool.getGiftBill();
+										  giftbill.setID("XJFYD-"+currentTime+"-"+String.format("%05d", list.size()+1));
+										  giftbill.setRemark(null);
+										  giftbill.setOperator(operatorid);
+										  pool.add(giftbill);
+										  words="具体赠品请查看赠品单";
+									      break;
+							case Coupon  :givemoney2=((int)(Math.floor(pmoney*tempvo.getCouponrate())/10)*10);
+										  words="赠送代金券:"+String.valueOf(givemoney2);
+										  break;
+							case Default :words="无促销";
+							  			  break;
+						}
+					}
+				}
+			}
+			return words;
+		}
 }

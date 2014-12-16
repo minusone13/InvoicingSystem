@@ -1,12 +1,13 @@
 package dataservice.accountdataservice;
 
+import java.rmi.Remote;
 import java.util.ArrayList;
 
 import po.AccountPO;
 
 
 
-public interface StubAccountDataService {
+public interface StubAccountDataService extends Remote{
 	public AccountPO find(AccountPO a);
 	
 	public boolean add(AccountPO a) ;

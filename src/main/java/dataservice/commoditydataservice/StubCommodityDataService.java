@@ -1,12 +1,13 @@
 package dataservice.commoditydataservice;
 
+import java.rmi.Remote;
 import java.util.ArrayList;
 
 import po.*;
 import po.stockpo.*;
 import vo.RM;
 
-public interface StubCommodityDataService {
+public interface StubCommodityDataService extends Remote{
 	public RM insert(CommodityPO po);
 	public RM insert(PackPO po);
 	public RM insert(CategoryPO po);

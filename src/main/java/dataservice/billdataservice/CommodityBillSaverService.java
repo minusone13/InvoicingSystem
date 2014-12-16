@@ -1,12 +1,13 @@
 package dataservice.billdataservice;
 
+import java.rmi.Remote;
 import java.util.ArrayList;
 
 import po.AlertBillPO;
 import po.GiftBillPO;
 import po.SpillsLossBillPO;
 
-public interface CommodityBillSaverService {
+public interface CommodityBillSaverService extends Remote{
 
 	/*保存库存赠送单*/
 	public void saveGiftBill(ArrayList<GiftBillPO> sgb);

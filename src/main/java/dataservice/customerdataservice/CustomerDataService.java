@@ -1,12 +1,13 @@
 package dataservice.customerdataservice;
 
+import java.rmi.Remote;
 import java.util.ArrayList;
 
 import po.CustomerPO;
 
 
 
-public interface CustomerDataService {
+public interface CustomerDataService extends Remote{
 	public boolean addCustomer(CustomerPO po);
 	public CustomerPO findCustomer(String name);
 	public boolean deleteCustomer(String name);

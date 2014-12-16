@@ -1,12 +1,13 @@
 package dataservice.billdataservice;
 
+import java.rmi.Remote;
 import java.util.ArrayList;
 
 import po.CashPaymentPO;
 import po.PaymentPO;
 import po.ReceiptPO;
 
-public interface FinancialBillSaverService {
+public interface FinancialBillSaverService extends Remote{
 
 	/*保存付款单*/
 	public void savePayment(ArrayList<PaymentPO> pb);
