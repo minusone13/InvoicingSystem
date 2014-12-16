@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
+import presentation.commodityui.StockManagerDriver;
+import data.commoditydata.StubStockDataController;
 import vo.AlertBillVO;
 import vo.BarginStrategyVO;
 import vo.GiftBillVO;
@@ -54,6 +56,9 @@ public class JPBillList extends JPanel {
 	 SaleBillBlService sbl=new salebillController();
 	 StubCommodityBlService stockbl=new StubStockController();
 	public JPBillList(){
+		//逻辑层接口
+		StockManagerDriver smd=new StockManagerDriver();
+		smd.start(stockbl,StubStockDataController.getInstance());
 		//面板大小
 		this.setSize(261, 0);
 		//设置布局
