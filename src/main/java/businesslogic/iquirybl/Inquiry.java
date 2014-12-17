@@ -26,12 +26,6 @@ import vo.financialBillVO.*;
 
 import vo.inquiryVO.*;
 
-//1、模糊查找
-//2、完善返回到ui层的内容
-//3、红冲功能，需要各位人员创建单据功能
-//4、添加记录步骤
-//5、导出excel表
-//6、根据收款单付款单，修改账户和客户的应收应付
 public class Inquiry {
 	StubBillPool bp = new StubBillPool();
 	
@@ -837,7 +831,7 @@ public class Inquiry {
 		double bonusTotal = sale.getAllVoucherBonus(dateBefore, dateAfter);
 		bsVO.setBonusTotal(bonusTotal);
 		
-		//折让后收入
+		//销售收入
 		double saleTotal = sale.getAllSalesIncome(dateBefore, dateAfter);
 		bsVO.setSaleTotal(saleTotal);
 		
@@ -849,7 +843,14 @@ public class Inquiry {
 		double cost = sale.getAllPurMoney(dateBefore, dateAfter);
 		bsVO.setCost(cost);
 		
-		double profit = adjustmentTotal+spillsTotal+bonusTotal+saleTotal-cost-lossTotal;
+		//总收入
+		double totalEarn =  adjustmentTotal+spillsTotal+bonusTotal+saleTotal;
+		bsVO.setTotalEarn(totalEarn);
+		//总支出
+		double totalPay = cost+lossTotal;
+		bsVO.setTotalPay(totalPay);
+		//利润
+		double profit = totalEarn-totalPay;
 		bsVO.setProfit(profit);
 		return bsVO;
 	}

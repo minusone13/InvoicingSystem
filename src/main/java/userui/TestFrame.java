@@ -5,6 +5,7 @@ import java.awt.Toolkit;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import presentation.financialui.BusinessConditionPanel;
 import presentation.managerui.MouseListenerGetXY;
 import presentation.userui.JPmanageUser;
 
@@ -34,7 +35,7 @@ public class TestFrame extends JFrame {
 	
 //		InitialInfoPanel t = new InitialInfoPanel();
 //		t.update(2);
-		TestFrame testJP=new TestFrame(new JPmanageUser());
+		TestFrame testJP=new TestFrame(new BusinessConditionPanel());
 //		JPmanagerStrategy2 test=new JPmanagerStrategy2();
 //		test.setStyle(StrategyStyle.ReachStrategy);
 		

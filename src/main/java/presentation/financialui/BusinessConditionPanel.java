@@ -16,13 +16,18 @@ import vo.inquiryVO.InquiryConditionVO;
 
 public class BusinessConditionPanel extends JPanel{
 	FinancialBlService financial = new Financial();
-	String[] earn = {"折让后总收入","折让","商品报溢收入","成本调价收入","代金券与实际收款差额收入"};
-	String[] pay = {"销售成本","商品报损","商品赠出"};
+	String[] earn1 = {"折让后总收入","折让","销售收入","商品报溢收入"};
+	String[] earn2 = {"成本调价收入","代金券与实际收款差额收入"};
+	String[] pay = {"总支出","销售成本","商品报损","商品赠出"};
 	String[] profit = {"利润"};
 	
-	DefaultTableModel modelOfEarn=new DefaultTableModel(new Object[][]{},earn);
-	JTable tableOfEarn = new JTable(modelOfEarn);
-	JScrollPane paneOfEarn;
+	DefaultTableModel modelOfEarn1=new DefaultTableModel(new Object[][]{},earn1);
+	JTable tableOfEarn1 = new JTable(modelOfEarn1);
+	JScrollPane paneOfEarn1;
+	
+	DefaultTableModel modelOfEarn2=new DefaultTableModel(new Object[][]{},earn2);
+	JTable tableOfEarn2 = new JTable(modelOfEarn2);
+	JScrollPane paneOfEarn2;
 	
 	DefaultTableModel modelOfPay=new DefaultTableModel(new Object[][]{},pay);
 	JTable tableOfPay = new JTable(modelOfPay);
@@ -35,7 +40,7 @@ public class BusinessConditionPanel extends JPanel{
 	JTextField year, month, day, year2, month2, day2;
 	JLabel ye, mo, da, ye2, mo2, da2;
 	JLabel sure = new JLabel();
-	ImageIcon sureIcon1=new ImageIcon("src\\image\\InquiryUI\\确定白.png");
+	ImageIcon sureIcon1=new ImageIcon("src\\image\\InquiryUI\\确定.png");
 	ImageIcon sureIcon0=new ImageIcon("src\\image\\InquiryUI\\确定灰.png");
 	
 	//frame的引用
@@ -47,23 +52,31 @@ public class BusinessConditionPanel extends JPanel{
 	 		frame=f;
 	 }
 	public void initial() {
-		this.setBounds(0, 0, 960, 150);
+		this.setBounds(0, 0, 960, 180);
 		//设置布局
 		this.setLayout(null);
 		//设置面板透明
 		this.setOpaque(false);
 		
-		paneOfEarn = new JScrollPane(tableOfEarn);
-		this.add(paneOfEarn);
-		paneOfEarn.setBounds(10, 30, 800, 50);
+		paneOfEarn1 = new JScrollPane(tableOfEarn1);
+		this.add(paneOfEarn1);
+		paneOfEarn1.setBounds(10, 30, 400, 50);
+		tableOfEarn1.setOpaque(false);
+		
+		paneOfEarn2 = new JScrollPane(tableOfEarn2);
+		this.add(paneOfEarn2);
+		paneOfEarn2.setBounds(10, 80, 400, 50);
+		tableOfEarn2.setOpaque(false);
 		
 		paneOfPay = new JScrollPane(tableOfPay);
 		this.add(paneOfPay);
-		paneOfPay.setBounds(10, 100, 300, 50);
+		paneOfPay.setBounds(10, 130, 300, 50);
+		tableOfPay.setOpaque(false);
 		
 		paneOfProfit = new JScrollPane(tableOfProfit);
 		this.add(paneOfProfit);
-		paneOfProfit.setBounds(350, 100, 60, 50);		
+		paneOfProfit.setBounds(310, 130, 100, 50);		
+		tableOfProfit.setOpaque(false);
 		
 		year = new JTextField(4);
 		ye = new JLabel("年");
@@ -116,18 +129,28 @@ public class BusinessConditionPanel extends JPanel{
 		icv.setTimeAfter(after);
 		icv.setTimeBefore(before);
 		BusinessSituationVO vo = financial.inquiryCondition(icv);
+		Object[][] data0 = new Object[1][];
 		Object[][] data1 = new Object[1][];
 		Object[][] data2 = new Object[1][];
 		Object[][] data3 = new Object[1][];
 		
-		Object[] temp1 = {vo.getSaleTotal(), vo.getDiscount(), vo.getSpillsTotal(), vo.getAdjustmentTotal(), vo.getBonusTotal()};
+		Object[] temp0 = {vo.getTotalEarn(), vo.getDiscount(),vo.getSaleTotal(),vo.getSpillsTotal()};
+		data0[0] = temp0;
+				
+		Object[] temp1 = { vo.getAdjustmentTotal(), vo.getBonusTotal()};
 		data1[0] = temp1;
-		Object[] temp2 = {vo.getCost(), vo.getLossTotal(), vo.getGiftTotal()};
+		
+		Object[] temp2 = {vo.getTotalPay(), vo.getCost(), vo.getLossTotal(), vo.getGiftTotal()};
 		data2[0] = temp2;
+		
 		Object[] temp3 ={vo.getProfit()};
 		data3[0] = temp3;
-		modelOfEarn.setDataVector(data1, earn);
-		tableOfEarn.updateUI();
+		
+		modelOfEarn1.setDataVector(data0, earn1);
+		tableOfEarn1.updateUI();
+		
+		modelOfEarn2.setDataVector(data1, earn2);
+		tableOfEarn2.updateUI();
 		
 		modelOfPay.setDataVector(data2, pay);
 		tableOfPay.updateUI();
@@ -137,13 +160,14 @@ public class BusinessConditionPanel extends JPanel{
 	}
 	
 	public void export() {
-		String[] names = {"折让后总收入","折让","商品报溢收入","成本调价收入","代金券与实际收款差额收入","销售成本","商品报损","商品赠出","利润"};
+		String[] names = {"折让后总收入","折让","销售收入","商品报溢收入","成本调价收入","代金券与实际收款差额收入","总支出","销售成本","商品报损","商品赠出","利润"};
 		String[][] data = new String[2][];
 		data[0] = names;
-		String[] temp = {tableOfEarn.getValueAt(0, 0).toString(),tableOfEarn.getValueAt(0, 1).toString(), 
-				tableOfEarn.getValueAt(0, 2).toString(), tableOfEarn.getValueAt(0, 3).toString(), 
-				tableOfEarn.getValueAt(0, 4).toString(), tableOfPay.getValueAt(0, 0).toString(), 
-				tableOfPay.getValueAt(0, 1).toString(), tableOfPay.getValueAt(0, 2).toString(),
+		String[] temp = {tableOfEarn1.getValueAt(0, 0).toString(),tableOfEarn1.getValueAt(0, 1).toString(), 
+				tableOfEarn1.getValueAt(0, 2).toString(), tableOfEarn1.getValueAt(0, 3).toString(), 
+				tableOfEarn2.getValueAt(0, 0).toString(), tableOfEarn2.getValueAt(0, 1).toString(),
+				tableOfPay.getValueAt(0, 0).toString(), tableOfPay.getValueAt(0, 1).toString(),
+				tableOfPay.getValueAt(0, 2).toString(), tableOfPay.getValueAt(0, 3).toString(),
 				tableOfProfit.getValueAt(0, 0).toString()};
 		data[1] = temp;
 		new Export("经营情况表", data);
@@ -184,9 +208,7 @@ public class BusinessConditionPanel extends JPanel{
 
 		public void mouseEntered(MouseEvent e) {
 			switch(num){
-			case 0:sure.setIcon(sureIcon1);
-					
-					break;
+			case 0:sure.setIcon(sureIcon1);break;			
 			
 			}
 		}

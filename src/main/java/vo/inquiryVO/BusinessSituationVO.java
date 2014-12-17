@@ -7,13 +7,26 @@ public class BusinessSituationVO {
 	private double spillsTotal;//商品报溢收入
 	private double lossTotal;//商品报损
 	private double bonusTotal;//代金券与实际收款差额收入
-	private double saleTotal;//折让后收入
+	private double saleTotal;//销售收入
 	private double discount;//折让
 	private double cost;//销售成本
+	double totalEarn;//总收入
+	double totalPay;//总支出
 	
 	private double profit;//利润
 
-	
+	public double getTotalEarn() {
+		return totalEarn;
+	}
+	public void setTotalEarn(double totalEarn) {
+		this.totalEarn = totalEarn;
+	}
+	public double getTotalPay() {
+		return totalPay;
+	}
+	public void setTotalPay(double totalPay) {
+		this.totalPay = totalPay;
+	}
 	public double getCost() {
 		return cost;
 	}
