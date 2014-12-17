@@ -5,12 +5,8 @@ import java.awt.Toolkit;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import businesslogic.StrategyStyle;
-import presentation.financialui.BusinessConditionPanel;
-import presentation.financialui.InitialInfoPanel;
-import presentation.financialui.SaleDetailPanel;
-import presentation.managerui.JPmanagerStrategy2;
 import presentation.managerui.MouseListenerGetXY;
+import presentation.userui.JPmanageUser;
 
 
 
@@ -36,11 +32,11 @@ public class TestFrame extends JFrame {
 //		JPManagerCom test=new JPManagerCom();
 //		test.setRole(Role.STOCK_STAFF);
 	
-		InitialInfoPanel t = new InitialInfoPanel();
-		t.update(2);
-		TestFrame testJP=new TestFrame(new SaleDetailPanel());
-		JPmanagerStrategy2 test=new JPmanagerStrategy2();
-		test.setStyle(StrategyStyle.ReachStrategy);
+//		InitialInfoPanel t = new InitialInfoPanel();
+//		t.update(2);
+		TestFrame testJP=new TestFrame(new JPmanageUser());
+//		JPmanagerStrategy2 test=new JPmanagerStrategy2();
+//		test.setStyle(StrategyStyle.ReachStrategy);
 		
 	}
 
