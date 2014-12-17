@@ -88,6 +88,6 @@ public class CustomerList implements CustomerForFinancial, CustomerBlService{
 			vo.setShouldTake(vo.getShouldTake()-hadGive);
 			this.updateCustomer(vo);
 			
-		}//修改应付;对应于收款单;hadgive是给了客户多少钱，对应与付款单;
+		}//修改应付;hadgive是给了客户多少钱，对应与付款单;
 		
 }

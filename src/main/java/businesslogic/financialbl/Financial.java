@@ -15,6 +15,8 @@ import vo.inquiryVO.InquirySaleVO;
 import businesslogic.Role;
 import businesslogic.accountbl.Account;
 import businesslogic.accountbl.AccountList;
+import businesslogic.customerService.CustomerForFinancial;
+import businesslogic.customerbl.CustomerList;
 import businesslogic.financialbillbl.CashPaymentBill;
 import businesslogic.financialbillbl.FinancialBillList;
 import businesslogic.financialbillbl.PaymentBill;
@@ -253,6 +255,7 @@ public class Financial implements FinancialBlService{
 	
 	//收款单修改金额
 	public void updateReceiptMoney(String customer, String account, double money) {
+		CustomerForFinancial cusMoney = new CustomerList();
 		AccountList a = new AccountList();
 		ArrayList<Account> accounts = a.getAllAccountInfo();
 		int size = accounts.size();
@@ -264,11 +267,13 @@ public class Financial implements FinancialBlService{
 				break;
 			}
 		}
+		cusMoney.changeShouldTake(customer, money);
 		a.saveAccounts(accounts);
 	}
 	
 	//付款单修改金额
 	public void updatePaymentMoney(String customer, String account, double money) {
+		CustomerForFinancial cusMoney = new CustomerList();
 		AccountList a = new AccountList();
 		ArrayList<Account> accounts = a.getAllAccountInfo();
 		int size = accounts.size();
@@ -280,6 +285,7 @@ public class Financial implements FinancialBlService{
 				break;
 			}
 		}
+		cusMoney.changeShouldPay(customer, money);
 		a.saveAccounts(accounts);
 	}
 	//现金费用单修改账户
