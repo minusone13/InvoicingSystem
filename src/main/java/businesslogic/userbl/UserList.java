@@ -108,6 +108,18 @@ public class UserList {
 		data.insert(user.toPO());
 		return result;
 	}
+	public RM authorized(String account)
+	{
+		UserPO po = data.find(account);
+		if(po == null)
+			return RM.notfound;
+		po.setAuthorized(true);
+		boolean result = data.update(po);
+		if(result)
+			return RM.done;
+		else
+			return RM.unknownerror;
+	}
 	public ArrayList<UserVO> showUsers()
 	{
 		ArrayList<UserPO>users=data.getUsers();

@@ -26,6 +26,10 @@ public class UserController implements StubUserBlService, UserService{
 	{
 		return l.find(account);
 	}
+	public RM authorized(String account)
+	{
+		return l.authorized(account);
+	}
 	public RM changePassword(UserVO vo)
 	{
 		return l.changePassword(vo);

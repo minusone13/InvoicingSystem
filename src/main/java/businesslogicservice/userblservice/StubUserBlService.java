@@ -19,4 +19,5 @@ public interface StubUserBlService {
 	public ArrayList<OperationRecordVO> showRecords();//显示系统日志
 	
 	public UserVO find(String account);
+	public RM authorized(String account);
 }

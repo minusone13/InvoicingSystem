@@ -13,6 +13,7 @@ public interface StubUserDataService extends Remote{
 	public boolean delete(UserPO po);
 	public UserPO find(String account);
 	public boolean insert(OperationRecordPO po);
+	public boolean update(UserPO po);
 	public RM updatePassword(UserPO po);
 	public int count(char c);
 	public ArrayList<UserPO> getUsers();

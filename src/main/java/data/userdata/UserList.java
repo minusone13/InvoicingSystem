@@ -3,8 +3,10 @@ package data.userdata;
 import java.io.*;
 import java.util.*;
 
+import data.commoditydata.MockCommodityData;
 import businesslogic.Role;
 import po.*;
+import po.stockpo.CommodityPO;
 import po.userpo.OperationRecordPO;
 import po.userpo.UserPO;
 import vo.RM;
@@ -140,6 +142,20 @@ public class UserList implements Serializable{
 			user.setName(po.getName());//whether it's true?
 			return true;
 		}
+	}
+	public boolean update(UserPO po)
+	{
+		int i=0;
+		for(i=0;i<users.size();i++)
+		{
+			if(users.get(i).getAccount().equals(po.getAccount()))
+			{
+				users.remove(i);
+				users.add(i,po);
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public ArrayList<UserPO> getUsers() {
