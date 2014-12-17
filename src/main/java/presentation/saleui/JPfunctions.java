@@ -79,6 +79,8 @@ public class JPfunctions extends JPanel{
 			switch(num){
 			case 1:
 				function1.setIcon(Imagefun1);
+				JPfunctions.this.setVisible(false);
+				frame.getSale().getCustomerManage().setVisible(true);
 				break;
 			case 2:
 				function2.setIcon(Imagefun2);

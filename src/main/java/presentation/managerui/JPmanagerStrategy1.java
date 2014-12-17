@@ -9,8 +9,11 @@ import javax.swing.JPanel;
 
 import userui.Frame;
 import businesslogic.BillStyle;
+import businesslogic.StrategyStyle;
 import businesslogic.financialbl.Financial;
+import businesslogic.managerbl.StubManager;
 import businesslogicservice.financialblservice.FinancialBlService;
+import businesslogicservice.managerblservice.StubManagerBlService;
 
 public class JPmanagerStrategy1 extends JPanel {
 
@@ -31,8 +34,8 @@ public class JPmanagerStrategy1 extends JPanel {
 	ImageIcon reachIcon1=new ImageIcon("src\\image\\strategy\\reach1.png");
 	//frame的引用
     Frame frame;
-    //逻辑层的财务人员接口
-    FinancialBlService fbl=new Financial();
+    //逻辑层接口
+    StubManagerBlService mbl=new StubManager();
 	public JPmanagerStrategy1(){
 		//设置窗口大小
 		this.setSize(445, 330);
@@ -98,37 +101,37 @@ public class JPmanagerStrategy1 extends JPanel {
 				//切换
 				JPmanagerStrategy1.this.setVisible(false);
 				//设置单据类型
-				frame.getFinancial().getManageBills2().setStyle(BillStyle.ReceiptBill);
+				frame.getManager().getManagerStrategy2().setStyle(StrategyStyle.LevelStrategy);
 				//从逻辑层读取单据信息填充单据列表
-				frame.getFinancial().getManageBills2().getBillList().getJPbillList().clear();
-				frame.getFinancial().getManageBills2().getBillList().reHome();
-				frame.getFinancial().getManageBills2().getBillList().addReceiptBillList(fbl.getAllOfReceiptBills());
+				frame.getManager().getManagerStrategy2().getBillList().getJPbillList().clear();
+				frame.getManager().getManagerStrategy2().getBillList().reHome();
+				frame.getManager().getManagerStrategy2().getBillList().addLevelStrategyList(mbl.ShowLevelStrategy());
 				//切换
-				frame.getFinancial().getManageBills2().setVisible(true);
+				frame.getManager().getManagerStrategy2().setVisible(true);
 				break;
 			case 22:bargin.setIcon(barginIcon);
 				//切换
 				JPmanagerStrategy1.this.setVisible(false);
 				//设置单据类型
-				frame.getFinancial().getManageBills2().setStyle(BillStyle.PaymentBill);
+				frame.getManager().getManagerStrategy2().setStyle(StrategyStyle.BarginStrategy);
 				//从逻辑层读取单据信息填充单据列表
-				frame.getFinancial().getManageBills2().getBillList().getJPbillList().clear();
-				frame.getFinancial().getManageBills2().getBillList().reHome();
-				frame.getFinancial().getManageBills2().getBillList().addPaymentBillList(fbl.getAllOfPaymentBills());
+				frame.getManager().getManagerStrategy2().getBillList().getJPbillList().clear();
+				frame.getManager().getManagerStrategy2().getBillList().reHome();
+				frame.getManager().getManagerStrategy2().getBillList().addBarginStrategyList(mbl.ShowBarginStrategy());
 				//切换
-				frame.getFinancial().getManageBills2().setVisible(true);
+				frame.getManager().getManagerStrategy2().setVisible(true);
 				break;
 			case 23:reach.setIcon(reachIcon);
 				//切换
 				JPmanagerStrategy1.this.setVisible(false);
 				//设置单据类型
-				frame.getFinancial().getManageBills2().setStyle(BillStyle.CashPaymentBill);
+				frame.getManager().getManagerStrategy2().setStyle(StrategyStyle.ReachStrategy);
 				//从逻辑层读取单据信息填充单据列表
-				frame.getFinancial().getManageBills2().getBillList().getJPbillList().clear();
-				frame.getFinancial().getManageBills2().getBillList().reHome();
-				frame.getFinancial().getManageBills2().getBillList().addCashPaymentBillList(fbl.getAllOfCashPaymentBills());
+				frame.getManager().getManagerStrategy2().getBillList().getJPbillList().clear();
+				frame.getManager().getManagerStrategy2().getBillList().reHome();
+				frame.getManager().getManagerStrategy2().getBillList().addReachStrategyList(mbl.ShowReachStrategy());
 				//切换
-				frame.getFinancial().getManageBills2().setVisible(true);
+				frame.getManager().getManagerStrategy2().setVisible(true);
 				break;
 			}
 		}

@@ -8,8 +8,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import presentation.financialui.JPmanageBills1.MouseListenOfButton;
+import presentation.userui.Login;
 import userui.Frame;
 import businesslogic.BillStyle;
+import businesslogic.Role;
 import businesslogic.financialbl.Financial;
 import businesslogicservice.financialblservice.FinancialBlService;
 
@@ -107,16 +109,13 @@ public class JPinquire extends JPanel {
 				frame.getFinancial().getManageBills2().setVisible(true);
 				break;
 			case 22:businessSituation.setIcon(businessSituationIcon);
-//				//切换
-//			JPinquire.this.setVisible(false);
-//				//设置单据类型
-//				frame.getFinancial().getManageBills2().setStyle(BillStyle.PaymentBill);
-//				//从逻辑层读取单据信息填充单据列表
-//				frame.getFinancial().getManageBills2().getBillList().getJPbillList().clear();
-//				frame.getFinancial().getManageBills2().getBillList().reHome();
-//				frame.getFinancial().getManageBills2().getBillList().addPaymentBillList(fbl.getAllOfPaymentBills());
-//				//切换
-//				frame.getFinancial().getManageBills2().setVisible(true);
+				JPinquire.this.setVisible(false);
+				if(Login.user.getR()==Role.FINANCIAL_STAFF){
+					frame.getFinancial().getBusinessCondition().setVisible(true);
+				}
+				else if(Login.user.getR()==Role.MANAGER){
+					frame.getManager().getBusinessCondition().setVisible(true);
+				}
 				break;
 			case 23:salesDetail.setIcon(salesDetailIcon);
 //				//切换

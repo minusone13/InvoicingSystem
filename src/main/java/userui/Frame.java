@@ -13,6 +13,7 @@ import presentation.commodityui.Stock;
 import presentation.financialui.FinancialUI;
 import presentation.managerui.ManagerUI;
 import presentation.saleui.Sale;
+import presentation.userui.Admin;
 import presentation.userui.Login;
 
 public class Frame extends JFrame implements MouseListener{
@@ -32,6 +33,8 @@ public class Frame extends JFrame implements MouseListener{
 	private Sale sale;
 	//库管
 	private Stock stock;
+	//管理员
+	private Admin admin;
 	public JPanel getMainJP() {
 		return mainJP;
 	}
@@ -90,8 +93,6 @@ public class Frame extends JFrame implements MouseListener{
 		mainJP.setBounds(0, 0, 960, 600);
 		mainJP.setLayout(null);
 		
-//		//加上监听接口
-//		bg.addMouseListener(this);
 		//关闭与小化
 		close.setIcon(new ImageIcon("src/image/cancel.png"));
 		minus.setIcon(new ImageIcon("src/image/minus.png"));
@@ -133,10 +134,22 @@ public class Frame extends JFrame implements MouseListener{
 		stock.setVisible(false);
 		stock.setBounds(0, 0, 960, 600);
 		
+		admin=new Admin();
+		admin.getFrame(this);
+		mainJP.add(admin,7);
+		admin.setVisible(false);
+		admin.setBounds(0, 0, 960, 600);
+		
 		//加上监听接口
 //		financial.addMouseListener(this);
 		//设置窗口可见
 		this.setVisible(true);
+	}
+	public Admin getAdmin() {
+		return admin;
+	}
+	public void setAdmin(Admin admin) {
+		this.admin = admin;
 	}
 	public Sale getSale() {
 		return sale;

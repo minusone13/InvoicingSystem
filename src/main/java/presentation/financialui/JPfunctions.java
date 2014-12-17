@@ -96,6 +96,8 @@ public class JPfunctions extends JPanel {
 			switch(num){
 			case 1:
 				function1.setIcon(Imagefun1);
+				JPfunctions.this.setVisible(false);
+				frame.getFinancial().getAccount().setVisible(true);
 				break;
 			case 2:
 				function2.setIcon(Imagefun2);
@@ -105,6 +107,8 @@ public class JPfunctions extends JPanel {
 				break;
 			case 3:
 				function3.setIcon(Imagefun3);
+				JPfunctions.this.setVisible(false);
+				frame.getFinancial().getInquire().setVisible(true);
 				break;
 			}
 		}

@@ -10,6 +10,7 @@ import businesslogic.financialbl.Financial;
 import businesslogicservice.financialblservice.FinancialBlService;
 import presentation.financialui.InitialInfoPanel.versionItemListener;
 import tool.Export;
+import userui.Frame;
 import vo.inquiryVO.BusinessSituationVO;
 import vo.inquiryVO.InquiryConditionVO;
 
@@ -37,10 +38,14 @@ public class BusinessConditionPanel extends JPanel{
 	ImageIcon sureIcon1=new ImageIcon("src\\image\\InquiryUI\\确定白.png");
 	ImageIcon sureIcon0=new ImageIcon("src\\image\\InquiryUI\\确定灰.png");
 	
+	//frame的引用
+    Frame frame;
 	public BusinessConditionPanel() {
 		initial();
 	}
-	
+	 public void getFrame( Frame f){
+	 		frame=f;
+	 }
 	public void initial() {
 		this.setBounds(0, 0, 960, 150);
 		//设置布局

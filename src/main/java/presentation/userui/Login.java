@@ -149,11 +149,18 @@ public class Login extends JPanel {
 							//切换面板
 							switch(userVO.getR()){
 							case ADMINISTRATOR:
+								Login.this.setVisible(false);
+								frame.getAdmin().setVisible(true);
 								break;
 							case FINANCIAL_STAFF:
 								
 								frame.getFinancial().getManageBills1().setVisible(false);
 								frame.getFinancial().getManageBills2().setVisible(false);
+								frame.getFinancial().getInquire().setVisible(false);
+								frame.getFinancial().getAccount().setVisible(false);
+								frame.getFinancial().getAccountBuild().setVisible(false);
+								frame.getFinancial().getBusinessCondition().setVisible(false);
+								frame.getFinancial().getAccountInfomation().setVisible(false);
 								frame.getFinancial().getFunction().setVisible(true);
 								Login.this.setVisible(false);
 								frame.getFinancial().setVisible(true);
@@ -164,6 +171,10 @@ public class Login extends JPanel {
 								
 								frame.getManager().getPassbill1().setVisible(false);
 								frame.getManager().getPassbill2().setVisible(false);
+								frame.getManager().getManagerStrategy1().setVisible(false);
+								frame.getManager().getManagerStrategy2().setVisible(false);
+								frame.getManager().getInquire().setVisible(false);
+								frame.getManager().getBusinessCondition().setVisible(false);
 								frame.getManager().getFunction().setVisible(true);
 								Login.this.setVisible(false);
 								frame.getManager().setVisible(true);
@@ -181,6 +192,7 @@ public class Login extends JPanel {
 								
 								frame.getSale().getManageBills1().setVisible(false);
 								frame.getSale().getManageBills2().setVisible(false);
+								frame.getSale().getCustomerManage().setVisible(false);
 								frame.getSale().getFunction().setVisible(true);
 								frame.getSale().setVisible(true);
 								Login.this.setVisible(false);
