@@ -136,6 +136,13 @@ public class StockTest{
 	}
 	
 	@Test
+	public void testUpdateCategory()
+	{
+		//new 
+		//combl.updateCategory(vo);
+	}
+	
+	@Test
 	public void testdeleteCommodity()
 	{
 		RM result=combl.deleteCommodity("好好防盗门","fdm02");

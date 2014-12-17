@@ -153,15 +153,23 @@ public class StubCommodityList implements Serializable{
 			return true;
 		}
 	}
-	public boolean update(CategoryPO po)
+	public RM update(CategoryPO po,String newName)
 	{
+		String a[]=po.getParent().split("\\\\");
+		if(!a[0].equals("1"))//default root is 1
+			return RM.unknownerror;
+		StubCategoryData temp=cat.goThrow(a, 1);
+		if(temp==null)
+			return RM.unknownerror;
+		if(temp.findSubCat(po.getName())!=null)
+			return RM.redundance;
 		StubCategoryData cat = findCategory(po.getId());
 		if(cat==null)
-			return false;
+			return RM.notfound;
 		else
 		{
-			cat.update(po.getName());
-			return true;
+			cat.update(newName);
+			return RM.done;
 		}
 	}
 	public RM insert(CategoryPO po)
