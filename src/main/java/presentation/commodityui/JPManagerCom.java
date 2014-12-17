@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -12,10 +13,17 @@ import javax.swing.JTextField;
 
 import presentation.managerui.MouseListenerGetXY;
 import userui.Frame;
+import vo.stockvo.CommodityVO;
 import businesslogic.Role;
 
 public class JPManagerCom extends JPanel{
 
+	public JLabel getAddIcon() {
+		return addIcon;
+	}
+	public void setAddIcon(JLabel addIcon) {
+		this.addIcon = addIcon;
+	}
 	public JPanel getHead() {
 		return head;
 	}
@@ -100,8 +108,8 @@ public class JPManagerCom extends JPanel{
 		comfirm.addMouseListener(new MouseListenerOfButton(2));
 		//add按钮
 		addIcon=new JLabel();
-		addIcon.setBounds(550, 3, 24, 24);
-		addIcon.setIcon(new ImageIcon("src/image/ChooseCom/littleAddW.png") );
+		addIcon.setBounds(545, 3, 24, 24);
+		addIcon.setIcon(new ImageIcon("src/image/function/littleAddW.png") );
 		addIcon.addMouseListener(new MouseListenerOfButton(3));
 		
 		detail.setBounds(15, 5, 550, 20);
@@ -181,21 +189,26 @@ public class JPManagerCom extends JPanel{
 				switch(role){
 				case MANAGER:
 					//输出商品到编辑面板
+					ArrayList<CommodityVO> temp=new ArrayList<CommodityVO>();
+					for(CommodityVO vo:commodities.getOutput()){
+						temp.add(vo);
+					}
 					switch(frame.getManager().getManagerStrategy2().getStyle()){
 					case LevelStrategy:
-						frame.getManager().getManagerStrategy2().getJPeditOfLevel().setOutput(commodities.getOutput());
+						frame.getManager().getManagerStrategy2().getJPeditOfLevel().setOutput(temp);
+						System.out.println("output");
 						break;
 					case BarginStrategy:
-						frame.getManager().getManagerStrategy2().getJPeditOfBargin().setOutput(commodities.getOutput());
+						frame.getManager().getManagerStrategy2().getJPeditOfBargin().setOutput(temp);
 						//自动计算总价
 						Double total=0.0;
-						for(int i=0;i<commodities.getOutput().size();i++){
-							total+=commodities.getOutput().get(i).getOut();
+						for(int i=0;i<temp.size();i++){
+							total+=temp.get(i).getOut()*temp.get(i).getNumber();
 						}
 						frame.getManager().getManagerStrategy2().getJPeditOfBargin().getOriginalTotalPriceText().setText(String.valueOf(total));
 						break;
 					case ReachStrategy:
-						frame.getManager().getManagerStrategy2().getJPeditOfReach().setOutput(commodities.getOutput());
+						frame.getManager().getManagerStrategy2().getJPeditOfReach().setOutput(temp);
 						break;
 					}
 					break;

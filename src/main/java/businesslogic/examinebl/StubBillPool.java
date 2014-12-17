@@ -59,16 +59,606 @@ public class StubBillPool {
 	private ArrayList<ReceiptBill> alOfReceiptBill=new ArrayList<ReceiptBill>();
 	private ArrayList<PaymentBill> alOfPaymentBill=new ArrayList<PaymentBill>();
 	private ArrayList<CashPaymentBill> alOfCashPaymentBill=new ArrayList<CashPaymentBill>();
+	//读取文档中的对象
+	SaleBillSaverService sbs=new SaleBillSaver();
+	FinancialBillSaverService fbs=new FinancialBillSaver();
+	CommodityBillSaverService cbs=new CommodityBillSaver();
 	/*构造函数*/
 	public StubBillPool(){
-		//读取文档中的对象
-		SaleBillSaverService sbs=new SaleBillSaver();
-		FinancialBillSaverService fbs=new FinancialBillSaver();
-		CommodityBillSaverService cbs=new CommodityBillSaver();
+	
 		
-		//清除保存的记录
+//		//清除保存的记录
+//		save();
+		
+		read();
+		
+	}
+	
+	/*需要向单据池中加入一张库存赠送单*/
+	public void add (StubGiftBill gb){
+		read();
+		alOfGiftBill.add(gb);
+		//保存
+		this.save();
+	}
+	/*需要向单据池中加入一张报溢/报损单*/
+	public void add (StubSpillsLossBill spb){
+		read();
+		alOfSpillsLossBill.add(spb);
+		//保存
+		this.save();
+	}
+	/*需要向单据池中加入一张库存报警单*/
+	public void add (StubAlertBill ab){
+		read();
+		alOfAlertBill.add(ab);
+		//保存
+		this.save();
+	}
+	/*需要向单据池中加入一张进货单*/
+	public void add (PurSheet ps){
+		read();
+		alOfPurSheet.add(ps);
+		//保存
+		this.save();
+	}
+	/*需要向单据池中加入一张进货退货单*/
+	public void add (PurBackSheet pbs){
+		read();
+		alOfPurBackSheet.add(pbs);
+		//保存
+		this.save();
+	}
+	/*需要向单据池中加入一张销售单*/
+	public void add (SaleSheet ss){
+		read();
+		alOfSaleSheet.add(ss);
+		//保存
+		this.save();
+	}
+	/*需要向单据池中加入一张销售退货单*/
+	public void add (SaleBackSheet sbs){
+		read();
+		alOfSaleBackSheet.add(sbs);
+		//保存
+		this.save();
+	}
+	/*需要向单据池中加入一张收款单*/
+	public void add (ReceiptBill rb){
+		read();
+		alOfReceiptBill.add(rb);
+		//保存
+		this.save();
+	}
+	/*需要向单据池中加入一张付款单*/
+	public void add (PaymentBill pb){
+		read();
+		alOfPaymentBill.add(pb);
+		//保存
+		this.save();
+	}
+	/*需要向单据池中加入一张现金费用单*/
+	public void add (CashPaymentBill cpb){
+		read();
+		alOfCashPaymentBill.add(cpb);
+		//保存
+		this.save();
+	}
+	/*需要从单据池筛选指定状态的所有赠送单*/
+	public ArrayList<StubGiftBill> getGiftBill (BillState st){
+		read();
+		ArrayList<StubGiftBill> result=new ArrayList<StubGiftBill>();//用于储存返回的单据
+		//遍历池中制定单据数组
+		for(StubGiftBill temp:alOfGiftBill){
+			if(temp.getState()==st){//如果单据状态符合筛选状态
+				result.add(temp);
+			}
+		}
+		return result;	
+	}
+	/*需要从单据池筛选指定状态的所有报溢/报损单*/
+	public ArrayList<StubSpillsLossBill> getSpillsLossBill (BillState st){
+		read();
+		ArrayList<StubSpillsLossBill> result=new ArrayList<StubSpillsLossBill>();//用于储存返回的单据
+		//遍历池中制定单据数组
+		for(StubSpillsLossBill temp:alOfSpillsLossBill){
+			if(temp.getState()==st){//如果单据状态符合筛选状态
+				result.add(temp);
+			}
+		}
+		
+		return result;
+		
+	}
+	/*需要从单据池筛选指定状态的所有库存报警单*/
+	public ArrayList<StubAlertBill> getAlertBill (BillState st){
+		read();
+		ArrayList<StubAlertBill> result=new ArrayList<StubAlertBill>();//用于储存返回的单据
+		//遍历池中制定单据数组
+		for(StubAlertBill temp:alOfAlertBill){
+			if(temp.getState()==st){//如果单据状态符合筛选状态
+				result.add(temp);
+			}
+		}
+		
+		return result;
+		
+	}
+	/*需要从单据池筛选指定状态的所有进货单*/
+	public ArrayList<PurSheet> getPurSheet (BillState st){
+		read();
+		ArrayList<PurSheet> result=new ArrayList<PurSheet>();//用于储存返回的单据
+		//遍历池中制定单据数组
+		for(PurSheet temp:alOfPurSheet){
+			if(temp.getState()==st){//如果单据状态符合筛选状态
+				result.add(temp);
+			}
+		}
+		
+		return result;
+		
+	}
+	/*需要从单据池筛选指定状态的所有进货退货单*/
+	public ArrayList<PurBackSheet> getPurBackSheet (BillState st){
+		read();
+		ArrayList<PurBackSheet> result=new ArrayList<PurBackSheet>();//用于储存返回的单据
+		//遍历池中制定单据数组
+		for(PurBackSheet temp:alOfPurBackSheet){
+			if(temp.getState()==st){//如果单据状态符合筛选状态
+				result.add(temp);
+			}
+		}
+		
+		return result;
+		
+	}
+	/*需要从单据池筛选指定状态的所有销售单*/
+	public ArrayList<SaleSheet> getSaleSheet (BillState st){
+		read();
+		ArrayList<SaleSheet> result=new ArrayList<SaleSheet>();//用于储存返回的单据
+		//遍历池中制定单据数组
+		for(SaleSheet temp:alOfSaleSheet){
+			if(temp.getState()==st){//如果单据状态符合筛选状态
+				result.add(temp);
+			}
+		}
+		
+		return result;
+		
+	}
+	/*需要从单据池筛选指定状态的所有销售退货单*/
+	public ArrayList<SaleBackSheet> getSaleBackSheet (BillState st){
+		read();
+		ArrayList<SaleBackSheet> result=new ArrayList<SaleBackSheet>();//用于储存返回的单据
+		//遍历池中制定单据数组
+		for(SaleBackSheet temp:alOfSaleBackSheet){
+			if(temp.getState()==st){//如果单据状态符合筛选状态
+				result.add(temp);
+			}
+		}
+		
+		return result;
+		
+	}
+	/*需要从单据池筛选指定状态的所有收款单*/
+	public ArrayList<ReceiptBill> getReceiptBill (BillState st){
+		read();
+		ArrayList<ReceiptBill> result=new ArrayList<ReceiptBill>();//用于储存返回的单据
+		//遍历池中制定单据数组
+		for(ReceiptBill temp:alOfReceiptBill){
+			if(temp.getState()==st){//如果单据状态符合筛选状态
+				result.add(temp);
+			}
+		}
+		
+		return result;	
+	}
+	/*需要从单据池筛选指定状态的所有付款单*/
+	public ArrayList<PaymentBill> getPaymentBill (BillState st){
+		read();
+		ArrayList<PaymentBill> result=new ArrayList<PaymentBill>();//用于储存返回的单据
+		//遍历池中制定单据数组
+		for(PaymentBill temp:alOfPaymentBill){
+			if(temp.getState()==st){//如果单据状态符合筛选状态
+				result.add(temp);
+			}
+		}
+		return result;
+	}
+	/*需要从单据池筛选指定状态的所有现金费用单*/
+	public ArrayList<CashPaymentBill> getCashPaymentBill (BillState st){
+		read();
+		ArrayList<CashPaymentBill> result=new ArrayList<CashPaymentBill>();//用于储存返回的单据
+		//遍历池中制定单据数组
+		for(CashPaymentBill temp:alOfCashPaymentBill){
+			if(temp.getState()==st){//如果单据状态符合筛选状态
+				result.add(temp);
+			}
+		}	
+		return result;
+	}
+	/*获取单据池所有赠送单*/
+	public ArrayList<StubGiftBill> getGiftBill (){
+		read();
+		return alOfGiftBill;	
+	}
+	/*获取单据池的所有报溢/报损单*/
+	public ArrayList<StubSpillsLossBill> getSpillsLossBill (){
+		read();
+		return alOfSpillsLossBill;
+	}
+	/*获取单据池的所有库存报警单*/
+	public ArrayList<StubAlertBill> getAlertBill (){
+		read();
+		return alOfAlertBill;
+	}
+	/*获取单据池的所有进货单*/
+	public ArrayList<PurSheet> getPurSheet (){
+		read();
+		return alOfPurSheet;
+	}
+	/*获取单据池的所有进货退货单*/
+	public ArrayList<PurBackSheet> getPurBackSheet (){
+		read();
+		return alOfPurBackSheet;
+	}
+	/*获取单据池的所有销售单*/
+	public ArrayList<SaleSheet> getSaleSheet (){
+		read();
+		return alOfSaleSheet;
+	}
+	/*获取单据池的所有销售退货单*/
+	public ArrayList<SaleBackSheet> getSaleBackSheet (){
+		read();
+		return alOfSaleBackSheet;
+	}
+	/*获取单据池的所有收款单*/
+	public ArrayList<ReceiptBill> getReceiptBill (){
+		read();
+		return alOfReceiptBill;	
+	}
+	/*获取单据池的所有付款单*/
+	public ArrayList<PaymentBill> getPaymentBill (){
+		read();
+		return alOfPaymentBill;
+	}
+	/*获取单据池的所有现金费用单*/
+	public ArrayList<CashPaymentBill> getCashPaymentBill (){
+		read();
+		return alOfCashPaymentBill;
+	}
+   /*修改单据信息*/
+	public void change(GiftBillVO gb){
+		read();
+		for(int i=0;i<alOfGiftBill.size();i++){
+			if(alOfGiftBill.get(i).getID().equals(gb.getID())){//寻找相同编号
+				//进行修改
+				//修改赠品
+				//转换vo成商品数组
+				ArrayList<MockCommodity> gift=new ArrayList<MockCommodity>();
+				for(int j=0;j<gb.getComs().size();j++){
+					gift.add(new MockCommodity(gb.getComs().get(j)));
+				}
+				//进行修改
+				alOfGiftBill.get(i).setComs(gift);
+				//修改完毕
+				break;
+			}
+		}
+		//保存
+		this.save();
+	}
+	public void change(SpillsLossBillVO slb){
+		read();
+		for(int i=0;i<alOfSpillsLossBill.size();i++){
+			if(alOfSpillsLossBill.get(i).getID().equals(slb.getID())){//寻找相同编号
+				//进行修改
+				//修改报溢报损的商品数量
+				alOfSpillsLossBill.get(i).setCom(new MockCommodity(slb.getCom()));
+				//修改操作员
+				//修改完毕
+				break;
+			}
+		}
+		//保存
+		this.save();
+	}
+	public void change(AlertBillVO ab){
+		read();
+		for(int i=0;i<alOfAlertBill.size();i++){
+			if(alOfAlertBill.get(i).getID().equals(ab.getID())){//寻找相同编号
+				//进行修改
+				//暂定不能修改
+			}
+		}
+		//保存
+		this.save();
+	}
+	public void change(PurSheetVO ps){
+		read();
+		for(int i=0;i<alOfPurSheet.size();i++){
+			if(alOfPurSheet.get(i).getID().equals(ps.getID())){//寻找相同编号
+				//进行修改
+				//修改客户
+				alOfPurSheet.get(i).setCustomer(new Customer(ps.getcustomer()));//阿超改动了一下；如有问题，快来告诉我;
+				//修改仓库
+				alOfPurSheet.get(i).setstock(ps.getstock());
+				//修改操作员
+				alOfPurSheet.get(i).setop(ps.getop());
+				//修改商品清单
+				
+				//修改总金额
+				alOfPurSheet.get(i).setmoney1(ps.getmoney1());
+				//修改备注
+				alOfPurSheet.get(i).setwords(ps.getwords());
+				//修改完毕
+				break;
+			}
+		}
+		//保存
+		this.save();
+	}
+	public void change(PurBackSheetVO pbs){
+		read();
+		for(int i=0;i<alOfPurBackSheet.size();i++){
+			if(alOfPurBackSheet.get(i).getID().equals(pbs.getID())){//寻找相同编号
+				//进行修改
+				//修改客户
+				alOfPurBackSheet.get(i).setCustomer(new Customer(pbs.getcustomer()));//阿超改动了一下；如有问题，快来告诉我;
+				//修改仓库
+				alOfPurBackSheet.get(i).setstock(pbs.getstock());
+				//修改操作员
+				alOfPurBackSheet.get(i).setop(pbs.getop());
+				//修改商品清单
+				
+				//修改总金额
+				alOfPurBackSheet.get(i).setmoney1(pbs.getmoney1());
+				//修改备注
+				alOfPurBackSheet.get(i).setwords(pbs.getwords());
+				//修改完毕
+				break;
+			}
+		}
+		//保存
+		this.save();
+	}
+	public void change(SaleSheetVO ss){
+		read();
+		for(int i=0;i<alOfSaleSheet.size();i++){
+			if(alOfSaleSheet.get(i).getID().equals(ss.getID())){//寻找相同编号
+				//进行修改
+				//修改客户
+				alOfSaleSheet.get(i).setCustomer(new Customer(ss.getcustomer()));//阿超改动了一下；如有问题，快来告诉我;
+				//修改仓库
+				alOfSaleSheet.get(i).setstock(ss.getstock());
+				//修改操作员
+				alOfSaleSheet.get(i).setop(ss.getop());
+				//修改商品清单
+				
+				//修改总金额
+				alOfSaleSheet.get(i).setmoney1(ss.getmoney1());
+				//修改使用代金券
+				alOfSaleSheet.get(i).setpmoney(ss.getpmoney());
+				//修改折让金额
+				alOfSaleSheet.get(i).setdiscount(ss.getdiscount());
+				//修改最终金额
+				alOfSaleSheet.get(i).setmoney2(ss.getmoney2());
+				//修改备注
+				alOfSaleSheet.get(i).setwords(ss.getwords());
+				//修改完毕
+				break;
+			}
+		}
+		//保存
+		this.save();
+	}
+	public void change(SaleBackSheetVO sbs){
+		read();
+		for(int i=0;i<alOfSaleBackSheet.size();i++){
+			if(alOfSaleBackSheet.get(i).getID().equals(sbs.getID())){//寻找相同编号
+				//进行修改
+				//修改客户
+				alOfSaleBackSheet.get(i).setCustomer(new Customer(sbs.getcustomer()));//阿超改动了一下；如有问题，快来告诉我;
+				//修改仓库
+				alOfSaleBackSheet.get(i).setstock(sbs.getstock());
+				//修改操作员
+				alOfSaleBackSheet.get(i).setop(sbs.getop());
+				//修改商品清单
+				
+				//修改总金额
+				alOfSaleBackSheet.get(i).setmoney1(sbs.getmoney1());
+				//修改使用代金券
+				alOfSaleBackSheet.get(i).setpmoney(sbs.getpmoney());
+				//修改折让金额
+				alOfSaleBackSheet.get(i).setdiscount(sbs.getdiscount());
+				//修改最终金额
+				alOfSaleBackSheet.get(i).setmoney2(sbs.getmoney2());
+				//修改备注
+				alOfSaleBackSheet.get(i).setwords(sbs.getwords());
+				//修改完毕
+				break;
+			}
+		}
+		//保存
+		this.save();
+	}
+	public void change(ReceiptVO rb){
+		read();
+		for(int i=0;i<alOfReceiptBill.size();i++){
+			if(alOfReceiptBill.get(i).getID().equals(rb.getID())){//寻找相同编号
+				//进行修改
+				//修改客户
+				alOfReceiptBill.get(i).setCustomer(rb.getCustomer());
+				//修改操作员
+				alOfReceiptBill.get(i).setOp(rb.getOp());
+				//修改总额
+				alOfReceiptBill.get(i).setTotal(rb.getTotal());
+				//修改转账列表
+				ArrayList<String> account = rb.getAccounts();
+				ArrayList<Double> money = rb.getMoney();
+				ArrayList<String> remark = rb.getRemark();
+				ArrayList<TransferAccount> transferlist = new ArrayList<TransferAccount>();
+				int length = account.size();
+				for(int j=0;j<length;j++) {
+					transferlist.add(new TransferAccount(account.get(j), money.get(j), remark.get(j)));
+				}
+				alOfReceiptBill.get(i).setTransferlist(transferlist);
+				//修改完毕
+				break;
+			}
+		}
+		//保存
+		this.save();
+	}
+	public void change(PaymentVO pb){
+		read();
+		for(int i=0;i<alOfPaymentBill.size();i++){
+			if(alOfPaymentBill.get(i).getID().equals(pb.getID())){//寻找相同编号
+				//进行修改
+				//修改客户
+				alOfPaymentBill.get(i).setCustomer(pb.getCustomer());
+				//修改操作员
+				alOfPaymentBill.get(i).setOp(pb.getOp());
+				//修改总额
+				alOfPaymentBill.get(i).setTotal(pb.getTotal());
+				//修改转账列表
+				ArrayList<String> account = pb.getAccounts();
+				ArrayList<Double> money = pb.getMoney();
+				ArrayList<String> remark = pb.getRemark();
+				ArrayList<TransferAccount> transferlist = new ArrayList<TransferAccount>();
+				int length = account.size();
+				for(int j=0;j<length;j++) {
+					transferlist.add(new TransferAccount(account.get(j), money.get(j), remark.get(j)));
+				}
+				alOfReceiptBill.get(i).setTransferlist(transferlist);
+				//修改完毕
+				break;
+			}
+		}
+		//保存
+		this.save();
+	}
+	public void change(CashPaymentVO cb){
+		read();
+		for(int i=0;i<alOfCashPaymentBill.size();i++){
+			System.out.println(alOfCashPaymentBill.get(i).getID()+":"+cb.getID());
+			if(alOfCashPaymentBill.get(i).getID().equals(cb.getID())){//寻找相同编号
+				//进行修改
+				//修改银行账户
+				alOfCashPaymentBill.get(i).setAccount(cb.getAccount());
+				//修改操作员
+				alOfCashPaymentBill.get(i).setOp(cb.getOp());
+				//修改总额
+				alOfCashPaymentBill.get(i).setTotal(cb.getTotal());
+				//修改条目清单
+				ArrayList<String> item = cb.getItem();
+				ArrayList<Double> money=cb.getMoney(); 
+				ArrayList<String> remark=cb.getRemark();
+				ArrayList<Item> itemList = new ArrayList<Item>();
+				int length = item.size();
+				for(int j=0;j<length;j++) {
+					itemList.add(new Item(item.get(j), money.get(j), remark.get(j)));
+				}
+				alOfCashPaymentBill.get(i).setItemList(itemList);
+				//修改完毕
+				System.out.println("现金费用单修改完毕");
+				break;
+			}
+		}
+		//保存
+		this.save();
+	}
+	/*改单据状态*/
+	public void transformState(BillStyle style,String ID,BillState state){
+		read();
+		switch(style){
+		case GiftBill:
+			for(int i=0;i<alOfGiftBill.size();i++){
+				if(alOfGiftBill.get(i).getID().equals(ID)){
+					alOfGiftBill.get(i).setState(state);
+				}
+			}
+			break;
+		case SpillsLossBill:
+			for(int i=0;i<alOfSpillsLossBill.size();i++){
+				if(alOfSpillsLossBill.get(i).getID().equals(ID)){
+					alOfSpillsLossBill.get(i).setState(state);
+				}
+			}
+			break;
+		case AlertBill:
+			for(int i=0;i<alOfAlertBill.size();i++){
+				if(alOfAlertBill.get(i).getID().equals(ID)){
+					alOfAlertBill.get(i).setState(state);
+				}
+			}
+			break;
+		case PurSheet:
+			for(int i=0;i<alOfPurSheet.size();i++){
+				if(alOfPurSheet.get(i).getID().equals(ID)){
+					alOfPurSheet.get(i).setState(state);
+				}
+			}
+			break;
+		case PurBackSheet:
+			for(int i=0;i<alOfPurBackSheet.size();i++){
+				if(alOfPurBackSheet.get(i).getID().equals(ID)){
+					alOfPurBackSheet.get(i).setState(state);
+				}
+			}
+			break;
+		case SaleSheet:
+			for(int i=0;i<alOfSaleSheet.size();i++){
+				if(alOfSaleSheet.get(i).getID().equals(ID)){
+					alOfSaleSheet.get(i).setState(state);
+				}
+			}
+			break;
+		case SaleBackSheet:
+			for(int i=0;i<alOfSaleBackSheet.size();i++){
+				if(alOfSaleBackSheet.get(i).getID().equals(ID)){
+					alOfSaleBackSheet.get(i).setState(state);
+				}
+			}
+			break;
+		case ReceiptBill:
+			for(int i=0;i<alOfReceiptBill.size();i++){
+				if(alOfReceiptBill.get(i).getID().equals(ID)){
+					alOfReceiptBill.get(i).setState(state);
+				}
+			}
+			break;
+		case PaymentBill:
+			for(int i=0;i<alOfPaymentBill.size();i++){
+				if(alOfPaymentBill.get(i).getID().equals(ID)){
+					alOfPaymentBill.get(i).setState(state);
+				}
+			}
+			break;
+		case CashPaymentBill:
+			for(int i=0;i<alOfCashPaymentBill.size();i++){
+				if(alOfCashPaymentBill.get(i).getID().equals(ID)){
+					alOfCashPaymentBill.get(i).setState(state);
+				}
+			}
+			break;
+			
+		}
+		//保存
 		save();
-		
+	}
+	/*实时读取池中数组对象*/
+	public void read(){
+		alOfGiftBill.clear();
+		alOfSpillsLossBill.clear();
+		alOfAlertBill.clear();
+		alOfPurSheet.clear();
+		alOfPurBackSheet.clear();
+		alOfSaleSheet.clear();
+		alOfSaleBackSheet.clear();
+		alOfReceiptBill.clear();
+		alOfPaymentBill.clear();
+		alOfCashPaymentBill.clear();
 		//将返回的PO对象的信息传入真正的单据对象
 		//赠送单
 		ArrayList<GiftBillPO> GiftBillListPO=cbs.getGiftBill();
@@ -151,7 +741,7 @@ public class StubBillPool {
 				alOfPaymentBill.add(pmb);
 			}
 		}
-		//赠送单
+		//现金费用单
 		ArrayList<CashPaymentPO> CashPaymentBillListPO=fbs.getCashPayment();
 		if(CashPaymentBillListPO!=null){
 			for(CashPaymentPO tempPO:CashPaymentBillListPO){
@@ -161,543 +751,7 @@ public class StubBillPool {
 			}
 		}
 
-		
 	}
-	/*需要向单据池中加入一张库存赠送单*/
-	public void add (StubGiftBill gb){
-		alOfGiftBill.add(gb);
-		//保存
-		this.save();
-	}
-	/*需要向单据池中加入一张报溢/报损单*/
-	public void add (StubSpillsLossBill spb){
-		alOfSpillsLossBill.add(spb);
-		//保存
-		this.save();
-	}
-	/*需要向单据池中加入一张库存报警单*/
-	public void add (StubAlertBill ab){
-		alOfAlertBill.add(ab);
-		//保存
-		this.save();
-	}
-	/*需要向单据池中加入一张进货单*/
-	public void add (PurSheet ps){
-		alOfPurSheet.add(ps);
-		//保存
-		this.save();
-	}
-	/*需要向单据池中加入一张进货退货单*/
-	public void add (PurBackSheet pbs){
-		alOfPurBackSheet.add(pbs);
-		//保存
-		this.save();
-	}
-	/*需要向单据池中加入一张销售单*/
-	public void add (SaleSheet ss){
-		alOfSaleSheet.add(ss);
-		//保存
-		this.save();
-	}
-	/*需要向单据池中加入一张销售退货单*/
-	public void add (SaleBackSheet sbs){
-		alOfSaleBackSheet.add(sbs);
-		//保存
-		this.save();
-	}
-	/*需要向单据池中加入一张收款单*/
-	public void add (ReceiptBill rb){
-		alOfReceiptBill.add(rb);
-		//保存
-		this.save();
-	}
-	/*需要向单据池中加入一张付款单*/
-	public void add (PaymentBill pb){
-		alOfPaymentBill.add(pb);
-		//保存
-		this.save();
-	}
-	/*需要向单据池中加入一张现金费用单*/
-	public void add (CashPaymentBill cpb){
-		alOfCashPaymentBill.add(cpb);
-		//保存
-		this.save();
-	}
-	/*需要从单据池筛选指定状态的所有赠送单*/
-	public ArrayList<StubGiftBill> getGiftBill (BillState st){
-		ArrayList<StubGiftBill> result=new ArrayList<StubGiftBill>();//用于储存返回的单据
-		//遍历池中制定单据数组
-		for(StubGiftBill temp:alOfGiftBill){
-			if(temp.getState()==st){//如果单据状态符合筛选状态
-				result.add(temp);
-			}
-		}
-		return result;	
-	}
-	/*需要从单据池筛选指定状态的所有报溢/报损单*/
-	public ArrayList<StubSpillsLossBill> getSpillsLossBill (BillState st){
-		ArrayList<StubSpillsLossBill> result=new ArrayList<StubSpillsLossBill>();//用于储存返回的单据
-		//遍历池中制定单据数组
-		for(StubSpillsLossBill temp:alOfSpillsLossBill){
-			if(temp.getState()==st){//如果单据状态符合筛选状态
-				result.add(temp);
-			}
-		}
-		
-		return result;
-		
-	}
-	/*需要从单据池筛选指定状态的所有库存报警单*/
-	public ArrayList<StubAlertBill> getAlertBill (BillState st){
-		ArrayList<StubAlertBill> result=new ArrayList<StubAlertBill>();//用于储存返回的单据
-		//遍历池中制定单据数组
-		for(StubAlertBill temp:alOfAlertBill){
-			if(temp.getState()==st){//如果单据状态符合筛选状态
-				result.add(temp);
-			}
-		}
-		
-		return result;
-		
-	}
-	/*需要从单据池筛选指定状态的所有进货单*/
-	public ArrayList<PurSheet> getPurSheet (BillState st){
-		ArrayList<PurSheet> result=new ArrayList<PurSheet>();//用于储存返回的单据
-		//遍历池中制定单据数组
-		for(PurSheet temp:alOfPurSheet){
-			if(temp.getState()==st){//如果单据状态符合筛选状态
-				result.add(temp);
-			}
-		}
-		
-		return result;
-		
-	}
-	/*需要从单据池筛选指定状态的所有进货退货单*/
-	public ArrayList<PurBackSheet> getPurBackSheet (BillState st){
-		ArrayList<PurBackSheet> result=new ArrayList<PurBackSheet>();//用于储存返回的单据
-		//遍历池中制定单据数组
-		for(PurBackSheet temp:alOfPurBackSheet){
-			if(temp.getState()==st){//如果单据状态符合筛选状态
-				result.add(temp);
-			}
-		}
-		
-		return result;
-		
-	}
-	/*需要从单据池筛选指定状态的所有销售单*/
-	public ArrayList<SaleSheet> getSaleSheet (BillState st){
-		ArrayList<SaleSheet> result=new ArrayList<SaleSheet>();//用于储存返回的单据
-		//遍历池中制定单据数组
-		for(SaleSheet temp:alOfSaleSheet){
-			if(temp.getState()==st){//如果单据状态符合筛选状态
-				result.add(temp);
-			}
-		}
-		
-		return result;
-		
-	}
-	/*需要从单据池筛选指定状态的所有销售退货单*/
-	public ArrayList<SaleBackSheet> getSaleBackSheet (BillState st){
-		ArrayList<SaleBackSheet> result=new ArrayList<SaleBackSheet>();//用于储存返回的单据
-		//遍历池中制定单据数组
-		for(SaleBackSheet temp:alOfSaleBackSheet){
-			if(temp.getState()==st){//如果单据状态符合筛选状态
-				result.add(temp);
-			}
-		}
-		
-		return result;
-		
-	}
-	/*需要从单据池筛选指定状态的所有收款单*/
-	public ArrayList<ReceiptBill> getReceiptBill (BillState st){
-		ArrayList<ReceiptBill> result=new ArrayList<ReceiptBill>();//用于储存返回的单据
-		//遍历池中制定单据数组
-		for(ReceiptBill temp:alOfReceiptBill){
-			if(temp.getState()==st){//如果单据状态符合筛选状态
-				result.add(temp);
-			}
-		}
-		
-		return result;	
-	}
-	/*需要从单据池筛选指定状态的所有付款单*/
-	public ArrayList<PaymentBill> getPaymentBill (BillState st){
-		ArrayList<PaymentBill> result=new ArrayList<PaymentBill>();//用于储存返回的单据
-		//遍历池中制定单据数组
-		for(PaymentBill temp:alOfPaymentBill){
-			if(temp.getState()==st){//如果单据状态符合筛选状态
-				result.add(temp);
-			}
-		}
-		return result;
-	}
-	/*需要从单据池筛选指定状态的所有现金费用单*/
-	public ArrayList<CashPaymentBill> getCashPaymentBill (BillState st){
-		ArrayList<CashPaymentBill> result=new ArrayList<CashPaymentBill>();//用于储存返回的单据
-		//遍历池中制定单据数组
-		for(CashPaymentBill temp:alOfCashPaymentBill){
-			if(temp.getState()==st){//如果单据状态符合筛选状态
-				result.add(temp);
-			}
-		}	
-		return result;
-	}
-	/*获取单据池所有赠送单*/
-	public ArrayList<StubGiftBill> getGiftBill (){
-		return alOfGiftBill;	
-	}
-	/*获取单据池的所有报溢/报损单*/
-	public ArrayList<StubSpillsLossBill> getSpillsLossBill (){
-		return alOfSpillsLossBill;
-	}
-	/*获取单据池的所有库存报警单*/
-	public ArrayList<StubAlertBill> getAlertBill (){
-		return alOfAlertBill;
-	}
-	/*获取单据池的所有进货单*/
-	public ArrayList<PurSheet> getPurSheet (){
-		return alOfPurSheet;
-	}
-	/*获取单据池的所有进货退货单*/
-	public ArrayList<PurBackSheet> getPurBackSheet (){
-		return alOfPurBackSheet;
-	}
-	/*获取单据池的所有销售单*/
-	public ArrayList<SaleSheet> getSaleSheet (){
-		return alOfSaleSheet;
-	}
-	/*获取单据池的所有销售退货单*/
-	public ArrayList<SaleBackSheet> getSaleBackSheet (){
-		return alOfSaleBackSheet;
-	}
-	/*获取单据池的所有收款单*/
-	public ArrayList<ReceiptBill> getReceiptBill (){
-		return alOfReceiptBill;	
-	}
-	/*获取单据池的所有付款单*/
-	public ArrayList<PaymentBill> getPaymentBill (){
-		return alOfPaymentBill;
-	}
-	/*获取单据池的所有现金费用单*/
-	public ArrayList<CashPaymentBill> getCashPaymentBill (){
-		return alOfCashPaymentBill;
-	}
-   /*修改单据信息*/
-	public void change(GiftBillVO gb){
-	
-		for(int i=0;i<alOfGiftBill.size();i++){
-			if(alOfGiftBill.get(i).getID().equals(gb.getID())){//寻找相同编号
-				//进行修改
-				//修改赠品
-				//转换vo成商品数组
-				ArrayList<MockCommodity> gift=new ArrayList<MockCommodity>();
-				for(int j=0;j<gb.getComs().size();j++){
-					gift.add(new MockCommodity(gb.getComs().get(j)));
-				}
-				//进行修改
-				alOfGiftBill.get(i).setComs(gift);
-				//修改完毕
-				break;
-			}
-		}
-		//保存
-		this.save();
-	}
-	public void change(SpillsLossBillVO slb){
-		for(int i=0;i<alOfSpillsLossBill.size();i++){
-			if(alOfSpillsLossBill.get(i).getID().equals(slb.getID())){//寻找相同编号
-				//进行修改
-				//修改报溢报损的商品数量
-				alOfSpillsLossBill.get(i).setCom(new MockCommodity(slb.getCom()));
-				//修改操作员
-				//修改完毕
-				break;
-			}
-		}
-		//保存
-		this.save();
-	}
-	public void change(AlertBillVO ab){
-		for(int i=0;i<alOfAlertBill.size();i++){
-			if(alOfAlertBill.get(i).getID().equals(ab.getID())){//寻找相同编号
-				//进行修改
-				//暂定不能修改
-			}
-		}
-		//保存
-		this.save();
-	}
-	public void change(PurSheetVO ps){
-		for(int i=0;i<alOfPurSheet.size();i++){
-			if(alOfPurSheet.get(i).getID().equals(ps.getID())){//寻找相同编号
-				//进行修改
-				//修改客户
-				alOfPurSheet.get(i).setCustomer(new Customer(ps.getcustomer()));//阿超改动了一下；如有问题，快来告诉我;
-				//修改仓库
-				alOfPurSheet.get(i).setstock(ps.getstock());
-				//修改操作员
-				alOfPurSheet.get(i).setop(ps.getop());
-				//修改商品清单
-				
-				//修改总金额
-				alOfPurSheet.get(i).setmoney1(ps.getmoney1());
-				//修改备注
-				alOfPurSheet.get(i).setwords(ps.getwords());
-				//修改完毕
-				break;
-			}
-		}
-		//保存
-		this.save();
-	}
-	public void change(PurBackSheetVO pbs){
-		for(int i=0;i<alOfPurBackSheet.size();i++){
-			if(alOfPurBackSheet.get(i).getID().equals(pbs.getID())){//寻找相同编号
-				//进行修改
-				//修改客户
-				alOfPurBackSheet.get(i).setCustomer(new Customer(pbs.getcustomer()));//阿超改动了一下；如有问题，快来告诉我;
-				//修改仓库
-				alOfPurBackSheet.get(i).setstock(pbs.getstock());
-				//修改操作员
-				alOfPurBackSheet.get(i).setop(pbs.getop());
-				//修改商品清单
-				
-				//修改总金额
-				alOfPurBackSheet.get(i).setmoney1(pbs.getmoney1());
-				//修改备注
-				alOfPurBackSheet.get(i).setwords(pbs.getwords());
-				//修改完毕
-				break;
-			}
-		}
-		//保存
-		this.save();
-	}
-	public void change(SaleSheetVO ss){
-		for(int i=0;i<alOfSaleSheet.size();i++){
-			if(alOfSaleSheet.get(i).getID().equals(ss.getID())){//寻找相同编号
-				//进行修改
-				//修改客户
-				alOfSaleSheet.get(i).setCustomer(new Customer(ss.getcustomer()));//阿超改动了一下；如有问题，快来告诉我;
-				//修改仓库
-				alOfSaleSheet.get(i).setstock(ss.getstock());
-				//修改操作员
-				alOfSaleSheet.get(i).setop(ss.getop());
-				//修改商品清单
-				
-				//修改总金额
-				alOfSaleSheet.get(i).setmoney1(ss.getmoney1());
-				//修改使用代金券
-				alOfSaleSheet.get(i).setpmoney(ss.getpmoney());
-				//修改折让金额
-				alOfSaleSheet.get(i).setdiscount(ss.getdiscount());
-				//修改最终金额
-				alOfSaleSheet.get(i).setmoney2(ss.getmoney2());
-				//修改备注
-				alOfSaleSheet.get(i).setwords(ss.getwords());
-				//修改完毕
-				break;
-			}
-		}
-		//保存
-		this.save();
-	}
-	public void change(SaleBackSheetVO sbs){
-		for(int i=0;i<alOfSaleBackSheet.size();i++){
-			if(alOfSaleBackSheet.get(i).getID().equals(sbs.getID())){//寻找相同编号
-				//进行修改
-				//修改客户
-				alOfSaleBackSheet.get(i).setCustomer(new Customer(sbs.getcustomer()));//阿超改动了一下；如有问题，快来告诉我;
-				//修改仓库
-				alOfSaleBackSheet.get(i).setstock(sbs.getstock());
-				//修改操作员
-				alOfSaleBackSheet.get(i).setop(sbs.getop());
-				//修改商品清单
-				
-				//修改总金额
-				alOfSaleBackSheet.get(i).setmoney1(sbs.getmoney1());
-				//修改使用代金券
-				alOfSaleBackSheet.get(i).setpmoney(sbs.getpmoney());
-				//修改折让金额
-				alOfSaleBackSheet.get(i).setdiscount(sbs.getdiscount());
-				//修改最终金额
-				alOfSaleBackSheet.get(i).setmoney2(sbs.getmoney2());
-				//修改备注
-				alOfSaleBackSheet.get(i).setwords(sbs.getwords());
-				//修改完毕
-				break;
-			}
-		}
-		//保存
-		this.save();
-	}
-	public void change(ReceiptVO rb){
-		for(int i=0;i<alOfReceiptBill.size();i++){
-			if(alOfReceiptBill.get(i).getID().equals(rb.getID())){//寻找相同编号
-				//进行修改
-				//修改客户
-				alOfReceiptBill.get(i).setCustomer(rb.getCustomer());
-				//修改操作员
-				alOfReceiptBill.get(i).setOp(rb.getOp());
-				//修改总额
-				alOfReceiptBill.get(i).setTotal(rb.getTotal());
-				//修改转账列表
-				ArrayList<String> account = rb.getAccounts();
-				ArrayList<Double> money = rb.getMoney();
-				ArrayList<String> remark = rb.getRemark();
-				ArrayList<TransferAccount> transferlist = new ArrayList<TransferAccount>();
-				int length = account.size();
-				for(int j=0;j<length;j++) {
-					transferlist.add(new TransferAccount(account.get(j), money.get(j), remark.get(j)));
-				}
-				alOfReceiptBill.get(i).setTransferlist(transferlist);
-				//修改完毕
-				break;
-			}
-		}
-		//保存
-		this.save();
-	}
-	public void change(PaymentVO pb){
-		for(int i=0;i<alOfPaymentBill.size();i++){
-			if(alOfPaymentBill.get(i).getID().equals(pb.getID())){//寻找相同编号
-				//进行修改
-				//修改客户
-				alOfPaymentBill.get(i).setCustomer(pb.getCustomer());
-				//修改操作员
-				alOfPaymentBill.get(i).setOp(pb.getOp());
-				//修改总额
-				alOfPaymentBill.get(i).setTotal(pb.getTotal());
-				//修改转账列表
-				ArrayList<String> account = pb.getAccounts();
-				ArrayList<Double> money = pb.getMoney();
-				ArrayList<String> remark = pb.getRemark();
-				ArrayList<TransferAccount> transferlist = new ArrayList<TransferAccount>();
-				int length = account.size();
-				for(int j=0;j<length;j++) {
-					transferlist.add(new TransferAccount(account.get(j), money.get(j), remark.get(j)));
-				}
-				alOfReceiptBill.get(i).setTransferlist(transferlist);
-				//修改完毕
-				break;
-			}
-		}
-		//保存
-		this.save();
-	}
-	public void change(CashPaymentVO cb){
-		System.out.println("进入单据池修改");
-		for(int i=0;i<alOfCashPaymentBill.size();i++){
-			System.out.println(alOfCashPaymentBill.get(i).getID()+":"+cb.getID());
-			if(alOfCashPaymentBill.get(i).getID().equals(cb.getID())){//寻找相同编号
-				//进行修改
-				//修改银行账户
-				alOfCashPaymentBill.get(i).setAccount(cb.getAccount());
-				//修改操作员
-				alOfCashPaymentBill.get(i).setOp(cb.getOp());
-				//修改总额
-				alOfCashPaymentBill.get(i).setTotal(cb.getTotal());
-				//修改条目清单
-				ArrayList<String> item = cb.getItem();
-				ArrayList<Double> money=cb.getMoney(); 
-				ArrayList<String> remark=cb.getRemark();
-				ArrayList<Item> itemList = new ArrayList<Item>();
-				int length = item.size();
-				for(int j=0;j<length;j++) {
-					itemList.add(new Item(item.get(j), money.get(j), remark.get(j)));
-				}
-				alOfCashPaymentBill.get(i).setItemList(itemList);
-				//修改完毕
-				System.out.println("现金费用单修改完毕");
-				break;
-			}
-		}
-		//保存
-		this.save();
-	}
-	/*改单据状态*/
-	public void transformState(BillStyle style,String ID,BillState state){
-		switch(style){
-		case GiftBill:
-			for(int i=0;i<alOfGiftBill.size();i++){
-				if(alOfGiftBill.get(i).getID().equals(ID)){
-					alOfGiftBill.get(i).setState(state);
-				}
-			}
-			break;
-		case SpillsLossBill:
-			for(int i=0;i<alOfSpillsLossBill.size();i++){
-				if(alOfSpillsLossBill.get(i).getID().equals(ID)){
-					alOfSpillsLossBill.get(i).setState(state);
-				}
-			}
-			break;
-		case AlertBill:
-			for(int i=0;i<alOfAlertBill.size();i++){
-				if(alOfAlertBill.get(i).getID().equals(ID)){
-					alOfAlertBill.get(i).setState(state);
-				}
-			}
-			break;
-		case PurSheet:
-			for(int i=0;i<alOfPurSheet.size();i++){
-				if(alOfPurSheet.get(i).getID().equals(ID)){
-					alOfPurSheet.get(i).setState(state);
-				}
-			}
-			break;
-		case PurBackSheet:
-			for(int i=0;i<alOfPurBackSheet.size();i++){
-				if(alOfPurBackSheet.get(i).getID().equals(ID)){
-					alOfPurBackSheet.get(i).setState(state);
-				}
-			}
-			break;
-		case SaleSheet:
-			for(int i=0;i<alOfSaleSheet.size();i++){
-				if(alOfSaleSheet.get(i).getID().equals(ID)){
-					alOfSaleSheet.get(i).setState(state);
-				}
-			}
-			break;
-		case SaleBackSheet:
-			for(int i=0;i<alOfSaleBackSheet.size();i++){
-				if(alOfSaleBackSheet.get(i).getID().equals(ID)){
-					alOfSaleBackSheet.get(i).setState(state);
-				}
-			}
-			break;
-		case ReceiptBill:
-			for(int i=0;i<alOfReceiptBill.size();i++){
-				if(alOfReceiptBill.get(i).getID().equals(ID)){
-					alOfReceiptBill.get(i).setState(state);
-				}
-			}
-			break;
-		case PaymentBill:
-			for(int i=0;i<alOfPaymentBill.size();i++){
-				if(alOfPaymentBill.get(i).getID().equals(ID)){
-					alOfPaymentBill.get(i).setState(state);
-				}
-			}
-			break;
-		case CashPaymentBill:
-			for(int i=0;i<alOfCashPaymentBill.size();i++){
-				if(alOfCashPaymentBill.get(i).getID().equals(ID)){
-					alOfCashPaymentBill.get(i).setState(state);
-				}
-			}
-			break;
-			
-		}
-		//保存
-		save();
-	}
-	
 	/*实时保存池中数组对象*/
 	public void save(){
 		//保存文档中的对象

@@ -300,6 +300,7 @@ public class JPBill extends JPanel {
 		bg.setIcon(new ImageIcon("src/image/strategy/BarginStrategy1.png"));
 		bg.setBounds(0, 0, 522, 93);
 		bg.addMouseListener(new MLofStartegy(2));
+		bg.addMouseListener(new MouseListenerGetXY());
 		//向右
 		right.setIcon(new ImageIcon("src/image/right.png"));
 		right.setBounds(221, 26, 40, 40);
@@ -313,15 +314,15 @@ public class JPBill extends JPanel {
 		ID.setBounds(31,5, 200, 20);
 		
 		//单据信息未完
-		JLabel originalTotalPrice=new JLabel();
-		JLabel decreasePrice=new JLabel();
-		JLabel num=new JLabel();
-		JLabel start=new JLabel();
-		JLabel last=new JLabel();
+		JLabel originalTotalPrice=new JLabel("原始总价");
+		JLabel decreasePrice=new JLabel("降价金额");
+		JLabel num=new JLabel("打包数量");
+		JLabel start=new JLabel("起始时间");
+		JLabel last=new JLabel("持续时间");
 		
 		Double originalTotal=0.0;
 		for(int i=0;i<bs.getAlOfCommodity().size();i++){
-			originalTotal+=bs.getAlOfCommodity().get(i).getOut();
+			originalTotal+=bs.getAlOfCommodity().get(i).getOut()*bs.getAlOfCommodity().get(i).getNumber();
 		}
 		//单据信息未完
 		JLabel originalTotalPriceTxt=new JLabel(String.valueOf(originalTotal));
@@ -330,11 +331,12 @@ public class JPBill extends JPanel {
 		JLabel startTxt=new JLabel(bs.getStartTime());
 		JLabel lastTxt=new JLabel(String.valueOf(bs.getLastTime()));
 		//字体
-		originalTotalPrice.setFont(new Font("宋体",Font.BOLD,14));
-		decreasePrice.setFont(new Font("宋体",Font.BOLD,14));
-		num.setFont(new Font("宋体",Font.BOLD,14));
-		start.setFont(new Font("宋体",Font.BOLD,14));
-		last.setFont(new Font("宋体",Font.BOLD,14));
+		originalTotalPrice.setFont(new Font("隶书",Font.BOLD,15));
+		decreasePrice.setFont(new Font("隶书",Font.BOLD,15));
+		num.setFont(new Font("隶书",Font.BOLD,15));
+		start.setFont(new Font("隶书",Font.BOLD,15));
+		last.setFont(new Font("隶书",Font.BOLD,15));
+		
 		//字体颜色
 		originalTotalPrice.setForeground(Color.white);
 		decreasePrice.setForeground(Color.white);
@@ -342,11 +344,33 @@ public class JPBill extends JPanel {
 		start.setForeground(Color.white);
 		last.setForeground(Color.white);
 		
+		originalTotalPrice.setBounds(280, 4, 100, 17);
+		decreasePrice.setBounds(280, 21, 100, 17);
+		num.setBounds(280,38, 100, 17);
+		start.setBounds(280,55, 160, 17);
+		last.setBounds(280,72, 100, 17);
+		
+		originalTotalPriceTxt.setBounds(370, 4, 100, 17);
+		decreasePriceTxt.setBounds(370, 21, 100, 17);
+		numTxt.setBounds(370,38, 100, 17);
+		startTxt.setBounds(370,55, 160, 17);
+		lastTxt.setBounds(370,72, 100, 17);
+		
 		//将组件加到面板上
 		this.add(right,0);
 		this.add(left,1);
 		this.add(ID,2);
-		this.add(bg,3);
+		this.add(originalTotalPrice,3);
+		this.add(decreasePrice,4);
+		this.add(num,5);
+		this.add(start,6);
+		this.add(last,7);
+		this.add(originalTotalPriceTxt,8);
+		this.add(decreasePriceTxt,9);
+		this.add(numTxt,10);
+		this.add(startTxt,11);
+		this.add(lastTxt,12);
+		this.add(bg,13);
 	}
 	public JPBill(ReachStrategyVO rs){
 		//区分面板种类

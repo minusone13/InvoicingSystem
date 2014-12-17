@@ -527,7 +527,7 @@ public class JPBillList extends JPanel {
 		table=t;
 	}
 
-	/*返回选中的单据VO*/
+	/*返回选中的单据*/
 	public JPBill getChosen(){
 		for(int i=0;i<JPbillList.size();i++){
 			if(JPbillList.get(i).getChoose()){
@@ -584,20 +584,37 @@ public class JPBillList extends JPanel {
 	/*删除选中的*/
 	public void removeChosen(){
 
-		if(isTheSameState()&&stateOfChosen()==BillState.OVER){//如果是同一个状态且是已处理状态
+		if(getChosen().getType()==JPbillType.Bill){
+			if(isTheSameState()&&stateOfChosen()==BillState.OVER){//如果是同一个状态且是已处理状态
+				for(int i=0;i<JPbillList.size();i++){
+					if(JPbillList.get(i).getChoose()){
+						JPbillList.remove(i);
+						i--;
+					}
+				}
+				//重新加到底板上
+				updateJP();
+			}
+		
+			else{
+				System.out.println("只有已处理单据能够移除");
+			}
+		}
+		else{//不是单据
 			for(int i=0;i<JPbillList.size();i++){
 				if(JPbillList.get(i).getChoose()){
 					//如果是策略，要从数据库中删除
-					if(JPbillList.get(i).getLevelStrategyVO()!=null||JPbillList.get(i).getBarginStrategyVO()!=null||JPbillList.get(i).getReachStrategyVO()!=null){
-						if(JPbillList.get(i).getLevelStrategyVO()!=null){
-							mbl.Remove(JPbillList.get(i).getLevelStrategyVO());
-						}
-						if(JPbillList.get(i).getBarginStrategyVO()!=null){
-							mbl.Remove(JPbillList.get(i).getBarginStrategyVO());
-						}
-						if(JPbillList.get(i).getReachStrategyVO()!=null){
-							mbl.Remove(JPbillList.get(i).getReachStrategyVO());
-						}
+					if(JPbillList.get(i).getLevelStrategyVO()!=null){
+						mbl.Remove(JPbillList.get(i).getLevelStrategyVO());
+						System.out.println("删除一条客户策略");
+					}
+					if(JPbillList.get(i).getBarginStrategyVO()!=null){
+						mbl.Remove(JPbillList.get(i).getBarginStrategyVO());
+						System.out.println("删除一条特价包策略");
+					}
+					if(JPbillList.get(i).getReachStrategyVO()!=null){
+						mbl.Remove(JPbillList.get(i).getReachStrategyVO());
+						System.out.println("删除一条满额策略");
 					}
 					JPbillList.remove(i);
 					i--;
@@ -606,10 +623,7 @@ public class JPBillList extends JPanel {
 			//重新加到底板上
 			updateJP();
 		}
-	
-		else{
-			System.out.println("只有已处理单据能够移除");
-		}
+		
 	}
 	
 	/*返回被选中的个数*/
