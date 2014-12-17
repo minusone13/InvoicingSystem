@@ -20,8 +20,9 @@ public interface StubCommodityDataService extends Remote{
 	public RM deleteCommodity(String name, String model);
 	public RM deleteCategory(String id);
 	public boolean update(CommodityPO po);
-	public boolean update(CategoryPO po);
+	public RM update(CategoryPO po,String newName);
 	public CommodityPO findCommodity(String name, String model);
+	//public CategoryPO findCategory(String id);
 	public ArrayList<StockPO> openCategory(String id);
 	
 	public ArrayList<AdjustmentRecordPO> getAdjustmentRecords();

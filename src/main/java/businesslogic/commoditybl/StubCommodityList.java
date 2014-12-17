@@ -314,12 +314,9 @@ public class StubCommodityList {//商品列表 haha
 		else
 			return RM.unknownerror;
 	}
-	public RM updateCategory(CategoryVO vo)
+	public RM updateCategory(CategoryVO vo, String newName)
 	{
-		if(comdata.update(new StubCategory(vo).toPO()))
-			return RM.done;
-		else
-			return RM.unknownerror;
+		return comdata.update(new StubCategory(vo).toPO(), newName);
 	}
 	public static StubCommodityDataService getComdata() {
 		return comdata;

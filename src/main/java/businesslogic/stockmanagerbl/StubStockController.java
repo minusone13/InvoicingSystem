@@ -164,11 +164,19 @@ public class StubStockController implements StubCommodityBlService, StockBlForSa
 		us.addRecord(new OperationRecord(user,"updateCommodity",result));
 		return result;
 	}
+	public RM updateCommodity(CommodityVO vo, String newName)
+	{
+		RM result = l.updateCommodity(vo);
+		us.addRecord(new OperationRecord(user,"updateCommodity",result));
+		return result;
+	}
 	public RM updateCategory(CategoryVO vo)
 	{
-		RM result = l.updateCategory(vo);
-		us.addRecord(new OperationRecord(user,"updateCategory",result));
-		return result;
+		return RM.unknownerror;
+	}
+	public RM updateCategory(CategoryVO vo, String newName)
+	{
+		return l.updateCategory(vo, newName);
 	}
 	
 	public RM creat(GiftBillVO vo)

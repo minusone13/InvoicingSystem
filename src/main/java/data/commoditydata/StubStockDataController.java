@@ -168,10 +168,10 @@ public class StubStockDataController implements StubCommodityDataService, StockD
 		save();
 		return result;
 	}
-	public boolean update(CategoryPO po)
+	public RM update(CategoryPO po,String newName)
 	{
 		read();
-		boolean result = l.update(po);
+		RM result = l.update(po,newName);
 		save();
 		return result;
 	}
