@@ -280,6 +280,8 @@ public class StubCommodityList {//商品列表 haha
 	public ArrayList<StockVO> openCategory(String id)
 	{
 		ArrayList<StockPO> pos=comdata.openCategory(id);
+		if(pos==null)
+			return null;
 		ArrayList<StockVO> vos=new ArrayList<StockVO>();
 		for(int i=0;i<pos.size();i++)
 		{

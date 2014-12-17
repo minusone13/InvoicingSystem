@@ -136,10 +136,67 @@ public class StockTest{
 	}
 	
 	@Test
-	public void testUpdateCategory()
+	public void testUpdateCategory1()
 	{
-		//new 
-		//combl.updateCategory(vo);
+		CategoryVO vo = new CategoryVO("1\\灯\\日光灯","纯白日光灯");
+		ArrayList<StockVO> vos = combl.openCategory("1\\灯\\日光灯");
+		int oldSize = vos.size();
+		combl.updateCategory(vo,"纯黑日光灯");
+		vos = combl.openCategory("1\\灯\\日光灯");
+		assertEquals("纯黑日光灯",vos.get(0).getCat().getName());
+		assertEquals(oldSize,vos.size());
+	}
+	
+	@Test
+	public void testUpdateCategory2()
+	{
+		CategoryVO vo = new CategoryVO("1","门");
+		ArrayList<StockVO> vos = combl.openCategory("1\\门");
+		int oldSize = vos.size();
+		vos = combl.openCategory("1");
+		combl.updateCategory(vo, "大门");
+		vos = combl.openCategory("1\\大门");
+		for(int i=0;i<vos.size();i++)
+		{
+			String s = vos.get(i).getCom().getId();
+			String a[] = s.split("\\\\");
+			assertEquals("1",a[0]);
+			assertEquals("大门",a[1]);
+		}
+		assertEquals(oldSize,vos.size());
+		vos = combl.openCategory("1\\门");
+		assertEquals(null,vos);
+		if(vos != null)
+			assertEquals(0,vos.size());
+	}
+	
+	@Test
+	public void testUpdateCategory3()
+	{
+		CategoryVO vo = new CategoryVO("1","灯");
+		ArrayList<StockVO> vos = combl.openCategory("1\\灯");
+		int oldSize = vos.size();
+		vos = combl.openCategory("1");
+		combl.updateCategory(vo, "闪光灯");
+		vos = combl.openCategory("1\\闪光灯");
+
+			String s = vos.get(0).getCat().getId();
+			String a[] = s.split("\\\\");
+			assertEquals("1",a[0]);
+			assertEquals("闪光灯",a[1]);
+			assertEquals("日光灯",a[2]);
+			ArrayList<StockVO> vostemp = combl.openCategory(s);
+			s = vostemp.get(0).getCat().getId();
+			a = s.split("\\\\");
+			assertEquals("1",a[0]);
+			assertEquals("闪光灯",a[1]);
+			assertEquals("日光灯",a[2]);
+			assertEquals("纯白日光灯",a[3]);
+		assertEquals(oldSize,vos.size());
+		vos = combl.openCategory("1\\灯");
+		assertEquals(null,vos);
+		if(vos != null)
+			assertEquals(0,vos.size());
 	}
 	
 	@Test

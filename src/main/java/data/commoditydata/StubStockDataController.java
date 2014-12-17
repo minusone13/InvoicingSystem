@@ -145,6 +145,9 @@ public class StubStockDataController implements StubCommodityDataService, StockD
 	public ArrayList<StockPO> openCategory(String id)
 	{
 		read();
+		StubCategoryData cat = l.findCategory(id);
+		if(cat == null)
+			return null;
 		return l.findCategory(id).open();
 	}
 	public RM deleteCommodity(String name, String model)

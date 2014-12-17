@@ -74,8 +74,8 @@ public class MockCommodity {
 		{
 			parent=po.getParent();
 			name=po.getName();
-			id=parent+"\\"+name;
 			model=po.getModel();
+			id=parent+"\\"+name+"-"+model;
 			number=po.getNumber();
 			in=po.getIn();
 			out=po.getOut();
@@ -90,8 +90,8 @@ public class MockCommodity {
 	{
 		parent=vo.getParent();
 		name=vo.getName();
-		id=parent+"\\"+name;
 		model=vo.getModel();
+		id=parent+"\\"+name+"-"+model;
 		number=vo.getNumber();
 		in=vo.getIn();
 		out=vo.getOut();
