@@ -7,6 +7,7 @@ import vo.GiftBillVO;
 import vo.LevelStrategyVO;
 import vo.ReachStrategyVO;
 import vo.VO;
+import businesslogic.LevelStrategyStyle;
 import businesslogicservice.managerblservice.StubManagerBlService;
 
 public class ManagerBLDriver {
@@ -20,6 +21,7 @@ public class ManagerBLDriver {
 	mbs.modifyPassword("wwweee");	
 	
 	LevelStrategyVO DiscountLevelStrategyTest=new LevelStrategyVO();
+	DiscountLevelStrategyTest.setLevel_strategy_style(LevelStrategyStyle.Discount);
 	DiscountLevelStrategyTest.setLevel(4);
 	DiscountLevelStrategyTest.setDiscountrate(0.8);
 	DiscountLevelStrategyTest.setStartTime("2014/12/9");

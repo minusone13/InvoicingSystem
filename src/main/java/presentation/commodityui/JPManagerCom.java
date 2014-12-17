@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import presentation.managerui.MouseListenerGetXY;
+import userui.Frame;
 import businesslogic.Role;
 
 public class JPManagerCom extends JPanel{
@@ -44,7 +45,11 @@ public class JPManagerCom extends JPanel{
 	//查询
 	private JLabel findIcon;
 	//查询
+	private JLabel addIcon;
+	//查询
 	private JTextField detail=new JTextField(16);
+	//frame的引用
+    Frame frame;
 	public JPManagerCom(){
 		this.setSize(617, 370);
 		this.setLayout(null);
@@ -93,6 +98,11 @@ public class JPManagerCom extends JPanel{
 		comfirm.setBounds(575, 3, 24, 24);
 		comfirm.setIcon(new ImageIcon("src/image/ChooseCom/confirm.png") );
 		comfirm.addMouseListener(new MouseListenerOfButton(2));
+		//add按钮
+		addIcon=new JLabel();
+		addIcon.setBounds(550, 3, 24, 24);
+		addIcon.setIcon(new ImageIcon("src/image/ChooseCom/littleAddW.png") );
+		addIcon.addMouseListener(new MouseListenerOfButton(3));
 		
 		detail.setBounds(15, 5, 550, 20);
 		detail.setOpaque(false);//文本框透明
@@ -106,14 +116,19 @@ public class JPManagerCom extends JPanel{
 		head.add(bgOfHead,3);
 		
 		bottom.add(comfirm,0);
-		bottom.add(detail,1);
-		bottom.add(bgOfBottom,2);
+		bottom.add(addIcon,1);
+		bottom.add(detail,2);
+		bottom.add(bgOfBottom,3);
 		
 		this.add(commodities,0);
 		this.add(content,1);
 		this.add(head,2);
 		this.add(bottom,3);
 		this.addMouseListener(new MouseListenerGetXY());
+	}
+	/*获取frame的引用*/
+	public void getFrame( Frame f){
+  		frame=f;
 	}
 	/*底部显示信息*/
 	public void showDetail(String s){
@@ -132,7 +147,7 @@ public class JPManagerCom extends JPanel{
 		this.commodities = commodities;
 	}
 	public class MouseListenerOfButton implements MouseListener{
-		private int num;//1、查询 2、确认
+		private int num;//1、查询 2、确认 3、add
 		public MouseListenerOfButton(int N){
 			num=N;
 		}
@@ -149,6 +164,9 @@ public class JPManagerCom extends JPanel{
 			case 2:
 				comfirm.setIcon(new ImageIcon("src/image/function/confirmR.png") );
 				break;
+			case 3:
+				addIcon.setIcon(new ImageIcon("src/image/function/littleAddR.png") );
+				break;
 			}
 		}
 		public void mouseReleased(MouseEvent e) {
@@ -159,6 +177,44 @@ public class JPManagerCom extends JPanel{
 				break;
 			case 2:
 				comfirm.setIcon(new ImageIcon("src/image/ChooseCom/confirm.png") );
+				//根据权限加商品到不同的地方
+				switch(role){
+				case MANAGER:
+					//输出商品到编辑面板
+					switch(frame.getManager().getManagerStrategy2().getStyle()){
+					case LevelStrategy:
+						frame.getManager().getManagerStrategy2().getJPeditOfLevel().setOutput(commodities.getOutput());
+						break;
+					case BarginStrategy:
+						frame.getManager().getManagerStrategy2().getJPeditOfBargin().setOutput(commodities.getOutput());
+						//自动计算总价
+						Double total=0.0;
+						for(int i=0;i<commodities.getOutput().size();i++){
+							total+=commodities.getOutput().get(i).getOut();
+						}
+						frame.getManager().getManagerStrategy2().getJPeditOfBargin().getOriginalTotalPriceText().setText(String.valueOf(total));
+						break;
+					case ReachStrategy:
+						frame.getManager().getManagerStrategy2().getJPeditOfReach().setOutput(commodities.getOutput());
+						break;
+					}
+					break;
+				case PURCHASE_SALE_STAFF:
+					break;
+				}
+			
+				//清除选择痕迹
+				commodities.getOutput().clear();
+				commodities.getCommodities().clear();
+				commodities.update();
+				//隐藏商品选择界面
+				JPManagerCom.this.setVisible(false);
+				break;
+			case 3:
+				addIcon.setIcon(new ImageIcon("src/image/function/littleAddW.png") );
+				//加选择的商品到输出
+				commodities.addToOutput();
+				
 				break;
 			}
 		}
@@ -174,6 +230,9 @@ public class JPManagerCom extends JPanel{
 				break;
 			case 2:
 				comfirm.setIcon(new ImageIcon("src/image/ChooseCom/confirm.png") );
+				break;
+			case 3:
+				addIcon.setIcon(new ImageIcon("src/image/function/littleAddW.png") );
 				break;
 			}
 		}

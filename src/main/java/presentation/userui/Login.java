@@ -175,6 +175,7 @@ public class Login extends JPanel {
 								frame.getManager().getManagerStrategy2().setVisible(false);
 								frame.getManager().getInquire().setVisible(false);
 								frame.getManager().getBusinessCondition().setVisible(false);
+								frame.getManager().getCommodityChoose().setVisible(false);
 								frame.getManager().getFunction().setVisible(true);
 								Login.this.setVisible(false);
 								frame.getManager().setVisible(true);

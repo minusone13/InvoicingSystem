@@ -10,7 +10,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import presentation.commodityui.StockManagerDriver;
-import data.commoditydata.StubStockDataController;
 import vo.AlertBillVO;
 import vo.BarginStrategyVO;
 import vo.GiftBillVO;
@@ -35,6 +34,7 @@ import businesslogicservice.commodityblservice.StubCommodityBlService;
 import businesslogicservice.financialblservice.FinancialBlService;
 import businesslogicservice.managerblservice.StubManagerBlService;
 import businesslogicservice.salebillblservice.SaleBillBlService;
+import data.commoditydata.StubStockDataController;
 
 public class JPBill extends JPanel {
 
@@ -171,7 +171,6 @@ public class JPBill extends JPanel {
 	public JPBill(LevelStrategyVO ls){
 		//区分面板种类
 		setType(JPbillType.Strategy);
-		System.out.println("构造一条客户策略");
 		//逻辑层接口
 		StockManagerDriver smd=new StockManagerDriver();
 		smd.start(stockbl,StubStockDataController.getInstance());
@@ -187,6 +186,7 @@ public class JPBill extends JPanel {
 		bg.setIcon(new ImageIcon("src/image/strategy/LevelStrategy1.png"));
 		bg.setBounds(0, 0, 522, 93);
 		bg.addMouseListener(new MLofStartegy(1));
+		bg.addMouseListener(new MouseListenerGetXY());
 		//向右
 		right.setIcon(new ImageIcon("src/image/right.png"));
 		right.setBounds(221, 26, 40, 40);
@@ -199,24 +199,24 @@ public class JPBill extends JPanel {
 		JLabel ID=new JLabel("ID:"+ls.getID(),JLabel.CENTER);
 		ID.setBounds(31,5, 200, 20);
 		
-		JLabel level=new JLabel();
-		JLabel limit=new JLabel();
-		JLabel discount=new JLabel();
-		JLabel coupon=new JLabel();
-		JLabel start=new JLabel();
-		JLabel last=new JLabel();
+		JLabel level=new JLabel("客户等级：");
+		JLabel limit=new JLabel("消费下限：");
+		JLabel discount=new JLabel("打折比例：");
+		JLabel coupon=new JLabel("赠送代金券比例：");
+		JLabel start=new JLabel("起始时间：");
+		JLabel last=new JLabel("持续时间：");
 		
 		JLabel levelTxt=new JLabel(String.valueOf(ls.getLevel()));
 		JLabel startTxt=new JLabel(ls.getStartTime());
 		JLabel lastTxt=new JLabel(String.valueOf(ls.getLastTime()));
 		
 		//设置标签字体
-		level.setFont(new Font("宋体",Font.BOLD,14));
-		limit.setFont(new Font("宋体",Font.BOLD,14));
-		discount.setFont(new Font("宋体",Font.BOLD,14));
-		coupon.setFont(new Font("宋体",Font.BOLD,14));
-		start.setFont(new Font("宋体",Font.BOLD,14));
-		last.setFont(new Font("宋体",Font.BOLD,14));
+		level.setFont(new Font("隶书",Font.BOLD,18));
+		limit.setFont(new Font("隶书",Font.BOLD,18));
+		discount.setFont(new Font("隶书",Font.BOLD,18));
+		coupon.setFont(new Font("隶书",Font.BOLD,18));
+		start.setFont(new Font("隶书",Font.BOLD,18));
+		last.setFont(new Font("隶书",Font.BOLD,18));
 		
 		
 		//设置字体颜色
@@ -227,28 +227,67 @@ public class JPBill extends JPanel {
 		start.setForeground(Color.white);
 		last.setForeground(Color.white);
 		
+		level.setBounds(280, 6, 100, 20);
+		limit.setBounds(280, 26, 100, 20);
+		discount.setBounds(280, 26, 100, 20);
+		coupon.setBounds(280, 26, 160, 20);
+		start.setBounds(280, 46, 100, 20);
+		last.setBounds(280, 66, 100, 20);
+		
+		levelTxt.setBounds(370, 6, 100, 20);
+		startTxt.setBounds(370, 48, 100, 20);
+		lastTxt.setBounds(370, 69, 100, 20);
+		
+		this.add(right,0);
+		this.add(left,1);
+		this.add(ID,2);
+		System.out.println(ls.getLevel_strategy_style());
 		//单据信息未完
 		switch(ls.getLevel_strategy_style()){
 		case Gift:
 			JLabel limitTxt=new JLabel(String.valueOf(ls.getLimit()));
+			limitTxt.setBounds(370, 27, 100, 20);
+			this.add(level,3);
+			this.add(limit,4);
+			this.add(start,5);
+			this.add(last,6);
+			this.add(levelTxt,7);
+			this.add(limitTxt,8);
+			this.add(startTxt,9);
+			this.add(lastTxt,10);
 			break;
 		case Discount://打折
 			JLabel discountTxt=new JLabel(String.valueOf(ls.getDiscountrate()));
+			discountTxt.setBounds(370, 27, 100, 20);
+			this.add(level,3);
+			this.add(discount,4);
+			this.add(start,5);
+			this.add(last,6);
+			this.add(levelTxt,7);
+			this.add(discountTxt,8);
+			this.add(startTxt,9);
+			this.add(lastTxt,10);
 			break;
 		case Coupon://代金券
 			JLabel couponTxt=new JLabel(String.valueOf(ls.getCouponrate()));
+			couponTxt.setBounds(425, 27, 100, 20);
+			this.add(level,3);
+			this.add(coupon,4);
+			this.add(start,5);
+			this.add(last,6);
+			this.add(levelTxt,7);
+			this.add(couponTxt,8);
+			this.add(startTxt,9);
+			this.add(lastTxt,10);
 			break;
 		}
 		//将组件加到面板上
-		this.add(right,0);
-		this.add(left,1);
-		this.add(ID,2);
-		this.add(bg,3);
+		this.add(bg,11);
+		
 	}
 	public JPBill(BarginStrategyVO bs){
 		//区分面板种类
 		setType(JPbillType.Strategy);
-		System.out.println("构造一条特价包策略");
 		//传递VO
 		barginStrategyVO=bs;
 		//面板大小
@@ -280,7 +319,7 @@ public class JPBill extends JPanel {
 		JLabel start=new JLabel();
 		JLabel last=new JLabel();
 		
-		int originalTotal=0;
+		Double originalTotal=0.0;
 		for(int i=0;i<bs.getAlOfCommodity().size();i++){
 			originalTotal+=bs.getAlOfCommodity().get(i).getOut();
 		}
@@ -312,7 +351,6 @@ public class JPBill extends JPanel {
 	public JPBill(ReachStrategyVO rs){
 		//区分面板种类
 		setType(JPbillType.Strategy);
-		System.out.println("构造一条满额策略");
 		//传递VO
 		reachStrategyVO=rs;
 		//面板大小
@@ -338,20 +376,20 @@ public class JPBill extends JPanel {
 		ID.setBounds(31,5, 200, 20);
 		
 		//单据信息未完
-		JLabel limit=new JLabel();
-		JLabel coupon=new JLabel();
-		JLabel start=new JLabel();
-		JLabel last=new JLabel();
+		JLabel limit=new JLabel("消费下限：");
+		JLabel coupon=new JLabel("代金券赠送比例：");
+		JLabel start=new JLabel("起始时间：");
+		JLabel last=new JLabel("持续时间：");
 		
 		JLabel limitTxt=new JLabel(String.valueOf(rs.getLimit()));
 		
 		JLabel startTxt=new JLabel(rs.getStartTime());
 		JLabel lastTxt=new JLabel(String.valueOf(rs.getLastTime()));
 		//设置标签字体
-		limit.setFont(new Font("宋体",Font.BOLD,14));
-		coupon.setFont(new Font("宋体",Font.BOLD,14));
-		start.setFont(new Font("宋体",Font.BOLD,14));
-		last.setFont(new Font("宋体",Font.BOLD,14));
+		limit.setFont(new Font("隶书",Font.BOLD,18));
+		coupon.setFont(new Font("隶书",Font.BOLD,18));
+		start.setFont(new Font("隶书",Font.BOLD,18));
+		last.setFont(new Font("隶书",Font.BOLD,18));
 		
 		//设置字体颜色
 		limit.setForeground(Color.white);
@@ -359,19 +397,51 @@ public class JPBill extends JPanel {
 		start.setForeground(Color.white);
 		last.setForeground(Color.white);
 		
-		switch(rs.getReach_strategy_style()){
-		case Gift://赠品
-			
-			break;
-		case Coupon://代金券
-			JLabel couponTxt=new JLabel(String.valueOf(rs.getCouponrate()));
-			break;
-		}
-		//将组件加到面板上
+		limit.setBounds(280, 6, 100, 20);
+		coupon.setBounds(280, 26, 160, 20);
+	
+		
+		limitTxt.setBounds(370, 6, 100, 20);
+		
 		this.add(right,0);
 		this.add(left,1);
 		this.add(ID,2);
-		this.add(bg,3);
+		switch(rs.getReach_strategy_style()){
+		case Gift://赠品
+			startTxt.setBounds(370, 27, 100, 20);
+			lastTxt.setBounds(370, 48, 100, 20);
+			start.setBounds(280, 26, 100, 20);
+			last.setBounds(280, 46, 100, 20);
+			this.add(limit,3);
+			this.add(start,4);
+			this.add(last,5);
+			this.add(limitTxt,6);
+			this.add(startTxt,7);
+			this.add(lastTxt,8);
+			this.add(bg,9);
+			break;
+		case Coupon://代金券
+			JLabel couponTxt=new JLabel(String.valueOf(rs.getCouponrate()));
+			couponTxt.setBounds(425, 27, 100, 20);
+			startTxt.setBounds(370, 48, 100, 20);
+			lastTxt.setBounds(370, 69, 100, 20);
+			start.setBounds(280, 46, 100, 20);
+			last.setBounds(280, 66, 100, 20);
+			
+			this.add(limit,3);
+			this.add(coupon,4);
+			this.add(start,5);
+			this.add(last,6);
+			this.add(limitTxt,7);
+			this.add(couponTxt,8);
+			this.add(startTxt,9);
+			this.add(lastTxt,10);
+			this.add(bg,11);
+			break;
+		}
+		//将组件加到面板上
+	
+		
 	}
 	public LevelStrategyVO getLevelStrategyVO() {
 		return levelStrategyVO;

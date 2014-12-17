@@ -24,8 +24,9 @@ public class JPcommodityPack extends JPanel {
 	private JPanel pack=null;
 	private ArrayList<JPcommodity> commodities=new ArrayList<JPcommodity>();
 	private JPManagerCom JPmanagerCom;
+	private ArrayList<CommodityVO> output=new ArrayList<CommodityVO>();
 	//逻辑层接口
-		private StubCommodityBlService stockbl=new StubStockController();
+	private StubCommodityBlService stockbl=new StubStockController();
 	public JPcommodityPack(){
 		//逻辑层接口
 		StockManagerDriver smd=new StockManagerDriver();
@@ -105,6 +106,21 @@ public class JPcommodityPack extends JPanel {
 		return null;
 		
 	}
+	/*将选中的商品加到输出数组中*/
+	public void addToOutput(){
+		ArrayList<CommodityVO> temp=getAllChosen();
+		if(temp!=null){
+			for(int i=0;i<temp.size();i++){
+				output.add(temp.get(i));
+			}
+		}
+	}
+	public ArrayList<CommodityVO> getOutput() {
+		return output;
+	}
+	public void setOutput(ArrayList<CommodityVO> output) {
+		this.output = output;
+	}
 	/*返回选中的商品*/
 	public ArrayList<CommodityVO> getAllChosen(){
 		if(getChosenNum()>=1){
@@ -148,6 +164,7 @@ public class JPcommodityPack extends JPanel {
 		}
 	
 	}
+	
 	/*返回选中商品的数量*/
 	public int getChosenNum(){
 		int i=0;

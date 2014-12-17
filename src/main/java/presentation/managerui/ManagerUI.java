@@ -7,6 +7,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import businesslogic.Role;
+import presentation.commodityui.JPManagerCom;
 import presentation.financialui.BusinessConditionPanel;
 import presentation.financialui.JPinquire;
 import userui.Frame;
@@ -35,6 +37,8 @@ public class ManagerUI extends JPanel {
 	private JPinquire inquire=new JPinquire();
 	//经营情况表
 	private BusinessConditionPanel businessCondition=new BusinessConditionPanel();
+	//商品选择面板
+	private JPManagerCom commodityChoose=new JPManagerCom();
 	public BusinessConditionPanel getBusinessCondition() {
 		return businessCondition;
 	}
@@ -126,6 +130,10 @@ public class ManagerUI extends JPanel {
 		//经营情况表
 		businessCondition.setLocation(55, 233);
 		businessCondition.setVisible(false);
+		//商品选择
+		commodityChoose.setLocation(55, 233);
+		commodityChoose.setRole(Role.MANAGER);
+		commodityChoose.setVisible(false);
 		
 		//home
 		home.setIcon(new ImageIcon("src/image/home.png") );
@@ -153,6 +161,7 @@ public class ManagerUI extends JPanel {
 		this.add(managerStrategy2,10);
 		this.add(inquire,11);
 		this.add(businessCondition,12);
+		this.add(commodityChoose,12);
 		this.add(bg,13);
 		
 	}
@@ -165,7 +174,14 @@ public class ManagerUI extends JPanel {
   		managerStrategy1.getFrame(frame);
   		managerStrategy2.getFrame(frame);
   		inquire.getFrame(frame);
+  		commodityChoose.getFrame(frame);
     }
+	public JPManagerCom getCommodityChoose() {
+		return commodityChoose;
+	}
+	public void setCommodityChoose(JPManagerCom commodityChoose) {
+		this.commodityChoose = commodityChoose;
+	}
 	public class MouseListenerOfButton implements MouseListener{
 
 		private int num;
@@ -203,6 +219,7 @@ public class ManagerUI extends JPanel {
 				ManagerUI.this.getManagerStrategy2().setVisible(false);
 				ManagerUI.this.getInquire().setVisible(false);
 				ManagerUI.this.getBusinessCondition().setVisible(false);
+				ManagerUI.this.getCommodityChoose().setVisible(false);
 				ManagerUI.this.getFunction().setVisible(true);
 				break;
 			case 2:

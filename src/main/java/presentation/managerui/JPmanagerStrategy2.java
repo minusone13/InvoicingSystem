@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
@@ -12,12 +13,19 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import userui.Frame;
-import businesslogic.BillState;
-import businesslogic.BillStyle;
+import vo.BarginStrategyVO;
+import vo.LevelStrategyVO;
+import vo.ReachStrategyVO;
+import vo.stockvo.CommodityVO;
+import businesslogic.LevelStrategyStyle;
+import businesslogic.ReachStrategyStyle;
 import businesslogic.StrategyStyle;
 
 public class JPmanagerStrategy2 extends JPanel {
-        //背景
+        public StrategyStyle getStyle() {
+		return style;
+	}
+		//背景
 		private JLabel bg=new JLabel();
 		//向上
 		private JLabel up=new JLabel();
@@ -33,6 +41,24 @@ public class JPmanagerStrategy2 extends JPanel {
 		private JLabel add=new JLabel();
 		//编辑面板
 		private JPanelEdit JPeditOfLevel;
+		public JPanelEdit getJPeditOfLevel() {
+			return JPeditOfLevel;
+		}
+		public void setJPeditOfLevel(JPanelEdit jPeditOfLevel) {
+			JPeditOfLevel = jPeditOfLevel;
+		}
+		public JPanelEdit getJPeditOfBargin() {
+			return JPeditOfBargin;
+		}
+		public void setJPeditOfBargin(JPanelEdit jPeditOfBargin) {
+			JPeditOfBargin = jPeditOfBargin;
+		}
+		public JPanelEdit getJPeditOfReach() {
+			return JPeditOfReach;
+		}
+		public void setJPeditOfReach(JPanelEdit jPeditOfReach) {
+			JPeditOfReach = jPeditOfReach;
+		}
 		//编辑面板
 		private JPanelEdit JPeditOfBargin;
 		//编辑面板
@@ -261,6 +287,13 @@ public class JPmanagerStrategy2 extends JPanel {
 		}
 		/*编辑栏面板*/
 		public class JPanelEdit extends JPanel{
+			public ArrayList<CommodityVO> getOutput() {
+				return output;
+			}
+			public void setOutput(ArrayList<CommodityVO> output) {
+				this.output = output;
+			}
+
 			//背景
 			private JLabel back=new JLabel();
 			//右移按钮
@@ -274,7 +307,8 @@ public class JPmanagerStrategy2 extends JPanel {
 			private ImageIcon add1=new ImageIcon("src/image/function/littleAddR.png");
 			private ImageIcon confirm0=new ImageIcon("src/image/function/confirmW.png");
 			private ImageIcon confirm1=new ImageIcon("src/image/function/confirmR.png");
-			
+			//接收输出的商品
+			private ArrayList<CommodityVO> output=new ArrayList<CommodityVO>();
 			//编辑面板的附件
 			private JLabel strategyType=new JLabel("策略种类");
 			private JLabel level=new JLabel("客户等级");
@@ -297,6 +331,13 @@ public class JPmanagerStrategy2 extends JPanel {
 			private JTextField startText=new JTextField(10);
 			private JTextField lastText=new JTextField(10);
 			private JTextField originalTotalPriceText=new JTextField(10);
+			public JTextField getOriginalTotalPriceText() {
+				return originalTotalPriceText;
+			}
+			public void setOriginalTotalPriceText(JTextField originalTotalPriceText) {
+				this.originalTotalPriceText = originalTotalPriceText;
+			}
+
 			private JTextField decreasePriceText=new JTextField(10);
 			private JTextField numText=new JTextField(10);
 			public JPanelEdit(StrategyStyle style){
@@ -369,6 +410,7 @@ public class JPmanagerStrategy2 extends JPanel {
 					strategyTypeCombo.setBackground(Color.gray);
 					strategyTypeCombo.setForeground(Color.white);
 					//客户等级选择下拉框
+					
 					String[] levelcomb={"一级","二级","三级","四级","五级"};
 					levelCombo = new JComboBox(levelcomb);
 					levelCombo.setFont(new Font("宋体",Font.BOLD,14));
@@ -571,9 +613,243 @@ public class JPmanagerStrategy2 extends JPanel {
 						break;
 					case 2:
 						addButton.setIcon(add0);
+						//调出商品选择面板
+						frame.getManager().getCommodityChoose().setVisible(true);
 						break;
 					case 3:
 						confirm.setIcon(confirm0);
+						//分类生成策略
+						switch(style){
+						case LevelStrategy:
+							if(strategyTypeCombo.getSelectedItem().toString().equals("赠送赠品")){
+								boolean legal=false;
+								if(
+										!limitText.getText().equals("")&&
+										!startText.getText().equals("")&&
+										!lastText.getText().equals("")&&
+										output.size()!=0){
+									legal=true;
+								}
+								if(legal){
+									LevelStrategyVO newLevel=new LevelStrategyVO();
+									newLevel.setLevel_strategy_style(LevelStrategyStyle.Gift);
+									int level=0;
+									if(levelCombo.getSelectedItem().toString().equals("一级")){
+										level=1;
+									}
+									if(levelCombo.getSelectedItem().toString().equals("二级")){
+										level=2;
+									}
+									if(levelCombo.getSelectedItem().toString().equals("三级")){
+										level=3;
+									}
+									if(levelCombo.getSelectedItem().toString().equals("四级")){
+										level=4;
+									}
+									if(levelCombo.getSelectedItem().toString().equals("五级")){
+										level=5;
+									}
+									newLevel.setLevel(level);
+									newLevel.setLimit(Double.parseDouble(limitText.getText()));
+									newLevel.setAlOfCommodity(output);
+									newLevel.setStartTime(startText.getText());
+									newLevel.setLastTime(Integer.parseInt(lastText.getText()));
+									billList.addLevelStrategy(newLevel);
+									
+									//清空信息
+									limitText.setText("");
+									startText.setText("");
+									lastText.setText("");
+									output.clear();
+								}
+								else{
+									System.out.println("请填写完整策略信息");
+								}
+										
+							}
+							else if(strategyTypeCombo.getSelectedItem().toString().equals("赠送代金券")){
+								boolean legal=false;
+								if(!limitText.getText().equals("")&&
+										!startText.getText().equals("")&&
+										!lastText.getText().equals("")&&
+										!couponText.getText().equals("")){
+									legal=true;
+								}
+								if(legal){
+									LevelStrategyVO newLevel=new LevelStrategyVO();
+									newLevel.setLevel_strategy_style(LevelStrategyStyle.Coupon);
+									int level=0;
+									if(levelCombo.getSelectedItem().toString().equals("一级")){
+										level=1;
+									}
+									if(levelCombo.getSelectedItem().toString().equals("二级")){
+										level=2;
+									}
+									if(levelCombo.getSelectedItem().toString().equals("三级")){
+										level=3;
+									}
+									if(levelCombo.getSelectedItem().toString().equals("四级")){
+										level=4;
+									}
+									if(levelCombo.getSelectedItem().toString().equals("五级")){
+										level=5;
+									}
+									newLevel.setLevel(level);
+									newLevel.setLimit(Double.parseDouble(limitText.getText()));
+									newLevel.setCouponrate(Double.parseDouble(couponText.getText()));
+									newLevel.setStartTime(startText.getText());
+									newLevel.setLastTime(Integer.parseInt(lastText.getText()));
+									billList.addLevelStrategy(newLevel);
+									
+									//清空信息
+									limitText.setText("");
+									startText.setText("");
+									lastText.setText("");
+									couponText.setText("");
+								}
+								else{
+									System.out.println("请填写完整策略信息");
+								}
+										
+							}
+							else if(strategyTypeCombo.getSelectedItem().toString().equals("打折")){
+								boolean legal=false;
+								if(!limitText.getText().equals("")&&
+										!startText.getText().equals("")&&
+										!lastText.getText().equals("")&&
+										!discountText.getText().equals("")){
+									legal=true;
+								}
+								if(legal){
+									LevelStrategyVO newLevel=new LevelStrategyVO();
+									newLevel.setLevel_strategy_style(LevelStrategyStyle.Discount);
+									int level=0;
+									if(levelCombo.getSelectedItem().toString().equals("一级")){
+										level=1;
+									}
+									if(levelCombo.getSelectedItem().toString().equals("二级")){
+										level=2;
+									}
+									if(levelCombo.getSelectedItem().toString().equals("三级")){
+										level=3;
+									}
+									if(levelCombo.getSelectedItem().toString().equals("四级")){
+										level=4;
+									}
+									if(levelCombo.getSelectedItem().toString().equals("五级")){
+										level=5;
+									}
+									newLevel.setLevel(level);
+									newLevel.setLimit(Double.parseDouble(limitText.getText()));
+									newLevel.setDiscountrate(Double.parseDouble(discountText.getText()));
+									newLevel.setStartTime(startText.getText());
+									newLevel.setLastTime(Integer.parseInt(lastText.getText()));
+									billList.addLevelStrategy(newLevel);
+									
+									//清空信息
+									limitText.setText("");
+									startText.setText("");
+									lastText.setText("");
+									discountText.setText("");
+								}
+								else{
+									System.out.println("请填写完整策略信息");
+								}
+										
+							}
+							break;
+						case BarginStrategy:
+							boolean Legal=false;
+							if(
+									!originalTotalPriceText.getText().equals("")&&
+									!decreasePriceText.getText().equals("")&&
+									!numText.getText().equals("")&&
+									!startText.getText().equals("")&&
+									!lastText.getText().equals("")&&
+									output.size()!=0){
+								Legal=true;
+							}
+							if(Legal){
+								BarginStrategyVO newBargin=new BarginStrategyVO();
+								newBargin.setNum(Integer.parseInt(numText.getText()));
+								newBargin.setDiscount(Double.parseDouble(decreasePriceText.getText()));
+								newBargin.setAlOfCommodity(output);
+								newBargin.setStartTime(startText.getText());
+								newBargin.setLastTime(Integer.parseInt(lastText.getText()));
+								billList.addBarginStrategy(newBargin);
+								
+								//清空信息
+								originalTotalPriceText.setText("");
+								decreasePriceText.setText("");
+								numText.setText("");
+								startText.setText("");
+								lastText.setText("");
+								output.clear();
+							}
+							else{
+								System.out.println("请填写完整策略信息");
+							}
+							break;
+						case ReachStrategy:
+							if(strategyTypeCombo.getSelectedItem().toString().equals("赠送赠品")){
+								boolean legal=false;
+								if(!limitText.getText().equals("")&&
+										!startText.getText().equals("")&&
+										!lastText.getText().equals("")&&
+										output.size()!=0){
+									legal=true;
+								}
+								if(legal){
+									ReachStrategyVO newReach=new ReachStrategyVO();
+									newReach.setReach_strategy_style(ReachStrategyStyle.Gift);
+									newReach.setLimit(Double.parseDouble(limitText.getText()));
+									newReach.setAlOfCommodity(output);
+									newReach.setStartTime(startText.getText());
+									newReach.setLastTime(Integer.parseInt(lastText.getText()));
+									billList.addReachStrategy(newReach);
+									
+									//清空信息
+									limitText.setText("");
+									startText.setText("");
+									lastText.setText("");
+									output.clear();
+								}
+								else{
+									System.out.println("请填写完整策略信息");
+								}
+										
+							}
+							else if(strategyTypeCombo.getSelectedItem().toString().equals("赠送代金券")){
+								boolean legal=false;
+								if(!limitText.getText().equals("")&&
+										!startText.getText().equals("")&&
+										!lastText.getText().equals("")&&
+										!couponText.getText().equals("")){
+									legal=true;
+								}
+								if(legal){
+									ReachStrategyVO newReach=new ReachStrategyVO();
+									newReach.setReach_strategy_style(ReachStrategyStyle.Coupon);
+									newReach.setLimit(Double.parseDouble(limitText.getText()));
+									newReach.setCouponrate(Double.parseDouble(couponText.getText()));
+									newReach.setStartTime(startText.getText());
+									newReach.setLastTime(Integer.parseInt(lastText.getText()));
+									billList.addReachStrategy(newReach);
+									
+									//清空信息
+									limitText.setText("");
+									startText.setText("");
+									lastText.setText("");
+									couponText.setText("");
+								}
+								else{
+									System.out.println("请填写完整策略信息");
+								}
+										
+							}
+							break;
+							
+						}
 						break;
 					}
 				}
