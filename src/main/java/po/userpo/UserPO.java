@@ -10,14 +10,16 @@ public class UserPO implements Serializable, Cloneable{
 	String account;//用于登陆的账号
 	String password;//经过MD5加密的密码
 	String name;//姓名
+	boolean authorized;//是否已授权
 	public UserPO(){}
-	public UserPO(String ID,Role r, String account, String password, String name)
+	public UserPO(String ID,Role r, String account, String password, String name, boolean authorized)
 	{
 		this.ID=ID;
 		this.r=r;
 		this.account=account;
 		this.password=password;
 		this.name=name;
+		this.authorized=authorized;
 	}
 	public Role getR() {
 		return r;
@@ -59,5 +61,11 @@ public class UserPO implements Serializable, Cloneable{
 	}
 	public void setID(String iD) {
 		ID = iD;
+	}
+	public boolean isAuthorized() {
+		return authorized;
+	}
+	public void setAuthorized(boolean authorized) {
+		this.authorized = authorized;
 	}
 }

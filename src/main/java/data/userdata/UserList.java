@@ -22,7 +22,7 @@ public class UserList implements Serializable{
 	public void initial()
 	{
 		users=new ArrayList<UserPO>();
-		users.add(new UserPO("A0001",Role.ADMINISTRATOR,"admin","21232f297a57a5a743894a0e4a801fc3","管理员"));
+		users.add(new UserPO("A0001",Role.ADMINISTRATOR,"admin","21232f297a57a5a743894a0e4a801fc3","管理员",true));
 		numOfAdmin++;
 		//default has a administrator account, default name is admin, password is admin. details see 大作业.doc
 		records=new ArrayList<OperationRecordPO>();

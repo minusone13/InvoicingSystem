@@ -25,14 +25,14 @@ public class UserList {
 		UserPO po = data.login(account, string2MD5(password));
 		if(po==null)
 			return null;
-		UserVO vo = new UserVO(po.getID(),po.getR(),po.getAccount(),po.getPassword(),po.getName());
+		UserVO vo = new User(po).toVO();
 		return vo;
 	}
 	public RM deleteUser(UserVO vo)
 	{
 		if(data.find(vo.getAccount())==null)
 			return RM.notfound;
-		boolean result=data.delete(new UserPO(vo.getID(),vo.getR(),vo.getAccount(),string2MD5(vo.getPassword()),vo.getName()));
+		boolean result=data.delete(new User(vo).toPO());
 		if(result==false)
 			return RM.unknownerror;
 		return RM.done;
@@ -46,7 +46,11 @@ public class UserList {
 			String result = generateID(vo);
 			if(result == null)
 				return RM.unknownerror;
-			data.insert(new UserPO(result,vo.getR(),vo.getAccount(),string2MD5(vo.getPassword()),vo.getName()));
+			User user = new User(vo);
+			user.setID(result);
+			user.setAuthorized(false);
+			user.setPassword(string2MD5(vo.getPassword()));
+			data.insert(user.toPO());
 			return RM.done;
 		}
 	}
@@ -68,9 +72,18 @@ public class UserList {
 		result=c+result;
 		return result;
 	}
+	public UserVO find(String account)
+	{
+		UserPO po = data.find(account);
+		if(po==null)
+			return null;
+		return new User(po).toVO();
+	}
 	public RM changePassword(UserVO vo)
 	{
-		RM result = data.updatePassword(new UserPO(vo.getID(),vo.getR(),vo.getAccount(),string2MD5(vo.getPassword()),vo.getName()));
+		User user = new User(vo);
+		user.setPassword(string2MD5(vo.getPassword()));
+		RM result = data.updatePassword(user.toPO());
 		return result;
 	}
 	public RM changePassword(UserVO vo, String oldPassword)
@@ -90,7 +103,9 @@ public class UserList {
 		String s = generateID(vo);
 		if(s==null)
 			return RM.unknownerror;
-		data.insert(new UserPO(s,vo.getR(),vo.getAccount(),vo.getPassword(),vo.getName()));
+		User user = new User(vo);
+		user.setID(s);
+		data.insert(user.toPO());
 		return result;
 	}
 	public ArrayList<UserVO> showUsers()
@@ -100,7 +115,7 @@ public class UserList {
 		for(int i=0;i<users.size();i++)
 		{
 			UserPO po = users.get(i);
-			result.add(new UserVO(po.getID(),po.getR(),po.getAccount(),po.getPassword(),po.getName()));
+			result.add(new User(po).toVO());
 		}
 		return result;
 	}
@@ -126,11 +141,6 @@ public class UserList {
 		account=po.getAccount();
 		password=po.getPassword();
 		name=po.getName();
-	}
-	
-	public UserPO getPO(UserPO po)
-	{
-		return new UserPO(ID,r,account,password,name);
 	}
 	
 	

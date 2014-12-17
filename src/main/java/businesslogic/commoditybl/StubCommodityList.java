@@ -18,7 +18,10 @@ public class StubCommodityList {//商品列表 haha
 	User user;
 	public CommodityVO findCommodity(String name, String model)
 	{
-		MockCommodity com = new MockCommodity(comdata.findCommodity(name, model));
+		CommodityPO po = comdata.findCommodity(name, model);
+		if(po == null)
+			return null;
+		MockCommodity com = new MockCommodity(po);
 		return com.toVO();
 	}
 	

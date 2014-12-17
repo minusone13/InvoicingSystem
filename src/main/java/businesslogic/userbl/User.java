@@ -10,6 +10,7 @@ public class User implements Cloneable{
 	String account;//用于登陆的账号
 	String password;//经过MD5加密的密码
 	String name;//姓名
+	boolean authorized;
 	public User(){}
 	public User(String ID,Role r, String account, String password, String name)
 	{
@@ -26,6 +27,7 @@ public class User implements Cloneable{
 		this.account=vo.getAccount();
 		this.password=vo.getPassword();
 		this.name=vo.getName();
+		this.authorized = vo.isAuthorized();
 	}
 	public User(UserPO po)
 	{
@@ -34,14 +36,15 @@ public class User implements Cloneable{
 		this.account=po.getAccount();
 		this.password=po.getPassword();
 		this.name=po.getName();
+		this.authorized = po.isAuthorized();
 	}
 	public UserPO toPO()
 	{
-		return new UserPO(ID,r,account,password,name);
+		return new UserPO(ID,r,account,password,name, authorized);
 	}
 	public UserVO toVO()
 	{
-		return new UserVO(ID,r,account,password,name);
+		return new UserVO(ID,r,account,password,name, authorized);
 	}
 	public Role getR() {
 		return r;
@@ -83,5 +86,11 @@ public class User implements Cloneable{
 	}
 	public void setID(String iD) {
 		ID = iD;
+	}
+	public boolean isAuthorized() {
+		return authorized;
+	}
+	public void setAuthorized(boolean authorized) {
+		this.authorized = authorized;
 	}
 }

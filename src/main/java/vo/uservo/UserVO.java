@@ -9,14 +9,16 @@ public class UserVO implements Cloneable{
 	String account;//账户，用于登陆
 	String password;//密码，用于登陆
 	String name;//姓名
+	boolean authorized;//是否已授权
 	public UserVO(){}
-	public UserVO(String ID,Role r, String account, String password, String name)
+	public UserVO(String ID,Role r, String account, String password, String name, boolean authorized)
 	{
 		this.ID=ID;
 		this.r=r;
 		this.account=account;
 		this.password=password;
 		this.name=name;
+		this.authorized=authorized;
 	}
 	public UserVO(Role r, String account, String password, String name)
 	{
@@ -72,5 +74,11 @@ public class UserVO implements Cloneable{
 	}
 	public void setID(String iD) {
 		ID = iD;
+	}
+	public boolean isAuthorized() {
+		return authorized;
+	}
+	public void setAuthorized(boolean authorized) {
+		this.authorized = authorized;
 	}
 }
