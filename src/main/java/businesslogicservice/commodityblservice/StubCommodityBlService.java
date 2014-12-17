@@ -19,7 +19,8 @@ public interface StubCommodityBlService {
 	public RM addCommodity(CommodityVO vo);
 	public RM addCategory(CategoryVO vo);
 	public RM updateCommodity(CommodityVO vo);//只有进价和售价是可以更改的
-	public RM updateCategory(CategoryVO vo);//只有名称可更改
+	public RM updateCategory(CategoryVO vo);//此接口有误，作废，见下面一个接口
+	public RM updateCategory(CategoryVO vo, String newName);//分类只可修改名称
 	public void setdataobject(StubCommodityDataService comdata);
 	public ArrayList<StockVO> openCategory(String id);//root category's ID is"1"。
 	public RM deleteCommodity(String name,String model);//有可能返回RM。done，若已有进出记录，返回alreadyHaveUnremoveableContents

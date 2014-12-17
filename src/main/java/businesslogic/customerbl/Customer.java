@@ -15,8 +15,8 @@ public class Customer{
 	private String postcode;//邮编
 	private String email;//电子邮箱；
 	private double maxOwe;//最大赊账（应付）
-	private double shouldPay;//应付
-	private double shouldTake;//应收
+	private double shouldPay;//公司应该给客户的
+	private double shouldTake;//公司应该向客户收取的
 	private String deSaler;//默认销售人员
 	
 	public Customer(){};

@@ -22,7 +22,14 @@ public class UserController implements StubUserBlService, UserService{
 	{
 		return l.signUp(vo);
 	}
-	
+	public UserVO find(String account)
+	{
+		return l.find(account);
+	}
+	public RM authorized(String account)
+	{
+		return l.authorized(account);
+	}
 	public RM changePassword(UserVO vo)
 	{
 		return l.changePassword(vo);

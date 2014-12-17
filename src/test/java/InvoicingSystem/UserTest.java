@@ -86,7 +86,7 @@ public class UserTest{
 	@Test
 	public void testdeleteUser()
 	{
-		RM result=ubl.deleteUser(new UserVO("A0001",Role.ADMINISTRATOR,"admin","admin","管理员"));
+		RM result=ubl.deleteUser(new UserVO("A0001",Role.ADMINISTRATOR,"admin","admin","管理员",true));
 		assertEquals(RM.done,result);
 		UserVO vo = ubl.login("admin", "admin");
 		assertEquals(null,vo);
@@ -95,7 +95,7 @@ public class UserTest{
 	@Test
 	public void testdeleteNotFound()
 	{
-		RM result=ubl.deleteUser(new UserVO("A0002",Role.ADMINISTRATOR,"admind","admin","管理员"));
+		RM result=ubl.deleteUser(new UserVO("A0002",Role.ADMINISTRATOR,"admind","admin","管理员",true));
 		assertEquals(RM.notfound,result);
 	}
 	

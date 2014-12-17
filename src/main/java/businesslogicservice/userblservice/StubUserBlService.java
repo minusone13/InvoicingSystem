@@ -17,4 +17,7 @@ public interface StubUserBlService {
 	public RM deleteUser(UserVO vo);//删除人员，UserVO直接从登陆或查看传过来的UserVO再返回回去,以登陆的帐户名判断是否存在
 	public ArrayList<UserVO> showUsers();//显示人员
 	public ArrayList<OperationRecordVO> showRecords();//显示系统日志
+	
+	public UserVO find(String account);
+	public RM authorized(String account);
 }

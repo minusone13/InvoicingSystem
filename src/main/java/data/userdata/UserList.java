@@ -3,8 +3,10 @@ package data.userdata;
 import java.io.*;
 import java.util.*;
 
+import data.commoditydata.MockCommodityData;
 import businesslogic.Role;
 import po.*;
+import po.stockpo.CommodityPO;
 import po.userpo.OperationRecordPO;
 import po.userpo.UserPO;
 import vo.RM;
@@ -22,7 +24,7 @@ public class UserList implements Serializable{
 	public void initial()
 	{
 		users=new ArrayList<UserPO>();
-		users.add(new UserPO("A0001",Role.ADMINISTRATOR,"admin","21232f297a57a5a743894a0e4a801fc3","管理员"));
+		users.add(new UserPO("A0001",Role.ADMINISTRATOR,"admin","21232f297a57a5a743894a0e4a801fc3","管理员",true));
 		numOfAdmin++;
 		//default has a administrator account, default name is admin, password is admin. details see 大作业.doc
 		records=new ArrayList<OperationRecordPO>();
@@ -140,6 +142,20 @@ public class UserList implements Serializable{
 			user.setName(po.getName());//whether it's true?
 			return true;
 		}
+	}
+	public boolean update(UserPO po)
+	{
+		int i=0;
+		for(i=0;i<users.size();i++)
+		{
+			if(users.get(i).getAccount().equals(po.getAccount()))
+			{
+				users.remove(i);
+				users.add(i,po);
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public ArrayList<UserPO> getUsers() {

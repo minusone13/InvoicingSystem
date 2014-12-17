@@ -94,6 +94,10 @@ public class UserDataController implements StubUserDataService{
 		save();
 		return result;
 	}
+	public boolean update(UserPO po)
+	{
+		return l.update(po);
+	}
 	public RM updatePassword(UserPO po)
 	{//更改密码
 		read();
