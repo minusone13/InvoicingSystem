@@ -19,8 +19,8 @@ public class StubStrategyPool {
 	/*构造函数*/
 	public StubStrategyPool(){
 		StrategySaverService ss=new StrategySaver();
-		//清除保存的记录
-		save();
+//		//清除保存的记录
+//		save();
 		//将返回的PO对象的信息传入真正的策略对象
 		//客户分层策略
 		ArrayList<LevelStrategyPO> LevelStrategyPOList=ss.getLevelStrategy();

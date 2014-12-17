@@ -123,7 +123,7 @@ public class JPmanageAccount extends JPanel {
 				inquire.setBounds(720, 215, 50, 50);
 				inquire.addMouseListener(new MouseListenerOfButton(3));
 				//期初建账
-				build.setIcon(buildIconR);
+				build.setIcon(buildIconW);
 				build.setBounds(720, 280, 55, 70);
 				build.addMouseListener(new MouseListenerOfButton(6));
 				//编辑面板

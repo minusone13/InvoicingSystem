@@ -7,8 +7,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import presentation.commodityui.JPManagerCom;
-import presentation.saleui.Sale;
+import presentation.financialui.JPinquire;
 import userui.Frame;
 
 public class ManagerUI extends JPanel {
@@ -27,6 +26,30 @@ public class ManagerUI extends JPanel {
 	private JPpassBill1 passbill1=new JPpassBill1();
 	//审批单据2
 	private JPpassBill2 passbill2=new JPpassBill2();
+	//制定策略1
+	private JPmanagerStrategy1 managerStrategy1=new JPmanagerStrategy1();
+	//制定策略2
+	private JPmanagerStrategy2 managerStrategy2=new JPmanagerStrategy2();
+	//查看各种报表
+	private JPinquire inquire=new JPinquire();
+	public JPinquire getInquire() {
+		return inquire;
+	}
+	public void setInquire(JPinquire inquire) {
+		this.inquire = inquire;
+	}
+	public JPmanagerStrategy1 getManagerStrategy1() {
+		return managerStrategy1;
+	}
+	public void setManagerStrategy1(JPmanagerStrategy1 managerStrategy1) {
+		this.managerStrategy1 = managerStrategy1;
+	}
+	public JPmanagerStrategy2 getManagerStrategy2() {
+		return managerStrategy2;
+	}
+	public void setManagerStrategy2(JPmanagerStrategy2 managerStrategy2) {
+		this.managerStrategy2 = managerStrategy2;
+	}
 	//home
 	private JLabel home=new JLabel();
 	//后退
@@ -82,9 +105,16 @@ public class ManagerUI extends JPanel {
 		passbill2.setLocation(55, 233);
 		passbill2.setVisible(false);
 	
-//		//商品选择test
-//		JPManagerCom comodityChooseTest=new JPManagerCom();
-//		comodityChooseTest.setLocation(55, 213);
+		//制定促销策略1
+		managerStrategy1.setLocation(55, 233);
+		managerStrategy1.setVisible(false);
+		//制定促销策略2
+		managerStrategy2.setLocation(55, 233);
+		managerStrategy2.setVisible(false);
+		//查看报表
+		inquire.setLocation(55, 233);
+		inquire.setVisible(false);
+		
 		//home
 		home.setIcon(new ImageIcon("src/image/home.png") );
 		home.setBounds(690, 165, 90, 32);
@@ -97,17 +127,20 @@ public class ManagerUI extends JPanel {
 		signout.setIcon(new ImageIcon("src/image/signout0.png") );
 		signout.setBounds(870, 165, 90, 32);
 		signout.addMouseListener(new MouseListenerOfButton(3));
+		
 		this.add(titile,0);
 		this.add(sign,1);
 		this.add(navigation,2);
-//		this.add(comodityChooseTest,3);
 		this.add(home,3);
 		this.add(back,4);
 		this.add(signout,5);
 		this.add(function,6);
 		this.add(passbill1,7);
 		this.add(passbill2,8);
-		this.add(bg,9);
+		this.add(managerStrategy1,9);
+		this.add(managerStrategy2,10);
+		this.add(inquire,11);
+		this.add(bg,12);
 		
 	}
 	/*获取frame的引用*/
@@ -116,6 +149,9 @@ public class ManagerUI extends JPanel {
   		function.getFrame(frame);
   		passbill1.getFrame(frame);
   		passbill2.getFrame(frame);
+  		managerStrategy1.getFrame(frame);
+  		managerStrategy2.getFrame(frame);
+  		inquire.getFrame(frame);
     }
 	public class MouseListenerOfButton implements MouseListener{
 
@@ -150,6 +186,9 @@ public class ManagerUI extends JPanel {
 				home.setIcon(new ImageIcon("src/image/home1.png"));
 				ManagerUI.this.getPassbill1().setVisible(false);
 				ManagerUI.this.getPassbill2().setVisible(false);
+				ManagerUI.this.getManagerStrategy1().setVisible(false);
+				ManagerUI.this.getManagerStrategy2().setVisible(false);
+				ManagerUI.this.getInquire().setVisible(false);
 				ManagerUI.this.getFunction().setVisible(true);
 				break;
 			case 2:

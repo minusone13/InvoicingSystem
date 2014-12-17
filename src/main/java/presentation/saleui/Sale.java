@@ -53,6 +53,8 @@ public class Sale extends JPanel{
 		private JPmanageBills1 manageBills1=new JPmanageBills1();
 		//单据管理面板
 		private JPmanageBills2 manageBills2=new JPmanageBills2();
+		//客户管理
+		private JPmanageCustomer customerManage=new JPmanageCustomer();
 		public Sale(){
 
 			//设置窗口大小
@@ -94,6 +96,9 @@ public class Sale extends JPanel{
 			
 			manageBills2.setVisible(false);
 			manageBills2.setLocation(55, 233);
+			//客户管理
+			customerManage.setVisible(false);
+			customerManage.setLocation(55, 233);
 			
 			this.add(title,0);
 			this.add(sign,1);
@@ -104,7 +109,8 @@ public class Sale extends JPanel{
 			this.add(function,6);
 			this.add(manageBills1,7);
 			this.add(manageBills2,8);
-			this.add(bg,9);
+			this.add(customerManage,9);
+			this.add(bg,10);
 		}
 
 	    /*获取frame引用*/
@@ -113,7 +119,15 @@ public class Sale extends JPanel{
 	    		function.getFrame(frame);
 	    		manageBills1.getFrame(frame);
 	    		manageBills2.getFrame(frame);
+	    		customerManage.getFrame(frame);
 	    }
+		public JPmanageCustomer getCustomerManage() {
+			return customerManage;
+		}
+
+		public void setCustomerManage(JPmanageCustomer customerManage) {
+			this.customerManage = customerManage;
+		}
 		public class MouseListenerOfButton implements MouseListener{
 
 			private int num;
@@ -147,6 +161,7 @@ public class Sale extends JPanel{
 					home.setIcon(new ImageIcon("src/image/home1.png"));
 					Sale.this.getManageBills1().setVisible(false);
 					Sale.this.getManageBills2().setVisible(false);
+					Sale.this.getCustomerManage().setVisible(false);
 					Sale.this.getFunction().setVisible(true);
 					break;
 				case 2:

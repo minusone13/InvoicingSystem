@@ -38,6 +38,8 @@ import businesslogicservice.salebillblservice.SaleBillBlService;
 
 public class JPBill extends JPanel {
 
+	//区分面板种类
+	private JPbillType Type=JPbillType.Default;
 	//单据编号
 	private String ID;
 	//单据类型
@@ -70,6 +72,15 @@ public class JPBill extends JPanel {
 	private BarginStrategyVO barginStrategyVO;
 	private ReachStrategyVO reachStrategyVO;
 	
+	public enum JPbillType {
+
+		Bill,
+		Strategy,
+		Account,
+		Customer,
+		User,
+		Default
+	}
 	public JLabel getRight() {
 		return right;
 	}
@@ -158,6 +169,9 @@ public class JPBill extends JPanel {
 	//清单表格的引用
 	JTableOfList table;
 	public JPBill(LevelStrategyVO ls){
+		//区分面板种类
+		setType(JPbillType.Strategy);
+		System.out.println("构造一条客户策略");
 		//逻辑层接口
 		StockManagerDriver smd=new StockManagerDriver();
 		smd.start(stockbl,StubStockDataController.getInstance());
@@ -232,7 +246,9 @@ public class JPBill extends JPanel {
 		this.add(bg,3);
 	}
 	public JPBill(BarginStrategyVO bs){
-		
+		//区分面板种类
+		setType(JPbillType.Strategy);
+		System.out.println("构造一条特价包策略");
 		//传递VO
 		barginStrategyVO=bs;
 		//面板大小
@@ -294,7 +310,9 @@ public class JPBill extends JPanel {
 		this.add(bg,3);
 	}
 	public JPBill(ReachStrategyVO rs){
-		
+		//区分面板种类
+		setType(JPbillType.Strategy);
+		System.out.println("构造一条满额策略");
 		//传递VO
 		reachStrategyVO=rs;
 		//面板大小
@@ -484,6 +502,8 @@ public class JPBill extends JPanel {
 		
 	}
 	public JPBill(GiftBillVO gb){
+		//区分面板种类
+		setType(JPbillType.Bill);
 		//设置单据编号，状态，种类
 		state=gb.getState();
 		style=gb.getBillStyle();
@@ -525,6 +545,8 @@ public class JPBill extends JPanel {
 		this.add(bg,3);
 	}
 	public JPBill(SpillsLossBillVO slb){
+		//区分面板种类
+		setType(JPbillType.Bill);
 		//设置单据编号，状态，种类
 		state=slb.getState();
 		style=slb.getBillStyle();
@@ -573,6 +595,8 @@ public class JPBill extends JPanel {
 		this.add(bg,3);
 	}
 	public JPBill(AlertBillVO ab){
+		//区分面板种类
+		setType(JPbillType.Bill);
 		//设置单据编号，状态，种类
 		state=ab.getState();
 		style=ab.getBillStyle();
@@ -614,6 +638,8 @@ public class JPBill extends JPanel {
 		this.add(bg,3);
 	}
 	public JPBill(PurSheetVO ps){
+		//区分面板种类
+		setType(JPbillType.Bill);
 		//设置单据编号，状态，种类
 		state=ps.getState();
 		style=ps.getBillStyle();
@@ -656,6 +682,8 @@ public class JPBill extends JPanel {
 		this.add(bg,3);
 	}
 	public JPBill(PurBackSheetVO pbs){
+		//区分面板种类
+		setType(JPbillType.Bill);
 		//设置单据编号，状态，种类
 		state=pbs.getState();
 		style=pbs.getBillStyle();
@@ -698,6 +726,9 @@ public class JPBill extends JPanel {
 		this.add(bg,3);
 	}
 	public JPBill(SaleSheetVO ss){
+		
+		//区分面板种类
+		setType(JPbillType.Bill);
 		//设置单据编号，状态，种类
 		state=ss.getState();
 		style=ss.getBillStyle();
@@ -742,6 +773,8 @@ public class JPBill extends JPanel {
 		this.add(bg,3);
 	}
 	public JPBill(SaleBackSheetVO sbs){
+		//区分面板种类
+		setType(JPbillType.Bill);
 		//设置单据编号，状态，种类
 		state=sbs.getState();
 		style=sbs.getBillStyle();
@@ -787,6 +820,8 @@ public class JPBill extends JPanel {
 	}
 	/*收款单构造界面*/
 	public JPBill(ReceiptVO rb){
+		//区分面板种类
+		setType(JPbillType.Bill);
 		//设置单据编号，状态，种类
 		state=rb.getBillState();
 		style=rb.getBillStyle();
@@ -836,6 +871,8 @@ public class JPBill extends JPanel {
 	}
 	/*付款单构造界面*/
 	public JPBill(PaymentVO pb){
+		//区分面板种类
+		setType(JPbillType.Bill);
 		//设置单据编号，状态，种类
 		state=pb.getBillState();
 		style=pb.getBillStyle();
@@ -885,6 +922,8 @@ public class JPBill extends JPanel {
 	}
 	/*现金费用单构造界面*/
 	public JPBill(CashPaymentVO cb){
+		//区分面板种类
+		setType(JPbillType.Bill);
 		//设置单据编号，状态，种类
 		state=cb.getBillState();
 		style=cb.getBillStyle();
@@ -1054,6 +1093,12 @@ public class JPBill extends JPanel {
 	}
 	public String getID() {
 		return ID;
+	}
+	public JPbillType getType() {
+		return Type;
+	}
+	public void setType(JPbillType type) {
+		Type = type;
 	}
 	public class MouseListenerOfButton implements MouseListener{
 

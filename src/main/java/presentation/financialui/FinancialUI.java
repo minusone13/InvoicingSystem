@@ -37,6 +37,10 @@ public class FinancialUI extends JPanel {
 	private JPmanageBills1 manageBills1=new JPmanageBills1();
 	//单据管理面板
 	private JPmanageBills2 manageBills2=new JPmanageBills2();
+	//查看各种报表
+	private JPinquire inquire=new JPinquire();
+	//账户管理
+	private JPmanageAccount account=new JPmanageAccount();
 	public JPfunctions getFunction() {
 		return function;
 	}
@@ -86,9 +90,14 @@ public class FinancialUI extends JPanel {
 			manageBills1.setLocation(55, 233);
 			
 			//单据管理板2
-			
 			manageBills2.setVisible(false);
 			manageBills2.setLocation(55, 233);
+			//查看报表
+			inquire.setLocation(55, 233);
+			inquire.setVisible(false);
+			//账户管理
+			account.setLocation(55, 233);
+			account.setVisible(false);
 			
 			//home
 			home.setIcon(new ImageIcon("src/image/home.png") );
@@ -111,15 +120,31 @@ public class FinancialUI extends JPanel {
 			this.add(function,6);
 			this.add(manageBills1,7);
 			this.add(manageBills2,8);
-			this.add(bg,9);
+			this.add(inquire,9);
+			this.add(account,10);
+			this.add(bg,11);
 			
 		}
-    /*获取frame引用*/
+    public JPinquire getInquire() {
+		return inquire;
+	}
+	public void setInquire(JPinquire inquire) {
+		this.inquire = inquire;
+	}
+	public JPmanageAccount getAccount() {
+		return account;
+	}
+	public void setAccount(JPmanageAccount account) {
+		this.account = account;
+	}
+	/*获取frame引用*/
     public void getFrame( Frame f){
     		frame=f;
     		function.getFrame(frame);
     		manageBills1.getFrame(frame);
     		manageBills2.getFrame(frame);
+    		inquire.getFrame(frame);
+    		account.getFrame(frame);
     }
 		public class MouseListenerOfButton implements MouseListener{
 
@@ -154,6 +179,8 @@ public class FinancialUI extends JPanel {
 					home.setIcon(new ImageIcon("src/image/home1.png"));
 					FinancialUI.this.getManageBills1().setVisible(false);
 					FinancialUI.this.getManageBills2().setVisible(false);
+					FinancialUI.this.getInquire().setVisible(false);
+					FinancialUI.this.getAccount().setVisible(false);
 					FinancialUI.this.getFunction().setVisible(true);
 					break;
 				case 2:

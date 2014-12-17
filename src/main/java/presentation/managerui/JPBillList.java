@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import javax.swing.JPanel;
 
 import presentation.commodityui.StockManagerDriver;
+import presentation.managerui.JPBill.JPbillType;
 import data.commoditydata.StubStockDataController;
 import vo.AlertBillVO;
 import vo.BarginStrategyVO;
@@ -120,8 +121,14 @@ public class JPBillList extends JPanel {
 			//设置面板透明
 			JPupdate.setOpaque(false);
 		}
-		//重新排序
-		JPbillList=sortBillList(JPbillList);
+		//如果是单据数据需要根据状态重新排序
+		if(JPbillList.size()!=0){
+			if(JPbillList.get(0).getType()==JPbillType.Bill){
+				//重新排序
+				JPbillList=sortBillList(JPbillList);
+			}
+		}
+		
 		//将table引用传给每个单据
 		giveTableToBill();
 		//循环加到更新面板上

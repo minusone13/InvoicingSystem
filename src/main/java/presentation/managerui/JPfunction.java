@@ -84,6 +84,8 @@ public class JPfunction extends JPanel {
 			switch(num){
 			case 1:
 				function1.setIcon(new ImageIcon("src/image/managerUI/makeStrategy.jpg"));
+				JPfunction.this.setVisible(false);
+				frame.getManager().getManagerStrategy1().setVisible(true);
 				break;
 			case 2:
 				function2.setIcon(new ImageIcon("src/image/managerUI/passBill.jpg"));
@@ -92,6 +94,8 @@ public class JPfunction extends JPanel {
 				break;
 			case 3:
 				function3.setIcon(new ImageIcon("src/image/managerUI/read.jpg"));
+				JPfunction.this.setVisible(false);
+				frame.getManager().getInquire().setVisible(true);
 				break;
 			}
 		}
