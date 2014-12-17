@@ -10,8 +10,8 @@ public class CustomerPO implements Serializable{
 	String address;
 	String postcode;
 	double maxOwe;
-	double shouldPay;
-	double shouldTake;
+	double shouldPay;//公司给客户的
+	double shouldTake;//公司从客户那里收取的
 	String deSaler;
 	private String email;//电子邮箱；
 	private int level;//客户级别

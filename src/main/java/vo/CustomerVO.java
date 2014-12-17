@@ -7,8 +7,8 @@ public class CustomerVO {
 	String address;
 	String postcode;
 	double maxOwe;
-	double shouldPay;
-	double shouldTake;
+	double shouldPay;//公司给客户的;
+	double shouldTake;//公司从客户收取的;
 	String deSaler;
 	private String id;
 	private String email;//电子邮箱；
