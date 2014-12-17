@@ -2,19 +2,12 @@ package presentation.financialui;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import presentation.managerui.ManagerUI;
 import userui.Frame;
-import vo.financialBillVO.CashPaymentVO;
-import vo.financialBillVO.PaymentVO;
-import vo.financialBillVO.ReceiptVO;
-import businesslogic.BillState;
-import businesslogic.BillStyle;
 
 public class FinancialUI extends JPanel {
 	//背景
@@ -39,8 +32,20 @@ public class FinancialUI extends JPanel {
 	private JPmanageBills2 manageBills2=new JPmanageBills2();
 	//查看各种报表
 	private JPinquire inquire=new JPinquire();
+	//经营情况表
+	private BusinessConditionPanel businessCondition=new BusinessConditionPanel();
 	//账户管理
 	private JPmanageAccount account=new JPmanageAccount();
+	//期初建账选择
+	private AccountBuildIndexPanel accountBuild=new AccountBuildIndexPanel();
+	//期初建账信息
+	private InitialInfoPanel accountInfomation=new InitialInfoPanel();
+	public InitialInfoPanel getAccountInfomation() {
+		return accountInfomation;
+	}
+	public void setAccountInfomation(InitialInfoPanel accountInfomation) {
+		this.accountInfomation = accountInfomation;
+	}
 	public JPfunctions getFunction() {
 		return function;
 	}
@@ -98,7 +103,15 @@ public class FinancialUI extends JPanel {
 			//账户管理
 			account.setLocation(55, 233);
 			account.setVisible(false);
-			
+			//经营情况表
+			businessCondition.setLocation(55, 233);
+			businessCondition.setVisible(false);
+			//期初建账选择
+			accountBuild.setLocation(0, 0);
+			accountBuild.setVisible(false);
+			//期初建账信息
+			accountInfomation.setLocation(55, 233);
+			accountInfomation.setVisible(false);
 			//home
 			home.setIcon(new ImageIcon("src/image/home.png") );
 			home.setBounds(690, 165, 90, 32);
@@ -122,10 +135,25 @@ public class FinancialUI extends JPanel {
 			this.add(manageBills2,8);
 			this.add(inquire,9);
 			this.add(account,10);
-			this.add(bg,11);
+			this.add(businessCondition,11);
+			this.add(accountBuild,12);
+			this.add(accountInfomation,13);
+			this.add(bg,14);
 			
 		}
-    public JPinquire getInquire() {
+    public BusinessConditionPanel getBusinessCondition() {
+		return businessCondition;
+	}
+	public void setBusinessCondition(BusinessConditionPanel businessCondition) {
+		this.businessCondition = businessCondition;
+	}
+	public AccountBuildIndexPanel getAccountBuild() {
+		return accountBuild;
+	}
+	public void setAccountBuild(AccountBuildIndexPanel accountBuild) {
+		this.accountBuild = accountBuild;
+	}
+	public JPinquire getInquire() {
 		return inquire;
 	}
 	public void setInquire(JPinquire inquire) {
@@ -145,6 +173,8 @@ public class FinancialUI extends JPanel {
     		manageBills2.getFrame(frame);
     		inquire.getFrame(frame);
     		account.getFrame(frame);
+    		businessCondition.getFrame(frame);
+    		accountBuild.getFrame(frame);
     }
 		public class MouseListenerOfButton implements MouseListener{
 
@@ -181,6 +211,9 @@ public class FinancialUI extends JPanel {
 					FinancialUI.this.getManageBills2().setVisible(false);
 					FinancialUI.this.getInquire().setVisible(false);
 					FinancialUI.this.getAccount().setVisible(false);
+					FinancialUI.this.getAccountBuild().setVisible(false);
+					FinancialUI.this.getBusinessCondition().setVisible(false);
+					FinancialUI.this.getAccountInfomation().setVisible(false);
 					FinancialUI.this.getFunction().setVisible(true);
 					break;
 				case 2:

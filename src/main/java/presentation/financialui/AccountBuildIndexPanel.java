@@ -5,6 +5,8 @@ import java.awt.event.MouseListener;
 
 import javax.swing.*;
 
+import userui.Frame;
+
 public class AccountBuildIndexPanel extends JPanel{
 	private JLabel clientInfo = new JLabel("New label");
 	private JLabel commodityInfo = new JLabel("New label");
@@ -25,11 +27,15 @@ public class AccountBuildIndexPanel extends JPanel{
 	ImageIcon commodityInfoIcon1=new ImageIcon("src\\image\\accountUI\\商品信息图标1.png");
 	ImageIcon accountInfoIcon1=new ImageIcon("src\\image\\accountUI\\账户信息图标1.png");
 	
-	
+	//frame的引用
+    Frame frame;
 	public AccountBuildIndexPanel() {
 		initial();
 	}
 	//初始化
+	 public void getFrame( Frame f){
+ 		frame=f;
+	 }
 	private void initial() {
 		//panel初始化
 		this.setLayout(null);
@@ -83,11 +89,18 @@ public class AccountBuildIndexPanel extends JPanel{
 
 		public void mouseReleased(MouseEvent e) {
 			switch(num){
-			case 21:clientInfo.setIcon(clientInfoIcon);
+			case 21:
+				clientInfo.setIcon(clientInfoIcon);
+				AccountBuildIndexPanel.this.setVisible(false);
+				frame.getFinancial().getAccountInfomation().update(1);
+				frame.getFinancial().getAccountInfomation().setVisible(true);
 				break;
 			case 22:commodityInfo.setIcon(commodityInfoIcon);
 				break;
 			case 23:accountInfo.setIcon(accountInfoIcon);
+				AccountBuildIndexPanel.this.setVisible(false);
+				frame.getFinancial().getAccountInfomation().update(2);
+				frame.getFinancial().getAccountInfomation().setVisible(true);
 				break;
 			case 24:buildButton.setLocation(800,450);
 					//buildButton.setIcon(buildIcon);	

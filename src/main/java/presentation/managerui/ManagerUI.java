@@ -7,6 +7,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import presentation.financialui.BusinessConditionPanel;
 import presentation.financialui.JPinquire;
 import userui.Frame;
 
@@ -32,6 +33,14 @@ public class ManagerUI extends JPanel {
 	private JPmanagerStrategy2 managerStrategy2=new JPmanagerStrategy2();
 	//查看各种报表
 	private JPinquire inquire=new JPinquire();
+	//经营情况表
+	private BusinessConditionPanel businessCondition=new BusinessConditionPanel();
+	public BusinessConditionPanel getBusinessCondition() {
+		return businessCondition;
+	}
+	public void setBusinessCondition(BusinessConditionPanel businessCondition) {
+		this.businessCondition = businessCondition;
+	}
 	public JPinquire getInquire() {
 		return inquire;
 	}
@@ -114,6 +123,9 @@ public class ManagerUI extends JPanel {
 		//查看报表
 		inquire.setLocation(55, 233);
 		inquire.setVisible(false);
+		//经营情况表
+		businessCondition.setLocation(55, 233);
+		businessCondition.setVisible(false);
 		
 		//home
 		home.setIcon(new ImageIcon("src/image/home.png") );
@@ -140,7 +152,8 @@ public class ManagerUI extends JPanel {
 		this.add(managerStrategy1,9);
 		this.add(managerStrategy2,10);
 		this.add(inquire,11);
-		this.add(bg,12);
+		this.add(businessCondition,12);
+		this.add(bg,13);
 		
 	}
 	/*获取frame的引用*/
@@ -189,6 +202,7 @@ public class ManagerUI extends JPanel {
 				ManagerUI.this.getManagerStrategy1().setVisible(false);
 				ManagerUI.this.getManagerStrategy2().setVisible(false);
 				ManagerUI.this.getInquire().setVisible(false);
+				ManagerUI.this.getBusinessCondition().setVisible(false);
 				ManagerUI.this.getFunction().setVisible(true);
 				break;
 			case 2:

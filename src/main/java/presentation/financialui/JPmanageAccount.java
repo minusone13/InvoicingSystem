@@ -232,6 +232,9 @@ public class JPmanageAccount extends JPanel {
 						break;			
 					case 6:
 						build.setIcon(buildIconW);
+						//期初建账
+						JPmanageAccount.this.setVisible(false);
+						frame.getFinancial().getAccountBuild().setVisible(true);
 					break;
 					case 7:
 						add.setIcon(addIconW);
