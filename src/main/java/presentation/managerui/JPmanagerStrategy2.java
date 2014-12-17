@@ -2,6 +2,8 @@ package presentation.managerui;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
@@ -409,6 +411,9 @@ public class JPmanagerStrategy2 extends JPanel {
 					strategyTypeCombo.setBounds(105,20, 130, 20);
 					strategyTypeCombo.setBackground(Color.gray);
 					strategyTypeCombo.setForeground(Color.white);
+					
+				
+
 					//客户等级选择下拉框
 					
 					String[] levelcomb={"一级","二级","三级","四级","五级"};
@@ -424,7 +429,8 @@ public class JPmanagerStrategy2 extends JPanel {
 					//浏览按钮
 					addButton.setIcon(add0);
 					addButton.setBounds(105,93, 24, 24);
-					addButton.addMouseListener(new MouseListenerOfButton(2));
+					final MouseListenerOfButton mlOfadd=new MouseListenerOfButton(2);
+					addButton.addMouseListener(mlOfadd);
 					//打折比例文本框
 					discountText.setBounds(105,120, 130, 20);
 					discountText.setOpaque(false);//文本框透明
@@ -442,6 +448,32 @@ public class JPmanagerStrategy2 extends JPanel {
 					lastText.setOpaque(false);//文本框透明
 					lastText.setForeground(Color.white);//前景色
 					
+					//起始状态，选择的是赠品
+					 discountText.setEditable(false);
+		    		  couponText.setEditable(false);
+					//选择动作监听
+					strategyTypeCombo.addActionListener(new ActionListener() {
+					      public void actionPerformed(final ActionEvent e) {
+					    	  if(strategyTypeCombo.getSelectedItem().toString().equals("赠送赠品")){
+					    		  limitText.setEditable(true);
+					    		  addButton.addMouseListener(mlOfadd);
+					    		  discountText.setEditable(false);
+					    		  couponText.setEditable(false);
+					    	  }
+					    	  else if(strategyTypeCombo.getSelectedItem().toString().equals("打折")){
+					    		  limitText.setEditable(false);
+					    		  addButton.removeMouseListener(mlOfadd);
+					    		  discountText.setEditable(true);
+					    		  couponText.setEditable(false);
+					    	  }
+					    	  else if(strategyTypeCombo.getSelectedItem().toString().equals("赠送代金券")){
+					    		  limitText.setEditable(false);
+					    		  addButton.removeMouseListener(mlOfadd);
+					    		  discountText.setEditable(false);
+					    		  couponText.setEditable(true);
+					    	  }
+					    	  }
+					      });
 					this.add(strategyType,0);
 					this.add(level,1);
 					this.add(limit,2);
@@ -535,7 +567,8 @@ public class JPmanagerStrategy2 extends JPanel {
 					//浏览按钮
 					addButton.setIcon(add0);
 					addButton.setBounds(105,88, 24, 24);
-					addButton.addMouseListener(new MouseListenerOfButton(2));
+					final MouseListenerOfButton mlOfadd2=new MouseListenerOfButton(2);
+					addButton.addMouseListener(mlOfadd2);
 					//代金券赠送比例文本框
 					couponText.setBounds(150,120, 85, 20);
 					couponText.setOpaque(false);//文本框透明
@@ -549,6 +582,21 @@ public class JPmanagerStrategy2 extends JPanel {
 					lastText.setOpaque(false);//文本框透明
 					lastText.setForeground(Color.white);//前景色
 					
+					//起始状态，选择的是赠送赠品
+					couponText.setEditable(false);
+					//选择动作监听
+					strategyTypeCombo.addActionListener(new ActionListener() {
+					      public void actionPerformed(final ActionEvent e) {
+					    	  if(strategyTypeCombo.getSelectedItem().toString().equals("赠送赠品")){
+					    		  addButton.addMouseListener(mlOfadd2);
+					    		  couponText.setEditable(false);
+					    	  }
+					    	  else if(strategyTypeCombo.getSelectedItem().toString().equals("赠送代金券")){
+					    		  addButton.removeMouseListener(mlOfadd2);
+					    		  couponText.setEditable(true);
+					    	  }
+					    	  }
+					      });
 					this.add(strategyType,0);
 					this.add(limit,1);
 					this.add(gift,2);
@@ -615,6 +663,8 @@ public class JPmanagerStrategy2 extends JPanel {
 						addButton.setIcon(add0);
 						//调出商品选择面板
 						frame.getManager().getCommodityChoose().setVisible(true);
+						//初始化目录
+						frame.getManager().getCommodityChoose().getContent().innitial();
 						break;
 					case 3:
 						confirm.setIcon(confirm0);
@@ -663,7 +713,7 @@ public class JPmanagerStrategy2 extends JPanel {
 									output.clear();
 								}
 								else{
-									System.out.println("请填写完整策略信息");
+									System.out.println("请填写完整策略信息"+output.size());
 								}
 										
 							}

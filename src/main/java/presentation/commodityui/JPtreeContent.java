@@ -33,7 +33,7 @@ public class JPtreeContent extends JPanel {
 	private JPManagerCom JPmanagerCom;//整个商品管理界面的引用
 	private DefaultTreeModel treeModel;//树模型
 	private final JTree tree ;//树
-	DefaultMutableTreeNode top ;
+	private DefaultMutableTreeNode top ;
 	//逻辑层接口
 	private StubCommodityBlService stockbl=new StubStockController();
 	
@@ -68,17 +68,8 @@ public class JPtreeContent extends JPanel {
         treeModel=new DefaultTreeModel(top);
         //通过树模型对象创建树对象
         tree= new JTree(treeModel);
-       //根据逻辑层数据构建树
-        ArrayList<StockVO> stockList=stockbl.openCategory("1");
-        if(stockList.size()!=0){
-        	 if(stockList.get(0).getT()==Type.Category){
-           	  for(StockVO temp:stockList){
-           		  DefaultMutableTreeNode child=new DefaultMutableTreeNode(temp.getCat().getName());
-           		  treeModel.insertNodeInto(child, top, top.getChildCount());
-           		 addCategory(child);//递归加子分类
-           	  }
-           }
-        }
+        //根据数据层初始化树
+        innitial();
       
         //设置树可编辑
         tree.setEditable(true);
@@ -125,6 +116,20 @@ public class JPtreeContent extends JPanel {
         
 		add(SCR,0);
 		add(back,1);
+	}
+	public void innitial(){
+		  //根据逻辑层数据构建树
+		top.removeAllChildren();
+        ArrayList<StockVO> stockList=stockbl.openCategory("1");
+        if(stockList.size()!=0){
+        	 if(stockList.get(0).getT()==Type.Category){
+           	  for(StockVO temp:stockList){
+           		  DefaultMutableTreeNode child=new DefaultMutableTreeNode(temp.getCat().getName());
+           		  treeModel.insertNodeInto(child, top, top.getChildCount());
+           		 addCategory(child);//递归加子分类
+           	  }
+           }
+        }
 	}
 	/*节点编辑监听*/
 	private class CellEditorAction implements CellEditorListener{  
@@ -194,12 +199,19 @@ public class JPtreeContent extends JPanel {
 	}
 	/*增加新节点*/
 	public void addTreeNode(DefaultMutableTreeNode newChild,DefaultMutableTreeNode parent){
-		treeModel.insertNodeInto(newChild, parent, parent.getChildCount());
+	
 		//调用逻辑层
 		CategoryVO newCategory=new CategoryVO(rePath(parent),newChild.getUserObject().toString());
 		RM rm=stockbl.addCategory(newCategory);
-		System.out.println("结果是"+rm);
-		
+		if(rm==RM.done){
+			treeModel.insertNodeInto(newChild, parent, parent.getChildCount());
+		}
+		else if(rm==RM.treeerror){
+			System.out.println("该分类下已有商品，不能创建分类");
+		}
+		else if(rm==RM.redundance){
+			System.out.println("已存在该分类");
+		}
 	}
 	/*删除当前选中的节点*/
 	public void removeChosen(){

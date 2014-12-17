@@ -54,6 +54,7 @@ public class JPManagerComOfStock extends JPanel {
 		manageCom.setLocation(0, 0);
 		manageCom.setRole(Role.STOCK_STAFF);
 		manageCom.getComfirm().setVisible(false);
+		manageCom.getAddIcon().setVisible(false);
 		
 		//增加分类功能按钮
 		addFolder.setIcon(addFolderW);

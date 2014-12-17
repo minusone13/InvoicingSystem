@@ -1,7 +1,9 @@
 package businesslogic.strategybl;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 import po.ReachStrategyPO;
 import po.stockpo.CommodityPO;
@@ -28,14 +30,13 @@ public class StubReachStrategy implements GetVOandPO{
 	/*构造方法*/
 	public StubReachStrategy(){
 	     Calendar ca = Calendar.getInstance();
-	     int year = ca.get(Calendar.YEAR);//获取年份
-	     int month=ca.get(Calendar.MONTH);//获取月份 
-	     int day=ca.get(Calendar.DATE);//获取日
 	     int minute=ca.get(Calendar.MINUTE);//分 
 	     int hour=ca.get(Calendar.HOUR);//小时 
 	     int second=ca.get(Calendar.SECOND);//秒
 	
-	     setID(String.valueOf(year)+String.valueOf(month)+String.valueOf(day)+String.valueOf(hour)+String.valueOf(minute)+String.valueOf(second));
+	     SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+		 String currentTime = format.format(new Date());
+	     setID("MECL-"+currentTime+"-"+String.valueOf(hour)+String.valueOf(minute)+String.valueOf(second));
 	}
 	
 	public ReachStrategyVO getVO() {
@@ -122,6 +123,7 @@ public class StubReachStrategy implements GetVOandPO{
 		for(int i=0;i<po.getAlOfCommodity().size();i++){
 			temp.add(new MockCommodity(po.getAlOfCommodity().get(i)));
 		}
+		this.setID(po.getID());
 		this.setAlOfCommodity(temp);
 		this.setCouponrate(po.getCouponrate());
 		this.setLastTime(po.getLastTime());

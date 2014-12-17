@@ -131,7 +131,7 @@ public class ManagerUI extends JPanel {
 		businessCondition.setLocation(55, 233);
 		businessCondition.setVisible(false);
 		//商品选择
-		commodityChoose.setLocation(55, 233);
+		commodityChoose.setLocation(55, 210);
 		commodityChoose.setRole(Role.MANAGER);
 		commodityChoose.setVisible(false);
 		
@@ -158,11 +158,11 @@ public class ManagerUI extends JPanel {
 		this.add(passbill1,7);
 		this.add(passbill2,8);
 		this.add(managerStrategy1,9);
-		this.add(managerStrategy2,10);
-		this.add(inquire,11);
-		this.add(businessCondition,12);
-		this.add(commodityChoose,12);
-		this.add(bg,13);
+		this.add(commodityChoose,10);
+		this.add(managerStrategy2,11);
+		this.add(inquire,12);
+		this.add(businessCondition,13);
+		this.add(bg,14);
 		
 	}
 	/*获取frame的引用*/
