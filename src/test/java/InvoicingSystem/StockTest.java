@@ -200,6 +200,28 @@ public class StockTest{
 	}
 	
 	@Test
+	public void testdeleteCategory()
+	{
+		ArrayList<StockVO> vos = combl.openCategory("1\\灯\\日光灯");
+		int oldSize = vos.size();
+		RM result = combl.deleteCategory("1\\灯\\日光灯\\纯白日光灯");
+		assertEquals(RM.done,result);
+		vos = combl.openCategory("1\\灯\\日光灯");
+		assertEquals(oldSize-1, vos.size());
+	}
+	
+	@Test
+	public void testdeleteCategoryAlreadyHave()
+	{
+		ArrayList<StockVO> vos = combl.openCategory("1");
+		int oldSize = vos.size();
+		RM result = combl.deleteCategory("1\\门");
+		assertEquals(RM.alreadyHaveUnremoveableContents,result);
+		vos = combl.openCategory("1");
+		assertEquals(oldSize, vos.size());
+	}
+	
+	@Test
 	public void testdeleteCommodity()
 	{
 		RM result=combl.deleteCommodity("好好防盗门","fdm02");

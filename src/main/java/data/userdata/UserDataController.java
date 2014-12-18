@@ -77,7 +77,10 @@ public class UserDataController implements StubUserDataService{
 	public UserPO find(String account)
 	{//通过账号查找一个用和
 		read();
-		return l.find(account);
+		UserPO po = l.find(account);
+		if(po==null)
+			return null;
+		return po.clone();
 	}
 	
 	public boolean insert(OperationRecordPO po)
@@ -96,7 +99,10 @@ public class UserDataController implements StubUserDataService{
 	}
 	public boolean update(UserPO po)
 	{
-		return l.update(po);
+		read();
+		boolean result = l.update(po);
+		save();
+		return result;
 	}
 	public RM updatePassword(UserPO po)
 	{//更改密码

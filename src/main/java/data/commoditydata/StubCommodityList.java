@@ -75,7 +75,7 @@ public class StubCommodityList implements Serializable{
 		StringBuffer sb=new StringBuffer();
 		for(int i=0;i<a.length-2;i++)
 			sb.append(a[i]+"\\");
-		sb.append(a[a.length-1]);
+		sb.append(a[a.length-2]);
 		String s=sb.toString();
 		String temp[]=s.split("\\\\");
 		StubCategoryData result=cat.goThrow(temp, 1);

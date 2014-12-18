@@ -127,7 +127,8 @@ public class UserList {
 		for(int i=0;i<users.size();i++)
 		{
 			UserPO po = users.get(i);
-			result.add(new User(po).toVO());
+			if(po.getR()!=po.getR().ADMINISTRATOR)
+				result.add(new User(po).toVO());
 		}
 		return result;
 	}

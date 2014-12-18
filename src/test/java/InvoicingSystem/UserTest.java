@@ -76,6 +76,17 @@ public class UserTest{
 	}
 	
 	@Test
+	public void testAuthorize()
+	{
+		UserController user=new UserController();
+		UserVO vo = user.find("stock");
+		assertFalse(vo.isAuthorized());
+		user.authorized("stock");
+		vo = user.find("stock");
+		assertTrue(vo.isAuthorized());
+	}
+	
+	@Test
 	public void testlogin()
 	{
 		UserController user=new UserController();

@@ -89,6 +89,8 @@ public class JPcommodityPack extends JPanel {
 	}
 	/*增加商品*/
 	public void addCommodity(CommodityVO com){
+		//用接口过逻辑层一遍
+		
 		commodities.add(new JPcommodity(com));
 		//增加商品
 		System.out.println("增加商品");

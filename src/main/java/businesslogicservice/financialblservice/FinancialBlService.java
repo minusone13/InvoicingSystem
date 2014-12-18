@@ -32,6 +32,8 @@ public interface FinancialBlService {
 	
 	public AccountVO findAccount(String s);
 	
+	public ArrayList<AccountVO> getAllAccountInfo();
+	
 	public boolean updateAccount(String oldname, String newname);
 	//期初建账
 	public void buildAccount() ;

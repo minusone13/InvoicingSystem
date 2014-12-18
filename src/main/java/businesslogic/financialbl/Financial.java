@@ -92,6 +92,20 @@ public class Financial implements FinancialBlService{
 		return result;
 	}
 	
+	public ArrayList<AccountVO> getAllAccountInfo() {
+		AccountList a = new AccountList();
+		ArrayList<Account> accounts = a.getAllAccountInfo();
+		ArrayList<AccountVO> accountsVO = new ArrayList<AccountVO> ();
+		
+		int size = accounts.size();
+		for(int i=0;i<size;i++) {
+			Account temp = accounts.get(i);
+			
+			accountsVO.add(temp.toVO());
+		}
+		return accountsVO;
+	}
+	
 	//期初建账
 	public void buildAccount() {
 		AccountList a = new AccountList();
