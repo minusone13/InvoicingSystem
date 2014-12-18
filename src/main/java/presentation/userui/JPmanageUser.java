@@ -375,7 +375,7 @@ public class JPmanageUser extends JPanel {
 							confirm.setIcon(confirm0);
 							//修改
 							
-							if(!codeText.getText().equals("")){
+							
 								Role r=null;
 								if(roleCombo.getSelectedItem().toString().equals("总经理")){
 									r=Role.MANAGER;
@@ -396,12 +396,10 @@ public class JPmanageUser extends JPanel {
 									r=Role.STOCK_STAFF;
 								}
 								UserVO temp=billList.getChosen().getUserVO();
-								temp.setPassword(codeText.getText());
+								if(!codeText.getText().equals("")){
+									temp.setPassword(codeText.getText());
+								}
 								billList.changeChosen(temp,r);
-							}
-							else{
-								System.out.println("请输入完整信息");
-							}
 							break;
 						}
 					}

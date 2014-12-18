@@ -266,10 +266,15 @@ public class JPBillList extends JPanel {
 	/*增加客户*/
 	public void addCustomer(CustomerVO cs){
 		//调用逻辑层
-//		customerbl.addCustomer(cs);
-		//从逻辑层读取数据更新界面
-		JPbillList.clear();
-//		this.addCustomerList(customerbl);
+		boolean result=customerbl.addCustomer(cs);
+		if(result){
+			//从逻辑层读取数据更新界面
+			JPbillList.clear();
+			this.addCustomerList(customerbl.getAllCustomer("Customer.txt"));
+		}
+		else{
+			System.out.println("增加客户失败");
+		}
 	}
 	/*增加用户VO数组*/
 	public void addUserList(ArrayList<UserVO> us){
@@ -506,7 +511,18 @@ public class JPBillList extends JPanel {
 			}
 		}
 	}
-	
+	/*修改选择的客户*/
+	public void changeChosen(CustomerVO cus){
+		for(int i=0;i<JPbillList.size();i++){
+			if(JPbillList.get(i).getChoose()){
+				JPbillList.get(i).change(cus);
+				//从逻辑层读取数据更新界面
+				JPbillList.clear();
+				this.addCustomerList(customerbl.getAllCustomer("Customer.txt"));
+				break;
+			}
+		}
+	}
 	/*修改选中的*/
 	public void changeChosen(GiftBillVO gb){
 		for(int i=0;i<JPbillList.size();i++){
@@ -746,7 +762,15 @@ public class JPBillList extends JPanel {
 						}
 						//如果是客户
 						if(JPbillList.get(i).getCustomerVO()!=null){
-//							customerbl.deleteCustomer(name)
+							boolean result=customerbl.deleteCustomer(JPbillList.get(i).getCustomerVO().getid());
+						
+							if(result){
+								JPbillList.remove(i);
+								i--;
+							}
+							else{
+								System.out.println("删除失败");
+							}
 						}
 						//如果是账户
 						if(JPbillList.get(i).getAccountVO()!=null){

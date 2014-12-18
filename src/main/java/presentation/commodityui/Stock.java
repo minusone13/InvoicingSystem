@@ -7,6 +7,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import businesslogic.Role;
 import userui.Frame;
 
 public class Stock extends JPanel {
@@ -26,6 +27,14 @@ public class Stock extends JPanel {
 	private JPmanageBills2 manageBills2=new JPmanageBills2();
 	//商品管理
 	JPManagerComOfStock managerComs=new JPManagerComOfStock();
+	//选择商品
+	JPManagerCom choseComs=new JPManagerCom();
+	public JPManagerCom getChoseComs() {
+		return choseComs;
+	}
+	public void setChoseComs(JPManagerCom choseComs) {
+		this.choseComs = choseComs;
+	}
 	//home
 	private JLabel home=new JLabel();
 	public JPfunction getFunction() {
@@ -86,6 +95,12 @@ public class Stock extends JPanel {
 			//商品管理
 			managerComs.setLocation(55, 210);
 			managerComs.setVisible(false);
+			
+			//选择商品
+			choseComs.setLocation(55, 210);
+			choseComs.setRole(Role.STOCK_STAFF);
+			choseComs.setVisible(false);
+			choseComs.getAddIcon().setVisible(false);
 			//home
 			home.setIcon(new ImageIcon("src/image/home.png") );
 			home.setBounds(690, 165, 90, 32);
@@ -104,11 +119,12 @@ public class Stock extends JPanel {
 			this.add(home,3);
 			this.add(back,4);
 			this.add(signout,5);
-			this.add(function,6);
-			this.add(manageBills1,7);
-			this.add(manageBills2,8);
-			this.add(managerComs,9);
-			this.add(bg,10);
+			this.add(choseComs,6);
+			this.add(function,7);
+			this.add(manageBills1,8);
+			this.add(manageBills2,9);
+			this.add(managerComs,10);
+			this.add(bg,11);
 			
 		}
     public JPManagerComOfStock getManagerComs() {
@@ -123,6 +139,7 @@ public class Stock extends JPanel {
     		function.getFrame(frame);
     		manageBills1.getFrame(frame);
     		manageBills2.getFrame(frame);
+    		choseComs.getFrame(frame);
     }
 		public class MouseListenerOfButton implements MouseListener{
 
@@ -159,6 +176,7 @@ public class Stock extends JPanel {
 					Stock.this.getManageBills().setVisible(false);
 					Stock.this.getManageBills2().setVisible(false);
 					Stock.this.getManagerComs().setVisible(false);
+					Stock.this.getChoseComs().setVisible(false);
 					Stock.this.getFunction().setVisible(true);
 					break;
 				case 2:

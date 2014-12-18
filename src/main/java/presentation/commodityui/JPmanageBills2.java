@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
@@ -12,15 +11,13 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import presentation.financialui.JPmanageBills2.JPanelEdit.MouseListenerOfButton;
+import po.SpillsLossBillPO.Type;
 import presentation.managerui.JPBillList;
 import presentation.managerui.JTableOfList;
 import presentation.managerui.MouseListenerGetXY;
-import presentation.userui.Login;
 import userui.Frame;
-import vo.financialBillVO.CashPaymentVO;
-import vo.financialBillVO.PaymentVO;
-import vo.financialBillVO.ReceiptVO;
+import vo.SpillsLossBillVO;
+import vo.stockvo.CommodityVO;
 import businesslogic.BillState;
 import businesslogic.BillStyle;
 
@@ -48,6 +45,12 @@ public class JPmanageBills2 extends JPanel {
 		//编辑面板
 		private JPanelEdit JPeditOfSpoil;
 	
+		public JPanelEdit getJPeditOfSpoil() {
+			return JPeditOfSpoil;
+		}
+		public void setJPeditOfSpoil(JPanelEdit jPeditOfSpoil) {
+			JPeditOfSpoil = jPeditOfSpoil;
+		}
 		public JPBillList getBillList() {
 			return billList;
 		}
@@ -261,30 +264,23 @@ public class JPmanageBills2 extends JPanel {
 					break;	
 				case 3:
 					done.setIcon(checkIconR);
-					billList.doneChosen();//处理选中的
+					
 					break;
 				case 4:
 					delete.setIcon(deleteIconR);
-					billList.removeChosen();//删除选中的
+				
 					break;
 				case 5:
 					edit.setIcon(editIconR);
-					if(billList.getChosenNum()==1&&billList.stateOfChosen()==BillState.DRAFT){
-						JPeditOfSpoil.setIsAdd(false);//不是加单据是修改单据
-						JPeditOfSpoil.leftMove();//调出编辑板
-					}
-					else{
-						System.out.println("只能修改一张草稿状态的单据");
-					}
+				
 					break;
 				case 6:
 					submit.setIcon(submitIconR);
-					billList.submitChosen();//上交选中的
+				
 					break;
 				case 7:
 					add.setIcon(addIconR);
-					JPeditOfSpoil.setIsAdd(true);//不是加单据是修改单据
-					JPeditOfSpoil.leftMove();//调出编辑板
+				
 				}
 			}
 
@@ -303,18 +299,30 @@ public class JPmanageBills2 extends JPanel {
 					break;	
 				case 3:
 					done.setIcon(checkIconW);
+					billList.doneChosen();//处理选中的
 					break;
 				case 4:
 					delete.setIcon(deleteIconW);
+					billList.removeChosen();//删除选中的
 					break;
 				case 5:
 					edit.setIcon(editIconW);
+					if(billList.getChosenNum()==1&&billList.stateOfChosen()==BillState.DRAFT){
+						JPeditOfSpoil.setIsAdd(false);//不是加单据是修改单据
+						JPeditOfSpoil.leftMove();//调出编辑板
+					}
+					else{
+						System.out.println("只能修改一张草稿状态的单据");
+					}
 					break;				
 				case 6:
 					submit.setIcon(submitIconW);
+					billList.submitChosen();//上交选中的
 					break;
 				case 7:
 					add.setIcon(addIconW);
+					JPeditOfSpoil.setIsAdd(true);//不是加单据是修改单据
+					JPeditOfSpoil.leftMove();//调出编辑板
 					break;
 				}
 			}
@@ -373,14 +381,37 @@ public class JPmanageBills2 extends JPanel {
 			private ImageIcon confirm1=new ImageIcon("src/image/function/confirmR.png");
 			
 			//报溢报损单的附件
+			private JComboBox typeCombo;
+			private JLabel typelabel=new JLabel("类别");
 			private JLabel commodity=new JLabel("商品");
 			private JLabel type=new JLabel("型号");
 			private JLabel num=new JLabel("数量");
 			private JLabel scan=new JLabel("浏览");
 			private JLabel scanButton=new JLabel();//增加条目按钮
 			private JTextField commodityText=new JTextField(10);
+			public JTextField getCommodityText() {
+				return commodityText;
+			}
+			public void setCommodityText(JTextField commodityText) {
+				this.commodityText = commodityText;
+			}
+			public JTextField getTypeText() {
+				return typeText;
+			}
+			public void setTypeText(JTextField typeText) {
+				this.typeText = typeText;
+			}
+
 			private JTextField typeText=new JTextField(10);
 			private JTextField numText=new JTextField(10);
+			//接收商品
+			private CommodityVO chosenVO;
+			public CommodityVO getChosenVO() {
+				return chosenVO;
+			}
+			public void setChosenVO(CommodityVO chosenVO) {
+				this.chosenVO = chosenVO;
+			}
 			public JPanelEdit(BillStyle style){
 				//确认种类
 				billStyle=style;
@@ -404,35 +435,46 @@ public class JPmanageBills2 extends JPanel {
 				confirm.setBounds(120, 236, 24, 24);
 				confirm.addMouseListener(new MouseListenerOfButton(3));
 			
+				String[] typeC={"报溢单","报损单"};
+				typeCombo = new JComboBox(typeC);
+				typeCombo.setFont(new Font("宋体",Font.BOLD,14));
+				typeCombo.setBounds(80,30, 150, 20);
+				typeCombo.setBackground(Color.gray);
+				typeCombo.setForeground(Color.white);
 				//设置标签字体
+				typelabel.setFont(new Font("宋体",Font.BOLD,14));
 				scan.setFont(new Font("宋体",Font.BOLD,14));
 				commodity.setFont(new Font("宋体",Font.BOLD,14));
 				type.setFont(new Font("宋体",Font.BOLD,14));
 				num.setFont(new Font("宋体",Font.BOLD,14));
 				//设置字体颜色
+				typelabel.setForeground(Color.white);
 				scan.setForeground(Color.white);
 				commodity.setForeground(Color.white);
 				type.setForeground(Color.white);
 				num.setForeground(Color.white);
 				//设置标签大小位置
-				scan.setBounds(40, 30, 40, 20);
-				commodity.setBounds(40, 60, 40, 20);
-				type.setBounds(40, 90, 40, 20);
-				num.setBounds(40, 120, 40, 20);
+				typelabel.setBounds(40, 30, 40, 20);
+				scan.setBounds(40, 60, 40, 20);
+				commodity.setBounds(40, 90, 40, 20);
+				type.setBounds(40, 120, 40, 20);
+				num.setBounds(40, 150, 40, 20);
 				//浏览按钮
 				scanButton.setIcon(scan0);
-				scanButton.setBounds(100, 28, 24, 24);
+				scanButton.setBounds(100, 58, 24, 24);
 				scanButton.addMouseListener(new MouseListenerOfButton(2));
 				//商品名文本框
-				commodityText.setBounds(80,60, 150, 20);
+				commodityText.setBounds(80,90, 150, 20);
 				commodityText.setOpaque(false);//文本框透明
+				commodityText.setEditable(false);
 				commodityText.setForeground(Color.white);//前景色
 				//型号文本框
-				typeText.setBounds(80,90, 150, 20);
+				typeText.setBounds(80,120, 150, 20);
 				typeText.setOpaque(false);//文本框透明
+				typeText.setEditable(false);
 				typeText.setForeground(Color.white);//前景色
 				//数量文本框
-				numText.setBounds(80,120, 150, 20);
+				numText.setBounds(80,150, 150, 20);
 				numText.setOpaque(false);//文本框透明
 				numText.setForeground(Color.white);//前景色
 				
@@ -446,7 +488,9 @@ public class JPmanageBills2 extends JPanel {
 				this.add(commodityText,7);
 				this.add(typeText,8);
 				this.add(numText,9);
-				this.add(back,10);
+				this.add(typelabel,10);
+				this.add(typeCombo,11);
+				this.add(back,12);
 			}
 			public void leftMove(){
 				Thread t=new Thread(new TreadOfLeft());
@@ -500,9 +544,58 @@ public class JPmanageBills2 extends JPanel {
 						break;
 					case 2:
 						scanButton.setIcon(scan0);
+						//调出商品选择界面
+						frame.getStock().getChoseComs().getContent().innitial();
+						frame.getStock().getChoseComs().setVisible(true);
 						break;
 					case 3:
 						confirm.setIcon(confirm0);
+						if(isAdd){
+							//生成报溢报损单
+							if(chosenVO!=null&&!numText.getText().equals("")){
+								chosenVO.setNumber(Integer.parseInt(numText.getText()));
+								SpillsLossBillVO newSpills=new SpillsLossBillVO();
+								System.out.println(chosenVO.getName()+":"+chosenVO.getModel()+":"+chosenVO.getNumber());
+								newSpills.setCom(chosenVO);
+								if(typeCombo.getSelectedItem().toString().equals("报损单")){
+									newSpills.setT(Type.Loss);
+								}
+								else if(typeCombo.getSelectedItem().toString().equals("报溢单")){
+									newSpills.setT(Type.Spills);
+								}
+								billList.addSpillsLossBill(newSpills);
+							}
+							else{
+								System.out.println("请填写完整信息");
+							}
+						}
+						else{//修改报溢单
+							if(billList.getChosenNum()==1){
+									SpillsLossBillVO modifyVO=billList.getChosen().getSpillsLossVO();
+									CommodityVO temp=new CommodityVO();
+									if(chosenVO!=null){
+										temp.setName(chosenVO.getName());
+										temp.setModel(chosenVO.getModel());
+									}
+									if(!numText.getText().equals("")){
+										temp.setNumber(chosenVO.getNumber());
+									}
+									if(typeCombo.getSelectedItem().toString().equals("报损单")){
+										modifyVO.setT(Type.Loss);
+									}
+									else if(typeCombo.getSelectedItem().toString().equals("报溢单")){
+										modifyVO.setT(Type.Spills);
+									}
+									modifyVO.setCom(temp);
+							}
+							else if(billList.getChosenNum()==0){
+								System.out.println("请选择要修改的单据");
+							}
+							else{
+								System.out.println("只能同时修改一张单据");
+							}
+						}
+						
 						break;
 					}
 				}

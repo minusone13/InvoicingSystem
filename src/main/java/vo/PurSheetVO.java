@@ -11,7 +11,7 @@ import businesslogic.customerbl.Customer;
 
 
 public class PurSheetVO extends VO{
-	//private BillStyle style=BillStyle.PurSheet;
+	private BillStyle style=BillStyle.PurSheet;
 	CustomerVO customer;
 	String id;
 	String userid;
@@ -119,6 +119,14 @@ public class PurSheetVO extends VO{
 
 	public void setwords(String words){
 		this.words=words;
+	}
+
+	public BillStyle getStyle() {
+		return style;
+	}
+
+	public void setStyle(BillStyle style) {
+		this.style = style;
 	}
 	
 }

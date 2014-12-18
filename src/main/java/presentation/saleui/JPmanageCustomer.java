@@ -11,15 +11,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import presentation.commodityui.JPmanageBills2.JPanelEdit;
-import presentation.commodityui.JPmanageBills2.JPanelEdit.MouseListenerOfButton;
-import presentation.commodityui.JPmanageBills2.JPanelEdit.TreadOfLeft;
-import presentation.commodityui.JPmanageBills2.JPanelEdit.TreadOfRight;
 import presentation.managerui.JPBillList;
 import presentation.managerui.MouseListenerGetXY;
 import userui.Frame;
-import businesslogic.BillState;
-import businesslogic.BillStyle;
+import vo.CustomerVO;
 
 public class JPmanageCustomer extends JPanel {
 
@@ -170,29 +165,19 @@ public class JPmanageCustomer extends JPanel {
 						break;	
 					case 3:
 						inquire.setIcon(searchIconR);
-						JPsearch.leftMove();
+					
 						break;
 					case 4:
 						delete.setIcon(deleteIconR);
-						billList.removeChosen();//删除选中的
+						
 						break;
 					case 5:
 						edit.setIcon(editIconR);
-						if(billList.getChosenNum()==1){
-							JPedit.setIsAdd(false);//不是加单据是修改单据
-							JPedit.leftMove();//调出编辑板
-						}
-						else if(billList.getChosenNum()==0){
-							System.out.println("请选择要修改的客户");
-						}
-						else{
-							System.out.println("只能修改一个客户的信息");
-						}
+						
 						break;
 					case 7:
 						add.setIcon(addIconR);
-						JPedit.setIsAdd(true);//不是加单据是修改单据
-						JPedit.leftMove();//调出编辑板
+						
 					}
 				}
 
@@ -211,15 +196,29 @@ public class JPmanageCustomer extends JPanel {
 						break;	
 					case 3:
 						inquire.setIcon(searchIconW);
+						JPsearch.leftMove();
 						break;
 					case 4:
 						delete.setIcon(deleteIconW);
+						billList.removeChosen();//删除选中的
 						break;
 					case 5:
 						edit.setIcon(editIconW);
+						if(billList.getChosenNum()==1){
+							JPedit.setIsAdd(false);//不是加客户是修改客户
+							JPedit.leftMove();//调出编辑板
+						}
+						else if(billList.getChosenNum()==0){
+							System.out.println("请选择要修改的客户");
+						}
+						else{
+							System.out.println("只能修改一个客户的信息");
+						}
 						break;				
 					case 7:
 						add.setIcon(addIconW);
+						JPedit.setIsAdd(true);//不是加客户是修改客户
+						JPedit.leftMove();//调出编辑板
 						break;
 					}
 				}
@@ -451,6 +450,110 @@ public class JPmanageCustomer extends JPanel {
 							break;
 						case 3:
 							confirm.setIcon(confirm0);
+							if(isAdd){
+								if(!nameText.getText().equals("")
+										&&!salemanText.getText().equals("")
+										&&!phoneNumberText.getText().equals("")
+										&&!emailText.getText().equals("")
+										&&!postcodeText.getText().equals("")
+										&&!addressText.getText().equals("")
+									){
+									int level=0;
+									if(rankCombo.getSelectedItem().toString().equals("一级")){
+										level=1;
+									}
+									else if(rankCombo.getSelectedItem().toString().equals("二级")){
+										level=2;
+									}
+									else if(rankCombo.getSelectedItem().toString().equals("三级")){
+										level=3;
+									}
+									else if(rankCombo.getSelectedItem().toString().equals("四级")){
+										level=4;
+									}
+									else if(rankCombo.getSelectedItem().toString().equals("五级")){
+										level=5;
+									}
+									int type=0;
+									if(categoryCombo.getSelectedItem().toString().equals("进货商")){
+										type=0;
+									}
+									else if(categoryCombo.getSelectedItem().toString().equals("销售商")){
+										type=1;
+									}
+									CustomerVO newCus=new CustomerVO();
+									newCus.settype(type);
+									newCus.setlevel(level);
+									newCus.setname(nameText.getText());
+									newCus.setdeSaler(salemanText.getText());
+									newCus.setphonenumber(phoneNumberText.getText());
+									newCus.setemail(emailText.getText());
+									newCus.setpostcode(postcodeText.getText());
+									newCus.setaddress(addressText.getText());
+									billList.addCustomer(newCus);
+								}
+								else{
+									System.out.println("请输入完整信息");
+								}
+							}
+							else{//修改
+								if(billList.getChosenNum()==1){
+									int level=0;
+									if(rankCombo.getSelectedItem().toString().equals("一级")){
+										level=1;
+									}
+									else if(rankCombo.getSelectedItem().toString().equals("二级")){
+										level=2;
+									}
+									else if(rankCombo.getSelectedItem().toString().equals("三级")){
+										level=3;
+									}
+									else if(rankCombo.getSelectedItem().toString().equals("四级")){
+										level=4;
+									}
+									else if(rankCombo.getSelectedItem().toString().equals("五级")){
+										level=5;
+									}
+									int type=0;
+									if(categoryCombo.getSelectedItem().toString().equals("进货商")){
+										type=0;
+									}
+									else if(categoryCombo.getSelectedItem().toString().equals("销售商")){
+										type=1;
+									}
+									CustomerVO modifyCus=billList.getChosen().getCustomerVO();
+									modifyCus.settype(type);
+									modifyCus.setlevel(level);
+									
+									if(!nameText.getText().equals("")
+											){
+										modifyCus.setname(nameText.getText());
+									}
+									if(!salemanText.getText().equals("")){
+										modifyCus.setdeSaler(salemanText.getText());
+									}
+									if(!phoneNumberText.getText().equals("")){
+										modifyCus.setphonenumber(phoneNumberText.getText());
+									}
+									if(!emailText.getText().equals("")){
+										modifyCus.setemail(emailText.getText());
+									}
+									if(!postcodeText.getText().equals("")){
+										modifyCus.setpostcode(postcodeText.getText());
+									}
+									if(!addressText.getText().equals("")){
+										modifyCus.setaddress(addressText.getText());
+									}
+									//进行修改
+									billList.changeChosen(modifyCus);
+								}
+								else if(billList.getChosenNum()==0){
+									System.out.println("请选择要修改的客户");
+								}
+								else{
+									System.out.println("只能同时修改一个客户");
+								}
+							}
 							break;
 						}
 					}
