@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
@@ -398,6 +399,9 @@ public class JPmanageUser extends JPanel {
 								temp.setPassword(codeText.getText());
 								billList.changeChosen(temp,r);
 							}
+							else{
+								System.out.println("请输入完整信息");
+							}
 							break;
 						}
 					}
@@ -518,7 +522,7 @@ public class JPmanageUser extends JPanel {
 					searchjl.setForeground(Color.white);
 					//设置标签大小位置
 					searchjl.setBounds(40, 30, 40, 20);
-					//数量文本框
+					//查找文本框
 					searchTxt.setBounds(80,30, 140, 20);
 					searchTxt.setOpaque(false);//文本框透明
 					searchTxt.setForeground(Color.white);//前景色
@@ -575,6 +579,17 @@ public class JPmanageUser extends JPanel {
 							break;
 						case 3:
 							searchButton.setIcon(search0);
+							//查找
+							if(!searchTxt.getText().equals("")){
+								billList.getJPbillList().clear();
+								billList.reHome();
+								ArrayList<UserVO> temp=new ArrayList<UserVO>();
+								temp.add(userbl.find(searchTxt.getText()));
+								billList.addUserList(temp);
+							}
+							else{
+								System.out.println("请输入用户账号");
+							}
 							break;
 						}
 					}

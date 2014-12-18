@@ -84,7 +84,7 @@ public class Financial implements FinancialBlService{
 	}
 	
 	public boolean updateAccount(String oldname, String newname) {
-		if(role != Role.FINANCIAL_MANAGER) return false;
+		
 		AccountList a = new AccountList();
 		boolean result = a.updateAccount(new Account(oldname),newname);
 		RM rm = RM.unknownerror;

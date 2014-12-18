@@ -77,6 +77,7 @@ public class AccountData  implements StubAccountDataService{
 		int index1 = traversal(accountList, apo.getName());
 		int index2 = traversal(accountList, apo.getNewName());
 		AccountPO tempPO = null;
+		System.out.println(index1+":"+index2);
 		if(index1 == -1||index2 != -1) return false;//可能老账户不存在，或者新账户已存在，考虑enum
 		tempPO = accountList.get(index1);
 		tempPO.setName(apo.getNewName());

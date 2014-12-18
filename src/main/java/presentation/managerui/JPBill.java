@@ -650,10 +650,14 @@ public class JPBill extends JPanel {
 		JLabel name=new JLabel(account.getName());
 		JLabel balance=new JLabel(String.valueOf(account.getBalance()));
 		
+		name.setBounds(147, 34, 100, 20);
+		balance.setBounds(350, 34, 100, 20);
 		
 		this.add(right,0);
 		this.add(left,1);
-		this.add(bg,2);
+		this.add(name,2);
+		this.add(balance,3);
+		this.add(bg,4);
 	}
 	public LevelStrategyVO getLevelStrategyVO() {
 		return levelStrategyVO;
@@ -1316,7 +1320,10 @@ public class JPBill extends JPanel {
 	public void change(String oldname, String newname){
 		
 		//调用逻辑层修改对应单据的数据
-		fbl.updateAccount(oldname, newname);
+		boolean result=fbl.updateAccount(oldname, newname);
+		if(result==false){
+			System.out.println("已存在该账户");
+		}
 	}
 	//修改用户密码
 	public void change(UserVO us){

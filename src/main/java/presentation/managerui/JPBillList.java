@@ -241,10 +241,16 @@ public class JPBillList extends JPanel {
 	/*增加账户*/
 	public void addAccount(AccountVO ac){
 		//调用逻辑层
-		fbl.addAccount(ac.getName(), ac.getBalance());
-		//从逻辑层读取数据更新界面
-		JPbillList.clear();
-		this.addAccountList(fbl.getAllAccountInfo());
+		boolean result=fbl.addAccount(ac.getName(), ac.getBalance());
+		if(result){
+			//从逻辑层读取数据更新界面
+			JPbillList.clear();
+			this.addAccountList(fbl.getAllAccountInfo());
+		}
+		else{
+			System.out.println("已存在该账户");
+		}
+	
 	}
 	/*增加客户VO数组*/
 	public void addCustomerList(ArrayList<CustomerVO> cs){
@@ -482,7 +488,7 @@ public class JPBillList extends JPanel {
 				JPbillList.get(i).change(oldname,newName);
 				//从逻辑层读取数据更新界面
 				JPbillList.clear();
-				this.addUserList(userbl.showUsers());
+				this.addAccountList(fbl.getAllAccountInfo());
 				break;
 			}
 		}
@@ -719,16 +725,24 @@ public class JPBillList extends JPanel {
 						//如果是策略，要从数据库中删除
 						if(JPbillList.get(i).getLevelStrategyVO()!=null){
 							mbl.Remove(JPbillList.get(i).getLevelStrategyVO());
+							JPbillList.remove(i);
+							i--;
 						}
 						if(JPbillList.get(i).getBarginStrategyVO()!=null){
 							mbl.Remove(JPbillList.get(i).getBarginStrategyVO());
+							JPbillList.remove(i);
+							i--;
 						}
 						if(JPbillList.get(i).getReachStrategyVO()!=null){
 							mbl.Remove(JPbillList.get(i).getReachStrategyVO());
+							JPbillList.remove(i);
+							i--;
 						}
 						//如果是用户
 						if(JPbillList.get(i).getUserVO()!=null){
 							userbl.deleteUser(JPbillList.get(i).getUserVO());
+							JPbillList.remove(i);
+							i--;
 						}
 						//如果是客户
 						if(JPbillList.get(i).getCustomerVO()!=null){
@@ -736,10 +750,18 @@ public class JPBillList extends JPanel {
 						}
 						//如果是账户
 						if(JPbillList.get(i).getAccountVO()!=null){
-							fbl.deleteAccount(JPbillList.get(i).getAccountVO().getName());
+							boolean result=fbl.deleteAccount(JPbillList.get(i).getAccountVO().getName());
+						
+							if(result){
+								JPbillList.remove(i);
+								i--;
+							}
+							else{
+								System.out.println("只能删除余额为0的账户");
+							}
+							
 						}
-						JPbillList.remove(i);
-						i--;
+						
 					}
 				}
 				//重新加到底板上

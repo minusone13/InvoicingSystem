@@ -29,7 +29,7 @@ public class SaleDetailPanel extends JPanel{
 	}
 	
 	private void initial() {
-		this.setBounds(0, 0, 750, 300);
+		this.setBounds(0, 0, 450, 300);
 		//设置布局
 		this.setLayout(null);
 		//设置面板透明
@@ -37,7 +37,7 @@ public class SaleDetailPanel extends JPanel{
 		
 		pane = new JScrollPane(table);
 		this.add(pane,0);
-		pane.setBounds(0, 50, 750, 100);
+		pane.setBounds(0, 0, 450, 150);
 	}
 	
 	public void update(InquirySaleVO isv) {

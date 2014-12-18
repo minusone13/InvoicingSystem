@@ -4,22 +4,20 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
-import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import presentation.commodityui.JPmanageBills2.JPanelEdit;
-import presentation.commodityui.JPmanageBills2.JPanelEdit.MouseListenerOfButton;
-import presentation.commodityui.JPmanageBills2.JPanelEdit.TreadOfLeft;
-import presentation.commodityui.JPmanageBills2.JPanelEdit.TreadOfRight;
 import presentation.managerui.JPBillList;
 import presentation.managerui.MouseListenerGetXY;
 import userui.Frame;
-import businesslogic.BillState;
-import businesslogic.BillStyle;
+import vo.accountVO.AccountVO;
+import vo.uservo.UserVO;
+import businesslogic.financialbl.Financial;
+import businesslogicservice.financialblservice.FinancialBlService;
 
 public class JPmanageAccount extends JPanel {
 
@@ -69,6 +67,7 @@ public class JPmanageAccount extends JPanel {
 			ImageIcon buildIconR=new ImageIcon("src/image/function/buildR.png");
 			//frame的引用
 		    Frame frame;
+		    FinancialBlService fbl=new Financial();
 			public JPmanageAccount(){//参数决定编辑板的类型
 				//面板大小
 				this.setSize(905, 342);
@@ -179,32 +178,22 @@ public class JPmanageAccount extends JPanel {
 						break;	
 					case 3:
 						inquire.setIcon(searchIconR);
-						JPsearch.leftMove();
+						
 						break;
 					case 4:
 						delete.setIcon(deleteIconR);
-						billList.removeChosen();//删除选中的
+						
 						break;
 					case 5:
 						edit.setIcon(editIconR);
-						if(billList.getChosenNum()==1){
-							JPedit.setIsAdd(false);//不是加账户是修改账户
-							JPedit.leftMove();//调出编辑板
-						}
-						else if(billList.getChosenNum()==0){
-							System.out.println("请选择要修改的账户");
-						}
-						else{
-							System.out.println("只能修改一个账户的信息");
-						}
+					
 						break;
 					case 6:
 						build.setIcon(buildIconR);
 					break;
 					case 7:
 						add.setIcon(addIconR);
-						JPedit.setIsAdd(true);//不是加账户是修改账户
-						JPedit.leftMove();//调出编辑板
+						
 					}
 				}
 
@@ -223,12 +212,24 @@ public class JPmanageAccount extends JPanel {
 						break;	
 					case 3:
 						inquire.setIcon(searchIconW);
+						JPsearch.leftMove();
 						break;
 					case 4:
 						delete.setIcon(deleteIconW);
+						billList.removeChosen();//删除选中的
 						break;
 					case 5:
 						edit.setIcon(editIconW);
+						if(billList.getChosenNum()==1){
+							JPedit.setIsAdd(false);//不是加账户是修改账户
+							JPedit.leftMove();//调出编辑板
+						}
+						else if(billList.getChosenNum()==0){
+							System.out.println("请选择要修改的账户");
+						}
+						else{
+							System.out.println("只能修改一个账户的信息");
+						}
 						break;			
 					case 6:
 						build.setIcon(buildIconW);
@@ -238,6 +239,8 @@ public class JPmanageAccount extends JPanel {
 					break;
 					case 7:
 						add.setIcon(addIconW);
+						JPedit.setIsAdd(true);
+						JPedit.leftMove();//调出编辑板
 						break;
 					}
 				}
@@ -406,6 +409,35 @@ public class JPmanageAccount extends JPanel {
 							break;
 						case 3:
 							confirm.setIcon(confirm0);
+							if(isAdd){//如果是增加账户
+								if(!nameText.getText().equals("")&&
+										!moneyText.getText().equals("")){
+									AccountVO newAccount=new AccountVO();
+									newAccount.setName(nameText.getText());
+									newAccount.setBalance(Double.parseDouble(moneyText.getText()));
+									billList.addAccount(newAccount);
+								}
+								else{
+									System.out.println("请输入完整信息");
+								}
+							}
+							else{//是修改
+								if(billList.getChosenNum()==1){
+									if(!nameText.getText().equals("")){
+										AccountVO modifyAccount=billList.getChosen().getAccountVO();
+										billList.changeChosen(modifyAccount.getName(), nameText.getText());
+									}
+									else{
+										System.out.println("请输入要修改的名称");
+									}
+								}
+								else if(billList.getChosenNum()==0){
+									System.out.println("请选择要修改的账户");
+								}
+								else{
+									System.out.println("只能同时修改一个账户");
+								}
+							}
 							break;
 						}
 					}
@@ -583,6 +615,17 @@ public class JPmanageAccount extends JPanel {
 							break;
 						case 3:
 							searchButton.setIcon(search0);
+							//查找
+							//查找
+							if(!searchTxt.getText().equals("")){
+								billList.getJPbillList().clear();
+								billList.reHome();
+								billList.addAccountList(fbl.fuzzyFindAccount(searchTxt.getText(), 1));
+							}
+							else{
+								System.out.println("请输入账户关键字");
+							}
+						
 							break;
 						}
 					}
