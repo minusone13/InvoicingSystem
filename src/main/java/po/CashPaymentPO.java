@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
-import businesslogic.BillState;
-import businesslogic.BillStyle;
 import businesslogic.Role;
 import businesslogic.financialbillbl.Item;
 

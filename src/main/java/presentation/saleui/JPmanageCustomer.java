@@ -11,6 +11,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import po.BillState;
+import po.BillStyle;
 import presentation.commodityui.JPmanageBills2.JPanelEdit;
 import presentation.commodityui.JPmanageBills2.JPanelEdit.MouseListenerOfButton;
 import presentation.commodityui.JPmanageBills2.JPanelEdit.TreadOfLeft;
@@ -18,8 +20,6 @@ import presentation.commodityui.JPmanageBills2.JPanelEdit.TreadOfRight;
 import presentation.managerui.JPBillList;
 import presentation.managerui.MouseListenerGetXY;
 import userui.Frame;
-import businesslogic.BillState;
-import businesslogic.BillStyle;
 
 public class JPmanageCustomer extends JPanel {
 

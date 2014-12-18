@@ -2,9 +2,9 @@ package businesslogic.stockmanagerbl;
 
 import java.util.*;
 
+import po.BillState;
 import presentation.userui.Login;
 import dataservice.commoditydataservice.*;
-import businesslogic.BillState;
 import businesslogic.Role;
 import businesslogic.commoditybillbl.*;
 import businesslogic.commoditybl.*;

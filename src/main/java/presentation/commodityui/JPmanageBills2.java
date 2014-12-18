@@ -12,6 +12,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import po.BillState;
+import po.BillStyle;
 import presentation.financialui.JPmanageBills2.JPanelEdit.MouseListenerOfButton;
 import presentation.managerui.JPBillList;
 import presentation.managerui.JTableOfList;
@@ -21,8 +23,6 @@ import userui.Frame;
 import vo.financialBillVO.CashPaymentVO;
 import vo.financialBillVO.PaymentVO;
 import vo.financialBillVO.ReceiptVO;
-import businesslogic.BillState;
-import businesslogic.BillStyle;
 
 public class JPmanageBills2 extends JPanel {
 	    //背景

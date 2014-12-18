@@ -69,7 +69,7 @@ public class CustomerList implements CustomerForFinancial, CustomerBlService{
 			try{
 				CustomerDataService customerdata = new CustomerData();
 				ArrayList<CustomerPO> listOfCustomerPO = customerdata.getAllCustomer(address);
-				if(listOfCustomerPO==null) return null;
+				if(listOfCustomerPO==null) return new ArrayList<CustomerVO>();
 				for(CustomerPO po: listOfCustomerPO){
 					Customer customer = new Customer();
 					customer.setPO(po);

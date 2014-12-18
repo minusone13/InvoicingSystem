@@ -3,8 +3,6 @@ package po;
 import java.io.Serializable;
 import java.util.*;
 
-import businesslogic.BillState;
-import businesslogic.BillStyle;
 import po.stockpo.CommodityPO;
 
 public class GiftBillPO extends PO implements Serializable{

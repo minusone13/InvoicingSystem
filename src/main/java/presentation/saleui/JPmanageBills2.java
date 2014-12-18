@@ -11,13 +11,13 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import po.BillState;
+import po.BillStyle;
 import presentation.financialui.JPmanageBills2.JPanelEdit;
 import presentation.managerui.JPBillList;
 import presentation.managerui.JTableOfList;
 import presentation.managerui.MouseListenerGetXY;
 import userui.Frame;
-import businesslogic.BillState;
-import businesslogic.BillStyle;
 
 public class JPmanageBills2 extends JPanel {
 	//背景

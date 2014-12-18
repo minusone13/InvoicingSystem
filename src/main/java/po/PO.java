@@ -3,8 +3,6 @@ package po;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import businesslogic.BillState;
-import businesslogic.BillStyle;
 import businesslogic.Role;
 import businesslogic.financialbillbl.Item;
 import businesslogic.financialbillbl.TransferAccount;

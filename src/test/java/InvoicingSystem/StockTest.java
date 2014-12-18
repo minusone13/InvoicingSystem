@@ -8,11 +8,11 @@ import java.util.Date;
 
 import org.junit.*;
 
+import po.BillState;
+import po.BillStyle;
 import po.stockpo.*;
 import po.stockpo.StockPO.Type;
 import presentation.commodityui.StockManagerDriver;
-import businesslogic.BillState;
-import businesslogic.BillStyle;
 import businesslogic.commoditybillbl.StubAlertBill;
 import businesslogic.commoditybillbl.StubGiftBill;
 import businesslogic.commoditybillbl.StubSpillsLossBill;

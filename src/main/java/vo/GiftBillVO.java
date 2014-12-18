@@ -3,9 +3,9 @@ package vo;
 import java.util.ArrayList;
 import java.util.Date;
 
+import po.BillState;
+import po.BillStyle;
 import vo.stockvo.CommodityVO;
-import businesslogic.BillState;
-import businesslogic.BillStyle;
 
 public class GiftBillVO extends VO{
 	private BillStyle billstyle=BillStyle.GiftBill;//订单种类

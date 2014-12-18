@@ -3,7 +3,7 @@ package businesslogicservice.salebillblservice;
 import java.util.ArrayList;
 import java.util.Date;
 
-import businesslogic.BillState;
+import po.BillState;
 import vo.CustomerVO;
 import vo.PurBackSheetVO;
 import vo.PurSheetVO;

@@ -8,8 +8,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import po.BillStyle;
 import userui.Frame;
-import businesslogic.BillStyle;
 import businesslogic.financialbl.Financial;
 import businesslogicservice.financialblservice.FinancialBlService;
 

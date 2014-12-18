@@ -3,12 +3,12 @@ package businesslogic.salebillbl;
 import java.util.ArrayList;
 import java.util.Date;
 
+import po.BillState;
+import po.BillStyle;
 import po.SaleSheetPO;
 import po.stockpo.CommodityPO;
 import vo.SaleSheetVO;
 import vo.stockvo.CommodityVO;
-import businesslogic.BillState;
-import businesslogic.BillStyle;
 import businesslogic.GetVOandPO;
 import businesslogic.commoditybl.MockCommodity;
 import businesslogic.customerbl.Customer;

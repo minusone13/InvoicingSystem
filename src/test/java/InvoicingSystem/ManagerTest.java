@@ -1,10 +1,12 @@
 package InvoicingSystem;
 
 import static org.junit.Assert.*;//added by lhw
+
 import java.util.ArrayList;
 
 import org.junit.*;//change from org.junit.test to org.junit.* by lhw;
 
+import po.BillStyle;
 import junit.framework.TestCase;
 import vo.BarginStrategyVO;
 import vo.GiftBillVO;
@@ -12,7 +14,6 @@ import vo.LevelStrategyVO;
 import vo.ReachStrategyVO;
 import vo.VO;
 import vo.inquiryVO.BusinessSituationVO;
-import businesslogic.BillStyle;
 import businesslogic.managerbl.StubManager;
 import businesslogicservice.managerblservice.StubManagerBlService;
 

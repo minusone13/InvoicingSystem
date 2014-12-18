@@ -2,8 +2,8 @@ package vo;
 
 import java.util.ArrayList;
 
-import businesslogic.BillState;
-import businesslogic.BillStyle;
+import po.BillState;
+import po.BillStyle;
 import businesslogic.LevelStrategyStyle;
 import businesslogic.ReachStrategyStyle;
 import businesslogic.Role;

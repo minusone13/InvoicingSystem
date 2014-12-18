@@ -3,9 +3,9 @@ package vo.financialBillVO;
 import java.util.ArrayList;
 import java.util.Date;
 
+import po.BillState;
+import po.BillStyle;
 import vo.VO;
-import businesslogic.BillState;
-import businesslogic.BillStyle;
 import businesslogic.Role;
 import businesslogic.financialbillbl.TransferAccount;
 

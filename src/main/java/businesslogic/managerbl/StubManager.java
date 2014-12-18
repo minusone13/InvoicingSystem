@@ -2,6 +2,8 @@ package businesslogic.managerbl;
 
 import java.util.ArrayList;
 
+import po.BillState;
+import po.BillStyle;
 import vo.AlertBillVO;
 import vo.BarginStrategyVO;
 import vo.GiftBillVO;
@@ -17,8 +19,6 @@ import vo.financialBillVO.CashPaymentVO;
 import vo.financialBillVO.PaymentVO;
 import vo.financialBillVO.ReceiptVO;
 import vo.inquiryVO.BusinessSituationVO;
-import businesslogic.BillState;
-import businesslogic.BillStyle;
 import businesslogic.commoditybillbl.StubAlertBill;
 import businesslogic.commoditybillbl.StubGiftBill;
 import businesslogic.commoditybillbl.StubSpillsLossBill;
