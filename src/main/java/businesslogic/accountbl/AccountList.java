@@ -1,5 +1,6 @@
  package businesslogic.accountbl;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import data.accountdata.AccountBuild;
@@ -64,7 +65,7 @@ public class AccountList {
 		return avo;
 	}
 	
-	public void buildAccount() {
+	public void buildAccount() throws RemoteException {
 		String str="";		
 		//new CustomerController().findCustomer(str); //调用客户信息
 		AccountBuild build = new AccountBuild();

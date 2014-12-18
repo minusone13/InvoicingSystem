@@ -1,5 +1,6 @@
 package businesslogic.financialbl;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import po.AccountPO;
@@ -109,7 +110,12 @@ public class Financial implements FinancialBlService{
 	//期初建账
 	public void buildAccount() {
 		AccountList a = new AccountList();
-		a.buildAccount();
+		try {
+			a.buildAccount();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		userSer.addRecord(new OperationRecord(new User(), "Build a account at the beginning", RM.done));		
 	}
 	
