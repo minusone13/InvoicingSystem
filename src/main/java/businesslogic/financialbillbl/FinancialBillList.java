@@ -2,12 +2,12 @@ package businesslogic.financialbillbl;
 
 import java.util.ArrayList;
 
+import po.BillState;
+import po.BillStyle;
 import vo.VO;
 import vo.financialBillVO.CashPaymentVO;
 import vo.financialBillVO.PaymentVO;
 import vo.financialBillVO.ReceiptVO;
-import businesslogic.BillState;
-import businesslogic.BillStyle;
 import businesslogic.examinebl.Bill;
 import businesslogic.examinebl.StubBillPool;
 

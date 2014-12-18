@@ -9,8 +9,6 @@ import po.stockpo.CommodityPO;
 import vo.GiftBillVO;
 import vo.VO;
 import vo.stockvo.CommodityVO;
-import businesslogic.BillState;
-import businesslogic.BillStyle;
 import businesslogic.GetVOandPO;
 import businesslogic.commoditybl.MockCommodity;
 import businesslogic.commoditybl.StubCommodityList;

@@ -3,10 +3,10 @@ package vo.financialBillVO;
 import java.util.ArrayList;
 import java.util.Date;
 
+import po.BillState;
+import po.BillStyle;
+import po.Role;
 import vo.VO;
-import businesslogic.BillState;
-import businesslogic.BillStyle;
-import businesslogic.Role;
 import businesslogic.financialbillbl.TransferAccount;
 
 public class ReceiptVO extends VO{
@@ -51,12 +51,7 @@ public class ReceiptVO extends VO{
 	public void setAccounts(ArrayList<String> accounts) {		
 		this.accounts = accounts;
 	}
-	public BillState getState() {
-		return state;
-	}
-	public void setState(BillState state) {
-		this.state = state;
-	}
+	
 	public String getUserID() {
 		return userID;
 	}

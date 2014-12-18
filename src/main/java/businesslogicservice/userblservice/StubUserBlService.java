@@ -2,6 +2,8 @@ package businesslogicservice.userblservice;
 
 import java.util.ArrayList;
 
+import po.RM;
+import po.Role;
 import businesslogic.*;
 import vo.*;
 import vo.uservo.*;

@@ -1,17 +1,16 @@
 package businesslogic.commoditybl;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import po.*;
 import po.stockpo.*;
-import businesslogic.Role;
 import businesslogic.commoditybillbl.StubAlertBill;
 import businesslogic.commoditybillbl.StubCommodityBill;
 import businesslogic.stockmanagerbl.*;
 import businesslogic.userbl.User;
 import dataservice.commoditydataservice.*;
 import vo.stockvo.*;
-import vo.RM;
 
 public class StubCommodityList {//商品列表 haha
 	static StubCommodityDataService comdata;
@@ -44,10 +43,25 @@ public class StubCommodityList {//商品列表 haha
 			result.add(new MockCommodity(pos.get(i)).toVO());
 		return result;
 	}
-	public boolean addPack(ArrayList<MockCommodity> commodityarray,int quantity, double discount)
+	public RM addPack(ArrayList<MockCommodity> commodityarray,int quantity, double discount)
 	{
-		//comdata.a
-		return true;
+		SimpleDateFormat dateformat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String ID=dateformat.format(new Date());
+		ID = "PACK-"+ID;
+		double total = 0;
+		for(int i = 0;i<commodityarray.size();i++)
+			total+=commodityarray.get(i).getOut()*commodityarray.get(i).getNumber();
+		total-=discount;
+		ArrayList<CommodityPO> compos = new ArrayList<CommodityPO>();
+		for(int i=0; i<commodityarray.size();i++)
+		{
+			MockCommodity com = commodityarray.get(i);
+			if(!isEnough(com.getName(),com.getModel(),com.getNumber()*quantity))
+				return RM.insufficient;
+			readyForOut(ID,com.getName(),com.getModel(),com.getNumber()*quantity,0);
+			compos.add(com.toPO());
+		}
+		return comdata.insert(new PackPO(ID,compos,quantity,total));
 	}
 	public RM addCommodity(CommodityVO vo)
 	{
@@ -251,6 +265,65 @@ public class StubCommodityList {//商品列表 haha
 			return RM.done;
 		else
 			return RM.unknownerror;
+	}
+	public RM checkOut(String id, String packID, int quantity, double price)
+	{//出库
+		PackPO po=comdata.findPack(packID);
+		if(po==null)//not found
+			return RM.notfound;
+		StubPack pack=new StubPack(po);
+		int num = pack.getQuantity();
+		if(num<quantity)
+			return RM.insufficient;
+		for(int i=0;i<pack.getComs().size();i++)
+		{
+			MockCommodity com = pack.getComs().get(i);
+			checkOut(pack.getID(),com.getName(),com.getModel(),0,0);
+			checkOut(id,com.getName(),com.getModel(),quantity*com.getNumber(),0);
+			readyForOut(pack.getID(),com.getName(), com.getModel(), (num-quantity)*com.getNumber(), 0);
+		}
+		CommodityRecord r;
+		r = new CommodityRecord(id,new Date(),quantity,0,price*quantity,0,quantity,0,price*quantity,0);
+		pack.setQuantity(num-quantity);
+		pack.add(r);
+		pack.prepareDelete(r);
+		RM result = comdata.update(pack.toPO());
+		return result;
+	}
+	public RM readyForOut(String id,String packID, int quantity, double price)
+	{//当销售单或进货退货单被提交后，请调用
+		PackPO po=comdata.findPack(packID);
+		if(po==null)//not found
+			return RM.notfound;
+		StubPack pack=new StubPack(po);
+		if(pack.getPotential()<quantity)
+			return RM.insufficient;
+		CommodityRecord r = new CommodityRecord(id,new Date(),quantity,0,price*quantity,0,quantity,0,price*quantity,0);
+		pack.prepareAdd(r);
+		RM result = comdata.update(pack.toPO());
+		return result;
+	}
+	public RM undoCheckOut(String id,String packID, int quantity, double price)
+	{//当销售退货单被审批后，请调用
+		PackPO po=comdata.findPack(packID);
+		if(po==null)//not found
+			return RM.notfound;
+		StubPack pack=new StubPack(po);
+		int num = pack.getQuantity();
+		for(int i=0;i<pack.getComs().size();i++)
+		{
+			MockCommodity com = pack.getComs().get(i);
+			checkOut(pack.getID(),com.getName(),com.getModel(),0,0);
+			checkIn(id,com.getName(),com.getModel(),quantity*com.getNumber(),0);
+			readyForOut(pack.getID(),com.getName(), com.getModel(), (num+quantity)*com.getNumber(), 0);
+		}
+		CommodityRecord r;
+		r = new CommodityRecord(id,new Date(),quantity,0,price*quantity,0,0,0,0,0);
+		pack.setQuantity(num+quantity);
+		pack.add(r);
+		pack.prepareDelete(r);
+		RM result = comdata.update(pack.toPO());
+		return result;
 	}
 	public boolean isEnough(String name,String model,int n)
 	{//在填写单据时检查，给出的是潜在库存最小值，也就是最保险的值

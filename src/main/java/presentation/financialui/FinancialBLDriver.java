@@ -2,6 +2,8 @@ package presentation.financialui;
 
 import java.util.ArrayList;
 import java.util.Date;
+
+import po.BillState;
 import po.stockpo.CategoryPO;
 import presentation.commodityui.StockManagerDriver;
 import data.commoditydata.StubStockDataController;
@@ -19,8 +21,6 @@ import vo.inquiryVO.BusinessSituationVO;
 import vo.inquiryVO.InquiryProcessVO;
 import vo.inquiryVO.InquirySaleVO;
 import vo.stockvo.CommodityVO;
-
-import businesslogic.BillState;
 import businesslogic.customerbl.Customer;
 import businesslogic.examinebl.StubBillPool;
 import businesslogic.financialbillbl.CashPaymentBill;

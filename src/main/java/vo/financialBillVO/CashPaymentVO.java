@@ -3,10 +3,10 @@ package vo.financialBillVO;
 import java.util.ArrayList;
 import java.util.Date;
 
+import po.BillState;
+import po.BillStyle;
+import po.Role;
 import vo.VO;
-import businesslogic.BillState;
-import businesslogic.BillStyle;
-import businesslogic.Role;
 import businesslogic.financialbillbl.Item;
 
 public class CashPaymentVO extends VO{
@@ -38,14 +38,6 @@ public class CashPaymentVO extends VO{
 
 	public void setID(String iD) {
 		ID = iD;
-	}
-
-	public BillState getState() {
-		return state;
-	}
-
-	public void setState(BillState state) {
-		this.state = state;
 	}
 
 	public Date getDate() {

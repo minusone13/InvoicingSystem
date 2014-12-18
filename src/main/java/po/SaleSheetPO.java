@@ -3,7 +3,6 @@ package po;
 import java.util.ArrayList;
 import java.util.Date;
 
-import businesslogic.BillState;
 import po.stockpo.CommodityPO;
 
 

@@ -11,10 +11,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import po.Role;
 import presentation.managerui.MouseListenerGetXY;
 import userui.Frame;
 import vo.stockvo.CommodityVO;
-import businesslogic.Role;
 
 public class JPManagerCom extends JPanel{
 

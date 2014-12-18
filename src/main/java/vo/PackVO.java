@@ -2,14 +2,29 @@ package vo;
 
 import java.util.ArrayList;
 
+import businesslogic.commoditybl.CommodityRecord;
+import vo.stockvo.CommodityRecordVO;
 import vo.stockvo.CommodityVO;
 
 public class PackVO {
+	public PackVO(String iD, ArrayList<CommodityVO> coms, int quantity,
+			double price, ArrayList<CommodityRecordVO> record,
+			ArrayList<CommodityRecordVO> prepareRecord) {
+		super();
+		ID = iD;
+		this.coms = coms;
+		this.quantity = quantity;
+		this.price = price;
+		this.record = record;
+		this.prepareRecord = prepareRecord;
+	}
+	public PackVO(){}
 	String ID;
-	ArrayList<CommodityVO> coms;
+	ArrayList<CommodityVO> coms = new ArrayList<CommodityVO>();
 	int quantity;
-	double discount;
 	double price;//price = total-discount
+	ArrayList<CommodityRecordVO> record=new ArrayList<CommodityRecordVO>();
+	ArrayList<CommodityRecordVO> prepareRecord=new ArrayList<CommodityRecordVO>();
 	public ArrayList<CommodityVO> getComs() {
 		return coms;
 	}
@@ -34,10 +49,16 @@ public class PackVO {
 	public void setID(String iD) {
 		ID = iD;
 	}
-	public double getDiscount() {
-		return discount;
+	public ArrayList<CommodityRecordVO> getRecord() {
+		return record;
 	}
-	public void setDiscount(double discount) {
-		this.discount = discount;
+	public void setRecord(ArrayList<CommodityRecordVO> record) {
+		this.record = record;
+	}
+	public ArrayList<CommodityRecordVO> getPrepareRecord() {
+		return prepareRecord;
+	}
+	public void setPrepareRecord(ArrayList<CommodityRecordVO> prepareRecord) {
+		this.prepareRecord = prepareRecord;
 	}
 }

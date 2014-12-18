@@ -3,6 +3,8 @@ package businesslogic.examinebl;
 import java.util.ArrayList;
 
 import po.AlertBillPO;
+import po.BillState;
+import po.BillStyle;
 import po.CashPaymentPO;
 import po.GiftBillPO;
 import po.PaymentPO;
@@ -22,8 +24,6 @@ import vo.SpillsLossBillVO;
 import vo.financialBillVO.CashPaymentVO;
 import vo.financialBillVO.PaymentVO;
 import vo.financialBillVO.ReceiptVO;
-import businesslogic.BillState;
-import businesslogic.BillStyle;
 import businesslogic.commoditybillbl.StubAlertBill;
 import businesslogic.commoditybillbl.StubGiftBill;
 import businesslogic.commoditybillbl.StubSpillsLossBill;

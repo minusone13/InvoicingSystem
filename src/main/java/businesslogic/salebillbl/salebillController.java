@@ -4,6 +4,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import po.BillState;
+import po.BillStyle;
 import vo.CustomerVO;
 import vo.LevelStrategyVO;
 import vo.PurBackSheetVO;
@@ -13,8 +15,6 @@ import vo.SaleBackSheetVO;
 import vo.SaleSheetVO;
 import vo.financialBillVO.ReceiptVO;
 import vo.stockvo.CommodityVO;
-import businesslogic.BillState;
-import businesslogic.BillStyle;
 import businesslogic.LevelStrategyStyle;
 import businesslogic.commoditybillbl.StubGiftBill;
 import businesslogic.commoditybl.MockCommodity;

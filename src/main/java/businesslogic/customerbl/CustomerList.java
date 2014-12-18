@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import businesslogic.customerService.CustomerForFinancial;
 import businesslogicservice.customerblservice.CustomerBlService;
 import po.CustomerPO;
+import po.RM;
 import vo.CustomerVO;
-import vo.RM;
 import data.customerdata.CustomerData;
 import dataservice.customerdataservice.CustomerDataService;
 
@@ -69,7 +69,7 @@ public class CustomerList implements CustomerForFinancial, CustomerBlService{
 			try{
 				CustomerDataService customerdata = new CustomerData();
 				ArrayList<CustomerPO> listOfCustomerPO = customerdata.getAllCustomer(address);
-				if(listOfCustomerPO==null) return null;
+				if(listOfCustomerPO==null) return new ArrayList<CustomerVO>();
 				for(CustomerPO po: listOfCustomerPO){
 					Customer customer = new Customer();
 					customer.setPO(po);

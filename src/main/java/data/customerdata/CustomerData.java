@@ -13,9 +13,10 @@ import java.util.ArrayList;
 
 import po.CustomerPO;
 import data.Tool;
+import data.customerServiceForFinancial.customerServiceForFinancial;
 import dataservice.customerdataservice.CustomerDataService;
 
-public class CustomerData extends UnicastRemoteObject implements CustomerDataService{
+public class CustomerData extends UnicastRemoteObject implements CustomerDataService,customerServiceForFinancial{
 
 	
 	public CustomerData() throws RemoteException {
@@ -98,7 +99,6 @@ public class CustomerData extends UnicastRemoteObject implements CustomerDataSer
 	}
 
 	public void saveAllCustomer(ArrayList<CustomerPO> listOfCustomerPO,String address) {
-		// TODO Auto-generated method stub
 		ObjectOutputStream oos=null;
 		try {
 			oos = new ObjectOutputStream(new FileOutputStream(address));
@@ -121,6 +121,11 @@ public class CustomerData extends UnicastRemoteObject implements CustomerDataSer
 			}
 		}
 		
+	}
+
+	public void saveCustomer(String address) {
+		ArrayList<CustomerPO> listOfPO = this.getAllCustomer("Customer.txt");
+		this.saveAllCustomer(listOfPO, address);
 	}
 
 

@@ -25,4 +25,5 @@ public class StubPackData implements Serializable{
 	public void setPrice(double price) {
 		this.price = price;
 	}
+	
 }

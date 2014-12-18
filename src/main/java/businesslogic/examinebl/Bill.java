@@ -1,7 +1,7 @@
 package businesslogic.examinebl;
 
-import businesslogic.BillState;
-import businesslogic.BillStyle;
+import po.BillState;
+import po.BillStyle;
 import businesslogic.commoditybillbl.StubAlertBill;
 
 public class Bill {

@@ -12,11 +12,11 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-import businesslogic.customerService.CustomerForFinancial;
-import businesslogic.customerbl.CustomerList;
 import po.AccountPO;
 import data.Tool;
 import data.commoditydata.StubStockDataController;
+import data.customerServiceForFinancial.customerServiceForFinancial;
+import data.customerdata.CustomerData;
 import data.stockservice.StockDataForFinancial;
 import dataservice.accountdataservice.StubAccountDataService;
 
@@ -27,7 +27,12 @@ public class AccountBuild{
 		version = format.format(new Date());
 	}
 	public void saveAccount() {
-		StubAccountDataService a = new AccountData();
+		StubAccountDataService a = null;
+		try {
+			a = new AccountData();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
 		a.saveAccount("accountBuild\\accountInfo\\"+version+".ser");
 		
 	}
@@ -37,8 +42,8 @@ public class AccountBuild{
 		sd.saveAndBuild("accountBuild\\commodity\\"+version+".ser");		
 	}
 	
-	public void saveCustomer() {
-		CustomerForFinancial cff = new CustomerList();
+	public void saveCustomer() throws RemoteException {
+		customerServiceForFinancial cff = new CustomerData();
 		cff.saveCustomer("accountBuild\\customerInfo\\"+version+".ser");
 	}
 	

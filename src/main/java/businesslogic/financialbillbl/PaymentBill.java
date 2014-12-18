@@ -4,13 +4,13 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import po.BillState;
+import po.BillStyle;
 import po.PO;
 import po.PaymentPO;
 import po.ReceiptPO;
-import businesslogic.BillStyle;
+import po.Role;
 import businesslogic.GetVOandPO;
-import businesslogic.BillState;
-import businesslogic.Role;
 import businesslogic.examinebl.Bill;
 import businesslogic.examinebl.StubBillPool;
 import vo.VO;
@@ -135,7 +135,7 @@ public class PaymentBill extends Bill implements GetVOandPO{
 		vo.setID(ID);
 		vo.setTotal(total);
 		vo.setRole(role);
-		vo.setState(state);
+		vo.setBillState(state);
 		int size = transferlist.size();
 		TransferAccount temp=null;
 		ArrayList<String> accounts = new ArrayList<String>();

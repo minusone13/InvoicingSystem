@@ -12,14 +12,14 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import po.BillState;
+import po.BillStyle;
 import presentation.financialui.JPmanageBills2.JPanelEdit;
 import presentation.financialui.JPmanageBills2.MouseListenerOfButton;
 import presentation.financialui.JPmanageBills2.JPanelEdit.JPaddList;
 import presentation.financialui.JPmanageBills2.JPanelEdit.TreadOfLeft;
 import presentation.financialui.JPmanageBills2.JPanelEdit.TreadOfRight;
 import presentation.userui.Login;
-import businesslogic.BillState;
-import businesslogic.BillStyle;
 import userui.Frame;
 import vo.financialBillVO.CashPaymentVO;
 import vo.financialBillVO.PaymentVO;

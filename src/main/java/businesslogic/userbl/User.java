@@ -1,8 +1,8 @@
 package businesslogic.userbl;
 
+import po.Role;
 import po.userpo.UserPO;
 import vo.uservo.UserVO;
-import businesslogic.Role;
 
 public class User implements Cloneable{
 	String ID;//自动生成

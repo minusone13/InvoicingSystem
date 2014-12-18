@@ -8,18 +8,21 @@ import java.util.Date;
 
 import org.junit.*;
 
+import po.BillState;
+import po.BillStyle;
+import po.RM;
 import po.stockpo.*;
 import po.stockpo.StockPO.Type;
 import presentation.commodityui.StockManagerDriver;
-import businesslogic.BillState;
-import businesslogic.BillStyle;
 import businesslogic.commoditybillbl.StubAlertBill;
 import businesslogic.commoditybillbl.StubGiftBill;
 import businesslogic.commoditybillbl.StubSpillsLossBill;
 import businesslogic.commoditybl.MockCommodity;
+import businesslogic.commoditybl.StubPack;
 import businesslogic.examinebl.StubBillPool;
 import businesslogic.stockmanagerbl.StubStockController;
 import businesslogic.stockservice.StockBlForFinancial;
+import businesslogic.stockservice.StockBlForManager;
 import businesslogic.stockservice.StockBlForSalesMen;
 import businesslogicservice.commodityblservice.StubCommodityBlService;
 import data.commoditydata.*;
@@ -541,6 +544,38 @@ public class StockTest{
 		assertEquals(RM.done,result);
 		result = sc.readyForOut("XSD-20141206-00003", "好好防盗门", "fdm05", 30, 200);
 		assertEquals(RM.insufficient,result);
+	}
+	
+	@Test
+	public void testaddPack()
+	{
+		StockBlForSalesMen sc=new StubStockController();
+		StockBlForManager m = new StubStockController();
+		CommodityPO compo = data.findCommodity("好好防盗门", "fdm05");
+		int oldNum = compo.getNumber();
+		CommodityVO vo = combl.findCommodity("好好防盗门", "fdm05");
+		MockCommodity com = new MockCommodity(vo);
+		ArrayList<MockCommodity> h = new ArrayList<MockCommodity>();
+		com.setNumber(2);
+		h.add(com);
+		//StubPack pack = new StubPack(h,10,300);
+		m.addPack(h,10,100);
+		ArrayList<PackPO> packs = data.getAllPacks();
+		PackPO packpo = packs.get(0);
+		assertEquals(300,packpo.getPrice(),0.001);
+		boolean result = sc.isEnough("好好防盗门", "fdm05", 30);
+		assertTrue(result);
+		result = sc.isEnough("好好防盗门", "fdm05", 31);
+		assertFalse(result);
+		
+		RM rm = sc.checkOut("XSD-20141206-00003", packpo.getID(), 2, 300);
+		assertEquals(RM.done,rm);
+		result = sc.isEnough("好好防盗门", "fdm05", 30);
+		assertTrue(result);
+		result = sc.isEnough("好好防盗门", "fdm05", 31);
+		assertFalse(result);
+		compo = data.findCommodity("好好防盗门", "fdm05");
+		assertEquals(oldNum-4,compo.getNumber());
 	}
 	
 	@Test

@@ -3,6 +3,8 @@ package vo;
 
 import java.util.Date;
 
+import po.BillState;
+import po.BillStyle;
 import vo.stockvo.*;
 import businesslogic.*;
 

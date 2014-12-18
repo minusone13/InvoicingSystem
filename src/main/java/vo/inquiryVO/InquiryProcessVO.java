@@ -1,6 +1,6 @@
 package vo.inquiryVO;
 
-import businesslogic.BillStyle;
+import po.BillStyle;
 
 public class InquiryProcessVO {
 	

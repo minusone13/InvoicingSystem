@@ -2,8 +2,8 @@ package businesslogic.userbl;
 
 import java.util.Date;
 
+import po.RM;
 import po.userpo.*;
-import vo.RM;
 import vo.uservo.OperationRecordVO;
 
 public class OperationRecord {

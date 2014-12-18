@@ -3,7 +3,7 @@ package po.userpo;
 import java.util.*;
 import java.io.*;
 
-import vo.RM;
+import po.RM;
 
 public class OperationRecordPO implements Serializable, Cloneable{
 //记录主要操作

@@ -2,7 +2,8 @@ package businesslogicservice.commodityblservice;
 import java.util.ArrayList;
 import java.util.Date;
 
-import businesslogic.BillState;
+import po.BillState;
+import po.RM;
 import po.stockpo.CommodityPO;
 import dataservice.commoditydataservice.*;
 import vo.*;

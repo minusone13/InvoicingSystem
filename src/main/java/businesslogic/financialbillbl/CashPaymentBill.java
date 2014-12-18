@@ -4,15 +4,15 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-import businesslogic.BillStyle;
 import businesslogic.GetVOandPO;
-import businesslogic.BillState;
-import businesslogic.Role;
 import businesslogic.examinebl.Bill;
 import businesslogic.examinebl.StubBillPool;
+import po.BillState;
+import po.BillStyle;
 import po.CashPaymentPO;
 import po.PO;
 import po.ReceiptPO;
+import po.Role;
 import vo.VO;
 import vo.financialBillVO.CashPaymentVO;
 

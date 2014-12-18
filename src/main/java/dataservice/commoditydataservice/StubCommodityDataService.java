@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 import po.*;
 import po.stockpo.*;
-import vo.RM;
 
 public interface StubCommodityDataService extends Remote{
 	public RM insert(CommodityPO po);
@@ -21,8 +20,11 @@ public interface StubCommodityDataService extends Remote{
 	public RM deleteCategory(String id);
 	public boolean update(CommodityPO po);
 	public RM update(CategoryPO po,String newName);
+	public RM update(PackPO po);
+	public ArrayList<PackPO> getAllPacks();
 	public CommodityPO findCommodity(String name, String model);
 	//public CategoryPO findCategory(String id);
+	public PackPO findPack(String PackID);
 	public ArrayList<StockPO> openCategory(String id);
 	
 	public ArrayList<AdjustmentRecordPO> getAdjustmentRecords();

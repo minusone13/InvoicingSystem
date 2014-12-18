@@ -3,11 +3,11 @@ package vo;
 import java.util.ArrayList;
 import java.util.Date;
 
+import po.BillState;
+import po.BillStyle;
 import po.SpillsLossBillPO.Type;
 import po.stockpo.CommodityPO;
 import vo.stockvo.CommodityVO;
-import businesslogic.BillState;
-import businesslogic.BillStyle;
 
 public class SpillsLossBillVO extends VO{
 	private BillStyle billstyle=BillStyle.SpillsLossBill;//订单种类

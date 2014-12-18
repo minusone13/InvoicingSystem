@@ -4,8 +4,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-import businesslogic.BillState;
-import businesslogic.Role;
+import po.BillState;
+import po.RM;
+import po.Role;
 import businesslogic.commoditybl.MockCommodity;
 import businesslogic.examinebl.StubBillPool;
 import businesslogic.userbl.User;
