@@ -12,7 +12,7 @@ public interface CustomerBlService {
 		 * 提供了一些客户管理方面的方法
 		 * */
 	
-		public boolean addCustomer(Customer newCustomer);
+		public boolean addCustomer(CustomerVO newCustomer);
 		public boolean updateCustomer(CustomerVO vo);
 		public boolean deleteCustomer(String name);
 		public CustomerVO findCustomer(String name);

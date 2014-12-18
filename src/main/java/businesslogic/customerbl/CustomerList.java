@@ -17,9 +17,9 @@ public class CustomerList implements CustomerForFinancial, CustomerBlService{
 		
 		CustomerDataService customerdata = new CustomerData();
 		
-		public boolean addCustomer(Customer newCustomer){
-			CustomerPO po = new CustomerPO();
-			po = newCustomer.getPO();
+		public boolean addCustomer(CustomerVO newCustomer){
+			Customer customer = new Customer(newCustomer);
+			CustomerPO po = customer.getPO();
 			return customerdata.addCustomer(po);
 		}
 		
