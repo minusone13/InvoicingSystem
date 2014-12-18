@@ -71,10 +71,6 @@ public class StubStockController implements StubCommodityBlService, StockBlForSa
 	{
 		return l.addPack(commodityarray, quantity, discount);
 	}
-	public RM addPack(StubPack p)
-	{
-		return RM.done;
-	}
 	public RM addCategory(CategoryVO vo)
 	{
 		RM result=l.addCategory(vo);

@@ -119,10 +119,10 @@ public class StubCommodityList implements Serializable{
 	}
 	private int searchPack(String PackID)
 	{//Search in flatlist
-		for(int i=0;i<flatlist.size();i++)
+		for(int i=0;i<packs.size();i++)
 		{
-			MockCommodityData com=flatlist.get(i);
-			if(com.getID().equals(PackID))
+			PackPO pack=packs.get(i);
+			if(pack.getID().equals(PackID))
 				return i;
 		}
 		return -1;
