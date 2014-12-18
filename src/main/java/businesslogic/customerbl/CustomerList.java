@@ -14,24 +14,40 @@ public class CustomerList implements CustomerForFinancial, CustomerBlService{
 		/*
 		 * 这里面都是bCustomer。
 		 * */
-		
-		CustomerDataService customerdata = new CustomerData();
-		
+	
+	
 		public boolean addCustomer(CustomerVO newCustomer){
 			Customer customer = new Customer(newCustomer);
 			CustomerPO po = customer.getPO();
-			return customerdata.addCustomer(po);
+			try{
+				CustomerDataService customerdata = new CustomerData();
+				return customerdata.addCustomer(po);}
+			catch(Exception e){
+				System.out.println("addCustomer 异常");
+			}
+			return false;
 		}
 		
 		public boolean deleteCustomer(String id){
-			return customerdata.deleteCustomer(id);
+			try{
+				CustomerDataService customerdata = new CustomerData();
+				return customerdata.deleteCustomer(id);}
+			catch(Exception e){
+				System.out.println("deteleCustomer 异常");
+			}
+			return false;
 		}
 		
 		public CustomerVO findCustomer(String id){
 			CustomerVO vo = new CustomerVO();
 			Customer newCustomer = new Customer();
-			newCustomer.setPO(customerdata.findCustomer(id));//判断下是否存在，到时候再说吧。。
-			vo=newCustomer.getVO();
+			try{
+				CustomerDataService customerdata = new CustomerData();
+				newCustomer.setPO(customerdata.findCustomer(id));//判断下是否存在，到时候再说吧。。
+				vo=newCustomer.getVO();}
+			catch(Exception e){
+				System.out.println("findCustomer 异常");
+			}
 			return vo;
 		}
 		
@@ -39,18 +55,29 @@ public class CustomerList implements CustomerForFinancial, CustomerBlService{
 			Customer newCustomer = new Customer(newCustomerVO);
 			CustomerPO po = new CustomerPO();
 			po = newCustomer.getPO();
-			return customerdata.updateCustomer(po);
+			try{
+				CustomerDataService customerdata = new CustomerData();
+				return customerdata.updateCustomer(po);}
+			catch(Exception e){
+				System.out.println("updateCustomer 异常");
+			}
+			return false;
 		}
 		
 		public ArrayList<CustomerVO> getAllCustomer(String address){
 			ArrayList<CustomerVO> listOfCustomerVO = new ArrayList<CustomerVO>();
-			ArrayList<CustomerPO> listOfCustomerPO = customerdata.getAllCustomer(address);
-			if(listOfCustomerPO==null) return null;
-			for(CustomerPO po: listOfCustomerPO){
-				Customer customer = new Customer();
-				customer.setPO(po);
-				CustomerVO vo = customer.getVO();
-				listOfCustomerVO.add(vo);
+			try{
+				CustomerDataService customerdata = new CustomerData();
+				ArrayList<CustomerPO> listOfCustomerPO = customerdata.getAllCustomer(address);
+				if(listOfCustomerPO==null) return null;
+				for(CustomerPO po: listOfCustomerPO){
+					Customer customer = new Customer();
+					customer.setPO(po);
+					CustomerVO vo = customer.getVO();
+					listOfCustomerVO.add(vo);
+				}
+			}catch(Exception e){
+				System.out.println("getAllCustomer 异常");
 			}
 			return listOfCustomerVO;
 		}
@@ -70,9 +97,22 @@ public class CustomerList implements CustomerForFinancial, CustomerBlService{
 					CustomerPO po = customer.getPO();
 					listOfCustomerPO.add(po);
 				}
-				customerdata.saveAllCustomer(listOfCustomerPO,address);
+				try{
+					CustomerDataService customerdata = new CustomerData();
+					customerdata.saveAllCustomer(listOfCustomerPO,address);
+				}catch(Exception e){
+					System.out.println("saveAllCustomer 异常1");
+				}
 			}
-			else customerdata.saveAllCustomer(null,address);
+			else {
+				try{
+					CustomerDataService customerdata = new CustomerData();
+					customerdata.saveAllCustomer(null,address);
+				}catch(Exception e){
+					System.out.println("saveAllCustomer 异常2");
+				}
+				
+			}
 			//这个方法是把已有的客户整体搬迁到另一个文档里;
 		}
 

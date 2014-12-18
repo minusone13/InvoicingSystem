@@ -7,6 +7,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
 import po.CustomerPO;
@@ -14,10 +16,14 @@ import po.SaleBackSheetPO;
 import data.Tool;
 import dataservice.customerdataservice.CustomerDataService;
 
-public class CustomerData implements CustomerDataService{
+public class CustomerData extends UnicastRemoteObject implements CustomerDataService{
 
-	public CustomerData(){}
 	
+	public CustomerData() throws RemoteException {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	public boolean addCustomer(CustomerPO po) {
 		String address = "Customer.txt";
 		ArrayList<CustomerPO> listOfCustomerPO = new ArrayList<CustomerPO>();
