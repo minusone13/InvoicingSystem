@@ -30,7 +30,12 @@ public class AccountList {
 		AccountPO apo = new AccountPO();
 		apo.setName(account.name);
 		apo.setBalance(account.balance);	
-		return a.add(apo);
+		try {
+			return a.add(apo);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 	
 	public boolean deleteAccount(Account account) {
@@ -42,7 +47,12 @@ public class AccountList {
 		}
 		AccountPO apo = new AccountPO();
 		apo.setName(account.name);
-		return a.delete(apo);
+		try {
+			return a.delete(apo);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 	
 	public boolean updateAccount(Account account, String newname) {
@@ -55,7 +65,12 @@ public class AccountList {
 		AccountPO apo = new AccountPO();
 		apo.setName(account.name);
 		apo.setNewName(newname);
-		return a.update(apo);
+		try {
+			return a.update(apo);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 	
 	public ArrayList<AccountVO> fuzzyFindAccount(String s, int precision) {
@@ -65,7 +80,12 @@ public class AccountList {
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
-		ArrayList<AccountPO> accountPOList = a.fuzzyFindAccount(s, precision);
+		ArrayList<AccountPO> accountPOList = null;
+		try {
+			accountPOList = a.fuzzyFindAccount(s, precision);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
 		ArrayList<AccountVO> accountVOList = new ArrayList<AccountVO>();
 		int size = accountPOList.size();
 		for(int i=0;i<size;i++) {
@@ -86,7 +106,12 @@ public class AccountList {
 		}
 		AccountPO apo = new AccountPO();
 		apo.setName(account.name);
-		apo = a.find(apo);
+		try {
+			apo = a.find(apo);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if(apo == null) return null;
 		AccountVO avo = new AccountVO();
 		
@@ -132,7 +157,13 @@ public class AccountList {
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
-		ArrayList<AccountPO> accList = a.getAllAcountInfo();
+		ArrayList<AccountPO> accList = null;
+		try {
+			accList = a.getAllAcountInfo();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		ArrayList<Account> accounts = new ArrayList<Account>();
 		int size = accList.size();
 		for(int i=0;i<size;i++) {
@@ -156,6 +187,11 @@ public class AccountList {
 		for(int i=0;i<size;i++) {
 			poList.add(accounts.get(i).toPO());			
 		}
-		a.writer(poList);
+		try {
+			a.writer(poList);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

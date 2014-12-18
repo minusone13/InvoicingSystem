@@ -77,7 +77,7 @@ public class CustomerList implements CustomerForFinancial, CustomerBlService{
 					listOfCustomerVO.add(vo);
 				}
 			}catch(Exception e){
-				System.out.println("getAllCustomer 异常");
+				System.out.println("getAllCustomer 异常222"+e);
 			}
 			return listOfCustomerVO;
 		}

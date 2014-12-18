@@ -211,15 +211,26 @@ public class JPManagerCom extends JPanel{
 						frame.getManager().getManagerStrategy2().getJPeditOfReach().setOutput(temp);
 						break;
 					}
+					//清除选择痕迹
+					commodities.getOutput().clear();
+					commodities.getCommodities().clear();
+					commodities.update();
 					break;
 				case PURCHASE_SALE_STAFF:
 					break;
+				case STOCK_STAFF:
+					//获取选择的商品
+					CommodityVO temp3=commodities.getChosen();
+					frame.getStock().getManageBills2().getJPeditOfSpoil().setChosenVO(temp3);
+					frame.getStock().getManageBills2().getJPeditOfSpoil().getCommodityText().setText(temp3.getName());
+					frame.getStock().getManageBills2().getJPeditOfSpoil().getTypeText().setText(temp3.getModel());
+					//清除选择痕迹
+					commodities.getCommodities().clear();
+					commodities.update();
+					break;
 				}
 			
-				//清除选择痕迹
-				commodities.getOutput().clear();
-				commodities.getCommodities().clear();
-				commodities.update();
+				
 				//隐藏商品选择界面
 				JPManagerCom.this.setVisible(false);
 				break;

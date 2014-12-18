@@ -50,7 +50,7 @@ public class StubCommodityList {//商品列表 haha
 		ID = "PACK-"+ID;
 		double total = 0;
 		for(int i = 0;i<commodityarray.size();i++)
-			total+=commodityarray.get(i).getOut();
+			total+=commodityarray.get(i).getOut()*commodityarray.get(i).getNumber();
 		total-=discount;
 		ArrayList<CommodityPO> compos = new ArrayList<CommodityPO>();
 		for(int i=0; i<commodityarray.size();i++)

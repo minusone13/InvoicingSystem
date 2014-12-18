@@ -133,7 +133,7 @@ public class Login extends JPanel {
 					frame.getAdmin().setVisible(true);
 					break;
 				case FINANCIAL_STAFF:
-					
+				case FINANCIAL_MANAGER:
 					frame.getFinancial().getManageBills1().setVisible(false);
 					frame.getFinancial().getManageBills2().setVisible(false);
 					frame.getFinancial().getInquire().setVisible(false);
@@ -145,10 +145,7 @@ public class Login extends JPanel {
 					Login.this.setVisible(false);
 					frame.getFinancial().setVisible(true);
 					break;
-				case FINANCIAL_MANAGER:
-					break;
 				case MANAGER:
-					
 					frame.getManager().getPassbill1().setVisible(false);
 					frame.getManager().getPassbill2().setVisible(false);
 					frame.getManager().getManagerStrategy1().setVisible(false);
@@ -165,12 +162,13 @@ public class Login extends JPanel {
 					frame.getStock().getManageBills().setVisible(false);
 					frame.getStock().getManageBills2().setVisible(false);
 					frame.getStock().getManagerComs().setVisible(false);
+					frame.getStock().getChoseComs().setVisible(false);
 					frame.getStock().getFunction().setVisible(true);
 					frame.getStock().setVisible(true);
 					Login.this.setVisible(false);
 					break;
 				case PURCHASE_SALE_STAFF:
-					
+				case PURCHASE_SALE_MANAGER:
 					frame.getSale().getManageBills1().setVisible(false);
 					frame.getSale().getManageBills2().setVisible(false);
 					frame.getSale().getCustomerManage().setVisible(false);

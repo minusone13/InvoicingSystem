@@ -33,7 +33,11 @@ public class AccountBuild{
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
-		a.saveAccount("accountBuild\\accountInfo\\"+version+".ser");
+		try {
+			a.saveAccount("accountBuild\\accountInfo\\"+version+".ser");
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
 		
 	}
 	
