@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 
 import po.BillState;
 import po.BillStyle;
+import po.RM;
 import po.Role;
 import presentation.commodityui.StockManagerDriver;
 import vo.AlertBillVO;
@@ -20,7 +21,6 @@ import vo.GiftBillVO;
 import vo.LevelStrategyVO;
 import vo.PurBackSheetVO;
 import vo.PurSheetVO;
-import vo.RM;
 import vo.ReachStrategyVO;
 import vo.SaleBackSheetVO;
 import vo.SaleSheetVO;

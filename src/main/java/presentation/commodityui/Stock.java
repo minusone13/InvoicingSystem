@@ -7,7 +7,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import businesslogic.Role;
+import po.Role;
 import userui.Frame;
 
 public class Stock extends JPanel {

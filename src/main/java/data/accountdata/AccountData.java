@@ -20,17 +20,17 @@ public class AccountData extends UnicastRemoteObject implements StubAccountDataS
 	
 
 	public AccountData() throws RemoteException {
-		super();
+//		super();
 	}
 
-	public AccountPO find(AccountPO a) {
+	public AccountPO find(AccountPO a) throws RemoteException {
 		ArrayList<AccountPO> accountList = reader();	
 		int index = traversal(accountList, a.getName());
 		if(index==-1) return null;
 		return accountList.get(index);
 	}
 
-	public ArrayList<AccountPO> fuzzyFindAccount(String s, int precision)
+	public ArrayList<AccountPO> fuzzyFindAccount(String s, int precision)throws RemoteException
 	{//precision 先默认给1，可以达到王雨城所说的算法。若取数字越高，精确度越高，搜索结果数量也就越少
 		ArrayList<AccountPO> result = new ArrayList<AccountPO>();//CommodityPO is changeable
 		ArrayList<AccountPO> accountList = reader();
@@ -48,7 +48,7 @@ public class AccountData extends UnicastRemoteObject implements StubAccountDataS
 				result.add(accountList.get(i));//here can also be changed
 		return result;
 	}
-	public boolean add(AccountPO apo) {
+	public boolean add(AccountPO apo) throws RemoteException{
 		ArrayList<AccountPO> accountList = reader();
 		if(accountList == null) {
 			
@@ -61,7 +61,7 @@ public class AccountData extends UnicastRemoteObject implements StubAccountDataS
 		return true;
 	}
 
-	public boolean delete(AccountPO apo) {
+	public boolean delete(AccountPO apo)throws RemoteException {
 		ArrayList<AccountPO> accountList = reader();
 		int index = traversal(accountList, apo.getName());
 		AccountPO tempPO = null;
@@ -76,7 +76,7 @@ public class AccountData extends UnicastRemoteObject implements StubAccountDataS
 	}
 
 
-	public boolean update(AccountPO apo) {
+	public boolean update(AccountPO apo)throws RemoteException {
 		ArrayList<AccountPO> accountList = reader();
 		int index1 = traversal(accountList, apo.getName());
 		int index2 = traversal(accountList, apo.getNewName());
@@ -90,7 +90,7 @@ public class AccountData extends UnicastRemoteObject implements StubAccountDataS
 	}
 	
 	//遍历账户列表,返回结果的下标，如果为-1说明不存在
-	private int traversal (ArrayList<AccountPO> accountList, String name) {
+	private int traversal (ArrayList<AccountPO> accountList, String name)throws RemoteException {
 		if(accountList == null)	return -1;
 		int size = accountList.size();
 		for(int i=0;i<size;i++) {//遍历所有账户
@@ -103,7 +103,7 @@ public class AccountData extends UnicastRemoteObject implements StubAccountDataS
 		return -1;
 	}
 	//读取以序列化存储的账户列表对象
-	private ArrayList<AccountPO> reader() {
+	private ArrayList<AccountPO> reader() throws RemoteException{
 		File filename = Tool.Opendoc("account.txt");
 		
 		ArrayList<AccountPO> accountList = null;
@@ -130,7 +130,7 @@ public class AccountData extends UnicastRemoteObject implements StubAccountDataS
 	}
 	
 	//以序列化方式存储账户列表
-	public void writer (ArrayList<AccountPO> accountList) {
+	public void writer (ArrayList<AccountPO> accountList)throws RemoteException {
 		String filename = "account.txt";
 		ObjectOutputStream oos = null;
 		try {
@@ -156,7 +156,7 @@ public class AccountData extends UnicastRemoteObject implements StubAccountDataS
 		}
 	}
 	
-	public void writer (ArrayList<AccountPO> accountList, String filename) {
+	public void writer (ArrayList<AccountPO> accountList, String filename) throws RemoteException{
 		//String filename = "account.txt";
 		ObjectOutputStream oos = null;
 		try {
@@ -181,11 +181,11 @@ public class AccountData extends UnicastRemoteObject implements StubAccountDataS
 			}
 		}
 	}
-	public ArrayList<AccountPO> getAllAcountInfo() {	
+	public ArrayList<AccountPO> getAllAcountInfo() throws RemoteException{	
 		return reader();
 	}
 	
-	public void saveAccount(String filename) {
+	public void saveAccount(String filename) throws RemoteException{
 		ArrayList<AccountPO> acc = reader();
 		writer(acc, filename);	
 	}
