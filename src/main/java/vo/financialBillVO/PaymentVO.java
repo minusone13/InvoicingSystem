@@ -82,12 +82,7 @@ public class PaymentVO extends VO{
 	public void setRole(Role r) {
 		this.role = r;
 	}
-	public BillState getState() {
-		return state;
-	}
-	public void setState(BillState state) {
-		this.state = state;
-	}
+	
 	public void setMoney(ArrayList<Double> money) {
 		this.money = money;
 	}
