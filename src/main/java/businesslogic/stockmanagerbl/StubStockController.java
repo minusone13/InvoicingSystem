@@ -4,9 +4,9 @@ import java.util.*;
 
 import po.BillState;
 import po.RM;
+import po.Role;
 import presentation.userui.Login;
 import dataservice.commoditydataservice.*;
-import businesslogic.Role;
 import businesslogic.commoditybillbl.*;
 import businesslogic.commoditybl.*;
 import businesslogic.examinebl.StubBillPool;

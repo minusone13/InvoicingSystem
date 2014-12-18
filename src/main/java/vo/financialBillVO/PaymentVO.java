@@ -5,8 +5,8 @@ import java.util.Date;
 
 import po.BillState;
 import po.BillStyle;
+import po.Role;
 import vo.VO;
-import businesslogic.Role;
 import businesslogic.financialbillbl.TransferAccount;
 
 public class PaymentVO extends VO{

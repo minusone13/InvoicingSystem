@@ -5,7 +5,6 @@ import java.util.*;
 
 import po.*;
 import po.stockpo.*;
-import businesslogic.Role;
 import businesslogic.commoditybillbl.StubAlertBill;
 import businesslogic.commoditybillbl.StubCommodityBill;
 import businesslogic.stockmanagerbl.*;

@@ -11,9 +11,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import po.RM;
+import po.Role;
 import presentation.managerui.MouseListenerGetXY;
 import vo.stockvo.CommodityVO;
-import businesslogic.Role;
 
 public class JPManagerComOfStock extends JPanel {
 

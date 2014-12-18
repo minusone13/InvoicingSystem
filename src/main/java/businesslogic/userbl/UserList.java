@@ -4,12 +4,12 @@ import java.security.*;
 import java.util.ArrayList;
 
 import po.RM;
+import po.Role;
 import po.userpo.*;
 import vo.uservo.OperationRecordVO;
 import vo.uservo.UserVO;
 import data.userdata.UserDataController;
 import dataservice.userdataservice.*;
-import businesslogic.Role;
 
 public class UserList {
 	static StubUserDataService data=UserDataController.getInstance();//need to be deleted

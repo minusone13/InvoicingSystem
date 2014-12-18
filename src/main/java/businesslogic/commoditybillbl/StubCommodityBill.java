@@ -6,7 +6,7 @@ import java.util.Date;
 
 import po.BillState;
 import po.RM;
-import businesslogic.Role;
+import po.Role;
 import businesslogic.commoditybl.MockCommodity;
 import businesslogic.examinebl.StubBillPool;
 import businesslogic.userbl.User;

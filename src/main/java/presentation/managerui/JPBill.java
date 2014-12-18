@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 
 import po.BillState;
 import po.BillStyle;
+import po.Role;
 import presentation.commodityui.StockManagerDriver;
 import vo.AlertBillVO;
 import vo.BarginStrategyVO;
@@ -28,7 +29,6 @@ import vo.financialBillVO.CashPaymentVO;
 import vo.financialBillVO.PaymentVO;
 import vo.financialBillVO.ReceiptVO;
 import vo.uservo.UserVO;
-import businesslogic.Role;
 import businesslogic.StrategyStyle;
 import businesslogic.customerbl.CustomerList;
 import businesslogic.financialbl.Financial;

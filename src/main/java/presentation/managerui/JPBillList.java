@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import javax.swing.JPanel;
 
 import po.BillState;
+import po.Role;
 import presentation.commodityui.StockManagerDriver;
 import presentation.managerui.JPBill.JPbillType;
 import vo.AlertBillVO;
@@ -23,7 +24,6 @@ import vo.financialBillVO.CashPaymentVO;
 import vo.financialBillVO.PaymentVO;
 import vo.financialBillVO.ReceiptVO;
 import vo.uservo.UserVO;
-import businesslogic.Role;
 import businesslogic.customerbl.CustomerList;
 import businesslogic.financialbl.Financial;
 import businesslogic.managerbl.StubManager;

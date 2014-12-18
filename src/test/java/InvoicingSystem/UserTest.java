@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 
 import po.RM;
+import po.Role;
 import po.stockpo.CategoryPO;
 import presentation.commodityui.StockManagerDriver;
 import presentation.userui.UserDriver;
@@ -18,7 +19,6 @@ import vo.uservo.UserVO;
 
 import org.junit.*;
 
-import businesslogic.Role;
 import businesslogic.stockmanagerbl.StubStockController;
 import businesslogic.userbl.*;
 import businesslogicservice.commodityblservice.StubCommodityBlService;

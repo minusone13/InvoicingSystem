@@ -4,7 +4,6 @@ import java.io.*;
 import java.util.*;
 
 import data.commoditydata.MockCommodityData;
-import businesslogic.Role;
 import po.*;
 import po.stockpo.CommodityPO;
 import po.userpo.OperationRecordPO;
