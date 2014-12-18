@@ -2,9 +2,9 @@ package businesslogic.stockservice;
 
 import java.util.ArrayList;
 
+import po.RM;
 import businesslogic.commoditybl.MockCommodity;
 import businesslogic.commoditybl.StubPack;
-import vo.RM;
 import vo.stockvo.CommodityVO;
 
 public interface StockBlForManager 

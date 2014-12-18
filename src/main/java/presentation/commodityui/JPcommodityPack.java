@@ -8,7 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import vo.RM;
+import po.RM;
 import vo.stockvo.CommodityVO;
 import businesslogic.stockmanagerbl.StubStockController;
 import businesslogicservice.commodityblservice.StubCommodityBlService;

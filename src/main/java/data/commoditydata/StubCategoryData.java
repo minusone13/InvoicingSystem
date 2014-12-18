@@ -7,7 +7,6 @@ import po.*;
 import po.stockpo.CategoryPO;
 import po.stockpo.StockPO;
 import po.stockpo.CommodityPO.*;
-import vo.RM;
 
 public class StubCategoryData implements Serializable{
 	ArrayList<StubCategoryData> cats=new ArrayList<StubCategoryData>();

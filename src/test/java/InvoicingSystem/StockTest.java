@@ -10,6 +10,7 @@ import org.junit.*;
 
 import po.BillState;
 import po.BillStyle;
+import po.RM;
 import po.stockpo.*;
 import po.stockpo.StockPO.Type;
 import presentation.commodityui.StockManagerDriver;

@@ -3,8 +3,8 @@ package businesslogic.userbl;
 import java.security.*;
 import java.util.ArrayList;
 
+import po.RM;
 import po.userpo.*;
-import vo.RM;
 import vo.uservo.OperationRecordVO;
 import vo.uservo.UserVO;
 import data.userdata.UserDataController;

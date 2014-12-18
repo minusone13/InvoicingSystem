@@ -7,7 +7,6 @@ import java.util.*;
 import data.Tool;
 import po.*;
 import po.stockpo.*;
-import vo.RM;
 
 public class StubCommodityList implements Serializable{
 	ArrayList<StubCategoryData> cats;

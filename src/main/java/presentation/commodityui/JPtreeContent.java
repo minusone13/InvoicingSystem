@@ -18,7 +18,7 @@ import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeNode;
 
-import vo.RM;
+import po.RM;
 import vo.stockvo.CategoryVO;
 import vo.stockvo.CommodityVO;
 import vo.stockvo.StockVO;

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import po.BillState;
+import po.RM;
 import businesslogic.Role;
 import businesslogic.commoditybl.MockCommodity;
 import businesslogic.examinebl.StubBillPool;

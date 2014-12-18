@@ -8,7 +8,6 @@ import data.stockservice.StockDataForFinancial;
 import dataservice.commoditydataservice.*;
 import po.*;
 import po.stockpo.*;
-import vo.RM;
 
 public class StubStockDataController implements StubCommodityDataService, StockDataForFinancial
 {//这是一个单体模式的类，因为这样读写文件方便些

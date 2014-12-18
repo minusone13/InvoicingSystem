@@ -9,7 +9,6 @@ import po.*;
 import po.stockpo.CommodityPO;
 import po.userpo.OperationRecordPO;
 import po.userpo.UserPO;
-import vo.RM;
 
 public class UserList implements Serializable{
 	ArrayList<UserPO> users;

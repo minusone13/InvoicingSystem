@@ -1,7 +1,8 @@
 package businesslogic.stockservice;
 
 import java.util.ArrayList;
-import vo.RM;
+
+import po.RM;
 import vo.stockvo.CommodityVO;
 
 public interface StockBlForSalesMen 

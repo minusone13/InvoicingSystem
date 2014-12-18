@@ -1,4 +1,4 @@
-package vo;
+package po;
 
 public enum RM {
 		redundance,//重复，一般用于添加一个项目0

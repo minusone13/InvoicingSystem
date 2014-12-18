@@ -12,7 +12,6 @@ import businesslogic.stockmanagerbl.*;
 import businesslogic.userbl.User;
 import dataservice.commoditydataservice.*;
 import vo.stockvo.*;
-import vo.RM;
 
 public class StubCommodityList {//商品列表 haha
 	static StubCommodityDataService comdata;

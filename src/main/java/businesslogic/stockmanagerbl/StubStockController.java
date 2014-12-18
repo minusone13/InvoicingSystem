@@ -3,6 +3,7 @@ package businesslogic.stockmanagerbl;
 import java.util.*;
 
 import po.BillState;
+import po.RM;
 import presentation.userui.Login;
 import dataservice.commoditydataservice.*;
 import businesslogic.Role;

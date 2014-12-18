@@ -2,9 +2,9 @@ package vo.uservo;
 
 import java.util.Date;
 
+import po.RM;
 import po.userpo.OperationRecordPO;
 import po.userpo.UserPO;
-import vo.RM;
 
 public class OperationRecordVO {
 	//记录主要操作

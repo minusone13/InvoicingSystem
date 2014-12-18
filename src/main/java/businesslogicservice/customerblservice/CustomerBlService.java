@@ -2,9 +2,9 @@ package businesslogicservice.customerblservice;
 
 import java.util.ArrayList;
 
+import po.RM;
 import businesslogic.customerbl.Customer;
 import vo.CustomerVO;
-import vo.RM;
 
 public interface CustomerBlService {
 		/*

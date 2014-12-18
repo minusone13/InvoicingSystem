@@ -8,7 +8,6 @@ import dataservice.userdataservice.*;
 import po.*;
 import po.userpo.OperationRecordPO;
 import po.userpo.UserPO;
-import vo.RM;
 
 public class UserDataController implements StubUserDataService{
 	private static UserDataController instance=null;
