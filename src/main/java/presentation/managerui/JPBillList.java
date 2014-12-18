@@ -6,9 +6,9 @@ import javax.swing.JPanel;
 
 import presentation.commodityui.StockManagerDriver;
 import presentation.managerui.JPBill.JPbillType;
-import data.commoditydata.StubStockDataController;
 import vo.AlertBillVO;
 import vo.BarginStrategyVO;
+import vo.CustomerVO;
 import vo.GiftBillVO;
 import vo.LevelStrategyVO;
 import vo.PurBackSheetVO;
@@ -17,18 +17,26 @@ import vo.ReachStrategyVO;
 import vo.SaleBackSheetVO;
 import vo.SaleSheetVO;
 import vo.SpillsLossBillVO;
+import vo.accountVO.AccountVO;
 import vo.financialBillVO.CashPaymentVO;
 import vo.financialBillVO.PaymentVO;
 import vo.financialBillVO.ReceiptVO;
+import vo.uservo.UserVO;
 import businesslogic.BillState;
+import businesslogic.Role;
+import businesslogic.customerbl.CustomerList;
 import businesslogic.financialbl.Financial;
 import businesslogic.managerbl.StubManager;
 import businesslogic.salebillbl.salebillController;
 import businesslogic.stockmanagerbl.StubStockController;
+import businesslogic.userbl.UserController;
 import businesslogicservice.commodityblservice.StubCommodityBlService;
+import businesslogicservice.customerblservice.CustomerBlService;
 import businesslogicservice.financialblservice.FinancialBlService;
 import businesslogicservice.managerblservice.StubManagerBlService;
 import businesslogicservice.salebillblservice.SaleBillBlService;
+import businesslogicservice.userblservice.StubUserBlService;
+import data.commoditydata.StubStockDataController;
 
 public class JPBillList extends JPanel {
 
@@ -51,11 +59,13 @@ public class JPBillList extends JPanel {
 	JPanel JPupdate=null;
 	//清单表格
 	JTableOfList table;//表格的引用
-	//四个逻辑层接口
+	//逻辑层接口
 	StubManagerBlService mbl=new StubManager();
 	FinancialBlService fbl=new Financial();
 	 SaleBillBlService sbl=new salebillController();
 	 StubCommodityBlService stockbl=new StubStockController();
+	 CustomerBlService customerbl=new CustomerList();
+	 StubUserBlService userbl=new UserController();
 	public JPBillList(){
 		//逻辑层接口
 		StockManagerDriver smd=new StockManagerDriver();
@@ -142,7 +152,7 @@ public class JPBillList extends JPanel {
 		this.add(JPupdate);
 		this.repaint();
 	}
-	/*增加赠送单VO数组*/
+	/*增加客户策略VO数组*/
 	public void addLevelStrategyList(ArrayList<LevelStrategyVO> ls){
 
 	
@@ -153,7 +163,7 @@ public class JPBillList extends JPanel {
 		//更新面板
 		updateJP();
 	}
-	/*增加赠送单*/
+	/*增加客户策略*/
 	public void addLevelStrategy(LevelStrategyVO ls){
 		//调用逻辑层
 		switch(ls.getLevel_strategy_style()){
@@ -172,7 +182,7 @@ public class JPBillList extends JPanel {
 		JPbillList.clear();
 		this.addLevelStrategyList(mbl.ShowLevelStrategy());
 	}
-	/*增加赠送单VO数组*/
+	/*增加特价包策略VO数组*/
 	public void addBarginStrategyList(ArrayList<BarginStrategyVO> bs){
 
 	
@@ -183,7 +193,7 @@ public class JPBillList extends JPanel {
 		//更新面板
 		updateJP();
 	}
-	/*增加赠送单*/
+	/*增加特价包策略*/
 	public void addBarginStrategy(BarginStrategyVO bs){
 		//调用逻辑层
 		mbl.addBarginStrategy(bs);
@@ -191,7 +201,7 @@ public class JPBillList extends JPanel {
 		JPbillList.clear();
 		this.addBarginStrategyList(mbl.ShowBarginStrategy());
 	}
-	/*增加赠送单VO数组*/
+	/*增加满额策略VO数组*/
 	public void addReachStrategyList(ArrayList<ReachStrategyVO> rs){
 
 	
@@ -202,7 +212,7 @@ public class JPBillList extends JPanel {
 		//更新面板
 		updateJP();
 	}
-	/*增加赠送单*/
+	/*增加满额策略*/
 	public void addReachStrategy(ReachStrategyVO rs){
 		//调用逻辑层
 		switch(rs.getReach_strategy_style()){
@@ -216,6 +226,65 @@ public class JPBillList extends JPanel {
 		//从逻辑层读取数据更新界面
 		JPbillList.clear();
 		this.addReachStrategyList(mbl.ShowReachStrategy());
+	}
+	/*增加账户VO数组*/
+	public void addAccountList(ArrayList<AccountVO> ac){
+
+	
+		//遍历单据vo数组把单据加到单据面板数组
+		for(int i=0;i<ac.size();i++){
+			JPbillList.add(new JPBill(ac.get(i)));
+		}
+		//更新面板
+		updateJP();
+	}
+	/*增加账户*/
+	public void addAccount(AccountVO ac){
+		//调用逻辑层
+		fbl.addAccount(ac.getName(), ac.getBalance());
+		//从逻辑层读取数据更新界面
+		JPbillList.clear();
+		this.addAccountList(fbl.getAllAccountInfo());
+	}
+	/*增加客户VO数组*/
+	public void addCustomerList(ArrayList<CustomerVO> cs){
+
+	
+		//遍历单据vo数组把单据加到单据面板数组
+		for(int i=0;i<cs.size();i++){
+			JPbillList.add(new JPBill(cs.get(i)));
+		}
+		//更新面板
+		updateJP();
+	}
+	/*增加客户*/
+	public void addCustomer(CustomerVO cs){
+		//调用逻辑层
+//		customerbl.addCustomer(cs);
+		//从逻辑层读取数据更新界面
+		JPbillList.clear();
+//		this.addCustomerList(customerbl);
+	}
+	/*增加用户VO数组*/
+	public void addUserList(ArrayList<UserVO> us){
+
+	
+		//遍历单据vo数组把单据加到单据面板数组
+		for(int i=0;i<us.size();i++){
+			JPbillList.add(new JPBill(us.get(i)));
+		}
+		//更新面板
+		updateJP();
+	}
+	/*授权用户*/
+	public void authorizeCustomer(UserVO us){
+		//调用逻辑层
+
+		userbl.authorized(us.getAccount());
+		//从逻辑层读取数据更新界面
+		JPbillList.clear();
+
+		this.addUserList(userbl.showUsers());
 	}
 	/*增加赠送单VO数组*/
 	public void addGiftBillList(ArrayList<GiftBillVO> gb){
@@ -406,6 +475,32 @@ public class JPBillList extends JPanel {
 		this.addSpillsLossBillList(stockbl.showSpillsLossBills());
 	}
 	
+	/*修改选中的账户*/
+	public void changeChosen(String oldname,String newName){
+		for(int i=0;i<JPbillList.size();i++){
+			if(JPbillList.get(i).getChoose()){
+				JPbillList.get(i).change(oldname,newName);
+				//从逻辑层读取数据更新界面
+				JPbillList.clear();
+				this.addUserList(userbl.showUsers());
+				break;
+			}
+		}
+	}
+	/*修改选中的用户*/
+	public void changeChosen(UserVO us,Role r){
+		for(int i=0;i<JPbillList.size();i++){
+			if(JPbillList.get(i).getChoose()){
+				JPbillList.get(i).change(us);//先改密码，ID没变
+				JPbillList.get(i).changeRole(us,r);//修改职务，ID可能变化
+				//从逻辑层读取数据更新界面
+				JPbillList.clear();
+				this.addUserList(userbl.showUsers());
+				break;
+			}
+		}
+	}
+	
 	/*修改选中的*/
 	public void changeChosen(GiftBillVO gb){
 		for(int i=0;i<JPbillList.size();i++){
@@ -581,13 +676,68 @@ public class JPBillList extends JPanel {
 			System.out.println("只有已经通过审批的单据能够处理");
 		}
 	}
+	/*授权选中的用户*/
+	public void authorizeChosen(){
+		if(getChosenNum()!=0){
+			for(int i=0;i<JPbillList.size();i++){
+				if(JPbillList.get(i).getChoose()){
+					JPbillList.get(i).authorize();
+				}
+			}
+			//从数据层重新读取更新面板
+			JPbillList.clear();
+			this.addUserList(userbl.showUsers());
+		}
+	
+		else{
+			System.out.println("请选择要授权的用户");
+		}
+	}
 	/*删除选中的*/
 	public void removeChosen(){
 
-		if(getChosen().getType()==JPbillType.Bill){
-			if(isTheSameState()&&stateOfChosen()==BillState.OVER){//如果是同一个状态且是已处理状态
+		if(getChosenNum()!=0){
+			if(getChosen().getType()==JPbillType.Bill){
+				if(isTheSameState()&&stateOfChosen()==BillState.OVER){//如果是同一个状态且是已处理状态
+					for(int i=0;i<JPbillList.size();i++){
+						if(JPbillList.get(i).getChoose()){
+							JPbillList.remove(i);
+							i--;
+						}
+					}
+					//重新加到底板上
+					updateJP();
+				}
+			
+				else{
+					System.out.println("只有已处理单据能够移除");
+				}
+			}
+			else{//不是单据
 				for(int i=0;i<JPbillList.size();i++){
 					if(JPbillList.get(i).getChoose()){
+						//如果是策略，要从数据库中删除
+						if(JPbillList.get(i).getLevelStrategyVO()!=null){
+							mbl.Remove(JPbillList.get(i).getLevelStrategyVO());
+						}
+						if(JPbillList.get(i).getBarginStrategyVO()!=null){
+							mbl.Remove(JPbillList.get(i).getBarginStrategyVO());
+						}
+						if(JPbillList.get(i).getReachStrategyVO()!=null){
+							mbl.Remove(JPbillList.get(i).getReachStrategyVO());
+						}
+						//如果是用户
+						if(JPbillList.get(i).getUserVO()!=null){
+							userbl.deleteUser(JPbillList.get(i).getUserVO());
+						}
+						//如果是客户
+						if(JPbillList.get(i).getCustomerVO()!=null){
+//							customerbl.deleteCustomer(name)
+						}
+						//如果是账户
+						if(JPbillList.get(i).getAccountVO()!=null){
+							fbl.deleteAccount(JPbillList.get(i).getAccountVO().getName());
+						}
 						JPbillList.remove(i);
 						i--;
 					}
@@ -595,34 +745,11 @@ public class JPBillList extends JPanel {
 				//重新加到底板上
 				updateJP();
 			}
+		}
+		else{
+			System.out.println("请选择要删除的选项");
+		}
 		
-			else{
-				System.out.println("只有已处理单据能够移除");
-			}
-		}
-		else{//不是单据
-			for(int i=0;i<JPbillList.size();i++){
-				if(JPbillList.get(i).getChoose()){
-					//如果是策略，要从数据库中删除
-					if(JPbillList.get(i).getLevelStrategyVO()!=null){
-						mbl.Remove(JPbillList.get(i).getLevelStrategyVO());
-						System.out.println("删除一条客户策略");
-					}
-					if(JPbillList.get(i).getBarginStrategyVO()!=null){
-						mbl.Remove(JPbillList.get(i).getBarginStrategyVO());
-						System.out.println("删除一条特价包策略");
-					}
-					if(JPbillList.get(i).getReachStrategyVO()!=null){
-						mbl.Remove(JPbillList.get(i).getReachStrategyVO());
-						System.out.println("删除一条满额策略");
-					}
-					JPbillList.remove(i);
-					i--;
-				}
-			}
-			//重新加到底板上
-			updateJP();
-		}
 		
 	}
 	

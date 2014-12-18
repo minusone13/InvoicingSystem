@@ -139,9 +139,13 @@ public class JPtreeContent extends JPanel {
         public void editingStopped(ChangeEvent e) {
         	DefaultMutableTreeNode thisNode=(DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
         	String parentID=rePath((DefaultMutableTreeNode)thisNode.getParent());
+        	
         	CategoryVO categryvo=new CategoryVO(parentID,thisNode.getUserObject().toString());
-        	RM rm=stockbl.updateCategory(categryvo);
-            System.out.println("编辑结束,结果是"+rm);  
+        	
+        	String newName=thisNode.getUserObject().toString();
+        	//逻辑层改变节点名字的接口
+        	RM rm=stockbl.updateCategory(categryvo,newName);
+            System.out.println("编辑结束,结果是"+rm+"新名称是:"+newName);  
         }  
     }  
 	/*返回逻辑层对应路径*/

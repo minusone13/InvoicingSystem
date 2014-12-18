@@ -27,6 +27,14 @@ public class Admin extends JPanel{
 
 		//用户管理
 		private JPmanageUser manageUser=new JPmanageUser();
+		public JPmanageUser getManageUser() {
+			return manageUser;
+		}
+
+		public void setManageUser(JPmanageUser manageUser) {
+			this.manageUser = manageUser;
+		}
+
 		public Admin(){
 
 			//设置窗口大小

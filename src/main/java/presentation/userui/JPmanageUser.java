@@ -11,15 +11,13 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import presentation.commodityui.JPmanageBills2.JPanelEdit;
-import presentation.commodityui.JPmanageBills2.JPanelEdit.MouseListenerOfButton;
-import presentation.commodityui.JPmanageBills2.JPanelEdit.TreadOfLeft;
-import presentation.commodityui.JPmanageBills2.JPanelEdit.TreadOfRight;
 import presentation.managerui.JPBillList;
 import presentation.managerui.MouseListenerGetXY;
 import userui.Frame;
-import businesslogic.BillState;
-import businesslogic.BillStyle;
+import vo.uservo.UserVO;
+import businesslogic.Role;
+import businesslogic.userbl.UserController;
+import businesslogicservice.userblservice.StubUserBlService;
 
 public class JPmanageUser extends JPanel {
 
@@ -65,6 +63,8 @@ public class JPmanageUser extends JPanel {
 			ImageIcon checkIconR=new ImageIcon("src/image/function/checkR.png");
 			//frame的引用
 		    Frame frame;
+		    //逻辑层接口
+		    StubUserBlService userbl=new UserController();
 			public JPmanageUser(){//参数决定编辑板的类型
 				//面板大小
 				this.setSize(905, 342);
@@ -87,6 +87,7 @@ public class JPmanageUser extends JPanel {
 				
 				//将单据vo数组加到单据面板列表
 				billList.setLocation(0, 0);
+			
 				
 				//将列表加在底板上
 				jp.add(billList,0);
@@ -170,22 +171,12 @@ public class JPmanageUser extends JPanel {
 						break;	
 					case 3:
 						inquire.setIcon(searchIconR);
-						JPsearch.leftMove();
 						break;
 					case 4:
 						delete.setIcon(deleteIconR);
 						break;
 					case 5:
 						edit.setIcon(editIconR);
-						if(billList.getChosenNum()==1){
-							JPedit.leftMove();//调出编辑板
-						}
-						else if(billList.getChosenNum()==0){
-							System.out.println("请选择要修改的用户");
-						}
-						else{
-							System.out.println("只能修改一个用户的信息");
-						}
 						break;
 					case 7:
 						pass.setIcon(checkIconR);
@@ -207,15 +198,27 @@ public class JPmanageUser extends JPanel {
 						break;	
 					case 3:
 						inquire.setIcon(searchIconW);
+						JPsearch.leftMove();
 						break;
 					case 4:
 						delete.setIcon(deleteIconW);
+						billList.removeChosen();
 						break;
 					case 5:
 						edit.setIcon(editIconW);
+						if(billList.getChosenNum()==1){
+							JPedit.leftMove();//调出编辑板
+						}
+						else if(billList.getChosenNum()==0){
+							System.out.println("请选择要修改的用户");
+						}
+						else{
+							System.out.println("只能修改一个用户的信息");
+						}
 						break;				
 					case 7:
 						pass.setIcon(checkIconW);
+						billList.authorizeChosen();
 						break;
 					}
 				}
@@ -303,7 +306,7 @@ public class JPmanageUser extends JPanel {
 					code.setBounds(40,60, 40, 20);
 					
 					//用户权限选择下拉框
-					String[] role={"总经理","财务主管","财务人员","进销人员","库存管理人员"};
+					String[] role={"总经理","财务经理","财务人员","进销经理","进销人员","库存管理人员"};
 					roleCombo = new JComboBox(role);
 					roleCombo.setFont(new Font("宋体",Font.BOLD,14));
 					roleCombo.setBounds(80,30, 150, 20);
@@ -369,6 +372,32 @@ public class JPmanageUser extends JPanel {
 							break;
 						case 3:
 							confirm.setIcon(confirm0);
+							//修改
+							
+							if(!codeText.getText().equals("")){
+								Role r=null;
+								if(roleCombo.getSelectedItem().toString().equals("总经理")){
+									r=Role.MANAGER;
+								}
+								else if(roleCombo.getSelectedItem().toString().equals("财务经理")){
+									r=Role.FINANCIAL_MANAGER;
+								}
+								else if(roleCombo.getSelectedItem().toString().equals("财务人员")){
+									r=Role.FINANCIAL_STAFF;
+								}
+								else if(roleCombo.getSelectedItem().toString().equals("进销经理")){
+									r=Role.PURCHASE_SALE_MANAGER;
+								}
+								else if(roleCombo.getSelectedItem().toString().equals("进销人员")){
+									r=Role.PURCHASE_SALE_STAFF;
+								}
+								else if(roleCombo.getSelectedItem().toString().equals("库存管理人员")){
+									r=Role.STOCK_STAFF;
+								}
+								UserVO temp=billList.getChosen().getUserVO();
+								temp.setPassword(codeText.getText());
+								billList.changeChosen(temp,r);
+							}
 							break;
 						}
 					}

@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import presentation.commodityui.StockManagerDriver;
 import vo.AlertBillVO;
 import vo.BarginStrategyVO;
+import vo.CustomerVO;
 import vo.GiftBillVO;
 import vo.LevelStrategyVO;
 import vo.PurBackSheetVO;
@@ -20,20 +21,27 @@ import vo.ReachStrategyVO;
 import vo.SaleBackSheetVO;
 import vo.SaleSheetVO;
 import vo.SpillsLossBillVO;
+import vo.accountVO.AccountVO;
 import vo.financialBillVO.CashPaymentVO;
 import vo.financialBillVO.PaymentVO;
 import vo.financialBillVO.ReceiptVO;
+import vo.uservo.UserVO;
 import businesslogic.BillState;
 import businesslogic.BillStyle;
+import businesslogic.Role;
 import businesslogic.StrategyStyle;
+import businesslogic.customerbl.CustomerList;
 import businesslogic.financialbl.Financial;
 import businesslogic.managerbl.StubManager;
 import businesslogic.salebillbl.salebillController;
 import businesslogic.stockmanagerbl.StubStockController;
+import businesslogic.userbl.UserController;
 import businesslogicservice.commodityblservice.StubCommodityBlService;
+import businesslogicservice.customerblservice.CustomerBlService;
 import businesslogicservice.financialblservice.FinancialBlService;
 import businesslogicservice.managerblservice.StubManagerBlService;
 import businesslogicservice.salebillblservice.SaleBillBlService;
+import businesslogicservice.userblservice.StubUserBlService;
 import data.commoditydata.StubStockDataController;
 
 public class JPBill extends JPanel {
@@ -72,6 +80,22 @@ public class JPBill extends JPanel {
 	private BarginStrategyVO barginStrategyVO;
 	private ReachStrategyVO reachStrategyVO;
 	
+	private CustomerVO customerVO;
+	private UserVO userVO;
+	private AccountVO accountVO;
+	public CustomerVO getCustomerVO() {
+		return customerVO;
+	}
+	public void setCustomerVO(CustomerVO customerVO) {
+		this.customerVO = customerVO;
+	}
+	public UserVO getUserVO() {
+		return userVO;
+	}
+	public void setUserVO(UserVO userVO) {
+		this.userVO = userVO;
+	}
+
 	public enum JPbillType {
 
 		Bill,
@@ -153,6 +177,8 @@ public class JPBill extends JPanel {
 	FinancialBlService fbl=new Financial();
 	 SaleBillBlService sbl=new salebillController();
 	 StubCommodityBlService stockbl=new StubStockController();
+	 CustomerBlService customerbl=new CustomerList();
+	 StubUserBlService userbl=new UserController();
 	//现金费用单的标签
 	JLabel operatorOfCas=new JLabel("操作员");
 	JLabel accountOfCas=new JLabel("帐户");
@@ -185,7 +211,7 @@ public class JPBill extends JPanel {
 		//背景
 		bg.setIcon(new ImageIcon("src/image/strategy/LevelStrategy1.png"));
 		bg.setBounds(0, 0, 522, 93);
-		bg.addMouseListener(new MLofStartegy(1));
+		bg.addMouseListener(new MLofOther(1));
 		bg.addMouseListener(new MouseListenerGetXY());
 		//向右
 		right.setIcon(new ImageIcon("src/image/right.png"));
@@ -299,7 +325,7 @@ public class JPBill extends JPanel {
 		//背景
 		bg.setIcon(new ImageIcon("src/image/strategy/BarginStrategy1.png"));
 		bg.setBounds(0, 0, 522, 93);
-		bg.addMouseListener(new MLofStartegy(2));
+		bg.addMouseListener(new MLofOther(2));
 		bg.addMouseListener(new MouseListenerGetXY());
 		//向右
 		right.setIcon(new ImageIcon("src/image/right.png"));
@@ -386,7 +412,7 @@ public class JPBill extends JPanel {
 		//背景
 		bg.setIcon(new ImageIcon("src/image/strategy/ReachStrategy1.png"));
 		bg.setBounds(0, 0, 522, 93);
-		bg.addMouseListener(new MLofStartegy(3));
+		bg.addMouseListener(new MLofOther(3));
 		//向右
 		right.setIcon(new ImageIcon("src/image/right.png"));
 		right.setBounds(221, 26, 40, 40);
@@ -467,6 +493,168 @@ public class JPBill extends JPanel {
 	
 		
 	}
+	public JPBill(CustomerVO customer){
+		//区分面板种类
+		setType(JPbillType.Customer);
+		//传递VO
+		customerVO=customer;
+		//面板大小
+		this.setSize(522, 93);
+		//设置布局
+		this.setLayout(null);
+		//设置面板透明
+		this.setOpaque(false);
+		//背景
+		bg.setIcon(new ImageIcon("src/image/customer/customer1.png"));
+		bg.setBounds(0, 0, 522, 93);
+		bg.addMouseListener(new MLofOther(4));
+		bg.addMouseListener(new MouseListenerGetXY());
+		//向右
+		right.setIcon(new ImageIcon("src/image/right.png"));
+		right.setBounds(221, 26, 40, 40);
+		right.addMouseListener(new MouseListenerOfButton(1));
+		//向左
+		left.setIcon(new ImageIcon("src/image/left.png"));
+		left.setBounds(482, 26, 40, 40);
+		left.addMouseListener(new MouseListenerOfButton(2));
+		//单据信息
+		JLabel ID=new JLabel("ID:"+customer.getid(),JLabel.CENTER);
+		ID.setBounds(31,5, 200, 20);
+		
+		//单据信息未完
+		JLabel name=new JLabel(customer.getname());
+		JLabel saleman=new JLabel(customer.getdeSaler());
+		JLabel level=new JLabel(String.valueOf(customer.getlevel()));
+		JLabel pay=new JLabel(String.valueOf(customer.getShouldPay()));
+		
+		JLabel receive=new JLabel(String.valueOf(customer.getShouldTake()));
+		
+		JLabel phoneNum=new JLabel(String.valueOf(customer.getphonenumber()));
+		JLabel address=new JLabel(customer.getaddress());
+
+		JLabel email=new JLabel(customer.getemail());
+		
+		JLabel postcode=new JLabel(customer.getpostcode());
+		JLabel maxowe=new JLabel(String.valueOf(customer.getmaxOwe()));
+	
+		
+		this.add(right,0);
+		this.add(left,1);
+		this.add(ID,2);
+		this.add(bg,3);
+	}
+	public JPBill(UserVO user){
+		//区分面板种类
+		setType(JPbillType.User);
+		//传递VO
+		userVO=user;
+		//面板大小
+		this.setSize(522, 93);
+		//设置布局
+		this.setLayout(null);
+		//设置面板透明
+		this.setOpaque(false);
+		//背景
+		bg.setIcon(new ImageIcon("src/image/user/user1.png"));
+		bg.setBounds(0, 0, 522, 93);
+		bg.addMouseListener(new MLofOther(5));
+		bg.addMouseListener(new MouseListenerGetXY());
+		//向右
+		right.setIcon(new ImageIcon("src/image/right.png"));
+		right.setBounds(221, 26, 40, 40);
+		right.addMouseListener(new MouseListenerOfButton(1));
+		//向左
+		left.setIcon(new ImageIcon("src/image/left.png"));
+		left.setBounds(482, 26, 40, 40);
+		left.addMouseListener(new MouseListenerOfButton(2));
+		//单据信息
+		JLabel ID=new JLabel("ID:"+user.getID(),JLabel.CENTER);
+		ID.setBounds(31,5, 200, 20);
+		
+		//单据信息未完
+		String authorize="";
+		if(user.isAuthorized()){
+			authorize="（已授权）";
+		}
+		else{
+			authorize="（未授权）";
+		}
+		JLabel name=new JLabel(user.getName(),JLabel.CENTER);
+		JLabel authority=new JLabel(authorize,JLabel.CENTER);
+		String ro="";
+		switch(user.getR()){
+		case ADMINISTRATOR:ro="管理员";
+			break;
+		case FINANCIAL_STAFF:ro="财务人员";
+			break;
+		case FINANCIAL_MANAGER:ro="财务经理";
+			break;
+		case MANAGER:ro="总经理";
+			break;
+		case STOCK_STAFF:ro="库存管理人员";
+			break;
+		case PURCHASE_SALE_STAFF:ro="进货销售人员";
+			break;
+		case PURCHASE_SALE_MANAGER:ro="进销经理";
+			break;
+		}
+		JLabel role=new JLabel(ro);
+		JLabel account=new JLabel(user.getAccount());
+		JLabel passcode=new JLabel(user.getPassword());
+		authority.setBounds(85,55,100, 20);
+		name.setBounds(85, 30,100, 20);
+		name.setFont(new Font("宋体",Font.BOLD,16));
+		name.setForeground(Color.white);
+		authority.setFont(new Font("宋体",Font.BOLD,16));
+		authority.setForeground(Color.white);
+		role.setBounds(338, 10,120, 20);
+		account.setBounds(338, 35, 100, 20);
+		passcode.setBounds(338, 60, 100, 20);
+		
+		this.add(right,0);
+		this.add(left,1);
+		this.add(ID,2);
+		this.add(name,3);
+		this.add(role,4);
+		this.add(account,5);
+		this.add(passcode,6);
+		this.add(authority,7);
+		this.add(bg,8);
+	}
+	public JPBill(AccountVO account){
+		//区分面板种类
+		setType(JPbillType.Account);
+		//传递VO
+		accountVO=account;
+		//面板大小
+		this.setSize(522, 93);
+		//设置布局
+		this.setLayout(null);
+		//设置面板透明
+		this.setOpaque(false);
+		//背景
+		bg.setIcon(new ImageIcon("src/image/account/account1.png"));
+		bg.setBounds(0, 0, 522, 93);
+		bg.addMouseListener(new MLofOther(6));
+		bg.addMouseListener(new MouseListenerGetXY());
+		//向右
+		right.setIcon(new ImageIcon("src/image/right.png"));
+		right.setBounds(221, 26, 40, 40);
+		right.addMouseListener(new MouseListenerOfButton(1));
+		//向左
+		left.setIcon(new ImageIcon("src/image/left.png"));
+		left.setBounds(482, 26, 40, 40);
+		left.addMouseListener(new MouseListenerOfButton(2));
+		
+		//单据信息未完
+		JLabel name=new JLabel(account.getName());
+		JLabel balance=new JLabel(String.valueOf(account.getBalance()));
+		
+		
+		this.add(right,0);
+		this.add(left,1);
+		this.add(bg,2);
+	}
 	public LevelStrategyVO getLevelStrategyVO() {
 		return levelStrategyVO;
 	}
@@ -485,10 +673,10 @@ public class JPBill extends JPanel {
 	public void setReachStrategyVO(ReachStrategyVO reachStrategyVO) {
 		this.reachStrategyVO = reachStrategyVO;
 	}
-	public class MLofStartegy implements MouseListener{
+	public class MLofOther implements MouseListener{
 
-		private int num;//1、客户策略2、特价包策略3、满额策略
-		public MLofStartegy(int N){
+		private int num;//1、客户策略2、特价包策略3、满额策略4、客户
+		public MLofOther(int N){
 			num=N;
 		}
 		public void mouseClicked(MouseEvent e) {
@@ -510,7 +698,15 @@ public class JPBill extends JPanel {
 				case 3:
 					bg.setIcon(new ImageIcon("src/image/strategy/ReachStrategy4.png"));
 					break;
-					
+				case 4:
+					bg.setIcon(new ImageIcon("src/image/customer/customer4.png"));
+					break;
+				case 5:
+					bg.setIcon(new ImageIcon("src/image/user/user4.png"));
+					break;
+				case 6:
+					bg.setIcon(new ImageIcon("src/image/account/account4.png"));
+					break;
 				}
 			}
 			else{
@@ -523,6 +719,15 @@ public class JPBill extends JPanel {
 					break;
 				case 3:
 					bg.setIcon(new ImageIcon("src/image/strategy/ReachStrategy3.png"));
+					break;
+				case 4:
+					bg.setIcon(new ImageIcon("src/image/customer/customer3.png"));
+					break;
+				case 5:
+					bg.setIcon(new ImageIcon("src/image/user/user3.png"));
+					break;
+				case 6:
+					bg.setIcon(new ImageIcon("src/image/account/account3.png"));
 					break;
 				}
 			}
@@ -545,7 +750,15 @@ public class JPBill extends JPanel {
 				case 3:
 					bg.setIcon(new ImageIcon("src/image/strategy/ReachStrategy4.png"));
 					break;
-					
+				case 4:
+					bg.setIcon(new ImageIcon("src/image/customer/customer4.png"));
+					break;
+				case 5:
+					bg.setIcon(new ImageIcon("src/image/user/user4.png"));
+					break;
+				case 6:
+					bg.setIcon(new ImageIcon("src/image/account/account4.png"));
+					break;
 				}
 			}
 			else{
@@ -558,6 +771,15 @@ public class JPBill extends JPanel {
 					break;
 				case 3:
 					bg.setIcon(new ImageIcon("src/image/strategy/ReachStrategy3.png"));
+					break;
+				case 4:
+					bg.setIcon(new ImageIcon("src/image/customer/customer3.png"));
+					break;
+				case 5:
+					bg.setIcon(new ImageIcon("src/image/user/user3.png"));
+					break;
+				case 6:
+					bg.setIcon(new ImageIcon("src/image/account/account3.png"));
 					break;
 				}
 			}
@@ -576,7 +798,15 @@ public class JPBill extends JPanel {
 				case 3:
 					bg.setIcon(new ImageIcon("src/image/strategy/ReachStrategy2.png"));
 					break;
-					
+				case 4:
+					bg.setIcon(new ImageIcon("src/image/customer/customer2.png"));
+					break;
+				case 5:
+					bg.setIcon(new ImageIcon("src/image/user/user2.png"));
+					break;
+				case 6:
+					bg.setIcon(new ImageIcon("src/image/account/account2.png"));
+					break;
 				}
 			}
 			else{
@@ -589,6 +819,15 @@ public class JPBill extends JPanel {
 					break;
 				case 3:
 					bg.setIcon(new ImageIcon("src/image/strategy/ReachStrategy1.png"));
+					break;
+				case 4:
+					bg.setIcon(new ImageIcon("src/image/customer/customer1.png"));
+					break;
+				case 5:
+					bg.setIcon(new ImageIcon("src/image/user/user1.png"));
+					break;
+				case 6:
+					bg.setIcon(new ImageIcon("src/image/account/account1.png"));
 					break;
 				}
 			}
@@ -1069,6 +1308,28 @@ public class JPBill extends JPanel {
 		this.add(ID,5);
 		this.add(bg,6);
 	}
+	//授权用户
+	public void authorize(){
+		userbl.authorized(userVO.getAccount());
+	}
+	//修改账户名
+	public void change(String oldname, String newname){
+		
+		//调用逻辑层修改对应单据的数据
+		fbl.updateAccount(oldname, newname);
+	}
+	//修改用户密码
+	public void change(UserVO us){
+		
+		//调用逻辑层修改对应单据的数据
+		userbl.changePassword(us);//修改密码
+	}
+	//修改用户职务
+	public void changeRole(UserVO us,Role r){
+		
+		//调用逻辑层修改对应单据的数据
+		userbl.changeRole(us, r);
+	}
 	public void change(GiftBillVO gb){
 	
 		//调用逻辑层修改对应单据的数据
@@ -1193,6 +1454,12 @@ public class JPBill extends JPanel {
 	}
 	public void setType(JPbillType type) {
 		Type = type;
+	}
+	public AccountVO getAccountVO() {
+		return accountVO;
+	}
+	public void setAccountVO(AccountVO accountVO) {
+		this.accountVO = accountVO;
 	}
 	public class MouseListenerOfButton implements MouseListener{
 

@@ -2,6 +2,8 @@ package presentation.userui;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -13,7 +15,6 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import presentation.financialui.FinancialUI;
 import userui.Frame;
 import vo.RM;
 import vo.uservo.UserVO;
@@ -42,8 +43,10 @@ public class Login extends JPanel {
     private JPasswordField passwords=new JPasswordField(16); 
 	//用户登录与注册接口
     StubUserBlService userService=new UserController();
+    
     //frame的引用
     Frame frame;
+    KeyAdapterOfSignIn keyAdapt;//键盘回车监听
     public Login(){
 
 		//设置窗口大小
@@ -77,6 +80,8 @@ public class Login extends JPanel {
 		passwords.setBorder(new EmptyBorder(0,0,0,0));
 		passwords.setOpaque(false);
 		passwords.setForeground(Color.white);
+		keyAdapt=new KeyAdapterOfSignIn();
+		passwords.addKeyListener(keyAdapt);
 		
 		//注册面板
 		jpRegister.setLocation(310, 220);
@@ -89,9 +94,103 @@ public class Login extends JPanel {
 		this.add(passwords,4);
 		this.add(bg,5);
 	}
+    public class KeyAdapterOfSignIn extends KeyAdapter{
+    	public void keyPressed(KeyEvent e){
+			if(e.getKeyChar()==KeyEvent.VK_ENTER){
+				signIn();
+			}
+		}
+    }
     /*获取frame引用*/
     public void getFrame( Frame f){
     		frame=f;
+    }
+    public void signIn(){
+    	
+		signIn.setIcon(new ImageIcon("src/image/userUi/sign in.png")  );
+		//登录
+		String userName=username.getText();
+		String passWords=new String(passwords.getPassword());
+		boolean legal=false;
+		//判断是否输入合法
+		if(!userName.equals("")&&!passWords.equals("")){
+			legal=true;
+		}
+		//如果合法就登录
+		if(legal){
+			UserVO userVO=userService.login(userName,passWords);
+			if(userVO!=null){
+				System.out.println("登录的是："+userVO.getR());
+				//将当前操作员信息赋值给当前登录面板的静态变量
+				user=userVO;
+				//切换面板
+				switch(userVO.getR()){
+				case ADMINISTRATOR:
+					Login.this.setVisible(false);
+					frame.getAdmin().getManageUser().getBillsList().getJPbillList().clear();
+					frame.getAdmin().getManageUser().getBillsList().reHome();
+					frame.getAdmin().getManageUser().getBillsList().addUserList(userService.showUsers());
+					frame.getAdmin().setVisible(true);
+					break;
+				case FINANCIAL_STAFF:
+					
+					frame.getFinancial().getManageBills1().setVisible(false);
+					frame.getFinancial().getManageBills2().setVisible(false);
+					frame.getFinancial().getInquire().setVisible(false);
+					frame.getFinancial().getAccount().setVisible(false);
+					frame.getFinancial().getAccountBuild().setVisible(false);
+					frame.getFinancial().getBusinessCondition().setVisible(false);
+					frame.getFinancial().getAccountInfomation().setVisible(false);
+					frame.getFinancial().getFunction().setVisible(true);
+					Login.this.setVisible(false);
+					frame.getFinancial().setVisible(true);
+					break;
+				case FINANCIAL_MANAGER:
+					break;
+				case MANAGER:
+					
+					frame.getManager().getPassbill1().setVisible(false);
+					frame.getManager().getPassbill2().setVisible(false);
+					frame.getManager().getManagerStrategy1().setVisible(false);
+					frame.getManager().getManagerStrategy2().setVisible(false);
+					frame.getManager().getInquire().setVisible(false);
+					frame.getManager().getBusinessCondition().setVisible(false);
+					frame.getManager().getCommodityChoose().setVisible(false);
+					frame.getManager().getFunction().setVisible(true);
+					Login.this.setVisible(false);
+					frame.getManager().setVisible(true);
+					break;
+				case STOCK_STAFF:
+					
+					frame.getStock().getManageBills().setVisible(false);
+					frame.getStock().getManageBills2().setVisible(false);
+					frame.getStock().getManagerComs().setVisible(false);
+					frame.getStock().getFunction().setVisible(true);
+					frame.getStock().setVisible(true);
+					Login.this.setVisible(false);
+					break;
+				case PURCHASE_SALE_STAFF:
+					
+					frame.getSale().getManageBills1().setVisible(false);
+					frame.getSale().getManageBills2().setVisible(false);
+					frame.getSale().getCustomerManage().setVisible(false);
+					frame.getSale().getFunction().setVisible(true);
+					frame.getSale().setVisible(true);
+					Login.this.setVisible(false);
+					break;
+				}
+				//清除文本框内容
+				username.setText("");
+				passwords.setText("");
+			}
+			else{
+				System.out.println("用户名或密码错误，请重新输入");
+			}
+			
+		}
+		else{
+			System.out.println("请输入用户名和密码");
+		}
     }
 	public class MouseListenerOfButton implements MouseListener{
 
@@ -129,88 +228,7 @@ public class Login extends JPanel {
 			// TODO Auto-generated method stub
 			if(work){
 				if(num==1){
-					
-					signIn.setIcon(new ImageIcon("src/image/userUi/sign in.png")  );
-					//登录
-					String userName=username.getText();
-					String passWords=new String(passwords.getPassword());
-					boolean legal=false;
-					//判断是否输入合法
-					if(!userName.equals("")&&!passWords.equals("")){
-						legal=true;
-					}
-					//如果合法就登录
-					if(legal){
-						UserVO userVO=userService.login(userName,passWords);
-						if(userVO!=null){
-							System.out.println("登录的是："+userVO.getR());
-							//将当前操作员信息赋值给当前登录面板的静态变量
-							user=userVO;
-							//切换面板
-							switch(userVO.getR()){
-							case ADMINISTRATOR:
-								Login.this.setVisible(false);
-								frame.getAdmin().setVisible(true);
-								break;
-							case FINANCIAL_STAFF:
-								
-								frame.getFinancial().getManageBills1().setVisible(false);
-								frame.getFinancial().getManageBills2().setVisible(false);
-								frame.getFinancial().getInquire().setVisible(false);
-								frame.getFinancial().getAccount().setVisible(false);
-								frame.getFinancial().getAccountBuild().setVisible(false);
-								frame.getFinancial().getBusinessCondition().setVisible(false);
-								frame.getFinancial().getAccountInfomation().setVisible(false);
-								frame.getFinancial().getFunction().setVisible(true);
-								Login.this.setVisible(false);
-								frame.getFinancial().setVisible(true);
-								break;
-							case FINANCIAL_MANAGER:
-								break;
-							case MANAGER:
-								
-								frame.getManager().getPassbill1().setVisible(false);
-								frame.getManager().getPassbill2().setVisible(false);
-								frame.getManager().getManagerStrategy1().setVisible(false);
-								frame.getManager().getManagerStrategy2().setVisible(false);
-								frame.getManager().getInquire().setVisible(false);
-								frame.getManager().getBusinessCondition().setVisible(false);
-								frame.getManager().getCommodityChoose().setVisible(false);
-								frame.getManager().getFunction().setVisible(true);
-								Login.this.setVisible(false);
-								frame.getManager().setVisible(true);
-								break;
-							case STOCK_STAFF:
-								
-								frame.getStock().getManageBills().setVisible(false);
-								frame.getStock().getManageBills2().setVisible(false);
-								frame.getStock().getManagerComs().setVisible(false);
-								frame.getStock().getFunction().setVisible(true);
-								frame.getStock().setVisible(true);
-								Login.this.setVisible(false);
-								break;
-							case PURCHASE_SALE_STAFF:
-								
-								frame.getSale().getManageBills1().setVisible(false);
-								frame.getSale().getManageBills2().setVisible(false);
-								frame.getSale().getCustomerManage().setVisible(false);
-								frame.getSale().getFunction().setVisible(true);
-								frame.getSale().setVisible(true);
-								Login.this.setVisible(false);
-								break;
-							}
-							//清除文本框内容
-							username.setText("");
-							passwords.setText("");
-						}
-						else{
-							System.out.println("用户名或密码错误，请重新输入");
-						}
-						
-					}
-					else{
-						System.out.println("请输入用户名和密码");
-					}
+					signIn();
 				}
 				else if(num==2){
 					register.setIcon(new ImageIcon("src/image/userUi/register.png") );
@@ -283,7 +301,7 @@ public class Login extends JPanel {
 			MouseListenerOfButton m2=new MouseListenerOfButton(2);
 			cancel.addMouseListener(m2);
 			//选择下拉框
-			String[] role = { "总经理", "财务人员","进销人员", "库存管理人员","财务主管" };
+			String[] role = { "总经理","财务主管" , "财务人员","进销经理","进销人员", "库存管理人员"};
 			roleComboBox = new JComboBox(role);
 			roleComboBox.setFont(new Font("隶书",Font.BOLD,20));
 			roleComboBox.setBounds(75, 15, 240, 38);
@@ -362,6 +380,9 @@ public class Login extends JPanel {
 					}
 					else if(r.equals("进销人员")){
 						role=Role.PURCHASE_SALE_STAFF;
+					}
+					else if(r.equals("进销经理")){
+						role=Role.PURCHASE_SALE_MANAGER;
 					}
 					else if(r.equals("库存管理人员")){
 						role=Role.STOCK_STAFF;

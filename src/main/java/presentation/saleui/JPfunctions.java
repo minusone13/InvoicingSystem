@@ -80,6 +80,8 @@ public class JPfunctions extends JPanel{
 			case 1:
 				function1.setIcon(Imagefun1);
 				JPfunctions.this.setVisible(false);
+				//传入客户数据
+				//显示客户管理界面
 				frame.getSale().getCustomerManage().setVisible(true);
 				break;
 			case 2:

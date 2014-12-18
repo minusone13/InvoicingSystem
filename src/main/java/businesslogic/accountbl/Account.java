@@ -1,6 +1,7 @@
 package businesslogic.accountbl;
 
 import po.AccountPO;
+import vo.accountVO.AccountVO;
 
 public class Account {
 	String name;//账户名
@@ -45,5 +46,12 @@ public class Account {
 		po.setBalance(balance);
 		po.setName(name);
 		return po;
+	}
+	
+	public AccountVO toVO() {
+		AccountVO vo = new AccountVO();
+		vo.setBalance(balance);
+		vo.setName(name);
+		return vo;
 	}
 }
