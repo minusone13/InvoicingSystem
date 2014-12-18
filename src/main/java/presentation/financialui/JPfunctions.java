@@ -7,6 +7,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import businesslogic.financialbl.Financial;
+import businesslogicservice.financialblservice.FinancialBlService;
 import presentation.managerui.JPfunction;
 import presentation.managerui.JPfunction.MouseListenerOfButton;
 import userui.Frame;
@@ -33,6 +35,7 @@ public class JPfunctions extends JPanel {
 	ImageIcon Imagefun31=new ImageIcon("src/image/financialUI/inquiryIndex1.png");
 	//frame的引用
     Frame frame;
+	FinancialBlService fbl=new Financial();
 	public JPfunctions(){
 		//设置窗口大小
 		this.setSize(522, 325);
@@ -97,6 +100,9 @@ public class JPfunctions extends JPanel {
 			case 1:
 				function1.setIcon(Imagefun1);
 				JPfunctions.this.setVisible(false);
+				frame.getFinancial().getAccount().getBillsList().getJPbillList().clear();
+				frame.getFinancial().getAccount().getBillsList().reHome();
+				frame.getFinancial().getAccount().getBillsList().addAccountList(fbl.getAllAccountInfo());
 				frame.getFinancial().getAccount().setVisible(true);
 				break;
 			case 2:

@@ -7,6 +7,10 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import businesslogic.customerbl.CustomerList;
+import businesslogic.salebillbl.salebillController;
+import businesslogicservice.customerblservice.CustomerBlService;
+import businesslogicservice.salebillblservice.SaleBillBlService;
 import presentation.saleui.JPfunctions;
 import userui.Frame;
 
@@ -25,6 +29,8 @@ public class JPfunctions extends JPanel{
 	ImageIcon Imagefun21 = new ImageIcon("src/image/saleUI/salebillIndex1.png");
 	//frame的引用
     Frame frame;
+    SaleBillBlService sbl=new salebillController();
+    CustomerBlService customerbl=new CustomerList();
 	public JPfunctions(){
 		//设置窗口大小
 		this.setSize(522, 325);
@@ -81,6 +87,7 @@ public class JPfunctions extends JPanel{
 				function1.setIcon(Imagefun1);
 				JPfunctions.this.setVisible(false);
 				//传入客户数据
+//				frame.getSale().getCustomerManage().getBillsList().addCustomerList(customerbl.);
 				//显示客户管理界面
 				frame.getSale().getCustomerManage().setVisible(true);
 				break;
