@@ -16,8 +16,12 @@ import po.stockpo.CommodityPO;
 import data.Tool;
 import dataservice.accountdataservice.StubAccountDataService;
 
-public class AccountData  implements StubAccountDataService{
+public class AccountData extends UnicastRemoteObject implements StubAccountDataService{
 	
+
+	public AccountData() throws RemoteException {
+		super();
+	}
 
 	public AccountPO find(AccountPO a) {
 		ArrayList<AccountPO> accountList = reader();	
