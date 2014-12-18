@@ -23,7 +23,7 @@ public class CustomerList implements CustomerForFinancial, CustomerBlService{
 				CustomerDataService customerdata = new CustomerData();
 				return customerdata.addCustomer(po);}
 			catch(Exception e){
-				System.out.println("addCustomer 异常");
+				System.out.println("addCustomer 异常"+e);
 			}
 			return false;
 		}
