@@ -20,4 +20,7 @@ public interface StockBlForSalesMen
 	
 	public RM readyForIn(String id,String name, String model, int quantity, double price);//当进货单或销售退货单提交后，请调用,price是单价
 	public RM readyForOut(String id,String name, String model, int quantity, double price);//当销售单或进货退货单被提交后，请调用,price是单价
+	public RM checkOut(String id, String packID, int quantity, double price);//销售特价包得到审批时时请调用, price是单价
+	public RM readyForOut(String id,String packID, int quantity, double price);//销售特价包提交时请调用，price是单价
+	public RM undoCheckOut(String id,String packID, int quantity, double price);//销售退货审批后请调用，price是单价
 }
