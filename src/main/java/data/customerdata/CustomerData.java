@@ -27,12 +27,12 @@ public class CustomerData implements CustomerDataService{
 		return true;
 	}
 
-	public boolean deleteCustomer(String name) {
+	public boolean deleteCustomer(String id) {
 		String address = "Customer.txt";
 		ArrayList<CustomerPO> listOfCustomerPO = new ArrayList<CustomerPO>();
 		listOfCustomerPO = this.getAllCustomer(address); 
 		for(CustomerPO po:listOfCustomerPO){
-			if(po.getname().equals(name)){
+			if(po.getid().equals(id)){
 				listOfCustomerPO.remove(po);
 				this.saveAllCustomer(listOfCustomerPO, address);
 				return true;
@@ -56,12 +56,12 @@ public class CustomerData implements CustomerDataService{
 		return false;
 	}
 
-	public CustomerPO findCustomer(String name) {
+	public CustomerPO findCustomer(String id) {
 		String address = "Customer.txt";
 		ArrayList<CustomerPO> listOfCustomerPO = new ArrayList<CustomerPO>();
 		listOfCustomerPO = this.getAllCustomer(address); 
 		for(CustomerPO po:listOfCustomerPO){
-			if(po.getname().equals(name)){
+			if(po.getid().equals(id)){
 				return po;
 			}
 		}

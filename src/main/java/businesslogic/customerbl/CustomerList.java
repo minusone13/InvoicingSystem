@@ -23,14 +23,14 @@ public class CustomerList implements CustomerForFinancial, CustomerBlService{
 			return customerdata.addCustomer(po);
 		}
 		
-		public boolean deleteCustomer(String name){
-			return customerdata.deleteCustomer(name);
+		public boolean deleteCustomer(String id){
+			return customerdata.deleteCustomer(id);
 		}
 		
-		public CustomerVO findCustomer(String name){
+		public CustomerVO findCustomer(String id){
 			CustomerVO vo = new CustomerVO();
 			Customer newCustomer = new Customer();
-			newCustomer.setPO(customerdata.findCustomer(name));//判断下是否存在，到时候再说吧。。
+			newCustomer.setPO(customerdata.findCustomer(id));//判断下是否存在，到时候再说吧。。
 			vo=newCustomer.getVO();
 			return vo;
 		}
@@ -76,15 +76,15 @@ public class CustomerList implements CustomerForFinancial, CustomerBlService{
 			//这个方法是把已有的客户整体搬迁到另一个文档里;
 		}
 
-		public void changeShouldPay(String name, double hadPay) {
-			CustomerVO vo = this.findCustomer(name);
+		public void changeShouldPay(String id, double hadPay) {
+			CustomerVO vo = this.findCustomer(id);
 			vo.setShouldPay(vo.getShouldPay()-hadPay);
 			this.updateCustomer(vo);
 			
 		}//修改应付;对应于收款单;hadpay公司给了客户多少，对应于付款单;
 
-		public void changeShouldTake(String name, double hadGive) {
-			CustomerVO vo = this.findCustomer(name);
+		public void changeShouldTake(String id, double hadGive) {
+			CustomerVO vo = this.findCustomer(id);
 			vo.setShouldTake(vo.getShouldTake()-hadGive);
 			this.updateCustomer(vo);
 			
