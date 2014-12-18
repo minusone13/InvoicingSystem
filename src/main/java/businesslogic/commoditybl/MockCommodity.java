@@ -200,7 +200,7 @@ public class MockCommodity {
 	public void setRecord(ArrayList<CommodityRecord> record) {
 		this.record = record;
 	}
-	private ArrayList<CommodityRecordPO> toRecordPOs(ArrayList<CommodityRecord> h)
+	protected ArrayList<CommodityRecordPO> toRecordPOs(ArrayList<CommodityRecord> h)
 	{
 		ArrayList<CommodityRecordPO> result=null;
 		if(h!=null)
@@ -211,7 +211,7 @@ public class MockCommodity {
 		}
 		return result;
 	}
-	private ArrayList<CommodityRecordVO> toRecordVOs(ArrayList<CommodityRecord> h)
+	protected ArrayList<CommodityRecordVO> toRecordVOs(ArrayList<CommodityRecord> h)
 	{
 		ArrayList<CommodityRecordVO> result=null;
 		if(h!=null)
@@ -222,7 +222,7 @@ public class MockCommodity {
 		}
 		return result;
 	}
-	private ArrayList<CommodityRecord> posToCom(ArrayList<CommodityRecordPO> h)
+	protected ArrayList<CommodityRecord> posToCom(ArrayList<CommodityRecordPO> h)
 	{
 		ArrayList<CommodityRecord> result=null;
 		if(h!=null)
@@ -233,7 +233,7 @@ public class MockCommodity {
 		}
 		return result;
 	}
-	private ArrayList<CommodityRecord> vosToCom(ArrayList<CommodityRecordVO> h)
+	protected ArrayList<CommodityRecord> vosToCom(ArrayList<CommodityRecordVO> h)
 	{
 		ArrayList<CommodityRecord> result=null;
 		if(h!=null)

@@ -148,5 +148,13 @@ public class SaleBackSheetVO extends VO{
 		return this.stock;
 	}
 
+	public BillStyle getStyle() {
+		return style;
+	}
+
+	public void setStyle(BillStyle style) {
+		this.style = style;
+	}
+
 		
 }

@@ -11,6 +11,8 @@ import javax.swing.JPanel;
 
 import po.BillState;
 import po.BillStyle;
+import po.RM;
+import po.Role;
 import presentation.commodityui.StockManagerDriver;
 import vo.AlertBillVO;
 import vo.BarginStrategyVO;
@@ -28,7 +30,6 @@ import vo.financialBillVO.CashPaymentVO;
 import vo.financialBillVO.PaymentVO;
 import vo.financialBillVO.ReceiptVO;
 import vo.uservo.UserVO;
-import businesslogic.Role;
 import businesslogic.StrategyStyle;
 import businesslogic.customerbl.CustomerList;
 import businesslogic.financialbl.Financial;
@@ -886,7 +887,7 @@ public class JPBill extends JPanel {
 		setType(JPbillType.Bill);
 		//设置单据编号，状态，种类
 		state=slb.getState();
-		style=slb.getBillStyle();
+		style=slb.getBillstyle();
 		ID=slb.getID();
 		//传递VO
 		spillsLossVO=slb;
@@ -925,18 +926,26 @@ public class JPBill extends JPanel {
 		JLabel model=new JLabel(slb.getCom().getModel());
 		JLabel num=new JLabel(String.valueOf(slb.getCom().getNumber()));
 		
+		type.setBounds(330, 7, 100, 20);
+		commodity.setBounds(330, 27, 100, 20);
+		model.setBounds(330, 47, 100, 20);
+		num.setBounds(330, 67, 100, 20);
 		//将组件加到面板上
 		this.add(right,0);
 		this.add(left,1);
 		this.add(ID,2);
-		this.add(bg,3);
+		this.add(type,3);
+		this.add(commodity,4);
+		this.add(model,5);
+		this.add(num,6);
+		this.add(bg,7);
 	}
 	public JPBill(AlertBillVO ab){
 		//区分面板种类
 		setType(JPbillType.Bill);
 		//设置单据编号，状态，种类
 		state=ab.getState();
-		style=ab.getBillStyle();
+		style=ab.getBillstyle();
 		ID=ab.getID();
 		//传递VO
 		alertVO=ab;
@@ -979,7 +988,7 @@ public class JPBill extends JPanel {
 		setType(JPbillType.Bill);
 		//设置单据编号，状态，种类
 		state=ps.getState();
-		style=ps.getBillStyle();
+		style=ps.getStyle();
 		ID=ps.getID();
 		//传递VO
 		purVO=ps;
@@ -1023,7 +1032,7 @@ public class JPBill extends JPanel {
 		setType(JPbillType.Bill);
 		//设置单据编号，状态，种类
 		state=pbs.getState();
-		style=pbs.getBillStyle();
+		style=pbs.getStyle();
 		ID=pbs.getID();
 		//传递VO
 		purbackVO=pbs;
@@ -1068,7 +1077,7 @@ public class JPBill extends JPanel {
 		setType(JPbillType.Bill);
 		//设置单据编号，状态，种类
 		state=ss.getState();
-		style=ss.getBillStyle();
+		style=ss.getStyle();
 		ID=ss.getID();
 		//传递VO
 		saleVO=ss;
@@ -1114,7 +1123,7 @@ public class JPBill extends JPanel {
 		setType(JPbillType.Bill);
 		//设置单据编号，状态，种类
 		state=sbs.getState();
-		style=sbs.getBillStyle();
+		style=sbs.getStyle();
 		ID=sbs.getID();
 		//传递VO
 		salebackVO=sbs;
@@ -1326,16 +1335,27 @@ public class JPBill extends JPanel {
 		}
 	}
 	//修改用户密码
+	public void change(CustomerVO cus){
+		
+		//调用逻辑层修改对应单据的数据
+		boolean result=customerbl.updateCustomer(cus);
+		if(result==false){
+			System.out.println("修改客户失败");
+		}
+	}
+	//修改用户密码
 	public void change(UserVO us){
 		
 		//调用逻辑层修改对应单据的数据
-		userbl.changePassword(us);//修改密码
+		RM rm=userbl.changePassword(us);//修改密码
+		System.out.println("修改密码的结果是："+rm);
 	}
 	//修改用户职务
 	public void changeRole(UserVO us,Role r){
 		
 		//调用逻辑层修改对应单据的数据
-		userbl.changeRole(us, r);
+		RM rm=userbl.changeRole(us, r);
+		System.out.println("修改权限的结果是："+rm);
 	}
 	public void change(GiftBillVO gb){
 	

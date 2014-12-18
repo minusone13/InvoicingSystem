@@ -27,8 +27,17 @@ public class AccountBuild{
 		version = format.format(new Date());
 	}
 	public void saveAccount() {
-		StubAccountDataService a = new AccountData();
-		a.saveAccount("accountBuild\\accountInfo\\"+version+".ser");
+		StubAccountDataService a = null;
+		try {
+			a = new AccountData();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+		try {
+			a.saveAccount("accountBuild\\accountInfo\\"+version+".ser");
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
 		
 	}
 	

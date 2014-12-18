@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 import po.BillState;
 import po.BillStyle;
+import po.Role;
 import businesslogic.LevelStrategyStyle;
 import businesslogic.ReachStrategyStyle;
-import businesslogic.Role;
 import businesslogic.StrategyStyle;
 import businesslogic.financialbillbl.Item;
 import businesslogic.financialbillbl.TransferAccount;

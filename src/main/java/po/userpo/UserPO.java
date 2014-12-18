@@ -2,7 +2,7 @@ package po.userpo;
 
 import java.io.*;
 
-import businesslogic.Role;
+import po.Role;
 
 public class UserPO implements Serializable, Cloneable{
 	String ID;//自动生成

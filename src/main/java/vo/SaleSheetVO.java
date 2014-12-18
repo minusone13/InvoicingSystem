@@ -148,4 +148,12 @@ public class SaleSheetVO extends VO{
 	public void setwords(String words){
 		this.words=words;
 	}
+
+	public BillStyle getStyle() {
+		return style;
+	}
+
+	public void setStyle(BillStyle style) {
+		this.style = style;
+	}
 }

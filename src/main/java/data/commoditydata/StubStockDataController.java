@@ -8,7 +8,6 @@ import data.stockservice.StockDataForFinancial;
 import dataservice.commoditydataservice.*;
 import po.*;
 import po.stockpo.*;
-import vo.RM;
 
 public class StubStockDataController implements StubCommodityDataService, StockDataForFinancial
 {//这是一个单体模式的类，因为这样读写文件方便些
@@ -106,8 +105,21 @@ public class StubStockDataController implements StubCommodityDataService, StockD
 	public RM insert(PackPO po)
 	{
 		read();
+		RM result = l.insert(po);
 		save();
-		return RM.done;
+		return result;
+	}
+	public RM update(PackPO po)
+	{
+		read();
+		RM result = l.update(po);
+		save();
+		return result;
+	}
+	public ArrayList<PackPO> getAllPacks()
+	{
+		read();
+		return l.getAllPacks();
 	}
 	public CommodityListPO getAll()
 	{//this is for financial
@@ -118,6 +130,11 @@ public class StubStockDataController implements StubCommodityDataService, StockD
 	{
 		read();
 		return l.findCommodity(name);
+	}
+	public PackPO findPack(String packID)
+	{
+		read();
+		return l.findPack(packID);
 	}
 	public ArrayList<CommodityPO> getAllCommodity()
 	{

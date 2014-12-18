@@ -7,7 +7,6 @@ import java.util.*;
 import data.Tool;
 import po.*;
 import po.stockpo.*;
-import vo.RM;
 
 public class StubCommodityList implements Serializable{
 	ArrayList<StubCategoryData> cats;
@@ -100,12 +99,30 @@ public class StubCommodityList implements Serializable{
 		else
 			return flatlist.get(i);
 	}
+	public PackPO findPack(String PackID)
+	{
+		int i=searchPack(PackID);
+		if(i==-1)
+			return null;//not found;
+		else
+			return packs.get(i);
+	}
 	private int searchCommodity(String name,String model)
 	{//Search in flatlist
 		for(int i=0;i<flatlist.size();i++)
 		{
 			MockCommodityData com=flatlist.get(i);
 			if(com.getName().equals(name) && com.getModel().equals(model))
+				return i;
+		}
+		return -1;
+	}
+	private int searchPack(String PackID)
+	{//Search in flatlist
+		for(int i=0;i<packs.size();i++)
+		{
+			PackPO pack=packs.get(i);
+			if(pack.getID().equals(PackID))
 				return i;
 		}
 		return -1;
@@ -189,6 +206,24 @@ public class StubCommodityList implements Serializable{
 	{
 		packs.add(po);
 		return RM.done;
+	}
+	public RM update(PackPO po)
+	{
+		for(int i = 0;i<packs.size();i++)
+			if(packs.get(i).getID().equals(po.getID()))
+			{
+				packs.remove(i);
+				packs.add(i, po);
+				return RM.done;
+			}
+		return RM.notfound;
+	}
+	public ArrayList<PackPO> getAllPacks()
+	{
+		ArrayList<PackPO> result = new ArrayList<PackPO>();
+		for(int i=0; i<packs.size(); i++)
+			result.add(packs.get(i).clone());
+		return result;
 	}
 	public ArrayList<AdjustmentRecordPO> getAdjustmentRecords()
 	{

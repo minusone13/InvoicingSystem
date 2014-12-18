@@ -8,7 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import vo.RM;
+import po.RM;
 import vo.stockvo.CommodityVO;
 import businesslogic.stockmanagerbl.StubStockController;
 import businesslogicservice.commodityblservice.StubCommodityBlService;
@@ -96,7 +96,7 @@ public class JPcommodityPack extends JPanel {
 		System.out.println("增加商品");
 		update();
 	}
-	/*返回选中的要修改的商品的VO*/
+	/*返回唯一选中的商品的VO*/
 	public CommodityVO getChosen(){
 		if(getChosenNum()==1){
 			for(JPcommodity temp:commodities){

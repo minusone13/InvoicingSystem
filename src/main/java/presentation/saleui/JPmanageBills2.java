@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
@@ -13,11 +14,13 @@ import javax.swing.JTextField;
 
 import po.BillState;
 import po.BillStyle;
-import presentation.financialui.JPmanageBills2.JPanelEdit;
 import presentation.managerui.JPBillList;
 import presentation.managerui.JTableOfList;
 import presentation.managerui.MouseListenerGetXY;
 import userui.Frame;
+import vo.CustomerVO;
+import businesslogic.customerbl.CustomerList;
+import businesslogicservice.customerblservice.CustomerBlService;
 
 public class JPmanageBills2 extends JPanel {
 	//背景
@@ -74,6 +77,8 @@ public class JPmanageBills2 extends JPanel {
 		ImageIcon addIconR=new ImageIcon("src/image/function/addR.png");
 		//frame的引用
 	    Frame frame;
+	    //调用逻辑层
+	    CustomerBlService customerbl=new CustomerList();
 		public JPmanageBills2(){
 			//面板大小
 			this.setSize(905, 342);
@@ -280,19 +285,19 @@ public class JPmanageBills2 extends JPanel {
 					if(billList.getChosenNum()==1&&billList.stateOfChosen()==BillState.DRAFT){
 						switch(style){
 						case PurSheet:
-//							JPeditOfPur.setIsAdd(false);//不是加单据是修改单据
+							JPeditOfPur.setAdd(false);//不是加单据是修改单据
 							JPeditOfPur.leftMove();//调出编辑板
 							break;
 						case PurBackSheet:
-//							JPeditOfPurBack.setIsAdd(false);//不是加单据是修改单据
+							JPeditOfPurBack.setAdd(false);//不是加单据是修改单据
 							JPeditOfPurBack.leftMove();//调出编辑板
 							break;
 						case SaleSheet:
-//							JPeditOfSale.setIsAdd(false);//不是加单据是修改单据
+							JPeditOfSale.setAdd(false);//不是加单据是修改单据
 							JPeditOfSale.leftMove();//调出编辑板
 							break;
 						case SaleBackSheet:
-//							JPeditOfSaleBack.setIsAdd(false);//不是加单据是修改单据
+							JPeditOfSaleBack.setAdd(false);//不是加单据是修改单据
 							JPeditOfSaleBack.leftMove();//调出编辑板
 							break;
 						}
@@ -305,19 +310,19 @@ public class JPmanageBills2 extends JPanel {
 					add.setIcon(addIconR);
 					switch(style){
 					case PurSheet:
-//						JPeditOfPur.setIsAdd(true);//不是加单据是修改单据
+						JPeditOfPur.setAdd(true);//不是加单据是修改单据
 						JPeditOfPur.leftMove();//调出编辑板
 						break;
 					case PurBackSheet:
-//						JPeditOfPurBack.setIsAdd(true);//不是加单据是修改单据
+						JPeditOfPurBack.setAdd(true);//不是加单据是修改单据
 						JPeditOfPurBack.leftMove();//调出编辑板
 						break;
 					case SaleSheet:
-//						JPeditOfSale.setIsAdd(true);//不是加单据是修改单据
+						JPeditOfSale.setAdd(true);//不是加单据是修改单据
 						JPeditOfSale.leftMove();//调出编辑板
 						break;
 					case SaleBackSheet:
-//						JPeditOfSaleBack.setIsAdd(true);//不是加单据是修改单据
+						JPeditOfSaleBack.setAdd(true);//不是加单据是修改单据
 						JPeditOfSaleBack.leftMove();//调出编辑板
 						break;
 					}
@@ -423,7 +428,8 @@ public class JPmanageBills2 extends JPanel {
 			private JTextField couponText=new JTextField(10);
 			private JTextField discountText=new JTextField(10);
 			private JTextField finalTotalText=new JTextField(10);
-			
+			//判断是加单据还是改单据
+			private boolean isAdd=false;
 			public JPanelEdit(BillStyle style){
 				//确认种类
 				billStyle=style;
@@ -469,14 +475,21 @@ public class JPmanageBills2 extends JPanel {
 					list.setBounds(40, 90, 60, 20);
 					total.setBounds(40, 120, 40, 20);
 					note.setBounds(40, 150, 40, 20);
+					
 					//客户选择下拉框
-					customerCombo = new JComboBox();
+					ArrayList<CustomerVO> customers=customerbl.getAllCustomer("Customer.txt");
+					String[] customerS=new String[customers.size()];
+					for(int i=0;i<customers.size();i++){
+						customerS[i]=customers.get(i).getname();
+					}
+					customerCombo = new JComboBox(customerS);
 					customerCombo.setFont(new Font("宋体",Font.BOLD,14));
 					customerCombo.setBounds(80,30, 150, 20);
 					customerCombo.setBackground(Color.gray);
 					customerCombo.setForeground(Color.white);
 					//仓库选择下拉框
-					warehouseCombo = new JComboBox();
+					String[] warehouseS={"仓库1"};
+					warehouseCombo = new JComboBox(warehouseS);
 					warehouseCombo.setFont(new Font("宋体",Font.BOLD,14));
 					warehouseCombo.setBounds(80,60, 150, 20);
 					warehouseCombo.setBackground(Color.gray);
@@ -539,13 +552,19 @@ public class JPmanageBills2 extends JPanel {
 					note.setBounds(40, 195, 40, 20);
 					
 					//客户选择下拉框
-					customerCombo = new JComboBox();
+					ArrayList<CustomerVO> customers2=customerbl.getAllCustomer("Customer.txt");
+					String[] customerS2=new String[customers2.size()];
+					for(int i=0;i<customers2.size();i++){
+						customerS2[i]=customers2.get(i).getname();
+					}
+					customerCombo = new JComboBox(customerS2);
 					customerCombo.setFont(new Font("宋体",Font.BOLD,14));
 					customerCombo.setBounds(80,20, 150, 20);
 					customerCombo.setBackground(Color.gray);
 					customerCombo.setForeground(Color.white);
 					//仓库选择下拉框
-					warehouseCombo = new JComboBox();
+					String[] warehouseS2={"仓库1"};
+					warehouseCombo = new JComboBox(warehouseS2);
 					warehouseCombo.setFont(new Font("宋体",Font.BOLD,14));
 					warehouseCombo.setBounds(80,45, 150, 20);
 					warehouseCombo.setBackground(Color.gray);
@@ -608,6 +627,12 @@ public class JPmanageBills2 extends JPanel {
 			public void RightMove(){
 				Thread t=new Thread(new TreadOfRight());
 				t.start();
+			}
+			public boolean isAdd() {
+				return isAdd;
+			}
+			public void setAdd(boolean isAdd) {
+				this.isAdd = isAdd;
 			}
 			public class MouseListenerOfButton implements MouseListener{
 

@@ -87,7 +87,9 @@ public class JPfunctions extends JPanel{
 				function1.setIcon(Imagefun1);
 				JPfunctions.this.setVisible(false);
 				//传入客户数据
-//				frame.getSale().getCustomerManage().getBillsList().addCustomerList(customerbl.);
+				frame.getSale().getCustomerManage().getBillsList().getJPbillList().clear();
+				frame.getSale().getCustomerManage().getBillsList().reHome();
+				frame.getSale().getCustomerManage().getBillsList().addCustomerList(customerbl.getAllCustomer("Customer.txt"));
 				//显示客户管理界面
 				frame.getSale().getCustomerManage().setVisible(true);
 				break;

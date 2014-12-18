@@ -18,30 +18,74 @@ import vo.accountVO.AccountVO;
 
 public class AccountList {
 	
-	StubAccountDataService a = new AccountData();
+	
 
 	public boolean addAccount(Account account) {
+		StubAccountDataService a = null;
+		try {
+			a = new AccountData();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
 		AccountPO apo = new AccountPO();
 		apo.setName(account.name);
 		apo.setBalance(account.balance);	
-		return a.add(apo);
+		try {
+			return a.add(apo);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 	
 	public boolean deleteAccount(Account account) {
+		StubAccountDataService a = null;
+		try {
+			a = new AccountData();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
 		AccountPO apo = new AccountPO();
 		apo.setName(account.name);
-		return a.delete(apo);
+		try {
+			return a.delete(apo);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 	
 	public boolean updateAccount(Account account, String newname) {
+		StubAccountDataService a = null;
+		try {
+			a = new AccountData();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
 		AccountPO apo = new AccountPO();
 		apo.setName(account.name);
 		apo.setNewName(newname);
-		return a.update(apo);
+		try {
+			return a.update(apo);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 	
 	public ArrayList<AccountVO> fuzzyFindAccount(String s, int precision) {
-		ArrayList<AccountPO> accountPOList = a.fuzzyFindAccount(s, precision);
+		StubAccountDataService a = null;
+		try {
+			a = new AccountData();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+		ArrayList<AccountPO> accountPOList = null;
+		try {
+			accountPOList = a.fuzzyFindAccount(s, precision);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
 		ArrayList<AccountVO> accountVOList = new ArrayList<AccountVO>();
 		int size = accountPOList.size();
 		for(int i=0;i<size;i++) {
@@ -54,9 +98,20 @@ public class AccountList {
 		return accountVOList;
 	}
 	public AccountVO findAccount(Account account) {
+		StubAccountDataService a = null;
+		try {
+			a = new AccountData();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
 		AccountPO apo = new AccountPO();
 		apo.setName(account.name);
-		apo = a.find(apo);
+		try {
+			apo = a.find(apo);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if(apo == null) return null;
 		AccountVO avo = new AccountVO();
 		
@@ -96,24 +151,47 @@ public class AccountList {
 		return accountsVO;
 	}
 	public ArrayList<Account> getAllAccountInfo() {
-		ArrayList<AccountPO> accList = a.getAllAcountInfo();
+		StubAccountDataService a = null;
+		try {
+			a = new AccountData();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+		ArrayList<AccountPO> accList = null;
+		try {
+			accList = a.getAllAcountInfo();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		ArrayList<Account> accounts = new ArrayList<Account>();
 		int size = accList.size();
 		for(int i=0;i<size;i++) {
 			AccountPO temp = accList.get(i);
-			Account a = new Account();
-			a.fromPOtoAccount(temp);
-			accounts.add(a);
+			Account account = new Account();
+			account.fromPOtoAccount(temp);
+			accounts.add(account);
 		}
 		return accounts;
 	}
 	
 	public void saveAccounts(ArrayList<Account> accounts) {
+		StubAccountDataService a = null;
+		try {
+			a = new AccountData();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
 		ArrayList<AccountPO> poList = new ArrayList<AccountPO>();
 		int size = accounts.size();
 		for(int i=0;i<size;i++) {
 			poList.add(accounts.get(i).toPO());			
 		}
-		a.writer(poList);
+		try {
+			a.writer(poList);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

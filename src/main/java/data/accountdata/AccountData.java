@@ -16,17 +16,21 @@ import po.stockpo.CommodityPO;
 import data.Tool;
 import dataservice.accountdataservice.StubAccountDataService;
 
-public class AccountData  implements StubAccountDataService{
+public class AccountData extends UnicastRemoteObject implements StubAccountDataService{
 	
 
-	public AccountPO find(AccountPO a) {
+	public AccountData() throws RemoteException {
+//		super();
+	}
+
+	public AccountPO find(AccountPO a) throws RemoteException {
 		ArrayList<AccountPO> accountList = reader();	
 		int index = traversal(accountList, a.getName());
 		if(index==-1) return null;
 		return accountList.get(index);
 	}
 
-	public ArrayList<AccountPO> fuzzyFindAccount(String s, int precision)
+	public ArrayList<AccountPO> fuzzyFindAccount(String s, int precision)throws RemoteException
 	{//precision 先默认给1，可以达到王雨城所说的算法。若取数字越高，精确度越高，搜索结果数量也就越少
 		ArrayList<AccountPO> result = new ArrayList<AccountPO>();//CommodityPO is changeable
 		ArrayList<AccountPO> accountList = reader();
@@ -44,7 +48,7 @@ public class AccountData  implements StubAccountDataService{
 				result.add(accountList.get(i));//here can also be changed
 		return result;
 	}
-	public boolean add(AccountPO apo) {
+	public boolean add(AccountPO apo) throws RemoteException{
 		ArrayList<AccountPO> accountList = reader();
 		if(accountList == null) {
 			
@@ -57,7 +61,7 @@ public class AccountData  implements StubAccountDataService{
 		return true;
 	}
 
-	public boolean delete(AccountPO apo) {
+	public boolean delete(AccountPO apo)throws RemoteException {
 		ArrayList<AccountPO> accountList = reader();
 		int index = traversal(accountList, apo.getName());
 		AccountPO tempPO = null;
@@ -72,7 +76,7 @@ public class AccountData  implements StubAccountDataService{
 	}
 
 
-	public boolean update(AccountPO apo) {
+	public boolean update(AccountPO apo)throws RemoteException {
 		ArrayList<AccountPO> accountList = reader();
 		int index1 = traversal(accountList, apo.getName());
 		int index2 = traversal(accountList, apo.getNewName());
@@ -86,7 +90,7 @@ public class AccountData  implements StubAccountDataService{
 	}
 	
 	//遍历账户列表,返回结果的下标，如果为-1说明不存在
-	private int traversal (ArrayList<AccountPO> accountList, String name) {
+	private int traversal (ArrayList<AccountPO> accountList, String name)throws RemoteException {
 		if(accountList == null)	return -1;
 		int size = accountList.size();
 		for(int i=0;i<size;i++) {//遍历所有账户
@@ -99,7 +103,7 @@ public class AccountData  implements StubAccountDataService{
 		return -1;
 	}
 	//读取以序列化存储的账户列表对象
-	private ArrayList<AccountPO> reader() {
+	private ArrayList<AccountPO> reader() throws RemoteException{
 		File filename = Tool.Opendoc("account.txt");
 		
 		ArrayList<AccountPO> accountList = null;
@@ -126,7 +130,7 @@ public class AccountData  implements StubAccountDataService{
 	}
 	
 	//以序列化方式存储账户列表
-	public void writer (ArrayList<AccountPO> accountList) {
+	public void writer (ArrayList<AccountPO> accountList)throws RemoteException {
 		String filename = "account.txt";
 		ObjectOutputStream oos = null;
 		try {
@@ -152,7 +156,7 @@ public class AccountData  implements StubAccountDataService{
 		}
 	}
 	
-	public void writer (ArrayList<AccountPO> accountList, String filename) {
+	public void writer (ArrayList<AccountPO> accountList, String filename) throws RemoteException{
 		//String filename = "account.txt";
 		ObjectOutputStream oos = null;
 		try {
@@ -177,11 +181,11 @@ public class AccountData  implements StubAccountDataService{
 			}
 		}
 	}
-	public ArrayList<AccountPO> getAllAcountInfo() {	
+	public ArrayList<AccountPO> getAllAcountInfo() throws RemoteException{	
 		return reader();
 	}
 	
-	public void saveAccount(String filename) {
+	public void saveAccount(String filename) throws RemoteException{
 		ArrayList<AccountPO> acc = reader();
 		writer(acc, filename);	
 	}

@@ -3,9 +3,11 @@ package businesslogic.stockmanagerbl;
 import java.util.*;
 
 import po.BillState;
+import po.RM;
+import po.Role;
+import po.stockpo.PackPO;
 import presentation.userui.Login;
 import dataservice.commoditydataservice.*;
-import businesslogic.Role;
 import businesslogic.commoditybillbl.*;
 import businesslogic.commoditybl.*;
 import businesslogic.examinebl.StubBillPool;
@@ -65,13 +67,9 @@ public class StubStockController implements StubCommodityBlService, StockBlForSa
 	{//precision 先默认给1，可以达到王雨城所说的算法。若取数字越高，精确度越高，搜索结果数量也就越少
 		return l.fuzzyFindCommodity(s, precision);
 	}
-	public boolean addPack(ArrayList<MockCommodity> commodityarray,int quantity, double discount)
+	public RM addPack(ArrayList<MockCommodity> commodityarray,int quantity, double discount)
 	{
 		return l.addPack(commodityarray, quantity, discount);
-	}
-	public RM addPack(StubPack p)
-	{
-		return RM.done;
 	}
 	public RM addCategory(CategoryVO vo)
 	{
@@ -112,6 +110,18 @@ public class StubStockController implements StubCommodityBlService, StockBlForSa
 	{//当销售单或进货退货单被提交后，请调用
 		RM result = l.readyForOut(id, name, model, quantity, price);
 		return result;
+	}
+	public RM checkOut(String id, String packID, int quantity, double price)
+	{//出库
+		return l.checkOut(id, packID, quantity, price);
+	}
+	public RM readyForOut(String id,String packID, int quantity, double price)
+	{//当销售单或进货退货单被提交后，请调用
+		return l.readyForOut(id, packID, quantity, price);
+	}
+	public RM undoCheckOut(String id,String packID, int quantity, double price)
+	{//当销售退货单被审批后，请调用
+		return l.undoCheckOut(id, packID, quantity, price);
 	}
 	public boolean isEnough(String name,String model,int n)
 	{//在填写单据时检查，给出的是潜在库存最小值，也就是最保险的值

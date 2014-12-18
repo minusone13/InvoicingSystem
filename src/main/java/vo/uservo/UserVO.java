@@ -1,6 +1,6 @@
 package vo.uservo;
 
-import businesslogic.Role;
+import po.Role;
 
 public class UserVO implements Cloneable{
 	String ID;//人员ID 示例：总经理为“M0001” 管理员为“A0001” 财务为“F0001” 销售“S0001” 库存“I0001”

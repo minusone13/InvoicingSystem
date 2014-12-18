@@ -3,9 +3,9 @@ package dataservice.userdataservice;
 import java.rmi.Remote;
 import java.util.ArrayList;
 
+import po.RM;
 import po.userpo.OperationRecordPO;
 import po.userpo.UserPO;
-import vo.RM;
 
 public interface StubUserDataService extends Remote{
 	public UserPO login(String account, String password);

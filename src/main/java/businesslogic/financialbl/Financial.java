@@ -4,6 +4,8 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import po.AccountPO;
+import po.RM;
+import po.Role;
 import vo.*;
 import vo.accountVO.AccountVO;
 import vo.financialBillVO.CashPaymentVO;
@@ -13,7 +15,6 @@ import vo.inquiryVO.BusinessSituationVO;
 import vo.inquiryVO.InquiryConditionVO;
 import vo.inquiryVO.InquiryProcessVO;
 import vo.inquiryVO.InquirySaleVO;
-import businesslogic.Role;
 import businesslogic.accountbl.Account;
 import businesslogic.accountbl.AccountList;
 import businesslogic.customerService.CustomerForFinancial;

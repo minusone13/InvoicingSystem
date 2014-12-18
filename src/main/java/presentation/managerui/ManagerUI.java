@@ -7,7 +7,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import businesslogic.Role;
+import po.Role;
 import presentation.commodityui.JPManagerCom;
 import presentation.financialui.BusinessConditionPanel;
 import presentation.financialui.JPinquire;

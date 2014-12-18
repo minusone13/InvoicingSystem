@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
-import businesslogic.Role;
 import businesslogic.financialbillbl.TransferAccount;
 
 public class PaymentPO extends PO implements Serializable{
