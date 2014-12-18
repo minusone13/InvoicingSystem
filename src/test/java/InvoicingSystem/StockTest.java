@@ -211,6 +211,17 @@ public class StockTest{
 	}
 	
 	@Test
+	public void testdeleteCategoryAlreadyHave()
+	{
+		ArrayList<StockVO> vos = combl.openCategory("1");
+		int oldSize = vos.size();
+		RM result = combl.deleteCategory("1\\门");
+		assertEquals(RM.alreadyHaveUnremoveableContents,result);
+		vos = combl.openCategory("1");
+		assertEquals(oldSize, vos.size());
+	}
+	
+	@Test
 	public void testdeleteCommodity()
 	{
 		RM result=combl.deleteCommodity("好好防盗门","fdm02");
