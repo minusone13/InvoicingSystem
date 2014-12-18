@@ -18,13 +18,12 @@ import dataservice.customerdataservice.CustomerDataService;
 
 public class CustomerData extends UnicastRemoteObject implements CustomerDataService,customerServiceForFinancial{
 
-	
 	public CustomerData() throws RemoteException {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public boolean addCustomer(CustomerPO po) {
+	public boolean addCustomer(CustomerPO po) throws RemoteException {
 		String address = "Customer.txt";
 		ArrayList<CustomerPO> listOfCustomerPO = new ArrayList<CustomerPO>();
 		listOfCustomerPO = this.getAllCustomer(address); 
@@ -33,12 +32,12 @@ public class CustomerData extends UnicastRemoteObject implements CustomerDataSer
 		return true;
 	}
 
-	public boolean deleteCustomer(String id) {
+	public boolean deleteCustomer(String name) throws RemoteException {
 		String address = "Customer.txt";
 		ArrayList<CustomerPO> listOfCustomerPO = new ArrayList<CustomerPO>();
 		listOfCustomerPO = this.getAllCustomer(address); 
 		for(CustomerPO po:listOfCustomerPO){
-			if(po.getid().equals(id)){
+			if(po.getname().equals(name)){
 				listOfCustomerPO.remove(po);
 				this.saveAllCustomer(listOfCustomerPO, address);
 				return true;
@@ -47,7 +46,7 @@ public class CustomerData extends UnicastRemoteObject implements CustomerDataSer
 		return false;
 	}
 
-	public boolean updateCustomer(CustomerPO po) {
+	public boolean updateCustomer(CustomerPO po)throws RemoteException {
 		String address = "Customer.txt";
 		ArrayList<CustomerPO> listOfCustomerPO = new ArrayList<CustomerPO>();
 		listOfCustomerPO = this.getAllCustomer(address); 
@@ -62,19 +61,19 @@ public class CustomerData extends UnicastRemoteObject implements CustomerDataSer
 		return false;
 	}
 
-	public CustomerPO findCustomer(String id) {
+	public CustomerPO findCustomer(String name) throws RemoteException{
 		String address = "Customer.txt";
 		ArrayList<CustomerPO> listOfCustomerPO = new ArrayList<CustomerPO>();
 		listOfCustomerPO = this.getAllCustomer(address); 
 		for(CustomerPO po:listOfCustomerPO){
-			if(po.getid().equals(id)){
+			if(po.getname().equals(name)){
 				return po;
 			}
 		}
-		return new CustomerPO("没人");
+		return new CustomerPO("娌′汉");
 	}
 
-	public ArrayList<CustomerPO> getAllCustomer(String addre) {
+	public ArrayList<CustomerPO> getAllCustomer(String addre) throws RemoteException{
 		ArrayList<CustomerPO> listOfCustomerPO = new ArrayList<CustomerPO>();
 		ObjectInputStream ois=null;
 		File address = Tool.Opendoc(addre);
@@ -98,7 +97,7 @@ public class CustomerData extends UnicastRemoteObject implements CustomerDataSer
 		else return new ArrayList<CustomerPO>();
 	}
 
-	public void saveAllCustomer(ArrayList<CustomerPO> listOfCustomerPO,String address) {
+	public void saveAllCustomer(ArrayList<CustomerPO> listOfCustomerPO,String address) throws RemoteException{
 		ObjectOutputStream oos=null;
 		try {
 			oos = new ObjectOutputStream(new FileOutputStream(address));
@@ -123,8 +122,16 @@ public class CustomerData extends UnicastRemoteObject implements CustomerDataSer
 		
 	}
 
-	public void saveCustomer(String address) {
-		ArrayList<CustomerPO> listOfPO = this.getAllCustomer("Customer.txt");
+
+
+	public void saveCustomer(String address) throws RemoteException {
+		ArrayList<CustomerPO> listOfPO = null;
+		try {
+			listOfPO = this.getAllCustomer("Customer.txt");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		this.saveAllCustomer(listOfPO, address);
 	}
 
