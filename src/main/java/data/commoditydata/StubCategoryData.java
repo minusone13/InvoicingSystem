@@ -137,6 +137,8 @@ public class StubCategoryData implements Serializable{
 		if(canAddCategory())
 		{
 			int i=search(name);
+			if(i==-1)
+				return RM.notfound;
 			if(cats.get(i).canBeDeleted())
 			{
 				cats.remove(i);
@@ -159,9 +161,9 @@ public class StubCategoryData implements Serializable{
 	}
 	private int search(String name)
 	{//Search a Category, return the index. if not found return -1
-		for(int i=0;i<coms.size();i++)
+		for(int i=0;i<cats.size();i++)
 		{
-			if(cats.get(i).equals(name))
+			if(cats.get(i).getName().equals(name))
 				return i;
 		}
 		return -1;
