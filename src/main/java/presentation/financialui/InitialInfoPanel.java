@@ -13,6 +13,7 @@ import vo.accountVO.AccountVO;
 import businesslogic.financialbl.Financial;
 import businesslogicservice.financialblservice.FinancialBlService;
 
+//显示期初建账信息
 public class InitialInfoPanel extends JPanel{
 	FinancialBlService financial = new Financial();
 	String[] nameOfClent = {"姓名","编号","分类","级别","电话","地址","邮编","电子邮箱","应收额度","应收","应付","默认业务员"};

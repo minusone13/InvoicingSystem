@@ -40,14 +40,6 @@ public class CashPaymentVO extends VO{
 		ID = iD;
 	}
 
-	public BillState getState() {
-		return state;
-	}
-
-	public void setState(BillState state) {
-		this.state = state;
-	}
-
 	public Date getDate() {
 		return date;
 	}
