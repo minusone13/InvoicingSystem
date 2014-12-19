@@ -56,6 +56,13 @@ public class StubCommodityList {//商品列表 haha
 		for(int i=0; i<commodityarray.size();i++)
 		{//加入特价包时给定了特价包的数量，响应商品要预留数量，如不足将报不足错误
 			MockCommodity com = commodityarray.get(i);
+			CommodityPO po=comdata.findCommodity(com.getName(),com.getModel());
+			if(po == null)
+				return RM.notfound;
+		}
+		for(int i=0; i<commodityarray.size();i++)
+		{//加入特价包时给定了特价包的数量，响应商品要预留数量，如不足将报不足错误
+			MockCommodity com = commodityarray.get(i);
 			if(!isEnough(com.getName(),com.getModel(),com.getNumber()*quantity))
 				return RM.insufficient;
 		}

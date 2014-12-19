@@ -13,15 +13,21 @@ public interface StockBlForSalesMen
 	public boolean isEnough(String name,String model,int n);//在填写单据时检查，给出的是潜在库存最小值，也就是最保险的值
 	public boolean isEnough(String PackID,int n);//判断特价包
 	
+	
+	//ID指的是销售进货单据的ID
+	//只有RM为done是为成功
+	//尤其在出库和准备出库中可能有insufficient不足结果
 	public RM checkIn(String id,String name, String model, int quantity, double price);//当进货单被审批后，请调用,price是单价
 	public RM checkOut(String id,String name, String model, int quantity, double price);//当销售单审批后，请调用,price是单价
+	public RM checkOut(String id, String packID, int quantity, double price);//销售特价包得到审批时时请调用, price是单价
 	public RM undoCheckIn(String id,String name, String model, int quantity, double price);//当进货退货单被审批后，请调用,price是单价
 	public RM undoCheckOut(String id,String name, String model, int quantity, double price);//当销售退货单被审批后，请调用,price是单价
 	//上面两个方法会修改库存余量
 	
+	
+	//准备出库的ID和实际出库的ID需相同，入库同理
 	public RM readyForIn(String id,String name, String model, int quantity, double price);//当进货单或销售退货单提交后，请调用,price是单价
 	public RM readyForOut(String id,String name, String model, int quantity, double price);//当销售单或进货退货单被提交后，请调用,price是单价
-	public RM checkOut(String id, String packID, int quantity, double price);//销售特价包得到审批时时请调用, price是单价
 	public RM readyForOut(String id,String packID, int quantity, double price);//销售特价包提交时请调用，price是单价
 	public RM undoCheckOut(String id,String packID, int quantity, double price);//销售退货审批后请调用，price是单价
 }

@@ -13,5 +13,5 @@ public interface StockBlForManager
 	//如输入飞利浦， 有可能返回飞利浦 SR01, 飞利浦 SR02等一系列商品
 	
 	public RM addPack(ArrayList<MockCommodity> commodityarray,int quantity, double discount);//增加特价包功能
-	//public boolean addPack(ArrayList<CommodityVO> commodityarray,int quantity, double total);也可以换成这个，看你觉得哪个好用
+	//返回值可能是 done,insufficient, notfound
 }
