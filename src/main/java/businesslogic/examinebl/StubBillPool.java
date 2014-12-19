@@ -1,5 +1,6 @@
 package businesslogic.examinebl;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import po.AlertBillPO;
@@ -661,7 +662,12 @@ public class StubBillPool {
 		alOfCashPaymentBill.clear();
 		//将返回的PO对象的信息传入真正的单据对象
 		//赠送单
-		ArrayList<GiftBillPO> GiftBillListPO=cbs.getGiftBill();
+		ArrayList<GiftBillPO> GiftBillListPO = null;
+		try {
+			GiftBillListPO = cbs.getGiftBill();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
 		if(GiftBillListPO!=null){
 			for(GiftBillPO tempPO:GiftBillListPO){
 				StubGiftBill gb=new StubGiftBill();
@@ -670,7 +676,12 @@ public class StubBillPool {
 			}
 		}
 		//报警单
-		ArrayList<AlertBillPO> AlertBillListPO=cbs.getAlertBill();
+		ArrayList<AlertBillPO> AlertBillListPO = null;
+		try {
+			AlertBillListPO = cbs.getAlertBill();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
 		if(AlertBillListPO!=null){
 			for(AlertBillPO tempPO:AlertBillListPO){
 				StubAlertBill ab=new StubAlertBill();
@@ -679,7 +690,12 @@ public class StubBillPool {
 			}
 		}
 		//报溢报损单
-		ArrayList<SpillsLossBillPO> SpillsLossBillListPO=cbs.getSpillsLossBill();
+		ArrayList<SpillsLossBillPO> SpillsLossBillListPO = null;
+		try {
+			SpillsLossBillListPO = cbs.getSpillsLossBill();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
 		if(SpillsLossBillListPO!=null){
 			for(SpillsLossBillPO tempPO:SpillsLossBillListPO){
 				StubSpillsLossBill slb=new StubSpillsLossBill();
@@ -688,7 +704,12 @@ public class StubBillPool {
 			}
 		}
 		//进货单
-		ArrayList<PurSheetPO> PurSheetListPO=sbs.getPurSheet();
+		ArrayList<PurSheetPO> PurSheetListPO = null;
+		try {
+			PurSheetListPO = sbs.getPurSheet();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
 		if(PurSheetListPO!=null){
 			for(PurSheetPO tempPO:PurSheetListPO){
 				PurSheet ps=new PurSheet();
@@ -697,7 +718,12 @@ public class StubBillPool {
 			}
 		}
 		//进货退货单
-		ArrayList<PurBackSheetPO> PurBackSheetListPO=sbs.getPurBackSheet();
+		ArrayList<PurBackSheetPO> PurBackSheetListPO = null;
+		try {
+			PurBackSheetListPO = sbs.getPurBackSheet();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
 		if(PurBackSheetListPO!=null){
 			for(PurBackSheetPO tempPO:PurBackSheetListPO){
 				PurBackSheet pbs=new PurBackSheet();
@@ -706,7 +732,12 @@ public class StubBillPool {
 			}
 		}
 		//销售单
-		ArrayList<SaleSheetPO> SaleSheetListPO=sbs.getSaleSheet();
+		ArrayList<SaleSheetPO> SaleSheetListPO = null;
+		try {
+			SaleSheetListPO = sbs.getSaleSheet();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
 		if(SaleSheetListPO!=null){
 			for(SaleSheetPO tempPO:SaleSheetListPO){
 				SaleSheet ss=new SaleSheet();
@@ -715,7 +746,12 @@ public class StubBillPool {
 			}
 		}
 		//销售退货单
-		ArrayList<SaleBackSheetPO> SaleBackSheetListPO=sbs.getSaleBackSheet();
+		ArrayList<SaleBackSheetPO> SaleBackSheetListPO = null;
+		try {
+			SaleBackSheetListPO = sbs.getSaleBackSheet();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
 		if(SaleBackSheetListPO!=null){
 			for(SaleBackSheetPO tempPO:SaleBackSheetListPO){
 				SaleBackSheet salebs=new SaleBackSheet();
@@ -724,7 +760,12 @@ public class StubBillPool {
 			}
 		}
 		//收款单
-		ArrayList<ReceiptPO> ReceiptBillListPO=fbs.getReceipt();
+		ArrayList<ReceiptPO> ReceiptBillListPO = null;
+		try {
+			ReceiptBillListPO = fbs.getReceipt();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
 		if(ReceiptBillListPO!=null){
 			for(ReceiptPO tempPO:ReceiptBillListPO){
 				ReceiptBill rcb=new ReceiptBill();
@@ -733,7 +774,12 @@ public class StubBillPool {
 			}
 		}
 		//付款单
-		ArrayList<PaymentPO> PaymentBillListPO=fbs.getPayment();
+		ArrayList<PaymentPO> PaymentBillListPO = null;
+		try {
+			PaymentBillListPO = fbs.getPayment();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
 		if(PaymentBillListPO!=null){
 			for(PaymentPO tempPO:PaymentBillListPO){
 				PaymentBill pmb=new PaymentBill();
@@ -742,7 +788,12 @@ public class StubBillPool {
 			}
 		}
 		//现金费用单
-		ArrayList<CashPaymentPO> CashPaymentBillListPO=fbs.getCashPayment();
+		ArrayList<CashPaymentPO> CashPaymentBillListPO = null;
+		try {
+			CashPaymentBillListPO = fbs.getCashPayment();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
 		if(CashPaymentBillListPO!=null){
 			for(CashPaymentPO tempPO:CashPaymentBillListPO){
 				CashPaymentBill cpb=new CashPaymentBill();
@@ -764,61 +815,103 @@ public class StubBillPool {
 		for(StubGiftBill temp:alOfGiftBill){//遍历数组，将对应PO对象加到新数组中
 			GiftBillPO.add(temp.getPO());
 		}
-		cbs.saveGiftBill(GiftBillPO);//保存PO数组到txt
+		try {
+			cbs.saveGiftBill(GiftBillPO);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}//保存PO数组到txt
 		//报溢报损单
 		ArrayList<SpillsLossBillPO> SpillsLossBillPO=new ArrayList<SpillsLossBillPO>();
 		for(StubSpillsLossBill temp:alOfSpillsLossBill){//遍历数组，将对应PO对象加到新数组中
 			SpillsLossBillPO.add(temp.getPO());
 		}
-		cbs.saveSpillsLossBill(SpillsLossBillPO);//保存PO数组到txt
+		try {
+			cbs.saveSpillsLossBill(SpillsLossBillPO);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}//保存PO数组到txt
 		//报警单
 		ArrayList<AlertBillPO> AlertBillPO=new ArrayList<AlertBillPO>();
 		for(StubAlertBill temp:alOfAlertBill){//遍历数组，将对应PO对象加到新数组中
 			AlertBillPO.add(temp.getPO());
 		}
-		cbs.saveAlertBill(AlertBillPO);;//保存PO数组到txt
+		try {
+			cbs.saveAlertBill(AlertBillPO);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		};//保存PO数组到txt
 		//进货单
 		ArrayList<PurSheetPO> PurSheetPO=new ArrayList<PurSheetPO>();
 		for(PurSheet temp:alOfPurSheet){//遍历数组，将对应PO对象加到新数组中
 			PurSheetPO.add(temp.getPO());
 		}
-		sbs.savePurSheet(PurSheetPO);//保存PO数组到txt
+		try {
+			sbs.savePurSheet(PurSheetPO);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}//保存PO数组到txt
 		//进货退货单
 		ArrayList<PurBackSheetPO> PurBackSheetPO=new ArrayList<PurBackSheetPO>();
 		for(PurBackSheet temp:alOfPurBackSheet){//遍历数组，将对应PO对象加到新数组中
 			PurBackSheetPO.add(temp.getPO());
 		}
-		sbs.savePurBackSheet(PurBackSheetPO);//保存PO数组到txt
+		try {
+			sbs.savePurBackSheet(PurBackSheetPO);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}//保存PO数组到txt
 
 		//销售单
 		ArrayList<SaleSheetPO> SaleSheetPO=new ArrayList<SaleSheetPO>();
 		for(SaleSheet temp:alOfSaleSheet){//遍历数组，将对应PO对象加到新数组中
 			SaleSheetPO.add(temp.getPO());
 		}
-		sbs.saveSaleSheet(SaleSheetPO);//保存PO数组到txt
+		try {
+			sbs.saveSaleSheet(SaleSheetPO);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}//保存PO数组到txt
 		//销售退货单
 		ArrayList<SaleBackSheetPO> SaleBackSheetPO=new ArrayList<SaleBackSheetPO>();
 		for(SaleBackSheet temp:alOfSaleBackSheet){//遍历数组，将对应PO对象加到新数组中
 			SaleBackSheetPO.add(temp.getPO());
 		}
-		sbs.saveSaleBackSheet(SaleBackSheetPO);//保存PO数组到txt
+		try {
+			sbs.saveSaleBackSheet(SaleBackSheetPO);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}//保存PO数组到txt
 		//收款单
 		ArrayList<ReceiptPO> ReceiptBillPO=new ArrayList<ReceiptPO>();
 		for(ReceiptBill temp:alOfReceiptBill){//遍历数组，将对应PO对象加到新数组中
 			ReceiptBillPO.add(temp.getPO());
 		}
-		fbs.saveReceipt(ReceiptBillPO);//保存PO数组到txt
+		try {
+			fbs.saveReceipt(ReceiptBillPO);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}//保存PO数组到txt
 		//收款单
 		ArrayList<PaymentPO> PaymentBillPO=new ArrayList<PaymentPO>();
 		for(PaymentBill temp:alOfPaymentBill){//遍历数组，将对应PO对象加到新数组中
 			PaymentBillPO.add(temp.getPO());
 		}
-		fbs.savePayment(PaymentBillPO);//保存PO数组到txt
+		try {
+			fbs.savePayment(PaymentBillPO);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}//保存PO数组到txt
 		//收款单
 		ArrayList<CashPaymentPO> CashPaymentBillPO=new ArrayList<CashPaymentPO>();
 		for(CashPaymentBill temp:alOfCashPaymentBill){//遍历数组，将对应PO对象加到新数组中
 			CashPaymentBillPO.add(temp.getPO());
 		}
-		fbs.saveCashPayment(CashPaymentBillPO);//保存PO数组到txt
+		try {
+			fbs.saveCashPayment(CashPaymentBillPO);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}//保存PO数组到txt
 	}
 }

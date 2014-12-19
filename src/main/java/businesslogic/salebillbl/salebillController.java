@@ -388,7 +388,6 @@ public class salebillController implements SaleBillBlService,salebillForFinancia
 								case Default :words="无促销";
 											  break;
 							}
-							
 						}
 					}
 				}

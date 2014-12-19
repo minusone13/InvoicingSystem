@@ -114,10 +114,6 @@ public class CustomerVO {
 		return this.id;
 	}
 	
-	public void aotusetid(){
-		CustomerList customerlist = new CustomerList();
-		int nowhas = customerlist.getAllCustomer("Customer.txt").size();
-		this.setid(nowhas+1+"");
-	}
+
 	
 }

@@ -1,5 +1,6 @@
 package businesslogic.strategybl;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import po.BarginStrategyPO;
@@ -167,7 +168,12 @@ public class StubStrategyPool {
 		alOfReachStrategy.clear();
 		//将返回的PO对象的信息传入真正的策略对象
 		//客户分层策略
-		ArrayList<LevelStrategyPO> LevelStrategyPOList=ss.getLevelStrategy();
+		ArrayList<LevelStrategyPO> LevelStrategyPOList = null;
+		try {
+			LevelStrategyPOList = ss.getLevelStrategy();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
 		if(LevelStrategyPOList!=null){
 			for(int i=0;i<LevelStrategyPOList.size();i++){
 				StubLevelStrategy ls=new StubLevelStrategy();
@@ -176,7 +182,12 @@ public class StubStrategyPool {
 			}
 		}
 		//特价包策略
-		ArrayList<BarginStrategyPO> BarginStrategyPOList=ss.getBarginStrategy();
+		ArrayList<BarginStrategyPO> BarginStrategyPOList = null;
+		try {
+			BarginStrategyPOList = ss.getBarginStrategy();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
 		if(BarginStrategyPOList!=null){
 			for(BarginStrategyPO tempPO:BarginStrategyPOList){
 				StubBarginStrategy bs=new StubBarginStrategy();
@@ -186,7 +197,12 @@ public class StubStrategyPool {
 			}
 		}
 		//满额促销策略
-		ArrayList<ReachStrategyPO> ReachStrategyPOList=ss.getReachStrategy();
+		ArrayList<ReachStrategyPO> ReachStrategyPOList = null;
+		try {
+			ReachStrategyPOList = ss.getReachStrategy();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
 		if(ReachStrategyPOList!=null){
 			for(ReachStrategyPO tempPO:ReachStrategyPOList){
 				StubReachStrategy rs=new StubReachStrategy();
@@ -204,19 +220,31 @@ public class StubStrategyPool {
 		for(StubLevelStrategy temp:alOfLevelStrategy){//遍历数组，将对应PO对象加到新数组中
 			LevelStrategyPO.add(temp.getPO());
 		}
-		ss.saveLevelStrategy(LevelStrategyPO);//保存PO数组到txt
+		try {
+			ss.saveLevelStrategy(LevelStrategyPO);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}//保存PO数组到txt
 		//特价包策略
 		ArrayList<BarginStrategyPO> BarginStrategyPO=new ArrayList<BarginStrategyPO>();
 		for(StubBarginStrategy temp:alOfBarginStrategy){//遍历数组，将对应PO对象加到新数组中
 			BarginStrategyPO.add(temp.getPO());
 		}
-		ss.saveBarginStrategy(BarginStrategyPO);//保存PO数组到txt
+		try {
+			ss.saveBarginStrategy(BarginStrategyPO);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}//保存PO数组到txt
 		//满额促销策略
 		ArrayList<ReachStrategyPO> ReachStrategyPO=new ArrayList<ReachStrategyPO>();
 		for(StubReachStrategy temp:alOfReachStrategy){//遍历数组，将对应PO对象加到新数组中
 			ReachStrategyPO.add(temp.getPO());
 		}
-		ss.saveReachStrategy(ReachStrategyPO);//保存PO数组到txt
+		try {
+			ss.saveReachStrategy(ReachStrategyPO);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}//保存PO数组到txt
 	}
 	
 

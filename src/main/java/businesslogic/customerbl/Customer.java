@@ -26,7 +26,7 @@ public class Customer{
 	public Customer(CustomerVO vo){
 		this.type=vo.gettype();
 		this.name=vo.getname();
-		this.id=vo.getid();
+		this.aotusetid();
 		this.address=vo.getaddress();
 		this.phonenumber=vo.getphonenumber();
 		this.postcode=vo.getpostcode();
@@ -51,6 +51,12 @@ public class Customer{
 		this.level=po.getlevel();
 		this.email=po.getemail();
 	};
+	
+	public void aotusetid(){
+		CustomerList customerlist = new CustomerList();
+		int nowhas = customerlist.getAllCustomer("Customer.txt").size();
+		this.setid(nowhas+1+"");
+	}
 	
 	public int getlevel(){
 		return this.level;

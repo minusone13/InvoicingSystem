@@ -1,5 +1,6 @@
 package businesslogic.salebillbl;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -13,6 +14,7 @@ import businesslogic.GetVOandPO;
 import businesslogic.commoditybl.MockCommodity;
 import businesslogic.customerbl.Customer;
 import businesslogic.examinebl.Bill;
+import businesslogic.examinebl.StubBillPool;
 
 public class SaleSheet extends Bill implements GetVOandPO{
 
@@ -45,7 +47,15 @@ public class SaleSheet extends Bill implements GetVOandPO{
 		public SaleSheet(){};
 		public SaleSheet(SaleSheetVO vo){
 			this.customer=new Customer(vo.getcustomer());//王雨城加
-			this.ID=vo.getid();
+			
+			SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+			String currentTime = format.format(new Date());
+			this.date = new Date();
+			StubBillPool pool = new StubBillPool();
+			ArrayList<SaleSheet> list = pool.getSaleSheet();
+			this.ID = "XSD-"+currentTime+"-"+String.format("%05d", list.size()+1);
+			
+			
 			ArrayList<MockCommodity> temp=new ArrayList<MockCommodity>();
 			for(int i=0;i<vo.getsheet().size();i++){
 				temp.add(new MockCommodity(vo.getsheet().get(i)));
