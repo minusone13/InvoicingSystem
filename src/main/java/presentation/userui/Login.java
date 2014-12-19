@@ -411,7 +411,10 @@ public class Login extends JPanel {
 						//注册
 						UserVO userVo=new UserVO(role,s2,s3,s1);
 						RM rm=userService.signUp(userVo);
-						System.out.println("注册结果是："+rm);
+					if(rm==RM.redundance){
+						frame.getWarning().showWarning("已存在此账号");
+					}
+					else{
 						//隐藏注册面板
 						JPregister.this.setVisible(false);
 						//恢复监控
@@ -422,6 +425,8 @@ public class Login extends JPanel {
 					    name.setText("");
 						username.setText("");
 						passwords.setText("");
+					}
+					
 					}
 					else{
 						System.out.println("输入不合法");

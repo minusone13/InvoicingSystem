@@ -218,6 +218,12 @@ public class salebillController implements SaleBillBlService,salebillForFinancia
 			listOfPurSheet=pool.getPurSheet();
 			PurSheetVO result = new PurSheetVO();
 			for(PurSheet pursheet:listOfPurSheet){
+				if(pursheet==null){
+					System.out.println("sheet");
+				}
+				if(pursheet.getid()==null){
+					System.out.println("id");
+				}
 				if(pursheet.getid().equals(id)){
 					result=pursheet.getVO();
 					break;

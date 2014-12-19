@@ -255,13 +255,13 @@ public class JPmanageBills2 extends JPanel {
 				switch(num){
 				case 1:
 					up.setIcon(upIconR);
-					//向上
-					billList.startUp();
+					//向下
+					billList.startDown();
 					break;
 				case 2:
 					down.setIcon(downIconR);
-					//向下
-					billList.startDown();
+					//向上
+					billList.startUp();
 					break;	
 				case 3:
 					done.setIcon(checkIconR);
@@ -390,29 +390,12 @@ public class JPmanageBills2 extends JPanel {
 			private JLabel scan=new JLabel("浏览");
 			private JLabel scanButton=new JLabel();//增加条目按钮
 			private JTextField commodityText=new JTextField(10);
-			public JTextField getCommodityText() {
-				return commodityText;
-			}
-			public void setCommodityText(JTextField commodityText) {
-				this.commodityText = commodityText;
-			}
-			public JTextField getTypeText() {
-				return typeText;
-			}
-			public void setTypeText(JTextField typeText) {
-				this.typeText = typeText;
-			}
-
+		
 			private JTextField typeText=new JTextField(10);
 			private JTextField numText=new JTextField(10);
 			//接收商品
 			private CommodityVO chosenVO;
-			public CommodityVO getChosenVO() {
-				return chosenVO;
-			}
-			public void setChosenVO(CommodityVO chosenVO) {
-				this.chosenVO = chosenVO;
-			}
+		
 			public JPanelEdit(BillStyle style){
 				//确认种类
 				billStyle=style;
@@ -672,6 +655,24 @@ public class JPmanageBills2 extends JPanel {
 				
 			}
 	
-
+			public JTextField getCommodityText() {
+				return commodityText;
+			}
+			public void setCommodityText(JTextField commodityText) {
+				this.commodityText = commodityText;
+			}
+			public JTextField getTypeText() {
+				return typeText;
+			}
+			public void setTypeText(JTextField typeText) {
+				this.typeText = typeText;
+			}
+			public CommodityVO getChosenVO() {
+				return chosenVO;
+			}
+			public void setChosenVO(CommodityVO chosenVO) {
+				this.chosenVO = chosenVO;
+			}
 		}
+		
 }
