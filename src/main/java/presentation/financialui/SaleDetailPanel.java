@@ -47,6 +47,7 @@ public class SaleDetailPanel extends JPanel{
 		model.setDataVector(data, names);
 		table.updateUI();
 	}
+	
 	private Object[][] getSaleDetail(InquirySaleVO isv) {
 		ArrayList<SaleSheetVO> saleSheet = financial.getSaleSaleSheet(isv);
 		ArrayList<SaleBackSheetVO> saleBackSheet = financial.getSaleSaleBackSheet(isv);
