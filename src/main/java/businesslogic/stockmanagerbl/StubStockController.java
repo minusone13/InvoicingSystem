@@ -5,8 +5,10 @@ import java.util.*;
 import po.BillState;
 import po.RM;
 import po.Role;
+import po.Tool;
 import po.stockpo.PackPO;
 import presentation.userui.Login;
+import data.commoditydata.StubStockDataController;
 import dataservice.commoditydataservice.*;
 import businesslogic.commoditybillbl.*;
 import businesslogic.commoditybl.*;
@@ -127,6 +129,10 @@ public class StubStockController implements StubCommodityBlService, StockBlForSa
 	{//在填写单据时检查，给出的是潜在库存最小值，也就是最保险的值
 		return l.isEnough(name, model, n);
 	}
+	public boolean isEnough(String PackID,int n)
+	{
+		return l.isEnough(PackID, n);
+	}
 	public ArrayList<StockVO> openCategory(String id)
 	{
 		return l.openCategory(id);
@@ -189,6 +195,9 @@ public class StubStockController implements StubCommodityBlService, StockBlForSa
 		return l.updateCategory(vo, newName);
 	}
 	
+	
+	
+	//单据方法
 	public RM creat(GiftBillVO vo)
 	{
 		StubGiftBill gb=new StubGiftBill();
@@ -288,9 +297,15 @@ public class StubStockController implements StubCommodityBlService, StockBlForSa
 		return result;
 	}
 	
+	
+	//库存查看，库存盘点
 	public CountVO count()
 	{//库存盘点
 		return l.count();
+	}
+	public void ExportCount(String FilePath,CountVO vo)
+	{
+		l.ExportCount(FilePath,vo);
 	}
 	
 	public ArrayList<CommodityVO> getRecords(Date d1, Date d2)
@@ -303,4 +318,9 @@ public class StubStockController implements StubCommodityBlService, StockBlForSa
 	public void setPool(StubBillPool pool) {
 		this.pool = pool;
 	}
+	
+    public void setFilePath(String s)
+    {//用于期初建账查看商品信息
+    	comdata.setFilePath(s);
+    }
 }

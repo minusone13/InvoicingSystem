@@ -559,7 +559,8 @@ public class StockTest{
 		com.setNumber(2);
 		h.add(com);
 		//StubPack pack = new StubPack(h,10,300);
-		m.addPack(h,10,100);
+		RM rm = m.addPack(h,10,100);
+		assertEquals(RM.done,rm);
 		ArrayList<PackPO> packs = data.getAllPacks();
 		PackPO packpo = packs.get(0);
 		assertEquals(300,packpo.getPrice(),0.001);
@@ -568,7 +569,17 @@ public class StockTest{
 		result = sc.isEnough("好好防盗门", "fdm05", 31);
 		assertFalse(result);
 		
-		RM rm = sc.checkOut("XSD-20141206-00003", packpo.getID(), 2, 300);
+		result = sc.isEnough(packpo.getID(),10);
+		assertTrue(result);
+		result = sc.isEnough(packpo.getID(),11);
+		assertFalse(result);
+		rm = sc.readyForOut("XSD-20141206-00003", packpo.getID(), 8, 300);
+		result = sc.isEnough(packpo.getID(),2);
+		assertTrue(result);
+		result = sc.isEnough(packpo.getID(),3);
+		assertFalse(result);
+		
+		rm = sc.checkOut("XSD-20141206-00003", packpo.getID(), 2, 300);
 		assertEquals(RM.done,rm);
 		result = sc.isEnough("好好防盗门", "fdm05", 30);
 		assertTrue(result);
@@ -576,6 +587,13 @@ public class StockTest{
 		assertFalse(result);
 		compo = data.findCommodity("好好防盗门", "fdm05");
 		assertEquals(oldNum-4,compo.getNumber());
+		result = sc.isEnough(packpo.getID(),8);
+		assertTrue(result);
+		result = sc.isEnough(packpo.getID(),9);
+		assertFalse(result);
+		packs = data.getAllPacks();
+		packpo = packs.get(0);
+		assertEquals(8,packpo.getQuantity());
 	}
 	
 	@Test
@@ -711,6 +729,13 @@ public class StockTest{
 		assertEquals(2,coms.getNo());
 		coms = combl.count();
 		assertEquals(3,coms.getNo());
+	}
+	
+	@Test
+	public void testExportCount()
+	{
+		combl.ExportCount("testCount.xls",combl.count());
+		assertTrue(true);
 	}
 	
 	@Test

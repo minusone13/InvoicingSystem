@@ -1,4 +1,4 @@
-package data;
+package po;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -11,7 +11,7 @@ public class Tool {
 	//提供读文件工具，并可保存文件名，统一保存，便于修改
 	public static String user = "User.ser";
 	public static String stock = "Stock.ser";
-
+	public static String defaultstock = "Stock.ser";
 	public static File Opendoc(String s)
 	{//参数为需要打开的文件路径
 	    File f = new File(s);

@@ -63,6 +63,7 @@ public class UserList {
 			case FINANCIAL_STAFF: ;
 			case FINANCIAL_MANAGER:c='F';break;
 			case STOCK_STAFF: c='I';break;//抱歉只能用I咯，S和下面的进货人员重了；
+			case PURCHASE_SALE_MANAGER:;
 			case PURCHASE_SALE_STAFF: c='S';break;
 			default: return null;
 		}

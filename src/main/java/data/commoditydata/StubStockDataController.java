@@ -3,7 +3,6 @@ package data.commoditydata;
 import java.io.*;
 import java.util.ArrayList;
 
-import data.Tool;
 import data.stockservice.StockDataForFinancial;
 import dataservice.commoditydataservice.*;
 import po.*;
@@ -95,6 +94,16 @@ public class StubStockDataController implements StubCommodityDataService, StockD
         save();
     }
     
+    public void setFilePath(String s)
+    {
+    	Tool.stock=s;
+    	instance = new StubStockDataController();
+    }
+    public void setDefaultFile()
+    {
+    	Tool.stock=Tool.defaultstock;
+    	instance = new StubStockDataController();
+    }
 	public RM insert(CommodityPO po)
 	{
 		read();

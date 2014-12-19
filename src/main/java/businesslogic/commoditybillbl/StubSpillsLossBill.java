@@ -23,7 +23,7 @@ public class StubSpillsLossBill extends Bill implements GetVOandPO
 	BillState state=BillState.DRAFT;
 	public SpillsLossBillVO getVO()
 	{
-		return new SpillsLossBillVO(operator,ID,t,new CommodityVO(),state);
+		return new SpillsLossBillVO(operator,ID,t,com.toVO(),state);
 	}
 	public SpillsLossBillPO getPO()
 	{

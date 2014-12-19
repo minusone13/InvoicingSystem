@@ -65,7 +65,7 @@ public class BusinessProcessPanel extends JPanel{
 	}
 	
 	public void initial() {
-		this.setBounds(0, 0, 750, 370);
+		this.setBounds(0, 0, 700, 320);
 		//设置布局
 		this.setLayout(null);
 		//设置面板透明
@@ -81,10 +81,10 @@ public class BusinessProcessPanel extends JPanel{
 		pane2 = new JScrollPane(table2);
 		
 		add(pane1);
-		pane1.setBounds(0, 0, 600, 150);
+		pane1.setBounds(0, 0, 700, 150);
 		
 		add(pane2);
-		pane2.setBounds(0, 170, 600, 150);
+		pane2.setBounds(0, 170, 700, 150);
 	}
 	
 	public void updateTable1(int choose, InquiryProcessVO ipv){

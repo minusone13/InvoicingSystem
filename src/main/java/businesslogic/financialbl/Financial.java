@@ -293,7 +293,7 @@ public class Financial implements FinancialBlService{
 	}
 	
 	//付款单修改金额
-	public void updatePaymentMoney(String customer, String account, double money) {
+	public boolean updatePaymentMoney(String customer, String account, double money) {
 		CustomerForFinancial cusMoney = new CustomerList();
 		AccountList a = new AccountList();
 		ArrayList<Account> accounts = a.getAllAccountInfo();
@@ -302,15 +302,18 @@ public class Financial implements FinancialBlService{
 			Account temp = accounts.get(i);
 			if(temp.getName().equals(account)) {
 				double balance = accounts.get(i).getBalance();
+				if(balance<money) return false;
 				accounts.get(i).setBalance(balance-money);
 				break;
 			}
 		}
 		cusMoney.changeShouldPay(customer, money);
 		a.saveAccounts(accounts);
+		return true;
 	}
+	
 	//现金费用单修改账户
-	public void updateCashPaymentMoney(String account, double money) {
+	public boolean updateCashPaymentMoney(String account, double money) {
 		AccountList a = new AccountList();
 		ArrayList<Account> accounts = a.getAllAccountInfo();
 		int size = accounts.size();
@@ -318,11 +321,13 @@ public class Financial implements FinancialBlService{
 			Account temp = accounts.get(i);
 			if(temp.getName().equals(account)) {
 				double balance = accounts.get(i).getBalance();
+				if(balance<money) return false;
 				accounts.get(i).setBalance(balance-money);
 				break;
 			}
 		}
 		a.saveAccounts(accounts);
+		return true;
 	}
 	
 	
