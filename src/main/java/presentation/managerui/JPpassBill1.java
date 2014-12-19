@@ -7,8 +7,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import entrance.Frame;
 import po.BillStyle;
-import userui.Frame;
+import presentation.PanelType;
 import businesslogic.managerbl.StubManager;
 import businesslogicservice.managerblservice.StubManagerBlService;
 
@@ -273,6 +274,8 @@ public class JPpassBill1 extends JPanel {
 				frame.getManager().getPassbill2().setVisible(true);
 				break;
 			}
+			//标记当前面板，用于后退按钮
+			frame.getManager().setPanelType(PanelType.JPpassBill2);
 		}
 
 		public void mouseEntered(MouseEvent e) {

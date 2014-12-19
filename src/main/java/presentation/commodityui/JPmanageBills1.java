@@ -8,8 +8,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import entrance.Frame;
 import po.BillStyle;
-import userui.Frame;
+import presentation.PanelType;
 import businesslogic.stockmanagerbl.StubStockController;
 import businesslogicservice.commodityblservice.StubCommodityBlService;
 
@@ -138,6 +139,8 @@ public class JPmanageBills1 extends JPanel {
 				frame.getStock().getManageBills2().setVisible(true);
 				break;
 			}
+			//标记当前面板，用于后退按钮
+			frame.getStock().setPanelType(PanelType.JPmanageBills2);
 		}
 
 		public void mouseEntered(MouseEvent e) {

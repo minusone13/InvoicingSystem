@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import entrance.Frame;
 import po.BillState;
 import po.BillStyle;
 import presentation.financialui.JPmanageBills2.JPanelEdit;
@@ -20,7 +21,6 @@ import presentation.financialui.JPmanageBills2.JPanelEdit.JPaddList;
 import presentation.financialui.JPmanageBills2.JPanelEdit.TreadOfLeft;
 import presentation.financialui.JPmanageBills2.JPanelEdit.TreadOfRight;
 import presentation.userui.Login;
-import userui.Frame;
 import vo.financialBillVO.CashPaymentVO;
 import vo.financialBillVO.PaymentVO;
 import vo.financialBillVO.ReceiptVO;
@@ -223,6 +223,7 @@ public class JPpassBill2 extends JPanel {
 	/*获取frame的引用*/
 	public void getFrame( Frame f){
   		frame=f;
+  		billList.setFrame(frame);
     }
 	/*按钮的监控*/
 	public class MouseListenerOfButton implements MouseListener{
@@ -270,7 +271,7 @@ public class JPpassBill2 extends JPanel {
 					JPeditOfCash.leftMove();
 					break;
 				default:
-					System.out.println("您无权修改此单据");
+					frame.getWarning().showWarning("您无权修改此单据");
 				}
 				break;
 			}

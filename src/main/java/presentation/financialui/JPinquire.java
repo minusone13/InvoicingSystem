@@ -7,11 +7,12 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import entrance.Frame;
 import po.BillStyle;
 import po.Role;
+import presentation.PanelType;
 import presentation.financialui.JPmanageBills1.MouseListenOfButton;
 import presentation.userui.Login;
-import userui.Frame;
 import businesslogic.financialbl.Financial;
 import businesslogicservice.financialblservice.FinancialBlService;
 
@@ -98,36 +99,43 @@ public class JPinquire extends JPanel {
 			switch(num){
 			case 21:businessProcess.setIcon(businessProcessIcon);
 				//切换
-			JPinquire.this.setVisible(false);
-				//设置单据类型
-				frame.getFinancial().getManageBills2().setStyle(BillStyle.ReceiptBill);
-				//从逻辑层读取单据信息填充单据列表
-				frame.getFinancial().getManageBills2().getBillList().getJPbillList().clear();
-				frame.getFinancial().getManageBills2().getBillList().reHome();
-				frame.getFinancial().getManageBills2().getBillList().addReceiptBillList(fbl.getAllOfReceiptBills());
-				//切换
-				frame.getFinancial().getManageBills2().setVisible(true);
+				JPinquire.this.setVisible(false);
+				if(Login.user.getR()==Role.FINANCIAL_STAFF){
+					frame.getFinancial().getBusinessProgress().setVisible(true);
+					//标记当前面板，用于后退按钮
+					frame.getFinancial().setPanelType(PanelType.BusinessProcessPanel);
+				}
+				else if(Login.user.getR()==Role.MANAGER){
+					frame.getManager().getBusinessProgress().setVisible(true);
+					//标记当前面板，用于后退按钮
+					frame.getManager().setPanelType(PanelType.BusinessProcessPanel);
+				}
 				break;
 			case 22:businessSituation.setIcon(businessSituationIcon);
 				JPinquire.this.setVisible(false);
 				if(Login.user.getR()==Role.FINANCIAL_STAFF){
 					frame.getFinancial().getBusinessCondition().setVisible(true);
+					//标记当前面板，用于后退按钮
+					frame.getFinancial().setPanelType(PanelType.BusinessConditionPanel);
 				}
 				else if(Login.user.getR()==Role.MANAGER){
 					frame.getManager().getBusinessCondition().setVisible(true);
+					//标记当前面板，用于后退按钮
+					frame.getManager().setPanelType(PanelType.BusinessConditionPanel);
 				}
 				break;
 			case 23:salesDetail.setIcon(salesDetailIcon);
-//				//切换
-//			JPinquire.this.setVisible(false);
-//				//设置单据类型
-//				frame.getFinancial().getManageBills2().setStyle(BillStyle.CashPaymentBill);
-//				//从逻辑层读取单据信息填充单据列表
-//				frame.getFinancial().getManageBills2().getBillList().getJPbillList().clear();
-//				frame.getFinancial().getManageBills2().getBillList().reHome();
-//				frame.getFinancial().getManageBills2().getBillList().addCashPaymentBillList(fbl.getAllOfCashPaymentBills());
-//				//切换
-//				frame.getFinancial().getManageBills2().setVisible(true);
+				JPinquire.this.setVisible(false);
+				if(Login.user.getR()==Role.FINANCIAL_STAFF){
+					frame.getFinancial().getSaleDetail().setVisible(true);
+					//标记当前面板，用于后退按钮
+					frame.getFinancial().setPanelType(PanelType.SaleDetailPanel);
+				}
+				else if(Login.user.getR()==Role.MANAGER){
+					frame.getManager().getSaleDetail().setVisible(true);
+					//标记当前面板，用于后退按钮
+					frame.getManager().setPanelType(PanelType.SaleDetailPanel);
+				}
 				break;
 			}
 		}

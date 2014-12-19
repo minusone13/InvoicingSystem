@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
@@ -11,10 +12,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import entrance.Frame;
 import presentation.managerui.JPBillList;
 import presentation.managerui.MouseListenerGetXY;
-import userui.Frame;
 import vo.CustomerVO;
+import businesslogic.customerbl.CustomerList;
+import businesslogicservice.customerblservice.CustomerBlService;
 
 public class JPmanageCustomer extends JPanel {
 
@@ -60,6 +63,8 @@ public class JPmanageCustomer extends JPanel {
 			ImageIcon addIconR=new ImageIcon("src/image/function/addR.png");
 			//frame的引用
 		    Frame frame;
+		    //客户管理逻辑层接口
+		    CustomerBlService customerbl=new CustomerList();
 			public JPmanageCustomer(){//参数决定编辑板的类型
 				//面板大小
 				this.setSize(905, 342);
@@ -134,6 +139,7 @@ public class JPmanageCustomer extends JPanel {
 			  /*获取frame引用*/
 		    public void getFrame( Frame f){
 		    		frame=f;
+		    		billList.setFrame(frame);
 		    }
 			public JPBillList getBillsList(){
 				return billList;
@@ -209,10 +215,10 @@ public class JPmanageCustomer extends JPanel {
 							JPedit.leftMove();//调出编辑板
 						}
 						else if(billList.getChosenNum()==0){
-							System.out.println("请选择要修改的客户");
+							frame.getWarning().showWarning("请选择要修改的客户");
 						}
 						else{
-							System.out.println("只能修改一个客户的信息");
+							frame.getWarning().showWarning("只能修改一个客户的信息");
 						}
 						break;				
 					case 7:
@@ -493,7 +499,7 @@ public class JPmanageCustomer extends JPanel {
 									billList.addCustomer(newCus);
 								}
 								else{
-									System.out.println("请输入完整信息");
+									frame.getWarning().showWarning("请输入完整信息");
 								}
 							}
 							else{//修改
@@ -548,10 +554,10 @@ public class JPmanageCustomer extends JPanel {
 									billList.changeChosen(modifyCus);
 								}
 								else if(billList.getChosenNum()==0){
-									System.out.println("请选择要修改的客户");
+									frame.getWarning().showWarning("请选择要修改的客户");
 								}
 								else{
-									System.out.println("只能同时修改一个客户");
+									frame.getWarning().showWarning("只能同时修改一个客户");
 								}
 							}
 							break;
@@ -731,6 +737,17 @@ public class JPmanageCustomer extends JPanel {
 							break;
 						case 3:
 							searchButton.setIcon(search0);
+							if(!searchTxt.getText().equals("")){
+								billList.getJPbillList().clear();
+								billList.reHome();
+								ArrayList<CustomerVO> cus=new ArrayList<CustomerVO>();
+								cus.add(customerbl.findCustomer(searchTxt.getText()));
+								billList.addCustomerList(cus);
+								
+							}
+							else{
+								frame.getWarning().showWarning("请输入客户ID");
+							}
 							break;
 						}
 					}

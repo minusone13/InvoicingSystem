@@ -7,11 +7,12 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import entrance.Frame;
 import businesslogic.financialbl.Financial;
 import businesslogicservice.financialblservice.FinancialBlService;
+import presentation.PanelType;
 import presentation.managerui.JPfunction;
 import presentation.managerui.JPfunction.MouseListenerOfButton;
-import userui.Frame;
 
 public class JPfunctions extends JPanel {
 
@@ -104,17 +105,22 @@ public class JPfunctions extends JPanel {
 				frame.getFinancial().getAccount().getBillsList().reHome();
 				frame.getFinancial().getAccount().getBillsList().addAccountList(fbl.getAllAccountInfo());
 				frame.getFinancial().getAccount().setVisible(true);
+				//标记当前面板，用于后退按钮
+				frame.getFinancial().setPanelType(PanelType.JPmanageAccount);
 				break;
 			case 2:
 				function2.setIcon(Imagefun2);
-				
 				JPfunctions.this.setVisible(false);
 				frame.getFinancial().getManageBills1().setVisible(true);
+				//标记当前面板，用于后退按钮
+				frame.getFinancial().setPanelType(PanelType.JPmanageBills1);
 				break;
 			case 3:
 				function3.setIcon(Imagefun3);
 				JPfunctions.this.setVisible(false);
 				frame.getFinancial().getInquire().setVisible(true);
+				//标记当前面板，用于后退按钮
+				frame.getFinancial().setPanelType(PanelType.JPinquire);
 				break;
 			}
 		}

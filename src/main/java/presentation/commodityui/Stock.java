@@ -7,8 +7,10 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import entrance.Frame;
 import po.Role;
-import userui.Frame;
+import presentation.PanelType;
+import presentation.saleui.Sale;
 
 public class Stock extends JPanel {
 	//背景
@@ -29,38 +31,16 @@ public class Stock extends JPanel {
 	JPManagerComOfStock managerComs=new JPManagerComOfStock();
 	//选择商品
 	JPManagerCom choseComs=new JPManagerCom();
-	public JPManagerCom getChoseComs() {
-		return choseComs;
-	}
-	public void setChoseComs(JPManagerCom choseComs) {
-		this.choseComs = choseComs;
-	}
 	//home
 	private JLabel home=new JLabel();
-	public JPfunction getFunction() {
-		return function;
-	}
-	public void setFunction(JPfunction function) {
-		this.function = function;
-	}
-	public JPmanageBills1 getManageBills() {
-		return manageBills1;
-	}
-	public void setManageBills(JPmanageBills1 manageBills) {
-		this.manageBills1 = manageBills;
-	}
-	public JPmanageBills2 getManageBills2() {
-		return manageBills2;
-	}
-	public void setManageBills2(JPmanageBills2 manageBills2) {
-		this.manageBills2 = manageBills2;
-	}
 	//后退
 	private JLabel back=new JLabel();
 	//登出
 	private JLabel signout=new JLabel();
 	//frame的引用
-    Frame frame;
+	private Frame frame;
+	//当前面板标记，用于后退跳转
+	private PanelType panelType=PanelType.JPfunction;
 	public Stock(){
 
 			//设置窗口大小
@@ -127,100 +107,161 @@ public class Stock extends JPanel {
 			this.add(bg,11);
 			
 		}
-    public JPManagerComOfStock getManagerComs() {
-		return managerComs;
-	}
-	public void setManagerComs(JPManagerComOfStock managerComs) {
-		this.managerComs = managerComs;
-	}
+
 	/*获取frame引用*/
     public void getFrame( Frame f){
     		frame=f;
     		function.getFrame(frame);
     		manageBills1.getFrame(frame);
     		manageBills2.getFrame(frame);
+    		managerComs.getFrame(frame);
     		choseComs.getFrame(frame);
     }
-		public class MouseListenerOfButton implements MouseListener{
+	public class MouseListenerOfButton implements MouseListener{
 
-			private int num;
-			public MouseListenerOfButton(int N){
-				num=N;
-			}
-			public void mouseClicked(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
+		private int num;
+		public MouseListenerOfButton(int N){
+			num=N;
+		}
+		public void mouseClicked(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
 
-			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
-				switch(num){
-				case 1:
-					home.setIcon(new ImageIcon("src/image/home2.png"));
-					break;
-				case 2:
-					back.setIcon(new ImageIcon("src/image/back2.png"));
-					break;
-				case 3:
-					signout.setIcon(new ImageIcon("src/image/signout2.png"));
-				
-					break;
-				}
+		public void mousePressed(MouseEvent e) {
+			// TODO Auto-generated method stub
+			switch(num){
+			case 1:
+				home.setIcon(new ImageIcon("src/image/home2.png"));
+				break;
+			case 2:
+				back.setIcon(new ImageIcon("src/image/back2.png"));
+				break;
+			case 3:
+				signout.setIcon(new ImageIcon("src/image/signout2.png"));
+			
+				break;
 			}
+		}
 
-			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
-				switch(num){
-				case 1:
-					home.setIcon(new ImageIcon("src/image/home1.png"));
-					Stock.this.getManageBills().setVisible(false);
-					Stock.this.getManageBills2().setVisible(false);
-					Stock.this.getManagerComs().setVisible(false);
-					Stock.this.getChoseComs().setVisible(false);
-					Stock.this.getFunction().setVisible(true);
-					break;
-				case 2:
-					back.setIcon(new ImageIcon("src/image/back1.png"));
-					break;
-				case 3:
-					signout.setIcon(new ImageIcon("src/image/signout1.png"));
+		public void mouseReleased(MouseEvent e) {
+			// TODO Auto-generated method stub
+			switch(num){
+			case 1:
+				home.setIcon(new ImageIcon("src/image/home1.png"));
+				Stock.this.getManageBills().setVisible(false);
+				Stock.this.getManageBills2().setVisible(false);
+				Stock.this.getManagerComs().setVisible(false);
+				Stock.this.getChoseComs().setVisible(false);
+				Stock.this.getFunction().setVisible(true);
+				//标记当前面板，用于后退按钮
+				frame.getStock().setPanelType(PanelType.JPfunction);
+				break;
+			case 2:
+				back.setIcon(new ImageIcon("src/image/back1.png"));
+				switch(panelType){
+				case JPfunction:
 					//实现登出跳转
 					frame.getLogin().setVisible(true);
 					Stock.this.setVisible(false);
+					
+					break;
+				case JPmanageBills1:
+					manageBills1.setVisible(false);
+					function.setVisible(true);
+					//标记当前面板，用于后退按钮
+					frame.getStock().setPanelType(PanelType.JPfunction);
+					break;
+				case JPmanageBills2:
+					manageBills2.setVisible(false);
+					choseComs.setVisible(false);
+					manageBills1.setVisible(true);
+					//标记当前面板，用于后退按钮
+					frame.getStock().setPanelType(PanelType.JPmanageBills1);
+					break;
+				case JPManagerComOfStock:
+					managerComs.setVisible(false);
+					function.setVisible(true);
+					//标记当前面板，用于后退按钮
+					frame.getStock().setPanelType(PanelType.JPfunction);
 					break;
 				}
+				break;
+			case 3:
+				signout.setIcon(new ImageIcon("src/image/signout1.png"));
+				//实现登出跳转
+				frame.getLogin().setVisible(true);
+				Stock.this.setVisible(false);
+				break;
 			}
-
-			public void mouseEntered(MouseEvent e) {
-				// TODO Auto-generated method stub
-				switch(num){
-				case 1:
-					home.setIcon(new ImageIcon("src/image/home1.png"));
-					break;
-				case 2:
-					back.setIcon(new ImageIcon("src/image/back1.png"));
-					break;
-				case 3:
-					signout.setIcon(new ImageIcon("src/image/signout1.png"));
-					break;
-				}
-			}
-
-			public void mouseExited(MouseEvent e) {
-				// TODO Auto-generated method stub
-				switch(num){
-				case 1:
-					home.setIcon(new ImageIcon("src/image/home.png"));
-					break;
-				case 2:
-					back.setIcon(new ImageIcon("src/image/back0.png"));
-					break;
-				case 3:
-					signout.setIcon(new ImageIcon("src/image/signout0.png"));
-					break;
-				}
-			}
-			
 		}
+
+		public void mouseEntered(MouseEvent e) {
+			// TODO Auto-generated method stub
+			switch(num){
+			case 1:
+				home.setIcon(new ImageIcon("src/image/home1.png"));
+				break;
+			case 2:
+				back.setIcon(new ImageIcon("src/image/back1.png"));
+				break;
+			case 3:
+				signout.setIcon(new ImageIcon("src/image/signout1.png"));
+				break;
+			}
+		}
+
+		public void mouseExited(MouseEvent e) {
+			// TODO Auto-generated method stub
+			switch(num){
+			case 1:
+				home.setIcon(new ImageIcon("src/image/home.png"));
+				break;
+			case 2:
+				back.setIcon(new ImageIcon("src/image/back0.png"));
+				break;
+			case 3:
+				signout.setIcon(new ImageIcon("src/image/signout0.png"));
+				break;
+			}
+		}
+		
 	}
+	public JPManagerCom getChoseComs() {
+		return choseComs;
+	}
+	public void setChoseComs(JPManagerCom choseComs) {
+		this.choseComs = choseComs;
+	}
+    public JPManagerComOfStock getManagerComs() {
+		return managerComs;
+	}
+	public void setManagerComs(JPManagerComOfStock managerComs) {
+		this.managerComs = managerComs;
+	}
+	public JPfunction getFunction() {
+		return function;
+	}
+	public void setFunction(JPfunction function) {
+		this.function = function;
+	}
+	public JPmanageBills1 getManageBills() {
+		return manageBills1;
+	}
+	public void setManageBills(JPmanageBills1 manageBills) {
+		this.manageBills1 = manageBills;
+	}
+	public JPmanageBills2 getManageBills2() {
+		return manageBills2;
+	}
+	public void setManageBills2(JPmanageBills2 manageBills2) {
+		this.manageBills2 = manageBills2;
+	}
+	public PanelType getPanelType() {
+		return panelType;
+	}
+	public void setPanelType(PanelType panelType) {
+		this.panelType = panelType;
+	}
+}
 	

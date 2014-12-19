@@ -7,11 +7,15 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import entrance.Frame;
 import po.Role;
+import presentation.PanelType;
 import presentation.commodityui.JPManagerCom;
 import presentation.financialui.BusinessConditionPanel;
+import presentation.financialui.BusinessProcessPanel;
+import presentation.financialui.FinancialUI;
 import presentation.financialui.JPinquire;
-import userui.Frame;
+import presentation.financialui.SaleDetailPanel;
 
 public class ManagerUI extends JPanel {
 
@@ -37,58 +41,22 @@ public class ManagerUI extends JPanel {
 	private JPinquire inquire=new JPinquire();
 	//经营情况表
 	private BusinessConditionPanel businessCondition=new BusinessConditionPanel();
+	//经营历程表
+	private BusinessProcessPanel businessProgress=new BusinessProcessPanel();
+	//销售明细表
+	private SaleDetailPanel saleDetail=new SaleDetailPanel();
 	//商品选择面板
 	private JPManagerCom commodityChoose=new JPManagerCom();
-	public BusinessConditionPanel getBusinessCondition() {
-		return businessCondition;
-	}
-	public void setBusinessCondition(BusinessConditionPanel businessCondition) {
-		this.businessCondition = businessCondition;
-	}
-	public JPinquire getInquire() {
-		return inquire;
-	}
-	public void setInquire(JPinquire inquire) {
-		this.inquire = inquire;
-	}
-	public JPmanagerStrategy1 getManagerStrategy1() {
-		return managerStrategy1;
-	}
-	public void setManagerStrategy1(JPmanagerStrategy1 managerStrategy1) {
-		this.managerStrategy1 = managerStrategy1;
-	}
-	public JPmanagerStrategy2 getManagerStrategy2() {
-		return managerStrategy2;
-	}
-	public void setManagerStrategy2(JPmanagerStrategy2 managerStrategy2) {
-		this.managerStrategy2 = managerStrategy2;
-	}
+	//当前面板标记，用于后退跳转
+	private PanelType panelType=PanelType.JPfunction;
 	//home
 	private JLabel home=new JLabel();
 	//后退
 	private JLabel back=new JLabel();
 	//登出
 	private JLabel signout=new JLabel();
-	public JPfunction getFunction() {
-		return function;
-	}
-	public void setFunction(JPfunction function) {
-		this.function = function;
-	}
-	public JPpassBill1 getPassbill1() {
-		return passbill1;
-	}
-	public void setPassbill1(JPpassBill1 passbill1) {
-		this.passbill1 = passbill1;
-	}
-	public JPpassBill2 getPassbill2() {
-		return passbill2;
-	}
-	public void setPassbill2(JPpassBill2 passbill2) {
-		this.passbill2 = passbill2;
-	}
 	//frame的引用
-    Frame frame;
+	private Frame frame;
 	public ManagerUI(){
 		//设置窗口大小
 		this.setSize(960, 600);
@@ -130,6 +98,12 @@ public class ManagerUI extends JPanel {
 		//经营情况表
 		businessCondition.setLocation(55, 233);
 		businessCondition.setVisible(false);
+		//经营历程表
+		businessProgress.setLocation(55, 233);
+		businessProgress.setVisible(false);
+		//销售明细表
+		saleDetail.setLocation(55, 233);
+		saleDetail.setVisible(false);
 		//商品选择
 		commodityChoose.setLocation(55, 210);
 		commodityChoose.setRole(Role.MANAGER);
@@ -162,7 +136,9 @@ public class ManagerUI extends JPanel {
 		this.add(managerStrategy2,11);
 		this.add(inquire,12);
 		this.add(businessCondition,13);
-		this.add(bg,14);
+		this.add(businessProgress,14);
+		this.add(saleDetail,15);
+		this.add(bg,16);
 		
 	}
 	/*获取frame的引用*/
@@ -219,11 +195,71 @@ public class ManagerUI extends JPanel {
 				ManagerUI.this.getManagerStrategy2().setVisible(false);
 				ManagerUI.this.getInquire().setVisible(false);
 				ManagerUI.this.getBusinessCondition().setVisible(false);
+				ManagerUI.this.getBusinessProgress().setVisible(false);
+				ManagerUI.this.getSaleDetail().setVisible(false);
 				ManagerUI.this.getCommodityChoose().setVisible(false);
 				ManagerUI.this.getFunction().setVisible(true);
+				//标记当前面板，用于后退按钮
+				ManagerUI.this.setPanelType(PanelType.JPfunction);
 				break;
 			case 2:
 				back.setIcon(new ImageIcon("src/image/back1.png"));
+				switch(panelType){
+				case JPfunction:
+					//实现登出跳转
+					frame.getLogin().setVisible(true);
+					ManagerUI.this.setVisible(false);
+					break;
+				case JPmanagerStrategy1:
+					managerStrategy1.setVisible(false);
+					function.setVisible(true);
+					//标记当前面板，用于后退按钮
+					ManagerUI.this.setPanelType(PanelType.JPfunction);
+					break;
+				case JPmanagerStrategy2:
+					managerStrategy2.setVisible(false);
+					commodityChoose.setVisible(false);
+					managerStrategy1.setVisible(true);
+					//标记当前面板，用于后退按钮
+					ManagerUI.this.setPanelType(PanelType.JPmanagerStrategy1);
+					break;
+				case JPpassBill1:
+					passbill1.setVisible(false);
+					function.setVisible(true);
+					//标记当前面板，用于后退按钮
+					ManagerUI.this.setPanelType(PanelType.JPfunction);
+					break;
+				case JPpassBill2:
+					passbill2.setVisible(false);
+					passbill1.setVisible(true);
+					//标记当前面板，用于后退按钮
+					ManagerUI.this.setPanelType(PanelType.JPpassBill1);
+					break;
+				case JPinquire:
+					inquire.setVisible(false);
+					function.setVisible(true);
+					//标记当前面板，用于后退按钮
+					ManagerUI.this.setPanelType(PanelType.JPfunction);
+					break;
+				case BusinessConditionPanel:
+					businessCondition.setVisible(false);
+					inquire.setVisible(true);
+					//标记当前面板，用于后退按钮
+					ManagerUI.this.setPanelType(PanelType.JPinquire);
+					break;
+				case BusinessProcessPanel:
+					businessProgress.setVisible(false);
+					inquire.setVisible(true);
+					//标记当前面板，用于后退按钮
+					ManagerUI.this.setPanelType(PanelType.JPinquire);
+					break;
+				case SaleDetailPanel:
+					saleDetail.setVisible(false);
+					inquire.setVisible(true);
+					//标记当前面板，用于后退按钮
+					ManagerUI.this.setPanelType(PanelType.JPinquire);
+					break;
+				}
 				break;
 			case 3:
 				signout.setIcon(new ImageIcon("src/image/signout1.png"));
@@ -264,5 +300,65 @@ public class ManagerUI extends JPanel {
 			}
 		}
 		
+	}
+	public BusinessConditionPanel getBusinessCondition() {
+		return businessCondition;
+	}
+	public void setBusinessCondition(BusinessConditionPanel businessCondition) {
+		this.businessCondition = businessCondition;
+	}
+	public JPinquire getInquire() {
+		return inquire;
+	}
+	public void setInquire(JPinquire inquire) {
+		this.inquire = inquire;
+	}
+	public JPmanagerStrategy1 getManagerStrategy1() {
+		return managerStrategy1;
+	}
+	public void setManagerStrategy1(JPmanagerStrategy1 managerStrategy1) {
+		this.managerStrategy1 = managerStrategy1;
+	}
+	public JPmanagerStrategy2 getManagerStrategy2() {
+		return managerStrategy2;
+	}
+	public void setManagerStrategy2(JPmanagerStrategy2 managerStrategy2) {
+		this.managerStrategy2 = managerStrategy2;
+	}
+	public JPfunction getFunction() {
+		return function;
+	}
+	public void setFunction(JPfunction function) {
+		this.function = function;
+	}
+	public JPpassBill1 getPassbill1() {
+		return passbill1;
+	}
+	public void setPassbill1(JPpassBill1 passbill1) {
+		this.passbill1 = passbill1;
+	}
+	public JPpassBill2 getPassbill2() {
+		return passbill2;
+	}
+	public void setPassbill2(JPpassBill2 passbill2) {
+		this.passbill2 = passbill2;
+	}
+	public BusinessProcessPanel getBusinessProgress() {
+		return businessProgress;
+	}
+	public void setBusinessProgress(BusinessProcessPanel businessProgress) {
+		this.businessProgress = businessProgress;
+	}
+	public SaleDetailPanel getSaleDetail() {
+		return saleDetail;
+	}
+	public void setSaleDetail(SaleDetailPanel saleDetail) {
+		this.saleDetail = saleDetail;
+	}
+	public PanelType getPanelType() {
+		return panelType;
+	}
+	public void setPanelType(PanelType panelType) {
+		this.panelType = panelType;
 	}
 }

@@ -7,8 +7,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import entrance.Frame;
 import po.BillStyle;
-import userui.Frame;
+import presentation.PanelType;
 import businesslogic.salebillbl.salebillController;
 import businesslogicservice.salebillblservice.SaleBillBlService;
 
@@ -150,6 +151,8 @@ public class JPmanageBills1  extends JPanel {
 				frame.getSale().getManageBills2().setVisible(true);
 			break;
 			}
+			//标记当前面板，用于后退按钮
+			frame.getSale().setPanelType(PanelType.JPmanageBills2);
 		}
 
 		public void mouseEntered(MouseEvent e) {

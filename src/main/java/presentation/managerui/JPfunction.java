@@ -7,7 +7,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import userui.Frame;
+import presentation.PanelType;
+import entrance.Frame;
 
 public class JPfunction extends JPanel {
 
@@ -86,16 +87,22 @@ public class JPfunction extends JPanel {
 				function1.setIcon(new ImageIcon("src/image/managerUI/makeStrategy.jpg"));
 				JPfunction.this.setVisible(false);
 				frame.getManager().getManagerStrategy1().setVisible(true);
+				//标记当前面板，用于后退按钮
+				frame.getManager().setPanelType(PanelType.JPmanagerStrategy1);
 				break;
 			case 2:
 				function2.setIcon(new ImageIcon("src/image/managerUI/passBill.jpg"));
 				JPfunction.this.setVisible(false);
 				frame.getManager().getPassbill1().setVisible(true);
+				//标记当前面板，用于后退按钮
+				frame.getManager().setPanelType(PanelType.JPpassBill1);
 				break;
 			case 3:
 				function3.setIcon(new ImageIcon("src/image/managerUI/read.jpg"));
 				JPfunction.this.setVisible(false);
 				frame.getManager().getInquire().setVisible(true);
+				//标记当前面板，用于后退按钮
+				frame.getManager().setPanelType(PanelType.JPinquire);
 				break;
 			}
 		}

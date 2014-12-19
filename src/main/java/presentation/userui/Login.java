@@ -15,9 +15,12 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import entrance.Frame;
 import po.RM;
 import po.Role;
-import userui.Frame;
+import presentation.PanelType;
+import presentation.WarningPanel;
+import presentation.saleui.Sale;
 import vo.uservo.UserVO;
 import businesslogic.userbl.UserController;
 import businesslogicservice.userblservice.StubUserBlService;
@@ -48,7 +51,7 @@ public class Login extends JPanel {
     Frame frame;
     KeyAdapterOfSignIn keyAdapt;//键盘回车监听
     public Login(){
-
+    	
 		//设置窗口大小
 		this.setSize(960, 600);
 		//设置布局
@@ -140,10 +143,14 @@ public class Login extends JPanel {
 					frame.getFinancial().getAccount().setVisible(false);
 					frame.getFinancial().getAccountBuild().setVisible(false);
 					frame.getFinancial().getBusinessCondition().setVisible(false);
+					frame.getFinancial().getBusinessProgress().setVisible(false);
+					frame.getFinancial().getSaleDetail().setVisible(false);
 					frame.getFinancial().getAccountInfomation().setVisible(false);
 					frame.getFinancial().getFunction().setVisible(true);
 					Login.this.setVisible(false);
 					frame.getFinancial().setVisible(true);
+					//标记当前面板，用于后退按钮
+					frame.getFinancial().setPanelType(PanelType.JPfunction);
 					break;
 				case MANAGER:
 					frame.getManager().getPassbill1().setVisible(false);
@@ -152,10 +159,14 @@ public class Login extends JPanel {
 					frame.getManager().getManagerStrategy2().setVisible(false);
 					frame.getManager().getInquire().setVisible(false);
 					frame.getManager().getBusinessCondition().setVisible(false);
+					frame.getManager().getBusinessProgress().setVisible(false);
+					frame.getManager().getSaleDetail().setVisible(false);
 					frame.getManager().getCommodityChoose().setVisible(false);
 					frame.getManager().getFunction().setVisible(true);
 					Login.this.setVisible(false);
 					frame.getManager().setVisible(true);
+					//标记当前面板，用于后退按钮
+					frame.getManager().setPanelType(PanelType.JPfunction);
 					break;
 				case STOCK_STAFF:
 					
@@ -166,15 +177,20 @@ public class Login extends JPanel {
 					frame.getStock().getFunction().setVisible(true);
 					frame.getStock().setVisible(true);
 					Login.this.setVisible(false);
+					//标记当前面板，用于后退按钮
+					frame.getStock().setPanelType(PanelType.JPfunction);
 					break;
 				case PURCHASE_SALE_STAFF:
 				case PURCHASE_SALE_MANAGER:
 					frame.getSale().getManageBills1().setVisible(false);
 					frame.getSale().getManageBills2().setVisible(false);
 					frame.getSale().getCustomerManage().setVisible(false);
+					frame.getSale().getChoseComs().setVisible(false);
 					frame.getSale().getFunction().setVisible(true);
 					frame.getSale().setVisible(true);
 					Login.this.setVisible(false);
+					//标记当前面板，用于后退按钮
+					frame.getSale().setPanelType(PanelType.JPfunction);
 					break;
 				}
 				//清除文本框内容
@@ -182,7 +198,7 @@ public class Login extends JPanel {
 				passwords.setText("");
 			}
 			else{
-				System.out.println("用户名或密码错误，请重新输入");
+				frame.getWarning().showWarning("用户名或密码错误，请重新输入");
 			}
 			
 		}

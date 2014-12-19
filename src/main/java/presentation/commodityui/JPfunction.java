@@ -7,8 +7,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import entrance.Frame;
+import presentation.PanelType;
 import presentation.financialui.JPfunctions;
-import userui.Frame;
 
 public class JPfunction extends JPanel {
 
@@ -87,11 +88,15 @@ public class JPfunction extends JPanel {
 				function1.setIcon(new ImageIcon("src/image/stockUI/Commodity.png"));
 				JPfunction.this.setVisible(false);
 				frame.getStock().getManagerComs().setVisible(true);
+				//标记当前面板，用于后退按钮
+				frame.getStock().setPanelType(PanelType.JPManagerComOfStock);
 				break;
 			case 2:
 				function2.setIcon(new ImageIcon("src/image/stockUI/Bill.png"));
 				JPfunction.this.setVisible(false);
 				frame.getStock().getManageBills().setVisible(true);
+				//标记当前面板，用于后退按钮
+				frame.getStock().setPanelType(PanelType.JPmanageBills1);
 				break;
 			case 3:
 				function3.setIcon(new ImageIcon("src/image/stockUI/Read.png"));

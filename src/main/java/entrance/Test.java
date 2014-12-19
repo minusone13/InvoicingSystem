@@ -1,4 +1,4 @@
-package userui;
+package entrance;
 
 public class Test {
 

@@ -7,10 +7,10 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import entrance.Frame;
 import presentation.financialui.FinancialUI;
 import presentation.saleui.JPmanageBills1;
 import presentation.saleui.JPmanageBills2;
-import userui.Frame;
 
 public class Admin extends JPanel{
 		/*

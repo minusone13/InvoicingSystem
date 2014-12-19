@@ -12,13 +12,16 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import entrance.Frame;
 import po.BillState;
 import po.BillStyle;
 import presentation.managerui.JPBillList;
 import presentation.managerui.JTableOfList;
 import presentation.managerui.MouseListenerGetXY;
-import userui.Frame;
 import vo.CustomerVO;
+import vo.PurBackSheetVO;
+import vo.PurSheetVO;
+import vo.stockvo.CommodityVO;
 import businesslogic.customerbl.CustomerList;
 import businesslogicservice.customerblservice.CustomerBlService;
 
@@ -51,6 +54,30 @@ public class JPmanageBills2 extends JPanel {
 		private JTableOfList table=new JTableOfList();
 		//编辑面板
 		private JPanelEdit JPeditOfPur;
+		public JPanelEdit getJPeditOfPur() {
+			return JPeditOfPur;
+		}
+		public void setJPeditOfPur(JPanelEdit jPeditOfPur) {
+			JPeditOfPur = jPeditOfPur;
+		}
+		public JPanelEdit getJPeditOfPurBack() {
+			return JPeditOfPurBack;
+		}
+		public void setJPeditOfPurBack(JPanelEdit jPeditOfPurBack) {
+			JPeditOfPurBack = jPeditOfPurBack;
+		}
+		public JPanelEdit getJPeditOfSale() {
+			return JPeditOfSale;
+		}
+		public void setJPeditOfSale(JPanelEdit jPeditOfSale) {
+			JPeditOfSale = jPeditOfSale;
+		}
+		public JPanelEdit getJPeditOfSaleBack() {
+			return JPeditOfSaleBack;
+		}
+		public void setJPeditOfSaleBack(JPanelEdit jPeditOfSaleBack) {
+			JPeditOfSaleBack = jPeditOfSaleBack;
+		}
 		//编辑面板
 		private JPanelEdit JPeditOfPurBack;
 		//编辑面板
@@ -59,6 +86,9 @@ public class JPmanageBills2 extends JPanel {
 		private JPanelEdit JPeditOfSaleBack;
 		//单据类型
 		private BillStyle style;
+		public BillStyle getStyle() {
+			return style;
+		}
 		//图片
 		ImageIcon upIconW=new ImageIcon("src/image/upW.png");
 		ImageIcon downIconW=new ImageIcon("src/image/downW.png");
@@ -167,6 +197,7 @@ public class JPmanageBills2 extends JPanel {
 		  /*获取frame引用*/
 	    public void getFrame( Frame f){
 	    		frame=f;
+	    		billList.setFrame(frame);
 	    }
 		/*重新设置类型*/
 		public void setStyle( BillStyle s){
@@ -420,6 +451,31 @@ public class JPmanageBills2 extends JPanel {
 			private JComboBox warehouseCombo;
 			private JLabel addList=new JLabel();//增加商品
 			private JTextField totalText=new JTextField(10);
+			public JTextField getTotalText() {
+				return totalText;
+			}
+			public void setTotalText(JTextField totalText) {
+				this.totalText = totalText;
+			}
+			public JTextField getCouponText() {
+				return couponText;
+			}
+			public void setCouponText(JTextField couponText) {
+				this.couponText = couponText;
+			}
+			public JTextField getDiscountText() {
+				return discountText;
+			}
+			public void setDiscountText(JTextField discountText) {
+				this.discountText = discountText;
+			}
+			public JTextField getFinalTotalText() {
+				return finalTotalText;
+			}
+			public void setFinalTotalText(JTextField finalTotalText) {
+				this.finalTotalText = finalTotalText;
+			}
+
 			private JTextField noteText=new JTextField(10);
 			//销售与退货单的附件
 			private JLabel coupon=new JLabel("使用代金券");
@@ -430,6 +486,10 @@ public class JPmanageBills2 extends JPanel {
 			private JTextField finalTotalText=new JTextField(10);
 			//判断是加单据还是改单据
 			private boolean isAdd=false;
+			//接收输出商品
+			private ArrayList<CommodityVO> output;
+			//接收输出的备注
+			private ArrayList<String> outputNotes;
 			public JPanelEdit(BillStyle style){
 				//确认种类
 				billStyle=style;
@@ -480,7 +540,7 @@ public class JPmanageBills2 extends JPanel {
 					ArrayList<CustomerVO> customers=customerbl.getAllCustomer("Customer.txt");
 					String[] customerS=new String[customers.size()];
 					for(int i=0;i<customers.size();i++){
-						customerS[i]=customers.get(i).getname();
+						customerS[i]=customers.get(i).getname()+":"+customers.get(i).getid();
 					}
 					customerCombo = new JComboBox(customerS);
 					customerCombo.setFont(new Font("宋体",Font.BOLD,14));
@@ -555,7 +615,7 @@ public class JPmanageBills2 extends JPanel {
 					ArrayList<CustomerVO> customers2=customerbl.getAllCustomer("Customer.txt");
 					String[] customerS2=new String[customers2.size()];
 					for(int i=0;i<customers2.size();i++){
-						customerS2[i]=customers2.get(i).getname();
+						customerS2[i]=customers2.get(i).getname()+":"+customers2.get(i).getid();
 					}
 					customerCombo = new JComboBox(customerS2);
 					customerCombo.setFont(new Font("宋体",Font.BOLD,14));
@@ -634,6 +694,18 @@ public class JPmanageBills2 extends JPanel {
 			public void setAdd(boolean isAdd) {
 				this.isAdd = isAdd;
 			}
+			public ArrayList<CommodityVO> getOutput() {
+				return output;
+			}
+			public void setOutput(ArrayList<CommodityVO> output) {
+				this.output = output;
+			}
+			public ArrayList<String> getOutputNotes() {
+				return outputNotes;
+			}
+			public void setOutputNotes(ArrayList<String> outputNotes) {
+				this.outputNotes = outputNotes;
+			}
 			public class MouseListenerOfButton implements MouseListener{
 
 				private int num;//1、右移 2、加号 3、确认
@@ -657,15 +729,6 @@ public class JPmanageBills2 extends JPanel {
 						break;
 					case 2:
 						addList.setIcon(add1);
-						//显示商品选择面板
-						switch(billStyle){
-						case PurSheet:
-						case PurBackSheet:
-							break;
-						case SaleSheet:
-						case SaleBackSheet:
-							break;
-						}
 						
 						break;
 					case 3:
@@ -682,9 +745,63 @@ public class JPmanageBills2 extends JPanel {
 						break;
 					case 2:
 						addList.setIcon(add0);
+						//显示商品选择面板
+						frame.getSale().getChoseComs().getContent().innitial();
+						frame.getSale().getChoseComs().setVisible(true);
 						break;
 					case 3:
 						confirm.setIcon(confirm0);
+						if(isAdd){
+							switch(style){
+							case PurSheet:
+								if(output!=null
+								&&!totalText.getText().equals("")
+								&&!noteText.getText().equals("")){
+							
+									PurSheetVO newPur=new PurSheetVO();
+									String[] temp=customerCombo.getSelectedItem().toString().split(":");
+									newPur.setCustomer(customerbl.findCustomer(temp[1]));
+									newPur.setstock(warehouseCombo.getSelectedItem().toString());
+									newPur.setsheet(output);
+									newPur.setcommoditywords(outputNotes);
+									newPur.setmoney1(Double.parseDouble(totalText.getText()));
+									newPur.setwords(noteText.getText());
+									
+									billList.addPurSheet(newPur);
+								}
+								else{
+									frame.getWarning().showWarning("请输入完整信息");
+								}
+								break;
+							case PurBackSheet:
+								if(output!=null
+								&&!totalText.getText().equals("")
+								&&!noteText.getText().equals("")){
+							
+									PurBackSheetVO newPurBack=new PurBackSheetVO();
+									String[] temp=customerCombo.getSelectedItem().toString().split(":");
+									newPurBack.setCustomer(customerbl.findCustomer(temp[1]));
+									newPurBack.setstock(warehouseCombo.getSelectedItem().toString());
+									newPurBack.setsheet(output);
+									newPurBack.setcommoditywords(outputNotes);
+									newPurBack.setmoney1(Double.parseDouble(totalText.getText()));
+									newPurBack.setwords(noteText.getText());
+									
+									billList.addPurBackSheet(newPurBack);
+								}
+								else{
+									frame.getWarning().showWarning("请输入完整信息");
+								}
+							break;
+							case SaleSheet:
+							case SaleBackSheet:
+								break;
+							}
+						}
+						else{
+							
+						}
+						
 						break;
 					}
 				}
