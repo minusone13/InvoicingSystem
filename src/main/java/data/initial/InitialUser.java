@@ -1,6 +1,6 @@
 package data.initial;
 
-import data.Tool;
+import po.Tool;
 import data.userdata.*;
 
 public class InitialUser

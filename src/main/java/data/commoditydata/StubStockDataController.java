@@ -3,7 +3,6 @@ package data.commoditydata;
 import java.io.*;
 import java.util.ArrayList;
 
-import data.Tool;
 import data.stockservice.StockDataForFinancial;
 import dataservice.commoditydataservice.*;
 import po.*;
