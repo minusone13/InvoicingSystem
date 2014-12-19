@@ -459,7 +459,8 @@ public class StubCommodityList {//商品列表 haha
 		ArrayList<CommodityPO> temp = comdata.getAllCommodity();
 		CountVO vo = count();
 		try {
-			WritableWorkbook book=Workbook.createWorkbook(new File(FilePath));
+			File f = po.Tool.Opendoc(FilePath);
+			WritableWorkbook book=Workbook.createWorkbook(f);
 			WritableSheet sheet=book.createSheet("第一页",0);
 			Label label=new Label(0,0,"库存盘点");
 			sheet.addCell(label);

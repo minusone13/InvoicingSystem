@@ -731,6 +731,12 @@ public class StockTest{
 		assertEquals(3,coms.getNo());
 	}
 	
+	@Ignore
+	public void testExportCount()
+	{
+		
+	}
+	
 	@Test
 	public void testKuCunChaKan()
 	{
