@@ -7,6 +7,8 @@ import po.RM;
 import po.Role;
 import po.stockpo.PackPO;
 import presentation.userui.Login;
+import data.Tool;
+import data.commoditydata.StubStockDataController;
 import dataservice.commoditydataservice.*;
 import businesslogic.commoditybillbl.*;
 import businesslogic.commoditybl.*;
@@ -312,4 +314,9 @@ public class StubStockController implements StubCommodityBlService, StockBlForSa
 	public void setPool(StubBillPool pool) {
 		this.pool = pool;
 	}
+	
+    public void setFilePath(String s)
+    {//用于期初建账查看商品信息
+    	comdata.setFilePath(s);
+    }
 }

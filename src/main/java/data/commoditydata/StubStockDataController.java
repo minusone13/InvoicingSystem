@@ -95,6 +95,16 @@ public class StubStockDataController implements StubCommodityDataService, StockD
         save();
     }
     
+    public void setFilePath(String s)
+    {
+    	Tool.stock=s;
+    	instance = new StubStockDataController();
+    }
+    public void setDefaultFile()
+    {
+    	Tool.stock=Tool.defaultstock;
+    	instance = new StubStockDataController();
+    }
 	public RM insert(CommodityPO po)
 	{
 		read();
