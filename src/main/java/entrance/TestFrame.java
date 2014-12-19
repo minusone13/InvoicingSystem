@@ -5,6 +5,8 @@ import java.awt.Toolkit;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import presentation.commodityui.StockCheckPanel;
+import presentation.commodityui.StockInventoryPanel;
 import presentation.financialui.BusinessConditionPanel;
 import presentation.financialui.BusinessProcessPanel;
 import presentation.financialui.SaleDetailPanel;
@@ -37,7 +39,7 @@ public class TestFrame extends JFrame {
 	
 //		InitialInfoPanel t = new InitialInfoPanel();
 //		t.update(2);
-		TestFrame testJP=new TestFrame(new BusinessProcessPanel());
+		TestFrame testJP=new TestFrame(new StockCheckPanel());
 //		JPmanagerStrategy2 test=new JPmanagerStrategy2();
 //		test.setStyle(StrategyStyle.ReachStrategy);
 		
