@@ -1,5 +1,6 @@
 package businesslogicservice.customerblservice;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import po.RM;
@@ -12,11 +13,11 @@ public interface CustomerBlService {
 		 * 提供了一些客户管理方面的方法
 		 * */
 	
-		public boolean addCustomer(CustomerVO newCustomer);
-		public boolean updateCustomer(CustomerVO vo);
-		public boolean deleteCustomer(String id);
-		public CustomerVO findCustomer(String id);
-		public ArrayList<CustomerVO> getAllCustomer(String address);
+		public boolean addCustomer(CustomerVO newCustomer)throws RemoteException;
+		public boolean updateCustomer(CustomerVO vo)throws RemoteException;
+		public boolean deleteCustomer(String id)throws RemoteException;
+		public CustomerVO findCustomer(String id) throws RemoteException;
+		public ArrayList<CustomerVO> getAllCustomer(String address)throws RemoteException;
 		
 		//    saveAllCustomer 方法;
 		/*

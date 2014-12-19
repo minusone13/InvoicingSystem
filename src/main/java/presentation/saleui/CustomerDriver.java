@@ -1,5 +1,7 @@
 package presentation.saleui;
 
+import java.rmi.RemoteException;
+
 import businesslogicservice.customerblservice.CustomerBlService;
 import businesslogicservice.salebillblservice.SaleBillBlService;
 
@@ -15,7 +17,16 @@ public class CustomerDriver {
 		public void drive(){
 			//boolean result1=cbs.addCustomer("csc");
 			//if(result1==true) System.out.println("addCustomer success!"); 
-			boolean result2=cbs.deleteCustomer("131");
+			boolean result2 = false;
+			try
+			{
+				result2 = cbs.deleteCustomer("131");
+			}
+			catch (RemoteException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			if(result2==true) System.out.println("deleteCustomer success!"); 
 			boolean result3=sbbs.getPurBackSheet("131");
 			if(result3==true) System.out.println("getPurBackSheet success!"); 

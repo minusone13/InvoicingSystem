@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -741,7 +742,15 @@ public class JPmanageCustomer extends JPanel {
 								billList.getJPbillList().clear();
 								billList.reHome();
 								ArrayList<CustomerVO> cus=new ArrayList<CustomerVO>();
-								cus.add(customerbl.findCustomer(searchTxt.getText()));
+								try
+								{
+									cus.add(customerbl.findCustomer(searchTxt.getText()));
+								}
+								catch (RemoteException e1)
+								{
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}
 								billList.addCustomerList(cus);
 								
 							}

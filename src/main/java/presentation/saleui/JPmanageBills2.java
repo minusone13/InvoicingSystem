@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -537,7 +538,16 @@ public class JPmanageBills2 extends JPanel {
 					note.setBounds(40, 150, 40, 20);
 					
 					//客户选择下拉框
-					ArrayList<CustomerVO> customers=customerbl.getAllCustomer("Customer.txt");
+						ArrayList<CustomerVO> customers = null;
+						try
+						{
+							customers = customerbl.getAllCustomer("Customer.txt");
+						}
+						catch (RemoteException e)
+						{
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 					String[] customerS=new String[customers.size()];
 					for(int i=0;i<customers.size();i++){
 						customerS[i]=customers.get(i).getname()+":"+customers.get(i).getid();
@@ -612,7 +622,16 @@ public class JPmanageBills2 extends JPanel {
 					note.setBounds(40, 195, 40, 20);
 					
 					//客户选择下拉框
-					ArrayList<CustomerVO> customers2=customerbl.getAllCustomer("Customer.txt");
+						ArrayList<CustomerVO> customers2 = null;
+						try
+						{
+							customers2 = customerbl.getAllCustomer("Customer.txt");
+						}
+						catch (RemoteException e)
+						{
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 					String[] customerS2=new String[customers2.size()];
 					for(int i=0;i<customers2.size();i++){
 						customerS2[i]=customers2.get(i).getname()+":"+customers2.get(i).getid();
@@ -760,7 +779,15 @@ public class JPmanageBills2 extends JPanel {
 							
 									PurSheetVO newPur=new PurSheetVO();
 									String[] temp=customerCombo.getSelectedItem().toString().split(":");
-									newPur.setCustomer(customerbl.findCustomer(temp[1]));
+									try
+									{
+										newPur.setCustomer(customerbl.findCustomer(temp[1]));
+									}
+									catch (RemoteException e1)
+									{
+										// TODO Auto-generated catch block
+										e1.printStackTrace();
+									}
 									newPur.setstock(warehouseCombo.getSelectedItem().toString());
 									newPur.setsheet(output);
 									newPur.setcommoditywords(outputNotes);
@@ -780,7 +807,15 @@ public class JPmanageBills2 extends JPanel {
 							
 									PurBackSheetVO newPurBack=new PurBackSheetVO();
 									String[] temp=customerCombo.getSelectedItem().toString().split(":");
-									newPurBack.setCustomer(customerbl.findCustomer(temp[1]));
+									try
+									{
+										newPurBack.setCustomer(customerbl.findCustomer(temp[1]));
+									}
+									catch (RemoteException e1)
+									{
+										// TODO Auto-generated catch block
+										e1.printStackTrace();
+									}
 									newPurBack.setstock(warehouseCombo.getSelectedItem().toString());
 									newPurBack.setsheet(output);
 									newPurBack.setcommoditywords(outputNotes);

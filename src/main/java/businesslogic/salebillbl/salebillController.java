@@ -1,5 +1,6 @@
 package businesslogic.salebillbl;
 
+import java.rmi.RemoteException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -398,7 +399,14 @@ public class salebillController implements SaleBillBlService,salebillForFinancia
 		public String sureReachStrategy(String nameOfCustomer,double pmoney,String operatorid,LevelStrategyStyle style){
 			String words = new String();
 			CustomerBlService custController = new CustomerList();
-			CustomerVO customervo = custController.findCustomer(nameOfCustomer);
+			try
+			{
+				CustomerVO customervo = custController.findCustomer(nameOfCustomer);
+			}
+			catch (RemoteException e)
+			{
+				e.printStackTrace();
+			}
 			StubManagerBlService straController = new StubManager();;
 			ArrayList<ReachStrategyVO> rsvo = straController.ShowReachStrategy();
 			//满额策略能够提供些什么;

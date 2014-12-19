@@ -1,5 +1,6 @@
 package businesslogic.customerbl;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import businesslogic.customerService.CustomerForFinancial;
@@ -38,16 +39,13 @@ public class CustomerList implements CustomerForFinancial, CustomerBlService{
 			return false;
 		}
 		
-		public CustomerVO findCustomer(String id){
+		public CustomerVO findCustomer(String id) throws RemoteException{
 			CustomerVO vo = new CustomerVO();
 			Customer newCustomer = new Customer();
-			try{
+			
 				CustomerDataService customerdata = new CustomerData();
 				newCustomer.setPO(customerdata.findCustomer(id));//判断下是否存在，到时候再说吧。。
-				vo=newCustomer.getVO();}
-			catch(Exception e){
-				System.out.println("findCustomer 异常"+e);
-			}
+				vo=newCustomer.getVO();
 			return vo;
 		}
 		
@@ -117,14 +115,32 @@ public class CustomerList implements CustomerForFinancial, CustomerBlService{
 		}
 
 		public void changeShouldPay(String id, double hadPay) {
-			CustomerVO vo = this.findCustomer(id);
+			CustomerVO vo = null;
+			try
+			{
+				vo = this.findCustomer(id);
+			}
+			catch (RemoteException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			vo.setShouldPay(vo.getShouldPay()-hadPay);
 			this.updateCustomer(vo);
 			
 		}//修改应付;对应于收款单;hadpay公司给了客户多少，对应于付款单;
 
 		public void changeShouldTake(String id, double hadGive) {
-			CustomerVO vo = this.findCustomer(id);
+			CustomerVO vo = null;
+			try
+			{
+				vo = this.findCustomer(id);
+			}
+			catch (RemoteException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			vo.setShouldTake(vo.getShouldTake()-hadGive);
 			this.updateCustomer(vo);
 			

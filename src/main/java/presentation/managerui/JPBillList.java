@@ -1,5 +1,6 @@
 package presentation.managerui;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
@@ -274,11 +275,28 @@ public class JPBillList extends JPanel {
 	/*增加客户*/
 	public void addCustomer(CustomerVO cs){
 		//调用逻辑层
-		boolean result=customerbl.addCustomer(cs);
+		boolean result = false;
+		try
+		{
+			result = customerbl.addCustomer(cs);
+		}
+		catch (RemoteException e1)
+		{
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		if(result){
 			//从逻辑层读取数据更新界面
 			JPbillList.clear();
-			this.addCustomerList(customerbl.getAllCustomer("Customer.txt"));
+			try
+			{
+				this.addCustomerList(customerbl.getAllCustomer("Customer.txt"));
+			}
+			catch (RemoteException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		else{
 			frame.getWarning().showWarning("增加客户失败");
@@ -532,7 +550,15 @@ public class JPBillList extends JPanel {
 				if(result){
 					//从逻辑层读取数据更新界面
 					JPbillList.clear();
-					this.addCustomerList(customerbl.getAllCustomer("Customer.txt"));
+					try
+					{
+						this.addCustomerList(customerbl.getAllCustomer("Customer.txt"));
+					}
+					catch (RemoteException e)
+					{
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
 				else{
 					
@@ -782,7 +808,16 @@ public class JPBillList extends JPanel {
 						}
 						//如果是客户
 						if(JPbillList.get(i).getCustomerVO()!=null){
-							boolean result=customerbl.deleteCustomer(JPbillList.get(i).getCustomerVO().getid());
+							boolean result = false;
+							try
+							{
+								result = customerbl.deleteCustomer(JPbillList.get(i).getCustomerVO().getid());
+							}
+							catch (RemoteException e)
+							{
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
 						
 							if(result){
 								JPbillList.remove(i);

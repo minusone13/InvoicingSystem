@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.rmi.RemoteException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -1368,7 +1369,16 @@ public class JPBill extends JPanel {
 	public boolean change(CustomerVO cus){
 		
 		//调用逻辑层修改对应单据的数据
-		boolean result=customerbl.updateCustomer(cus);
+		boolean result = false;
+		try
+		{
+			result = customerbl.updateCustomer(cus);
+		}
+		catch (RemoteException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return result;
 	}
 	//修改用户密码

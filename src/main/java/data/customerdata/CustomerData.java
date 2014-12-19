@@ -32,12 +32,12 @@ public class CustomerData extends UnicastRemoteObject implements CustomerDataSer
 		return true;
 	}
 
-	public boolean deleteCustomer(String name) throws RemoteException {
+	public boolean deleteCustomer(String id) throws RemoteException {
 		String address = "Customer.txt";
 		ArrayList<CustomerPO> listOfCustomerPO = new ArrayList<CustomerPO>();
 		listOfCustomerPO = this.getAllCustomer(address); 
 		for(CustomerPO po:listOfCustomerPO){
-			if(po.getname().equals(name)){
+			if(po.getid().equals(id)){
 				listOfCustomerPO.remove(po);
 				this.saveAllCustomer(listOfCustomerPO, address);
 				return true;
@@ -70,10 +70,10 @@ public class CustomerData extends UnicastRemoteObject implements CustomerDataSer
 				return po;
 			}
 		}
-		return new CustomerPO("娌′汉");
+		return new CustomerPO("没人");
 	}
 
-	public ArrayList<CustomerPO> getAllCustomer(String addre) throws RemoteException{
+	public ArrayList<CustomerPO> getAllCustomer(String addre) {
 		ArrayList<CustomerPO> listOfCustomerPO = new ArrayList<CustomerPO>();
 		ObjectInputStream ois=null;
 		File address = Tool.Opendoc(addre);
