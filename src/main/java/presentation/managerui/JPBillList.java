@@ -346,6 +346,7 @@ public class JPBillList extends JPanel {
 	}
 	/*增加进货单*/
 	public void addPurSheet(PurSheetVO ps){
+		System.out.println("增加进货单");
 		//调用逻辑层
 		sbl.createPurSheet(ps);
 		//从逻辑层读取数据更新界面

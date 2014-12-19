@@ -7,6 +7,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import po.Role;
+import presentation.commodityui.JPManagerCom;
 import presentation.financialui.FinancialUI;
 import presentation.saleui.JPmanageBills1;
 import presentation.saleui.JPmanageBills2;
@@ -26,6 +28,7 @@ public class Sale extends JPanel{
 		private JLabel signout = new JLabel();
 		//frame的引用
 		private Frame frame;
+		
 	 	public JPfunctions getFunction() {
 			return function;
 		}
@@ -55,6 +58,16 @@ public class Sale extends JPanel{
 		private JPmanageBills2 manageBills2=new JPmanageBills2();
 		//客户管理
 		private JPmanageCustomer customerManage=new JPmanageCustomer();
+		//选择商品
+		JPManagerCom choseComs=new JPManagerCom();
+		public JPManagerCom getChoseComs() {
+			return choseComs;
+		}
+
+		public void setChoseComs(JPManagerCom choseComs) {
+			this.choseComs = choseComs;
+		}
+
 		public Sale(){
 
 			//设置窗口大小
@@ -99,6 +112,10 @@ public class Sale extends JPanel{
 			//客户管理
 			customerManage.setVisible(false);
 			customerManage.setLocation(55, 233);
+			//选择商品
+			choseComs.setLocation(55, 210);
+			choseComs.setRole(Role.PURCHASE_SALE_STAFF);
+			choseComs.setVisible(false);
 			
 			this.add(title,0);
 			this.add(sign,1);
@@ -106,11 +123,12 @@ public class Sale extends JPanel{
 			this.add(home,3);
 			this.add(back,4);
 			this.add(signout,5);
-			this.add(function,6);
-			this.add(manageBills1,7);
-			this.add(manageBills2,8);
-			this.add(customerManage,9);
-			this.add(bg,10);
+			this.add(choseComs,6);
+			this.add(function,7);
+			this.add(manageBills1,8);
+			this.add(manageBills2,9);
+			this.add(customerManage,10);
+			this.add(bg,11);
 		}
 
 	    /*获取frame引用*/
@@ -120,6 +138,7 @@ public class Sale extends JPanel{
 	    		manageBills1.getFrame(frame);
 	    		manageBills2.getFrame(frame);
 	    		customerManage.getFrame(frame);
+	    		choseComs.getFrame(frame);
 	    }
 		public JPmanageCustomer getCustomerManage() {
 			return customerManage;
@@ -162,6 +181,7 @@ public class Sale extends JPanel{
 					Sale.this.getManageBills1().setVisible(false);
 					Sale.this.getManageBills2().setVisible(false);
 					Sale.this.getCustomerManage().setVisible(false);
+					Sale.this.getChoseComs().setVisible(false);
 					Sale.this.getFunction().setVisible(true);
 					break;
 				case 2:

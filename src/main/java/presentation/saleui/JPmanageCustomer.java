@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
@@ -15,6 +16,8 @@ import presentation.managerui.JPBillList;
 import presentation.managerui.MouseListenerGetXY;
 import userui.Frame;
 import vo.CustomerVO;
+import businesslogic.customerbl.CustomerList;
+import businesslogicservice.customerblservice.CustomerBlService;
 
 public class JPmanageCustomer extends JPanel {
 
@@ -60,6 +63,8 @@ public class JPmanageCustomer extends JPanel {
 			ImageIcon addIconR=new ImageIcon("src/image/function/addR.png");
 			//frame的引用
 		    Frame frame;
+		    //客户管理逻辑层接口
+		    CustomerBlService customerbl=new CustomerList();
 			public JPmanageCustomer(){//参数决定编辑板的类型
 				//面板大小
 				this.setSize(905, 342);
@@ -731,6 +736,17 @@ public class JPmanageCustomer extends JPanel {
 							break;
 						case 3:
 							searchButton.setIcon(search0);
+							if(!searchTxt.getText().equals("")){
+								billList.getJPbillList().clear();
+								billList.reHome();
+								ArrayList<CustomerVO> cus=new ArrayList<CustomerVO>();
+								cus.add(customerbl.findCustomer(searchTxt.getText()));
+								billList.addCustomerList(cus);
+								
+							}
+							else{
+								System.out.println("请输入客户ID");
+							}
 							break;
 						}
 					}

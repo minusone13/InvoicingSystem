@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import presentation.WarningPanel;
 import presentation.commodityui.Stock;
 import presentation.financialui.FinancialUI;
 import presentation.managerui.ManagerUI;
@@ -35,6 +36,13 @@ public class Frame extends JFrame implements MouseListener{
 	private Stock stock;
 	//管理员
 	private Admin admin;
+	private WarningPanel warning;
+	public WarningPanel getWarning() {
+		return warning;
+	}
+	public void setWarning(WarningPanel warning) {
+		this.warning = warning;
+	}
 	public JPanel getMainJP() {
 		return mainJP;
 	}
@@ -92,7 +100,8 @@ public class Frame extends JFrame implements MouseListener{
 		//设置jp大小
 		mainJP.setBounds(0, 0, 960, 600);
 		mainJP.setLayout(null);
-		
+		//提示信息框
+		warning=new WarningPanel();
 		//关闭与小化
 		close.setIcon(new ImageIcon("src/image/cancel.png"));
 		minus.setIcon(new ImageIcon("src/image/minus.png"));
@@ -100,43 +109,44 @@ public class Frame extends JFrame implements MouseListener{
 		minus.setBounds(910, 1, 24, 24);
 		close.addMouseListener(new MouseListenerOfButton(1));
 		minus.addMouseListener(new MouseListenerOfButton(2));
-		mainJP.add(close,0);
-		mainJP.add(minus,1);
+		mainJP.add(warning,0);
+		mainJP.add(close,1);
+		mainJP.add(minus,2);
 		
 		
 		//登录面板
 		login=new Login();
 		login.getFrame(this);
-		mainJP.add(login,2);
+		mainJP.add(login,3);
 		login.setBounds(0, 0, 960, 600);
 		
 		manager=new ManagerUI();
 		manager.getFrame(this);
-		mainJP.add(manager,3);
+		mainJP.add(manager,4);
 		manager.setVisible(false);
 		manager.setBounds(0, 0, 960, 600);
 		
 		financial=new FinancialUI();
 		financial.getFrame(this);
-		mainJP.add(financial,4);
+		mainJP.add(financial,5);
 		financial.setVisible(false);
 		financial.setBounds(0, 0, 960, 600);
 		
 		sale=new Sale();
 		sale.getFrame(this);
-		mainJP.add(sale,5);
+		mainJP.add(sale,6);
 		sale.setVisible(false);
 		sale.setBounds(0, 0, 960, 600);
 		
 		stock=new Stock();
 		stock.getFrame(this);
-		mainJP.add(stock,6);
+		mainJP.add(stock,7);
 		stock.setVisible(false);
 		stock.setBounds(0, 0, 960, 600);
 		
 		admin=new Admin();
 		admin.getFrame(this);
-		mainJP.add(admin,7);
+		mainJP.add(admin,8);
 		admin.setVisible(false);
 		admin.setBounds(0, 0, 960, 600);
 		

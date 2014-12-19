@@ -57,7 +57,13 @@ public class JPManagerCom extends JPanel{
 	//查询
 	private JTextField detail=new JTextField(16);
 	//frame的引用
-    Frame frame;
+	private Frame frame;
+	public Frame getFrame() {
+		return frame;
+	}
+	public void setFrame(Frame frame) {
+		this.frame = frame;
+	}
 	public JPManagerCom(){
 		this.setSize(617, 370);
 		this.setLayout(null);
@@ -217,6 +223,48 @@ public class JPManagerCom extends JPanel{
 					commodities.update();
 					break;
 				case PURCHASE_SALE_STAFF:
+					//输出商品到编辑面板
+					ArrayList<CommodityVO> temp2=new ArrayList<CommodityVO>();
+					for(CommodityVO vo:commodities.getOutput()){
+						temp2.add(vo);
+					}
+					ArrayList<String> tempNotes=new ArrayList<String>();
+					for(String str:commodities.getOutputNotes()){
+						tempNotes.add(str);
+					}
+					//自动计算总进价
+					Double total=0.0;
+					for(int i=0;i<temp2.size();i++){
+						total+=temp2.get(i).getIn()*temp2.get(i).getNumber();
+					}
+					//自动计算总售价
+					Double total2=0.0;
+					for(int i=0;i<temp2.size();i++){
+						total2+=temp2.get(i).getOut()*temp2.get(i).getNumber();
+					}
+					
+					switch(frame.getSale().getManageBills2().getStyle()){
+					case PurSheet:
+						frame.getSale().getManageBills2().getJPeditOfPur().setOutput(temp2);
+						frame.getSale().getManageBills2().getJPeditOfPur().getTotalText().setText(String.valueOf(total));
+						break;
+					case PurBackSheet:
+						frame.getSale().getManageBills2().getJPeditOfPurBack().setOutput(temp2);
+						frame.getSale().getManageBills2().getJPeditOfPurBack().getTotalText().setText(String.valueOf(total));
+						break;
+					case SaleSheet:
+						frame.getSale().getManageBills2().getJPeditOfSale().setOutput(temp2);
+						frame.getSale().getManageBills2().getJPeditOfSale().getTotalText().setText(String.valueOf(total2));
+						break;
+					case SaleBackSheet:
+						frame.getSale().getManageBills2().getJPeditOfSaleBack().setOutput(temp2);
+						frame.getSale().getManageBills2().getJPeditOfSaleBack().getTotalText().setText(String.valueOf(total2));
+						break;
+					}
+					//清除选择痕迹
+					commodities.getOutput().clear();
+					commodities.getCommodities().clear();
+					commodities.update();
 					break;
 				case STOCK_STAFF:
 					//获取选择的商品

@@ -523,7 +523,14 @@ public class JPBill extends JPanel {
 		ID.setBounds(31,5, 200, 20);
 		
 		//单据信息未完
-		JLabel name=new JLabel(customer.getname());
+		String t="";
+		if(customer.gettype()==0){
+			t="进货商:";
+		}
+		else{
+			t="销售商:";
+		}
+		JLabel name=new JLabel(t+customer.getname());
 		JLabel saleman=new JLabel(customer.getdeSaler());
 		JLabel level=new JLabel(String.valueOf(customer.getlevel()));
 		JLabel pay=new JLabel(String.valueOf(customer.getShouldPay()));
@@ -538,11 +545,37 @@ public class JPBill extends JPanel {
 		JLabel postcode=new JLabel(customer.getpostcode());
 		JLabel maxowe=new JLabel(String.valueOf(customer.getmaxOwe()));
 	
+		name.setFont(new Font("楷体",Font.PLAIN,16));
+		saleman.setFont(new Font("楷体",Font.PLAIN,16));
+		name.setForeground(Color.white);
+		saleman.setForeground(Color.white);
+		name.setBounds(80, 28,150, 20);
+		saleman.setBounds(143,47,150, 20);
+		level.setBounds(315,4, 100, 17);
+		receive.setBounds(315,21, 100, 17);
+		pay.setBounds(315,38, 100, 17);
+		phoneNum.setBounds(315,55, 100, 17);
+		address.setBounds(315,72,250, 17);
+		
+		email.setBounds(400,3,200, 17);
+		maxowe.setBounds(424,20, 100, 17);
+		postcode.setBounds(400,38, 100, 17);
+		
 		
 		this.add(right,0);
 		this.add(left,1);
 		this.add(ID,2);
-		this.add(bg,3);
+		this.add(name,3);
+		this.add(saleman,4);
+		this.add(level,5);
+		this.add(receive,6);
+		this.add(pay,7);
+		this.add(phoneNum,8);
+		this.add(address,9);
+		this.add(email,10);
+		this.add(maxowe,11);
+		this.add(postcode,12);
+		this.add(bg,13);
 	}
 	public JPBill(UserVO user){
 		//区分面板种类
@@ -984,6 +1017,7 @@ public class JPBill extends JPanel {
 		this.add(bg,3);
 	}
 	public JPBill(PurSheetVO ps){
+		System.out.println("初始化进货单");
 		//区分面板种类
 		setType(JPbillType.Bill);
 		//设置单据编号，状态，种类
@@ -1012,7 +1046,7 @@ public class JPBill extends JPanel {
 		left.setBounds(482, 26, 40, 40);
 		left.addMouseListener(new MouseListenerOfButton(2));
 		//单据信息
-		JLabel ID=new JLabel("ID:"+ps.getID(),JLabel.CENTER);
+		JLabel ID=new JLabel("ID:"+ps.getid(),JLabel.CENTER);
 		ID.setBounds(31,5, 200, 20);
 		
 		JLabel customer=new JLabel(ps.getcustomer().getname());
@@ -1664,7 +1698,7 @@ public class JPBill extends JPanel {
 					list2[i][3]=String.valueOf(purVO.getsheet().get(i).getNumber());
 					list2[i][4]=String.valueOf(purVO.getsheet().get(i).getIn());
 					list2[i][5]=String.valueOf(purVO.getsheet().get(i).getIn()*purVO.getsheet().get(i).getNumber());
-//					list2[i][6]=purVO.getsheet().get(i);
+					list2[i][6]=purVO.getcommoditywords().get(i);
 				}
 				table.setList(list2);
 				table.updateShow();
@@ -1673,14 +1707,14 @@ public class JPBill extends JPanel {
 				String[] temp3={"编号","名称","型号","数量","单价","金额","备注"};
 				table.setColumnNames(temp3);
 				String[][] list3=new String[purbackVO.getsheet().size()][7];
-				for(int i=0;i<purVO.getsheet().size();i++){
-					list3[i][0]=purVO.getsheet().get(i).getId();
-					list3[i][1]=purVO.getsheet().get(i).getName();
-					list3[i][2]=purVO.getsheet().get(i).getModel();
-					list3[i][3]=String.valueOf(purVO.getsheet().get(i).getNumber());
-					list3[i][4]=String.valueOf(purVO.getsheet().get(i).getIn());
-					list3[i][5]=String.valueOf(purVO.getsheet().get(i).getIn()*purVO.getsheet().get(i).getNumber());
-//					list3[i][6]=purVO.getsheet().get(i);
+				for(int i=0;i<purbackVO.getsheet().size();i++){
+					list3[i][0]=purbackVO.getsheet().get(i).getId();
+					list3[i][1]=purbackVO.getsheet().get(i).getName();
+					list3[i][2]=purbackVO.getsheet().get(i).getModel();
+					list3[i][3]=String.valueOf(purbackVO.getsheet().get(i).getNumber());
+					list3[i][4]=String.valueOf(purbackVO.getsheet().get(i).getIn());
+					list3[i][5]=String.valueOf(purbackVO.getsheet().get(i).getIn()*purbackVO.getsheet().get(i).getNumber());
+					list3[i][6]=purbackVO.getcommoditywords().get(i);
 				}
 				table.setList(list3);
 				table.updateShow();
@@ -1689,14 +1723,14 @@ public class JPBill extends JPanel {
 				String[] temp4={"编号","名称","型号","数量","单价","金额","备注"};
 				table.setColumnNames(temp4);
 				String[][] list4=new String[saleVO.getsheet().size()][7];
-				for(int i=0;i<purVO.getsheet().size();i++){
-					list4[i][0]=purVO.getsheet().get(i).getId();
-					list4[i][1]=purVO.getsheet().get(i).getName();
-					list4[i][2]=purVO.getsheet().get(i).getModel();
-					list4[i][3]=String.valueOf(purVO.getsheet().get(i).getNumber());
-					list4[i][4]=String.valueOf(purVO.getsheet().get(i).getOut());
-					list4[i][5]=String.valueOf(purVO.getsheet().get(i).getOut()*purVO.getsheet().get(i).getNumber());
-//					list4[i][6]=purVO.getsheet().get(i);
+				for(int i=0;i<saleVO.getsheet().size();i++){
+					list4[i][0]=saleVO.getsheet().get(i).getId();
+					list4[i][1]=saleVO.getsheet().get(i).getName();
+					list4[i][2]=saleVO.getsheet().get(i).getModel();
+					list4[i][3]=String.valueOf(saleVO.getsheet().get(i).getNumber());
+					list4[i][4]=String.valueOf(saleVO.getsheet().get(i).getOut());
+					list4[i][5]=String.valueOf(saleVO.getsheet().get(i).getOut()*purVO.getsheet().get(i).getNumber());
+					list4[i][6]=saleVO.getcommoditywords().get(i);
 				}
 				table.setList(list4);
 				table.updateShow();
@@ -1705,14 +1739,14 @@ public class JPBill extends JPanel {
 				String[] temp5={"编号","名称","型号","数量","单价","金额","备注"};
 				table.setColumnNames(temp5);
 				String[][] list5=new String[salebackVO.getsheet().size()][7];
-				for(int i=0;i<purVO.getsheet().size();i++){
-					list5[i][0]=purVO.getsheet().get(i).getId();
-					list5[i][1]=purVO.getsheet().get(i).getName();
-					list5[i][2]=purVO.getsheet().get(i).getModel();
-					list5[i][3]=String.valueOf(purVO.getsheet().get(i).getNumber());
-					list5[i][4]=String.valueOf(purVO.getsheet().get(i).getOut());
-					list5[i][5]=String.valueOf(purVO.getsheet().get(i).getOut()*purVO.getsheet().get(i).getNumber());
-//					list5[i][6]=purVO.getsheet().get(i);
+				for(int i=0;i<salebackVO.getsheet().size();i++){
+					list5[i][0]=salebackVO.getsheet().get(i).getId();
+					list5[i][1]=salebackVO.getsheet().get(i).getName();
+					list5[i][2]=salebackVO.getsheet().get(i).getModel();
+					list5[i][3]=String.valueOf(salebackVO.getsheet().get(i).getNumber());
+					list5[i][4]=String.valueOf(salebackVO.getsheet().get(i).getOut());
+					list5[i][5]=String.valueOf(salebackVO.getsheet().get(i).getOut()*purVO.getsheet().get(i).getNumber());
+					list5[i][6]=salebackVO.getcommoditywords().get(i);
 				}
 				table.setList(list5);
 				table.updateShow();

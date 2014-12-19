@@ -32,7 +32,7 @@ public class JPtreeContent extends JPanel {
 	private JScrollPane SCR;
 	private JPManagerCom JPmanagerCom;//整个商品管理界面的引用
 	private DefaultTreeModel treeModel;//树模型
-	private final JTree tree ;//树
+	private JTree tree ;//树
 	private DefaultMutableTreeNode top ;
 	//逻辑层接口
 	private StubCommodityBlService stockbl=new StubStockController();
@@ -63,14 +63,35 @@ public class JPtreeContent extends JPanel {
 		SCR.getViewport().setOpaque(false);//设置透明
 		SCR.setBorder(null);
 		
-        top= new DefaultMutableTreeNode("商品分类");
+		
+        //根据数据层初始化树
+        innitial();
+      
+      
+//        tree.startEditingAtPath(tree.getSelectionPath());  
+        
+        
+		add(SCR,0);
+		add(back,1);
+	}
+	public void innitial(){
+		top= new DefaultMutableTreeNode("商品分类");
         //通过树节点对象创建树模型对象
         treeModel=new DefaultTreeModel(top);
         //通过树模型对象创建树对象
         tree= new JTree(treeModel);
-        //根据数据层初始化树
-        innitial();
-      
+		  //根据逻辑层数据构建树
+		top.removeAllChildren();
+        ArrayList<StockVO> stockList=stockbl.openCategory("1");
+        if(stockList.size()!=0){
+        	 if(stockList.get(0).getT()==Type.Category){
+           	  for(StockVO temp:stockList){
+           		  DefaultMutableTreeNode child=new DefaultMutableTreeNode(temp.getCat().getName());
+           		  treeModel.insertNodeInto(child, top, top.getChildCount());
+           		 addCategory(child);//递归加子分类
+           	  }
+           }
+        }
         //设置树可编辑
         tree.setEditable(true);
         //设置树透明
@@ -110,26 +131,7 @@ public class JPtreeContent extends JPanel {
         }
         });
         tree.getCellEditor().addCellEditorListener(new CellEditorAction());  
-//        tree.startEditingAtPath(tree.getSelectionPath());  
-        
         SCR.setViewportView(tree);
-        
-		add(SCR,0);
-		add(back,1);
-	}
-	public void innitial(){
-		  //根据逻辑层数据构建树
-		top.removeAllChildren();
-        ArrayList<StockVO> stockList=stockbl.openCategory("1");
-        if(stockList.size()!=0){
-        	 if(stockList.get(0).getT()==Type.Category){
-           	  for(StockVO temp:stockList){
-           		  DefaultMutableTreeNode child=new DefaultMutableTreeNode(temp.getCat().getName());
-           		  treeModel.insertNodeInto(child, top, top.getChildCount());
-           		 addCategory(child);//递归加子分类
-           	  }
-           }
-        }
 	}
 	/*节点编辑监听*/
 	private class CellEditorAction implements CellEditorListener{  

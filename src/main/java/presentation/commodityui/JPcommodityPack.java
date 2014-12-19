@@ -25,6 +25,7 @@ public class JPcommodityPack extends JPanel {
 	private ArrayList<JPcommodity> commodities=new ArrayList<JPcommodity>();
 	private JPManagerCom JPmanagerCom;
 	private ArrayList<CommodityVO> output=new ArrayList<CommodityVO>();
+	private ArrayList<String> outputNotes=new ArrayList<String>();
 	//逻辑层接口
 	private StubCommodityBlService stockbl=new StubStockController();
 	public JPcommodityPack(){
@@ -110,10 +111,12 @@ public class JPcommodityPack extends JPanel {
 	}
 	/*将选中的商品加到输出数组中*/
 	public void addToOutput(){
-		ArrayList<CommodityVO> temp=getAllChosen();
-		if(temp!=null){
-			for(int i=0;i<temp.size();i++){
-				output.add(temp.get(i));
+		ArrayList<CommodityVO> temp1=getAllChosen();
+		ArrayList<String> temp2=getAllChosenNotes();
+		if(temp1!=null){
+			for(int i=0;i<temp1.size();i++){
+				output.add(temp1.get(i));//商品输出
+				outputNotes.add(temp2.get(i));//备注输出
 			}
 		}
 	}
@@ -122,6 +125,22 @@ public class JPcommodityPack extends JPanel {
 	}
 	public void setOutput(ArrayList<CommodityVO> output) {
 		this.output = output;
+	}
+	/*返回选中的商品的备注*/
+	public ArrayList<String> getAllChosenNotes(){
+		if(getChosenNum()>=1){
+			ArrayList<String> result=new ArrayList<String>();
+			for(JPcommodity temp:commodities){
+				if(temp.isChosen()){
+					result.add(temp.getNote());
+				}
+			}
+			return result;
+		}
+		else{
+			System.out.println("没有选择任何商品");
+		}
+		return null;
 	}
 	/*返回选中的商品*/
 	public ArrayList<CommodityVO> getAllChosen(){
@@ -208,5 +227,11 @@ public class JPcommodityPack extends JPanel {
 	}
 	public void setJPmanagerCom(JPManagerCom jPmanagerCom) {
 		JPmanagerCom = jPmanagerCom;
+	}
+	public ArrayList<String> getOutputNotes() {
+		return outputNotes;
+	}
+	public void setOutputNotes(ArrayList<String> outputNotes) {
+		this.outputNotes = outputNotes;
 	}
 }

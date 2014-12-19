@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import po.BillStyle;
 import vo.stockvo.CommodityVO;
 
 public class JPcommodity extends JPanel implements MouseListener{
@@ -36,6 +37,7 @@ public class JPcommodity extends JPanel implements MouseListener{
 	private JPanel showOfStock=new JPanel();//显示已选
 	
 	private CommodityVO commodity;//对应的VO
+	private String note="";//对应的备注
 	private JPManagerCom JPmanagerCom;//引用
 	public CommodityVO getCommodity() {
 		return commodity;
@@ -217,39 +219,63 @@ public class JPcommodity extends JPanel implements MouseListener{
 
 		public void mousePressed(MouseEvent e) {
 			// TODO Auto-generated method stub
-			switch(num){
-			case 1:
-				//隐藏输入面板
-				editOfManager.setVisible(false);
-				//标记选中
-				chosen=true;
-				//显示数字在标签上
-				showNumOfManager.setText(inputNumTxtOfManager.getText());
-				//改变VO对象的数量信息
-				commodity.setNumber(Integer.parseInt(inputNumTxtOfManager.getText()));
-				//显示选中面板
-				showOfManager.setVisible(true);
-				//清空输入框
-				inputNumTxtOfManager.setText("");
-				break;
-			case 2:
-				//设置不可编辑
-				inputNumTxtOfSale.setEditable(false);
-				inputPriceTxtOfSale.setEditable(false);
-				inputNoteTxtOfSale.setEditable(false);
-				//隐藏确认按钮
-				comfirmOfSale.setVisible(false);
-				//标记选中
-				chosen=true;
-				//改变VO的数据
-				break;
-			}
+		
 		
 		}
 
 		public void mouseReleased(MouseEvent e) {
 			// TODO Auto-generated method stub
-			
+			switch(num){
+			case 1:
+				if(!inputNumTxtOfManager.getText().equals("")){
+					//隐藏输入面板
+					editOfManager.setVisible(false);
+					//标记选中
+					chosen=true;
+					//显示数字在标签上
+					showNumOfManager.setText(inputNumTxtOfManager.getText());
+					//改变VO对象的数量信息
+					commodity.setNumber(Integer.parseInt(inputNumTxtOfManager.getText()));
+					//显示选中面板
+					showOfManager.setVisible(true);
+					//清空输入框
+					inputNumTxtOfManager.setText("");
+				}
+				else{
+					System.out.println("请输入数量");
+				}
+				break;
+			case 2:
+				if(!inputNumTxtOfSale.getText().equals("")
+						&&!inputPriceTxtOfSale.getText().equals("")
+						&&!inputNoteTxtOfSale.getText().equals("")){
+					//设置不可编辑
+					inputNumTxtOfSale.setEditable(false);
+					inputPriceTxtOfSale.setEditable(false);
+					inputNoteTxtOfSale.setEditable(false);
+					//改变VO对象信息
+					commodity.setNumber(Integer.parseInt(inputNumTxtOfSale.getText()));
+					
+					if(JPmanagerCom.getFrame().getSale().getManageBills2().getStyle()==BillStyle.PurSheet
+					   ||JPmanagerCom.getFrame().getSale().getManageBills2().getStyle()==BillStyle.PurBackSheet){
+						commodity.setIn(Double.parseDouble(inputPriceTxtOfSale.getText()));
+					}
+					else{
+						commodity.setOut(Double.parseDouble(inputPriceTxtOfSale.getText()));
+					}
+					//改变备注信息
+					note=inputNoteTxtOfSale.getText();
+					
+					//隐藏确认按钮
+					comfirmOfSale.setVisible(false);
+					//标记选中
+					chosen=true;
+				}
+				else{
+					System.out.println("请输入完整信息");
+				}
+				break;
+			}
 		}
 
 		public void mouseEntered(MouseEvent e) {
@@ -336,6 +362,12 @@ public class JPcommodity extends JPanel implements MouseListener{
 	}
 	public void setJPmanagerCom(JPManagerCom jPmanagerCom) {
 		JPmanagerCom = jPmanagerCom;
+	}
+	public String getNote() {
+		return note;
+	}
+	public void setNote(String note) {
+		this.note = note;
 	}
 
 

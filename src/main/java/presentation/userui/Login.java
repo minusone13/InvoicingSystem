@@ -17,6 +17,7 @@ import javax.swing.border.EmptyBorder;
 
 import po.RM;
 import po.Role;
+import presentation.WarningPanel;
 import userui.Frame;
 import vo.uservo.UserVO;
 import businesslogic.userbl.UserController;
@@ -48,7 +49,7 @@ public class Login extends JPanel {
     Frame frame;
     KeyAdapterOfSignIn keyAdapt;//键盘回车监听
     public Login(){
-
+    	
 		//设置窗口大小
 		this.setSize(960, 600);
 		//设置布局
@@ -172,6 +173,7 @@ public class Login extends JPanel {
 					frame.getSale().getManageBills1().setVisible(false);
 					frame.getSale().getManageBills2().setVisible(false);
 					frame.getSale().getCustomerManage().setVisible(false);
+					frame.getSale().getChoseComs().setVisible(false);
 					frame.getSale().getFunction().setVisible(true);
 					frame.getSale().setVisible(true);
 					Login.this.setVisible(false);
@@ -182,7 +184,7 @@ public class Login extends JPanel {
 				passwords.setText("");
 			}
 			else{
-				System.out.println("用户名或密码错误，请重新输入");
+				frame.getWarning().showWarning("用户名或密码错误，请重新输入");
 			}
 			
 		}
