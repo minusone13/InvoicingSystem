@@ -54,10 +54,14 @@ public class StubCommodityList {//商品列表 haha
 		total-=discount;
 		ArrayList<CommodityPO> compos = new ArrayList<CommodityPO>();
 		for(int i=0; i<commodityarray.size();i++)
-		{
+		{//加入特价包时给定了特价包的数量，响应商品要预留数量，如不足将报不足错误
 			MockCommodity com = commodityarray.get(i);
 			if(!isEnough(com.getName(),com.getModel(),com.getNumber()*quantity))
 				return RM.insufficient;
+		}
+		for(int i=0; i<commodityarray.size();i++)
+		{//准备相应商品数量
+			MockCommodity com = commodityarray.get(i);
 			readyForOut(ID,com.getName(),com.getModel(),com.getNumber()*quantity,0);
 			compos.add(com.toPO());
 		}
@@ -328,9 +332,20 @@ public class StubCommodityList {//商品列表 haha
 	public boolean isEnough(String name,String model,int n)
 	{//在填写单据时检查，给出的是潜在库存最小值，也就是最保险的值
 		CommodityPO po=comdata.findCommodity(name, model);
+		if(po == null)
+			return false;
 		MockCommodity com=new MockCommodity(po);
 		int potential = com.getPotential();
 		return(n<=potential);
+	}
+	public boolean isEnough(String PackID,int n)
+	{//同上，判断特价包
+		PackPO po = comdata.findPack(PackID);
+		if(po == null)
+			return false;
+		StubPack pack = new StubPack(po);
+		int potential = pack.getPotential();
+		return (n<=potential);
 	}
 	public ArrayList<MockCommodity> posToCom(ArrayList<CommodityPO> h)
 	{
