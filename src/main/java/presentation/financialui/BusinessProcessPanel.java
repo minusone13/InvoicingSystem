@@ -87,6 +87,25 @@ public class BusinessProcessPanel extends JPanel{
 		pane2.setBounds(0, 170, 700, 150);
 	}
 	
+	public void export(int choose) {
+		if(choose==1) {
+			int size = table1.getRowCount();
+			String[][] data = new String[size+1][];
+			String[] names = {"单据编号","客户","操作员","总额汇总","单据状态","银行账户","金额","备注"};
+			data[0] = names;	
+		} else if(choose == 2) {
+			int size = table1.getRowCount();
+			String[][] data = new String[size+1][];
+			String[] names = {"单据编号","银行账户","操作员","总额汇总","单据状态","条目名","金额","备注"};
+			data[0] = names;	
+		} else if(choose == 3) {
+			int size = table1.getRowCount();
+			String[][] data = new String[size+1][];
+			String[] names = {"单据编号","供应商","仓库","操作员","备注","总额合计","单据状态","商品编号",
+					"名称","型号","数量","单价","金额","备注"};
+			data[0] = names;
+		}
+	}
 	public void updateTable1(int choose, InquiryProcessVO ipv){
 		switch(choose){
 		
@@ -164,7 +183,7 @@ public class BusinessProcessPanel extends JPanel{
 			model2.setDataVector(new Object[][]{}, columnNames3s);
 			table2.updateUI();
 			break;
-		//有问题，业务员=========================================
+//有问题，业务员=========================================
 		case 4:
 	    	saleSheet = financial.getProcessSaleSheet(ipv);
 	    	saleBackSheet = financial.getProcessSaleBackSheet(ipv);
@@ -299,7 +318,7 @@ public class BusinessProcessPanel extends JPanel{
 			model2.setDataVector(data, columnNames2s);
 			table2.updateUI();
     	}
-    	//有问题=============================================
+ //有问题=============================================
     	else if(choose == 3){
     		int size1 = purSheet.size();
     		int size2 = purBackSheet.size();

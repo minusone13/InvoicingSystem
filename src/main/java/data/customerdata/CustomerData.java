@@ -51,7 +51,7 @@ public class CustomerData extends UnicastRemoteObject implements CustomerDataSer
 		ArrayList<CustomerPO> listOfCustomerPO = new ArrayList<CustomerPO>();
 		listOfCustomerPO = this.getAllCustomer(address); 
 		for(CustomerPO temppo:listOfCustomerPO){
-			if(temppo.getname().equals(po.getname())){
+			if(temppo.getid().equals(po.getid())){
 				listOfCustomerPO.remove(temppo);
 				listOfCustomerPO.add(po);
 				this.saveAllCustomer(listOfCustomerPO, address);
@@ -61,12 +61,12 @@ public class CustomerData extends UnicastRemoteObject implements CustomerDataSer
 		return false;
 	}
 
-	public CustomerPO findCustomer(String name) throws RemoteException{
+	public CustomerPO findCustomer(String id) throws RemoteException{
 		String address = "Customer.txt";
 		ArrayList<CustomerPO> listOfCustomerPO = new ArrayList<CustomerPO>();
 		listOfCustomerPO = this.getAllCustomer(address); 
 		for(CustomerPO po:listOfCustomerPO){
-			if(po.getname().equals(name)){
+			if(po.getid().equals(id)){
 				return po;
 			}
 		}

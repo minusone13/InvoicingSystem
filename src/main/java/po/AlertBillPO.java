@@ -5,102 +5,131 @@ import java.util.Date;
 
 import po.stockpo.CommodityPO;
 
-
-public class AlertBillPO extends PO implements Serializable{
+public class AlertBillPO extends PO implements Serializable
+{
 	private BillStyle style = BillStyle.AlertBill;
 	private Date date;
 	String operator;
 	private String ID;
 	private CommodityPO comPO;
 	private int shortage;
-	private BillState state=BillState.DRAFT;
-	public AlertBillPO(){}
-	
-	public AlertBillPO(Date date,String userID,String ID,CommodityPO comPO, int shortage,BillState state)
+	private BillState state = BillState.DRAFT;
+
+	public AlertBillPO()
+	{}
+
+	public AlertBillPO(Date date, String userID, String ID, CommodityPO comPO,
+			int shortage, BillState state)
 	{
-		this.date=date;
-		this.operator=userID;
-		this.ID=ID;
-		this.comPO=comPO;
-		this.shortage=shortage;
-		this.state=state;
+		this.date = date;
+		this.operator = userID;
+		this.ID = ID;
+		this.comPO = comPO;
+		this.shortage = shortage;
+		this.state = state;
 	}
-	public AlertBillPO(String userID,String ID,CommodityPO comPO, int shortage,BillState state)
+
+	public AlertBillPO(String userID, String ID, CommodityPO comPO,
+			int shortage, BillState state)
 	{
-		this.operator=userID;
-		this.ID=ID;
-		this.comPO=comPO;
-		this.shortage=shortage;
-		this.state=state;
+		this.operator = userID;
+		this.ID = ID;
+		this.comPO = comPO;
+		this.shortage = shortage;
+		this.state = state;
 	}
-	public AlertBillPO(String userID,String ID, CommodityPO comPO, int shortage)
+
+	public AlertBillPO(String userID, String ID, CommodityPO comPO, int shortage)
 	{
-		this.operator=userID;
-		this.ID=ID;
-		this.comPO=comPO;
-		this.shortage=shortage;
+		this.operator = userID;
+		this.ID = ID;
+		this.comPO = comPO;
+		this.shortage = shortage;
 	}
-	public AlertBillPO(CommodityPO comPO,int shortage)
+
+	public AlertBillPO(CommodityPO comPO, int shortage)
 	{
-		this.comPO=comPO;
-		this.shortage=shortage;
+		this.comPO = comPO;
+		this.shortage = shortage;
 	}
+
 	public CommodityPO getCommodity()
 	{
 		return comPO;
 	}
+
 	public int getshortage()
 	{
 		return shortage;
 	}
-	public String getID() {
+
+	public String getID()
+	{
 		return ID;
 	}
-	public void setID(String iD) {
+
+	public void setID(String iD)
+	{
 		ID = iD;
 	}
-	public CommodityPO getComPO() {
+
+	public CommodityPO getComPO()
+	{
 		return comPO;
 	}
-	public void setComPO(CommodityPO comPO) {
+
+	public void setComPO(CommodityPO comPO)
+	{
 		this.comPO = comPO;
 	}
-	public int getShortage() {
+
+	public int getShortage()
+	{
 		return shortage;
 	}
-	public void setShortage(int shortage) {
+
+	public void setShortage(int shortage)
+	{
 		this.shortage = shortage;
 	}
 
-	public BillStyle getStyle() {
+	public BillStyle getStyle()
+	{
 		return style;
 	}
 
-	public void setStyle(BillStyle style) {
+	public void setStyle(BillStyle style)
+	{
 		this.style = style;
 	}
 
-	public BillState getState() {
+	public BillState getState()
+	{
 		return state;
 	}
 
-	public void setState(BillState state) {
+	public void setState(BillState state)
+	{
 		this.state = state;
 	}
 
-	public String getOperator() {
+	public String getOperator()
+	{
 		return operator;
 	}
 
-	public void setOperator(String userID) {
+	public void setOperator(String userID)
+	{
 		this.operator = userID;
 	}
 
-	public Date getDate() {
+	public Date getDate()
+	{
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(Date date)
+	{
 		this.date = date;
 	}
 }

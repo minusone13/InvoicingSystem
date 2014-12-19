@@ -2,15 +2,18 @@ package po.stockpo;
 
 import java.util.*;
 
-public class CommodityListPO {
+public class CommodityListPO
+{
 	ArrayList<CommodityPO> cats;
+
+	public CommodityListPO()
+	{}
+
 	public CommodityListPO(ArrayList<CommodityPO> cats)
 	{
-		this.cats=cats;
+		this.cats = cats;
 	}
-	public CommodityListPO()
-	{
-	}
+
 	public ArrayList<CommodityPO> getList()
 	{
 		return cats;
