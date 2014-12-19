@@ -210,13 +210,14 @@ public class JPmanagerStrategy2 extends JPanel {
 				switch(num){
 				case 1:
 					up.setIcon(upIconR);
-					//向上
-					billList.startUp();
+					//向下
+					billList.startDown();
 					break;
 				case 2:
 					down.setIcon(downIconR);
-					//向下
-					billList.startDown();
+					//向上
+					billList.startUp();
+				
 					break;	
 				case 3:
 					add.setIcon(addIconR);

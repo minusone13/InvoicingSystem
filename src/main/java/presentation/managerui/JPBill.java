@@ -8,6 +8,7 @@ import java.awt.event.MouseListener;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 import po.BillState;
 import po.BillStyle;
@@ -84,95 +85,7 @@ public class JPBill extends JPanel {
 	private CustomerVO customerVO;
 	private UserVO userVO;
 	private AccountVO accountVO;
-	public CustomerVO getCustomerVO() {
-		return customerVO;
-	}
-	public void setCustomerVO(CustomerVO customerVO) {
-		this.customerVO = customerVO;
-	}
-	public UserVO getUserVO() {
-		return userVO;
-	}
-	public void setUserVO(UserVO userVO) {
-		this.userVO = userVO;
-	}
-
-	public enum JPbillType {
-
-		Bill,
-		Strategy,
-		Account,
-		Customer,
-		User,
-		Default
-	}
-	public JLabel getRight() {
-		return right;
-	}
-	public void setRight(JLabel right) {
-		this.right = right;
-	}
-	public GiftBillVO getGiftVO() {
-		return giftVO;
-	}
-	public void setGiftVO(GiftBillVO giftVO) {
-		this.giftVO = giftVO;
-	}
-	public AlertBillVO getAlertVO() {
-		return alertVO;
-	}
-	public void setAlertVO(AlertBillVO alertVO) {
-		this.alertVO = alertVO;
-	}
-	public SpillsLossBillVO getSpillsLossVO() {
-		return spillsLossVO;
-	}
-	public void setSpillsLossVO(SpillsLossBillVO spillsLossVO) {
-		this.spillsLossVO = spillsLossVO;
-	}
-	public PurSheetVO getPurVO() {
-		return purVO;
-	}
-	public void setPurVO(PurSheetVO purVO) {
-		this.purVO = purVO;
-	}
-	public PurBackSheetVO getPurbackVO() {
-		return purbackVO;
-	}
-	public void setPurbackVO(PurBackSheetVO purbackVO) {
-		this.purbackVO = purbackVO;
-	}
-	public SaleSheetVO getSaleVO() {
-		return saleVO;
-	}
-	public void setSaleVO(SaleSheetVO saleVO) {
-		this.saleVO = saleVO;
-	}
-	public CashPaymentVO getCashVO() {
-		return cashVO;
-	}
-	public void setCashVO(CashPaymentVO cashVO) {
-		this.cashVO = cashVO;
-	}
-	public PaymentVO getPayVO() {
-		return payVO;
-	}
-	public void setPayVO(PaymentVO payVO) {
-		this.payVO = payVO;
-	}
-	public ReceiptVO getReceiptVO() {
-		return receiptVO;
-	}
-	public void setReceiptVO(ReceiptVO receiptVO) {
-		this.receiptVO = receiptVO;
-	}
-	public SaleBackSheetVO getSalebackVO() {
-		return salebackVO;
-	}
-	public void setSalebackVO(SaleBackSheetVO salebackVO) {
-		this.salebackVO = salebackVO;
-	}
-
+	
 	//逻辑层的接口
 	StubManagerBlService mbl=new StubManager();
 	FinancialBlService fbl=new Financial();
@@ -223,7 +136,10 @@ public class JPBill extends JPanel {
 		left.setBounds(482, 26, 40, 40);
 		left.addMouseListener(new MouseListenerOfButton(2));
 		//单据信息
-		JLabel ID=new JLabel("ID:"+ls.getID(),JLabel.CENTER);
+		JTextField ID=new JTextField("ID:"+ls.getID(),JTextField.CENTER);
+		ID.setOpaque(false);
+		ID.setBorder(null);
+		ID.setFont(new Font("",Font.BOLD,14));
 		ID.setBounds(31,5, 200, 20);
 		
 		JLabel level=new JLabel("客户等级：");
@@ -336,9 +252,11 @@ public class JPBill extends JPanel {
 		left.setBounds(482, 26, 40, 40);
 		left.addMouseListener(new MouseListenerOfButton(2));
 		//单据信息
-		JLabel ID=new JLabel("ID:"+bs.getID(),JLabel.CENTER);
+		JTextField ID=new JTextField("ID:"+bs.getID(),JTextField.CENTER);
+		ID.setOpaque(false);
+		ID.setBorder(null);
+		ID.setFont(new Font("",Font.BOLD,14));
 		ID.setBounds(31,5, 200, 20);
-		
 		//单据信息未完
 		JLabel originalTotalPrice=new JLabel("原始总价");
 		JLabel decreasePrice=new JLabel("降价金额");
@@ -422,9 +340,11 @@ public class JPBill extends JPanel {
 		left.setBounds(482, 26, 40, 40);
 		left.addMouseListener(new MouseListenerOfButton(2));
 		//单据信息
-		JLabel ID=new JLabel("ID:"+rs.getID(),JLabel.CENTER);
+		JTextField ID=new JTextField("ID:"+rs.getID(),JTextField.CENTER);
+		ID.setOpaque(false);
+		ID.setBorder(null);
+		ID.setFont(new Font("",Font.BOLD,14));
 		ID.setBounds(31,5, 200, 20);
-		
 		//单据信息未完
 		JLabel limit=new JLabel("消费下限：");
 		JLabel coupon=new JLabel("代金券赠送比例：");
@@ -518,9 +438,11 @@ public class JPBill extends JPanel {
 		left.setBounds(482, 26, 40, 40);
 		left.addMouseListener(new MouseListenerOfButton(2));
 		//单据信息
-		JLabel ID=new JLabel("ID:"+customer.getid(),JLabel.CENTER);
-		ID.setBounds(31,5, 200, 20);
-		
+		JTextField ID=new JTextField("ID:"+customer.getid(),JTextField.CENTER);
+		ID.setOpaque(false);
+		ID.setBorder(null);
+		ID.setFont(new Font("",Font.BOLD,14));
+		ID.setBounds(31,5, 200, 20);		
 		//单据信息未完
 		String t="";
 		if(customer.gettype()==0){
@@ -601,9 +523,11 @@ public class JPBill extends JPanel {
 		left.setBounds(482, 26, 40, 40);
 		left.addMouseListener(new MouseListenerOfButton(2));
 		//单据信息
-		JLabel ID=new JLabel("ID:"+user.getID(),JLabel.CENTER);
-		ID.setBounds(31,5, 200, 20);
-		
+		JTextField ID=new JTextField("ID:"+user.getID(),JTextField.CENTER);
+		ID.setOpaque(false);
+		ID.setBorder(null);
+		ID.setFont(new Font("",Font.BOLD,14));
+		ID.setBounds(31,5, 200, 20);	
 		//单据信息未完
 		String authorize="";
 		if(user.isAuthorized()){
@@ -900,9 +824,11 @@ public class JPBill extends JPanel {
 		left.setBounds(482, 26, 40, 40);
 		left.addMouseListener(new MouseListenerOfButton(2));
 		//单据信息
-		JLabel ID=new JLabel("ID:"+gb.getID(),JLabel.CENTER);
+		JTextField ID=new JTextField("ID:"+gb.getID(),JTextField.CENTER);
+		ID.setOpaque(false);
+		ID.setBorder(null);
+		ID.setFont(new Font("",Font.BOLD,14));
 		ID.setBounds(31,5, 200, 20);
-		
 		//单据信息未完
 		String[] remark=gb.getRemark();
 		JLabel reason=new JLabel(remark[0]);
@@ -943,7 +869,10 @@ public class JPBill extends JPanel {
 		left.setBounds(482, 26, 40, 40);
 		left.addMouseListener(new MouseListenerOfButton(2));
 		//单据信息
-		JLabel ID=new JLabel("ID:"+slb.getID(),JLabel.CENTER);
+		JTextField ID=new JTextField("ID:"+slb.getID(),JTextField.CENTER);
+		ID.setOpaque(false);
+		ID.setBorder(null);
+		ID.setFont(new Font("",Font.BOLD,14));
 		ID.setBounds(31,5, 200, 20);
 		
 		String Type="";
@@ -1001,9 +930,11 @@ public class JPBill extends JPanel {
 		left.setBounds(482, 26, 40, 40);
 		left.addMouseListener(new MouseListenerOfButton(2));
 		//单据信息
-		JLabel ID=new JLabel("ID:"+ab.getID(),JLabel.CENTER);
+		JTextField ID=new JTextField("ID:"+ab.getID(),JTextField.CENTER);
+		ID.setOpaque(false);
+		ID.setBorder(null);
+		ID.setFont(new Font("",Font.BOLD,14));
 		ID.setBounds(31,5, 200, 20);
-		
 		JLabel commodity=new JLabel(ab.getCom().getName());
 		JLabel model=new JLabel(ab.getCom().getModel());
 		JLabel num=new JLabel(String.valueOf(ab.getCom().getNumber()));
@@ -1044,7 +975,10 @@ public class JPBill extends JPanel {
 		left.setBounds(482, 26, 40, 40);
 		left.addMouseListener(new MouseListenerOfButton(2));
 		//单据信息
-		JLabel ID=new JLabel("ID:"+ps.getid(),JLabel.CENTER);
+		JTextField ID=new JTextField("ID:"+ps.getid(),JTextField.CENTER);
+		ID.setOpaque(false);
+		ID.setBorder(null);
+		ID.setFont(new Font("",Font.BOLD,14));
 		ID.setBounds(31,5, 200, 20);
 		
 		JLabel customer=new JLabel(ps.getcustomer().getname());
@@ -1088,7 +1022,10 @@ public class JPBill extends JPanel {
 		left.setBounds(482, 26, 40, 40);
 		left.addMouseListener(new MouseListenerOfButton(2));
 		//单据信息
-		JLabel ID=new JLabel("ID:"+pbs.getid(),JLabel.CENTER);
+		JTextField ID=new JTextField("ID:"+pbs.getid(),JTextField.CENTER);
+		ID.setOpaque(false);
+		ID.setBorder(null);
+		ID.setFont(new Font("",Font.BOLD,14));
 		ID.setBounds(31,5, 200, 20);
 		
 		JLabel customer=new JLabel(pbs.getcustomer().getname());
@@ -1133,7 +1070,10 @@ public class JPBill extends JPanel {
 		left.setBounds(482, 26, 40, 40);
 		left.addMouseListener(new MouseListenerOfButton(2));
 		//单据信息
-		JLabel ID=new JLabel("ID:"+ss.getid(),JLabel.CENTER);
+		JTextField ID=new JTextField("ID:"+ss.getid(),JTextField.CENTER);
+		ID.setOpaque(false);
+		ID.setBorder(null);
+		ID.setFont(new Font("",Font.BOLD,14));
 		ID.setBounds(31,5, 200, 20);
 		
 		JLabel customer=new JLabel(ss.getcustomer().getname());
@@ -1179,7 +1119,10 @@ public class JPBill extends JPanel {
 		left.setBounds(482, 26, 40, 40);
 		left.addMouseListener(new MouseListenerOfButton(2));
 		//单据信息
-		JLabel ID=new JLabel("ID:"+sbs.getid(),JLabel.CENTER);
+		JTextField ID=new JTextField("ID:"+sbs.getid(),JTextField.CENTER);
+		ID.setOpaque(false);
+		ID.setBorder(null);
+		ID.setFont(new Font("",Font.BOLD,14));
 		ID.setBounds(31,5, 200, 20);
 		
 		JLabel customer=new JLabel(sbs.getcustomer().getname());
@@ -1225,6 +1168,12 @@ public class JPBill extends JPanel {
 		left.setIcon(new ImageIcon("src/image/left.png"));
 		left.setBounds(482, 26, 40, 40);
 		left.addMouseListener(new MouseListenerOfButton(2));
+		//单据信息
+		JTextField ID=new JTextField("ID:"+rb.getID(),JTextField.CENTER);
+		ID.setOpaque(false);
+		ID.setBorder(null);
+		ID.setFont(new Font("",Font.BOLD,14));
+		ID.setBounds(31,5, 200, 20);
 		//单据信息
 		operatorOfPR.setBounds(345, 15, 50, 16);
 		customerOfPR.setBounds(330, 33, 50, 16);
@@ -1277,6 +1226,12 @@ public class JPBill extends JPanel {
 		left.setBounds(482, 26, 40, 40);
 		left.addMouseListener(new MouseListenerOfButton(2));
 		//单据信息
+		JTextField ID=new JTextField("ID:"+pb.getID(),JTextField.CENTER);
+		ID.setOpaque(false);
+		ID.setBorder(null);
+		ID.setFont(new Font("",Font.BOLD,14));
+		ID.setBounds(31,5, 200, 20);
+		//单据信息
 		operatorOfPR.setBounds(345, 15, 50, 16);
 		customerOfPR.setBounds(330, 33, 50, 16);
 		moneyOfPR.setBounds(330, 49, 50, 16);
@@ -1328,7 +1283,10 @@ public class JPBill extends JPanel {
 		left.setBounds(482, 26, 40, 40);
 		left.addMouseListener(new MouseListenerOfButton(2));
 		//单据信息
-		JLabel ID=new JLabel("ID:"+cb.getID(),JLabel.CENTER);
+		JTextField ID=new JTextField("ID:"+cb.getID(),JTextField.CENTER);
+		ID.setOpaque(false);
+		ID.setBorder(null);
+		ID.setFont(new Font("",Font.BOLD,14));
 		ID.setBounds(31,5, 200, 20);
 		
 		operatorOfCas.setBounds(345, 15, 150, 16);
@@ -1773,4 +1731,93 @@ public class JPBill extends JPanel {
 		}
 		
 	}
+	public CustomerVO getCustomerVO() {
+		return customerVO;
+	}
+	public void setCustomerVO(CustomerVO customerVO) {
+		this.customerVO = customerVO;
+	}
+	public UserVO getUserVO() {
+		return userVO;
+	}
+	public void setUserVO(UserVO userVO) {
+		this.userVO = userVO;
+	}
+
+	public enum JPbillType {
+
+		Bill,
+		Strategy,
+		Account,
+		Customer,
+		User,
+		Default
+	}
+	public JLabel getRight() {
+		return right;
+	}
+	public void setRight(JLabel right) {
+		this.right = right;
+	}
+	public GiftBillVO getGiftVO() {
+		return giftVO;
+	}
+	public void setGiftVO(GiftBillVO giftVO) {
+		this.giftVO = giftVO;
+	}
+	public AlertBillVO getAlertVO() {
+		return alertVO;
+	}
+	public void setAlertVO(AlertBillVO alertVO) {
+		this.alertVO = alertVO;
+	}
+	public SpillsLossBillVO getSpillsLossVO() {
+		return spillsLossVO;
+	}
+	public void setSpillsLossVO(SpillsLossBillVO spillsLossVO) {
+		this.spillsLossVO = spillsLossVO;
+	}
+	public PurSheetVO getPurVO() {
+		return purVO;
+	}
+	public void setPurVO(PurSheetVO purVO) {
+		this.purVO = purVO;
+	}
+	public PurBackSheetVO getPurbackVO() {
+		return purbackVO;
+	}
+	public void setPurbackVO(PurBackSheetVO purbackVO) {
+		this.purbackVO = purbackVO;
+	}
+	public SaleSheetVO getSaleVO() {
+		return saleVO;
+	}
+	public void setSaleVO(SaleSheetVO saleVO) {
+		this.saleVO = saleVO;
+	}
+	public CashPaymentVO getCashVO() {
+		return cashVO;
+	}
+	public void setCashVO(CashPaymentVO cashVO) {
+		this.cashVO = cashVO;
+	}
+	public PaymentVO getPayVO() {
+		return payVO;
+	}
+	public void setPayVO(PaymentVO payVO) {
+		this.payVO = payVO;
+	}
+	public ReceiptVO getReceiptVO() {
+		return receiptVO;
+	}
+	public void setReceiptVO(ReceiptVO receiptVO) {
+		this.receiptVO = receiptVO;
+	}
+	public SaleBackSheetVO getSalebackVO() {
+		return salebackVO;
+	}
+	public void setSalebackVO(SaleBackSheetVO salebackVO) {
+		this.salebackVO = salebackVO;
+	}
+
 }
