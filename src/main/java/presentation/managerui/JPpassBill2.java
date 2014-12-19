@@ -223,6 +223,7 @@ public class JPpassBill2 extends JPanel {
 	/*获取frame的引用*/
 	public void getFrame( Frame f){
   		frame=f;
+  		billList.setFrame(frame);
     }
 	/*按钮的监控*/
 	public class MouseListenerOfButton implements MouseListener{
@@ -270,7 +271,7 @@ public class JPpassBill2 extends JPanel {
 					JPeditOfCash.leftMove();
 					break;
 				default:
-					System.out.println("您无权修改此单据");
+					frame.getWarning().showWarning("您无权修改此单据");
 				}
 				break;
 			}

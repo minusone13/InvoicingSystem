@@ -94,7 +94,7 @@ public class JPcommodityPack extends JPanel {
 		
 		commodities.add(new JPcommodity(com));
 		//增加商品
-		System.out.println("增加商品");
+		JPmanagerCom.getFrame().getWarning().showWarning("增加商品");
 		update();
 	}
 	/*返回唯一选中的商品的VO*/
@@ -138,7 +138,7 @@ public class JPcommodityPack extends JPanel {
 			return result;
 		}
 		else{
-			System.out.println("没有选择任何商品");
+			JPmanagerCom.getFrame().getWarning().showWarning("没有选择任何商品");
 		}
 		return null;
 	}
@@ -154,7 +154,7 @@ public class JPcommodityPack extends JPanel {
 			return result;
 		}
 		else{
-			System.out.println("没有选择任何商品");
+			JPmanagerCom.getFrame().getWarning().showWarning("没有选择任何商品");
 		}
 		return null;
 	}
@@ -166,12 +166,12 @@ public class JPcommodityPack extends JPanel {
 					//删除逻辑层
 					RM rm=stockbl.deleteCommodity(commodities.get(i).getCommodity().getName(), commodities.get(i).getCommodity().getModel());
 					if(rm==RM.done){
-						System.out.println("已成功删除");
+						JPmanagerCom.getFrame().getWarning().showWarning("已成功删除");
 						//删除界面层
 						commodities.remove(commodities.get(i));
 					}
 					else{
-						System.out.println("删除失败，已有进出记录");
+						JPmanagerCom.getFrame().getWarning().showWarning("删除失败，已有进出记录");
 					}
 					
 				
@@ -181,7 +181,7 @@ public class JPcommodityPack extends JPanel {
 			update();
 		}
 		else{
-			System.out.println("请选择你要删除的商品");
+			JPmanagerCom.getFrame().getWarning().showWarning("请选择你要删除的商品");
 		}
 	
 	}
@@ -206,10 +206,10 @@ public class JPcommodityPack extends JPanel {
 			}
 		}
 		else if(getChosenNum()==0){
-			System.out.println("请选择你要修改的商品");
+			JPmanagerCom.getFrame().getWarning().showWarning("请选择你要修改的商品");
 		}
 		else{
-			System.out.println("只能同时修改一个商品");
+			JPmanagerCom.getFrame().getWarning().showWarning("只能同时修改一个商品");
 		}
 		
 	}

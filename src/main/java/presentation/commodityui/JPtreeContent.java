@@ -136,7 +136,6 @@ public class JPtreeContent extends JPanel {
 	/*节点编辑监听*/
 	private class CellEditorAction implements CellEditorListener{  
         public void editingCanceled(ChangeEvent e) {  
-            System.out.println("编辑取消");  
         }  
         public void editingStopped(ChangeEvent e) {
         	DefaultMutableTreeNode thisNode=(DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
@@ -147,7 +146,6 @@ public class JPtreeContent extends JPanel {
         	String newName=thisNode.getUserObject().toString();
         	//逻辑层改变节点名字的接口
         	RM rm=stockbl.updateCategory(categryvo,newName);
-            System.out.println("编辑结束,结果是"+rm+"新名称是:"+newName);  
         }  
     }  
 	/*返回逻辑层对应路径*/
@@ -191,11 +189,10 @@ public class JPtreeContent extends JPanel {
 		//调用逻辑层
 		RM rm=stockbl.deleteCategory(rePath(node));
 		if(rm==RM.done){
-			System.out.println("已成功删除");
 			treeModel.removeNodeFromParent(node);
 		}
 		else{
-			System.out.println("删除失败，已有子分类或者商品");
+			JPmanagerCom.getFrame().getWarning().showWarning("删除失败，已有子分类或者商品");
 		}
 	}
 	/*返回最后选择的节点*/
@@ -213,10 +210,10 @@ public class JPtreeContent extends JPanel {
 			treeModel.insertNodeInto(newChild, parent, parent.getChildCount());
 		}
 		else if(rm==RM.treeerror){
-			System.out.println("该分类下已有商品，不能创建分类");
+			JPmanagerCom.getFrame().getWarning().showWarning("该分类下已有商品，不能创建分类");
 		}
 		else if(rm==RM.redundance){
-			System.out.println("已存在该分类");
+			JPmanagerCom.getFrame().getWarning().showWarning("已存在该分类");
 		}
 	}
 	/*删除当前选中的节点*/
@@ -226,7 +223,7 @@ public class JPtreeContent extends JPanel {
 			removeTreeNode(lastSelected);
 		}
 		else{
-			System.out.println("请选择要删除的分类");
+			JPmanagerCom.getFrame().getWarning().showWarning("请选择要删除的分类");
 		}
 	}
 	/*增加新节点到当前选中的节点*/
@@ -236,7 +233,7 @@ public class JPtreeContent extends JPanel {
 			addTreeNode(newChild,lastSelected);
 		}
 		else{
-			System.out.println("请选择父节点分类");
+			JPmanagerCom.getFrame().getWarning().showWarning("请选择父节点分类");
 		}
 		
 	}
@@ -247,7 +244,7 @@ public class JPtreeContent extends JPanel {
 			addTreeNode(new DefaultMutableTreeNode("未命名"),lastSelected);
 		}
 		else{
-			System.out.println("请选择父节点分类");
+			JPmanagerCom.getFrame().getWarning().showWarning("请选择父节点分类");
 		}
 		
 	}

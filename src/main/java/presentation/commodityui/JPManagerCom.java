@@ -202,7 +202,6 @@ public class JPManagerCom extends JPanel{
 					switch(frame.getManager().getManagerStrategy2().getStyle()){
 					case LevelStrategy:
 						frame.getManager().getManagerStrategy2().getJPeditOfLevel().setOutput(temp);
-						System.out.println("output");
 						break;
 					case BarginStrategy:
 						frame.getManager().getManagerStrategy2().getJPeditOfBargin().setOutput(temp);
@@ -246,18 +245,22 @@ public class JPManagerCom extends JPanel{
 					switch(frame.getSale().getManageBills2().getStyle()){
 					case PurSheet:
 						frame.getSale().getManageBills2().getJPeditOfPur().setOutput(temp2);
+						frame.getSale().getManageBills2().getJPeditOfPur().setOutputNotes(tempNotes);
 						frame.getSale().getManageBills2().getJPeditOfPur().getTotalText().setText(String.valueOf(total));
 						break;
 					case PurBackSheet:
 						frame.getSale().getManageBills2().getJPeditOfPurBack().setOutput(temp2);
+						frame.getSale().getManageBills2().getJPeditOfPurBack().setOutputNotes(tempNotes);
 						frame.getSale().getManageBills2().getJPeditOfPurBack().getTotalText().setText(String.valueOf(total));
 						break;
 					case SaleSheet:
 						frame.getSale().getManageBills2().getJPeditOfSale().setOutput(temp2);
+						frame.getSale().getManageBills2().getJPeditOfSale().setOutputNotes(tempNotes);
 						frame.getSale().getManageBills2().getJPeditOfSale().getTotalText().setText(String.valueOf(total2));
 						break;
 					case SaleBackSheet:
 						frame.getSale().getManageBills2().getJPeditOfSaleBack().setOutput(temp2);
+						frame.getSale().getManageBills2().getJPeditOfSaleBack().setOutputNotes(tempNotes);
 						frame.getSale().getManageBills2().getJPeditOfSaleBack().getTotalText().setText(String.valueOf(total2));
 						break;
 					}

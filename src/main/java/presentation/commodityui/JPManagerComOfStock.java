@@ -13,6 +13,7 @@ import javax.swing.JTextField;
 import po.RM;
 import po.Role;
 import presentation.managerui.MouseListenerGetXY;
+import userui.Frame;
 import vo.stockvo.CommodityVO;
 
 public class JPManagerComOfStock extends JPanel {
@@ -43,6 +44,8 @@ public class JPManagerComOfStock extends JPanel {
 	ImageIcon addComR=new ImageIcon("src/image/function/addR.png");
 	ImageIcon deleteComR=new ImageIcon("src/image/function/deleteR.png");
 	ImageIcon editComR=new ImageIcon("src/image/function/editR.png");
+	//frame的引用
+    Frame frame;
 	public JPManagerComOfStock(){
 		//面板大小
 		this.setSize(905, 370);
@@ -88,6 +91,10 @@ public class JPManagerComOfStock extends JPanel {
 		this.add(editCom,6);
 	}
 	
+ 	public void getFrame( Frame f){
+ 		frame=f;
+	}
+	 
 	public class MouseListenerOfButton implements MouseListener{
 
 		private int num;
@@ -130,10 +137,10 @@ public class JPManagerComOfStock extends JPanel {
 				}
 				else if(manageCom.getCommodities().getChosenNum()==0){
 					
-					System.out.println("请选择要修改的商品");
+					frame.getWarning().showWarning("请选择要修改的商品");
 				}
 				else{
-					System.out.println("只能同时修改一个商品");
+					frame.getWarning().showWarning("只能同时修改一个商品");
 				}
 				break;
 			}
@@ -382,14 +389,14 @@ public class JPManagerComOfStock extends JPanel {
 									manageCom.getCommodities().addCommodity(commmodity);
 								}
 								else if(rm==RM.redundance){
-									System.out.println("商品重复");
+									frame.getWarning().showWarning("商品重复");
 								}
 								else if(rm==RM.treeerror){
-									System.out.println("分类下已有分类，不能添加商品");
+									frame.getWarning().showWarning("分类下已有分类，不能添加商品");
 								}
 							}
 							else{
-								System.out.println("请选择分类");
+								frame.getWarning().showWarning("请选择分类");
 							}
 						}
 					}
@@ -424,11 +431,11 @@ public class JPManagerComOfStock extends JPanel {
 								manageCom.getCommodities().changeChosen(modifyVO);
 							}
 							else{
-								System.out.println("修改结果是"+rm);
+								frame.getWarning().showWarning("修改结果是"+rm);
 							}
 						}
 						else{
-							System.out.println("请至少填写一个修改项进行修改");
+							frame.getWarning().showWarning("请至少填写一个修改项进行修改");
 						}
 					}
 					

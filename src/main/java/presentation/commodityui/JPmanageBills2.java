@@ -157,6 +157,7 @@ public class JPmanageBills2 extends JPanel {
 		  /*获取frame引用*/
 	    public void getFrame( Frame f){
 	    		frame=f;
+	    		billList.setFrame(frame);
 	    }
 		/*重新设置类型*/
 		public void setStyle( BillStyle s){
@@ -312,7 +313,7 @@ public class JPmanageBills2 extends JPanel {
 						JPeditOfSpoil.leftMove();//调出编辑板
 					}
 					else{
-						System.out.println("只能修改一张草稿状态的单据");
+						frame.getWarning().showWarning("只能修改一张草稿状态的单据");
 					}
 					break;				
 				case 6:
@@ -555,7 +556,7 @@ public class JPmanageBills2 extends JPanel {
 							if(chosenVO!=null&&!numText.getText().equals("")){
 								chosenVO.setNumber(Integer.parseInt(numText.getText()));
 								SpillsLossBillVO newSpills=new SpillsLossBillVO();
-								System.out.println(chosenVO.getName()+":"+chosenVO.getModel()+":"+chosenVO.getNumber());
+								frame.getWarning().showWarning(chosenVO.getName()+":"+chosenVO.getModel()+":"+chosenVO.getNumber());
 								newSpills.setCom(chosenVO);
 								if(typeCombo.getSelectedItem().toString().equals("报损单")){
 									newSpills.setT(Type.Loss);
@@ -566,7 +567,7 @@ public class JPmanageBills2 extends JPanel {
 								billList.addSpillsLossBill(newSpills);
 							}
 							else{
-								System.out.println("请填写完整信息");
+								frame.getWarning().showWarning("请填写完整信息");
 							}
 						}
 						else{//修改报溢单
@@ -589,10 +590,10 @@ public class JPmanageBills2 extends JPanel {
 									modifyVO.setCom(temp);
 							}
 							else if(billList.getChosenNum()==0){
-								System.out.println("请选择要修改的单据");
+								frame.getWarning().showWarning("请选择要修改的单据");
 							}
 							else{
-								System.out.println("只能同时修改一张单据");
+								frame.getWarning().showWarning("只能同时修改一张单据");
 							}
 						}
 						

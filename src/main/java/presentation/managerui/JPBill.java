@@ -238,12 +238,12 @@ public class JPBill extends JPanel {
 		JLabel lastTxt=new JLabel(String.valueOf(ls.getLastTime()));
 		
 		//设置标签字体
-		level.setFont(new Font("隶书",Font.BOLD,18));
-		limit.setFont(new Font("隶书",Font.BOLD,18));
-		discount.setFont(new Font("隶书",Font.BOLD,18));
-		coupon.setFont(new Font("隶书",Font.BOLD,18));
-		start.setFont(new Font("隶书",Font.BOLD,18));
-		last.setFont(new Font("隶书",Font.BOLD,18));
+		level.setFont(new Font("楷体",Font.BOLD,18));
+		limit.setFont(new Font("楷体",Font.BOLD,18));
+		discount.setFont(new Font("楷体",Font.BOLD,18));
+		coupon.setFont(new Font("楷体",Font.BOLD,18));
+		start.setFont(new Font("楷体",Font.BOLD,18));
+		last.setFont(new Font("楷体",Font.BOLD,18));
 		
 		
 		//设置字体颜色
@@ -268,7 +268,6 @@ public class JPBill extends JPanel {
 		this.add(right,0);
 		this.add(left,1);
 		this.add(ID,2);
-		System.out.println(ls.getLevel_strategy_style());
 		//单据信息未完
 		switch(ls.getLevel_strategy_style()){
 		case Gift:
@@ -358,11 +357,11 @@ public class JPBill extends JPanel {
 		JLabel startTxt=new JLabel(bs.getStartTime());
 		JLabel lastTxt=new JLabel(String.valueOf(bs.getLastTime()));
 		//字体
-		originalTotalPrice.setFont(new Font("隶书",Font.BOLD,15));
-		decreasePrice.setFont(new Font("隶书",Font.BOLD,15));
-		num.setFont(new Font("隶书",Font.BOLD,15));
-		start.setFont(new Font("隶书",Font.BOLD,15));
-		last.setFont(new Font("隶书",Font.BOLD,15));
+		originalTotalPrice.setFont(new Font("楷体",Font.BOLD,15));
+		decreasePrice.setFont(new Font("楷体",Font.BOLD,15));
+		num.setFont(new Font("楷体",Font.BOLD,15));
+		start.setFont(new Font("楷体",Font.BOLD,15));
+		last.setFont(new Font("楷体",Font.BOLD,15));
 		
 		//字体颜色
 		originalTotalPrice.setForeground(Color.white);
@@ -437,10 +436,10 @@ public class JPBill extends JPanel {
 		JLabel startTxt=new JLabel(rs.getStartTime());
 		JLabel lastTxt=new JLabel(String.valueOf(rs.getLastTime()));
 		//设置标签字体
-		limit.setFont(new Font("隶书",Font.BOLD,18));
-		coupon.setFont(new Font("隶书",Font.BOLD,18));
-		start.setFont(new Font("隶书",Font.BOLD,18));
-		last.setFont(new Font("隶书",Font.BOLD,18));
+		limit.setFont(new Font("楷体",Font.BOLD,18));
+		coupon.setFont(new Font("楷体",Font.BOLD,18));
+		start.setFont(new Font("楷体",Font.BOLD,18));
+		last.setFont(new Font("楷体",Font.BOLD,18));
 		
 		//设置字体颜色
 		limit.setForeground(Color.white);
@@ -1017,7 +1016,6 @@ public class JPBill extends JPanel {
 		this.add(bg,3);
 	}
 	public JPBill(PurSheetVO ps){
-		System.out.println("初始化进货单");
 		//区分面板种类
 		setType(JPbillType.Bill);
 		//设置单据编号，状态，种类
@@ -1090,7 +1088,7 @@ public class JPBill extends JPanel {
 		left.setBounds(482, 26, 40, 40);
 		left.addMouseListener(new MouseListenerOfButton(2));
 		//单据信息
-		JLabel ID=new JLabel("ID:"+pbs.getID(),JLabel.CENTER);
+		JLabel ID=new JLabel("ID:"+pbs.getid(),JLabel.CENTER);
 		ID.setBounds(31,5, 200, 20);
 		
 		JLabel customer=new JLabel(pbs.getcustomer().getname());
@@ -1135,7 +1133,7 @@ public class JPBill extends JPanel {
 		left.setBounds(482, 26, 40, 40);
 		left.addMouseListener(new MouseListenerOfButton(2));
 		//单据信息
-		JLabel ID=new JLabel("ID:"+ss.getID(),JLabel.CENTER);
+		JLabel ID=new JLabel("ID:"+ss.getid(),JLabel.CENTER);
 		ID.setBounds(31,5, 200, 20);
 		
 		JLabel customer=new JLabel(ss.getcustomer().getname());
@@ -1181,7 +1179,7 @@ public class JPBill extends JPanel {
 		left.setBounds(482, 26, 40, 40);
 		left.addMouseListener(new MouseListenerOfButton(2));
 		//单据信息
-		JLabel ID=new JLabel("ID:"+sbs.getID(),JLabel.CENTER);
+		JLabel ID=new JLabel("ID:"+sbs.getid(),JLabel.CENTER);
 		ID.setBounds(31,5, 200, 20);
 		
 		JLabel customer=new JLabel(sbs.getcustomer().getname());
@@ -1360,36 +1358,30 @@ public class JPBill extends JPanel {
 		userbl.authorized(userVO.getAccount());
 	}
 	//修改账户名
-	public void change(String oldname, String newname){
+	public boolean change(String oldname, String newname){
 		
 		//调用逻辑层修改对应单据的数据
 		boolean result=fbl.updateAccount(oldname, newname);
-		if(result==false){
-			System.out.println("已存在该账户");
-		}
+		return result;
 	}
 	//修改用户密码
-	public void change(CustomerVO cus){
+	public boolean change(CustomerVO cus){
 		
 		//调用逻辑层修改对应单据的数据
 		boolean result=customerbl.updateCustomer(cus);
-		if(result==false){
-			System.out.println("修改客户失败");
-		}
+		return result;
 	}
 	//修改用户密码
 	public void change(UserVO us){
 		
 		//调用逻辑层修改对应单据的数据
 		RM rm=userbl.changePassword(us);//修改密码
-		System.out.println("修改密码的结果是："+rm);
 	}
 	//修改用户职务
 	public void changeRole(UserVO us,Role r){
 		
 		//调用逻辑层修改对应单据的数据
 		RM rm=userbl.changeRole(us, r);
-		System.out.println("修改权限的结果是："+rm);
 	}
 	public void change(GiftBillVO gb){
 	
@@ -1439,7 +1431,6 @@ public class JPBill extends JPanel {
 		//界面层
 		state=st;
 		//修改背景
-		System.out.println("修改后状态"+state);
 		setBillBg(style,state,2);
 	}
 	/*根据条件生成地址给单据上背景*/
@@ -1646,7 +1637,6 @@ public class JPBill extends JPanel {
 		public void mousePressed(MouseEvent e) {
 			// TODO Auto-generated method stub
 			choose=!choose;//选中与取消选中
-			System.out.println(state);
 			if(choose){
 				setBillBg(st,state,3);
 			}

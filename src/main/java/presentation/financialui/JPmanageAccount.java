@@ -147,6 +147,7 @@ public class JPmanageAccount extends JPanel {
 			  /*获取frame引用*/
 		    public void getFrame( Frame f){
 		    		frame=f;
+		    		billList.setFrame(frame);
 		    }
 			public JPBillList getBillsList(){
 				return billList;
@@ -225,10 +226,10 @@ public class JPmanageAccount extends JPanel {
 							JPedit.leftMove();//调出编辑板
 						}
 						else if(billList.getChosenNum()==0){
-							System.out.println("请选择要修改的账户");
+							frame.getWarning().showWarning("请选择要修改的账户");
 						}
 						else{
-							System.out.println("只能修改一个账户的信息");
+							frame.getWarning().showWarning("只能修改一个账户的信息");
 						}
 						break;			
 					case 6:
@@ -418,7 +419,7 @@ public class JPmanageAccount extends JPanel {
 									billList.addAccount(newAccount);
 								}
 								else{
-									System.out.println("请输入完整信息");
+									frame.getWarning().showWarning("请输入完整信息");
 								}
 							}
 							else{//是修改
@@ -428,14 +429,14 @@ public class JPmanageAccount extends JPanel {
 										billList.changeChosen(modifyAccount.getName(), nameText.getText());
 									}
 									else{
-										System.out.println("请输入要修改的名称");
+										frame.getWarning().showWarning("请输入要修改的名称");
 									}
 								}
 								else if(billList.getChosenNum()==0){
-									System.out.println("请选择要修改的账户");
+									frame.getWarning().showWarning("请选择要修改的账户");
 								}
 								else{
-									System.out.println("只能同时修改一个账户");
+									frame.getWarning().showWarning("只能同时修改一个账户");
 								}
 							}
 							break;
@@ -623,7 +624,7 @@ public class JPmanageAccount extends JPanel {
 								billList.addAccountList(fbl.fuzzyFindAccount(searchTxt.getText(), 1));
 							}
 							else{
-								System.out.println("请输入账户关键字");
+								frame.getWarning().showWarning("请输入账户关键字");
 							}
 						
 							break;

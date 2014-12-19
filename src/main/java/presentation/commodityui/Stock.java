@@ -139,6 +139,7 @@ public class Stock extends JPanel {
     		function.getFrame(frame);
     		manageBills1.getFrame(frame);
     		manageBills2.getFrame(frame);
+    		managerComs.getFrame(frame);
     		choseComs.getFrame(frame);
     }
 		public class MouseListenerOfButton implements MouseListener{

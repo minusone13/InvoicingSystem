@@ -197,6 +197,7 @@ public class JPmanageBills2 extends JPanel {
 		  /*获取frame引用*/
 	    public void getFrame( Frame f){
 	    		frame=f;
+	    		billList.setFrame(frame);
 	    }
 		/*重新设置类型*/
 		public void setStyle( BillStyle s){
@@ -769,7 +770,7 @@ public class JPmanageBills2 extends JPanel {
 									billList.addPurSheet(newPur);
 								}
 								else{
-									System.out.println("请输入完整信息");
+									frame.getWarning().showWarning("请输入完整信息");
 								}
 								break;
 							case PurBackSheet:
@@ -789,7 +790,7 @@ public class JPmanageBills2 extends JPanel {
 									billList.addPurBackSheet(newPurBack);
 								}
 								else{
-									System.out.println("请输入完整信息");
+									frame.getWarning().showWarning("请输入完整信息");
 								}
 							break;
 							case SaleSheet:

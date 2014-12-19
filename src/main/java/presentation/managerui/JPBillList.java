@@ -8,6 +8,7 @@ import po.BillState;
 import po.Role;
 import presentation.commodityui.StockManagerDriver;
 import presentation.managerui.JPBill.JPbillType;
+import userui.Frame;
 import vo.AlertBillVO;
 import vo.BarginStrategyVO;
 import vo.CustomerVO;
@@ -66,6 +67,13 @@ public class JPBillList extends JPanel {
 	 StubCommodityBlService stockbl=new StubStockController();
 	 CustomerBlService customerbl=new CustomerList();
 	 StubUserBlService userbl=new UserController();
+	 Frame frame;//主窗口引用
+	public Frame getFrame() {
+		return frame;
+	}
+	public void setFrame(Frame frame) {
+		this.frame = frame;
+	}
 	public JPBillList(){
 		//逻辑层接口
 		StockManagerDriver smd=new StockManagerDriver();
@@ -248,7 +256,7 @@ public class JPBillList extends JPanel {
 			this.addAccountList(fbl.getAllAccountInfo());
 		}
 		else{
-			System.out.println("已存在该账户");
+			frame.getWarning().showWarning("已存在该账户");
 		}
 	
 	}
@@ -273,7 +281,7 @@ public class JPBillList extends JPanel {
 			this.addCustomerList(customerbl.getAllCustomer("Customer.txt"));
 		}
 		else{
-			System.out.println("增加客户失败");
+			frame.getWarning().showWarning("增加客户失败");
 		}
 	}
 	/*增加用户VO数组*/
@@ -346,7 +354,6 @@ public class JPBillList extends JPanel {
 	}
 	/*增加进货单*/
 	public void addPurSheet(PurSheetVO ps){
-		System.out.println("增加进货单");
 		//调用逻辑层
 		sbl.createPurSheet(ps);
 		//从逻辑层读取数据更新界面
@@ -491,10 +498,15 @@ public class JPBillList extends JPanel {
 	public void changeChosen(String oldname,String newName){
 		for(int i=0;i<JPbillList.size();i++){
 			if(JPbillList.get(i).getChoose()){
-				JPbillList.get(i).change(oldname,newName);
-				//从逻辑层读取数据更新界面
-				JPbillList.clear();
-				this.addAccountList(fbl.getAllAccountInfo());
+				boolean result=JPbillList.get(i).change(oldname,newName);
+				if(result){
+					//从逻辑层读取数据更新界面
+					JPbillList.clear();
+					this.addAccountList(fbl.getAllAccountInfo());
+				}
+				else{
+					frame.getWarning().showWarning("已存在该账户");
+				}
 				break;
 			}
 		}
@@ -504,7 +516,7 @@ public class JPBillList extends JPanel {
 		for(int i=0;i<JPbillList.size();i++){
 			if(JPbillList.get(i).getChoose()){
 				JPbillList.get(i).change(us);//先改密码，ID没变
-				JPbillList.get(i).changeRole(us,r);//修改职务，ID可能变化
+				JPbillList.get(i).changeRole(userbl.find(us.getAccount()),r);//修改职务，ID可能变化
 				//从逻辑层读取数据更新界面
 				JPbillList.clear();
 				this.addUserList(userbl.showUsers());
@@ -516,10 +528,17 @@ public class JPBillList extends JPanel {
 	public void changeChosen(CustomerVO cus){
 		for(int i=0;i<JPbillList.size();i++){
 			if(JPbillList.get(i).getChoose()){
-				JPbillList.get(i).change(cus);
-				//从逻辑层读取数据更新界面
-				JPbillList.clear();
-				this.addCustomerList(customerbl.getAllCustomer("Customer.txt"));
+				boolean result=JPbillList.get(i).change(cus);
+				if(result){
+					//从逻辑层读取数据更新界面
+					JPbillList.clear();
+					this.addCustomerList(customerbl.getAllCustomer("Customer.txt"));
+				}
+				else{
+					
+				}
+			
+			
 				break;
 			}
 		}
@@ -666,7 +685,7 @@ public class JPBillList extends JPanel {
 			updateJP();
 		}
 		else{
-			System.out.println("只有提交状态的单据能够通过审批");
+			frame.getWarning().showWarning("只有提交状态的单据能够通过审批");
 		}
 	}
 	/*提交选中的*/
@@ -681,7 +700,7 @@ public class JPBillList extends JPanel {
 			updateJP();
 		}
 		else{
-			System.out.println("只有草稿状态的单据能够提交");
+			frame.getWarning().showWarning("只有草稿状态的单据能够提交");
 		}
 	}
 	/*处理选中的*/
@@ -696,7 +715,7 @@ public class JPBillList extends JPanel {
 			updateJP();
 		}
 		else{
-			System.out.println("只有已经通过审批的单据能够处理");
+			frame.getWarning().showWarning("只有已经通过审批的单据能够处理");
 		}
 	}
 	/*授权选中的用户*/
@@ -713,7 +732,7 @@ public class JPBillList extends JPanel {
 		}
 	
 		else{
-			System.out.println("请选择要授权的用户");
+			frame.getWarning().showWarning("请选择要授权的用户");
 		}
 	}
 	/*删除选中的*/
@@ -733,7 +752,7 @@ public class JPBillList extends JPanel {
 				}
 			
 				else{
-					System.out.println("只有已处理单据能够移除");
+					frame.getWarning().showWarning("只有已处理单据能够移除");
 				}
 			}
 			else{//不是单据
@@ -770,7 +789,7 @@ public class JPBillList extends JPanel {
 								i--;
 							}
 							else{
-								System.out.println("删除失败");
+								frame.getWarning().showWarning("删除失败");
 							}
 						}
 						//如果是账户
@@ -782,7 +801,7 @@ public class JPBillList extends JPanel {
 								i--;
 							}
 							else{
-								System.out.println("只能删除余额为0的账户");
+								frame.getWarning().showWarning("只能删除余额为0的账户");
 							}
 							
 						}
@@ -794,7 +813,7 @@ public class JPBillList extends JPanel {
 			}
 		}
 		else{
-			System.out.println("请选择要删除的选项");
+			frame.getWarning().showWarning("请选择要删除的选项");
 		}
 		
 		
@@ -828,7 +847,6 @@ public class JPBillList extends JPanel {
 		if(isTheSameState()){//如果选中的单据都是同一个状态
 			for(int i=0;i<JPbillList.size();i++){
 				if(JPbillList.get(i).getChoose()){
-					System.out.println(JPbillList.get(i).getState());
 					return JPbillList.get(i).getState();
 				}
 			}

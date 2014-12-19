@@ -242,7 +242,7 @@ public class JPcommodity extends JPanel implements MouseListener{
 					inputNumTxtOfManager.setText("");
 				}
 				else{
-					System.out.println("请输入数量");
+					JPmanagerCom.getFrame().getWarning().showWarning("请输入数量");
 				}
 				break;
 			case 2:
@@ -272,7 +272,7 @@ public class JPcommodity extends JPanel implements MouseListener{
 					chosen=true;
 				}
 				else{
-					System.out.println("请输入完整信息");
+					JPmanagerCom.getFrame().getWarning().showWarning("请输入完整信息");
 				}
 				break;
 			}

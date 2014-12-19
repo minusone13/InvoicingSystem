@@ -167,6 +167,7 @@ public class JPmanagerStrategy2 extends JPanel {
 		  /*获取frame引用*/
 	    public void getFrame( Frame f){
 	    		frame=f;
+	    		billList.setFrame(frame);
 	    }
 		/*重新设置类型*/
 		public void setStyle( StrategyStyle s){
@@ -713,7 +714,7 @@ public class JPmanagerStrategy2 extends JPanel {
 									output.clear();
 								}
 								else{
-									System.out.println("请填写完整策略信息"+output.size());
+									frame.getWarning().showWarning("请填写完整策略信息"+output.size());
 								}
 										
 							}
@@ -758,7 +759,7 @@ public class JPmanagerStrategy2 extends JPanel {
 									couponText.setText("");
 								}
 								else{
-									System.out.println("请填写完整策略信息");
+									frame.getWarning().showWarning("请填写完整策略信息");
 								}
 										
 							}
@@ -803,7 +804,7 @@ public class JPmanagerStrategy2 extends JPanel {
 									discountText.setText("");
 								}
 								else{
-									System.out.println("请填写完整策略信息");
+									frame.getWarning().showWarning("请填写完整策略信息");
 								}
 										
 							}
@@ -837,7 +838,7 @@ public class JPmanagerStrategy2 extends JPanel {
 								output.clear();
 							}
 							else{
-								System.out.println("请填写完整策略信息");
+								frame.getWarning().showWarning("请填写完整策略信息");
 							}
 							break;
 						case ReachStrategy:
@@ -865,7 +866,7 @@ public class JPmanagerStrategy2 extends JPanel {
 									output.clear();
 								}
 								else{
-									System.out.println("请填写完整策略信息");
+									frame.getWarning().showWarning("请填写完整策略信息");
 								}
 										
 							}
@@ -893,7 +894,7 @@ public class JPmanagerStrategy2 extends JPanel {
 									couponText.setText("");
 								}
 								else{
-									System.out.println("请填写完整策略信息");
+									frame.getWarning().showWarning("请填写完整策略信息");
 								}
 										
 							}

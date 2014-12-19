@@ -162,6 +162,7 @@ public class JPmanageBills2 extends JPanel {
 		  /*获取frame引用*/
 	    public void getFrame( Frame f){
 	    		frame=f;
+	    		billList.setFrame(frame);
 	    }
 		/*重新设置类型*/
 		public void setStyle( BillStyle s){
@@ -290,7 +291,7 @@ public class JPmanageBills2 extends JPanel {
 						
 					}
 					else{
-						System.out.println("只能修改一张草稿状态的单据");
+						frame.getWarning().showWarning("只能修改一张草稿状态的单据");
 					}
 					break;
 				case 6:
@@ -624,7 +625,7 @@ public class JPmanageBills2 extends JPanel {
 							switch(billStyle){
 							case ReceiptBill:
 								if(customerCombo.getSelectedItem()==null){
-									System.out.println("没有客户，不能创建单据");
+									frame.getWarning().showWarning("没有客户，不能创建单据");
 								}
 								else{
 									boolean legal=false;
@@ -637,7 +638,7 @@ public class JPmanageBills2 extends JPanel {
 									}
 									if(legal){
 										//生成新的单据加入到billList
-										System.out.println("生成了一张收款单");
+										frame.getWarning().showWarning("生成了一张收款单");
 										ReceiptVO newRec=new ReceiptVO();
 										//传入单据数据
 										newRec.setCustomer(customerCombo.getSelectedItem().toString());
@@ -654,13 +655,13 @@ public class JPmanageBills2 extends JPanel {
 										tranListEdit.getNoteArray().clear();
 									}
 									else{
-										System.out.println("单据信息不完整，请检查是否填写了转账列表");
+										frame.getWarning().showWarning("单据信息不完整，请检查是否填写了转账列表");
 									}
 								}
 								break;
 							case PaymentBill:
 								if(customerCombo.getSelectedItem()==null){
-									System.out.println("没有客户，不能创建单据");
+									frame.getWarning().showWarning("没有客户，不能创建单据");
 								}
 								else{
 									boolean legal2=false;
@@ -673,7 +674,7 @@ public class JPmanageBills2 extends JPanel {
 									}
 									if(legal2){
 										//生成新的单据加入到billList
-										System.out.println("生成了一张付款单");
+										frame.getWarning().showWarning("生成了一张付款单");
 										PaymentVO newPay=new PaymentVO();
 										//传入单据数据
 										newPay.setCustomer(customerCombo.getSelectedItem().toString());
@@ -690,7 +691,7 @@ public class JPmanageBills2 extends JPanel {
 										tranListEdit.getNoteArray().clear();
 									}
 									else{
-										System.out.println("单据信息不完整，请检查是否填写了转账列表");
+										frame.getWarning().showWarning("单据信息不完整，请检查是否填写了转账列表");
 									}
 								}
 								break;
@@ -706,23 +707,23 @@ public class JPmanageBills2 extends JPanel {
 								if(legal3){
 									//生成新的单据加入到billList
 									//设置单据数据
-									System.out.println("生成了一张现金费用单");
+									frame.getWarning().showWarning("生成了一张现金费用单");
 									CashPaymentVO newCash=new CashPaymentVO();
 									
-									System.out.println("银行账户是："+accountText.getText());
+									frame.getWarning().showWarning("银行账户是："+accountText.getText());
 									newCash.setAccount(accountText.getText());
 									
 									for(int i=0;i<ListEdit.getListArray().size();i++){
-										System.out.println("条目名"+(i+1)+":"+ListEdit.getListArray().get(i));
+										frame.getWarning().showWarning("条目名"+(i+1)+":"+ListEdit.getListArray().get(i));
 										newCash.getItem().add(ListEdit.getListArray().get(i));
 										
-										System.out.println("金额"+(i+1)+":"+ListEdit.getMoneyArray().get(i));
+										frame.getWarning().showWarning("金额"+(i+1)+":"+ListEdit.getMoneyArray().get(i));
 										newCash.getMoney().add(ListEdit.getMoneyArray().get(i));
 										
-										System.out.println("备注"+(i+1)+":"+ListEdit.getNoteArray().get(i));
+										frame.getWarning().showWarning("备注"+(i+1)+":"+ListEdit.getNoteArray().get(i));
 										newCash.getRemark().add(ListEdit.getNoteArray().get(i));
 									}
-									System.out.println("总额是："+totalText.getText());
+									frame.getWarning().showWarning("总额是："+totalText.getText());
 									newCash.setTotal(Double.parseDouble(totalText.getText()));
 									
 									//操作员
@@ -737,7 +738,7 @@ public class JPmanageBills2 extends JPanel {
 									ListEdit.getNoteArray().clear();
 								}
 								else{
-									System.out.println("单据信息不完整，请检查是否填写了转账列表");
+									frame.getWarning().showWarning("单据信息不完整，请检查是否填写了转账列表");
 								}
 								break;
 							}
@@ -746,7 +747,7 @@ public class JPmanageBills2 extends JPanel {
 							switch(billStyle){
 							case ReceiptBill:
 								if(customerCombo.getSelectedItem()==null){
-									System.out.println("没有客户，不能创建单据");
+									frame.getWarning().showWarning("没有客户，不能创建单据");
 								}
 								else{
 									boolean legal=false;
@@ -781,13 +782,13 @@ public class JPmanageBills2 extends JPanel {
 										tranListEdit.getNoteArray().clear();
 									}
 									else{
-										System.out.println("请输入修改数据");
+										frame.getWarning().showWarning("请输入修改数据");
 									}
 								}
 								break;
 							case PaymentBill:
 								if(customerCombo.getSelectedItem()==null){
-									System.out.println("没有客户，不能创建单据");
+									frame.getWarning().showWarning("没有客户，不能创建单据");
 								}
 								else{
 									boolean legal2=false;
@@ -823,7 +824,7 @@ public class JPmanageBills2 extends JPanel {
 										tranListEdit.getNoteArray().clear();
 									}
 									else{
-										System.out.println("请输入修改数据");
+										frame.getWarning().showWarning("请输入修改数据");
 									}
 								}
 								break;
@@ -860,7 +861,7 @@ public class JPmanageBills2 extends JPanel {
 									newCash.setOp(Login.user.getName()+Login.user.getID());//修改操作员
 									//修改billList中被选中的单据
 									billList.changeChosen(newCash);
-									System.out.println("修改cash");
+									frame.getWarning().showWarning("修改cash");
 									//清空信息
 									accountText.setText("");
 									totalText.setText("");
@@ -869,7 +870,7 @@ public class JPmanageBills2 extends JPanel {
 									ListEdit.getNoteArray().clear();
 								}
 								else{
-									System.out.println("请输入修改数据");
+									frame.getWarning().showWarning("请输入修改数据");
 								}
 								break;
 							}
@@ -1149,7 +1150,7 @@ public class JPmanageBills2 extends JPanel {
 							JPaddList.this.setVisible(false);
 						}
 						else{
-							System.out.println("请完整输入信息，若无备注请填写“无”！");
+							frame.getWarning().showWarning("请完整输入信息，若无备注请填写“无”！");
 						}
 						
 						
