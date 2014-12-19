@@ -26,6 +26,8 @@ public interface StubCommodityBlService {
 	public ArrayList<StockVO> openCategory(String id);//root category's ID is"1"。
 	public RM deleteCommodity(String name,String model);//有可能返回RM。done，若已有进出记录，返回alreadyHaveUnremoveableContents
 	public RM deleteCategory(String id);//有可能返回RM。done，若已有子分类或商品，返回alreadyHaveUnremoveableContents
+	
+	public void setFilePath(String s);//用于期初建账查看商品信息
 	public void setUser(UserVO vo);//告诉代码此时操作的User
 	
 	

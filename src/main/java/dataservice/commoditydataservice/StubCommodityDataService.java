@@ -7,6 +7,9 @@ import po.*;
 import po.stockpo.*;
 
 public interface StubCommodityDataService extends Remote{
+	public void setFilePath(String s);
+	public void setDefaultFile();
+	
 	public RM insert(CommodityPO po);
 	public RM insert(PackPO po);
 	public RM insert(CategoryPO po);
