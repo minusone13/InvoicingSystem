@@ -1,5 +1,7 @@
 package vo;
 
+import businesslogic.customerbl.CustomerList;
+
 public class CustomerVO {
 	int type;
 	String name;
@@ -105,13 +107,17 @@ public class CustomerVO {
 	}
 
 	public void setid(String id) {
-		// TODO Auto-generated method stub
 		this.id=id;
 	}
 
 	public String getid() {
-		// TODO Auto-generated method stub
 		return this.id;
+	}
+	
+	public void aotusetid(){
+		CustomerList customerlist = new CustomerList();
+		int nowhas = customerlist.getAllCustomer("Customer.txt").size();
+		this.setid(nowhas+1+"");
 	}
 	
 }
