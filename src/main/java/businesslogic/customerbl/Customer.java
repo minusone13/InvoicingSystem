@@ -22,6 +22,7 @@ public class Customer{
 	public Customer(){};
 	public Customer(String name){
 		this.name=name;
+		this.aotusetid();
 	}
 	public Customer(CustomerVO vo){
 		this.type=vo.gettype();

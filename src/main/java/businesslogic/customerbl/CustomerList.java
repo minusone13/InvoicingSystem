@@ -46,7 +46,7 @@ public class CustomerList implements CustomerForFinancial, CustomerBlService{
 				newCustomer.setPO(customerdata.findCustomer(id));//判断下是否存在，到时候再说吧。。
 				vo=newCustomer.getVO();}
 			catch(Exception e){
-				System.out.println("findCustomer 异常");
+				System.out.println("findCustomer 异常"+e);
 			}
 			return vo;
 		}
