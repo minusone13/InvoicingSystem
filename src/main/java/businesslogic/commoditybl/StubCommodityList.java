@@ -1,8 +1,13 @@
 package businesslogic.commoditybl;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+import jxl.Workbook;
+import jxl.write.Label;
+import jxl.write.WritableSheet;
+import jxl.write.WritableWorkbook;
 import po.*;
 import po.stockpo.*;
 import businesslogic.commoditybillbl.StubAlertBill;
@@ -447,6 +452,48 @@ public class StubCommodityList {//商品列表 haha
 		for(int i=0;i<temp.size();i++)
 			result.add(new MockCommodity(temp.get(i)).toVO());
 		return new CountVO(result,new Date(),comdata.getCountNo());
+	}
+	
+	public void ExportCount(String FilePath)
+	{
+		ArrayList<CommodityPO> temp = comdata.getAllCommodity();
+		CountVO vo = count();
+		try {
+			WritableWorkbook book=Workbook.createWorkbook(new File(FilePath));
+			WritableSheet sheet=book.createSheet("第一页",0);
+			Label label=new Label(0,0,"库存盘点");
+			sheet.addCell(label);
+			label=new Label(1,0,"批次："+new Date());
+			sheet.addCell(label);
+			label=new Label(2,0,"批号："+vo.getNo());
+			sheet.addCell(label);
+			label=new Label(0,1,"行号");
+			sheet.addCell(label);
+			label=new Label(1,1,"名称");
+			sheet.addCell(label);
+			label=new Label(2,1,"型号");
+			sheet.addCell(label);
+			label=new Label(3,1,"库存数量");
+			sheet.addCell(label);
+			label=new Label(4,1,"库存均价");
+			sheet.addCell(label);
+			for(int i=2;i<=temp.size()+1;i++){
+					label=new Label(0,i,Integer.toString(i-1));
+					CommodityVO comvo = vo.getList().get(i-2);
+					label=new Label(1,i,comvo.getName());
+					sheet.addCell(label);
+					label=new Label(2,i,comvo.getModel());
+					sheet.addCell(label);
+					label=new Label(3,i,Integer.toString(comvo.getNumber()));
+					sheet.addCell(label);
+					label=new Label(4,i,Double.toString(comvo.getIn()));
+					sheet.addCell(label);
+			}
+	        book.write();
+	        book.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public ArrayList<CommodityVO> getRecords(Date d1, Date d2)
