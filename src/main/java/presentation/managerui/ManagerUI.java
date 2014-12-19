@@ -231,7 +231,7 @@ public class ManagerUI extends JPanel {
 					break;
 				case JPpassBill2:
 					passbill2.setVisible(false);
-					passbill1.setVisible(false);
+					passbill1.setVisible(true);
 					//标记当前面板，用于后退按钮
 					ManagerUI.this.setPanelType(PanelType.JPpassBill1);
 					break;
