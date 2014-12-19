@@ -454,17 +454,18 @@ public class StubCommodityList {//商品列表 haha
 		return new CountVO(result,new Date(),comdata.getCountNo());
 	}
 	
-	public void ExportCount(String FilePath)
+	public void ExportCount(String FilePath,CountVO vo)
 	{
 		ArrayList<CommodityPO> temp = comdata.getAllCommodity();
-		CountVO vo = count();
 		try {
 			File f = po.Tool.Opendoc(FilePath);
 			WritableWorkbook book=Workbook.createWorkbook(f);
 			WritableSheet sheet=book.createSheet("第一页",0);
 			Label label=new Label(0,0,"库存盘点");
 			sheet.addCell(label);
-			label=new Label(1,0,"批次："+new Date());
+			SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+			String currentTime = format.format(new Date());
+			label=new Label(1,0,"批次："+currentTime);
 			sheet.addCell(label);
 			label=new Label(2,0,"批号："+vo.getNo());
 			sheet.addCell(label);
@@ -480,6 +481,7 @@ public class StubCommodityList {//商品列表 haha
 			sheet.addCell(label);
 			for(int i=2;i<=temp.size()+1;i++){
 					label=new Label(0,i,Integer.toString(i-1));
+					sheet.addCell(label);
 					CommodityVO comvo = vo.getList().get(i-2);
 					label=new Label(1,i,comvo.getName());
 					sheet.addCell(label);

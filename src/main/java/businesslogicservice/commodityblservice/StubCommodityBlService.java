@@ -50,4 +50,5 @@ public interface StubCommodityBlService {
 	
 	public CountVO count();//库存盘点
 	public ArrayList<CommodityVO> getRecords(Date d1, Date d2);//库存查看,当中的ArrayList<CommodityRecordVO> 只有第零项有值，是查看的数据
+	public void ExportCount(String FilePath,CountVO vo);//导出excel
 }

@@ -731,10 +731,11 @@ public class StockTest{
 		assertEquals(3,coms.getNo());
 	}
 	
-	@Ignore
+	@Test
 	public void testExportCount()
 	{
-		
+		combl.ExportCount("testCount.xls",combl.count());
+		assertTrue(true);
 	}
 	
 	@Test

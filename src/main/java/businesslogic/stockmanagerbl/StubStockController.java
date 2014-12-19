@@ -303,6 +303,10 @@ public class StubStockController implements StubCommodityBlService, StockBlForSa
 	{//库存盘点
 		return l.count();
 	}
+	public void ExportCount(String FilePath,CountVO vo)
+	{
+		l.ExportCount(FilePath,vo);
+	}
 	
 	public ArrayList<CommodityVO> getRecords(Date d1, Date d2)
 	{//库存查看
