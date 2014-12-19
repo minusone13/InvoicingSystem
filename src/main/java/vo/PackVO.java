@@ -6,10 +6,12 @@ import businesslogic.commoditybl.CommodityRecord;
 import vo.stockvo.CommodityRecordVO;
 import vo.stockvo.CommodityVO;
 
-public class PackVO {
+public class PackVO
+{
 	public PackVO(String iD, ArrayList<CommodityVO> coms, int quantity,
 			double price, ArrayList<CommodityRecordVO> record,
-			ArrayList<CommodityRecordVO> prepareRecord) {
+			ArrayList<CommodityRecordVO> prepareRecord)
+	{
 		super();
 		ID = iD;
 		this.coms = coms;
@@ -18,47 +20,74 @@ public class PackVO {
 		this.record = record;
 		this.prepareRecord = prepareRecord;
 	}
-	public PackVO(){}
+
+	public PackVO()
+	{}
+
 	String ID;
 	ArrayList<CommodityVO> coms = new ArrayList<CommodityVO>();
 	int quantity;
-	double price;//price = total-discount
-	ArrayList<CommodityRecordVO> record=new ArrayList<CommodityRecordVO>();
-	ArrayList<CommodityRecordVO> prepareRecord=new ArrayList<CommodityRecordVO>();
-	public ArrayList<CommodityVO> getComs() {
+	double price;// price = total-discount
+	ArrayList<CommodityRecordVO> record = new ArrayList<CommodityRecordVO>();
+	ArrayList<CommodityRecordVO> prepareRecord = new ArrayList<CommodityRecordVO>();
+
+	public ArrayList<CommodityVO> getComs()
+	{
 		return coms;
 	}
-	public void setComs(ArrayList<CommodityVO> coms) {
+
+	public void setComs(ArrayList<CommodityVO> coms)
+	{
 		this.coms = coms;
 	}
-	public int getQuantity() {
+
+	public int getQuantity()
+	{
 		return quantity;
 	}
-	public void setQuantity(int quantity) {
+
+	public void setQuantity(int quantity)
+	{
 		this.quantity = quantity;
 	}
-	public double getPrice() {
+
+	public double getPrice()
+	{
 		return price;
 	}
-	public void setPrice(double price) {
+
+	public void setPrice(double price)
+	{
 		this.price = price;
 	}
-	public String getID() {
+
+	public String getID()
+	{
 		return ID;
 	}
-	public void setID(String iD) {
+
+	public void setID(String iD)
+	{
 		ID = iD;
 	}
-	public ArrayList<CommodityRecordVO> getRecord() {
+
+	public ArrayList<CommodityRecordVO> getRecord()
+	{
 		return record;
 	}
-	public void setRecord(ArrayList<CommodityRecordVO> record) {
+
+	public void setRecord(ArrayList<CommodityRecordVO> record)
+	{
 		this.record = record;
 	}
-	public ArrayList<CommodityRecordVO> getPrepareRecord() {
+
+	public ArrayList<CommodityRecordVO> getPrepareRecord()
+	{
 		return prepareRecord;
 	}
-	public void setPrepareRecord(ArrayList<CommodityRecordVO> prepareRecord) {
+
+	public void setPrepareRecord(ArrayList<CommodityRecordVO> prepareRecord)
+	{
 		this.prepareRecord = prepareRecord;
 	}
 }

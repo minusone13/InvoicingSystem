@@ -8,9 +8,10 @@ import po.stockpo.CommodityRecordPO;
 import vo.stockvo.CommodityRecordVO;
 import vo.stockvo.CommodityVO;
 
-public class MockCommodity {
+public class MockCommodity
+{
 	String id;
-	String parent;//the ID of parent Category
+	String parent;// the ID of parent Category
 	String name;
 	String model;
 	int number;
@@ -19,235 +20,310 @@ public class MockCommodity {
 	double lastin;
 	double lastout;
 	int alertLine;
-	ArrayList<CommodityRecord> record=new ArrayList<CommodityRecord>();
-	ArrayList<CommodityRecord> prepareRecord=new ArrayList<CommodityRecord>();
-	public void computeRecordsTotal(Date d1,Date d2)
-	{//用于库存查看
+	ArrayList<CommodityRecord> record = new ArrayList<CommodityRecord>();
+	ArrayList<CommodityRecord> prepareRecord = new ArrayList<CommodityRecord>();
+
+	public void computeRecordsTotal(Date d1, Date d2)
+	{// 用于库存查看
 		ArrayList<CommodityRecord> result = new ArrayList<CommodityRecord>();
-		CommodityRecord temp = new CommodityRecord(0,0,0,0);
-		for(int i=0; i<record.size(); i++)
+		CommodityRecord temp = new CommodityRecord(0, 0, 0, 0);
+		for (int i = 0; i < record.size(); i++)
 		{
 			CommodityRecord r = record.get(i);
-			if(r.getDate().after(d1) && r.getDate().before(d2))
+			if (r.getDate().after(d1) && r.getDate().before(d2))
 				temp.plus(r);
 		}
 		result.add(temp);
 		record = result;
 	}
+
 	public int checkAlert()
 	{
-		return alertLine-number;
+		return alertLine - number;
 	}
+
 	public boolean hasIn()
 	{
-		return (inQuantity()!=0);
+		return (inQuantity() != 0);
 	}
+
 	public boolean hasOut()
 	{
-		return (outQuantity()!=0);
+		return (outQuantity() != 0);
 	}
+
 	public int inQuantity()
 	{
-		int temp=0;
-		for(int i=0;i<record.size();i++)
-			temp+=record.get(i).getInquantity();
+		int temp = 0;
+		for (int i = 0; i < record.size(); i++)
+			temp += record.get(i).getInquantity();
 		return temp;
 	}
+
 	public int outQuantity()
 	{
-		int temp=0;
-		for(int i=0;i<record.size();i++)
-			temp+=record.get(i).getOutquantity();
+		int temp = 0;
+		for (int i = 0; i < record.size(); i++)
+			temp += record.get(i).getOutquantity();
 		return temp;
 	}
+
 	public double outTotal()
 	{
-		double temp=0;
-		for(int i=0;i<record.size();i++)
-			temp+=record.get(i).getOutamount();
+		double temp = 0;
+		for (int i = 0; i < record.size(); i++)
+			temp += record.get(i).getOutamount();
 		return temp;
 	}
-	public MockCommodity(){}
+
+	public MockCommodity()
+	{}
+
 	public MockCommodity(CommodityPO po)
 	{
-		if(po!=null)
+		if (po != null)
 		{
-			parent=po.getParent();
-			name=po.getName();
-			model=po.getModel();
-			id=parent+"\\"+name+"-"+model;
-			number=po.getNumber();
-			in=po.getIn();
-			out=po.getOut();
-			lastin=po.getLastIn();
-			lastout=po.getLastOut();
-			alertLine=po.getAlertLine();
-			record=posToCom(po.getRecord());
-			prepareRecord=posToCom(po.getPrepareRecord());
+			parent = po.getParent();
+			name = po.getName();
+			model = po.getModel();
+			id = parent + "\\" + name + "-" + model;
+			number = po.getNumber();
+			in = po.getIn();
+			out = po.getOut();
+			lastin = po.getLastIn();
+			lastout = po.getLastOut();
+			alertLine = po.getAlertLine();
+			record = posToCom(po.getRecord());
+			prepareRecord = posToCom(po.getPrepareRecord());
 		}
 	}
+
 	public MockCommodity(CommodityVO vo)
 	{
-		parent=vo.getParent();
-		name=vo.getName();
-		model=vo.getModel();
-		id=parent+"\\"+name+"-"+model;
-		number=vo.getNumber();
-		in=vo.getIn();
-		out=vo.getOut();
-		lastin=vo.getLastin();
-		lastout=vo.getLastout();
-		alertLine=vo.getAlertLine();
-		if (vo.getRecord()!=null)
+		parent = vo.getParent();
+		name = vo.getName();
+		model = vo.getModel();
+		id = parent + "\\" + name + "-" + model;
+		number = vo.getNumber();
+		in = vo.getIn();
+		out = vo.getOut();
+		lastin = vo.getLastin();
+		lastout = vo.getLastout();
+		alertLine = vo.getAlertLine();
+		if (vo.getRecord() != null)
 		{
-			record=vosToCom(vo.getRecord());
+			record = vosToCom(vo.getRecord());
 		}
-		prepareRecord=vosToCom(vo.getPrepareRecord());
+		prepareRecord = vosToCom(vo.getPrepareRecord());
 	}
+
 	public int getPotential()
 	{
 		int potential = number;
-		for(int i=0;i<prepareRecord.size();i++)
-			potential-=prepareRecord.get(i).getOutquantity();
+		for (int i = 0; i < prepareRecord.size(); i++)
+			potential -= prepareRecord.get(i).getOutquantity();
 		return potential;
 	}
+
 	public void add(CommodityRecord r)
 	{
 		record.add(r);
 	}
+
 	public void prepareDelete(CommodityRecord r)
 	{
-		for(int i=0;i<prepareRecord.size();i++)
-			if(prepareRecord.get(i).equals(r))
+		for (int i = 0; i < prepareRecord.size(); i++)
+			if (prepareRecord.get(i).equals(r))
 				prepareRecord.remove(i);
 	}
+
 	public void prepareAdd(CommodityRecord r)
 	{
 		prepareRecord.add(r);
 	}
+
 	public CommodityPO toPO()
 	{
-		return new CommodityPO(parent,name,model,number,in,out,lastin,lastout,alertLine,toRecordPOs(record), toRecordPOs(prepareRecord));
+		return new CommodityPO(parent, name, model, number, in, out, lastin,
+				lastout, alertLine, toRecordPOs(record),
+				toRecordPOs(prepareRecord));
 	}
+
 	public CommodityVO toVO()
 	{
-		
-		return new CommodityVO(parent,name,model,number,in,out,lastin,lastout,alertLine,toRecordVOs(record), toRecordVOs(prepareRecord));
+
+		return new CommodityVO(parent, name, model, number, in, out, lastin,
+				lastout, alertLine, toRecordVOs(record),
+				toRecordVOs(prepareRecord));
 	}
-	public String getId() {
+
+	public String getId()
+	{
 		return id;
 	}
-	public void setId(String id) {
+
+	public void setId(String id)
+	{
 		this.id = id;
 	}
-	public String getParent() {
+
+	public String getParent()
+	{
 		return parent;
 	}
-	public void setParent(String parent) {
+
+	public void setParent(String parent)
+	{
 		this.parent = parent;
 	}
-	public String getName() {
+
+	public String getName()
+	{
 		return name;
 	}
-	public void setName(String name) {
+
+	public void setName(String name)
+	{
 		this.name = name;
 	}
-	public String getModel() {
+
+	public String getModel()
+	{
 		return model;
 	}
-	public void setModel(String model) {
+
+	public void setModel(String model)
+	{
 		this.model = model;
 	}
-	public int getNumber() {
+
+	public int getNumber()
+	{
 		return number;
 	}
-	public void setNumber(int number) {
+
+	public void setNumber(int number)
+	{
 		this.number = number;
 	}
-	public double getIn() {
+
+	public double getIn()
+	{
 		return in;
 	}
-	public void setIn(double in) {
+
+	public void setIn(double in)
+	{
 		this.in = in;
 	}
-	public double getOut() {
+
+	public double getOut()
+	{
 		return out;
 	}
-	public void setOut(double out) {
+
+	public void setOut(double out)
+	{
 		this.out = out;
 	}
-	public double getLastin() {
+
+	public double getLastin()
+	{
 		return lastin;
 	}
-	public void setLastin(double lastin) {
+
+	public void setLastin(double lastin)
+	{
 		this.lastin = lastin;
 	}
-	public double getLastout() {
+
+	public double getLastout()
+	{
 		return lastout;
 	}
-	public void setLastout(double lastout) {
+
+	public void setLastout(double lastout)
+	{
 		this.lastout = lastout;
 	}
-	public int getAlertLine() {
+
+	public int getAlertLine()
+	{
 		return alertLine;
 	}
-	public void setAlertLine(int alertLine) {
+
+	public void setAlertLine(int alertLine)
+	{
 		this.alertLine = alertLine;
 	}
-	public ArrayList<CommodityRecord> getRecord() {
+
+	public ArrayList<CommodityRecord> getRecord()
+	{
 		return record;
 	}
-	public void setRecord(ArrayList<CommodityRecord> record) {
+
+	public void setRecord(ArrayList<CommodityRecord> record)
+	{
 		this.record = record;
 	}
-	protected ArrayList<CommodityRecordPO> toRecordPOs(ArrayList<CommodityRecord> h)
+
+	protected ArrayList<CommodityRecordPO> toRecordPOs(
+			ArrayList<CommodityRecord> h)
 	{
-		ArrayList<CommodityRecordPO> result=null;
-		if(h!=null)
+		ArrayList<CommodityRecordPO> result = null;
+		if (h != null)
 		{
-			result=new ArrayList<CommodityRecordPO>();
-			for(int i=0;i<h.size();i++)
+			result = new ArrayList<CommodityRecordPO>();
+			for (int i = 0; i < h.size(); i++)
 				result.add(h.get(i).toPO());
 		}
 		return result;
 	}
-	protected ArrayList<CommodityRecordVO> toRecordVOs(ArrayList<CommodityRecord> h)
+
+	protected ArrayList<CommodityRecordVO> toRecordVOs(
+			ArrayList<CommodityRecord> h)
 	{
-		ArrayList<CommodityRecordVO> result=null;
-		if(h!=null)
+		ArrayList<CommodityRecordVO> result = null;
+		if (h != null)
 		{
-			result=new ArrayList<CommodityRecordVO>();
-			for(int i=0;i<h.size();i++)
+			result = new ArrayList<CommodityRecordVO>();
+			for (int i = 0; i < h.size(); i++)
 				result.add(h.get(i).toVO());
 		}
 		return result;
 	}
+
 	protected ArrayList<CommodityRecord> posToCom(ArrayList<CommodityRecordPO> h)
 	{
-		ArrayList<CommodityRecord> result=null;
-		if(h!=null)
+		ArrayList<CommodityRecord> result = null;
+		if (h != null)
 		{
-			result=new ArrayList<CommodityRecord>();
-			for(int i=0;i<h.size();i++)
+			result = new ArrayList<CommodityRecord>();
+			for (int i = 0; i < h.size(); i++)
 				result.add(new CommodityRecord(h.get(i)));
 		}
 		return result;
 	}
+
 	protected ArrayList<CommodityRecord> vosToCom(ArrayList<CommodityRecordVO> h)
 	{
-		ArrayList<CommodityRecord> result=null;
-		if(h!=null)
+		ArrayList<CommodityRecord> result = null;
+		if (h != null)
 		{
-			result=new ArrayList<CommodityRecord>();
-			for(int i=0;i<h.size();i++)
+			result = new ArrayList<CommodityRecord>();
+			for (int i = 0; i < h.size(); i++)
 				result.add(new CommodityRecord(h.get(i)));
 		}
 		return result;
 	}
-	public ArrayList<CommodityRecord> getPrepareRecord() {
+
+	public ArrayList<CommodityRecord> getPrepareRecord()
+	{
 		return prepareRecord;
 	}
-	public void setPrepareRecord(ArrayList<CommodityRecord> prepareRecord) {
+
+	public void setPrepareRecord(ArrayList<CommodityRecord> prepareRecord)
+	{
 		this.prepareRecord = prepareRecord;
 	}
 }
