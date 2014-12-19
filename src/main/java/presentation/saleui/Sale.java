@@ -7,12 +7,14 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import entrance.Frame;
 import po.Role;
+import presentation.PanelType;
 import presentation.commodityui.JPManagerCom;
 import presentation.financialui.FinancialUI;
+import presentation.managerui.ManagerUI;
 import presentation.saleui.JPmanageBills1;
 import presentation.saleui.JPmanageBills2;
-import userui.Frame;
 
 public class Sale extends JPanel{
 		/*
@@ -28,30 +30,6 @@ public class Sale extends JPanel{
 		private JLabel signout = new JLabel();
 		//frame的引用
 		private Frame frame;
-		
-	 	public JPfunctions getFunction() {
-			return function;
-		}
-
-		public void setFunction(JPfunctions function) {
-			this.function = function;
-		}
-
-		public JPmanageBills1 getManageBills1() {
-			return manageBills1;
-		}
-
-		public void setManageBills1(JPmanageBills1 manageBills1) {
-			this.manageBills1 = manageBills1;
-		}
-
-		public JPmanageBills2 getManageBills2() {
-			return manageBills2;
-		}
-
-		public void setManageBills2(JPmanageBills2 manageBills2) {
-			this.manageBills2 = manageBills2;
-		}
 		//管理单据选择面板
 		private JPmanageBills1 manageBills1=new JPmanageBills1();
 		//单据管理面板
@@ -60,14 +38,8 @@ public class Sale extends JPanel{
 		private JPmanageCustomer customerManage=new JPmanageCustomer();
 		//选择商品
 		JPManagerCom choseComs=new JPManagerCom();
-		public JPManagerCom getChoseComs() {
-			return choseComs;
-		}
-
-		public void setChoseComs(JPManagerCom choseComs) {
-			this.choseComs = choseComs;
-		}
-
+		//当前面板标记，用于后退跳转
+		private PanelType panelType=PanelType.JPfunction;
 		public Sale(){
 
 			//设置窗口大小
@@ -140,13 +112,7 @@ public class Sale extends JPanel{
 	    		customerManage.getFrame(frame);
 	    		choseComs.getFrame(frame);
 	    }
-		public JPmanageCustomer getCustomerManage() {
-			return customerManage;
-		}
-
-		public void setCustomerManage(JPmanageCustomer customerManage) {
-			this.customerManage = customerManage;
-		}
+	
 		public class MouseListenerOfButton implements MouseListener{
 
 			private int num;
@@ -183,9 +149,37 @@ public class Sale extends JPanel{
 					Sale.this.getCustomerManage().setVisible(false);
 					Sale.this.getChoseComs().setVisible(false);
 					Sale.this.getFunction().setVisible(true);
+					//标记当前面板，用于后退按钮
+					Sale.this.setPanelType(PanelType.JPfunction);
 					break;
 				case 2:
 					back.setIcon(new ImageIcon("src/image/back1.png"));
+					switch(panelType){
+					case JPfunction:
+						//实现登出跳转
+						frame.getLogin().setVisible(true);
+						Sale.this.setVisible(false);
+						break;
+					case JPmanageBills1:
+						manageBills1.setVisible(false);
+						function.setVisible(true);
+						//标记当前面板，用于后退按钮
+						Sale.this.setPanelType(PanelType.JPfunction);
+						break;
+					case JPmanageBills2:
+						manageBills2.setVisible(false);
+						choseComs.setVisible(false);
+						manageBills1.setVisible(true);
+						//标记当前面板，用于后退按钮
+						Sale.this.setPanelType(PanelType.JPmanageBills1);
+						break;
+					case JPmanageCustomer:
+						customerManage.setVisible(false);
+						function.setVisible(true);
+						//标记当前面板，用于后退按钮
+						Sale.this.setPanelType(PanelType.JPfunction);
+						break;
+					}
 					break;
 				case 3:
 					signout.setIcon(new ImageIcon("src/image/signout1.png"));
@@ -227,6 +221,48 @@ public class Sale extends JPanel{
 			}
 			
 		}
-	
-		
+		public JPManagerCom getChoseComs() {
+			return choseComs;
+		}
+
+		public void setChoseComs(JPManagerCom choseComs) {
+			this.choseComs = choseComs;
+		}
+	 	public JPfunctions getFunction() {
+			return function;
+		}
+
+		public void setFunction(JPfunctions function) {
+			this.function = function;
+		}
+
+		public JPmanageBills1 getManageBills1() {
+			return manageBills1;
+		}
+
+		public void setManageBills1(JPmanageBills1 manageBills1) {
+			this.manageBills1 = manageBills1;
+		}
+
+		public JPmanageBills2 getManageBills2() {
+			return manageBills2;
+		}
+
+		public void setManageBills2(JPmanageBills2 manageBills2) {
+			this.manageBills2 = manageBills2;
+		}
+		public JPmanageCustomer getCustomerManage() {
+			return customerManage;
+		}
+
+		public void setCustomerManage(JPmanageCustomer customerManage) {
+			this.customerManage = customerManage;
+		}
+		public PanelType getPanelType() {
+			return panelType;
+		}
+
+		public void setPanelType(PanelType panelType) {
+			this.panelType = panelType;
+		}
 }

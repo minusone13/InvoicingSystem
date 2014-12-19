@@ -11,13 +11,13 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import entrance.Frame;
 import po.BillState;
 import po.BillStyle;
 import po.SpillsLossBillPO.Type;
 import presentation.managerui.JPBillList;
 import presentation.managerui.JTableOfList;
 import presentation.managerui.MouseListenerGetXY;
-import userui.Frame;
 import vo.SpillsLossBillVO;
 import vo.stockvo.CommodityVO;
 

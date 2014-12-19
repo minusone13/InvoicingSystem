@@ -7,12 +7,13 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import entrance.Frame;
 import businesslogic.customerbl.CustomerList;
 import businesslogic.salebillbl.salebillController;
 import businesslogicservice.customerblservice.CustomerBlService;
 import businesslogicservice.salebillblservice.SaleBillBlService;
+import presentation.PanelType;
 import presentation.saleui.JPfunctions;
-import userui.Frame;
 
 public class JPfunctions extends JPanel{
 	//background
@@ -92,11 +93,15 @@ public class JPfunctions extends JPanel{
 				frame.getSale().getCustomerManage().getBillsList().addCustomerList(customerbl.getAllCustomer("Customer.txt"));
 				//显示客户管理界面
 				frame.getSale().getCustomerManage().setVisible(true);
+				//标记当前面板，用于后退按钮
+				frame.getSale().setPanelType(PanelType.JPmanageCustomer);
 				break;
 			case 2:
 				function2.setIcon(Imagefun2);
 				JPfunctions.this.setVisible(false);
 				frame.getSale().getManageBills1().setVisible(true);
+				//标记当前面板，用于后退按钮
+				frame.getSale().setPanelType(PanelType.JPmanageBills1);
 				break;
 			}
 		}

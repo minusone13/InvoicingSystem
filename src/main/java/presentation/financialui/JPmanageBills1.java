@@ -8,8 +8,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import entrance.Frame;
 import po.BillStyle;
-import userui.Frame;
+import presentation.PanelType;
 import businesslogic.financialbl.Financial;
 import businesslogicservice.financialblservice.FinancialBlService;
 
@@ -108,6 +109,7 @@ public class JPmanageBills1 extends JPanel {
 				frame.getFinancial().getManageBills2().getBillList().addReceiptBillList(fbl.getAllOfReceiptBills());
 				//切换
 				frame.getFinancial().getManageBills2().setVisible(true);
+				
 				break;
 			case 22:paymentbill.setIcon(paymentbillIcon);
 				//切换
@@ -134,6 +136,8 @@ public class JPmanageBills1 extends JPanel {
 				frame.getFinancial().getManageBills2().setVisible(true);
 				break;
 			}
+			//标记当前面板，用于后退按钮
+			frame.getFinancial().setPanelType(PanelType.JPmanageBills2);
 		}
 
 		public void mouseEntered(MouseEvent e) {

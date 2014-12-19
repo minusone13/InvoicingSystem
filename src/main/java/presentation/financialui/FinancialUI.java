@@ -7,7 +7,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import userui.Frame;
+import entrance.Frame;
+import presentation.PanelType;
+import presentation.managerui.ManagerUI;
 
 public class FinancialUI extends JPanel {
 	//背景
@@ -32,40 +34,22 @@ public class FinancialUI extends JPanel {
 	private JPmanageBills2 manageBills2=new JPmanageBills2();
 	//查看各种报表
 	private JPinquire inquire=new JPinquire();
+	//经营历程表
+	private BusinessProcessPanel businessProgress=new BusinessProcessPanel();
+	//销售明细表
+	private SaleDetailPanel saleDetail=new SaleDetailPanel();
 	//经营情况表
 	private BusinessConditionPanel businessCondition=new BusinessConditionPanel();
 	//账户管理
 	private JPmanageAccount account=new JPmanageAccount();
 	//期初建账选择
-	private AccountBuildIndexPanel accountBuild=new AccountBuildIndexPanel();
+	private AccountBuildIndexPanel accountBuildIndex=new AccountBuildIndexPanel();
 	//期初建账信息
 	private InitialInfoPanel accountInfomation=new InitialInfoPanel();
-	public InitialInfoPanel getAccountInfomation() {
-		return accountInfomation;
-	}
-	public void setAccountInfomation(InitialInfoPanel accountInfomation) {
-		this.accountInfomation = accountInfomation;
-	}
-	public JPfunctions getFunction() {
-		return function;
-	}
-	public void setFunction(JPfunctions function) {
-		this.function = function;
-	}
-	public JPmanageBills1 getManageBills1() {
-		return manageBills1;
-	}
-	public void setManageBills1(JPmanageBills1 manageBills1) {
-		this.manageBills1 = manageBills1;
-	}
-	public JPmanageBills2 getManageBills2() {
-		return manageBills2;
-	}
-	public void setManageBills2(JPmanageBills2 manageBills2) {
-		this.manageBills2 = manageBills2;
-	}
+	//当前面板标记，用于后退跳转
+	private PanelType panelType=PanelType.JPfunction;
 	//frame的引用
-    Frame frame;
+	private Frame frame;
 	public FinancialUI(){
 
 			//设置窗口大小
@@ -106,9 +90,15 @@ public class FinancialUI extends JPanel {
 			//经营情况表
 			businessCondition.setLocation(55, 233);
 			businessCondition.setVisible(false);
+			//经营历程表
+			businessProgress.setLocation(55, 233);
+			businessProgress.setVisible(false);
+			//销售明细表
+			saleDetail.setLocation(55, 233);
+			saleDetail.setVisible(false);
 			//期初建账选择
-			accountBuild.setLocation(0, 0);
-			accountBuild.setVisible(false);
+			accountBuildIndex.setLocation(0, 0);
+			accountBuildIndex.setVisible(false);
 			//期初建账信息
 			accountInfomation.setLocation(55, 233);
 			accountInfomation.setVisible(false);
@@ -136,22 +126,198 @@ public class FinancialUI extends JPanel {
 			this.add(inquire,9);
 			this.add(account,10);
 			this.add(businessCondition,11);
-			this.add(accountBuild,12);
+			this.add(accountBuildIndex,12);
 			this.add(accountInfomation,13);
-			this.add(bg,14);
+			this.add(businessProgress,14);
+			this.add(saleDetail,15);
+			this.add(bg,16);
 			
 		}
-    public BusinessConditionPanel getBusinessCondition() {
+    
+	/*获取frame引用*/
+    public void getFrame( Frame f){
+    		frame=f;
+    		function.getFrame(frame);
+    		manageBills1.getFrame(frame);
+    		manageBills2.getFrame(frame);
+    		inquire.getFrame(frame);
+    		account.getFrame(frame);
+    		businessCondition.getFrame(frame);
+    		accountBuildIndex.getFrame(frame);
+    }
+
+	public class MouseListenerOfButton implements MouseListener{
+
+		private int num;
+		public MouseListenerOfButton(int N){
+			num=N;
+		}
+		public void mouseClicked(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		public void mousePressed(MouseEvent e) {
+			// TODO Auto-generated method stub
+			switch(num){
+			case 1:
+				home.setIcon(new ImageIcon("src/image/home2.png"));
+				break;
+			case 2:
+				back.setIcon(new ImageIcon("src/image/back2.png"));
+				break;
+			case 3:
+				signout.setIcon(new ImageIcon("src/image/signout2.png"));
+				break;
+			}
+		}
+
+		public void mouseReleased(MouseEvent e) {
+			// TODO Auto-generated method stub
+			switch(num){
+			case 1:
+				home.setIcon(new ImageIcon("src/image/home1.png"));
+				FinancialUI.this.getManageBills1().setVisible(false);
+				FinancialUI.this.getManageBills2().setVisible(false);
+				FinancialUI.this.getInquire().setVisible(false);
+				FinancialUI.this.getAccount().setVisible(false);
+				FinancialUI.this.getAccountBuild().setVisible(false);
+				FinancialUI.this.getBusinessCondition().setVisible(false);
+				FinancialUI.this.getBusinessProgress().setVisible(false);
+				FinancialUI.this.getSaleDetail().setVisible(false);
+				FinancialUI.this.getAccountInfomation().setVisible(false);
+				FinancialUI.this.getFunction().setVisible(true);
+				//标记当前面板，用于后退按钮
+				frame.getFinancial().setPanelType(PanelType.JPfunction);
+				break;
+			case 2:
+				back.setIcon(new ImageIcon("src/image/back1.png"));
+				switch(panelType){
+				case JPfunction:
+					//实现登出跳转
+					frame.getLogin().setVisible(true);
+					FinancialUI.this.setVisible(false);
+					break;
+				case JPmanageBills1:
+					manageBills1.setVisible(false);
+					function.setVisible(true);
+					//标记当前面板，用于后退按钮
+					frame.getFinancial().setPanelType(PanelType.JPfunction);
+					break;
+				case JPmanageBills2:
+					manageBills2.setVisible(false);
+					manageBills1.setVisible(true);
+					//标记当前面板，用于后退按钮
+					frame.getFinancial().setPanelType(PanelType.JPmanageBills1);
+					break;
+					
+				case JPmanageAccount:
+					account.setVisible(false);
+					function.setVisible(true);
+					//标记当前面板，用于后退按钮
+					frame.getFinancial().setPanelType(PanelType.JPfunction);
+					break;
+				case JPinquire:
+					inquire.setVisible(false);
+					function.setVisible(true);
+					//标记当前面板，用于后退按钮
+					frame.getFinancial().setPanelType(PanelType.JPfunction);
+					break;
+				case AccountBuildIndexPanel:
+					accountBuildIndex.setVisible(false);
+					account.setVisible(true);
+					//标记当前面板，用于后退按钮
+					frame.getFinancial().setPanelType(PanelType.JPmanageAccount);
+					break;
+				case BusinessConditionPanel:
+					businessCondition.setVisible(false);
+					inquire.setVisible(true);
+					//标记当前面板，用于后退按钮
+					frame.getFinancial().setPanelType(PanelType.JPinquire);
+					break;
+				case BusinessProcessPanel:
+					businessProgress.setVisible(false);
+					inquire.setVisible(true);
+					//标记当前面板，用于后退按钮
+					frame.getFinancial().setPanelType(PanelType.JPinquire);
+					break;
+				case SaleDetailPanel:
+					saleDetail.setVisible(false);
+					inquire.setVisible(true);
+					//标记当前面板，用于后退按钮
+					frame.getFinancial().setPanelType(PanelType.JPinquire);
+					break;
+				case InitialInfoPanel:
+					accountInfomation.setVisible(false);
+					accountBuildIndex.setVisible(true);
+					//标记当前面板，用于后退按钮
+					frame.getFinancial().setPanelType(PanelType.AccountBuildIndexPanel);
+					break;
+				}
+				break;
+			case 3:
+				signout.setIcon(new ImageIcon("src/image/signout1.png"));
+				//实现登出跳转
+				frame.getLogin().setVisible(true);
+				FinancialUI.this.setVisible(false);
+				break;
+			}
+		}
+
+		public void mouseEntered(MouseEvent e) {
+			// TODO Auto-generated method stub
+			switch(num){
+			case 1:
+				home.setIcon(new ImageIcon("src/image/home1.png"));
+				break;
+			case 2:
+				back.setIcon(new ImageIcon("src/image/back1.png"));
+				break;
+			case 3:
+				signout.setIcon(new ImageIcon("src/image/signout1.png"));
+				break;
+			}
+		}
+
+		public void mouseExited(MouseEvent e) {
+			// TODO Auto-generated method stub
+			switch(num){
+			case 1:
+				home.setIcon(new ImageIcon("src/image/home.png"));
+				break;
+			case 2:
+				back.setIcon(new ImageIcon("src/image/back0.png"));
+				break;
+			case 3:
+				signout.setIcon(new ImageIcon("src/image/signout0.png"));
+				break;
+			}
+		}
+		
+	}
+	public BusinessProcessPanel getBusinessProgress() {
+		return businessProgress;
+	}
+	public void setBusinessProgress(BusinessProcessPanel businessProgress) {
+		this.businessProgress = businessProgress;
+	}
+		public SaleDetailPanel getSaleDetail() {
+		return saleDetail;
+	}
+	public void setSaleDetail(SaleDetailPanel saleDetail) {
+		this.saleDetail = saleDetail;
+	}
+	public BusinessConditionPanel getBusinessCondition() {
 		return businessCondition;
 	}
 	public void setBusinessCondition(BusinessConditionPanel businessCondition) {
 		this.businessCondition = businessCondition;
 	}
 	public AccountBuildIndexPanel getAccountBuild() {
-		return accountBuild;
+		return accountBuildIndex;
 	}
 	public void setAccountBuild(AccountBuildIndexPanel accountBuild) {
-		this.accountBuild = accountBuild;
+		this.accountBuildIndex = accountBuild;
 	}
 	public JPinquire getInquire() {
 		return inquire;
@@ -165,100 +331,37 @@ public class FinancialUI extends JPanel {
 	public void setAccount(JPmanageAccount account) {
 		this.account = account;
 	}
-	/*获取frame引用*/
-    public void getFrame( Frame f){
-    		frame=f;
-    		function.getFrame(frame);
-    		manageBills1.getFrame(frame);
-    		manageBills2.getFrame(frame);
-    		inquire.getFrame(frame);
-    		account.getFrame(frame);
-    		businessCondition.getFrame(frame);
-    		accountBuild.getFrame(frame);
-    }
-		public class MouseListenerOfButton implements MouseListener{
-
-			private int num;
-			public MouseListenerOfButton(int N){
-				num=N;
-			}
-			public void mouseClicked(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
-				switch(num){
-				case 1:
-					home.setIcon(new ImageIcon("src/image/home2.png"));
-					break;
-				case 2:
-					back.setIcon(new ImageIcon("src/image/back2.png"));
-					break;
-				case 3:
-					signout.setIcon(new ImageIcon("src/image/signout2.png"));
-					break;
-				}
-			}
-
-			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
-				switch(num){
-				case 1:
-					home.setIcon(new ImageIcon("src/image/home1.png"));
-					FinancialUI.this.getManageBills1().setVisible(false);
-					FinancialUI.this.getManageBills2().setVisible(false);
-					FinancialUI.this.getInquire().setVisible(false);
-					FinancialUI.this.getAccount().setVisible(false);
-					FinancialUI.this.getAccountBuild().setVisible(false);
-					FinancialUI.this.getBusinessCondition().setVisible(false);
-					FinancialUI.this.getAccountInfomation().setVisible(false);
-					FinancialUI.this.getFunction().setVisible(true);
-					break;
-				case 2:
-					back.setIcon(new ImageIcon("src/image/back1.png"));
-					break;
-				case 3:
-					signout.setIcon(new ImageIcon("src/image/signout1.png"));
-					//实现登出跳转
-					frame.getLogin().setVisible(true);
-					FinancialUI.this.setVisible(false);
-					break;
-				}
-			}
-
-			public void mouseEntered(MouseEvent e) {
-				// TODO Auto-generated method stub
-				switch(num){
-				case 1:
-					home.setIcon(new ImageIcon("src/image/home1.png"));
-					break;
-				case 2:
-					back.setIcon(new ImageIcon("src/image/back1.png"));
-					break;
-				case 3:
-					signout.setIcon(new ImageIcon("src/image/signout1.png"));
-					break;
-				}
-			}
-
-			public void mouseExited(MouseEvent e) {
-				// TODO Auto-generated method stub
-				switch(num){
-				case 1:
-					home.setIcon(new ImageIcon("src/image/home.png"));
-					break;
-				case 2:
-					back.setIcon(new ImageIcon("src/image/back0.png"));
-					break;
-				case 3:
-					signout.setIcon(new ImageIcon("src/image/signout0.png"));
-					break;
-				}
-			}
-			
-		}
+	public InitialInfoPanel getAccountInfomation() {
+		return accountInfomation;
 	}
+	public void setAccountInfomation(InitialInfoPanel accountInfomation) {
+		this.accountInfomation = accountInfomation;
+	}
+	public JPfunctions getFunction() {
+		return function;
+	}
+	public void setFunction(JPfunctions function) {
+		this.function = function;
+	}
+	public JPmanageBills1 getManageBills1() {
+		return manageBills1;
+	}
+	public void setManageBills1(JPmanageBills1 manageBills1) {
+		this.manageBills1 = manageBills1;
+	}
+	public JPmanageBills2 getManageBills2() {
+		return manageBills2;
+	}
+	public void setManageBills2(JPmanageBills2 manageBills2) {
+		this.manageBills2 = manageBills2;
+	}
+	public PanelType getPanelType() {
+		return panelType;
+	}
+
+	public void setPanelType(PanelType panelType) {
+		this.panelType = panelType;
+	}
+}
 	
 

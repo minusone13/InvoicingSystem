@@ -11,9 +11,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import entrance.Frame;
+import presentation.PanelType;
 import presentation.managerui.JPBillList;
 import presentation.managerui.MouseListenerGetXY;
-import userui.Frame;
 import vo.accountVO.AccountVO;
 import vo.uservo.UserVO;
 import businesslogic.financialbl.Financial;
@@ -237,6 +238,8 @@ public class JPmanageAccount extends JPanel {
 						//期初建账
 						JPmanageAccount.this.setVisible(false);
 						frame.getFinancial().getAccountBuild().setVisible(true);
+						//标记当前面板，用于后退按钮
+						frame.getFinancial().setPanelType(PanelType.AccountBuildIndexPanel);
 					break;
 					case 7:
 						add.setIcon(addIconW);

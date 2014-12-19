@@ -12,9 +12,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import entrance.Frame;
 import presentation.managerui.JPBillList;
 import presentation.managerui.MouseListenerGetXY;
-import userui.Frame;
 import vo.CustomerVO;
 import businesslogic.customerbl.CustomerList;
 import businesslogicservice.customerblservice.CustomerBlService;

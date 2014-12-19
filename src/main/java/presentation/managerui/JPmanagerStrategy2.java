@@ -14,7 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import userui.Frame;
+import entrance.Frame;
 import vo.BarginStrategyVO;
 import vo.LevelStrategyVO;
 import vo.ReachStrategyVO;

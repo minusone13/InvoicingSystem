@@ -8,7 +8,6 @@ import po.BillState;
 import po.Role;
 import presentation.commodityui.StockManagerDriver;
 import presentation.managerui.JPBill.JPbillType;
-import userui.Frame;
 import vo.AlertBillVO;
 import vo.BarginStrategyVO;
 import vo.CustomerVO;
@@ -38,6 +37,7 @@ import businesslogicservice.managerblservice.StubManagerBlService;
 import businesslogicservice.salebillblservice.SaleBillBlService;
 import businesslogicservice.userblservice.StubUserBlService;
 import data.commoditydata.StubStockDataController;
+import entrance.Frame;
 
 public class JPBillList extends JPanel {
 

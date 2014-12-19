@@ -1,4 +1,4 @@
-package userui;
+package entrance;
 
 import java.awt.Toolkit;
 import java.awt.event.MouseEvent;

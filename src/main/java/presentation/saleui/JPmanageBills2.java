@@ -12,12 +12,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import entrance.Frame;
 import po.BillState;
 import po.BillStyle;
 import presentation.managerui.JPBillList;
 import presentation.managerui.JTableOfList;
 import presentation.managerui.MouseListenerGetXY;
-import userui.Frame;
 import vo.CustomerVO;
 import vo.PurBackSheetVO;
 import vo.PurSheetVO;

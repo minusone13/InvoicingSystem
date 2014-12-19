@@ -5,7 +5,8 @@ import java.awt.event.MouseListener;
 
 import javax.swing.*;
 
-import userui.Frame;
+import presentation.PanelType;
+import entrance.Frame;
 
 public class AccountBuildIndexPanel extends JPanel{
 	private JLabel clientInfo = new JLabel("New label");
@@ -94,13 +95,19 @@ public class AccountBuildIndexPanel extends JPanel{
 				AccountBuildIndexPanel.this.setVisible(false);
 				frame.getFinancial().getAccountInfomation().update(1);
 				frame.getFinancial().getAccountInfomation().setVisible(true);
+				//标记当前面板，用于后退按钮
+				frame.getFinancial().setPanelType(PanelType.InitialInfoPanel);
 				break;
 			case 22:commodityInfo.setIcon(commodityInfoIcon);
+				//标记当前面板，用于后退按钮
+				frame.getFinancial().setPanelType(PanelType.InitialInfoPanel);
 				break;
 			case 23:accountInfo.setIcon(accountInfoIcon);
 				AccountBuildIndexPanel.this.setVisible(false);
 				frame.getFinancial().getAccountInfomation().update(2);
 				frame.getFinancial().getAccountInfomation().setVisible(true);
+				//标记当前面板，用于后退按钮
+				frame.getFinancial().setPanelType(PanelType.InitialInfoPanel);
 				break;
 			case 24:buildButton.setLocation(800,450);
 					//buildButton.setIcon(buildIcon);	

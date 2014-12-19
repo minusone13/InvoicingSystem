@@ -12,10 +12,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import entrance.Frame;
 import po.Role;
 import presentation.managerui.JPBillList;
 import presentation.managerui.MouseListenerGetXY;
-import userui.Frame;
 import vo.uservo.UserVO;
 import businesslogic.userbl.UserController;
 import businesslogicservice.userblservice.StubUserBlService;
