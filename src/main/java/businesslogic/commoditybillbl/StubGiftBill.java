@@ -16,6 +16,7 @@ import businesslogic.examinebl.Bill;
 
 public class StubGiftBill extends Bill implements GetVOandPO
 {// 赠送单类，统一进入单据池管理和存储
+	//参见大作业要求
 	Date date;
 	private BillStyle billstyle = BillStyle.GiftBill;
 	String operator;

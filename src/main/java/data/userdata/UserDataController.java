@@ -221,7 +221,7 @@ public class UserDataController implements StubUserDataService
 	}
 
 	public boolean update(UserPO po)
-	{
+	{//简单的替换，也就是删除后增加
 		read();
 		boolean result = l.update(po);
 		save();

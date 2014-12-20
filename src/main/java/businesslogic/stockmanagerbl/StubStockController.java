@@ -51,6 +51,7 @@ public class StubStockController implements StubCommodityBlService,
 		return l;
 	}
 
+	//没有注释的方法参见进一步调用的方法中的注释，并可参考BLservice中的注释
 	public RM addCommodity(CommodityVO vo)
 	{
 		RM result = l.addCommodity(vo);
@@ -80,7 +81,7 @@ public class StubStockController implements StubCommodityBlService,
 
 	public RM addPack(ArrayList<MockCommodity> commodityarray, int quantity,
 			double discount)
-	{
+	{//增加特价包
 		return l.addPack(commodityarray, quantity, discount);
 	}
 

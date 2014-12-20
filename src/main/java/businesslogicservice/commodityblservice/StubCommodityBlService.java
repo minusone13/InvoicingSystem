@@ -12,14 +12,10 @@ import vo.stockvo.*;
 import vo.uservo.UserVO;
 
 public interface StubCommodityBlService
-{
+{//由businesslogic/stockmanagerbl/StubStockController.java实现
 	public ArrayList<CommodityVO> findCommodity(String name);// 输入商品名称，返回一系列具有同样名称的商品
-																// need to be
-																// changed to
-																// mohuchazhao
 
 	public ArrayList<CommodityVO> fuzzyFindCommodity(String s, int precision);
-
 	// precision 先默认给1，可以达到王雨城所说的算法。若取数字越高，精确度越高，搜索结果数量也就越少
 
 	public CommodityVO findCommodity(String name, String model);// 返回结果为null为没找到
@@ -27,6 +23,8 @@ public interface StubCommodityBlService
 	public CommodityVO findCommodity(CommodityVO vo);// 返回结果为null为没找到
 
 	public RM addCommodity(CommodityVO vo);
+	//parent, name, model, in,out, alertLine几个参数给进来，vo中有相应的构造方法
+	
 
 	public RM addCategory(CategoryVO vo);
 
@@ -48,12 +46,14 @@ public interface StubCommodityBlService
 	public void setFilePath(String s);// 用于期初建账查看商品信息
 
 	public void setUser(UserVO vo);// 告诉代码此时操作的User
-
-	public RM creat(GiftBillVO vo);
+	
+	
+	//库存单据管理
+	public RM creat(GiftBillVO vo);//在创建时ID不用给出，返回值可能有done，insufficient和notfound,unknownerror,下同
 
 	public RM creat(SpillsLossBillVO vo);
 
-	public RM update(GiftBillVO vo);
+	public RM update(GiftBillVO vo);//只有草稿状态可修改，下同
 
 	public RM update(SpillsLossBillVO vo);
 
@@ -63,7 +63,7 @@ public interface StubCommodityBlService
 
 	public RM submit(AlertBillVO vo);
 
-	public RM over(GiftBillVO vo);
+	public RM over(GiftBillVO vo);//只有审批的才可完成，下同
 
 	public RM over(SpillsLossBillVO vo);
 
@@ -73,10 +73,11 @@ public interface StubCommodityBlService
 
 	public ArrayList<AlertBillVO> showAlertBills();
 
+	
+	//库存查看与库存盘点
 	public CountVO count();// 库存盘点
 
 	public ArrayList<CommodityVO> getRecords(Date d1, Date d2);// 库存查看,当中的ArrayList<CommodityRecordVO>
 																// 只有第零项有值，是查看的数据
-
 	public void ExportCount(String FilePath, CountVO vo);// 导出excel
 }

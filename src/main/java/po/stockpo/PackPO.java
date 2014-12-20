@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class PackPO implements Serializable, Cloneable
 {
-	String ID;
+	String ID;//ID唯一确定特价包
 
 	ArrayList<CommodityPO> coms = new ArrayList<CommodityPO>();
 

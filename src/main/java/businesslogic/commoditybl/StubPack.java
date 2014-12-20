@@ -70,9 +70,9 @@ public class StubPack
 				com.toRecordVOs(prepareRecord));
 	}
 
-	String ID;
-	ArrayList<MockCommodity> coms;
-	int quantity;
+	String ID;//特价包有ID，唯一确定确定一个特价包
+	ArrayList<MockCommodity> coms;//coms中的number是本类商品在特价包中的数量
+	int quantity;//下面几个参数类似businesslogic/commoditybl/Commodity.java
 	double price;// 总价，通过total-discount得出
 	ArrayList<CommodityRecord> record = new ArrayList<CommodityRecord>();
 	ArrayList<CommodityRecord> prepareRecord = new ArrayList<CommodityRecord>();
