@@ -20,7 +20,7 @@ import vo.stockvo.*;
 public class StubCommodityList
 {// 商品列表 haha
 	static StubCommodityDataService comdata;
-	User user;
+	static User user;
 
 	public CommodityVO findCommodity(String name, String model)
 	{
