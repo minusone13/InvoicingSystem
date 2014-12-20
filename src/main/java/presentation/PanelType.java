@@ -17,6 +17,9 @@ public enum PanelType {
 	JPmanagerStrategy2,
 	JPpassBill1,
 	JPpassBill2,
-	JPmanageCustomer
+	JPmanageCustomer,
+	StockInventoryPanel,
+	StockCheckPanel,
+	JPStcokShow
 	
 }

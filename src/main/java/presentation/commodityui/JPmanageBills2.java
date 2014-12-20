@@ -172,16 +172,19 @@ public class JPmanageBills2 extends JPanel {
 				table.updateShow();
 				add.setVisible(false);
 				edit.setVisible(false);
+				done.setVisible(true);
 				break;
 			case SpillsLossBill:
 				table.setVisible(false);
 				add.setVisible(true);
 				edit.setVisible(true);
+				done.setVisible(true);
 				break;
 			case AlertBill:
 				table.setVisible(false);
 				add.setVisible(false);
 				edit.setVisible(false);
+				done.setVisible(false);//库管人员无权完成报警单，进货人员进货后由进货人员处理，库管只负责上交
 				break;
 			case PurBackSheet:
 				String[] temp2={"商品","型号","数量"};

@@ -28,9 +28,15 @@ public class Stock extends JPanel {
 	//单据管理面板
 	private JPmanageBills2 manageBills2=new JPmanageBills2();
 	//商品管理
-	JPManagerComOfStock managerComs=new JPManagerComOfStock();
+	private JPManagerComOfStock managerComs=new JPManagerComOfStock();
 	//选择商品
-	JPManagerCom choseComs=new JPManagerCom();
+	private JPManagerCom choseComs=new JPManagerCom();
+	//库存查看与盘点选择
+	private JPStcokShow stockShow=new JPStcokShow();
+	//库存盘点
+	private StockInventoryPanel stockTack=new StockInventoryPanel();
+	//库存查看
+	private StockCheckPanel stockCheck=new StockCheckPanel();
 	//home
 	private JLabel home=new JLabel();
 	//后退
@@ -81,6 +87,17 @@ public class Stock extends JPanel {
 			choseComs.setRole(Role.STOCK_STAFF);
 			choseComs.setVisible(false);
 			choseComs.getAddIcon().setVisible(false);
+			
+			//库存查看与盘点
+			stockShow.setLocation(55, 233);
+			stockShow.setVisible(false);
+			//库存盘点
+			stockTack.setLocation(55, 233);
+			stockTack.setVisible(false);
+			//库存查看
+			stockCheck.setLocation(55, 233);
+			stockCheck.setVisible(false);
+			
 			//home
 			home.setIcon(new ImageIcon("src/image/home.png") );
 			home.setBounds(690, 165, 90, 32);
@@ -104,7 +121,10 @@ public class Stock extends JPanel {
 			this.add(manageBills1,8);
 			this.add(manageBills2,9);
 			this.add(managerComs,10);
-			this.add(bg,11);
+			this.add(stockShow,11);
+			this.add(stockTack,12);
+			this.add(stockCheck,13);
+			this.add(bg,14);
 			
 		}
 
@@ -116,6 +136,9 @@ public class Stock extends JPanel {
     		manageBills2.getFrame(frame);
     		managerComs.getFrame(frame);
     		choseComs.getFrame(frame);
+    		stockShow.getFrame(frame);
+    		stockTack.getFrame(frame);
+    		stockCheck.getFrame(frame);
     }
 	public class MouseListenerOfButton implements MouseListener{
 
@@ -153,6 +176,9 @@ public class Stock extends JPanel {
 				Stock.this.getManageBills2().setVisible(false);
 				Stock.this.getManagerComs().setVisible(false);
 				Stock.this.getChoseComs().setVisible(false);
+				Stock.this.getStockShow().setVisible(false);
+				Stock.this.getStockTack().setVisible(false);
+				Stock.this.getStockCheck().setVisible(false);
 				Stock.this.getFunction().setVisible(true);
 				//标记当前面板，用于后退按钮
 				frame.getStock().setPanelType(PanelType.JPfunction);
@@ -181,6 +207,24 @@ public class Stock extends JPanel {
 					break;
 				case JPManagerComOfStock:
 					managerComs.setVisible(false);
+					function.setVisible(true);
+					//标记当前面板，用于后退按钮
+					frame.getStock().setPanelType(PanelType.JPfunction);
+					break;
+				case StockInventoryPanel:
+					stockTack.setVisible(false);
+					stockShow.setVisible(true);
+					//标记当前面板，用于后退按钮
+					frame.getStock().setPanelType(PanelType.JPStcokShow);
+					break;
+				case StockCheckPanel:
+					stockCheck.setVisible(false);
+					stockShow.setVisible(true);
+					//标记当前面板，用于后退按钮
+					frame.getStock().setPanelType(PanelType.JPStcokShow);
+					break;
+				case JPStcokShow:
+					stockShow.setVisible(false);
 					function.setVisible(true);
 					//标记当前面板，用于后退按钮
 					frame.getStock().setPanelType(PanelType.JPfunction);
@@ -262,6 +306,35 @@ public class Stock extends JPanel {
 	}
 	public void setPanelType(PanelType panelType) {
 		this.panelType = panelType;
+	}
+	public JPStcokShow getStockShow()
+	{
+		return stockShow;
+	}
+
+	public void setStockShow(JPStcokShow stockShow)
+	{
+		this.stockShow = stockShow;
+	}
+
+	public StockInventoryPanel getStockTack()
+	{
+		return stockTack;
+	}
+
+	public void setStockTack(StockInventoryPanel stockTack)
+	{
+		this.stockTack = stockTack;
+	}
+
+	public StockCheckPanel getStockCheck()
+	{
+		return stockCheck;
+	}
+
+	public void setStockCheck(StockCheckPanel stockCheck)
+	{
+		this.stockCheck = stockCheck;
 	}
 }
 	

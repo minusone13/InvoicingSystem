@@ -139,11 +139,11 @@ public class JPmanageBills2 extends JPanel {
 			delete.addMouseListener(new MouseListenerOfButton(4));
 			//编辑功能按钮
 			edit.setIcon(editIconW);
-			edit.setBounds(720, 150, 50, 50);
+			edit.setBounds(720, 215, 50, 50);
 			edit.addMouseListener(new MouseListenerOfButton(5));
 			//提交功能按钮
 			submit.setIcon(submitIconW);
-			submit.setBounds(720, 215, 50, 50);
+			submit.setBounds(720,150 , 50, 50);
 			submit.addMouseListener(new MouseListenerOfButton(6));
 			//创建功能按钮
 			add.setIcon(addIconW);
@@ -197,6 +197,8 @@ public class JPmanageBills2 extends JPanel {
 				break;
 			case AlertBill:
 				table.setVisible(false);
+				edit.setVisible(false);
+				add.setVisible(false);
 				break;
 			case PurBackSheet:
 				String[] temp2={"编号","名称","型号","数量","单价","金额","备注"};

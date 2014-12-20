@@ -100,6 +100,10 @@ public class JPfunction extends JPanel {
 				break;
 			case 3:
 				function3.setIcon(new ImageIcon("src/image/stockUI/Read.png"));
+				JPfunction.this.setVisible(false);
+				frame.getStock().getStockShow().setVisible(true);
+				//标记当前面板，用于后退按钮
+				frame.getStock().setPanelType(PanelType.JPStcokShow);
 				break;
 			}
 		}

@@ -1,10 +1,14 @@
 package presentation.financialui;
 
+import java.awt.Color;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 import businesslogic.financialbl.Financial;
@@ -70,6 +74,13 @@ public class BusinessProcessPanel extends JPanel{
 		this.setLayout(null);
 		//设置面板透明
 		this.setOpaque(false);
+		//背景图
+		JLabel jpbg1=new JLabel();
+		jpbg1.setBounds(0, 0, 700, 150);
+		jpbg1.setIcon(new ImageIcon("src/image/block/blockForTable(long).png"));
+		JLabel jpbg2=new JLabel();
+		jpbg2.setBounds(0, 170, 700, 150);
+		jpbg2.setIcon(new ImageIcon("src/image/block/blockForTable(long).png"));
 		
 		model1 = new DefaultTableModel(new Object[][]{}, columnNames4);
 		model2 = new DefaultTableModel(new Object[][]{}, columnNames4s);
@@ -77,14 +88,40 @@ public class BusinessProcessPanel extends JPanel{
 		table1 = new JTable(model1);
 		table2 = new JTable(model2);
 		
+		table1.setOpaque(false);
+        DefaultTableCellRenderer render1 = new DefaultTableCellRenderer();   
+        render1.setOpaque(false); //将渲染器设置为透明  
+        table1.setDefaultRenderer(Object.class,render1);  
+        table1.setForeground(Color.white);
+        table1.setBorder(null);
+        table1.setShowVerticalLines(false);
+        
+        table2.setOpaque(false);
+        DefaultTableCellRenderer render2 = new DefaultTableCellRenderer();   
+        render2.setOpaque(false); //将渲染器设置为透明  
+        table2.setDefaultRenderer(Object.class,render2);  
+        table2.setForeground(Color.white);
+        table2.setBorder(null);
+        table2.setShowVerticalLines(false);
+		
 		pane1 = new JScrollPane(table1);
 		pane2 = new JScrollPane(table2);
 		
-		add(pane1);
+		pane1.setOpaque(false);//设置透明
+		pane1.getViewport().setOpaque(false);//设置透明
+		pane1.setBorder(null);
 		pane1.setBounds(0, 0, 700, 150);
 		
-		add(pane2);
+		pane2.setOpaque(false);//设置透明
+		pane2.getViewport().setOpaque(false);//设置透明
+		pane2.setBorder(null);
 		pane2.setBounds(0, 170, 700, 150);
+		
+		add(pane1);
+		add(pane2);
+		add(jpbg1);
+		add(jpbg2);
+		
 	}
 	
 	public void export(int choose) {

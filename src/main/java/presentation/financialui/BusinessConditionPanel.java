@@ -1,9 +1,11 @@
 package presentation.financialui;
 
+import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 import entrance.Frame;
@@ -52,32 +54,85 @@ public class BusinessConditionPanel extends JPanel{
 	 		frame=f;
 	 }
 	public void initial() {
-		this.setBounds(0, 0, 960, 180);
+		this.setBounds(0, 0, 960,315);
 		//设置布局
 		this.setLayout(null);
 		//设置面板透明
 		this.setOpaque(false);
+		//背景图
+		JLabel jpbg1=new JLabel();
+		jpbg1.setBounds(0,0, 400, 315);
+		jpbg1.setIcon(new ImageIcon("src/image/block/blockForTable2.png"));
 		
 		paneOfEarn1 = new JScrollPane(tableOfEarn1);
-		this.add(paneOfEarn1);
-		paneOfEarn1.setBounds(10, 30, 400, 50);
+		this.add(paneOfEarn1,0);
+		paneOfEarn1.setBounds(0,55, 400, 50);
 		tableOfEarn1.setOpaque(false);
 		
 		paneOfEarn2 = new JScrollPane(tableOfEarn2);
-		this.add(paneOfEarn2);
-		paneOfEarn2.setBounds(10, 80, 400, 50);
+		this.add(paneOfEarn2,1);
+		paneOfEarn2.setBounds(0,160, 400, 50);
 		tableOfEarn2.setOpaque(false);
 		
 		paneOfPay = new JScrollPane(tableOfPay);
-		this.add(paneOfPay);
-		paneOfPay.setBounds(10, 130, 300, 50);
+		this.add(paneOfPay,2);
+		paneOfPay.setBounds(0,265, 300, 50);
 		tableOfPay.setOpaque(false);
 		
 		paneOfProfit = new JScrollPane(tableOfProfit);
-		this.add(paneOfProfit);
-		paneOfProfit.setBounds(310, 130, 100, 50);		
+		this.add(paneOfProfit,3);
+		paneOfProfit.setBounds(300,265, 100, 50);		
 		tableOfProfit.setOpaque(false);
+		//滚动面板透明
+		paneOfEarn1.setOpaque(false);//设置透明
+		paneOfEarn1.getViewport().setOpaque(false);//设置透明
+		paneOfEarn1.setBorder(null);
+		//滚动面板透明
+		paneOfEarn2.setOpaque(false);//设置透明
+		paneOfEarn2.getViewport().setOpaque(false);//设置透明
+		paneOfEarn2.setBorder(null);
+		//滚动面板透明
+		paneOfPay.setOpaque(false);//设置透明
+		paneOfPay.getViewport().setOpaque(false);//设置透明
+		paneOfPay.setBorder(null);
+		//滚动面板透明
+		paneOfProfit.setOpaque(false);//设置透明
+		paneOfProfit.getViewport().setOpaque(false);//设置透明
+		paneOfProfit.setBorder(null);
 		
+		//表格透明
+		tableOfEarn1.setOpaque(false);
+        DefaultTableCellRenderer render1 = new DefaultTableCellRenderer();   
+        render1.setOpaque(false); //将渲染器设置为透明  
+        tableOfEarn1.setDefaultRenderer(Object.class,render1);  
+        tableOfEarn1.setForeground(Color.white);
+        tableOfEarn1.setBorder(null);
+        tableOfEarn1.setShowVerticalLines(false);
+		//表格透明
+        tableOfEarn2.setOpaque(false);
+        DefaultTableCellRenderer render2 = new DefaultTableCellRenderer();   
+        render2.setOpaque(false); //将渲染器设置为透明  
+        tableOfEarn2.setDefaultRenderer(Object.class,render2);  
+        tableOfEarn2.setForeground(Color.white);
+        tableOfEarn2.setBorder(null);
+        tableOfEarn2.setShowVerticalLines(false);
+		//表格透明
+        tableOfPay.setOpaque(false);
+        DefaultTableCellRenderer render3 = new DefaultTableCellRenderer();   
+        render3.setOpaque(false); //将渲染器设置为透明  
+        tableOfPay.setDefaultRenderer(Object.class,render3);  
+        tableOfPay.setForeground(Color.white);
+        tableOfPay.setBorder(null);
+        tableOfPay.setShowVerticalLines(false);
+		//表格透明
+        tableOfProfit.setOpaque(false);
+        DefaultTableCellRenderer render4 = new DefaultTableCellRenderer();   
+        render4.setOpaque(false); //将渲染器设置为透明  
+        tableOfProfit.setDefaultRenderer(Object.class,render4);  
+        tableOfProfit.setForeground(Color.white);
+        tableOfProfit.setBorder(null);
+        tableOfProfit.setShowVerticalLines(false);
+        
 		year = new JTextField(4);
 		ye = new JLabel("年");
 		month = new JTextField(2);
@@ -85,17 +140,17 @@ public class BusinessConditionPanel extends JPanel{
 		day = new JTextField(2);
 		da = new JLabel("日     至");
 		
-		add(year);
+//		add(year);
 		year.setBounds(10, 0, 35, 20);
-		add(ye);
+//		add(ye);
 		ye.setBounds(46, -2, 25, 25);
-		add(month);
+//		add(month);
 		month.setBounds(75,	0, 35, 20);
-		add(mo);
+//		add(mo);
 		mo.setBounds(111, -2, 25, 25);
-		add(day);
+//		add(day);
 		day.setBounds(140, 0, 35, 20);
-		add(da);
+//		add(da);
 		da.setBounds(176, -2, 50, 25);
 		
 		year2 = new JTextField(4);
@@ -105,23 +160,24 @@ public class BusinessConditionPanel extends JPanel{
 		day2 = new JTextField(2);
 		da2 = new JLabel("日");
 		
-		add(year2);
+//		add(year2);
 		year2.setBounds(220, 0, 35, 20);
-		add(ye2);
+//		add(ye2);
 		ye2.setBounds(256, -2, 25, 25);
-		add(month2);
+//		add(month2);
 		month2.setBounds(285, 0, 35, 20);
-		add(mo2);
+//		add(mo2);
 		mo2.setBounds(321, -2, 25, 25);
-		add(day2);
+//		add(day2);
 		day2.setBounds(350, 0, 35, 20);
-		add(da2);
+//		add(da2);
 		da2.setBounds(386, -2, 25, 25);
 		
-		add(sure);
+//		add(sure);
 		sure.setBounds(420, 0, 20, 20);
 		sure.setIcon(sureIcon0);
 		sure.addMouseListener(new MouseListenOfButton(0));
+		this.add(jpbg1,4);
 	}
 	
 	public void update(String before, String after) {

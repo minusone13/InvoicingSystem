@@ -20,6 +20,7 @@ import po.RM;
 import po.Role;
 import presentation.PanelType;
 import presentation.WarningPanel;
+import presentation.commodityui.Stock;
 import presentation.saleui.Sale;
 import vo.uservo.UserVO;
 import businesslogic.userbl.UserController;
@@ -174,6 +175,9 @@ public class Login extends JPanel {
 					frame.getStock().getManageBills2().setVisible(false);
 					frame.getStock().getManagerComs().setVisible(false);
 					frame.getStock().getChoseComs().setVisible(false);
+					frame.getStock().getStockShow().setVisible(false);
+					frame.getStock().getStockTack().setVisible(false);
+					frame.getStock().getStockCheck().setVisible(false);
 					frame.getStock().getFunction().setVisible(true);
 					frame.getStock().setVisible(true);
 					Login.this.setVisible(false);
