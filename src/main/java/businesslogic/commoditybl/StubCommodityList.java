@@ -25,7 +25,9 @@ import vo.stockvo.*;
 
 public class StubCommodityList
 {// 商品列表 haha
+
 	User user;
+
 
 	public CommodityVO findCommodity(String name, String model)
 	{

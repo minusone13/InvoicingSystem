@@ -1261,4 +1261,152 @@ public class StockTest{
 		assertEquals(0,coms.get(0).getRecord().get(0).getInquantity());
 		assertEquals(0,coms.get(0).getRecord().get(0).getOutquantity());
 	}
+	
+	@AfterClass
+	public static void end()
+	{
+		StockTest st = new StockTest();
+		st.initial();
+		controller.checkIn("JHD-20141204-00002","迪迪防盗门","dd02", 20, 500);
+		StubCommodityDataService data = null;
+		try
+		{
+			data = (StubCommodityDataService)Naming.lookup("rmi://127.0.0.1:1099/StubStockDataController.getInstance()");
+		}
+		catch (MalformedURLException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		catch (RemoteException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		catch (NotBoundException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//创建赠送单
+		GiftBillVO vo = new GiftBillVO();
+		ArrayList<CommodityVO> coms = new ArrayList<CommodityVO>();
+		CommodityPO po = null;
+		try
+		{
+			po = data.findCommodity("好好防盗门", "fdm05");
+		}
+		catch (RemoteException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		CommodityVO com = new MockCommodity(po).toVO();
+		com.setNumber(10);
+		coms.add(com);
+		try
+		{
+			po = data.findCommodity("迪迪防盗门","dd02");
+		}
+		catch (RemoteException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		com = new MockCommodity(po).toVO();
+		com.setNumber(15);
+		coms.add(com);
+		vo.setComs(coms);
+		
+		combl.creat(vo);
+		StockBlForSalesMen sc=new StubStockController();
+		
+		StubGiftBill gb = pool.getGiftBill().get(pool.getGiftBill().size()-1);
+		combl.submit(gb.getVO());
+		
+		gb = pool.getGiftBill().get(pool.getGiftBill().size()-1);
+		pool.transformState(BillStyle.GiftBill, gb.getID(), BillState.EXAMINED);
+		combl.over(gb.getVO());
+		
+		//创建第二个赠送单，同时会产生一个报警单
+		vo = new GiftBillVO();
+		coms = new ArrayList<CommodityVO>();
+		try
+		{
+			po = data.findCommodity("迪迪防盗门","dd02");
+		}
+		catch (RemoteException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		com = new MockCommodity(po).toVO();
+		com.setNumber(26);
+		coms.add(com);
+		vo.setComs(coms);
+		
+		combl.creat(vo);
+		
+		gb = pool.getGiftBill().get(pool.getGiftBill().size()-1);
+		combl.submit(gb.getVO());
+		
+		gb = pool.getGiftBill().get(pool.getGiftBill().size()-1);
+		pool.transformState(BillStyle.GiftBill, gb.getID(), BillState.EXAMINED);
+		combl.over(gb.getVO());
+		
+		
+		//创建一个报损单，这张报损单没有提交，如果提交了将产生一个报警单
+		SpillsLossBillVO vo1 = new SpillsLossBillVO();
+		CommodityPO compo = null;
+		try
+		{
+			compo = data.findCommodity("好好防盗门", "fdm05");
+		}
+		catch (RemoteException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		CommodityVO com1 = new MockCommodity(compo).toVO();
+		com1.setNumber(30);
+		vo1.setCom(com1);
+		vo1.setT(vo1.getT().Loss);
+		
+		combl.creat(vo1);
+		sc.isEnough("好好防盗门", "fdm05", 41);
+		
+		StubSpillsLossBill gb1 = pool.getSpillsLossBill().get(pool.getSpillsLossBill().size()-1);
+		combl.submit(gb1.getVO());
+		
+		gb1 = pool.getSpillsLossBill().get(pool.getSpillsLossBill().size()-1);
+		pool.transformState(BillStyle.SpillsLossBill, gb1.getID(), BillState.EXAMINED);
+		combl.over(gb1.getVO());
+		
+		
+		//创建一个报溢单
+		vo1 = new SpillsLossBillVO();
+		try
+		{
+			compo = data.findCommodity("好好防盗门", "fdm05");
+		}
+		catch (RemoteException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		com1 = new MockCommodity(compo).toVO();
+		com1.setNumber(1);
+		vo1.setCom(com1);
+		vo1.setT(vo1.getT().Spills);
+		
+		combl.creat(vo1);
+		sc.isEnough("好好防盗门", "fdm05", 41);
+		
+		gb1 = pool.getSpillsLossBill().get(pool.getSpillsLossBill().size()-1);
+		combl.submit(gb1.getVO());
+		
+		gb1 = pool.getSpillsLossBill().get(pool.getSpillsLossBill().size()-1);
+		pool.transformState(BillStyle.SpillsLossBill, gb1.getID(), BillState.EXAMINED);
+		combl.over(gb1.getVO());
+	}
 }

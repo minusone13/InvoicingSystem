@@ -19,12 +19,12 @@ public interface StockBlForSalesMen
 	// 只有RM为done是为成功
 	// 尤其在出库和准备出库中可能有insufficient不足结果
 	public RM checkIn(String id, String name, String model, int quantity,
-			double price);// 当进货单被审批后，请调用,price是单价
+			double price);// 当进货单完成后，请调用,price是单价
 
 	public RM checkOut(String id, String name, String model, int quantity,
-			double price);// 当销售单审批后，请调用,price是单价
+			double price);// 当销售单完成后，请调用,price是单价
 
-	public RM checkOut(String id, String packID, int quantity, double price);// 销售特价包得到审批时时请调用,
+	public RM checkOut(String id, String packID, int quantity, double price);// 销售特价包完成后请调用,
 																				// price是单价
 
 	public RM undoCheckIn(String id, String name, String model, int quantity,

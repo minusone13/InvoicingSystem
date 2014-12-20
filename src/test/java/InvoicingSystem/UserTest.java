@@ -196,4 +196,21 @@ public class UserTest{
 		assertEquals(RM.done,records.get(1).getResult());
 		assertEquals("I0000",records.get(0).getUser().getID());
 	}
+	
+	@AfterClass
+	public static void end()
+	{
+		UserTest ut = new UserTest();
+		ut.initial();
+		UserVO vo = new UserVO(Role.FINANCIAL_MANAGER, "financialM", "financialM", "Ryen");
+		ubl.signUp(vo);
+		vo = new UserVO(Role.FINANCIAL_STAFF, "financial", "financial", "Peter");
+		ubl.signUp(vo);
+		vo = new UserVO(Role.MANAGER, "manager", "manager", "Leez");
+		ubl.signUp(vo);
+		vo = new UserVO(Role.PURCHASE_SALE_MANAGER, "saleM", "saleM", "Heg");
+		ubl.signUp(vo);
+		vo = new UserVO(Role.PURCHASE_SALE_STAFF, "sale", "sale", "Herb");
+		ubl.signUp(vo);
+	}
 }

@@ -76,8 +76,12 @@ public interface StubCommodityBlService
 	
 	//库存查看与库存盘点
 	public CountVO count();// 库存盘点
+	//CountVO中的商品列表显示的时候显示名称，型号，库存数量，库存均价
+	//也就是 name model number in
 
 	public ArrayList<CommodityVO> getRecords(Date d1, Date d2);// 库存查看,当中的ArrayList<CommodityRecordVO>
-																// 只有第零项有值，是查看的数据
+	// 只有第零项有值，是查看的数据
+	//显示名称、型号、库存数量、出/入库数量/金额，销售/进货的数量/金额
+	
 	public void ExportCount(String FilePath, CountVO vo);// 导出excel
 }
