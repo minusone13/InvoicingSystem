@@ -3,6 +3,7 @@ package businesslogic.stockservice;
 import java.util.ArrayList;
 
 import po.RM;
+import vo.GiftBillVO;
 import vo.stockvo.CommodityVO;
 
 public interface StockBlForSalesMen
@@ -43,4 +44,6 @@ public interface StockBlForSalesMen
 	public RM readyForOut(String id, String packID, int quantity, double price);// 销售特价包提交时请调用，price是单价
 
 	public RM undoCheckOut(String id, String packID, int quantity, double price);// 销售退货审批后请调用，price是单价
+	
+	public RM creat(GiftBillVO vo);//在创建时ID不用给出，返回值可能有done，insufficient和notfound,unknownerror,下同
 }

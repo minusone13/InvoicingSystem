@@ -29,7 +29,7 @@ public class StubStockController implements StubCommodityBlService,
 	StubCommodityList l = new StubCommodityList();
 	StubCommodityBill bl = new StubCommodityBill();
 	UserService us = new UserController();
-	static StubCommodityDataService comdata;
+	static StubCommodityDataService comdata = StubStockDataController.getInstance();
 	static StubBillPool pool = new StubBillPool();
 	User user = new User("I0000", Role.STOCK_STAFF, "DefaultStock", "default",
 			"Liu");
@@ -44,6 +44,7 @@ public class StubStockController implements StubCommodityBlService,
 		l.setUser(user);
 		bl.setUser(user);
 		bl.setPool(pool);
+		l.setcomdata(comdata);
 	}
 
 	public StubCommodityList getCommodityList()
