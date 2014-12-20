@@ -1,5 +1,8 @@
 package presentation.managerui;
 
+import java.net.MalformedURLException;
+import java.rmi.Naming;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
@@ -38,6 +41,7 @@ import businesslogicservice.managerblservice.StubManagerBlService;
 import businesslogicservice.salebillblservice.SaleBillBlService;
 import businesslogicservice.userblservice.StubUserBlService;
 import data.commoditydata.StubStockDataController;
+import dataservice.commoditydataservice.StubCommodityDataService;
 import entrance.Frame;
 
 public class JPBillList extends JPanel {
@@ -78,7 +82,22 @@ public class JPBillList extends JPanel {
 	public JPBillList(){
 		//逻辑层接口
 		StockManagerDriver smd=new StockManagerDriver();
-		smd.start(stockbl,StubStockDataController.getInstance());
+		try
+		{
+			smd.start(stockbl,(StubCommodityDataService)Naming.lookup("rmi://127.0.0.1:1099/StubStockDataController.getInstance()"));
+		}
+		catch (MalformedURLException e)
+		{
+			e.printStackTrace();
+		}
+		catch (RemoteException e)
+		{
+			e.printStackTrace();
+		}
+		catch (NotBoundException e)
+		{
+			e.printStackTrace();
+		}
 		//面板大小
 		this.setSize(261, 0);
 		//设置布局
@@ -882,14 +901,12 @@ public class JPBillList extends JPanel {
 	public class TreadOfUp implements Runnable{
 
 		public void run() {
-			// TODO Auto-generated method stub
 			
 			while(!stop){
 				y-=10;
 				try {
 					Thread.sleep(50);
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				JPBillList.this.setLocation(0, y);
@@ -902,14 +919,12 @@ public class JPBillList extends JPanel {
 	public class TreadOfDown implements Runnable{
 
 		public void run() {
-			// TODO Auto-generated method stub
 			
 			while(!stop){
 				y+=10;
 				try {
 					Thread.sleep(50);
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				JPBillList.this.setLocation(0, y);

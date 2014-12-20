@@ -2,6 +2,10 @@ package InvoicingSystem;
 
 import static org.junit.Assert.*;
 
+import java.net.MalformedURLException;
+import java.rmi.Naming;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -25,8 +29,6 @@ import businesslogic.stockservice.StockBlForFinancial;
 import businesslogic.stockservice.StockBlForManager;
 import businesslogic.stockservice.StockBlForSalesMen;
 import businesslogicservice.commodityblservice.StubCommodityBlService;
-import data.commoditydata.*;
-import data.initial.Initial;
 import dataservice.commoditydataservice.StubCommodityDataService;
 import vo.*;
 import vo.stockvo.*;
@@ -34,15 +36,32 @@ import vo.stockvo.*;
 
 public class StockTest{
 	static StockManagerDriver smd=new StockManagerDriver();
-	static StubStockDataController data=StubStockDataController.getInstance();
+	//static StubCommodityDataService data=(StubCommodityDataService)Naming.lookup("rmi://127.0.0.1:1099/StubStockDataController.getInstance()");
 	static StubCommodityBlService combl;
 	static StubStockController controller;
 	static StubBillPool pool;
 	static
 	{
-		Initial initial=new Initial();
-		initial.initialAll();
-		controller = new StubStockController();
+		//Initial initial=new Initial();
+		//initial.initialAll();
+		//ontroller = new StubStockController();
+		StubCommodityDataService data = null;
+		try
+		{
+			data = (StubCommodityDataService)Naming.lookup("rmi://127.0.0.1:1099/StubStockDataController.getInstance()");
+		}
+		catch (MalformedURLException e)
+		{
+			e.printStackTrace();
+		}
+		catch (RemoteException e)
+		{
+			e.printStackTrace();
+		}
+		catch (NotBoundException e)
+		{
+			e.printStackTrace();
+		}
 		pool = controller.getPool();
 		smd.start(controller,data);
 		combl=smd.getCombl();
@@ -51,13 +70,65 @@ public class StockTest{
 	@Before
 	public void initial()
 	{
-		Initial initial=new Initial();
-		initial.initialAll();
+		//Initial initial=new Initial();
+		//initial.initialAll();
+		StubCommodityDataService data = null;
+		try
+		{
+			data = (StubCommodityDataService)Naming.lookup("rmi://127.0.0.1:1099/StubStockDataController.getInstance()");
+		}
+		catch (MalformedURLException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		catch (RemoteException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		catch (NotBoundException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		smd.start(new StubStockController(),data);
-		data.insert(new CategoryPO("1", "灯"));
-		data.insert(new CategoryPO("1\\灯","日光灯"));
-		data.insert(new CategoryPO("1\\灯\\日光灯","纯白日光灯"));
-		data.insert(new CategoryPO("1", "门"));
+		try
+		{
+			data.insert(new CategoryPO("1", "灯"));
+		}
+		catch (RemoteException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try
+		{
+			data.insert(new CategoryPO("1\\灯","日光灯"));
+		}
+		catch (RemoteException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try
+		{
+			data.insert(new CategoryPO("1\\灯\\日光灯","纯白日光灯"));
+		}
+		catch (RemoteException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try
+		{
+			data.insert(new CategoryPO("1", "门"));
+		}
+		catch (RemoteException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		CommodityVO mockvo=new CommodityVO("1\\门","好好防盗门","fdm02",200,300,10);
 		CommodityVO mockvo1=new CommodityVO("1\\门","好好防盗门","fdm05",100,200,15);
 		CommodityVO mockvo2=new CommodityVO("1\\门","迪迪防盗门","dd02",100,200,15);
@@ -85,13 +156,69 @@ public class StockTest{
 	@Test
 	public void testaddCategoryRedundance()
 	{
-		assertEquals(RM.redundance,data.insert(new CategoryPO("1", "灯")));
+		StubCommodityDataService data = null;
+		try
+		{
+			data = (StubCommodityDataService)Naming.lookup("rmi://127.0.0.1:1099/StubStockDataController.getInstance()");
+		}
+		catch (MalformedURLException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		catch (RemoteException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		catch (NotBoundException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try
+		{
+			assertEquals(RM.redundance,data.insert(new CategoryPO("1", "灯")));
+		}
+		catch (RemoteException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	@Test
 	public void testaddCategory()
 	{
-		assertEquals(RM.done,data.insert(new CategoryPO("1\\灯","白炽灯")));
+		StubCommodityDataService data = null;
+		try
+		{
+			data = (StubCommodityDataService)Naming.lookup("rmi://127.0.0.1:1099/StubStockDataController.getInstance()");
+		}
+		catch (MalformedURLException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		catch (RemoteException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		catch (NotBoundException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try
+		{
+			assertEquals(RM.done,data.insert(new CategoryPO("1\\灯","白炽灯")));
+		}
+		catch (RemoteException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	@Test
@@ -107,7 +234,35 @@ public class StockTest{
 	@Test
 	public void testaddCategorytreeerror()
 	{
-		assertEquals(RM.treeerror,data.insert(new CategoryPO("1\\门", "高级防盗门")));
+		StubCommodityDataService data = null;
+		try
+		{
+			data = (StubCommodityDataService)Naming.lookup("rmi://127.0.0.1:1099/StubStockDataController.getInstance()");
+		}
+		catch (MalformedURLException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		catch (RemoteException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		catch (NotBoundException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try
+		{
+			assertEquals(RM.treeerror,data.insert(new CategoryPO("1\\门", "高级防盗门")));
+		}
+		catch (RemoteException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	@Test
@@ -309,9 +464,38 @@ public class StockTest{
 	public void testGiftBill()
 	{
 		boolean b;
+		StubCommodityDataService data = null;
+		try
+		{
+			data = (StubCommodityDataService)Naming.lookup("rmi://127.0.0.1:1099/StubStockDataController.getInstance()");
+		}
+		catch (MalformedURLException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		catch (RemoteException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		catch (NotBoundException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		GiftBillVO vo = new GiftBillVO();
 		ArrayList<CommodityVO> coms = new ArrayList<CommodityVO>();
-		CommodityPO po = data.findCommodity("好好防盗门", "fdm05");
+		CommodityPO po = null;
+		try
+		{
+			po = data.findCommodity("好好防盗门", "fdm05");
+		}
+		catch (RemoteException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		CommodityVO com = new MockCommodity(po).toVO();
 		com.setNumber(10);
 		coms.add(com);
@@ -336,7 +520,15 @@ public class StockTest{
 		pool.transformState(BillStyle.GiftBill, gb.getID(), BillState.EXAMINED);
 		result = combl.over(gb.getVO());
 		assertEquals(RM.done,result);
-		po = data.findCommodity("好好防盗门", "fdm05");
+		try
+		{
+			po = data.findCommodity("好好防盗门", "fdm05");
+		}
+		catch (RemoteException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		assertEquals(40,po.getNumber());
 	}
 	
@@ -344,8 +536,37 @@ public class StockTest{
 	public void SpillsLossBillLoss()
 	{
 		boolean b;
+		StubCommodityDataService data = null;
+		try
+		{
+			data = (StubCommodityDataService)Naming.lookup("rmi://127.0.0.1:1099/StubStockDataController.getInstance()");
+		}
+		catch (MalformedURLException e1)
+		{
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		catch (RemoteException e1)
+		{
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		catch (NotBoundException e1)
+		{
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		SpillsLossBillVO vo = new SpillsLossBillVO();
-		CommodityPO compo = data.findCommodity("好好防盗门", "fdm05");
+		CommodityPO compo = null;
+		try
+		{
+			compo = data.findCommodity("好好防盗门", "fdm05");
+		}
+		catch (RemoteException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		CommodityVO com = new MockCommodity(compo).toVO();
 		com.setNumber(10);
 		vo.setCom(com);
@@ -370,7 +591,17 @@ public class StockTest{
 		pool.transformState(BillStyle.SpillsLossBill, gb.getID(), BillState.EXAMINED);
 		result = combl.over(gb.getVO());
 		assertEquals(RM.done,result);
-		CommodityPO compo1 = data.findCommodity("好好防盗门", "fdm05");
+		
+		CommodityPO compo1 = null;
+		try
+		{
+			compo1 = data.findCommodity("好好防盗门", "fdm05");
+		}
+		catch (RemoteException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		assertEquals(40,compo1.getNumber());
 		assertEquals(compo.getAlertLine(),compo1.getAlertLine());
 		assertEquals(compo.getIn(),compo1.getIn(),0.001);
@@ -383,8 +614,37 @@ public class StockTest{
 	public void SpillsLossBillSpills()
 	{
 		boolean b;
+		StubCommodityDataService data = null;
+		try
+		{
+			data = (StubCommodityDataService)Naming.lookup("rmi://127.0.0.1:1099/StubStockDataController.getInstance()");
+		}
+		catch (MalformedURLException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		catch (RemoteException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		catch (NotBoundException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		SpillsLossBillVO vo = new SpillsLossBillVO();
-		CommodityPO compo = data.findCommodity("好好防盗门", "fdm05");
+		CommodityPO compo = null;
+		try
+		{
+			compo = data.findCommodity("好好防盗门", "fdm05");
+		}
+		catch (RemoteException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		CommodityVO com = new MockCommodity(compo).toVO();
 		com.setNumber(20);
 		vo.setCom(com);
@@ -411,7 +671,17 @@ public class StockTest{
 		assertEquals(RM.done,result);
 		b = sc.isEnough("好好防盗门", "fdm05", 70);
 		assertTrue(b);
-		CommodityPO compo1 = data.findCommodity("好好防盗门", "fdm05");
+		
+		CommodityPO compo1 = null;
+		try
+		{
+			compo1 = data.findCommodity("好好防盗门", "fdm05");
+		}
+		catch (RemoteException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		assertEquals(70,compo1.getNumber());
 		assertEquals(compo.getAlertLine(),compo1.getAlertLine());
 		assertEquals(compo.getIn(),compo1.getIn(),0.001);
@@ -448,8 +718,37 @@ public class StockTest{
 	@Test
 	public void testSpillsLossBillID()
 	{
+		StubCommodityDataService data = null;
+		try
+		{
+			data = (StubCommodityDataService)Naming.lookup("rmi://127.0.0.1:1099/StubStockDataController.getInstance()");
+		}
+		catch (MalformedURLException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		catch (RemoteException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		catch (NotBoundException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		SpillsLossBillVO vo = new SpillsLossBillVO();
-		CommodityPO compo = data.findCommodity("好好防盗门", "fdm05");
+		CommodityPO compo = null;
+		try
+		{
+			compo = data.findCommodity("好好防盗门", "fdm05");
+		}
+		catch (RemoteException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		CommodityVO com = new MockCommodity(compo).toVO();
 		com.setNumber(20);
 		vo.setCom(com);
@@ -483,9 +782,38 @@ public class StockTest{
 	@Test
 	public void testgiftBillID()
 	{
+		StubCommodityDataService data = null;
+		try
+		{
+			data = (StubCommodityDataService)Naming.lookup("rmi://127.0.0.1:1099/StubStockDataController.getInstance()");
+		}
+		catch (MalformedURLException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		catch (RemoteException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		catch (NotBoundException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		GiftBillVO vo = new GiftBillVO();
 		ArrayList<CommodityVO> coms = new ArrayList<CommodityVO>();
-		CommodityPO po = data.findCommodity("好好防盗门", "fdm05");
+		CommodityPO po = null;
+		try
+		{
+			po = data.findCommodity("好好防盗门", "fdm05");
+		}
+		catch (RemoteException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		CommodityVO com = new MockCommodity(po).toVO();
 		com.setNumber(10);
 		coms.add(com);
@@ -549,9 +877,38 @@ public class StockTest{
 	@Test
 	public void testaddPack()
 	{
+		StubCommodityDataService data = null;
+		try
+		{
+			data = (StubCommodityDataService)Naming.lookup("rmi://127.0.0.1:1099/StubStockDataController.getInstance()");
+		}
+		catch (MalformedURLException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		catch (RemoteException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		catch (NotBoundException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		StockBlForSalesMen sc=new StubStockController();
 		StockBlForManager m = new StubStockController();
-		CommodityPO compo = data.findCommodity("好好防盗门", "fdm05");
+		CommodityPO compo = null;
+		try
+		{
+			compo = data.findCommodity("好好防盗门", "fdm05");
+		}
+		catch (RemoteException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		int oldNum = compo.getNumber();
 		CommodityVO vo = combl.findCommodity("好好防盗门", "fdm05");
 		MockCommodity com = new MockCommodity(vo);
@@ -561,7 +918,16 @@ public class StockTest{
 		//StubPack pack = new StubPack(h,10,300);
 		RM rm = m.addPack(h,10,100);
 		assertEquals(RM.done,rm);
-		ArrayList<PackPO> packs = data.getAllPacks();
+		ArrayList<PackPO> packs = null;
+		try
+		{
+			packs = data.getAllPacks();
+		}
+		catch (RemoteException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		PackPO packpo = packs.get(0);
 		assertEquals(300,packpo.getPrice(),0.001);
 		boolean result = sc.isEnough("好好防盗门", "fdm05", 30);
@@ -585,13 +951,29 @@ public class StockTest{
 		assertTrue(result);
 		result = sc.isEnough("好好防盗门", "fdm05", 31);
 		assertFalse(result);
-		compo = data.findCommodity("好好防盗门", "fdm05");
+		try
+		{
+			compo = data.findCommodity("好好防盗门", "fdm05");
+		}
+		catch (RemoteException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		assertEquals(oldNum-4,compo.getNumber());
 		result = sc.isEnough(packpo.getID(),8);
 		assertTrue(result);
 		result = sc.isEnough(packpo.getID(),9);
 		assertFalse(result);
-		packs = data.getAllPacks();
+		try
+		{
+			packs = data.getAllPacks();
+		}
+		catch (RemoteException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		packpo = packs.get(0);
 		assertEquals(8,packpo.getQuantity());
 	}
@@ -599,11 +981,40 @@ public class StockTest{
 	@Test
 	public void testLastOut()
 	{
+		StubCommodityDataService data = null;
+		try
+		{
+			data = (StubCommodityDataService)Naming.lookup("rmi://127.0.0.1:1099/StubStockDataController.getInstance()");
+		}
+		catch (MalformedURLException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		catch (RemoteException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		catch (NotBoundException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		StockBlForSalesMen sc=new StubStockController();
 		RM result = sc.readyForOut("XSD-20141206-00001", "好好防盗门", "fdm05", 20, 200);
 		assertEquals(RM.done,result);
 		result = sc.checkOut("XSD-20141206-00001", "好好防盗门", "fdm05", 10, 300);
-		CommodityPO po = data.findCommodity("好好防盗门", "fdm05");
+		CommodityPO po = null;
+		try
+		{
+			po = data.findCommodity("好好防盗门", "fdm05");
+		}
+		catch (RemoteException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		double lastout = po.getLastOut();
 		assertEquals(300,(int)lastout);
 		assertEquals(RM.done,result);
@@ -618,12 +1029,41 @@ public class StockTest{
 	@Test
 	public void testIn()
 	{
+		StubCommodityDataService data = null;
+		try
+		{
+			data = (StubCommodityDataService)Naming.lookup("rmi://127.0.0.1:1099/StubStockDataController.getInstance()");
+		}
+		catch (MalformedURLException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		catch (RemoteException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		catch (NotBoundException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		StockBlForSalesMen sc=new StubStockController();
 		RM result = sc.readyForOut("XSD-20141206-00001", "好好防盗门", "fdm05", 20, 200);
 		assertEquals(RM.done,result);
 		result = sc.checkOut("XSD-20141206-00001", "好好防盗门", "fdm05", 10, 300);
 		result = sc.checkIn("JHD-20141206-00002", "好好防盗门", "fdm05", 40, 50);
-		CommodityPO po = data.findCommodity("好好防盗门", "fdm05");
+		CommodityPO po = null;
+		try
+		{
+			po = data.findCommodity("好好防盗门", "fdm05");
+		}
+		catch (RemoteException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		double in = po.getIn();
 		assertEquals(100,(int)in);
 		assertEquals(RM.done,result);
@@ -637,7 +1077,36 @@ public class StockTest{
 		assertEquals(RM.done,result);
 		result = sc.checkOut("XSD-20141206-00002", "好好防盗门", "fdm05", 20, 40);
 		assertEquals(RM.done,result);
-		CommodityPO po = data.findCommodity("好好防盗门", "fdm05");
+		StubCommodityDataService data = null;
+		try
+		{
+			data = (StubCommodityDataService)Naming.lookup("rmi://127.0.0.1:1099/StubStockDataController.getInstance()");
+		}
+		catch (MalformedURLException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		catch (RemoteException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		catch (NotBoundException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		CommodityPO po = null;
+		try
+		{
+			po = data.findCommodity("好好防盗门", "fdm05");
+		}
+		catch (RemoteException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		double out = po.getOut();
 		assertEquals(30,(int)out);
 	}
@@ -645,10 +1114,39 @@ public class StockTest{
 	@Test
 	public void testundoIn()
 	{
+		StubCommodityDataService data = null;
+		try
+		{
+			data = (StubCommodityDataService)Naming.lookup("rmi://127.0.0.1:1099/StubStockDataController.getInstance()");
+		}
+		catch (MalformedURLException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		catch (RemoteException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		catch (NotBoundException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		StockBlForSalesMen sc=new StubStockController();
 		RM result = sc.checkOut("XSD-20141206-00000", "好好防盗门", "fdm05", 10, 300);
 		assertEquals(RM.done,result);
-		CommodityPO po = data.findCommodity("好好防盗门", "fdm05");
+		CommodityPO po = null;
+		try
+		{
+			po = data.findCommodity("好好防盗门", "fdm05");
+		}
+		catch (RemoteException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		result = sc.readyForOut("XSD-20141206-00001", "好好防盗门", "fdm05", 20, 200);
 		assertEquals(RM.done,result);
 		result = sc.checkOut("XSD-20141206-00001", "好好防盗门", "fdm05", 10, 300);
@@ -658,7 +1156,16 @@ public class StockTest{
 		assertEquals(RM.done,result);
 		result = sc.undoCheckIn("JHTHD-20141206-00002", "好好防盗门", "fdm05", 40, 50);
 		assertEquals(RM.done,result);
-		CommodityPO po1 = data.findCommodity("好好防盗门", "fdm05");
+		CommodityPO po1 = null;
+		try
+		{
+			po1 = data.findCommodity("好好防盗门", "fdm05");
+		}
+		catch (RemoteException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		assertEquals(po.getAlertLine(),po1.getAlertLine());
 		assertEquals(po.getId(),po1.getId());
 		assertEquals(po.getIn(),po1.getIn(),0.01);

@@ -4,6 +4,9 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.net.MalformedURLException;
+import java.rmi.Naming;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
 import javax.swing.ImageIcon;
@@ -46,6 +49,7 @@ import businesslogicservice.managerblservice.StubManagerBlService;
 import businesslogicservice.salebillblservice.SaleBillBlService;
 import businesslogicservice.userblservice.StubUserBlService;
 import data.commoditydata.StubStockDataController;
+import dataservice.commoditydataservice.StubCommodityDataService;
 
 public class JPBill extends JPanel {
 
@@ -114,7 +118,22 @@ public class JPBill extends JPanel {
 		setType(JPbillType.Strategy);
 		//逻辑层接口
 		StockManagerDriver smd=new StockManagerDriver();
-		smd.start(stockbl,StubStockDataController.getInstance());
+		try
+		{
+			smd.start(stockbl,(StubCommodityDataService)Naming.lookup("rmi://127.0.0.1:1099/StubStockDataController.getInstance()"));
+		}
+		catch (MalformedURLException e)
+		{
+			e.printStackTrace();
+		}
+		catch (RemoteException e)
+		{
+			e.printStackTrace();
+		}
+		catch (NotBoundException e)
+		{
+			e.printStackTrace();
+		}
 		//传递VO
 		levelStrategyVO=ls;
 		//面板大小
@@ -642,12 +661,10 @@ public class JPBill extends JPanel {
 			num=N;
 		}
 		public void mouseClicked(MouseEvent e) {
-			// TODO Auto-generated method stub
 			
 		}
 
 		public void mousePressed(MouseEvent e) {
-			// TODO Auto-generated method stub
 			choose=!choose;
 			if(choose){
 				switch(num){
@@ -696,11 +713,9 @@ public class JPBill extends JPanel {
 		}
 
 		public void mouseReleased(MouseEvent e) {
-			// TODO Auto-generated method stub
 		}
 
 		public void mouseEntered(MouseEvent e) {
-			// TODO Auto-generated method stub
 			if(choose){
 				switch(num){
 				case 1:
@@ -748,7 +763,6 @@ public class JPBill extends JPanel {
 		}
 
 		public void mouseExited(MouseEvent e) {
-			// TODO Auto-generated method stub
 			if(choose){
 				switch(num){
 				case 1:
@@ -1480,12 +1494,10 @@ public class JPBill extends JPanel {
 			num=N;
 		}
 		public void mouseClicked(MouseEvent e) {
-			// TODO Auto-generated method stub
 			
 		}
 
 		public void mousePressed(MouseEvent e) {
-			// TODO Auto-generated method stub
 			switch(num){
 			case 1:
 				right.setIcon(new ImageIcon("src/image/rightR.png"));
@@ -1501,7 +1513,6 @@ public class JPBill extends JPanel {
 		}
 
 		public void mouseReleased(MouseEvent e) {
-			// TODO Auto-generated method stub
 			
 			switch(num){
 			case 1:
@@ -1513,12 +1524,10 @@ public class JPBill extends JPanel {
 		}
 
 		public void mouseEntered(MouseEvent e) {
-			// TODO Auto-generated method stub
 			
 		}
 
 		public void mouseExited(MouseEvent e) {
-			// TODO Auto-generated method stub
 			switch(num){
 			case 1:
 				right.setIcon(new ImageIcon("src/image/right.png"));
@@ -1534,7 +1543,6 @@ public class JPBill extends JPanel {
 	public class TreadOfRight  implements Runnable{
 
 		public void run() {
-			// TODO Auto-generated method stub
 			int x=0;
 			int y=(int)JPBill.this.getLocation().getY();
 			while(x!=-261){
@@ -1547,7 +1555,6 @@ public class JPBill extends JPanel {
 				try {
 					Thread.sleep(50);
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				JPBill.this.setLocation(x, y);
@@ -1559,7 +1566,6 @@ public class JPBill extends JPanel {
 	public class TreadOfLeft  implements Runnable{
 
 		public void run() {
-			// TODO Auto-generated method stub
 			int x=-261;
 			int y=(int)JPBill.this.getLocation().getY();
 			while(x!=0){
@@ -1572,7 +1578,6 @@ public class JPBill extends JPanel {
 				try {
 					Thread.sleep(50);
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				JPBill.this.setLocation(x, y);
@@ -1590,12 +1595,10 @@ public class JPBill extends JPanel {
 			
 		}
 		public void mouseClicked(MouseEvent e) {
-			// TODO Auto-generated method stub
 			
 		}
 
 		public void mousePressed(MouseEvent e) {
-			// TODO Auto-generated method stub
 			choose=!choose;//选中与取消选中
 			if(choose){
 				setBillBg(st,state,3);
@@ -1607,12 +1610,10 @@ public class JPBill extends JPanel {
 		}
 
 		public void mouseReleased(MouseEvent e) {
-			// TODO Auto-generated method stub
 			
 		}
 
 		public void mouseEntered(MouseEvent e) {
-			// TODO Auto-generated method stub
 			if(choose){
 				setBillBg(st,state,3);
 			}
@@ -1723,7 +1724,6 @@ public class JPBill extends JPanel {
 		}
 
 		public void mouseExited(MouseEvent e) {
-			// TODO Auto-generated method stub
 			if(choose){
 				setBillBg(st,state,2);
 			}

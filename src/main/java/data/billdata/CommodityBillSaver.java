@@ -19,14 +19,14 @@ import po.Tool;
 import data.commoditydata.StubStockDataController;
 import dataservice.billdataservice.CommodityBillSaverService;
 
-public class CommodityBillSaver implements CommodityBillSaverService{
+public class CommodityBillSaver extends UnicastRemoteObject implements CommodityBillSaverService{
 
 	/*构造函数*/
-	public CommodityBillSaver(){
+	public CommodityBillSaver()throws RemoteException{
 		
 	}
 	/*保存库存赠送单*/
-	public void saveGiftBill(ArrayList<GiftBillPO> sgb){
+	public void saveGiftBill(ArrayList<GiftBillPO> sgb)throws RemoteException{
 		String filename = "GiftBillPO.txt";
 		ObjectOutputStream oos=null;
 		try {
@@ -49,7 +49,7 @@ public class CommodityBillSaver implements CommodityBillSaverService{
 		}
 	}
 	/*保存报溢报损单*/
-	public void saveSpillsLossBill(ArrayList<SpillsLossBillPO> slb){
+	public void saveSpillsLossBill(ArrayList<SpillsLossBillPO> slb)throws RemoteException{
 		String filename = "SpillsLossBillPO.txt";
 		ObjectOutputStream oos=null;
 		try {
@@ -72,7 +72,7 @@ public class CommodityBillSaver implements CommodityBillSaverService{
 		}
 	}
 	/*保存库存报警单*/
-	public void saveAlertBill(ArrayList<AlertBillPO> sab){
+	public void saveAlertBill(ArrayList<AlertBillPO> sab)throws RemoteException{
 		String filename = "AlertBillPO.txt";
 		ObjectOutputStream oos=null;
 		try {
@@ -95,7 +95,7 @@ public class CommodityBillSaver implements CommodityBillSaverService{
 		}
 	}
 	/*获取库存赠送单*/
-	public ArrayList<GiftBillPO> getGiftBill(){
+	public ArrayList<GiftBillPO> getGiftBill()throws RemoteException{
 		File filename = Tool.Opendoc("GiftBillPO.txt");
 		
 		ArrayList<GiftBillPO> giftbillList = null;
@@ -122,7 +122,7 @@ public class CommodityBillSaver implements CommodityBillSaverService{
 		
 	}
 	/*获取报溢报损单*/
-	public ArrayList<SpillsLossBillPO> getSpillsLossBill(){
+	public ArrayList<SpillsLossBillPO> getSpillsLossBill()throws RemoteException{
 		File filename = Tool.Opendoc("SpillsLossBillPO.txt");
 		
 		ArrayList<SpillsLossBillPO> spillsLossbillList = null;
@@ -149,7 +149,7 @@ public class CommodityBillSaver implements CommodityBillSaverService{
 		
 	}
 	/*获取库存报警单*/
-	public ArrayList<AlertBillPO> getAlertBill(){
+	public ArrayList<AlertBillPO> getAlertBill()throws RemoteException{
 		File filename = Tool.Opendoc("AlertBillPO.txt");
 		
 		ArrayList<AlertBillPO> alertbillList = null;

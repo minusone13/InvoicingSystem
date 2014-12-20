@@ -7,6 +7,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
 import po.CashPaymentPO;
@@ -16,14 +18,14 @@ import po.Tool;
 import dataservice.billdataservice.FinancialBillSaverService;
 
 
-public class FinancialBillSaver implements FinancialBillSaverService{
+public class FinancialBillSaver extends UnicastRemoteObject implements FinancialBillSaverService{
 
 	/*构造函数*/
-	public FinancialBillSaver(){
+	public FinancialBillSaver()throws RemoteException{
 		
 	}
 	/*保存付款单*/
-	public void savePayment(ArrayList<PaymentPO> pb){
+	public void savePayment(ArrayList<PaymentPO> pb)throws RemoteException{
 		String filename = "PaymentPO.txt";
 		ObjectOutputStream oos=null;
 		try {
@@ -46,7 +48,7 @@ public class FinancialBillSaver implements FinancialBillSaverService{
 		}
 	}
 	/*保存收款单*/
-	public void saveReceipt(ArrayList<ReceiptPO> rb){
+	public void saveReceipt(ArrayList<ReceiptPO> rb)throws RemoteException{
 		String filename = "ReceiptPO.txt";
 		ObjectOutputStream oos=null;
 		try {
@@ -69,7 +71,7 @@ public class FinancialBillSaver implements FinancialBillSaverService{
 		}
 	}
 	/*保存现金费用单*/
-	public void saveCashPayment(ArrayList<CashPaymentPO> cpb){
+	public void saveCashPayment(ArrayList<CashPaymentPO> cpb)throws RemoteException{
 		String filename = "CashPaymentPO.txt";
 		ObjectOutputStream oos=null;
 		try {
@@ -92,7 +94,7 @@ public class FinancialBillSaver implements FinancialBillSaverService{
 		}
 	}
 	/*获取付款单*/
-	public ArrayList<PaymentPO> getPayment(){
+	public ArrayList<PaymentPO> getPayment()throws RemoteException{
 		File filename = Tool.Opendoc("PaymentPO.txt");
 		
 		ArrayList<PaymentPO> paymentbillList = null;
@@ -120,7 +122,7 @@ public class FinancialBillSaver implements FinancialBillSaverService{
 		
 	}
 	/*获取收款单*/
-	public ArrayList<ReceiptPO> getReceipt(){
+	public ArrayList<ReceiptPO> getReceipt()throws RemoteException{
 		File filename = Tool.Opendoc("ReceiptPO.txt");
 		
 		ArrayList<ReceiptPO> receiptbillList = null;
@@ -148,7 +150,7 @@ public class FinancialBillSaver implements FinancialBillSaverService{
 		
 	}
 	/*获取现金费用单*/
-	public ArrayList<CashPaymentPO> getCashPayment(){
+	public ArrayList<CashPaymentPO> getCashPayment()throws RemoteException{
 		File filename = Tool.Opendoc("CashPaymentPO.txt");
 		
 		ArrayList<CashPaymentPO> cashpaymentbillList = null;

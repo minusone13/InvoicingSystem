@@ -1,6 +1,7 @@
 package presentation.commodityui;
 
 import java.awt.Dimension;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -31,7 +32,15 @@ public class JPcommodityPack extends JPanel {
 	public JPcommodityPack(){
 		//逻辑层接口
 		StockManagerDriver smd=new StockManagerDriver();
-		smd.start(stockbl,StubStockDataController.getInstance());
+		try
+		{
+			smd.start(stockbl,StubStockDataController.getInstance());
+		}
+		catch (RemoteException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		this.setSize(467, 300);
 		//设置布局
 		this.setLayout(null);

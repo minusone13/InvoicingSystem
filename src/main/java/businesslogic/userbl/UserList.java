@@ -1,5 +1,9 @@
 package businesslogic.userbl;
 
+import java.net.MalformedURLException;
+import java.rmi.Naming;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 import java.security.*;
 import java.util.ArrayList;
 
@@ -8,12 +12,11 @@ import po.Role;
 import po.userpo.*;
 import vo.uservo.OperationRecordVO;
 import vo.uservo.UserVO;
-import data.userdata.UserDataController;
 import dataservice.userdataservice.*;
 
 public class UserList
 {
-	static StubUserDataService data = UserDataController.getInstance();// need
+	//static StubUserDataService data = UserDataController.getInstance();// need
 																		// to be
 																		// deleted
 	String ID;// 自动生成
@@ -24,7 +27,32 @@ public class UserList
 
 	public UserVO login(String account, String password)
 	{
-		UserPO po = data.login(account, string2MD5(password));
+		StubUserDataService data = null;
+		try
+		{
+			data = (StubUserDataService)Naming.lookup("rmi://127.0.0.1:1099/UserDataController");
+		}
+		catch (MalformedURLException e)
+		{
+			e.printStackTrace();
+		}
+		catch (RemoteException e)
+		{
+			e.printStackTrace();
+		}
+		catch (NotBoundException e)
+		{
+			e.printStackTrace();
+		}
+		UserPO po = null;
+		try
+		{
+			po = data.login(account, string2MD5(password));
+		}
+		catch (RemoteException e)
+		{
+			e.printStackTrace();
+		}
 		if (po == null)
 			return null;
 		UserVO vo = new User(po).toVO();
@@ -32,10 +60,41 @@ public class UserList
 	}
 
 	public RM deleteUser(UserVO vo)
+	{	StubUserDataService data = null;
+	try
 	{
-		if (data.find(vo.getAccount()) == null)
-			return RM.notfound;
-		boolean result = data.delete(new User(vo).toPO());
+		data = (StubUserDataService)Naming.lookup("rmi://127.0.0.1:1099/UserDataController");
+	}
+	catch (MalformedURLException e)
+	{
+		e.printStackTrace();
+	}
+	catch (RemoteException e)
+	{
+		e.printStackTrace();
+	}
+	catch (NotBoundException e)
+	{
+		e.printStackTrace();
+	}
+		try
+		{
+			if (data.find(vo.getAccount()) == null)
+				return RM.notfound;
+		}
+		catch (RemoteException e)
+		{
+			e.printStackTrace();
+		}
+		boolean result = false;
+		try
+		{
+			result = data.delete(new User(vo).toPO());
+		}
+		catch (RemoteException e)
+		{
+			e.printStackTrace();
+		}
 		if (result == false)
 			return RM.unknownerror;
 		return RM.done;
@@ -43,20 +102,45 @@ public class UserList
 
 	public RM signUp(UserVO vo)
 	{
-		if (data.find(vo.getAccount()) != null)
-			return RM.redundance;
-		else
+		StubUserDataService data = null;
+		try
 		{
-			String result = generateID(vo);
-			if (result == null)
-				return RM.unknownerror;
-			User user = new User(vo);
-			user.setID(result);
-			user.setAuthorized(false);
-			user.setPassword(string2MD5(vo.getPassword()));
-			data.insert(user.toPO());
-			return RM.done;
+			data = (StubUserDataService)Naming.lookup("rmi://127.0.0.1:1099/UserDataController");
 		}
+		catch (MalformedURLException e)
+		{
+			e.printStackTrace();
+		}
+		catch (RemoteException e)
+		{
+			e.printStackTrace();
+		}
+		catch (NotBoundException e)
+		{
+			e.printStackTrace();
+		}
+		try
+		{
+			if (data.find(vo.getAccount()) != null)
+				return RM.redundance;
+			else
+			{
+				String result = generateID(vo);
+				if (result == null)
+					return RM.unknownerror;
+				User user = new User(vo);
+				user.setID(result);
+				user.setAuthorized(false);
+				user.setPassword(string2MD5(vo.getPassword()));
+				data.insert(user.toPO());
+				return RM.done;
+			}
+		}
+		catch (RemoteException e)
+		{
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	public String generateID(UserVO vo)
@@ -85,7 +169,32 @@ public class UserList
 			default:
 				return null;
 		}
-		int x = data.count(c);
+		StubUserDataService data = null;
+		try
+		{
+			data = (StubUserDataService)Naming.lookup("rmi://127.0.0.1:1099/UserDataController");
+		}
+		catch (MalformedURLException e)
+		{
+			e.printStackTrace();
+		}
+		catch (RemoteException e)
+		{
+			e.printStackTrace();
+		}
+		catch (NotBoundException e)
+		{
+			e.printStackTrace();
+		}
+		int x = 0;
+		try
+		{
+			x = data.count(c);
+		}
+		catch (RemoteException e)
+		{
+			e.printStackTrace();
+		}
 		x++;
 		String result = String.format("%04d", x);
 		result = c + result;
@@ -94,7 +203,32 @@ public class UserList
 
 	public UserVO find(String account)
 	{
-		UserPO po = data.find(account);
+		StubUserDataService data = null;
+		try
+		{
+			data = (StubUserDataService)Naming.lookup("rmi://127.0.0.1:1099/UserDataController");
+		}
+		catch (MalformedURLException e)
+		{
+			e.printStackTrace();
+		}
+		catch (RemoteException e)
+		{
+			e.printStackTrace();
+		}
+		catch (NotBoundException e)
+		{
+			e.printStackTrace();
+		}
+		UserPO po = null;
+		try
+		{
+			po = data.find(account);
+		}
+		catch (RemoteException e)
+		{
+			e.printStackTrace();
+		}
 		if (po == null)
 			return null;
 		return new User(po).toVO();
@@ -102,9 +236,34 @@ public class UserList
 
 	public RM changePassword(UserVO vo)
 	{
+		StubUserDataService data = null;
+		try
+		{
+			data = (StubUserDataService)Naming.lookup("rmi://127.0.0.1:1099/UserDataController");
+		}
+		catch (MalformedURLException e)
+		{
+			e.printStackTrace();
+		}
+		catch (RemoteException e)
+		{
+			e.printStackTrace();
+		}
+		catch (NotBoundException e)
+		{
+			e.printStackTrace();
+		}
 		User user = new User(vo);
 		user.setPassword(string2MD5(vo.getPassword()));
-		RM result = data.updatePassword(user.toPO());
+		RM result = null;
+		try
+		{
+			result = data.updatePassword(user.toPO());
+		}
+		catch (RemoteException e)
+		{
+			e.printStackTrace();
+		}
 		return result;
 	}
 
@@ -128,17 +287,74 @@ public class UserList
 			return RM.unknownerror;
 		User user = new User(vo);
 		user.setID(s);
-		data.insert(user.toPO());
+		StubUserDataService data = null;
+		try
+		{
+			data = (StubUserDataService)Naming.lookup("rmi://127.0.0.1:1099/UserDataController");
+		}
+		catch (MalformedURLException e)
+		{
+			e.printStackTrace();
+		}
+		catch (RemoteException e)
+		{
+			e.printStackTrace();
+		}
+		catch (NotBoundException e)
+		{
+			e.printStackTrace();
+		}
+		try
+		{
+			data.insert(user.toPO());
+		}
+		catch (RemoteException e)
+		{
+			e.printStackTrace();
+		}
 		return result;
 	}
 
 	public RM authorized(String account)
 	{
-		UserPO po = data.find(account);
+		StubUserDataService data = null;
+		try
+		{
+			data = (StubUserDataService)Naming.lookup("rmi://127.0.0.1:1099/UserDataController");
+		}
+		catch (MalformedURLException e)
+		{
+			e.printStackTrace();
+		}
+		catch (RemoteException e)
+		{
+			e.printStackTrace();
+		}
+		catch (NotBoundException e)
+		{
+			e.printStackTrace();
+		}
+		UserPO po = null;
+		try
+		{
+			po = data.find(account);
+		}
+		catch (RemoteException e1)
+		{
+			e1.printStackTrace();
+		}
 		if (po == null)
 			return RM.notfound;
 		po.setAuthorized(true);
-		boolean result = data.update(po);
+		boolean result = false;
+		try
+		{
+			result = data.update(po);
+		}
+		catch (RemoteException e)
+		{
+			e.printStackTrace();
+		}
 		if (result)
 			return RM.done;
 		else
@@ -147,7 +363,32 @@ public class UserList
 
 	public ArrayList<UserVO> showUsers()
 	{
-		ArrayList<UserPO> users = data.getUsers();
+		StubUserDataService data = null;
+		try
+		{
+			data = (StubUserDataService)Naming.lookup("rmi://127.0.0.1:1099/UserDataController");
+		}
+		catch (MalformedURLException e)
+		{
+			e.printStackTrace();
+		}
+		catch (RemoteException e)
+		{
+			e.printStackTrace();
+		}
+		catch (NotBoundException e)
+		{
+			e.printStackTrace();
+		}
+		ArrayList<UserPO> users = null;
+		try
+		{
+			users = data.getUsers();
+		}
+		catch (RemoteException e)
+		{
+			e.printStackTrace();
+		}
 		ArrayList<UserVO> result = new ArrayList<UserVO>();
 		for (int i = 0; i < users.size(); i++)
 		{
@@ -160,7 +401,32 @@ public class UserList
 
 	public ArrayList<OperationRecordVO> showRecords()
 	{
-		ArrayList<OperationRecordPO> records = data.getRecords();
+		StubUserDataService data = null;
+		try
+		{
+			data = (StubUserDataService)Naming.lookup("rmi://127.0.0.1:1099/UserDataController");
+		}
+		catch (MalformedURLException e)
+		{
+			e.printStackTrace();
+		}
+		catch (RemoteException e)
+		{
+			e.printStackTrace();
+		}
+		catch (NotBoundException e)
+		{
+			e.printStackTrace();
+		}
+		ArrayList<OperationRecordPO> records = null;
+		try
+		{
+			records = data.getRecords();
+		}
+		catch (RemoteException e)
+		{
+			e.printStackTrace();
+		}
 		ArrayList<OperationRecordVO> result = new ArrayList<OperationRecordVO>();
 		for (int i = 0; i < records.size(); i++)
 		{
@@ -172,7 +438,32 @@ public class UserList
 
 	public boolean addRecord(OperationRecord op)
 	{
-		return data.insert(op.toPO());
+		StubUserDataService data = null;
+		try
+		{
+			data = (StubUserDataService)Naming.lookup("rmi://127.0.0.1:1099/UserDataController");
+		}
+		catch (MalformedURLException e1)
+		{
+			e1.printStackTrace();
+		}
+		catch (RemoteException e1)
+		{
+			e1.printStackTrace();
+		}
+		catch (NotBoundException e1)
+		{
+			e1.printStackTrace();
+		}
+		try
+		{
+			return data.insert(op.toPO());
+		}
+		catch (RemoteException e)
+		{
+			e.printStackTrace();
+		}
+		return false;
 	}
 
 	public void setPO(UserPO po)
@@ -215,18 +506,38 @@ public class UserList
 	}
 
 	public void setdataobject(StubUserDataService data)
-	{
-		this.data = data;
+	{		
+		//不会不会;
+		//this.data = data;
 	}
 
 	public static StubUserDataService getData()
 	{
+		StubUserDataService data = null;
+		try
+		{
+			data = (StubUserDataService)Naming.lookup("rmi://127.0.0.1:1099/UserDataController");
+		}
+		catch (MalformedURLException e)
+		{
+			e.printStackTrace();
+		}
+		catch (RemoteException e)
+		{
+			e.printStackTrace();
+		}
+		catch (NotBoundException e)
+		{
+			e.printStackTrace();
+		}
 		return data;
 	}
 
 	public static void setData(StubUserDataService data)
 	{
-		UserList.data = data;
+		///我又不会改了
+		//StubUserDataService data = (StubUserDataService)Naming.lookup("rmi://127.0.0.1:1099/UserDataController");
+		//UserList.data = data;
 	}
 
 	public String getID()

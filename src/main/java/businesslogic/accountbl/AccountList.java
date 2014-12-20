@@ -1,12 +1,12 @@
  package businesslogic.accountbl;
 
+import java.net.MalformedURLException;
+import java.rmi.Naming;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import data.accountdata.AccountBuild;
-import data.accountdata.AccountData;
-import data.commoditydata.StubStockDataController;
-import data.stockservice.StockDataForFinancial;
 import dataservice.accountdataservice.StubAccountDataService;
 import businesslogic.commoditybl.StubCommodityList;
 import businesslogic.customerService.CustomerForFinancial;
@@ -23,7 +23,20 @@ public class AccountList {
 	public boolean addAccount(Account account) {
 		StubAccountDataService a = null;
 		try {
-			a = new AccountData();
+			try
+			{
+				a = (StubAccountDataService)Naming.lookup("rmi://127.0.0.1:1099/AccountData");
+			}
+			catch (MalformedURLException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			catch (NotBoundException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
@@ -41,7 +54,20 @@ public class AccountList {
 	public boolean deleteAccount(Account account) {
 		StubAccountDataService a = null;
 		try {
-			a = new AccountData();
+			try
+			{
+				a = (StubAccountDataService)Naming.lookup("rmi://127.0.0.1:1099/AccountData");
+			}
+			catch (MalformedURLException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			catch (NotBoundException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
@@ -58,7 +84,20 @@ public class AccountList {
 	public boolean updateAccount(Account account, String newname) {
 		StubAccountDataService a = null;
 		try {
-			a = new AccountData();
+			try
+			{
+				a = (StubAccountDataService)Naming.lookup("rmi://127.0.0.1:1099/AccountData");
+			}
+			catch (MalformedURLException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			catch (NotBoundException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
@@ -76,7 +115,20 @@ public class AccountList {
 	public ArrayList<AccountVO> fuzzyFindAccount(String s, int precision) {
 		StubAccountDataService a = null;
 		try {
-			a = new AccountData();
+			try
+			{
+				a = (StubAccountDataService)Naming.lookup("rmi://127.0.0.1:1099/AccountData");
+			}
+			catch (MalformedURLException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			catch (NotBoundException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
@@ -100,7 +152,20 @@ public class AccountList {
 	public AccountVO findAccount(Account account) {
 		StubAccountDataService a = null;
 		try {
-			a = new AccountData();
+			try
+			{
+				a = (StubAccountDataService)Naming.lookup("rmi://127.0.0.1:1099/AccountData");
+			}
+			catch (MalformedURLException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			catch (NotBoundException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
@@ -153,7 +218,20 @@ public class AccountList {
 	public ArrayList<Account> getAllAccountInfo() {
 		StubAccountDataService a = null;
 		try {
-			a = new AccountData();
+			try
+			{
+				a = (StubAccountDataService)Naming.lookup("rmi://127.0.0.1:1099/AccountData");
+			}
+			catch (MalformedURLException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			catch (NotBoundException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
@@ -178,7 +256,20 @@ public class AccountList {
 	public void saveAccounts(ArrayList<Account> accounts) {
 		StubAccountDataService a = null;
 		try {
-			a = new AccountData();
+			try
+			{
+				a = (StubAccountDataService)Naming.lookup("rmi://127.0.0.1:1099/AccountData");
+			}
+			catch (MalformedURLException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			catch (NotBoundException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}

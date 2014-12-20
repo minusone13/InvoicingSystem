@@ -1,8 +1,10 @@
 package data.initial;
 
+import java.rmi.RemoteException;
+
 public class Initial {
 	//负责初始化文件
-	public void initialAll()
+	public void initialAll() throws RemoteException
 	{
 		new InitialStock();
 		new InitialUser();
@@ -13,7 +15,7 @@ public class Initial {
 	{
 		new InitialTestStock();
 	}
-	public void initialStock()
+	public void initialStock() throws RemoteException
 	{
 		new InitialStock();
 	}

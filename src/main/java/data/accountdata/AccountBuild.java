@@ -42,8 +42,25 @@ public class AccountBuild{
 	}
 	
 	public void saveCommodity() {
-		StockDataForFinancial sd = StubStockDataController.getInstance();
-		sd.saveAndBuild("accountBuild\\commodity\\"+version+".ser");		
+		StockDataForFinancial sd = null;
+		try
+		{
+			sd = StubStockDataController.getInstance();
+		}
+		catch (RemoteException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try
+		{
+			sd.saveAndBuild("accountBuild\\commodity\\"+version+".ser");
+		}
+		catch (RemoteException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
 	}
 	
 	public void saveCustomer() throws RemoteException {

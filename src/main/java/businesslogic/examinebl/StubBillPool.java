@@ -1,5 +1,8 @@
 package businesslogic.examinebl;
 
+import java.net.MalformedURLException;
+import java.rmi.Naming;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
@@ -39,9 +42,6 @@ import businesslogic.salebillbl.PurBackSheet;
 import businesslogic.salebillbl.PurSheet;
 import businesslogic.salebillbl.SaleBackSheet;
 import businesslogic.salebillbl.SaleSheet;
-import data.billdata.CommodityBillSaver;
-import data.billdata.FinancialBillSaver;
-import data.billdata.SaleBillSaver;
 import dataservice.billdataservice.CommodityBillSaverService;
 import dataservice.billdataservice.FinancialBillSaverService;
 import dataservice.billdataservice.SaleBillSaverService;
@@ -61,9 +61,9 @@ public class StubBillPool {
 	private ArrayList<PaymentBill> alOfPaymentBill=new ArrayList<PaymentBill>();
 	private ArrayList<CashPaymentBill> alOfCashPaymentBill=new ArrayList<CashPaymentBill>();
 	//读取文档中的对象
-	SaleBillSaverService sbs=new SaleBillSaver();
-	FinancialBillSaverService fbs=new FinancialBillSaver();
-	CommodityBillSaverService cbs=new CommodityBillSaver();
+	//SaleBillSaverService sbs=new SaleBillSaver();
+	//FinancialBillSaverService fbs=new FinancialBillSaver();
+	//CommodityBillSaverService cbs=new CommodityBillSaver();
 	/*构造函数*/
 	public StubBillPool(){
 	
@@ -664,6 +664,19 @@ public class StubBillPool {
 		//赠送单
 		ArrayList<GiftBillPO> GiftBillListPO = null;
 		try {
+			CommodityBillSaverService cbs = null;
+			try
+			{
+				cbs = (CommodityBillSaverService)Naming.lookup("rmi://127.0.0.1:1099/CommodityBillSaverService");
+			}
+			catch (MalformedURLException e)
+			{
+				e.printStackTrace();
+			}
+			catch (NotBoundException e)
+			{
+				e.printStackTrace();
+			}
 			GiftBillListPO = cbs.getGiftBill();
 		} catch (RemoteException e) {
 			e.printStackTrace();
@@ -678,6 +691,19 @@ public class StubBillPool {
 		//报警单
 		ArrayList<AlertBillPO> AlertBillListPO = null;
 		try {
+			CommodityBillSaverService cbs = null;
+			try
+			{
+				cbs = (CommodityBillSaverService)Naming.lookup("rmi://127.0.0.1:1099/CommodityBillSaverService");
+			}
+			catch (MalformedURLException e)
+			{
+				e.printStackTrace();
+			}
+			catch (NotBoundException e)
+			{
+				e.printStackTrace();
+			}
 			AlertBillListPO = cbs.getAlertBill();
 		} catch (RemoteException e) {
 			e.printStackTrace();
@@ -692,6 +718,19 @@ public class StubBillPool {
 		//报溢报损单
 		ArrayList<SpillsLossBillPO> SpillsLossBillListPO = null;
 		try {
+			CommodityBillSaverService cbs = null;
+			try
+			{
+				cbs = (CommodityBillSaverService)Naming.lookup("rmi://127.0.0.1:1099/CommodityBillSaverService");
+			}
+			catch (MalformedURLException e)
+			{
+				e.printStackTrace();
+			}
+			catch (NotBoundException e)
+			{
+				e.printStackTrace();
+			}
 			SpillsLossBillListPO = cbs.getSpillsLossBill();
 		} catch (RemoteException e) {
 			e.printStackTrace();
@@ -706,6 +745,19 @@ public class StubBillPool {
 		//进货单
 		ArrayList<PurSheetPO> PurSheetListPO = null;
 		try {
+			SaleBillSaverService sbs = null;
+			try
+			{
+				sbs = (SaleBillSaverService)Naming.lookup("rmi://127.0.0.1:1099/SaleBillSaver");
+			}
+			catch (MalformedURLException e)
+			{
+				e.printStackTrace();
+			}
+			catch (NotBoundException e)
+			{
+				e.printStackTrace();
+			}
 			PurSheetListPO = sbs.getPurSheet();
 		} catch (RemoteException e) {
 			e.printStackTrace();
@@ -720,6 +772,19 @@ public class StubBillPool {
 		//进货退货单
 		ArrayList<PurBackSheetPO> PurBackSheetListPO = null;
 		try {
+			SaleBillSaverService sbs = null;
+			try
+			{
+				sbs = (SaleBillSaverService)Naming.lookup("rmi://127.0.0.1:1099/SaleBillSaver");
+			}
+			catch (MalformedURLException e)
+			{
+				e.printStackTrace();
+			}
+			catch (NotBoundException e)
+			{
+				e.printStackTrace();
+			}
 			PurBackSheetListPO = sbs.getPurBackSheet();
 		} catch (RemoteException e) {
 			e.printStackTrace();
@@ -734,6 +799,19 @@ public class StubBillPool {
 		//销售单
 		ArrayList<SaleSheetPO> SaleSheetListPO = null;
 		try {
+			SaleBillSaverService sbs = null;
+			try
+			{
+				sbs = (SaleBillSaverService)Naming.lookup("rmi://127.0.0.1:1099/SaleBillSaver");
+			}
+			catch (MalformedURLException e)
+			{
+				e.printStackTrace();
+			}
+			catch (NotBoundException e)
+			{
+				e.printStackTrace();
+			}
 			SaleSheetListPO = sbs.getSaleSheet();
 		} catch (RemoteException e) {
 			e.printStackTrace();
@@ -748,6 +826,19 @@ public class StubBillPool {
 		//销售退货单
 		ArrayList<SaleBackSheetPO> SaleBackSheetListPO = null;
 		try {
+			SaleBillSaverService sbs = null;
+			try
+			{
+				sbs = (SaleBillSaverService)Naming.lookup("rmi://127.0.0.1:1099/SaleBillSaver");
+			}
+			catch (MalformedURLException e)
+			{
+				e.printStackTrace();
+			}
+			catch (NotBoundException e)
+			{
+				e.printStackTrace();
+			}
 			SaleBackSheetListPO = sbs.getSaleBackSheet();
 		} catch (RemoteException e) {
 			e.printStackTrace();
@@ -762,6 +853,19 @@ public class StubBillPool {
 		//收款单
 		ArrayList<ReceiptPO> ReceiptBillListPO = null;
 		try {
+			FinancialBillSaverService fbs = null;
+			try
+			{
+				fbs = (FinancialBillSaverService)Naming.lookup("rmi://127.0.0.1:1099/FinancialBillSaver");
+			}
+			catch (MalformedURLException e)
+			{
+				e.printStackTrace();
+			}
+			catch (NotBoundException e)
+			{
+				e.printStackTrace();
+			}
 			ReceiptBillListPO = fbs.getReceipt();
 		} catch (RemoteException e) {
 			e.printStackTrace();
@@ -776,6 +880,19 @@ public class StubBillPool {
 		//付款单
 		ArrayList<PaymentPO> PaymentBillListPO = null;
 		try {
+			FinancialBillSaverService fbs = null;
+			try
+			{
+				fbs = (FinancialBillSaverService)Naming.lookup("rmi://127.0.0.1:1099/FinancialBillSaver");
+			}
+			catch (MalformedURLException e)
+			{
+				e.printStackTrace();
+			}
+			catch (NotBoundException e)
+			{
+				e.printStackTrace();
+			}
 			PaymentBillListPO = fbs.getPayment();
 		} catch (RemoteException e) {
 			e.printStackTrace();
@@ -790,6 +907,19 @@ public class StubBillPool {
 		//现金费用单
 		ArrayList<CashPaymentPO> CashPaymentBillListPO = null;
 		try {
+			FinancialBillSaverService fbs = null;
+			try
+			{
+				fbs = (FinancialBillSaverService)Naming.lookup("rmi://127.0.0.1:1099/FinancialBillSaver");
+			}
+			catch (MalformedURLException e)
+			{
+				e.printStackTrace();
+			}
+			catch (NotBoundException e)
+			{
+				e.printStackTrace();
+			}
 			CashPaymentBillListPO = fbs.getCashPayment();
 		} catch (RemoteException e) {
 			e.printStackTrace();
@@ -806,9 +936,60 @@ public class StubBillPool {
 	/*实时保存池中数组对象*/
 	public void save(){
 		//保存文档中的对象
-		SaleBillSaverService sbs=new SaleBillSaver();
-		FinancialBillSaverService fbs=new FinancialBillSaver();
-		CommodityBillSaverService cbs=new CommodityBillSaver();
+		SaleBillSaverService sbs = null;
+		try
+		{
+			sbs = (SaleBillSaverService)Naming.lookup("rmi://127.0.0.1:1099/SaleBillSaver");
+		}
+		catch (MalformedURLException e1)
+		{
+			e1.printStackTrace();
+		}
+		catch (RemoteException e1)
+		{
+			e1.printStackTrace();
+		}
+		catch (NotBoundException e1)
+		{
+			e1.printStackTrace();
+		}
+		//SaleBillSaverService sbs=new SaleBillSaver();
+		FinancialBillSaverService fbs = null;
+		try
+		{
+			fbs = (FinancialBillSaverService)Naming.lookup("rmi://127.0.0.1:1099/FinancialBillSaver");
+		}
+		catch (MalformedURLException e1)
+		{
+			e1.printStackTrace();
+		}
+		catch (RemoteException e1)
+		{
+			e1.printStackTrace();
+		}
+		catch (NotBoundException e1)
+		{
+			e1.printStackTrace();
+		}
+		//FinancialBillSaverService fbs=new FinancialBillSaver();
+		CommodityBillSaverService cbs = null;
+		try
+		{
+			cbs = (CommodityBillSaverService)Naming.lookup("rmi://127.0.0.1:1099/CommodityBillSaverService");
+		}
+		catch (MalformedURLException e1)
+		{
+			e1.printStackTrace();
+		}
+		catch (RemoteException e1)
+		{
+			e1.printStackTrace();
+		}
+		catch (NotBoundException e1)
+		{
+			e1.printStackTrace();
+		}
+		//CommodityBillSaverService cbs=new CommodityBillSaver();
 		
 		//赠送单
 		ArrayList<GiftBillPO> GiftBillPO=new ArrayList<GiftBillPO>();
@@ -818,7 +999,6 @@ public class StubBillPool {
 		try {
 			cbs.saveGiftBill(GiftBillPO);
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}//保存PO数组到txt
 		//报溢报损单
@@ -829,7 +1009,6 @@ public class StubBillPool {
 		try {
 			cbs.saveSpillsLossBill(SpillsLossBillPO);
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}//保存PO数组到txt
 		//报警单

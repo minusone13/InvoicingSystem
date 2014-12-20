@@ -7,6 +7,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
 import po.BarginStrategyPO;
@@ -15,9 +17,14 @@ import po.ReachStrategyPO;
 import po.Tool;
 import dataservice.strategydataservice.StrategySaverService;
 
-public class StrategySaver implements StrategySaverService{
+public class StrategySaver extends UnicastRemoteObject implements StrategySaverService{
 
-	public void saveLevelStrategy(ArrayList<LevelStrategyPO> ls){
+	public StrategySaver() throws RemoteException
+	{
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public void saveLevelStrategy(ArrayList<LevelStrategyPO> ls)throws RemoteException{
 		String filename = "LevelStrategyPO.txt";
 		ObjectOutputStream oos=null;
 		try {
@@ -39,7 +46,7 @@ public class StrategySaver implements StrategySaverService{
 			}
 		}
 	}
-	public void saveReachStrategy(ArrayList<ReachStrategyPO> rs){
+	public void saveReachStrategy(ArrayList<ReachStrategyPO> rs)throws RemoteException{
 		String filename = "ReachStrategyPO.txt";
 		ObjectOutputStream oos=null;
 		try {
@@ -61,7 +68,7 @@ public class StrategySaver implements StrategySaverService{
 			}
 		}
 	}
-	public void saveBarginStrategy(ArrayList<BarginStrategyPO> bs){
+	public void saveBarginStrategy(ArrayList<BarginStrategyPO> bs)throws RemoteException{
 		String filename = "BarginStrategyPO.txt";
 		ObjectOutputStream oos=null;
 		try {
@@ -83,7 +90,7 @@ public class StrategySaver implements StrategySaverService{
 			}
 		}
 	}
-	public ArrayList<LevelStrategyPO> getLevelStrategy(){
+	public ArrayList<LevelStrategyPO> getLevelStrategy()throws RemoteException{
 		File filename = Tool.Opendoc("LevelStrategyPO.txt");
 		
 		ArrayList<LevelStrategyPO> levelstrategyList = null;
@@ -113,7 +120,7 @@ public class StrategySaver implements StrategySaverService{
 		
 		
 	}
-	public ArrayList<ReachStrategyPO> getReachStrategy(){
+	public ArrayList<ReachStrategyPO> getReachStrategy()throws RemoteException{
 		File filename = Tool.Opendoc("ReachStrategyPO.txt");
 		
 		ArrayList<ReachStrategyPO> reachstrategyList = null;
@@ -140,7 +147,7 @@ public class StrategySaver implements StrategySaverService{
 		
 		
 	}
-	public ArrayList<BarginStrategyPO> getBarginStrategy(){
+	public ArrayList<BarginStrategyPO> getBarginStrategy()throws RemoteException{
 		File filename = Tool.Opendoc("BarginStrategyPO.txt");
 		
 		ArrayList<BarginStrategyPO> barginstrategyList = null;
