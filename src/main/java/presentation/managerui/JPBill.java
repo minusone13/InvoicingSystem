@@ -1328,15 +1328,7 @@ public class JPBill extends JPanel {
 		
 		//调用逻辑层修改对应单据的数据
 		boolean result = false;
-		try
-		{
-			result = customerbl.updateCustomer(cus);
-		}
-		catch (RemoteException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		result = customerbl.updateCustomer(cus);
 		return result;
 	}
 	//修改用户密码

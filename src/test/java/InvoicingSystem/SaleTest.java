@@ -191,15 +191,7 @@ public class SaleTest extends TestCase{
 		public void testfindCustomer(){
 			CustomerList customerlist = new CustomerList();
 			CustomerVO tempvo = null;
-			try
-			{
-				tempvo = customerlist.findCustomer("5");
-			}
-			catch (RemoteException e)
-			{
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			tempvo = customerlist.findCustomer("5");
 			boolean result11=true;
 			if(tempvo.getname().equals("没人")){
 				result11=false;

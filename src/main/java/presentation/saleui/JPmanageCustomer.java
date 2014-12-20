@@ -743,15 +743,7 @@ public class JPmanageCustomer extends JPanel {
 								billList.getJPbillList().clear();
 								billList.reHome();
 								ArrayList<CustomerVO> cus=new ArrayList<CustomerVO>();
-								try
-								{
-									cus.add(customerbl.findCustomer(searchTxt.getText()));
-								}
-								catch (RemoteException e1)
-								{
-									// TODO Auto-generated catch block
-									e1.printStackTrace();
-								}
+								cus.add(customerbl.findCustomer(searchTxt.getText()));
 								billList.addCustomerList(cus);
 								
 							}

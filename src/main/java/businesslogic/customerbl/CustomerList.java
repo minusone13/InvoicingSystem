@@ -39,12 +39,28 @@ public class CustomerList implements CustomerForFinancial, CustomerBlService{
 			return false;
 		}
 		
-		public CustomerVO findCustomer(String id) throws RemoteException{
+		public CustomerVO findCustomer(String id){
 			CustomerVO vo = new CustomerVO();
 			Customer newCustomer = new Customer();
 			
-				CustomerDataService customerdata = new CustomerData();
-				newCustomer.setPO(customerdata.findCustomer(id));//判断下是否存在，到时候再说吧。。
+				CustomerDataService customerdata = null;
+				try
+				{
+					customerdata = new CustomerData();
+				}
+				catch (RemoteException e)
+				{
+
+					e.printStackTrace();
+				}
+				try
+				{
+					newCustomer.setPO(customerdata.findCustomer(id));
+				}
+				catch (RemoteException e)
+				{
+					e.printStackTrace();
+				}//判断下是否存在，到时候再说吧。。
 				vo=newCustomer.getVO();
 			return vo;
 		}
@@ -116,15 +132,7 @@ public class CustomerList implements CustomerForFinancial, CustomerBlService{
 
 		public void changeShouldPay(String id, double hadPay) {
 			CustomerVO vo = null;
-			try
-			{
-				vo = this.findCustomer(id);
-			}
-			catch (RemoteException e)
-			{
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			vo = this.findCustomer(id);
 			vo.setShouldPay(vo.getShouldPay()-hadPay);
 			this.updateCustomer(vo);
 			
@@ -132,15 +140,7 @@ public class CustomerList implements CustomerForFinancial, CustomerBlService{
 
 		public void changeShouldTake(String id, double hadGive) {
 			CustomerVO vo = null;
-			try
-			{
-				vo = this.findCustomer(id);
-			}
-			catch (RemoteException e)
-			{
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			vo = this.findCustomer(id);
 			vo.setShouldTake(vo.getShouldTake()-hadGive);
 			this.updateCustomer(vo);
 			

@@ -504,15 +504,7 @@ public class JPmanageBills2 extends JPanel {
 					
 					//客户选择下拉框
 						ArrayList<CustomerVO> customers = null;
-						try
-						{
-							customers = customerbl.getAllCustomer("Customer.txt");
-						}
-						catch (RemoteException e)
-						{
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
+						customers = customerbl.getAllCustomer("Customer.txt");
 					String[] customerS=new String[customers.size()];
 					for(int i=0;i<customers.size();i++){
 						customerS[i]=customers.get(i).getname()+":"+customers.get(i).getid();
@@ -651,15 +643,7 @@ public class JPmanageBills2 extends JPanel {
 					
 					//客户选择下拉框
 						ArrayList<CustomerVO> customers2 = null;
-						try
-						{
-							customers2 = customerbl.getAllCustomer("Customer.txt");
-						}
-						catch (RemoteException e)
-						{
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
+						customers2 = customerbl.getAllCustomer("Customer.txt");
 					String[] customerS2=new String[customers2.size()];
 					for(int i=0;i<customers2.size();i++){
 						customerS2[i]=customers2.get(i).getname()+":"+customers2.get(i).getid();
@@ -885,15 +869,7 @@ public class JPmanageBills2 extends JPanel {
 							
 									PurSheetVO newPur=new PurSheetVO();
 									String[] temp=customerCombo.getSelectedItem().toString().split(":");
-									try
-									{
-										newPur.setCustomer(customerbl.findCustomer(temp[1]));
-									}
-									catch (RemoteException e1)
-									{
-										// TODO Auto-generated catch block
-										e1.printStackTrace();
-									}
+									newPur.setCustomer(customerbl.findCustomer(temp[1]));
 									newPur.setstock(warehouseCombo.getSelectedItem().toString());
 									newPur.setsheet(output);
 									newPur.setcommoditywords(outputNotes);
@@ -916,15 +892,7 @@ public class JPmanageBills2 extends JPanel {
 									PurBackSheetVO newPurBack=new PurBackSheetVO();
 
 									String[] temp=customerTxt.getText().split(":");
-									try
-									{
-										newPurBack.setCustomer(customerbl.findCustomer(temp[1]));
-									}
-									catch (RemoteException e1)
-									{
-										// TODO Auto-generated catch block
-										e1.printStackTrace();
-									}
+									newPurBack.setCustomer(customerbl.findCustomer(temp[1]));
 									newPurBack.setstock(warehouseTxt.getText());
 									newPurBack.setsheet(output);
 									newPurBack.setcommoditywords(outputNotes);
