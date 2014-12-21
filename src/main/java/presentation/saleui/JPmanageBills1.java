@@ -2,6 +2,7 @@ package presentation.saleui;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.rmi.RemoteException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -55,7 +56,16 @@ public class JPmanageBills1  extends JPanel {
 	public JPmanageBills1(){
 		//逻辑层接口
 		StockManagerDriver smd=new StockManagerDriver();
-		smd.start(stockbl,StubStockDataController.getInstance());
+		try
+		{
+			smd.start(stockbl,StubStockDataController.getInstance());
+		}
+		catch (RemoteException e)
+		{
+			System.out.println("库存管理人员接口异常");
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		//设置窗口大小
 		this.setSize(445, 330);
 		//设置布局
