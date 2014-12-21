@@ -55,8 +55,7 @@ public class SaleDetailPanel extends JPanel{
 		pane.getViewport().setOpaque(false);//设置透明
 		pane.setBorder(null);
 		pane.setBounds(0, 0, 400, 315);
-		
-		
+				
 		this.add(pane,0);
 		this.add(jpbg1,1);
 	}
