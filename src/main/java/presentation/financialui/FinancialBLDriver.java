@@ -1,13 +1,16 @@
 package presentation.financialui;
 
+import java.net.MalformedURLException;
+import java.rmi.Naming;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Date;
 
 import po.BillState;
 import po.stockpo.CategoryPO;
 import presentation.commodityui.StockManagerDriver;
-import data.commoditydata.StubStockDataController;
-import data.initial.Initial;
+import dataservice.commoditydataservice.StubCommodityDataService;
 import vo.PurBackSheetVO;
 import vo.PurSheetVO;
 import vo.SaleBackSheetVO;
@@ -35,16 +38,33 @@ public class FinancialBLDriver {
 	FinancialBlService fbs;
 	
 	static StockManagerDriver smd=new StockManagerDriver();
-	static StubStockDataController data=StubStockDataController.getInstance();
+	//static StubCommodityDataService data=(StubCommodityDataService)Naming.lookup("rmi://127.0.0.1:1099/StubStockDataController.getInstance()");
 	static StubCommodityBlService combl;
 	static StubStockController controller;
 	static StubBillPool pool;
 	static
 	{
-		Initial initial=new Initial();
-		initial.initialAll();
+		//Initial initial=new Initial();
+		//initial.initialAll();
 		controller = new StubStockController();
 		pool = controller.getPool();
+		StubCommodityDataService data = null;
+		try
+		{
+			data = (StubCommodityDataService)Naming.lookup("rmi://127.0.0.1:1099/StubStockDataController.getInstance()");
+		}
+		catch (MalformedURLException e)
+		{
+			e.printStackTrace();
+		}
+		catch (RemoteException e)
+		{
+			e.printStackTrace();
+		}
+		catch (NotBoundException e)
+		{
+			e.printStackTrace();
+		}
 		smd.start(controller,data);
 		combl=smd.getCombl();
 	}
@@ -98,13 +118,58 @@ public class FinancialBLDriver {
 	
 	public void initial()
 	{
-		Initial initial=new Initial();
-		initial.initialAll();
+		//Initial initial=new Initial();
+		//initial.initialAll();
+		StubCommodityDataService data = null;
+		try
+		{
+			data = (StubCommodityDataService)Naming.lookup("rmi://127.0.0.1:1099/StubStockDataController.getInstance()");
+		}
+		catch (MalformedURLException e)
+		{
+			e.printStackTrace();
+		}
+		catch (RemoteException e)
+		{
+			e.printStackTrace();
+		}
+		catch (NotBoundException e)
+		{
+			e.printStackTrace();
+		}
 		smd.start(new StubStockController(),data);
-		data.insert(new CategoryPO("1", "灯"));
-		data.insert(new CategoryPO("1\\灯","日光灯"));
-		data.insert(new CategoryPO("1\\灯\\日光灯","纯白日光灯"));
-		data.insert(new CategoryPO("1", "门"));
+		try
+		{
+			data.insert(new CategoryPO("1", "灯"));
+		}
+		catch (RemoteException e)
+		{
+			e.printStackTrace();
+		}
+		try
+		{
+			data.insert(new CategoryPO("1\\灯","日光灯"));
+		}
+		catch (RemoteException e)
+		{
+			e.printStackTrace();
+		}
+		try
+		{
+			data.insert(new CategoryPO("1\\灯\\日光灯","纯白日光灯"));
+		}
+		catch (RemoteException e)
+		{
+			e.printStackTrace();
+		}
+		try
+		{
+			data.insert(new CategoryPO("1", "门"));
+		}
+		catch (RemoteException e)
+		{
+			e.printStackTrace();
+		}
 		CommodityVO mockvo=new CommodityVO("1\\门","好好防盗门","fdm02",200,300,10);
 		CommodityVO mockvo1=new CommodityVO("1\\门","好好防盗门","fdm05",100,200,15);
 		CommodityVO mockvo2=new CommodityVO("1\\门","迪迪防盗门","dd02",100,200,15);

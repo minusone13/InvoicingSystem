@@ -405,14 +405,7 @@ public class salebillController implements SaleBillBlService,salebillForFinancia
 		public String sureReachStrategy(String nameOfCustomer,double pmoney,String operatorid,LevelStrategyStyle style){
 			String words = new String();
 			CustomerBlService custController = new CustomerList();
-			try
-			{
-				CustomerVO customervo = custController.findCustomer(nameOfCustomer);
-			}
-			catch (RemoteException e)
-			{
-				e.printStackTrace();
-			}
+			CustomerVO customervo = custController.findCustomer(nameOfCustomer);
 			StubManagerBlService straController = new StubManager();;
 			ArrayList<ReachStrategyVO> rsvo = straController.ShowReachStrategy();
 			//满额策略能够提供些什么;

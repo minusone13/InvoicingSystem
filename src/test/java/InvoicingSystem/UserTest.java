@@ -2,6 +2,10 @@ package InvoicingSystem;
 
 import static org.junit.Assert.*;
 
+import java.net.MalformedURLException;
+import java.rmi.Naming;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import po.RM;
@@ -9,9 +13,6 @@ import po.Role;
 import po.stockpo.CategoryPO;
 import presentation.commodityui.StockManagerDriver;
 import presentation.userui.UserDriver;
-import data.commoditydata.StubStockDataController;
-import data.initial.Initial;
-import data.userdata.UserDataController;
 import vo.stockvo.CategoryVO;
 import vo.stockvo.CommodityVO;
 import vo.uservo.OperationRecordVO;
@@ -19,6 +20,8 @@ import vo.uservo.UserVO;
 
 import org.junit.*;
 
+import dataservice.commoditydataservice.StubCommodityDataService;
+import dataservice.userdataservice.StubUserDataService;
 import businesslogic.stockmanagerbl.StubStockController;
 import businesslogic.userbl.*;
 import businesslogicservice.commodityblservice.StubCommodityBlService;
@@ -26,17 +29,36 @@ import businesslogicservice.userblservice.StubUserBlService;
 
 public class UserTest{
 	static UserDriver smd=new UserDriver();
-	static UserDataController data=UserDataController.getInstance();
 	static StubUserBlService ubl=new UserController();
 	static
 	{
+		StubUserDataService data = null;
+		try
+		{
+			data = (StubUserDataService)Naming.lookup("rmi://127.0.0.1:1099/UserDataController");
+		}
+		catch (MalformedURLException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		catch (RemoteException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		catch (NotBoundException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		smd.start(ubl,data);
 	}
 	@Before
 	public void initial()
 	{
-		Initial initial=new Initial();
-		initial.initialUser();
+		//Initial initial=new Initial();
+		//initial.initialUser();
 		UserController user=new UserController();
 		UserVO vo = new UserVO(Role.STOCK_STAFF, "stock", "stock", "Helen");
 		user.signUp(vo);
@@ -173,5 +195,22 @@ public class UserTest{
 		assertEquals(RM.redundance,records.get(0).getResult());
 		assertEquals(RM.done,records.get(1).getResult());
 		assertEquals("I0000",records.get(0).getUser().getID());
+	}
+	
+	@AfterClass
+	public static void end()
+	{
+		UserTest ut = new UserTest();
+		ut.initial();
+		UserVO vo = new UserVO(Role.FINANCIAL_MANAGER, "financialM", "financialM", "Ryen");
+		ubl.signUp(vo);
+		vo = new UserVO(Role.FINANCIAL_STAFF, "financial", "financial", "Peter");
+		ubl.signUp(vo);
+		vo = new UserVO(Role.MANAGER, "manager", "manager", "Leez");
+		ubl.signUp(vo);
+		vo = new UserVO(Role.PURCHASE_SALE_MANAGER, "saleM", "saleM", "Heg");
+		ubl.signUp(vo);
+		vo = new UserVO(Role.PURCHASE_SALE_STAFF, "sale", "sale", "Herb");
+		ubl.signUp(vo);
 	}
 }

@@ -1,5 +1,8 @@
 package businesslogic.strategybl;
 
+import java.net.MalformedURLException;
+import java.rmi.Naming;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
@@ -17,7 +20,7 @@ public class StubStrategyPool {
 	private ArrayList<StubLevelStrategy> alOfLevelStrategy=new ArrayList<StubLevelStrategy>();
 	private ArrayList<StubBarginStrategy> alOfBarginStrategy=new ArrayList<StubBarginStrategy>();
 	private ArrayList<StubReachStrategy> alOfReachStrategy=new ArrayList<StubReachStrategy>();
-	StrategySaverService ss=new StrategySaver();
+	//StrategySaverService ss=new StrategySaver();
 	/*构造函数*/
 	public StubStrategyPool(){
 	
@@ -170,6 +173,19 @@ public class StubStrategyPool {
 		//客户分层策略
 		ArrayList<LevelStrategyPO> LevelStrategyPOList = null;
 		try {
+			StrategySaverService ss = null;
+			try
+			{
+				ss = (StrategySaverService)Naming.lookup("rmi://127.0.0.1:1099/StrategySaver");
+			}
+			catch (MalformedURLException e)
+			{
+				e.printStackTrace();
+			}
+			catch (NotBoundException e)
+			{
+				e.printStackTrace();
+			}
 			LevelStrategyPOList = ss.getLevelStrategy();
 		} catch (RemoteException e) {
 			e.printStackTrace();
@@ -184,6 +200,19 @@ public class StubStrategyPool {
 		//特价包策略
 		ArrayList<BarginStrategyPO> BarginStrategyPOList = null;
 		try {
+			StrategySaverService ss = null;
+			try
+			{
+				ss = (StrategySaverService)Naming.lookup("rmi://127.0.0.1:1099/StrategySaver");
+			}
+			catch (MalformedURLException e)
+			{
+				e.printStackTrace();
+			}
+			catch (NotBoundException e)
+			{
+				e.printStackTrace();
+			}
 			BarginStrategyPOList = ss.getBarginStrategy();
 		} catch (RemoteException e) {
 			e.printStackTrace();
@@ -199,6 +228,19 @@ public class StubStrategyPool {
 		//满额促销策略
 		ArrayList<ReachStrategyPO> ReachStrategyPOList = null;
 		try {
+			StrategySaverService ss = null;
+			try
+			{
+				ss = (StrategySaverService)Naming.lookup("rmi://127.0.0.1:1099/StrategySaver");
+			}
+			catch (MalformedURLException e)
+			{
+				e.printStackTrace();
+			}
+			catch (NotBoundException e)
+			{
+				e.printStackTrace();
+			}
 			ReachStrategyPOList = ss.getReachStrategy();
 		} catch (RemoteException e) {
 			e.printStackTrace();
@@ -213,8 +255,24 @@ public class StubStrategyPool {
 	}
 	/*实时保存池中数组对象*/
 	public void save(){
-		StrategySaverService ss=new StrategySaver();
-		
+		//StrategySaverService ss=new StrategySaver();
+		StrategySaverService ss = null;
+		try
+		{
+			ss = (StrategySaverService)Naming.lookup("rmi://127.0.0.1:1099/StrategySaver");
+		}
+		catch (MalformedURLException e1)
+		{
+			e1.printStackTrace();
+		}
+		catch (RemoteException e1)
+		{
+			e1.printStackTrace();
+		}
+		catch (NotBoundException e1)
+		{
+			e1.printStackTrace();
+		}
 		//客户分层策略
 		ArrayList<LevelStrategyPO> LevelStrategyPO=new ArrayList<LevelStrategyPO>();
 		for(StubLevelStrategy temp:alOfLevelStrategy){//遍历数组，将对应PO对象加到新数组中

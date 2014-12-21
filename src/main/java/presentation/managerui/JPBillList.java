@@ -1,5 +1,8 @@
 package presentation.managerui;
 
+import java.net.MalformedURLException;
+import java.rmi.Naming;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
@@ -38,6 +41,7 @@ import businesslogicservice.managerblservice.StubManagerBlService;
 import businesslogicservice.salebillblservice.SaleBillBlService;
 import businesslogicservice.userblservice.StubUserBlService;
 import data.commoditydata.StubStockDataController;
+import dataservice.commoditydataservice.StubCommodityDataService;
 import entrance.Frame;
 
 public class JPBillList extends JPanel {
@@ -78,7 +82,22 @@ public class JPBillList extends JPanel {
 	public JPBillList(){
 		//逻辑层接口
 		StockManagerDriver smd=new StockManagerDriver();
-		smd.start(stockbl,StubStockDataController.getInstance());
+		try
+		{
+			smd.start(stockbl,(StubCommodityDataService)Naming.lookup("rmi://127.0.0.1:1099/StubStockDataController.getInstance()"));
+		}
+		catch (MalformedURLException e)
+		{
+			e.printStackTrace();
+		}
+		catch (RemoteException e)
+		{
+			e.printStackTrace();
+		}
+		catch (NotBoundException e)
+		{
+			e.printStackTrace();
+		}
 		//面板大小
 		this.setSize(261, 0);
 		//设置布局
@@ -276,27 +295,11 @@ public class JPBillList extends JPanel {
 	public void addCustomer(CustomerVO cs){
 		//调用逻辑层
 		boolean result = false;
-		try
-		{
-			result = customerbl.addCustomer(cs);
-		}
-		catch (RemoteException e1)
-		{
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+		result = customerbl.addCustomer(cs);
 		if(result){
 			//从逻辑层读取数据更新界面
 			JPbillList.clear();
-			try
-			{
-				this.addCustomerList(customerbl.getAllCustomer("Customer.txt"));
-			}
-			catch (RemoteException e)
-			{
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			this.addCustomerList(customerbl.getAllCustomer("Customer.txt"));
 		}
 		else{
 			frame.getWarning().showWarning("增加客户失败");
@@ -550,15 +553,7 @@ public class JPBillList extends JPanel {
 				if(result){
 					//从逻辑层读取数据更新界面
 					JPbillList.clear();
-					try
-					{
-						this.addCustomerList(customerbl.getAllCustomer("Customer.txt"));
-					}
-					catch (RemoteException e)
-					{
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+					this.addCustomerList(customerbl.getAllCustomer("Customer.txt"));
 				}
 				else{
 					
@@ -809,15 +804,7 @@ public class JPBillList extends JPanel {
 						//如果是客户
 						if(JPbillList.get(i).getCustomerVO()!=null){
 							boolean result = false;
-							try
-							{
-								result = customerbl.deleteCustomer(JPbillList.get(i).getCustomerVO().getid());
-							}
-							catch (RemoteException e)
-							{
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
+							result = customerbl.deleteCustomer(JPbillList.get(i).getCustomerVO().getid());
 						
 							if(result){
 								JPbillList.remove(i);
@@ -914,14 +901,12 @@ public class JPBillList extends JPanel {
 	public class TreadOfUp implements Runnable{
 
 		public void run() {
-			// TODO Auto-generated method stub
 			
 			while(!stop){
 				y-=10;
 				try {
 					Thread.sleep(50);
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				JPBillList.this.setLocation(0, y);
@@ -934,14 +919,12 @@ public class JPBillList extends JPanel {
 	public class TreadOfDown implements Runnable{
 
 		public void run() {
-			// TODO Auto-generated method stub
 			
 			while(!stop){
 				y+=10;
 				try {
 					Thread.sleep(50);
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				JPBillList.this.setLocation(0, y);

@@ -1,6 +1,12 @@
 package presentation;
 
 
+import java.net.MalformedURLException;
+import java.rmi.Naming;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+
+import dataservice.commoditydataservice.StubCommodityDataService;
 import presentation.commodityui.StockManagerDriver;
 import presentation.financialui.FinancialBLDriver;
 import presentation.managerui.ManagerBLDriver;
@@ -10,15 +16,13 @@ import businesslogic.managerbl.StubManager;
 import businesslogic.stockmanagerbl.StubStockController;
 import businesslogicservice.financialblservice.FinancialBlService;
 import businesslogicservice.managerblservice.StubManagerBlService;
-import data.commoditydata.StubStockDataController;
-import data.initial.Initial;
 
 public class StartUp {
 	public static void main(String args[])
 	{
-		Initial initial= new Initial();
-		initial.initialAll();
-		initial.initialTest();//向单据文件写入一些单据
+		//Initial initial= new Initial();
+		//initial.initialAll();
+		//initial.initialTest();//向单据文件写入一些单据
 		//总经理的驱动程序
 		StubManagerBlService manager = new StubManager();
 		ManagerBLDriver managerDriver = new ManagerBLDriver(manager);
@@ -29,9 +33,24 @@ public class StartUp {
 		driver.drive();
 		
 		//库存管理人员的启动程序
-		initial.initialStock();
+	//	initial.initialStock();
 		StockManagerDriver smd=new StockManagerDriver();
-		smd.start(new StubStockController(),StubStockDataController.getInstance());
+		try
+		{
+			smd.start(new StubStockController(),(StubCommodityDataService)Naming.lookup("rmi://127.0.0.1:1099/StubStockDataController.getInstance()"));
+		}
+		catch (MalformedURLException e)
+		{
+			e.printStackTrace();
+		}
+		catch (RemoteException e)
+		{
+			e.printStackTrace();
+		}
+		catch (NotBoundException e)
+		{
+			e.printStackTrace();
+		}
 			
 	}
 }

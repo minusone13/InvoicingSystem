@@ -91,15 +91,7 @@ public class JPfunctions extends JPanel{
 				//传入客户数据
 				frame.getSale().getCustomerManage().getBillsList().getJPbillList().clear();
 				frame.getSale().getCustomerManage().getBillsList().reHome();
-					try
-					{
-						frame.getSale().getCustomerManage().getBillsList().addCustomerList(customerbl.getAllCustomer("Customer.txt"));
-					}
-					catch (RemoteException e1)
-					{
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
+					frame.getSale().getCustomerManage().getBillsList().addCustomerList(customerbl.getAllCustomer("Customer.txt"));
 				//显示客户管理界面
 				frame.getSale().getCustomerManage().setVisible(true);
 				//标记当前面板，用于后退按钮

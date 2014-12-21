@@ -2,6 +2,10 @@ package presentation.commodityui;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.net.MalformedURLException;
+import java.rmi.Naming;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -18,6 +22,8 @@ import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeNode;
 
+import data.commoditydata.StubStockDataController;
+import dataservice.commoditydataservice.StubCommodityDataService;
 import po.RM;
 import vo.stockvo.CategoryVO;
 import vo.stockvo.CommodityVO;
@@ -25,7 +31,6 @@ import vo.stockvo.StockVO;
 import vo.stockvo.StockVO.Type;
 import businesslogic.stockmanagerbl.StubStockController;
 import businesslogicservice.commodityblservice.StubCommodityBlService;
-import data.commoditydata.StubStockDataController;
 
 public class JPtreeContent extends JPanel {
 
@@ -46,7 +51,24 @@ public class JPtreeContent extends JPanel {
 	public JPtreeContent(){
 		//逻辑层接口
 		StockManagerDriver smd=new StockManagerDriver();
-		smd.start(stockbl,StubStockDataController.getInstance());
+		
+		try
+		{
+			smd.start(stockbl,(StubCommodityDataService)Naming.lookup("rmi://127.0.0.1:1099/StubStockDataController.getInstance()"));
+		}
+		catch (MalformedURLException e)
+		{
+			e.printStackTrace();
+		}
+		catch (RemoteException e)
+		{
+			e.printStackTrace();
+		}
+		catch (NotBoundException e)
+		{
+			e.printStackTrace();
+		}
+		//学长你这里为什么要调用数据层！
 		
 		this.setSize(150, 350);
 		this.setLayout(null);

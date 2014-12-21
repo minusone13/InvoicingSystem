@@ -122,8 +122,6 @@ public class CustomerData extends UnicastRemoteObject implements CustomerDataSer
 		
 	}
 
-
-
 	public void saveCustomer(String address) throws RemoteException {
 		ArrayList<CustomerPO> listOfPO = null;
 		try {

@@ -1,5 +1,8 @@
 package businesslogic.customerbl;
 
+import java.net.MalformedURLException;
+import java.rmi.Naming;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
@@ -8,7 +11,6 @@ import businesslogicservice.customerblservice.CustomerBlService;
 import po.CustomerPO;
 import po.RM;
 import vo.CustomerVO;
-import data.customerdata.CustomerData;
 import dataservice.customerdataservice.CustomerDataService;
 
 public class CustomerList implements CustomerForFinancial, CustomerBlService{
@@ -21,7 +23,7 @@ public class CustomerList implements CustomerForFinancial, CustomerBlService{
 			Customer customer = new Customer(newCustomer);
 			CustomerPO po = customer.getPO();
 			try{
-				CustomerDataService customerdata = new CustomerData();
+				CustomerDataService customerdata = (CustomerDataService)Naming.lookup("rmi://127.0.0.1:1099/CustomerData");
 				return customerdata.addCustomer(po);}
 			catch(Exception e){
 				System.out.println("addCustomer 异常"+e);
@@ -31,7 +33,7 @@ public class CustomerList implements CustomerForFinancial, CustomerBlService{
 		
 		public boolean deleteCustomer(String id){
 			try{
-				CustomerDataService customerdata = new CustomerData();
+				CustomerDataService customerdata = (CustomerDataService)Naming.lookup("rmi://127.0.0.1:1099/CustomerData");
 				return customerdata.deleteCustomer(id);}
 			catch(Exception e){
 				System.out.println("deteleCustomer 异常");
@@ -39,12 +41,41 @@ public class CustomerList implements CustomerForFinancial, CustomerBlService{
 			return false;
 		}
 		
-		public CustomerVO findCustomer(String id) throws RemoteException{
+		public CustomerVO findCustomer(String id){
 			CustomerVO vo = new CustomerVO();
 			Customer newCustomer = new Customer();
 			
-				CustomerDataService customerdata = new CustomerData();
-				newCustomer.setPO(customerdata.findCustomer(id));//判断下是否存在，到时候再说吧。。
+				CustomerDataService customerdata = null;
+				try
+				{
+					 try
+					{
+						customerdata = (CustomerDataService)Naming.lookup("rmi://127.0.0.1:1099/CustomerData");
+					}
+					catch (MalformedURLException e)
+					{
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					catch (NotBoundException e)
+					{
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				catch (RemoteException e)
+				{
+
+					e.printStackTrace();
+				}
+				try
+				{
+					newCustomer.setPO(customerdata.findCustomer(id));
+				}
+				catch (RemoteException e)
+				{
+					e.printStackTrace();
+				}//判断下是否存在，到时候再说吧。。
 				vo=newCustomer.getVO();
 			return vo;
 		}
@@ -54,7 +85,7 @@ public class CustomerList implements CustomerForFinancial, CustomerBlService{
 			CustomerPO po = new CustomerPO();
 			po = newCustomer.getPO();
 			try{
-				CustomerDataService customerdata = new CustomerData();
+				CustomerDataService customerdata = (CustomerDataService)Naming.lookup("rmi://127.0.0.1:1099/CustomerData");
 				return customerdata.updateCustomer(po);}
 			catch(Exception e){
 				System.out.println("updateCustomer 异常");
@@ -65,7 +96,7 @@ public class CustomerList implements CustomerForFinancial, CustomerBlService{
 		public ArrayList<CustomerVO> getAllCustomer(String address){
 			ArrayList<CustomerVO> listOfCustomerVO = new ArrayList<CustomerVO>();
 			try{
-				CustomerDataService customerdata = new CustomerData();
+				CustomerDataService customerdata = (CustomerDataService)Naming.lookup("rmi://127.0.0.1:1099/CustomerData");
 				ArrayList<CustomerPO> listOfCustomerPO = customerdata.getAllCustomer(address);
 				if(listOfCustomerPO==null) return new ArrayList<CustomerVO>();
 				for(CustomerPO po: listOfCustomerPO){
@@ -96,7 +127,7 @@ public class CustomerList implements CustomerForFinancial, CustomerBlService{
 					listOfCustomerPO.add(po);
 				}
 				try{
-					CustomerDataService customerdata = new CustomerData();
+					CustomerDataService customerdata = (CustomerDataService)Naming.lookup("rmi://127.0.0.1:1099/CustomerData");
 					customerdata.saveAllCustomer(listOfCustomerPO,address);
 				}catch(Exception e){
 					System.out.println("saveAllCustomer 异常1");
@@ -104,7 +135,7 @@ public class CustomerList implements CustomerForFinancial, CustomerBlService{
 			}
 			else {
 				try{
-					CustomerDataService customerdata = new CustomerData();
+					CustomerDataService customerdata = (CustomerDataService)Naming.lookup("rmi://127.0.0.1:1099/CustomerData");
 					customerdata.saveAllCustomer(null,address);
 				}catch(Exception e){
 					System.out.println("saveAllCustomer 异常2");
@@ -116,15 +147,7 @@ public class CustomerList implements CustomerForFinancial, CustomerBlService{
 
 		public void changeShouldPay(String id, double hadPay) {
 			CustomerVO vo = null;
-			try
-			{
-				vo = this.findCustomer(id);
-			}
-			catch (RemoteException e)
-			{
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			vo = this.findCustomer(id);
 			vo.setShouldPay(vo.getShouldPay()-hadPay);
 			this.updateCustomer(vo);
 			
@@ -132,15 +155,7 @@ public class CustomerList implements CustomerForFinancial, CustomerBlService{
 
 		public void changeShouldTake(String id, double hadGive) {
 			CustomerVO vo = null;
-			try
-			{
-				vo = this.findCustomer(id);
-			}
-			catch (RemoteException e)
-			{
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			vo = this.findCustomer(id);
 			vo.setShouldTake(vo.getShouldTake()-hadGive);
 			this.updateCustomer(vo);
 			

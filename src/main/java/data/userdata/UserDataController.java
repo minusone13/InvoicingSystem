@@ -1,6 +1,8 @@
 package data.userdata;
 
 import java.io.*;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
 import dataservice.userdataservice.*;
@@ -8,12 +10,19 @@ import po.*;
 import po.userpo.OperationRecordPO;
 import po.userpo.UserPO;
 
-public class UserDataController implements StubUserDataService
+public class UserDataController extends UnicastRemoteObject implements StubUserDataService
 {
-	public static UserDataController getInstance()
+	public static UserDataController getInstance()throws RemoteException
 	{// 单体模式
 		if (instance == null)
-			instance = new UserDataController();
+			try
+			{
+				instance = new UserDataController();
+			}
+			catch (RemoteException e)
+			{
+				e.printStackTrace();
+			}
 		return instance;
 	}
 
@@ -21,18 +30,18 @@ public class UserDataController implements StubUserDataService
 	UserList l;
 	File f;
 
-	private UserDataController()
+	public UserDataController()throws RemoteException
 	{
 		read();
 	}
 
-	public int count(char c)
+	public int count(char c)throws RemoteException
 	{// 用于计算指定职务已有员工数量，便于逻辑层对新的员工生成ID
 		read();
 		return l.count(c);
 	}
 
-	public boolean delete(UserPO po)
+	public boolean delete(UserPO po)throws RemoteException
 	{
 		read();
 		boolean result = l.delete(po);
@@ -40,7 +49,7 @@ public class UserDataController implements StubUserDataService
 		return result;
 	}
 
-	public UserPO find(String account)
+	public UserPO find(String account)throws RemoteException
 	{// 通过账号查找一个用和
 		read();
 		UserPO po = l.find(account);
@@ -49,13 +58,13 @@ public class UserDataController implements StubUserDataService
 		return po.clone();
 	}
 
-	public ArrayList<OperationRecordPO> getRecords()
+	public ArrayList<OperationRecordPO> getRecords()throws RemoteException
 	{
 		read();
 		return l.getRecords();
 	}
 
-	public ArrayList<UserPO> getUsers()
+	public ArrayList<UserPO> getUsers()throws RemoteException
 	{
 		read();
 		ArrayList<UserPO> users = l.getUsers();
@@ -67,7 +76,7 @@ public class UserDataController implements StubUserDataService
 		return users;
 	}
 
-	public void initial()
+	public void initial()throws RemoteException
 	{
 		f = Tool.Opendoc(Tool.user);
 
@@ -112,7 +121,7 @@ public class UserDataController implements StubUserDataService
 		save();
 	}
 
-	public boolean insert(OperationRecordPO po)
+	public boolean insert(OperationRecordPO po)throws RemoteException
 	{// 插入关键操作记录
 		read();
 		boolean result = l.insert(po);
@@ -120,7 +129,7 @@ public class UserDataController implements StubUserDataService
 		return result;
 	}
 
-	public boolean insert(UserPO po)
+	public boolean insert(UserPO po)throws RemoteException
 	{// 插入一个用户（对应于增加用户）
 		read();
 		boolean result = l.insert(po);
@@ -128,13 +137,13 @@ public class UserDataController implements StubUserDataService
 		return result;
 	}
 
-	public UserPO login(String account, String password)
+	public UserPO login(String account, String password)throws RemoteException
 	{// 登陆函数，若用户名账户和密码正确，返回UserPO,里面指示了用户类型Role。登陆失败则返回NULL
 		read();
 		return l.login(account, password);
 	}
 
-	public void read()
+	public void read()throws RemoteException
 	{
 		f = Tool.Opendoc(Tool.user);
 
@@ -183,7 +192,7 @@ public class UserDataController implements StubUserDataService
 		}
 	}
 
-	public void save()
+	public void save()throws RemoteException
 	{
 		ObjectOutputStream oos = null;
 		try
@@ -220,7 +229,7 @@ public class UserDataController implements StubUserDataService
 		}
 	}
 
-	public boolean update(UserPO po)
+	public boolean update(UserPO po)throws RemoteException
 	{//简单的替换，也就是删除后增加
 		read();
 		boolean result = l.update(po);
@@ -228,7 +237,7 @@ public class UserDataController implements StubUserDataService
 		return result;
 	}
 
-	public RM updatePassword(UserPO po)
+	public RM updatePassword(UserPO po)throws RemoteException
 	{// 更改密码
 		read();
 		RM result = l.updatePassword(po);
