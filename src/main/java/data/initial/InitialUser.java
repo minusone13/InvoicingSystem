@@ -20,14 +20,6 @@ public class InitialUser
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		try
-		{
-			data.initial();
-		}
-		catch (RemoteException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		data.initial();
 	}
 }

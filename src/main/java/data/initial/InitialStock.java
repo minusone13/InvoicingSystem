@@ -20,14 +20,6 @@ public class InitialStock
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		try
-		{
-			data.Initial();
-		}
-		catch (RemoteException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		data.Initial();
 	}
 }
