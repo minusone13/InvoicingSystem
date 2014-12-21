@@ -954,7 +954,7 @@ public class StubCommodityList
 		StubCommodityDataService comdata = null;
 		try
 		{
-			comdata = (StubCommodityDataService)Naming.lookup("rmi://127.0.0.1:1099/CustomerData");
+			comdata = (StubCommodityDataService)Naming.lookup("rmi://127.0.0.1:1099/StubStockDataController");
 		}
 		catch (MalformedURLException e)
 		{
