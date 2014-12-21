@@ -62,6 +62,7 @@ public class JPmanageBills1  extends JPanel {
 		}
 		catch (RemoteException e)
 		{
+			System.out.println("库存管理人员接口异常");
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
