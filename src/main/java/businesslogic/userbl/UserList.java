@@ -16,9 +16,29 @@ import dataservice.userdataservice.*;
 
 public class UserList
 {
-	//static StubUserDataService data = UserDataController.getInstance();// need
-																		// to be
-																		// deleted
+	static StubUserDataService data = null;// need
+	static
+	{
+		try
+		{
+			data = (StubUserDataService) Naming.lookup("rmi://127.0.0.1:1099/UserDataController");
+		}
+		catch (MalformedURLException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		catch (RemoteException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		catch (NotBoundException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	String ID;// 自动生成
 	Role r;// 职务
 	String account;// 用于登陆的账号
@@ -27,23 +47,6 @@ public class UserList
 
 	public UserVO login(String account, String password)
 	{
-		StubUserDataService data = null;
-		try
-		{
-			data = (StubUserDataService)Naming.lookup("rmi://127.0.0.1:1099/UserDataController");
-		}
-		catch (MalformedURLException e)
-		{
-			e.printStackTrace();
-		}
-		catch (RemoteException e)
-		{
-			e.printStackTrace();
-		}
-		catch (NotBoundException e)
-		{
-			e.printStackTrace();
-		}
 		UserPO po = null;
 		try
 		{
@@ -51,6 +54,7 @@ public class UserList
 		}
 		catch (RemoteException e)
 		{
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		if (po == null)
@@ -60,23 +64,7 @@ public class UserList
 	}
 
 	public RM deleteUser(UserVO vo)
-	{	StubUserDataService data = null;
-	try
 	{
-		data = (StubUserDataService)Naming.lookup("rmi://127.0.0.1:1099/UserDataController");
-	}
-	catch (MalformedURLException e)
-	{
-		e.printStackTrace();
-	}
-	catch (RemoteException e)
-	{
-		e.printStackTrace();
-	}
-	catch (NotBoundException e)
-	{
-		e.printStackTrace();
-	}
 		try
 		{
 			if (data.find(vo.getAccount()) == null)
@@ -84,6 +72,7 @@ public class UserList
 		}
 		catch (RemoteException e)
 		{
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		boolean result = false;
@@ -93,6 +82,7 @@ public class UserList
 		}
 		catch (RemoteException e)
 		{
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		if (result == false)
@@ -102,23 +92,6 @@ public class UserList
 
 	public RM signUp(UserVO vo)
 	{
-		StubUserDataService data = null;
-		try
-		{
-			data = (StubUserDataService)Naming.lookup("rmi://127.0.0.1:1099/UserDataController");
-		}
-		catch (MalformedURLException e)
-		{
-			e.printStackTrace();
-		}
-		catch (RemoteException e)
-		{
-			e.printStackTrace();
-		}
-		catch (NotBoundException e)
-		{
-			e.printStackTrace();
-		}
 		try
 		{
 			if (data.find(vo.getAccount()) != null)
@@ -138,9 +111,10 @@ public class UserList
 		}
 		catch (RemoteException e)
 		{
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return null;
+		return RM.RMIError;
 	}
 
 	public String generateID(UserVO vo)
@@ -169,30 +143,14 @@ public class UserList
 			default:
 				return null;
 		}
-		StubUserDataService data = null;
-		try
-		{
-			data = (StubUserDataService)Naming.lookup("rmi://127.0.0.1:1099/UserDataController");
-		}
-		catch (MalformedURLException e)
-		{
-			e.printStackTrace();
-		}
-		catch (RemoteException e)
-		{
-			e.printStackTrace();
-		}
-		catch (NotBoundException e)
-		{
-			e.printStackTrace();
-		}
-		int x = 0;
+		int x=0;
 		try
 		{
 			x = data.count(c);
 		}
 		catch (RemoteException e)
 		{
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		x++;
@@ -203,23 +161,6 @@ public class UserList
 
 	public UserVO find(String account)
 	{
-		StubUserDataService data = null;
-		try
-		{
-			data = (StubUserDataService)Naming.lookup("rmi://127.0.0.1:1099/UserDataController");
-		}
-		catch (MalformedURLException e)
-		{
-			e.printStackTrace();
-		}
-		catch (RemoteException e)
-		{
-			e.printStackTrace();
-		}
-		catch (NotBoundException e)
-		{
-			e.printStackTrace();
-		}
 		UserPO po = null;
 		try
 		{
@@ -227,6 +168,7 @@ public class UserList
 		}
 		catch (RemoteException e)
 		{
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		if (po == null)
@@ -236,32 +178,16 @@ public class UserList
 
 	public RM changePassword(UserVO vo)
 	{
-		StubUserDataService data = null;
-		try
-		{
-			data = (StubUserDataService)Naming.lookup("rmi://127.0.0.1:1099/UserDataController");
-		}
-		catch (MalformedURLException e)
-		{
-			e.printStackTrace();
-		}
-		catch (RemoteException e)
-		{
-			e.printStackTrace();
-		}
-		catch (NotBoundException e)
-		{
-			e.printStackTrace();
-		}
 		User user = new User(vo);
 		user.setPassword(string2MD5(vo.getPassword()));
-		RM result = null;
+		RM result = RM.RMIError;
 		try
 		{
 			result = data.updatePassword(user.toPO());
 		}
 		catch (RemoteException e)
 		{
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return result;
@@ -287,29 +213,13 @@ public class UserList
 			return RM.unknownerror;
 		User user = new User(vo);
 		user.setID(s);
-		StubUserDataService data = null;
-		try
-		{
-			data = (StubUserDataService)Naming.lookup("rmi://127.0.0.1:1099/UserDataController");
-		}
-		catch (MalformedURLException e)
-		{
-			e.printStackTrace();
-		}
-		catch (RemoteException e)
-		{
-			e.printStackTrace();
-		}
-		catch (NotBoundException e)
-		{
-			e.printStackTrace();
-		}
 		try
 		{
 			data.insert(user.toPO());
 		}
 		catch (RemoteException e)
 		{
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return result;
@@ -317,31 +227,15 @@ public class UserList
 
 	public RM authorized(String account)
 	{
-		StubUserDataService data = null;
-		try
-		{
-			data = (StubUserDataService)Naming.lookup("rmi://127.0.0.1:1099/UserDataController");
-		}
-		catch (MalformedURLException e)
-		{
-			e.printStackTrace();
-		}
-		catch (RemoteException e)
-		{
-			e.printStackTrace();
-		}
-		catch (NotBoundException e)
-		{
-			e.printStackTrace();
-		}
 		UserPO po = null;
 		try
 		{
 			po = data.find(account);
 		}
-		catch (RemoteException e1)
+		catch (RemoteException e)
 		{
-			e1.printStackTrace();
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		if (po == null)
 			return RM.notfound;
@@ -353,6 +247,7 @@ public class UserList
 		}
 		catch (RemoteException e)
 		{
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		if (result)
@@ -363,31 +258,16 @@ public class UserList
 
 	public ArrayList<UserVO> showUsers()
 	{
-		StubUserDataService data = null;
-		try
-		{
-			data = (StubUserDataService)Naming.lookup("rmi://127.0.0.1:1099/UserDataController");
-		}
-		catch (MalformedURLException e)
-		{
-			e.printStackTrace();
-		}
-		catch (RemoteException e)
-		{
-			e.printStackTrace();
-		}
-		catch (NotBoundException e)
-		{
-			e.printStackTrace();
-		}
-		ArrayList<UserPO> users = null;
+		ArrayList<UserPO> users;
 		try
 		{
 			users = data.getUsers();
 		}
 		catch (RemoteException e)
 		{
+			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return null;
 		}
 		ArrayList<UserVO> result = new ArrayList<UserVO>();
 		for (int i = 0; i < users.size(); i++)
@@ -401,31 +281,16 @@ public class UserList
 
 	public ArrayList<OperationRecordVO> showRecords()
 	{
-		StubUserDataService data = null;
-		try
-		{
-			data = (StubUserDataService)Naming.lookup("rmi://127.0.0.1:1099/UserDataController");
-		}
-		catch (MalformedURLException e)
-		{
-			e.printStackTrace();
-		}
-		catch (RemoteException e)
-		{
-			e.printStackTrace();
-		}
-		catch (NotBoundException e)
-		{
-			e.printStackTrace();
-		}
-		ArrayList<OperationRecordPO> records = null;
+		ArrayList<OperationRecordPO> records;
 		try
 		{
 			records = data.getRecords();
 		}
 		catch (RemoteException e)
 		{
+			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return null;
 		}
 		ArrayList<OperationRecordVO> result = new ArrayList<OperationRecordVO>();
 		for (int i = 0; i < records.size(); i++)
@@ -438,29 +303,13 @@ public class UserList
 
 	public boolean addRecord(OperationRecord op)
 	{
-		StubUserDataService data = null;
-		try
-		{
-			data = (StubUserDataService)Naming.lookup("rmi://127.0.0.1:1099/UserDataController");
-		}
-		catch (MalformedURLException e1)
-		{
-			e1.printStackTrace();
-		}
-		catch (RemoteException e1)
-		{
-			e1.printStackTrace();
-		}
-		catch (NotBoundException e1)
-		{
-			e1.printStackTrace();
-		}
 		try
 		{
 			return data.insert(op.toPO());
 		}
 		catch (RemoteException e)
 		{
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return false;
@@ -506,38 +355,18 @@ public class UserList
 	}
 
 	public void setdataobject(StubUserDataService data)
-	{		
-		//不会不会;
-		//this.data = data;
+	{
+		this.data = data;
 	}
 
 	public static StubUserDataService getData()
 	{
-		StubUserDataService data = null;
-		try
-		{
-			data = (StubUserDataService)Naming.lookup("rmi://127.0.0.1:1099/UserDataController");
-		}
-		catch (MalformedURLException e)
-		{
-			e.printStackTrace();
-		}
-		catch (RemoteException e)
-		{
-			e.printStackTrace();
-		}
-		catch (NotBoundException e)
-		{
-			e.printStackTrace();
-		}
 		return data;
 	}
 
 	public static void setData(StubUserDataService data)
 	{
-		///我又不会改了
-		//StubUserDataService data = (StubUserDataService)Naming.lookup("rmi://127.0.0.1:1099/UserDataController");
-		//UserList.data = data;
+		UserList.data = data;
 	}
 
 	public String getID()
