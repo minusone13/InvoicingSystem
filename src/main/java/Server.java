@@ -45,7 +45,7 @@ public class Server
 			Naming.bind("rmi://127.0.0.1:1099/StubStockDataController",commoditydata);
 			Naming.bind("rmi://127.0.0.1:1099/StrategySaver",strategysaver);
 			Naming.bind("rmi://127.0.0.1:1099/UserDataController",userdatacontroller);
-			
+			System.out.println("服务器启动完成");
 		}
 		catch (RemoteException e)
 		{
