@@ -13,6 +13,7 @@ import javax.swing.table.DefaultTableModel;
 
 import businesslogic.financialbl.Financial;
 import businesslogicservice.financialblservice.FinancialBlService;
+import tool.Export;
 import vo.AlertBillVO;
 import vo.GiftBillVO;
 import vo.PurBackSheetVO;
@@ -127,26 +128,242 @@ public class BusinessProcessPanel extends JPanel{
 	public void export(int choose) {
 		if(choose==1) {
 			int size = table1.getRowCount();
+			int size1 = receipt.size();
+			
 			String[][] data = new String[size+1][];
-			String[] names = {"单据编号","客户","操作员","总额汇总","单据状态","银行账户","金额","备注"};
+			String[] names = {"单据编号","客户","操作员","总额汇总","单据状态","转账列表"};
 			data[0] = names;	
+			
+			for(int i=0;i<size1;i++) {
+				ReceiptVO vo = receipt.get(i);
+    			ArrayList<String> accounts = vo.getAccounts();
+    			ArrayList<Double> money = vo.getMoney();
+    			ArrayList<String> remark = vo.getRemark();
+				
+    			String acc = "";
+    			int sizeOfacc = accounts.size();
+    			for(int j=0;j<sizeOfacc;j++) {
+    				acc = acc+accounts.get(j)+"，";
+    				acc = acc+money.get(j).toString()+"，";
+    				acc = acc+remark.get(j)+"；";
+    			}
+    			String[] temp = {table1.getValueAt(i, 0).toString(), table1.getValueAt(i, 1).toString(),
+						 table1.getValueAt(i, 2).toString(),table1.getValueAt(i, 3).toString(), 
+						 table1.getValueAt(i, 4).toString(), acc};
+				
+				 data[i+1] = temp;
+			 }
+			for(int i=size1;i<size;i++) {
+				PaymentVO vo = payment.get(i);
+    			ArrayList<String> accounts = vo.getAccounts();
+    			ArrayList<Double> money = vo.getMoney();
+    			ArrayList<String> remark = vo.getRemark();
+    			String acc = "";
+    			int sizeOfacc = accounts.size();
+    			for(int j=0;j<sizeOfacc;j++) {
+    				acc = acc+accounts.get(j)+"，";
+    				acc = acc+money.get(j).toString()+"，";
+    				acc = acc+remark.get(j)+"；";
+    			}
+    			String[] temp = {table1.getValueAt(i, 0).toString(), table1.getValueAt(i, 1).toString(),
+						 table1.getValueAt(i, 2).toString(),table1.getValueAt(i, 3).toString(), 
+						 table1.getValueAt(i, 4).toString(), acc};
+				
+				 data[i+1] = temp;
+			 }
+			new Export("经营历程表--付款收款单",data);
 		} else if(choose == 2) {
 			int size = table1.getRowCount();
 			String[][] data = new String[size+1][];
-			String[] names = {"单据编号","银行账户","操作员","总额汇总","单据状态","条目名","金额","备注"};
-			data[0] = names;	
+			String[] names = {"单据编号","银行账户","操作员","总额汇总","单据状态","条目清单"};
+			data[0] = names;
+			
+			
+			for(int i=0;i<size;i++) {
+				CashPaymentVO vo = cashPayment.get(i);
+    			ArrayList<String> item = vo.getItem();
+    			ArrayList<Double> money = vo.getMoney();
+    			ArrayList<String> remark = vo.getRemark();
+    			String ite = "";
+    			int sizeOfitem = item.size();
+    			for(int j=0;j<sizeOfitem;j++) {
+    				ite = ite+item.get(j)+"，";
+    				ite = ite+money.get(j).toString()+"，";
+    				ite = ite+remark.get(j)+"；";
+    			}
+				String[] temp = {table1.getValueAt(i, 0).toString(), table1.getValueAt(i, 1).toString(),
+						 table1.getValueAt(i, 2).toString(),table1.getValueAt(i, 3).toString(), 
+						 table1.getValueAt(i, 4).toString(), ite};
+				
+				 data[i+1] = temp;
+			 }
+			new Export("经营历程表--现金费用单",data);
 		} else if(choose == 3) {
 			int size = table1.getRowCount();
+			int size1 = purSheet.size();
 			String[][] data = new String[size+1][];
-			String[] names = {"单据编号","供应商","仓库","操作员","备注","总额合计","单据状态","商品编号",
-					"名称","型号","数量","单价","金额","备注"};
+			String[] names = {"单据编号","供应商","仓库","操作员","备注","总额合计","单据状态","商品清单"};
 			data[0] = names;
+			
+			for(int i=0;i<size1;i++) {
+				PurSheetVO vo = purSheet.get(i);
+				
+				ArrayList<CommodityVO> com = vo.getsheet();
+				ArrayList<String> commoditywords = vo.getcommoditywords();
+				int sizeOfcom = com.size();
+				String comList = "";
+				for(int j=0;j<sizeOfcom;j++) {
+					
+					CommodityVO comVO = com.get(j);
+					comList = comList+ comVO.getId()+"，";
+					comList = comList+ comVO.getName()+"，";
+					comList = comList+ comVO.getModel()+"，";
+					comList = comList+ comVO.getNumber()+"，";
+					comList = comList+ comVO.getNumber()*comVO.getLastin()+"，";
+					comList = comList+ commoditywords.get(j)+"；";
+				}
+				 
+				String[] temp = {table1.getValueAt(i, 0).toString(), table1.getValueAt(i, 1).toString(),
+						 table1.getValueAt(i, 2).toString(),table1.getValueAt(i, 3).toString(), 
+						 table1.getValueAt(i, 4).toString(), table1.getValueAt(i, 5).toString(),
+						 table1.getValueAt(i, 6).toString(), comList};
+				
+				 data[i+1] = temp;
+			 }
+			
+			for(int i=size1;i<size;i++) {
+				PurBackSheetVO vo = purBackSheet.get(i);
+				
+				ArrayList<CommodityVO> com = vo.getsheet();
+				ArrayList<String> commoditywords = vo.getcommoditywords();
+				int sizeOfcom = com.size();
+				String comList = "";
+				for(int j=0;j<sizeOfcom;j++) {
+					
+					CommodityVO comVO = com.get(j);
+					comList = comList+ comVO.getId()+"，";
+					comList = comList+ comVO.getName()+"，";
+					comList = comList+ comVO.getModel()+"，";
+					comList = comList+ comVO.getNumber()+"，";
+					comList = comList+ comVO.getNumber()*comVO.getLastin()+"，";
+					comList = comList+ commoditywords.get(j)+"；";
+				}
+				 
+				String[] temp = {table1.getValueAt(i, 0).toString(), table1.getValueAt(i, 1).toString(),
+						 table1.getValueAt(i, 2).toString(),table1.getValueAt(i, 3).toString(), 
+						 table1.getValueAt(i, 4).toString(), table1.getValueAt(i, 5).toString(),
+						 table1.getValueAt(i, 6).toString(), comList};
+				
+				 data[i+1] = temp;
+			 }
+			new Export("经营历程表--进货类单据",data);
 		} else if(choose == 4) {
+			
 			int size = table1.getRowCount();
+			int size1 = saleSheet.size();
 			String[][] data = new String[size+1][];
 			String[] names = {"单据编号","客户","业务员","操作员","仓库","折让前总额","折让","代金券",
-					"折让后总额","备注","单据状态","商品编号","名称","型号","数量","单价","金额","备注"};
+					"折让后总额","备注","单据状态","商品清单"};
 			data[0] = names;
+			for(int i=0;i<size1;i++) {
+				SaleSheetVO vo = saleSheet.get(i);
+				
+				ArrayList<CommodityVO> com = vo.getsheet();
+				ArrayList<String> commoditywords = vo.getcommoditywords();
+				int sizeOfcom = com.size();
+				String comList = "";
+				for(int j=0;j<sizeOfcom;j++) {
+					
+					CommodityVO comVO = com.get(j);
+					comList = comList+ comVO.getId()+"，";
+					comList = comList+ comVO.getName()+"，";
+					comList = comList+ comVO.getModel()+"，";
+					comList = comList+ comVO.getNumber()+"，";
+					comList = comList+ comVO.getNumber()*comVO.getLastin()+"，";
+					comList = comList+ commoditywords.get(j)+"；";
+				}
+				 
+				String[] temp = {table1.getValueAt(i, 0).toString(), table1.getValueAt(i, 1).toString(),
+						 table1.getValueAt(i, 2).toString(),table1.getValueAt(i, 3).toString(), 
+						 table1.getValueAt(i, 4).toString(), table1.getValueAt(i, 5).toString(),
+						 table1.getValueAt(i, 6).toString(), table1.getValueAt(i, 7).toString(),
+						 table1.getValueAt(i, 8).toString(),table1.getValueAt(i, 9).toString(),
+						 table1.getValueAt(i, 10).toString(),comList};
+				
+				 data[i+1] = temp;
+			 }
+			
+			for(int i=size1;i<size;i++) {
+				PurBackSheetVO vo = purBackSheet.get(i);
+				
+				ArrayList<CommodityVO> com = vo.getsheet();
+				ArrayList<String> commoditywords = vo.getcommoditywords();
+				int sizeOfcom = com.size();
+				String comList = "";
+				for(int j=0;j<sizeOfcom;j++) {
+					
+					CommodityVO comVO = com.get(j);
+					comList = comList+ comVO.getId()+"，";
+					comList = comList+ comVO.getName()+"，";
+					comList = comList+ comVO.getModel()+"，";
+					comList = comList+ comVO.getNumber()+"，";
+					comList = comList+ comVO.getNumber()*comVO.getLastin()+"，";
+					comList = comList+ commoditywords.get(j)+"；";
+				}
+				 
+				String[] temp = {table1.getValueAt(i, 0).toString(), table1.getValueAt(i, 1).toString(),
+						 table1.getValueAt(i, 2).toString(),table1.getValueAt(i, 3).toString(), 
+						 table1.getValueAt(i, 4).toString(), table1.getValueAt(i, 5).toString(),
+						 table1.getValueAt(i, 6).toString(), table1.getValueAt(i, 7).toString(),
+						 table1.getValueAt(i, 8).toString(),table1.getValueAt(i, 9).toString(),
+						 table1.getValueAt(i, 10).toString(),comList};
+				
+				 data[i+1] = temp;
+			 }
+			new Export("经营历程表--销售类单据",data);
+		} else if(choose == 5) {
+			int size = table1.getRowCount();		
+			String[][] data = new String[size+1][];
+			String[] names = {"单据编号","操作员","单据状态","商品组合"};
+			data[0] = names;
+			for(int i=0;i<size;i++) {
+				GiftBillVO vo = gift.get(i);
+				ArrayList<CommodityVO> com = vo.getComs();
+				int sizeOfcom = com.size();
+				String comList = "";
+				for(int j=0;j<sizeOfcom;j++) {
+					
+					CommodityVO comVO = com.get(j);				
+					comList = comList+ comVO.getName()+"，";
+					comList = comList+ comVO.getModel()+"，";
+					comList = comList+ comVO.getNumber()+"；";
+						
+				}
+				 
+				String[] temp = {table1.getValueAt(i, 0).toString(), table1.getValueAt(i, 1).toString(),
+						 table1.getValueAt(i, 2).toString(), comList};
+				
+				 data[i+1] = temp;
+			 }
+			new Export("经营历程表--赠送单",data);
+		} else if(choose == 6) {
+			int size = table1.getRowCount();
+			String[][] data = new String[size+1][];
+			String[] names = {"单据编号","商品名","类型","数量"};
+			data[0] = names;
+			
+			for(int i=0;i<size;i++) {
+				GiftBillVO vo = gift.get(i);
+				ArrayList<CommodityVO> com = vo.getComs();
+				int sizeOfcom = com.size();
+			
+				 
+				String[] temp = {table1.getValueAt(i, 0).toString(), table1.getValueAt(i, 1).toString(),
+						 table1.getValueAt(i, 2).toString(),table1.getValueAt(i, 3).toString()};
+				
+				 data[i+1] = temp;
+			 }
+			new Export("经营历程表--库存类单据",data);
 		}
 	}
 	public void updateTable1(int choose, InquiryProcessVO ipv){
@@ -369,15 +586,15 @@ public class BusinessProcessPanel extends JPanel{
     		if(index<size1) {
     			PurSheetVO vo = purSheet.get(index);
     			ArrayList<CommodityVO> sheet = vo.getsheet();
-    			
+    			ArrayList<String> commoditywords = vo.getcommoditywords();
     			int size = sheet.size();
     			Object[][] data = new Object[size][];
-    			
     			for(int i = 0;i<size;i++) {
     				CommodityVO tempCom = sheet.get(i);
     				Object[] temp  = {tempCom.getId(), tempCom.getName(), 
     						tempCom.getModel(), tempCom.getNumber(), 
-    						vo.getmoney1() , vo.getwords()};
+    						tempCom.getLastin(), tempCom.getLastin()*tempCom.getNumber() ,
+    						commoditywords.get(i)};
     				data[i] = temp;
     			} 
     			model2.setDataVector(data, columnNames3s);
@@ -386,7 +603,7 @@ public class BusinessProcessPanel extends JPanel{
     			index = index-size1;
     			PurBackSheetVO vo = purBackSheet.get(index);
     			ArrayList<CommodityVO> sheet = vo.getsheet();
-    			
+    			ArrayList<String> commoditywords = vo.getcommoditywords();
     			int size = sheet.size();
     			Object[][] data = new Object[size][];
     			
@@ -394,7 +611,8 @@ public class BusinessProcessPanel extends JPanel{
     				CommodityVO tempCom = sheet.get(i);
     				Object[] temp  = {tempCom.getId(), tempCom.getName(), 
     						tempCom.getModel(), tempCom.getNumber(), 
-    						vo.getmoney1() , vo.getwords()};
+    						tempCom.getLastin(), tempCom.getLastin()*tempCom.getNumber() ,
+    						commoditywords.get(i)};
     				data[i] = temp;
     			}
     			model2.setDataVector(data, columnNames3s);
@@ -409,7 +627,7 @@ public class BusinessProcessPanel extends JPanel{
     		if(index<size1) {
     			SaleSheetVO vo = saleSheet.get(index);
     			ArrayList<CommodityVO> sheet = vo.getsheet();
-    			
+    			ArrayList<String> commoditywords = vo.getcommoditywords();
     			int size = sheet.size();
     			Object[][] data = new Object[size][];
     			
@@ -417,7 +635,8 @@ public class BusinessProcessPanel extends JPanel{
     				CommodityVO tempCom = sheet.get(i);
     				Object[] temp  = {tempCom.getId(), tempCom.getName(), 
     						tempCom.getModel(), tempCom.getNumber(), 
-    						vo.getmoney1() , vo.getwords()};
+    						tempCom.getLastout(), tempCom.getNumber()*tempCom.getLastout() ,
+    						commoditywords.get(i)};
     				data[i] = temp;
     			} 
     			model2.setDataVector(data, columnNames4s);
@@ -426,7 +645,7 @@ public class BusinessProcessPanel extends JPanel{
     			index = index-size1;
     			SaleBackSheetVO vo = saleBackSheet.get(index);
     			ArrayList<CommodityVO> sheet = vo.getsheet();
-    			
+    			ArrayList<String> commoditywords = vo.getcommoditywords();
     			int size = sheet.size();
     			Object[][] data = new Object[size][];
     			
@@ -434,7 +653,8 @@ public class BusinessProcessPanel extends JPanel{
     				CommodityVO tempCom = sheet.get(i);
     				Object[] temp  = {tempCom.getId(), tempCom.getName(), 
     						tempCom.getModel(), tempCom.getNumber(), 
-    						vo.getmoney1() , vo.getwords()};
+    						tempCom.getLastout(), tempCom.getNumber()*tempCom.getLastout() , 
+    						commoditywords.get(i)};
     				data[i] = temp;
     			}
     			model2.setDataVector(data, columnNames4s);
