@@ -54,7 +54,7 @@ public class JPtreeContent extends JPanel {
 		
 		try
 		{
-			smd.start(stockbl,(StubCommodityDataService)Naming.lookup("rmi://127.0.0.1:1099/StubStockDataController.getInstance()"));
+			smd.start(stockbl,(StubCommodityDataService)Naming.lookup("rmi://127.0.0.1:1099/StubStockDataController"));
 		}
 		catch (MalformedURLException e)
 		{

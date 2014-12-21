@@ -29,8 +29,6 @@ import businesslogicservice.managerblservice.StubManagerBlService;
 import businesslogicservice.salebillblservice.SaleBillBlService;
 
 public class salebillController implements SaleBillBlService,salebillForFinancial{
-		salebillList salebilllist;
-		//我来试一试push;
 		
 		// salebillsaversevvice中有getall的方法；
 		public salebillController(){

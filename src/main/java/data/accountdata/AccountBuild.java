@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -21,13 +22,13 @@ import data.stockservice.StockDataForFinancial;
 import dataservice.accountdataservice.AccountBuildService;
 import dataservice.accountdataservice.AccountDataService;
 
-public class AccountBuild implements AccountBuildService{
+public class AccountBuild extends UnicastRemoteObject implements AccountBuildService{
 	String version=null;
-	public AccountBuild() {
+	public AccountBuild() throws RemoteException{
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");//change yyyy/MM/dd to this by lhw
 		version = format.format(new Date());
 	}
-	public void saveAccount() {
+	public void saveAccount() throws RemoteException{
 		AccountDataService a = null;
 		try {
 			a = new AccountData();
@@ -42,7 +43,7 @@ public class AccountBuild implements AccountBuildService{
 		
 	}
 	
-	public void saveCommodity() {
+	public void saveCommodity()throws RemoteException {
 		StockDataForFinancial sd = null;
 		try
 		{
@@ -69,7 +70,7 @@ public class AccountBuild implements AccountBuildService{
 		cff.saveCustomer("accountBuild\\customerInfo\\"+version+".ser");
 	}
 	
-	public void saveVersion() {
+	public void saveVersion()throws RemoteException {
 		ArrayList<String> versions = getVersion();
 		if(versions==null) versions = new ArrayList<String>();
 		int size = versions.size();
@@ -103,7 +104,7 @@ public class AccountBuild implements AccountBuildService{
 		}
 	} 
 	
-	public ArrayList<String> getVersion() {
+	public ArrayList<String> getVersion() throws RemoteException{
 		File filename = Tool.Opendoc("version.ser");
 		
 		ArrayList<String> versions = null;
@@ -129,7 +130,7 @@ public class AccountBuild implements AccountBuildService{
 		else return null;
 	}
 	
-	public ArrayList<AccountPO> getAccount(String version) {
+	public ArrayList<AccountPO> getAccount(String version)throws RemoteException {
 		File filename = Tool.Opendoc("accountBuild\\accountInfo\\"+version+".ser");
 		
 		ArrayList<AccountPO> accountList = null;

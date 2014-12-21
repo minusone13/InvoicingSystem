@@ -6,7 +6,6 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-import data.accountdata.AccountBuild;
 import dataservice.accountdataservice.AccountBuildService;
 import dataservice.accountdataservice.AccountDataService;
 import businesslogic.commoditybl.StubCommodityList;
@@ -187,7 +186,19 @@ public class AccountList {
 	}
 	
 	public void buildAccount() throws RemoteException {		
-		AccountBuildService build = new AccountBuild();
+		AccountBuildService build = null;
+		try
+		{
+			build = (AccountBuildService)Naming.lookup("rmi://127.0.0.1:1099/AccountBuild");
+		}
+		catch (MalformedURLException e)
+		{
+			e.printStackTrace();
+		}
+		catch (NotBoundException e)
+		{
+			e.printStackTrace();
+		}
 		build.saveCommodity();
 		build.saveAccount();
 		build.saveCustomer();
@@ -195,16 +206,65 @@ public class AccountList {
 	}
 	
 	public ArrayList<String> getVersions() {
-		AccountBuildService build = new AccountBuild();
-		return build.getVersion();
+		AccountBuildService build = null;
+		try
+		{
+			build = (AccountBuildService)Naming.lookup("rmi://127.0.0.1:1099/AccountBuild");
+		}
+		catch (MalformedURLException e)
+		{
+			e.printStackTrace();
+		}
+		catch (RemoteException e)
+		{
+			e.printStackTrace();
+		}
+		catch (NotBoundException e)
+		{
+			e.printStackTrace();
+		}
+		try
+		{
+			return build.getVersion();
+		}
+		catch (RemoteException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 	public ArrayList<CustomerVO> getOldCustomersInfo(String version) {
 		CustomerForFinancial cff = new CustomerList();
 		return cff.getCustomer(version);
 	}
 	public ArrayList<AccountVO> getOldAccountsInfo(String version) {
-		AccountBuildService build = new AccountBuild();
-		ArrayList<AccountPO> accountsPO = build.getAccount(version);
+		AccountBuildService build = null;
+		try
+		{
+			build = (AccountBuildService)Naming.lookup("rmi://127.0.0.1:1099/AccountBuild");
+		}
+		catch (MalformedURLException e)
+		{
+			e.printStackTrace();
+		}
+		catch (RemoteException e)
+		{
+			e.printStackTrace();
+		}
+		catch (NotBoundException e)
+		{
+			e.printStackTrace();
+		}
+		ArrayList<AccountPO> accountsPO = null;
+		try
+		{
+			accountsPO = build.getAccount(version);
+		}
+		catch (RemoteException e)
+		{
+			e.printStackTrace();
+		}
 		ArrayList<AccountVO> accountsVO = new ArrayList<AccountVO>();
 		int size = accountsPO.size();
 		for(int i=0;i<size;i++) {

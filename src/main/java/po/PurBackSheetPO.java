@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import po.stockpo.CommodityPO;
-import businesslogic.commoditybl.MockCommodity;
-import businesslogic.customerbl.Customer;
 
 public class PurBackSheetPO extends PO implements Serializable{
 	CustomerPO customer;
