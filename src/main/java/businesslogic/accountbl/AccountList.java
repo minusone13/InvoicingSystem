@@ -223,7 +223,16 @@ public class AccountList {
 		{
 			e.printStackTrace();
 		}
-		return build.getVersion();
+		try
+		{
+			return build.getVersion();
+		}
+		catch (RemoteException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 	public ArrayList<CustomerVO> getOldCustomersInfo(String version) {
 		CustomerForFinancial cff = new CustomerList();
@@ -247,7 +256,15 @@ public class AccountList {
 		{
 			e.printStackTrace();
 		}
-		ArrayList<AccountPO> accountsPO = build.getAccount(version);
+		ArrayList<AccountPO> accountsPO = null;
+		try
+		{
+			accountsPO = build.getAccount(version);
+		}
+		catch (RemoteException e)
+		{
+			e.printStackTrace();
+		}
 		ArrayList<AccountVO> accountsVO = new ArrayList<AccountVO>();
 		int size = accountsPO.size();
 		for(int i=0;i<size;i++) {

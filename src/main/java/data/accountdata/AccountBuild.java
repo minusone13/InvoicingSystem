@@ -28,7 +28,7 @@ public class AccountBuild extends UnicastRemoteObject implements AccountBuildSer
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");//change yyyy/MM/dd to this by lhw
 		version = format.format(new Date());
 	}
-	public void saveAccount() {
+	public void saveAccount() throws RemoteException{
 		AccountDataService a = null;
 		try {
 			a = new AccountData();
@@ -43,7 +43,7 @@ public class AccountBuild extends UnicastRemoteObject implements AccountBuildSer
 		
 	}
 	
-	public void saveCommodity() {
+	public void saveCommodity()throws RemoteException {
 		StockDataForFinancial sd = null;
 		try
 		{
@@ -70,7 +70,7 @@ public class AccountBuild extends UnicastRemoteObject implements AccountBuildSer
 		cff.saveCustomer("accountBuild\\customerInfo\\"+version+".ser");
 	}
 	
-	public void saveVersion() {
+	public void saveVersion()throws RemoteException {
 		ArrayList<String> versions = getVersion();
 		if(versions==null) versions = new ArrayList<String>();
 		int size = versions.size();
@@ -104,7 +104,7 @@ public class AccountBuild extends UnicastRemoteObject implements AccountBuildSer
 		}
 	} 
 	
-	public ArrayList<String> getVersion() {
+	public ArrayList<String> getVersion() throws RemoteException{
 		File filename = Tool.Opendoc("version.ser");
 		
 		ArrayList<String> versions = null;
@@ -130,7 +130,7 @@ public class AccountBuild extends UnicastRemoteObject implements AccountBuildSer
 		else return null;
 	}
 	
-	public ArrayList<AccountPO> getAccount(String version) {
+	public ArrayList<AccountPO> getAccount(String version)throws RemoteException {
 		File filename = Tool.Opendoc("accountBuild\\accountInfo\\"+version+".ser");
 		
 		ArrayList<AccountPO> accountList = null;
