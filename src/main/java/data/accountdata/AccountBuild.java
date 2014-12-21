@@ -18,16 +18,17 @@ import data.commoditydata.StubStockDataController;
 import data.customerServiceForFinancial.customerServiceForFinancial;
 import data.customerdata.CustomerData;
 import data.stockservice.StockDataForFinancial;
-import dataservice.accountdataservice.StubAccountDataService;
+import dataservice.accountdataservice.AccountBuildService;
+import dataservice.accountdataservice.AccountDataService;
 
-public class AccountBuild{
+public class AccountBuild implements AccountBuildService{
 	String version=null;
 	public AccountBuild() {
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");//change yyyy/MM/dd to this by lhw
 		version = format.format(new Date());
 	}
 	public void saveAccount() {
-		StubAccountDataService a = null;
+		AccountDataService a = null;
 		try {
 			a = new AccountData();
 		} catch (RemoteException e) {

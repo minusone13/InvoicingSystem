@@ -8,7 +8,7 @@ import po.AccountPO;
 
 
 
-public interface StubAccountDataService extends Remote{
+public interface AccountDataService extends Remote{
 	public AccountPO find(AccountPO a) throws RemoteException;
 	
 	public boolean add(AccountPO a) throws RemoteException;

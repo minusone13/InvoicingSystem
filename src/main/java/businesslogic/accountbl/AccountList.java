@@ -7,7 +7,8 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import data.accountdata.AccountBuild;
-import dataservice.accountdataservice.StubAccountDataService;
+import dataservice.accountdataservice.AccountBuildService;
+import dataservice.accountdataservice.AccountDataService;
 import businesslogic.commoditybl.StubCommodityList;
 import businesslogic.customerService.CustomerForFinancial;
 import businesslogic.customerbl.CustomerList;
@@ -21,11 +22,11 @@ public class AccountList {
 	
 
 	public boolean addAccount(Account account) {
-		StubAccountDataService a = null;
+		AccountDataService a = null;
 		try {
 			try
 			{
-				a = (StubAccountDataService)Naming.lookup("rmi://127.0.0.1:1099/AccountData");
+				a = (AccountDataService)Naming.lookup("rmi://127.0.0.1:1099/AccountData");
 			}
 			catch (MalformedURLException e)
 			{
@@ -52,11 +53,11 @@ public class AccountList {
 	}
 	
 	public boolean deleteAccount(Account account) {
-		StubAccountDataService a = null;
+		AccountDataService a = null;
 		try {
 			try
 			{
-				a = (StubAccountDataService)Naming.lookup("rmi://127.0.0.1:1099/AccountData");
+				a = (AccountDataService)Naming.lookup("rmi://127.0.0.1:1099/AccountData");
 			}
 			catch (MalformedURLException e)
 			{
@@ -82,11 +83,11 @@ public class AccountList {
 	}
 	
 	public boolean updateAccount(Account account, String newname) {
-		StubAccountDataService a = null;
+		AccountDataService a = null;
 		try {
 			try
 			{
-				a = (StubAccountDataService)Naming.lookup("rmi://127.0.0.1:1099/AccountData");
+				a = (AccountDataService)Naming.lookup("rmi://127.0.0.1:1099/AccountData");
 			}
 			catch (MalformedURLException e)
 			{
@@ -113,11 +114,11 @@ public class AccountList {
 	}
 	
 	public ArrayList<AccountVO> fuzzyFindAccount(String s, int precision) {
-		StubAccountDataService a = null;
+		AccountDataService a = null;
 		try {
 			try
 			{
-				a = (StubAccountDataService)Naming.lookup("rmi://127.0.0.1:1099/AccountData");
+				a = (AccountDataService)Naming.lookup("rmi://127.0.0.1:1099/AccountData");
 			}
 			catch (MalformedURLException e)
 			{
@@ -150,11 +151,11 @@ public class AccountList {
 		return accountVOList;
 	}
 	public AccountVO findAccount(Account account) {
-		StubAccountDataService a = null;
+		AccountDataService a = null;
 		try {
 			try
 			{
-				a = (StubAccountDataService)Naming.lookup("rmi://127.0.0.1:1099/AccountData");
+				a = (AccountDataService)Naming.lookup("rmi://127.0.0.1:1099/AccountData");
 			}
 			catch (MalformedURLException e)
 			{
@@ -185,10 +186,8 @@ public class AccountList {
 		return avo;
 	}
 	
-	public void buildAccount() throws RemoteException {
-		String str="";		
-		//new CustomerController().findCustomer(str); //调用客户信息
-		AccountBuild build = new AccountBuild();
+	public void buildAccount() throws RemoteException {		
+		AccountBuildService build = new AccountBuild();
 		build.saveCommodity();
 		build.saveAccount();
 		build.saveCustomer();
@@ -196,7 +195,7 @@ public class AccountList {
 	}
 	
 	public ArrayList<String> getVersions() {
-		AccountBuild build = new AccountBuild();
+		AccountBuildService build = new AccountBuild();
 		return build.getVersion();
 	}
 	public ArrayList<CustomerVO> getOldCustomersInfo(String version) {
@@ -204,7 +203,7 @@ public class AccountList {
 		return cff.getCustomer(version);
 	}
 	public ArrayList<AccountVO> getOldAccountsInfo(String version) {
-		AccountBuild build = new AccountBuild();
+		AccountBuildService build = new AccountBuild();
 		ArrayList<AccountPO> accountsPO = build.getAccount(version);
 		ArrayList<AccountVO> accountsVO = new ArrayList<AccountVO>();
 		int size = accountsPO.size();
@@ -216,11 +215,11 @@ public class AccountList {
 		return accountsVO;
 	}
 	public ArrayList<Account> getAllAccountInfo() {
-		StubAccountDataService a = null;
+		AccountDataService a = null;
 		try {
 			try
 			{
-				a = (StubAccountDataService)Naming.lookup("rmi://127.0.0.1:1099/AccountData");
+				a = (AccountDataService)Naming.lookup("rmi://127.0.0.1:1099/AccountData");
 			}
 			catch (MalformedURLException e)
 			{
@@ -254,11 +253,11 @@ public class AccountList {
 	}
 	
 	public void saveAccounts(ArrayList<Account> accounts) {
-		StubAccountDataService a = null;
+		AccountDataService a = null;
 		try {
 			try
 			{
-				a = (StubAccountDataService)Naming.lookup("rmi://127.0.0.1:1099/AccountData");
+				a = (AccountDataService)Naming.lookup("rmi://127.0.0.1:1099/AccountData");
 			}
 			catch (MalformedURLException e)
 			{

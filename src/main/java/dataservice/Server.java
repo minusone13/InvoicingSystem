@@ -14,7 +14,7 @@ import data.commoditydata.StubStockDataController;
 import data.customerdata.CustomerData;
 import data.strategydata.StrategySaver;
 import data.userdata.UserDataController;
-import dataservice.accountdataservice.StubAccountDataService;
+import dataservice.accountdataservice.AccountDataService;
 import dataservice.billdataservice.CommodityBillSaverService;
 import dataservice.billdataservice.FinancialBillSaverService;
 import dataservice.billdataservice.SaleBillSaverService;
@@ -27,7 +27,7 @@ public class Server {
 		public static void main(String args[]){
 			try { 
 	            //创建一些远程对象; 
-	            StubAccountDataService accountdataservice = new AccountData();
+	            AccountDataService accountdataservice = new AccountData();
 	            CommodityBillSaverService commoditybillsaverservice = new CommodityBillSaver();
 	            FinancialBillSaverService financialbillsaverservice = new FinancialBillSaver();
 	            SaleBillSaverService salebillsaver = new SaleBillSaver();

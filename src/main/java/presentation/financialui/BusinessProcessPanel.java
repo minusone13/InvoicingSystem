@@ -141,6 +141,12 @@ public class BusinessProcessPanel extends JPanel{
 			String[] names = {"单据编号","供应商","仓库","操作员","备注","总额合计","单据状态","商品编号",
 					"名称","型号","数量","单价","金额","备注"};
 			data[0] = names;
+		} else if(choose == 4) {
+			int size = table1.getRowCount();
+			String[][] data = new String[size+1][];
+			String[] names = {"单据编号","客户","业务员","操作员","仓库","折让前总额","折让","代金券",
+					"折让后总额","备注","单据状态","商品编号","名称","型号","数量","单价","金额","备注"};
+			data[0] = names;
 		}
 	}
 	public void updateTable1(int choose, InquiryProcessVO ipv){
