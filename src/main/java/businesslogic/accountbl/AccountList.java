@@ -6,7 +6,6 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-import data.accountdata.AccountBuild;
 import dataservice.accountdataservice.AccountBuildService;
 import dataservice.accountdataservice.AccountDataService;
 import businesslogic.commoditybl.StubCommodityList;
@@ -187,7 +186,19 @@ public class AccountList {
 	}
 	
 	public void buildAccount() throws RemoteException {		
-		AccountBuildService build = new AccountBuild();
+		AccountBuildService build = null;
+		try
+		{
+			build = (AccountBuildService)Naming.lookup("rmi://127.0.0.1:1099/AccountBuild");
+		}
+		catch (MalformedURLException e)
+		{
+			e.printStackTrace();
+		}
+		catch (NotBoundException e)
+		{
+			e.printStackTrace();
+		}
 		build.saveCommodity();
 		build.saveAccount();
 		build.saveCustomer();
@@ -195,7 +206,23 @@ public class AccountList {
 	}
 	
 	public ArrayList<String> getVersions() {
-		AccountBuildService build = new AccountBuild();
+		AccountBuildService build = null;
+		try
+		{
+			build = (AccountBuildService)Naming.lookup("rmi://127.0.0.1:1099/AccountBuild");
+		}
+		catch (MalformedURLException e)
+		{
+			e.printStackTrace();
+		}
+		catch (RemoteException e)
+		{
+			e.printStackTrace();
+		}
+		catch (NotBoundException e)
+		{
+			e.printStackTrace();
+		}
 		return build.getVersion();
 	}
 	public ArrayList<CustomerVO> getOldCustomersInfo(String version) {
@@ -203,7 +230,23 @@ public class AccountList {
 		return cff.getCustomer(version);
 	}
 	public ArrayList<AccountVO> getOldAccountsInfo(String version) {
-		AccountBuildService build = new AccountBuild();
+		AccountBuildService build = null;
+		try
+		{
+			build = (AccountBuildService)Naming.lookup("rmi://127.0.0.1:1099/AccountBuild");
+		}
+		catch (MalformedURLException e)
+		{
+			e.printStackTrace();
+		}
+		catch (RemoteException e)
+		{
+			e.printStackTrace();
+		}
+		catch (NotBoundException e)
+		{
+			e.printStackTrace();
+		}
 		ArrayList<AccountPO> accountsPO = build.getAccount(version);
 		ArrayList<AccountVO> accountsVO = new ArrayList<AccountVO>();
 		int size = accountsPO.size();

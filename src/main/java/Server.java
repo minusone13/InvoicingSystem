@@ -4,6 +4,7 @@ import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 
+import data.accountdata.AccountBuild;
 import data.accountdata.AccountData;
 import data.billdata.CommodityBillSaver;
 import data.billdata.FinancialBillSaver;
@@ -12,6 +13,7 @@ import data.commoditydata.StubStockDataController;
 import data.customerdata.CustomerData;
 import data.strategydata.StrategySaver;
 import data.userdata.UserDataController;
+import dataservice.accountdataservice.AccountBuildService;
 import dataservice.accountdataservice.AccountDataService;
 import dataservice.billdataservice.CommodityBillSaverService;
 import dataservice.billdataservice.FinancialBillSaverService;
@@ -35,7 +37,8 @@ public class Server
 			StubCommodityDataService commoditydata = StubStockDataController.getInstance();
 			StrategySaverService strategysaver = new StrategySaver();
 			StubUserDataService userdatacontroller = UserDataController.getInstance();
-			//这里我并没有理解单体模式;所以我擅自变动了user和Commodity方面的两个构造函数的可见性;
+			AccountBuildService accountbuild = new AccountBuild();
+			
 			LocateRegistry.createRegistry(1099);
 			Naming.bind("rmi://127.0.0.1:1099/CustomerData",customerdataservice);
 			Naming.bind("rmi://127.0.0.1:1099/AccountData",accountdataservice);
@@ -45,6 +48,7 @@ public class Server
 			Naming.bind("rmi://127.0.0.1:1099/StubStockDataController",commoditydata);
 			Naming.bind("rmi://127.0.0.1:1099/StrategySaver",strategysaver);
 			Naming.bind("rmi://127.0.0.1:1099/UserDataController",userdatacontroller);
+			Naming.bind("rmi://127.0.0.1:1099/AccountBuild",accountbuild);
 			System.out.println("服务器启动完成");
 		}
 		catch (RemoteException e)

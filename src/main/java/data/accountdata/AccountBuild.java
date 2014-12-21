@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -21,9 +22,9 @@ import data.stockservice.StockDataForFinancial;
 import dataservice.accountdataservice.AccountBuildService;
 import dataservice.accountdataservice.AccountDataService;
 
-public class AccountBuild implements AccountBuildService{
+public class AccountBuild extends UnicastRemoteObject implements AccountBuildService{
 	String version=null;
-	public AccountBuild() {
+	public AccountBuild() throws RemoteException{
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");//change yyyy/MM/dd to this by lhw
 		version = format.format(new Date());
 	}

@@ -25,7 +25,7 @@ public class StubStockDataController extends UnicastRemoteObject implements Stub
 
 	File f;
 
-	public StubStockDataController()throws RemoteException
+	private StubStockDataController()throws RemoteException
 	{
 		read();
 	}
