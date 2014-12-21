@@ -28,6 +28,7 @@ public class StubStockDataController implements StubCommodityDataService,
 		read();
 	}
 
+	//没有注释的方法参见dataservice/commoditydataservice/StubCommodityDataService.java
 	public RM deleteCategory(String id)
 	{
 		read();
@@ -120,7 +121,7 @@ public class StubStockDataController implements StubCommodityDataService,
 	}
 
 	public void Initial()
-	{
+	{//初始化方法，程序第一次运行时使用
 		f = Tool.Opendoc(Tool.stock);
 
 		// some initial under;
@@ -285,7 +286,7 @@ public class StubStockDataController implements StubCommodityDataService,
 	}
 
 	public boolean saveAndBuild(String s)
-	{
+	{//用于期初建账
 		read();
 		l.accountBuild();
 		save(s);

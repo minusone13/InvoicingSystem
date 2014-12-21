@@ -7,6 +7,7 @@ import vo.stockvo.CommodityRecordVO;
 
 public class CommodityRecord
 {
+	//参数参见作业要求中的库存查看，id为记录的原因，如进货单、赠送单、报溢报损单型号，
 	public CommodityRecord(String id, Date date, int outquantity,
 			int inquantity, double outamount, double inamount,
 			int salequantity, int importquantity, double saleamount,
@@ -203,7 +204,7 @@ public class CommodityRecord
 	}
 
 	public void plus(CommodityRecord r)
-	{
+	{//用于库存查看
 		outquantity += r.getOutquantity();
 		inquantity += r.getInquantity();
 		outamount += r.getOutamount();

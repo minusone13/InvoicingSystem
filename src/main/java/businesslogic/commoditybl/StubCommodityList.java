@@ -32,12 +32,12 @@ public class StubCommodityList
 	}
 
 	public CommodityVO findCommodity(CommodityVO vo)
-	{
+	{//调用CommodityVO findCommodity(String name, String model)
 		return findCommodity(vo.getName(), vo.getModel());
 	}
 
 	public ArrayList<CommodityVO> findCommodity(String name)
-	{
+	{//对同一名称的商品返回一系列不同型号的商品
 		ArrayList<CommodityPO> pos = comdata.findCommodity(name);
 		ArrayList<MockCommodity> coms = posToCom(pos);
 		ArrayList<CommodityVO> vos = toVOs(coms);
@@ -55,7 +55,7 @@ public class StubCommodityList
 
 	public RM addPack(ArrayList<MockCommodity> commodityarray, int quantity,
 			double discount)
-	{
+	{//特价包中每个商品的数量在商品 number属性中,RM可能返回done insufficient unknownerror notfound
 		SimpleDateFormat dateformat = new SimpleDateFormat(
 				"yyyy-MM-dd HH:mm:ss");
 		String ID = dateformat.format(new Date());
@@ -113,13 +113,14 @@ public class StubCommodityList
 	}
 
 	public void setcomdata(StubCommodityDataService comdata)
-	{
+	{//原用于启动程序
 		this.comdata = comdata;
 	}
 
 	public RM checkIn(String id, String name, String model, int quantity,
 			double price)
-	{// 入库
+	{//第一个参数id是进货销售单的ID，下同。
+		// 入库 ，可能返回done notfound unknownerror 只有done时表示成功
 		CommodityPO po = comdata.findCommodity(name, model);
 		if (po == null)// not found
 			return RM.notfound;
@@ -158,7 +159,7 @@ public class StubCommodityList
 
 	public RM checkOut(String id, String name, String model, int quantity,
 			double price)
-	{// 出库
+	{// 出库，可能返回done insufficient notfound unknownerror 只有done时表示成功
 		CommodityPO po = comdata.findCommodity(name, model);
 		if (po == null)// not found
 			return RM.notfound;
@@ -206,7 +207,7 @@ public class StubCommodityList
 
 	public RM readyForIn(String id, String name, String model, int quantity,
 			double price)
-	{// 当进货单或销售退货单提交后，请调用
+	{// 当进货单或销售退货单提交后，请调用，可能返回done notfound unknownerror 只有done时表示成功
 		CommodityPO po = comdata.findCommodity(name, model);
 		if (po == null)// not found
 			return RM.notfound;
@@ -226,7 +227,7 @@ public class StubCommodityList
 
 	public RM readyForOut(String id, String name, String model, int quantity,
 			double price)
-	{// 当销售单或进货退货单被提交后，请调用
+	{// 当销售单或进货退货单被提交后，请调用，可能返回done insufficient notfound unknownerror 只有done时表示成功
 		CommodityPO po = comdata.findCommodity(name, model);
 		if (po == null)// not found
 			return RM.notfound;
@@ -245,7 +246,7 @@ public class StubCommodityList
 
 	public RM undoCheckIn(String id, String name, String model, int quantity,
 			double price)
-	{// 当进货退货单被审批后，请调用
+	{// 当进货退货单被审批后，请调用，可能返回done insufficient notfound unknownerror 只有done时表示成功
 		CommodityPO po = comdata.findCommodity(name, model);
 		if (po == null)// not found
 			return RM.notfound;
@@ -281,7 +282,7 @@ public class StubCommodityList
 
 	public RM undoCheckOut(String id, String name, String model, int quantity,
 			double price)
-	{// 当销售退货单被审批后，请调用
+	{// 当销售退货单被审批后，请调用，可能返回done notfound unknownerror 只有done时表示成功
 		CommodityPO po = comdata.findCommodity(name, model);
 		if (po == null)// not found
 			return RM.notfound;
@@ -319,7 +320,7 @@ public class StubCommodityList
 	}
 
 	public RM checkOut(String id, String packID, int quantity, double price)
-	{// 出库
+	{// 出库特价包，可能返回done insufficient notfound unknownerror 只有done时表示成功
 		PackPO po = comdata.findPack(packID);
 		if (po == null)// not found
 			return RM.notfound;
@@ -347,7 +348,7 @@ public class StubCommodityList
 	}
 
 	public RM readyForOut(String id, String packID, int quantity, double price)
-	{// 当销售单或进货退货单被提交后，请调用
+	{// 特价包，当销售单或进货退货单被提交后，请调用，可能返回done insufficient notfound unknownerror 只有done时表示成功
 		PackPO po = comdata.findPack(packID);
 		if (po == null)// not found
 			return RM.notfound;
@@ -407,7 +408,7 @@ public class StubCommodityList
 		return (n <= potential);
 	}
 
-	public ArrayList<MockCommodity> posToCom(ArrayList<CommodityPO> h)
+	private ArrayList<MockCommodity> posToCom(ArrayList<CommodityPO> h)
 	{
 		ArrayList<MockCommodity> result = new ArrayList<MockCommodity>();
 		for (int i = 0; i < h.size(); i++)
@@ -417,7 +418,7 @@ public class StubCommodityList
 		return result;
 	}
 
-	public ArrayList<CommodityVO> toVOs(ArrayList<MockCommodity> h)
+	private ArrayList<CommodityVO> toVOs(ArrayList<MockCommodity> h)
 	{
 		ArrayList<CommodityVO> result = new ArrayList<CommodityVO>();
 		for (int i = 0; i < h.size(); i++)
@@ -428,7 +429,7 @@ public class StubCommodityList
 	}
 
 	public ArrayList<StockVO> openCategory(String id)
-	{
+	{//打开一个分类，StockVO里面有一个参数Type，表示类型（商品or分类）
 		ArrayList<StockPO> pos = comdata.openCategory(id);
 		if (pos == null)
 			return null;
@@ -444,6 +445,7 @@ public class StubCommodityList
 		return vos;
 	}
 
+	//下面的方法请看BLService的说明
 	public RM deleteCommodity(String name, String model)
 	{
 		RM result = comdata.deleteCommodity(name, model);

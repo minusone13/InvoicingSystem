@@ -10,7 +10,7 @@ import vo.uservo.*;
 import dataservice.userdataservice.*;
 
 public interface StubUserBlService
-{
+{//由businesslogic/userbl/UserController.java
 	public void setdataobject(StubUserDataService data);// 用于初始化程序传入实际实现对象
 
 	public UserVO login(String account, String password);// 登陆，若用户名和密码，若登陆成功返回一个UserVO，若失败返回null

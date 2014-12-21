@@ -13,6 +13,7 @@ public class UserList implements Serializable
 	ArrayList<OperationRecordPO> records;
 	ArrayList<UserPO> deleted;
 
+	//统计历史人员数量，便于生成员工ID
 	int numOfAdmin = 0;
 	int numOfManager = 0;
 	int numOfFinancial = 0;

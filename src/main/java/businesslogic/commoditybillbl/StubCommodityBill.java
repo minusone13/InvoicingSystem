@@ -15,7 +15,7 @@ import vo.uservo.UserVO;
 
 public class StubCommodityBill
 {// 统一管理了库存单据，相当于一个对内的Controller
-	ArrayList<StubAlertBill> alerts;
+	ArrayList<StubAlertBill> alerts;//这三个事实上是省去了下面的变量定义，实际的List从单据Pool里面取出来
 	ArrayList<StubGiftBill> gifts;
 	ArrayList<StubSpillsLossBill> sls;
 	static StubBillPool pool = new StubBillPool();

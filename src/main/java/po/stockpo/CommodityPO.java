@@ -5,6 +5,7 @@ import java.util.*;
 
 public class CommodityPO implements Serializable, Cloneable
 {
+	//参见businesslogic/commoditybl/MockCommodity.java
 	String id;
 	String parent;
 	String name;

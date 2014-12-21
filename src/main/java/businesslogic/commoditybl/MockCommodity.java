@@ -10,18 +10,18 @@ import vo.stockvo.CommodityVO;
 
 public class MockCommodity
 {
-	String id;
+	String id;//id==parent+"\\"+name
 	String parent;// the ID of parent Category
-	String name;
+	String name;//名称和型号唯一确定一个商品
 	String model;
 	int number;
-	double in;
+	double in;//增加商品时有一个默认进出价，之后随商品进销为平均进出价，下同
 	double out;
 	double lastin;
 	double lastout;
-	int alertLine;
-	ArrayList<CommodityRecord> record = new ArrayList<CommodityRecord>();
-	ArrayList<CommodityRecord> prepareRecord = new ArrayList<CommodityRecord>();
+	int alertLine;//库存报警，当小于AlertLine会报警
+	ArrayList<CommodityRecord> record = new ArrayList<CommodityRecord>();//进出记录，用于库存查看
+	ArrayList<CommodityRecord> prepareRecord = new ArrayList<CommodityRecord>();//备货记录
 
 	public void computeRecordsTotal(Date d1, Date d2)
 	{// 用于库存查看

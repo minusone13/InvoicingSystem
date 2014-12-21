@@ -60,7 +60,7 @@ public class UserList
 	}
 
 	public String generateID(UserVO vo)
-	{
+	{//生成员工ID
 		char c = 0;
 		switch (vo.getR()) {// 自动生成ID，详见Data层的UserList类
 			case MANAGER:
@@ -185,7 +185,7 @@ public class UserList
 	}
 
 	public static String string2MD5(String inStr)
-	{
+	{//密码加密
 		MessageDigest md5 = null;
 		try
 		{

@@ -29,7 +29,7 @@ public class StubStockController implements StubCommodityBlService,
 	StubCommodityList l = new StubCommodityList();
 	StubCommodityBill bl = new StubCommodityBill();
 	UserService us = new UserController();
-	static StubCommodityDataService comdata;
+	static StubCommodityDataService comdata = StubStockDataController.getInstance();
 	static StubBillPool pool = new StubBillPool();
 	User user = new User("I0000", Role.STOCK_STAFF, "DefaultStock", "default",
 			"Liu");
@@ -44,6 +44,7 @@ public class StubStockController implements StubCommodityBlService,
 		l.setUser(user);
 		bl.setUser(user);
 		bl.setPool(pool);
+		l.setcomdata(comdata);
 	}
 
 	public StubCommodityList getCommodityList()
@@ -51,6 +52,7 @@ public class StubStockController implements StubCommodityBlService,
 		return l;
 	}
 
+	//没有注释的方法参见进一步调用的方法中的注释，并可参考BLservice中的注释
 	public RM addCommodity(CommodityVO vo)
 	{
 		RM result = l.addCommodity(vo);
@@ -80,7 +82,7 @@ public class StubStockController implements StubCommodityBlService,
 
 	public RM addPack(ArrayList<MockCommodity> commodityarray, int quantity,
 			double discount)
-	{
+	{//增加特价包
 		return l.addPack(commodityarray, quantity, discount);
 	}
 

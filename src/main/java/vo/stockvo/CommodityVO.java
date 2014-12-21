@@ -25,6 +25,7 @@ public class CommodityVO
 		this.prepareRecord = prepareRecord;
 	}
 
+	//参见businesslogic/commoditybl/MockCommodity.java
 	String id;// ID恒等于parent+"\\"+name
 	String parent;// 父分类的ID
 	String name;
