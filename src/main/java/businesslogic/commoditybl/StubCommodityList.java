@@ -1,11 +1,6 @@
 package businesslogic.commoditybl;
 
-
-
 import java.io.File;
-import java.net.MalformedURLException;
-import java.rmi.Naming;
-import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -25,29 +20,11 @@ import vo.stockvo.*;
 
 public class StubCommodityList
 {// 商品列表 haha
-
-	User user;
-
+	static StubCommodityDataService comdata;
+	static User user;
 
 	public CommodityVO findCommodity(String name, String model)
 	{
-		StubCommodityDataService comdata = null;
-		try
-		{
-			comdata = (StubCommodityDataService)Naming.lookup("rmi://127.0.0.1:1099/CustomerData");
-		}
-		catch (MalformedURLException e)
-		{
-			e.printStackTrace();
-		}
-		catch (RemoteException e)
-		{
-			e.printStackTrace();
-		}
-		catch (NotBoundException e)
-		{
-			e.printStackTrace();
-		}
 		CommodityPO po = null;
 		try
 		{
@@ -55,6 +32,7 @@ public class StubCommodityList
 		}
 		catch (RemoteException e)
 		{
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		if (po == null)
@@ -70,23 +48,6 @@ public class StubCommodityList
 
 	public ArrayList<CommodityVO> findCommodity(String name)
 	{//对同一名称的商品返回一系列不同型号的商品
-		StubCommodityDataService comdata = null;
-		try
-		{
-			comdata = (StubCommodityDataService)Naming.lookup("rmi://127.0.0.1:1099/CustomerData");
-		}
-		catch (MalformedURLException e)
-		{
-			e.printStackTrace();
-		}
-		catch (RemoteException e)
-		{
-			e.printStackTrace();
-		}
-		catch (NotBoundException e)
-		{
-			e.printStackTrace();
-		}
 		ArrayList<CommodityPO> pos = null;
 		try
 		{
@@ -94,6 +55,7 @@ public class StubCommodityList
 		}
 		catch (RemoteException e)
 		{
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		ArrayList<MockCommodity> coms = posToCom(pos);
@@ -103,23 +65,6 @@ public class StubCommodityList
 
 	public ArrayList<CommodityVO> fuzzyFindCommodity(String s, int precision)
 	{// precision 先默认给1，可以达到王雨城所说的算法。若取数字越高，精确度越高，搜索结果数量也就越少
-		StubCommodityDataService comdata = null;
-		try
-		{
-			comdata = (StubCommodityDataService)Naming.lookup("rmi://127.0.0.1:1099/CustomerData");
-		}
-		catch (MalformedURLException e)
-		{
-			e.printStackTrace();
-		}
-		catch (RemoteException e)
-		{
-			e.printStackTrace();
-		}
-		catch (NotBoundException e)
-		{
-			e.printStackTrace();
-		}
 		ArrayList<CommodityPO> pos = null;
 		try
 		{
@@ -127,6 +72,7 @@ public class StubCommodityList
 		}
 		catch (RemoteException e)
 		{
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		ArrayList<CommodityVO> result = new ArrayList<CommodityVO>();
@@ -143,23 +89,6 @@ public class StubCommodityList
 		String ID = dateformat.format(new Date());
 		ID = "PACK-" + ID;
 		double total = 0;
-		StubCommodityDataService comdata = null;
-		try
-		{
-			comdata = (StubCommodityDataService)Naming.lookup("rmi://127.0.0.1:1099/CustomerData");
-		}
-		catch (MalformedURLException e)
-		{
-			e.printStackTrace();
-		}
-		catch (RemoteException e)
-		{
-			e.printStackTrace();
-		}
-		catch (NotBoundException e)
-		{
-			e.printStackTrace();
-		}
 		for (int i = 0; i < commodityarray.size(); i++)
 			total += commodityarray.get(i).getOut()
 					* commodityarray.get(i).getNumber();
@@ -176,6 +105,7 @@ public class StubCommodityList
 			}
 			catch (RemoteException e)
 			{
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			if (po == null)
@@ -201,30 +131,14 @@ public class StubCommodityList
 		}
 		catch (RemoteException e)
 		{
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return null;
+		return RM.RMIError;
 	}
 
 	public RM addCommodity(CommodityVO vo)
 	{
-		StubCommodityDataService comdata = null;
-		try
-		{
-			comdata = (StubCommodityDataService)Naming.lookup("rmi://127.0.0.1:1099/CustomerData");
-		}
-		catch (MalformedURLException e)
-		{
-			e.printStackTrace();
-		}
-		catch (RemoteException e)
-		{
-			e.printStackTrace();
-		}
-		catch (NotBoundException e)
-		{
-			e.printStackTrace();
-		}
 		CommodityPO po = null;
 		try
 		{
@@ -232,6 +146,7 @@ public class StubCommodityList
 		}
 		catch (RemoteException e)
 		{
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		if (po != null)
@@ -242,13 +157,14 @@ public class StubCommodityList
 			com.setNumber(0);
 			com.setLastin(-1);
 			com.setLastout(-1);
-			RM result = null;
+			RM result = RM.unknownerror;
 			try
 			{
 				result = comdata.insert(com.toPO());
 			}
 			catch (RemoteException e)
 			{
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			return result;
@@ -257,61 +173,27 @@ public class StubCommodityList
 
 	public RM addCategory(CategoryVO vo)
 	{
-		StubCommodityDataService comdata = null;
-		try
-		{
-			comdata = (StubCommodityDataService)Naming.lookup("rmi://127.0.0.1:1099/CustomerData");
-		}
-		catch (MalformedURLException e)
-		{
-			e.printStackTrace();
-		}
-		catch (RemoteException e)
-		{
-			e.printStackTrace();
-		}
-		catch (NotBoundException e)
-		{
-			e.printStackTrace();
-		}
 		try
 		{
 			return comdata.insert(new StubCategory(vo).toPO());
 		}
 		catch (RemoteException e)
 		{
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return null;
+		return RM.RMIError;
 	}
 
 	public void setcomdata(StubCommodityDataService comdata)
 	{//原用于启动程序
-		//这个我不懂该怎么去修改;
-		//this.comdata = comdata;
+		this.comdata = comdata;
 	}
 
 	public RM checkIn(String id, String name, String model, int quantity,
 			double price)
 	{//第一个参数id是进货销售单的ID，下同。
 		// 入库 ，可能返回done notfound unknownerror 只有done时表示成功
-		StubCommodityDataService comdata = null;
-		try
-		{
-			comdata = (StubCommodityDataService)Naming.lookup("rmi://127.0.0.1:1099/CustomerData");
-		}
-		catch (MalformedURLException e)
-		{
-			e.printStackTrace();
-		}
-		catch (RemoteException e)
-		{
-			e.printStackTrace();
-		}
-		catch (NotBoundException e)
-		{
-			e.printStackTrace();
-		}
 		CommodityPO po = null;
 		try
 		{
@@ -319,6 +201,7 @@ public class StubCommodityList
 		}
 		catch (RemoteException e)
 		{
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		if (po == null)// not found
@@ -356,6 +239,7 @@ public class StubCommodityList
 		}
 		catch (RemoteException e)
 		{
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		if (result)
@@ -367,31 +251,16 @@ public class StubCommodityList
 	public RM checkOut(String id, String name, String model, int quantity,
 			double price)
 	{// 出库，可能返回done insufficient notfound unknownerror 只有done时表示成功
-		StubCommodityDataService comdata = null;
-		try
-		{
-			comdata = (StubCommodityDataService)Naming.lookup("rmi://127.0.0.1:1099/CustomerData");
-		}
-		catch (MalformedURLException e)
-		{
-			e.printStackTrace();
-		}
-		catch (RemoteException e)
-		{
-			e.printStackTrace();
-		}
-		catch (NotBoundException e)
-		{
-			e.printStackTrace();
-		}
-		CommodityPO po = null;
+		CommodityPO po;
 		try
 		{
 			po = comdata.findCommodity(name, model);
 		}
 		catch (RemoteException e)
 		{
+			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return RM.RMIError;
 		}
 		if (po == null)// not found
 			return RM.notfound;
@@ -430,6 +299,7 @@ public class StubCommodityList
 		}
 		catch (RemoteException e)
 		{
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		int shortage = com.checkAlert();
@@ -448,23 +318,6 @@ public class StubCommodityList
 	public RM readyForIn(String id, String name, String model, int quantity,
 			double price)
 	{// 当进货单或销售退货单提交后，请调用，可能返回done notfound unknownerror 只有done时表示成功
-		StubCommodityDataService comdata = null;
-		try
-		{
-			comdata = (StubCommodityDataService)Naming.lookup("rmi://127.0.0.1:1099/CustomerData");
-		}
-		catch (MalformedURLException e)
-		{
-			e.printStackTrace();
-		}
-		catch (RemoteException e)
-		{
-			e.printStackTrace();
-		}
-		catch (NotBoundException e)
-		{
-			e.printStackTrace();
-		}
 		CommodityPO po = null;
 		try
 		{
@@ -472,6 +325,7 @@ public class StubCommodityList
 		}
 		catch (RemoteException e)
 		{
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		if (po == null)// not found
@@ -490,6 +344,7 @@ public class StubCommodityList
 		}
 		catch (RemoteException e)
 		{
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		if (result)
@@ -501,23 +356,6 @@ public class StubCommodityList
 	public RM readyForOut(String id, String name, String model, int quantity,
 			double price)
 	{// 当销售单或进货退货单被提交后，请调用，可能返回done insufficient notfound unknownerror 只有done时表示成功
-		StubCommodityDataService comdata = null;
-		try
-		{
-			comdata = (StubCommodityDataService)Naming.lookup("rmi://127.0.0.1:1099/CustomerData");
-		}
-		catch (MalformedURLException e)
-		{
-			e.printStackTrace();
-		}
-		catch (RemoteException e)
-		{
-			e.printStackTrace();
-		}
-		catch (NotBoundException e)
-		{
-			e.printStackTrace();
-		}
 		CommodityPO po = null;
 		try
 		{
@@ -525,6 +363,7 @@ public class StubCommodityList
 		}
 		catch (RemoteException e)
 		{
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		if (po == null)// not found
@@ -542,6 +381,7 @@ public class StubCommodityList
 		}
 		catch (RemoteException e)
 		{
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		if (result)
@@ -553,23 +393,6 @@ public class StubCommodityList
 	public RM undoCheckIn(String id, String name, String model, int quantity,
 			double price)
 	{// 当进货退货单被审批后，请调用，可能返回done insufficient notfound unknownerror 只有done时表示成功
-		StubCommodityDataService comdata = null;
-		try
-		{
-			comdata = (StubCommodityDataService)Naming.lookup("rmi://127.0.0.1:1099/CustomerData");
-		}
-		catch (MalformedURLException e)
-		{
-			e.printStackTrace();
-		}
-		catch (RemoteException e)
-		{
-			e.printStackTrace();
-		}
-		catch (NotBoundException e)
-		{
-			e.printStackTrace();
-		}
 		CommodityPO po = null;
 		try
 		{
@@ -577,6 +400,7 @@ public class StubCommodityList
 		}
 		catch (RemoteException e)
 		{
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		if (po == null)// not found
@@ -604,6 +428,7 @@ public class StubCommodityList
 		}
 		catch (RemoteException e)
 		{
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		int shortage = com.checkAlert();
@@ -622,23 +447,6 @@ public class StubCommodityList
 	public RM undoCheckOut(String id, String name, String model, int quantity,
 			double price)
 	{// 当销售退货单被审批后，请调用，可能返回done notfound unknownerror 只有done时表示成功
-		StubCommodityDataService comdata = null;
-		try
-		{
-			comdata = (StubCommodityDataService)Naming.lookup("rmi://127.0.0.1:1099/CustomerData");
-		}
-		catch (MalformedURLException e)
-		{
-			e.printStackTrace();
-		}
-		catch (RemoteException e)
-		{
-			e.printStackTrace();
-		}
-		catch (NotBoundException e)
-		{
-			e.printStackTrace();
-		}
 		CommodityPO po = null;
 		try
 		{
@@ -646,6 +454,7 @@ public class StubCommodityList
 		}
 		catch (RemoteException e)
 		{
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		if (po == null)// not found
@@ -683,6 +492,7 @@ public class StubCommodityList
 		}
 		catch (RemoteException e)
 		{
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		if (result)
@@ -693,31 +503,15 @@ public class StubCommodityList
 
 	public RM checkOut(String id, String packID, int quantity, double price)
 	{// 出库特价包，可能返回done insufficient notfound unknownerror 只有done时表示成功
-		StubCommodityDataService comdata = null;
-		try
-		{
-			comdata = (StubCommodityDataService)Naming.lookup("rmi://127.0.0.1:1099/CustomerData");
-		}
-		catch (MalformedURLException e)
-		{
-			e.printStackTrace();
-		}
-		catch (RemoteException e)
-		{
-			e.printStackTrace();
-		}
-		catch (NotBoundException e)
-		{
-			e.printStackTrace();
-		}
 		PackPO po = null;
 		try
 		{
 			po = comdata.findPack(packID);
 		}
-		catch (RemoteException e)
+		catch (RemoteException e1)
 		{
-			e.printStackTrace();
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		}
 		if (po == null)// not found
 			return RM.notfound;
@@ -747,6 +541,7 @@ public class StubCommodityList
 		}
 		catch (RemoteException e)
 		{
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return result;
@@ -754,23 +549,6 @@ public class StubCommodityList
 
 	public RM readyForOut(String id, String packID, int quantity, double price)
 	{// 特价包，当销售单或进货退货单被提交后，请调用，可能返回done insufficient notfound unknownerror 只有done时表示成功
-		StubCommodityDataService comdata = null;
-		try
-		{
-			comdata = (StubCommodityDataService)Naming.lookup("rmi://127.0.0.1:1099/CustomerData");
-		}
-		catch (MalformedURLException e)
-		{
-			e.printStackTrace();
-		}
-		catch (RemoteException e)
-		{
-			e.printStackTrace();
-		}
-		catch (NotBoundException e)
-		{
-			e.printStackTrace();
-		}
 		PackPO po = null;
 		try
 		{
@@ -778,6 +556,7 @@ public class StubCommodityList
 		}
 		catch (RemoteException e)
 		{
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		if (po == null)// not found
@@ -795,6 +574,7 @@ public class StubCommodityList
 		}
 		catch (RemoteException e)
 		{
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return result;
@@ -802,23 +582,6 @@ public class StubCommodityList
 
 	public RM undoCheckOut(String id, String packID, int quantity, double price)
 	{// 当销售退货单被审批后，请调用
-		StubCommodityDataService comdata = null;
-		try
-		{
-			comdata = (StubCommodityDataService)Naming.lookup("rmi://127.0.0.1:1099/CustomerData");
-		}
-		catch (MalformedURLException e)
-		{
-			e.printStackTrace();
-		}
-		catch (RemoteException e)
-		{
-			e.printStackTrace();
-		}
-		catch (NotBoundException e)
-		{
-			e.printStackTrace();
-		}
 		PackPO po = null;
 		try
 		{
@@ -826,6 +589,7 @@ public class StubCommodityList
 		}
 		catch (RemoteException e)
 		{
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		if (po == null)// not found
@@ -854,6 +618,7 @@ public class StubCommodityList
 		}
 		catch (RemoteException e)
 		{
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return result;
@@ -861,23 +626,6 @@ public class StubCommodityList
 
 	public boolean isEnough(String name, String model, int n)
 	{// 在填写单据时检查，给出的是潜在库存最小值，也就是最保险的值
-		StubCommodityDataService comdata = null;
-		try
-		{
-			comdata = (StubCommodityDataService)Naming.lookup("rmi://127.0.0.1:1099/CustomerData");
-		}
-		catch (MalformedURLException e)
-		{
-			e.printStackTrace();
-		}
-		catch (RemoteException e)
-		{
-			e.printStackTrace();
-		}
-		catch (NotBoundException e)
-		{
-			e.printStackTrace();
-		}
 		CommodityPO po = null;
 		try
 		{
@@ -885,6 +633,7 @@ public class StubCommodityList
 		}
 		catch (RemoteException e)
 		{
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		if (po == null)
@@ -896,23 +645,6 @@ public class StubCommodityList
 
 	public boolean isEnough(String PackID, int n)
 	{// 同上，判断特价包
-		StubCommodityDataService comdata = null;
-		try
-		{
-			comdata = (StubCommodityDataService)Naming.lookup("rmi://127.0.0.1:1099/CustomerData");
-		}
-		catch (MalformedURLException e1)
-		{
-			e1.printStackTrace();
-		}
-		catch (RemoteException e1)
-		{
-			e1.printStackTrace();
-		}
-		catch (NotBoundException e1)
-		{
-			e1.printStackTrace();
-		}
 		PackPO po = null;
 		try
 		{
@@ -920,6 +652,7 @@ public class StubCommodityList
 		}
 		catch (RemoteException e)
 		{
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		if (po == null)
@@ -951,23 +684,6 @@ public class StubCommodityList
 
 	public ArrayList<StockVO> openCategory(String id)
 	{//打开一个分类，StockVO里面有一个参数Type，表示类型（商品or分类）
-		StubCommodityDataService comdata = null;
-		try
-		{
-			comdata = (StubCommodityDataService)Naming.lookup("rmi://127.0.0.1:1099/StubStockDataController");
-		}
-		catch (MalformedURLException e)
-		{
-			e.printStackTrace();
-		}
-		catch (RemoteException e)
-		{
-			e.printStackTrace();
-		}
-		catch (NotBoundException e)
-		{
-			e.printStackTrace();
-		}
 		ArrayList<StockPO> pos = null;
 		try
 		{
@@ -975,6 +691,7 @@ public class StubCommodityList
 		}
 		catch (RemoteException e)
 		{
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		if (pos == null)
@@ -994,30 +711,14 @@ public class StubCommodityList
 	//下面的方法请看BLService的说明
 	public RM deleteCommodity(String name, String model)
 	{
-		StubCommodityDataService comdata = null;
-		try
-		{
-			comdata = (StubCommodityDataService)Naming.lookup("rmi://127.0.0.1:1099/CustomerData");
-		}
-		catch (MalformedURLException e)
-		{
-			e.printStackTrace();
-		}
-		catch (RemoteException e)
-		{
-			e.printStackTrace();
-		}
-		catch (NotBoundException e)
-		{
-			e.printStackTrace();
-		}
-		RM result = null;
+		RM result = RM.RMIError;
 		try
 		{
 			result = comdata.deleteCommodity(name, model);
 		}
 		catch (RemoteException e)
 		{
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return result;
@@ -1025,30 +726,14 @@ public class StubCommodityList
 
 	public RM deleteCategory(String id)
 	{
-		StubCommodityDataService comdata = null;
-		try
-		{
-			comdata = (StubCommodityDataService)Naming.lookup("rmi://127.0.0.1:1099/CustomerData");
-		}
-		catch (MalformedURLException e)
-		{
-			e.printStackTrace();
-		}
-		catch (RemoteException e)
-		{
-			e.printStackTrace();
-		}
-		catch (NotBoundException e)
-		{
-			e.printStackTrace();
-		}
-		RM result = null;
+		RM result = RM.RMIError;
 		try
 		{
 			result = comdata.deleteCategory(id);
 		}
 		catch (RemoteException e)
 		{
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return result;
@@ -1056,23 +741,6 @@ public class StubCommodityList
 
 	public RM updateCommodity(CommodityVO vo)
 	{
-		StubCommodityDataService comdata = null;
-		try
-		{
-			comdata = (StubCommodityDataService)Naming.lookup("rmi://127.0.0.1:1099/CustomerData");
-		}
-		catch (MalformedURLException e)
-		{
-			e.printStackTrace();
-		}
-		catch (RemoteException e)
-		{
-			e.printStackTrace();
-		}
-		catch (NotBoundException e)
-		{
-			e.printStackTrace();
-		}
 		CommodityPO po = null;
 		try
 		{
@@ -1080,6 +748,7 @@ public class StubCommodityList
 		}
 		catch (RemoteException e)
 		{
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		if (po == null)// not found
@@ -1092,6 +761,7 @@ public class StubCommodityList
 		}
 		catch (RemoteException e)
 		{
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		try
@@ -1103,67 +773,34 @@ public class StubCommodityList
 		}
 		catch (RemoteException e)
 		{
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return null;
+		return RM.RMIError;
 	}
 
 	public RM updateCategory(CategoryVO vo, String newName)
 	{
-		StubCommodityDataService comdata = null;
-		try
-		{
-			comdata = (StubCommodityDataService)Naming.lookup("rmi://127.0.0.1:1099/CustomerData");
-		}
-		catch (MalformedURLException e)
-		{
-			e.printStackTrace();
-		}
-		catch (RemoteException e)
-		{
-			e.printStackTrace();
-		}
-		catch (NotBoundException e)
-		{
-			e.printStackTrace();
-		}
 		try
 		{
 			return comdata.update(new StubCategory(vo).toPO(), newName);
 		}
 		catch (RemoteException e)
 		{
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return null;
+		return RM.RMIError;
 	}
 
 	public static StubCommodityDataService getComdata()
 	{
-		StubCommodityDataService comdata = null;
-		try
-		{
-			comdata = (StubCommodityDataService)Naming.lookup("rmi://127.0.0.1:1099/CustomerData");
-		}
-		catch (MalformedURLException e)
-		{
-			e.printStackTrace();
-		}
-		catch (RemoteException e)
-		{
-			e.printStackTrace();
-		}
-		catch (NotBoundException e)
-		{
-			e.printStackTrace();
-		}
 		return comdata;
 	}
 
 	public static void setComdata(StubCommodityDataService comdata)
 	{
-		//我同样还是不会改这个方法;
-		//StubCommodityList.comdata = comdata;
+		StubCommodityList.comdata = comdata;
 	}
 
 	public User getUser()
@@ -1178,23 +815,6 @@ public class StubCommodityList
 
 	public double getAdjustmentTotal(Date d1, Date d2)
 	{// 商品调价。这个返回值可能为正，也可能为负
-		StubCommodityDataService comdata = null;
-		try
-		{
-			comdata = (StubCommodityDataService)Naming.lookup("rmi://127.0.0.1:1099/CustomerData");
-		}
-		catch (MalformedURLException e)
-		{
-			e.printStackTrace();
-		}
-		catch (RemoteException e)
-		{
-			e.printStackTrace();
-		}
-		catch (NotBoundException e)
-		{
-			e.printStackTrace();
-		}
 		ArrayList<AdjustmentRecordPO> h = null;
 		try
 		{
@@ -1202,7 +822,9 @@ public class StubCommodityList
 		}
 		catch (RemoteException e)
 		{
+			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return 0;
 		}
 		double income = 0;
 		for (int i = 0; i < h.size(); i++)
@@ -1217,23 +839,6 @@ public class StubCommodityList
 
 	public CountVO count()
 	{// 库存盘点
-		StubCommodityDataService comdata = null;
-		try
-		{
-			comdata = (StubCommodityDataService)Naming.lookup("rmi://127.0.0.1:1099/CustomerData");
-		}
-		catch (MalformedURLException e)
-		{
-			e.printStackTrace();
-		}
-		catch (RemoteException e)
-		{
-			e.printStackTrace();
-		}
-		catch (NotBoundException e)
-		{
-			e.printStackTrace();
-		}
 		ArrayList<CommodityPO> temp = null;
 		try
 		{
@@ -1241,7 +846,9 @@ public class StubCommodityList
 		}
 		catch (RemoteException e)
 		{
+			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return null;
 		}
 		ArrayList<CommodityVO> result = new ArrayList<CommodityVO>();
 		for (int i = 0; i < temp.size(); i++)
@@ -1252,6 +859,7 @@ public class StubCommodityList
 		}
 		catch (RemoteException e)
 		{
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
@@ -1259,23 +867,6 @@ public class StubCommodityList
 
 	public void ExportCount(String FilePath, CountVO vo)
 	{
-		StubCommodityDataService comdata = null;
-		try
-		{
-			comdata = (StubCommodityDataService)Naming.lookup("rmi://127.0.0.1:1099/CustomerData");
-		}
-		catch (MalformedURLException e1)
-		{
-			e1.printStackTrace();
-		}
-		catch (RemoteException e1)
-		{
-			e1.printStackTrace();
-		}
-		catch (NotBoundException e1)
-		{
-			e1.printStackTrace();
-		}
 		ArrayList<CommodityPO> temp = null;
 		try
 		{
@@ -1283,7 +874,9 @@ public class StubCommodityList
 		}
 		catch (RemoteException e1)
 		{
+			// TODO Auto-generated catch block
 			e1.printStackTrace();
+			return;
 		}
 		try
 		{
@@ -1333,23 +926,6 @@ public class StubCommodityList
 
 	public ArrayList<CommodityVO> getRecords(Date d1, Date d2)
 	{// 库存查看
-		StubCommodityDataService comdata = null;
-		try
-		{
-			comdata = (StubCommodityDataService)Naming.lookup("rmi://127.0.0.1:1099/CustomerData");
-		}
-		catch (MalformedURLException e)
-		{
-			e.printStackTrace();
-		}
-		catch (RemoteException e)
-		{
-			e.printStackTrace();
-		}
-		catch (NotBoundException e)
-		{
-			e.printStackTrace();
-		}
 		ArrayList<CommodityVO> result = new ArrayList<CommodityVO>();
 		ArrayList<CommodityPO> temp = null;
 		try
@@ -1358,6 +934,7 @@ public class StubCommodityList
 		}
 		catch (RemoteException e)
 		{
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		for (int i = 0; i < temp.size(); i++)
