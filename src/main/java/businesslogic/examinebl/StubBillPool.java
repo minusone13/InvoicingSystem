@@ -667,7 +667,7 @@ public class StubBillPool {
 			CommodityBillSaverService cbs = null;
 			try
 			{
-				cbs = (CommodityBillSaverService)Naming.lookup("rmi://127.0.0.1:1099/CommodityBillSaverService");
+				cbs = (CommodityBillSaverService)Naming.lookup("rmi://127.0.0.1:1099/CommodityBillSaver");
 			}
 			catch (MalformedURLException e)
 			{
@@ -694,7 +694,7 @@ public class StubBillPool {
 			CommodityBillSaverService cbs = null;
 			try
 			{
-				cbs = (CommodityBillSaverService)Naming.lookup("rmi://127.0.0.1:1099/CommodityBillSaverService");
+				cbs = (CommodityBillSaverService)Naming.lookup("rmi://127.0.0.1:1099/CommodityBillSaver");
 			}
 			catch (MalformedURLException e)
 			{
@@ -721,7 +721,7 @@ public class StubBillPool {
 			CommodityBillSaverService cbs = null;
 			try
 			{
-				cbs = (CommodityBillSaverService)Naming.lookup("rmi://127.0.0.1:1099/CommodityBillSaverService");
+				cbs = (CommodityBillSaverService)Naming.lookup("rmi://127.0.0.1:1099/CommodityBillSaver");
 			}
 			catch (MalformedURLException e)
 			{
@@ -975,7 +975,7 @@ public class StubBillPool {
 		CommodityBillSaverService cbs = null;
 		try
 		{
-			cbs = (CommodityBillSaverService)Naming.lookup("rmi://127.0.0.1:1099/CommodityBillSaverService");
+			cbs = (CommodityBillSaverService)Naming.lookup("rmi://127.0.0.1:1099/CommodityBillSaver");
 		}
 		catch (MalformedURLException e1)
 		{

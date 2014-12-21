@@ -12,7 +12,7 @@ import data.commoditydata.StubStockDataController;
 import data.customerdata.CustomerData;
 import data.strategydata.StrategySaver;
 import data.userdata.UserDataController;
-import dataservice.accountdataservice.StubAccountDataService;
+import dataservice.accountdataservice.AccountDataService;
 import dataservice.billdataservice.CommodityBillSaverService;
 import dataservice.billdataservice.FinancialBillSaverService;
 import dataservice.billdataservice.SaleBillSaverService;
@@ -28,7 +28,7 @@ public class Server
 		 try
 		{
 			CustomerDataService customerdataservice= new CustomerData();
-			StubAccountDataService accountdataservice = new AccountData();
+			AccountDataService accountdataservice = new AccountData();
 			CommodityBillSaverService commoditybillsaver = new CommodityBillSaver();
 			FinancialBillSaverService financialbillsaver = new FinancialBillSaver();
 			SaleBillSaverService salebillsaver = new SaleBillSaver();
@@ -45,7 +45,7 @@ public class Server
 			Naming.bind("rmi://127.0.0.1:1099/StubStockDataController",commoditydata);
 			Naming.bind("rmi://127.0.0.1:1099/StrategySaver",strategysaver);
 			Naming.bind("rmi://127.0.0.1:1099/UserDataController",userdatacontroller);
-			
+			System.out.println("服务器启动完成");
 		}
 		catch (RemoteException e)
 		{

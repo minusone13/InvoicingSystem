@@ -14,9 +14,9 @@ import java.util.ArrayList;
 import po.AccountPO;
 import po.Tool;
 import po.stockpo.CommodityPO;
-import dataservice.accountdataservice.StubAccountDataService;
+import dataservice.accountdataservice.AccountDataService;
 
-public class AccountData extends UnicastRemoteObject implements StubAccountDataService{
+public class AccountData extends UnicastRemoteObject implements AccountDataService{
 	
 
 	public AccountData() throws RemoteException {
