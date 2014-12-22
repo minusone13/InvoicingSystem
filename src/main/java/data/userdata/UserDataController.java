@@ -30,7 +30,7 @@ public class UserDataController extends UnicastRemoteObject implements StubUserD
 	UserList l;
 	File f;
 
-	public UserDataController()throws RemoteException
+	private UserDataController()throws RemoteException
 	{
 		read();
 	}
