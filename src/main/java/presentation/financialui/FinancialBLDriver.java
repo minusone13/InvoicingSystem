@@ -51,7 +51,7 @@ public class FinancialBLDriver {
 		StubCommodityDataService data = null;
 		try
 		{
-			data = (StubCommodityDataService)Naming.lookup("rmi://127.0.0.1:1099/StubStockDataController.getInstance()");
+			data = (StubCommodityDataService)Naming.lookup("rmi://127.0.0.1:1099/StubStockDataController");
 		}
 		catch (MalformedURLException e)
 		{
