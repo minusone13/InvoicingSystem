@@ -1,20 +1,29 @@
 package presentation.financialui;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import javax.swing.*;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
-import entrance.Frame;
-import businesslogic.financialbl.Financial;
-import businesslogicservice.financialblservice.FinancialBlService;
-import presentation.financialui.InitialInfoPanel.versionItemListener;
+import presentation.commodityui.StockCheckPanel.JPeditForCheck;
+import presentation.commodityui.StockCheckPanel.JPeditForCheck.MouseListenerOfButton;
+import presentation.commodityui.StockCheckPanel.JPeditForCheck.TreadOfLeft;
+import presentation.commodityui.StockCheckPanel.JPeditForCheck.TreadOfRight;
 import tool.Export;
 import vo.inquiryVO.BusinessSituationVO;
 import vo.inquiryVO.InquiryConditionVO;
+import businesslogic.financialbl.Financial;
+import businesslogicservice.financialblservice.FinancialBlService;
+import entrance.Frame;
 
 public class BusinessConditionPanel extends JPanel{
 	FinancialBlService financial = new Financial();
@@ -38,13 +47,17 @@ public class BusinessConditionPanel extends JPanel{
 	DefaultTableModel modelOfProfit=new DefaultTableModel(new Object[][]{},profit);
 	JTable tableOfProfit = new JTable(modelOfProfit);
 	JScrollPane paneOfProfit;
-	
-	JTextField year, month, day, year2, month2, day2;
-	JLabel ye, mo, da, ye2, mo2, da2;
-	JLabel sure = new JLabel();
-	ImageIcon sureIcon1=new ImageIcon("src\\image\\InquiryUI\\确定.png");
-	ImageIcon sureIcon0=new ImageIcon("src\\image\\InquiryUI\\确定灰.png");
-	
+	//查询面板
+	private JPeditForSituation checkJP;
+	//查询按钮
+	private JLabel inquire=new JLabel();
+	//导出按钮
+	private JLabel download=new JLabel();
+	//图片
+	private ImageIcon searchIconW=new ImageIcon("src/image/function/searchW.png");
+	private ImageIcon searchIconR=new ImageIcon("src/image/function/searchR.png");
+	private ImageIcon downloadIconW=new ImageIcon("src/image/function/downLoadW.png");
+	private ImageIcon downloadIconR=new ImageIcon("src/image/function/downLoadR.png");
 	//frame的引用
     Frame frame;
 	public BusinessConditionPanel() {
@@ -133,53 +146,86 @@ public class BusinessConditionPanel extends JPanel{
         tableOfProfit.setBorder(null);
         tableOfProfit.setShowVerticalLines(false);
         
-		year = new JTextField(4);
-		ye = new JLabel("年");
-		month = new JTextField(2);
-		mo = new JLabel("月");
-		day = new JTextField(2);
-		da = new JLabel("日     至");
+        //查询面板
+        checkJP=new JPeditForSituation();
+    	checkJP.setLocation(905, 36);
+		//查询功能按钮
+		inquire.setIcon(searchIconW);
+		inquire.setBounds(820, 20, 50, 50);
+		inquire.addMouseListener(new MouseListenerOfButton(1));
+		//导出功能按钮
+		download.setIcon(downloadIconW);
+		download.setBounds(820, 85, 50, 50);
+		download.addMouseListener(new MouseListenerOfButton(2));
 		
-//		add(year);
-		year.setBounds(10, 0, 35, 20);
-//		add(ye);
-		ye.setBounds(46, -2, 25, 25);
-//		add(month);
-		month.setBounds(75,	0, 35, 20);
-//		add(mo);
-		mo.setBounds(111, -2, 25, 25);
-//		add(day);
-		day.setBounds(140, 0, 35, 20);
-//		add(da);
-		da.setBounds(176, -2, 50, 25);
-		
-		year2 = new JTextField(4);
-		ye2 = new JLabel("年");
-		month2 = new JTextField(2);
-		mo2 = new JLabel("月");
-		day2 = new JTextField(2);
-		da2 = new JLabel("日");
-		
-//		add(year2);
-		year2.setBounds(220, 0, 35, 20);
-//		add(ye2);
-		ye2.setBounds(256, -2, 25, 25);
-//		add(month2);
-		month2.setBounds(285, 0, 35, 20);
-//		add(mo2);
-		mo2.setBounds(321, -2, 25, 25);
-//		add(day2);
-		day2.setBounds(350, 0, 35, 20);
-//		add(da2);
-		da2.setBounds(386, -2, 25, 25);
-		
-//		add(sure);
-		sure.setBounds(420, 0, 20, 20);
-		sure.setIcon(sureIcon0);
-		sure.addMouseListener(new MouseListenOfButton(0));
 		this.add(jpbg1,4);
+		this.add(checkJP,5);
+		this.add(inquire,6);
+		this.add(download,7);
 	}
-	
+	public class MouseListenerOfButton implements MouseListener{
+
+		private int num;
+		public MouseListenerOfButton(int N){
+			num=N;
+		}
+		public void mouseClicked(MouseEvent e)
+		{
+			// TODO Auto-generated method stub
+			
+		}
+
+		public void mousePressed(MouseEvent e)
+		{
+			// TODO Auto-generated method stub
+			switch(num){
+				case 1:
+					inquire.setIcon(searchIconR);
+					break;
+				case 2:
+					download.setIcon(downloadIconR);
+					break;
+			}
+			
+		}
+
+		public void mouseReleased(MouseEvent e)
+		{
+			// TODO Auto-generated method stub
+			switch(num){
+				case 1:
+					inquire.setIcon(searchIconW);
+					//调出查询面板
+					checkJP.leftMove();
+					break;
+				case 2:
+					download.setIcon(downloadIconW);
+					break;
+			}
+			
+		}
+
+		public void mouseEntered(MouseEvent e)
+		{
+			// TODO Auto-generated method stub
+			
+		}
+
+		public void mouseExited(MouseEvent e)
+		{
+			// TODO Auto-generated method stub
+			switch(num){
+				case 1:
+					inquire.setIcon(searchIconW);
+					break;
+				case 2:
+					download.setIcon(downloadIconW);
+					break;
+			}
+			
+		}
+		
+	}
 	public void update(String before, String after) {
 		InquiryConditionVO icv = new InquiryConditionVO();
 		icv.setTimeAfter(after);
@@ -228,52 +274,260 @@ public class BusinessConditionPanel extends JPanel{
 		data[1] = temp;
 		new Export("经营情况表", data);
 	} 
-	public class MouseListenOfButton implements MouseListener{
-
-		private int num;
-		public MouseListenOfButton(int N){
-			num=N;
-		}
-		public void mouseClicked(MouseEvent e) {
+	//查找条件输入面板
+	public class JPeditForSituation extends JPanel
+	{
+		private JTextField year1;
+		private JTextField month1;
+		private JTextField date1;
+		private JTextField year2;
+		private JTextField month2;
+		private JTextField date2;
+		//右移按钮
+		private JLabel right=new JLabel();
+		//确认按钮
+		private JLabel confirm=new JLabel();
+		//图片
+		private ImageIcon right0=new ImageIcon("src/image/function/rightW.png");
+		private ImageIcon right1=new ImageIcon("src/image/function/rightR.png");
+		private ImageIcon confirm0=new ImageIcon("src/image/function/confirmW.png");
+		private ImageIcon confirm1=new ImageIcon("src/image/function/confirmR.png");
+		public JPeditForSituation(){
+			//面板大小
+			this.setSize(240,270);
+			//设置布局
+			this.setLayout(null);
+			//设置面板透明
+			this.setOpaque(false);
+			//右移按钮
+			right.setIcon(right0);
+			right.setBounds(10, 123, 24, 24);
+			right.addMouseListener(new MouseListenerOfButton(1));
+			//确认按钮
+			confirm.setIcon(confirm0);
+			confirm.setBounds(120, 236, 24, 24);
+			confirm.addMouseListener(new MouseListenerOfButton(3));
+			add(right);
+			add(confirm);
 			
+			JLabel ye1 = new JLabel("年");
+			ye1.setForeground(Color.WHITE);
+			ye1.setFont(new Font("宋体", Font.BOLD, 14));
+			ye1.setBounds(94, 60, 25, 21);
+			add(ye1);
+			
+			JLabel m1 = new JLabel("月");
+			m1.setForeground(Color.WHITE);
+			m1.setFont(new Font("宋体", Font.BOLD, 14));
+			m1.setBounds(160, 59, 25, 23);
+			add(m1);
+			
+			JLabel d1 = new JLabel("日");
+			d1.setForeground(Color.WHITE);
+			d1.setFont(new Font("宋体", Font.BOLD, 14));
+			d1.setBounds(220, 60, 16, 21);
+			add(d1);
+			
+			year1 = new JTextField();
+			year1.setOpaque(false);//文本框透明
+			year1.setForeground(Color.white);//前景色
+			year1.setBounds(40, 60, 50, 20);
+			add(year1);
+			year1.setColumns(10);
+			
+			month1 = new JTextField();
+			month1.setOpaque(false);//文本框透明
+			month1.setForeground(Color.white);//前景色
+			month1.setColumns(10);
+			month1.setBounds(113, 60, 43, 21);
+			add(month1);
+			
+			date1 = new JTextField();
+			date1.setOpaque(false);//文本框透明
+			date1.setForeground(Color.white);//前景色
+			date1.setColumns(10);
+			date1.setBounds(178, 60, 36, 21);
+			add(date1);
+			
+			JLabel start = new JLabel("起始时间");
+			start.setForeground(Color.WHITE);
+			start.setFont(new Font("宋体", Font.BOLD, 14));
+			start.setBounds(94, 29, 72, 21);
+			add(start);
+			
+			JLabel over = new JLabel("结束时间");
+			over.setForeground(Color.WHITE);
+			over.setFont(new Font("宋体", Font.BOLD, 14));
+			over.setBounds(94, 91, 72, 21);
+			add(over);
+			
+			year2 = new JTextField();
+			year2.setOpaque(false);//文本框透明
+			year2.setForeground(Color.white);//前景色
+			year2.setColumns(10);
+			year2.setBounds(40, 120, 50, 20);
+			add(year2);
+			
+			month2 = new JTextField();
+			month2.setOpaque(false);//文本框透明
+			month2.setForeground(Color.white);//前景色
+			month2.setColumns(10);
+			month2.setBounds(113, 120, 43, 21);
+			add(month2);
+			
+			date2 = new JTextField();
+			date2.setOpaque(false);//文本框透明
+			date2.setForeground(Color.white);//前景色
+			date2.setColumns(10);
+			date2.setBounds(178, 120, 36, 21);
+			add(date2);
+			
+			JLabel ye2 = new JLabel("年");
+			ye2.setForeground(Color.WHITE);
+			ye2.setFont(new Font("宋体", Font.BOLD, 14));
+			ye2.setBounds(94, 120, 25, 21);
+			add(ye2);
+			
+			JLabel m2 = new JLabel("月");
+			m2.setForeground(Color.WHITE);
+			m2.setFont(new Font("宋体", Font.BOLD, 14));
+			m2.setBounds(160, 120, 25, 23);
+			add(m2);
+			
+			JLabel d2 = new JLabel("日");
+			d2.setForeground(Color.WHITE);
+			d2.setFont(new Font("宋体", Font.BOLD, 14));
+			d2.setBounds(220, 120, 16, 21);
+			add(d2);
+			
+			JLabel bg = new JLabel("New label");
+			bg.setIcon(new ImageIcon("C:\\Users\\wyc\\git\\git\\InvoicingSystem\\src\\image\\function\\editBlock.PNG"));
+			bg.setBounds(0, 0, 240, 270);
+			add(bg);
 		}
+		public class MouseListenerOfButton implements MouseListener{
 
-		public void mousePressed(MouseEvent e) {
-			switch(num){
-			case 0:sure.setIcon(sureIcon0);
-			String y1 = year.getText();
-			String m1 = month.getText();
-			String d1 = day.getText();
-			String y2 = year2.getText();
-			String m2 = month2.getText();
-			String d2 = day2.getText();
-			String timeBefore = y1+"/"+m1+"/"+d1;
-			String timeAfter = y2+"/"+m2+"/"+d2;
-			update(timeBefore, timeAfter);				
-			break;
+			private int num;//1、右移  3、确认
+			public MouseListenerOfButton(int N){
+				num=N;
+			}
+			
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
 				
 			}
-		}
 
-		public void mouseReleased(MouseEvent e) {
-			switch(num){
-			case 0:sure.setIcon(sureIcon1); break;
-					
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				switch(num){
+				case 1:
+					right.setIcon(right1);
+					//右移
+					RightMove();
+					break;
+				case 3:
+					confirm.setIcon(confirm1);
+					break;
+				}
 			}
-		}
 
-		public void mouseEntered(MouseEvent e) {
-			switch(num){
-			case 0:sure.setIcon(sureIcon1);break;			
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				switch(num){
+				case 1:
+					right.setIcon(right0);
+					break;
+				case 3:
+					confirm.setIcon(confirm0);
+					//点击查询
+					String y1 = year1.getText();
+					String m1 = month1.getText();
+					String d1 = date1.getText();
+					String y2 = year2.getText();
+					String m2 = month2.getText();
+					String d2 = date2.getText();
+					String timeBefore = y1+"/"+m1+"/"+d1;
+					String timeAfter = y2+"/"+m2+"/"+d2;
+					BusinessConditionPanel.this.update(timeBefore, timeAfter);				
+					break;
+				}
+			}
+
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				switch(num){
+				case 1:
+					right.setIcon(right0);
+					break;
+				case 3:
+					confirm.setIcon(confirm0);
+					break;
+				}
+			}
 			
-			}
 		}
+		public class TreadOfLeft  implements Runnable{
 
-		public void mouseExited(MouseEvent e) {
-			switch(num){
-			case 0:sure.setIcon(sureIcon0); break;
+			public void run() {
+				// TODO Auto-generated method stub
+				int x=905;
+				int y=36;
+				while(x!=665){
+					if((x-665)>10){
+						x-=10;
+					}
+					else{
+						x=665;
+					}
+					try {
+						Thread.sleep(50);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					JPeditForSituation.this.setLocation(x, y);
+				}
 			}
+			
 		}
 		
+		public class TreadOfRight  implements Runnable{
+
+			public void run() {
+				// TODO Auto-generated method stub
+				int x=665;
+				int y=36;
+				while(x!=905){
+					if((905-x)>10){
+						x+=10;
+					}
+					else{
+						x=905;
+					}
+					try {
+						Thread.sleep(50);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					JPeditForSituation.this.setLocation(x, y);
+				}
+			}
+			
+		}
+		public void leftMove(){
+			Thread t=new Thread(new TreadOfLeft());
+			t.start();
+		}
+		public void RightMove(){
+			Thread t=new Thread(new TreadOfRight());
+			t.start();
+		}
+
 	}
 }

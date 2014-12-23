@@ -115,7 +115,7 @@ public class JPmanageCustomer extends JPanel {
 				edit.setIcon(editIconW);
 				edit.setBounds(720, 150, 50, 50);
 				edit.addMouseListener(new MouseListenerOfButton(5));
-				//处理功能按钮
+				//查询功能按钮
 				inquire.setIcon(searchIconW);
 				inquire.setBounds(720, 215, 50, 50);
 				inquire.addMouseListener(new MouseListenerOfButton(3));

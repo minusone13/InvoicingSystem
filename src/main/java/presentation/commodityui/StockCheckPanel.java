@@ -20,6 +20,7 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
+import presentation.commodityui.JPmanageBills2.MouseListenerOfButton;
 import vo.stockvo.CommodityVO;
 import businesslogic.stockmanagerbl.StubStockController;
 import businesslogicservice.commodityblservice.StubCommodityBlService;
@@ -32,6 +33,17 @@ public class StockCheckPanel extends JPanel{
 	DefaultTableModel model=new DefaultTableModel(new Object[][]{},names);
 	JTable table = new JTable(model);
 	JScrollPane pane = new JScrollPane(table);
+	//查询面板
+	JPeditForCheck checkJP;
+	//查询按钮
+	private JLabel inquire=new JLabel();
+	//导出按钮
+	private JLabel download=new JLabel();
+	//图片
+	private ImageIcon searchIconW=new ImageIcon("src/image/function/searchW.png");
+	private ImageIcon searchIconR=new ImageIcon("src/image/function/searchR.png");
+	private ImageIcon downloadIconW=new ImageIcon("src/image/function/downLoadW.png");
+	private ImageIcon downloadIconR=new ImageIcon("src/image/function/downLoadR.png");
 	//frame的引用
     Frame frame;
     //逻辑层接口
@@ -59,7 +71,7 @@ public class StockCheckPanel extends JPanel{
 		{
 			e.printStackTrace();
 		}
-		this.setBounds(0, 0,800, 315);
+		this.setBounds(0, 0,905, 315);
 		//设置布局
 		this.setLayout(null);
 		//设置面板透明
@@ -67,7 +79,7 @@ public class StockCheckPanel extends JPanel{
 		//背景图
 		JLabel jpbg1=new JLabel();
 		jpbg1.setBounds(0, 0,800, 315);
-		jpbg1.setIcon(new ImageIcon("src/image/block/blockForTable.png"));
+		jpbg1.setIcon(new ImageIcon("src/image/block/blockForTable3.png"));
 		//表格透明
 		table.setOpaque(false);
         DefaultTableCellRenderer render1 = new DefaultTableCellRenderer();   
@@ -81,9 +93,86 @@ public class StockCheckPanel extends JPanel{
 		pane.getViewport().setOpaque(false);//设置透明
 		pane.setBorder(null);
 		pane.setBounds(0, 0, 800,315);
+		//查找条件输入面板
+		checkJP=new JPeditForCheck();
+		checkJP.setLocation(905, 36);
+		//查询功能按钮
+		inquire.setIcon(searchIconW);
+		inquire.setBounds(820, 20, 50, 50);
+		inquire.addMouseListener(new MouseListenerOfButton(1));
+		//导出功能按钮
+		download.setIcon(downloadIconW);
+		download.setBounds(820, 85, 50, 50);
+		download.addMouseListener(new MouseListenerOfButton(2));
 		
-		add(pane,0);
-		add(jpbg1,1);
+		add(checkJP,0);
+		add(pane,1);
+		add(inquire,2);
+		add(download,3);
+		add(jpbg1,4);
+		
+	}
+	public class MouseListenerOfButton implements MouseListener{
+
+		private int num;
+		public MouseListenerOfButton(int N){
+			num=N;
+		}
+		public void mouseClicked(MouseEvent e)
+		{
+			// TODO Auto-generated method stub
+			
+		}
+
+		public void mousePressed(MouseEvent e)
+		{
+			// TODO Auto-generated method stub
+			switch(num){
+				case 1:
+					inquire.setIcon(searchIconR);
+					break;
+				case 2:
+					download.setIcon(downloadIconR);
+					break;
+			}
+			
+		}
+
+		public void mouseReleased(MouseEvent e)
+		{
+			// TODO Auto-generated method stub
+			switch(num){
+				case 1:
+					inquire.setIcon(searchIconW);
+					//调出查询面板
+					checkJP.leftMove();
+					break;
+				case 2:
+					download.setIcon(downloadIconW);
+					break;
+			}
+			
+		}
+
+		public void mouseEntered(MouseEvent e)
+		{
+			// TODO Auto-generated method stub
+			
+		}
+
+		public void mouseExited(MouseEvent e)
+		{
+			// TODO Auto-generated method stub
+			switch(num){
+				case 1:
+					inquire.setIcon(searchIconW);
+					break;
+				case 2:
+					download.setIcon(downloadIconW);
+					break;
+			}
+			
+		}
 		
 	}
 	public void update(Date date1,Date date2){
@@ -169,16 +258,22 @@ public class StockCheckPanel extends JPanel{
 			add(d1);
 			
 			year1 = new JTextField();
+			year1.setOpaque(false);//文本框透明
+			year1.setForeground(Color.white);//前景色
 			year1.setBounds(40, 60, 50, 20);
 			add(year1);
 			year1.setColumns(10);
 			
 			month1 = new JTextField();
+			month1.setOpaque(false);//文本框透明
+			month1.setForeground(Color.white);//前景色
 			month1.setColumns(10);
 			month1.setBounds(113, 60, 43, 21);
 			add(month1);
 			
 			date1 = new JTextField();
+			date1.setOpaque(false);//文本框透明
+			date1.setForeground(Color.white);//前景色
 			date1.setColumns(10);
 			date1.setBounds(178, 60, 36, 21);
 			add(date1);
@@ -196,16 +291,22 @@ public class StockCheckPanel extends JPanel{
 			add(over);
 			
 			year2 = new JTextField();
+			year2.setOpaque(false);//文本框透明
+			year2.setForeground(Color.white);//前景色
 			year2.setColumns(10);
 			year2.setBounds(40, 120, 50, 20);
 			add(year2);
 			
 			month2 = new JTextField();
+			month2.setOpaque(false);//文本框透明
+			month2.setForeground(Color.white);//前景色
 			month2.setColumns(10);
 			month2.setBounds(113, 120, 43, 21);
 			add(month2);
 			
 			date2 = new JTextField();
+			date2.setOpaque(false);//文本框透明
+			date2.setForeground(Color.white);//前景色
 			date2.setColumns(10);
 			date2.setBounds(178, 120, 36, 21);
 			add(date2);

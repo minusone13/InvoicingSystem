@@ -1,6 +1,8 @@
 package presentation.commodityui;
 
 import java.awt.Color;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
@@ -17,6 +19,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
+import presentation.commodityui.StockCheckPanel.MouseListenerOfButton;
 import vo.stockvo.CommodityVO;
 import businesslogic.stockmanagerbl.StubStockController;
 import businesslogicservice.commodityblservice.StubCommodityBlService;
@@ -33,8 +36,13 @@ public class StockInventoryPanel extends JPanel{
 	DefaultTableModel model=new DefaultTableModel(new Object[][]{},names);
 	JTable table = new JTable(model);
 	JScrollPane pane = new JScrollPane(table);
+	//导出按钮
+	private JLabel download=new JLabel();
+	//图片
+	private ImageIcon downloadIconW=new ImageIcon("src/image/function/downLoadW.png");
+	private ImageIcon downloadIconR=new ImageIcon("src/image/function/downLoadR.png");
 	//frame的引用
-    Frame frame;
+	private Frame frame;
     //逻辑层接口
 	 StubCommodityBlService stockbl=new StubStockController();
 	public StockInventoryPanel() {
@@ -60,7 +68,7 @@ public class StockInventoryPanel extends JPanel{
 		{
 			e.printStackTrace();
 		}
-		this.setBounds(0, 0, 400, 315);
+		this.setBounds(0, 0, 800, 315);
 		//设置布局
 		this.setLayout(null);
 		//设置面板透明
@@ -82,9 +90,66 @@ public class StockInventoryPanel extends JPanel{
 		pane.getViewport().setOpaque(false);//设置透明
 		pane.setBorder(null);
 		pane.setBounds(0, 0, 400, 315);
+		//导出功能按钮
+		download.setIcon(downloadIconW);
+		download.setBounds(720,20, 50, 50);
+		download.addMouseListener(new MouseListenerOfButton(2));
 		
 		add(pane,0);
 		add(jpbg1,1);
+		add(download,2);
+		
+	}
+	public class MouseListenerOfButton implements MouseListener{
+
+		private int num;
+		public MouseListenerOfButton(int N){
+			num=N;
+		}
+		public void mouseClicked(MouseEvent e)
+		{
+			// TODO Auto-generated method stub
+			
+		}
+
+		public void mousePressed(MouseEvent e)
+		{
+			// TODO Auto-generated method stub
+			switch(num){
+				case 2:
+					download.setIcon(downloadIconR);
+					break;
+			}
+			
+		}
+
+		public void mouseReleased(MouseEvent e)
+		{
+			// TODO Auto-generated method stub
+			switch(num){
+				case 2:
+					download.setIcon(downloadIconW);
+					break;
+			}
+			
+		}
+
+		public void mouseEntered(MouseEvent e)
+		{
+			// TODO Auto-generated method stub
+			
+		}
+
+		public void mouseExited(MouseEvent e)
+		{
+			// TODO Auto-generated method stub
+			switch(num){
+				case 2:
+					download.setIcon(downloadIconW);
+					break;
+			}
+			
+		}
 		
 	}
 	public void update(){

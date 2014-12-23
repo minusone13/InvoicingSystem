@@ -207,6 +207,8 @@ public class JPmanageBills2 extends JPanel {
 				table.setList(new String[1][7]);
 				table.updateShow();
 				table.setVisible(true);
+				edit.setVisible(true);
+				add.setVisible(true);
 				break;
 			case SaleSheet:
 				String[] temp3={"编号","名称","型号","数量","单价","金额","备注"};
@@ -215,6 +217,8 @@ public class JPmanageBills2 extends JPanel {
 				table.setList(new String[1][7]);
 				table.updateShow();
 				table.setVisible(true);
+				edit.setVisible(true);
+				add.setVisible(true);
 				break;
 			case SaleBackSheet:
 				String[] temp4={"编号","名称","型号","数量","单价","金额","备注"};
@@ -223,6 +227,8 @@ public class JPmanageBills2 extends JPanel {
 				table.setList(new String[1][7]);
 				table.updateShow();
 				table.setVisible(true);
+				edit.setVisible(true);
+				add.setVisible(true);
 				break;
 			case ReceiptBill:
 				String[] temp5={"银行账户","转账金额","备注"};
@@ -247,6 +253,8 @@ public class JPmanageBills2 extends JPanel {
 				table.setList(new String[1][7]);
 				table.updateShow();
 				table.setVisible(true);
+				edit.setVisible(true);
+				add.setVisible(true);
 				break;
 			case CashPaymentBill:
 				String[] temp8={"条目名","金额","备注"};
