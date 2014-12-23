@@ -116,13 +116,13 @@ public class StubStockDataController extends UnicastRemoteObject implements Stub
 		return l.getCountNo();
 	}
 
-	public StubCommodityList getL()throws RemoteException
+	public StubCommodityList getL()
 	{
 		read();
 		return l;
 	}
 
-	public void Initial()throws RemoteException
+	public void Initial()
 	{//初始化方法，程序第一次运行时使用
 		f = Tool.Opendoc(Tool.stock);
 
@@ -208,7 +208,7 @@ public class StubStockDataController extends UnicastRemoteObject implements Stub
 		return l.findCategory(id).open();
 	}
 
-	public void read()throws RemoteException
+	public void read()
 	{
 		f = Tool.Opendoc(Tool.stock);
 
@@ -257,13 +257,13 @@ public class StubStockDataController extends UnicastRemoteObject implements Stub
 		}
 	}
 
-	public boolean save()throws RemoteException
+	public boolean save()
 	{
 		save(f);
 		return true;
 	}
 
-	public boolean save(File file)throws RemoteException
+	public boolean save(File file)
 	{
 		try
 		{
@@ -280,14 +280,14 @@ public class StubStockDataController extends UnicastRemoteObject implements Stub
 		return true;
 	}
 
-	public boolean save(String s)throws RemoteException
+	public boolean save(String s)
 	{
 		File file = Tool.Opendoc(s);
 		save(file);
 		return true;
 	}
 
-	public boolean saveAndBuild(String s)throws RemoteException
+	public boolean saveAndBuild(String s)
 	{//用于期初建账
 		read();
 		l.accountBuild();
@@ -301,7 +301,7 @@ public class StubStockDataController extends UnicastRemoteObject implements Stub
 		instance = new StubStockDataController();
 	}
 
-	public void setFilePath(String s) 
+	public void setFilePath(String s) throws RemoteException
 	{
 		Tool.stock = s;
 		try
@@ -315,7 +315,7 @@ public class StubStockDataController extends UnicastRemoteObject implements Stub
 		}
 	}
 
-	public void setL(StubCommodityList l)throws RemoteException
+	public void setL(StubCommodityList l)
 	{
 		read();
 		this.l = l;

@@ -32,7 +32,7 @@ public class salebillController implements SaleBillBlService,salebillForFinancia
 		
 		// salebillsaversevvice中有getall的方法；
 		public salebillController(){
-			System.out.println("salebillController success!");
+			//System.out.println("salebillController success!");
 		}
 
 		public boolean createPurSheet(PurSheetVO vo) {

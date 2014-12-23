@@ -9,6 +9,8 @@ import java.util.*;
 import po.BillState;
 import po.RM;
 import po.Role;
+import po.Tool;
+import po.stockpo.PackPO;
 import presentation.userui.Login;
 import dataservice.commoditydataservice.*;
 import businesslogic.commoditybillbl.*;
@@ -30,30 +32,34 @@ public class StubStockController implements StubCommodityBlService,
 	StubCommodityList l = new StubCommodityList();
 	StubCommodityBill bl = new StubCommodityBill();
 	UserService us = new UserController();
-	//static StubCommodityDataService comdata = StubStockDataController.getInstance();
+	static StubCommodityDataService comdata = null;
 	static StubBillPool pool = new StubBillPool();
 	User user = new User("I0000", Role.STOCK_STAFF, "DefaultStock", "default",
 			"Liu");
-
-	public StubStockController()
+	static
 	{
-		StubCommodityDataService comdata = null;
 		try
 		{
 			comdata = (StubCommodityDataService)Naming.lookup("rmi://127.0.0.1:1099/StubStockDataController");
 		}
 		catch (MalformedURLException e)
 		{
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		catch (RemoteException e)
 		{
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		catch (NotBoundException e)
 		{
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	public StubStockController()
+	{
 		UserVO temp = Login.user;
 		if (temp != null)
 		{
@@ -113,8 +119,7 @@ public class StubStockController implements StubCommodityBlService,
 
 	public void setdataobject(StubCommodityDataService comdata)
 	{
-		//oh我又是无法改动这个;
-		//this.comdata = comdata;
+		this.comdata = comdata;
 		l.setcomdata(comdata);
 	}
 
@@ -391,29 +396,13 @@ public class StubStockController implements StubCommodityBlService,
 
 	public void setFilePath(String s)
 	{// 用于期初建账查看商品信息
-		StubCommodityDataService comdata = null;
-		try
-		{
-			comdata = (StubCommodityDataService)Naming.lookup("rmi://127.0.0.1:1099/StubStockDataController");
-		}
-		catch (MalformedURLException e)
-		{
-			e.printStackTrace();
-		}
-		catch (RemoteException e)
-		{
-			e.printStackTrace();
-		}
-		catch (NotBoundException e)
-		{
-			e.printStackTrace();
-		}
 		try
 		{
 			comdata.setFilePath(s);
 		}
 		catch (RemoteException e)
 		{
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

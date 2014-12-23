@@ -17,15 +17,9 @@ public class InitialUser
 		}
 		catch (RemoteException e)
 		{
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		try
-		{
-			data.initial();
-		}
-		catch (RemoteException e)
-		{
-			e.printStackTrace();
-		}
+		data.initial();
 	}
 }

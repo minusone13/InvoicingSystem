@@ -30,7 +30,7 @@ public class UserDataController extends UnicastRemoteObject implements StubUserD
 	UserList l;
 	File f;
 
-	public UserDataController()throws RemoteException
+	private UserDataController()throws RemoteException
 	{
 		read();
 	}
@@ -76,7 +76,7 @@ public class UserDataController extends UnicastRemoteObject implements StubUserD
 		return users;
 	}
 
-	public void initial()throws RemoteException
+	public void initial()
 	{
 		f = Tool.Opendoc(Tool.user);
 
@@ -143,7 +143,7 @@ public class UserDataController extends UnicastRemoteObject implements StubUserD
 		return l.login(account, password);
 	}
 
-	public void read()throws RemoteException
+	public void read()
 	{
 		f = Tool.Opendoc(Tool.user);
 
@@ -192,7 +192,7 @@ public class UserDataController extends UnicastRemoteObject implements StubUserD
 		}
 	}
 
-	public void save()throws RemoteException
+	public void save()
 	{
 		ObjectOutputStream oos = null;
 		try

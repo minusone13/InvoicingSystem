@@ -54,15 +54,7 @@ public class AccountBuild extends UnicastRemoteObject implements AccountBuildSer
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		try
-		{
-			sd.saveAndBuild("accountBuild\\commodity\\"+version+".ser");
-		}
-		catch (RemoteException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}		
+		sd.saveAndBuild("accountBuild\\commodity\\"+version+".ser");	
 	}
 	
 	public void saveCustomer() throws RemoteException {
