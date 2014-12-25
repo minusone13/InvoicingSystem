@@ -213,8 +213,17 @@ public class JPtreeContent extends JPanel {
 		if(rm==RM.done){
 			treeModel.removeNodeFromParent(node);
 		}
-		else{
+		else if(rm==RM.alreadyHaveUnremoveableContents){
 			JPmanagerCom.getFrame().getWarning().showWarning("删除失败，已有子分类或者商品");
+		}
+		else if(rm==RM.RMIError){
+			JPmanagerCom.getFrame().getWarning().showWarning(WarningText.RMIError);
+		}
+		else if(rm==RM.notfound){
+			JPmanagerCom.getFrame().getWarning().showWarning("没有对应分类，请重试");
+		}
+		else{
+			JPmanagerCom.getFrame().getWarning().showWarning(WarningText.unknownerror);
 		}
 	}
 	/*返回最后选择的节点*/
@@ -236,6 +245,12 @@ public class JPtreeContent extends JPanel {
 		}
 		else if(rm==RM.redundance){
 			JPmanagerCom.getFrame().getWarning().showWarning("已存在该分类");
+		}
+		else if(rm==RM.RMIError){
+			JPmanagerCom.getFrame().getWarning().showWarning(WarningText.RMIError);
+		}
+		else{
+			JPmanagerCom.getFrame().getWarning().showWarning(WarningText.unknownerror);
 		}
 	}
 	/*删除当前选中的节点*/

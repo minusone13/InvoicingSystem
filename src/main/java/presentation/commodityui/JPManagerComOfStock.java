@@ -394,6 +394,12 @@ public class JPManagerComOfStock extends JPanel {
 								else if(rm==RM.treeerror){
 									frame.getWarning().showWarning("分类下已有分类，不能添加商品");
 								}
+								else if(rm==RM.RMIError){//added by lhw
+									frame.getWarning().showWarning(WarningText.RMIError);
+								}
+								else{
+									frame.getWarning().showWarning(WarningText.unknownerror);
+								}
 							}
 							else{
 								frame.getWarning().showWarning("请选择分类");
