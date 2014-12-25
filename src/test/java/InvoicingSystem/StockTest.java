@@ -774,7 +774,7 @@ public class StockTest{
 	}
 	
 	@AfterClass
-	public static void end() throws RemoteException
+	public static void end()
 	{
 		StockTest st = new StockTest();
 		st.initial();
@@ -783,11 +783,28 @@ public class StockTest{
 		//创建赠送单
 		GiftBillVO vo = new GiftBillVO();
 		ArrayList<CommodityVO> coms = new ArrayList<CommodityVO>();
-		CommodityPO po = data.findCommodity("好好防盗门", "fdm05");
+		CommodityPO po = null;
+		try
+		{
+			po = data.findCommodity("好好防盗门", "fdm05");
+		}
+		catch (RemoteException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		CommodityVO com = new MockCommodity(po).toVO();
 		com.setNumber(10);
 		coms.add(com);
-		po = data.findCommodity("迪迪防盗门","dd02");
+		try
+		{
+			po = data.findCommodity("迪迪防盗门","dd02");
+		}
+		catch (RemoteException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		com = new MockCommodity(po).toVO();
 		com.setNumber(15);
 		coms.add(com);
@@ -806,7 +823,15 @@ public class StockTest{
 		//创建第二个赠送单，同时会产生一个报警单
 		vo = new GiftBillVO();
 		coms = new ArrayList<CommodityVO>();
-		po = data.findCommodity("迪迪防盗门","dd02");
+		try
+		{
+			po = data.findCommodity("迪迪防盗门","dd02");
+		}
+		catch (RemoteException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		com = new MockCommodity(po).toVO();
 		com.setNumber(26);
 		coms.add(com);
@@ -824,7 +849,16 @@ public class StockTest{
 		
 		//创建一个报损单，这张报损单没有提交，如果提交了将产生一个报警单
 		SpillsLossBillVO vo1 = new SpillsLossBillVO();
-		CommodityPO compo = data.findCommodity("好好防盗门", "fdm05");
+		CommodityPO compo = null;
+		try
+		{
+			compo = data.findCommodity("好好防盗门", "fdm05");
+		}
+		catch (RemoteException e1)
+		{
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		CommodityVO com1 = new MockCommodity(compo).toVO();
 		com1.setNumber(30);
 		vo1.setCom(com1);
@@ -843,7 +877,15 @@ public class StockTest{
 		
 		//创建一个报溢单
 		vo1 = new SpillsLossBillVO();
-		compo = data.findCommodity("好好防盗门", "fdm05");
+		try
+		{
+			compo = data.findCommodity("好好防盗门", "fdm05");
+		}
+		catch (RemoteException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		com1 = new MockCommodity(compo).toVO();
 		com1.setNumber(1);
 		vo1.setCom(com1);
