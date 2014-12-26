@@ -16,6 +16,8 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
+import presentation.financialui.BusinessConditionPanel.JPeditForSituation;
+import presentation.financialui.BusinessConditionPanel.MouseListenerOfButton;
 import tool.Export;
 import vo.CustomerVO;
 import vo.SaleBackSheetVO;
@@ -34,13 +36,23 @@ public class SaleDetailPanel extends JPanel{
 	DefaultTableModel model = new DefaultTableModel(new Object[][]{}, names );
 	JTable table = new JTable(model);
 	JScrollPane pane = new JScrollPane(table);
-	
+	//查询面板
+	private JPeditForSaleDetail checkJP;
+	//查询按钮
+	private JLabel inquire=new JLabel();
+	//导出按钮
+	private JLabel download=new JLabel();
+	//图片
+	private ImageIcon searchIconW=new ImageIcon("src/image/function/searchW.png");
+	private ImageIcon searchIconR=new ImageIcon("src/image/function/searchR.png");
+	private ImageIcon downloadIconW=new ImageIcon("src/image/function/downLoadW.png");
+	private ImageIcon downloadIconR=new ImageIcon("src/image/function/downLoadR.png");
 	public SaleDetailPanel(){
 		initial();
 	}
 	
 	private void initial() {
-		this.setBounds(0, 0, 450, 315);
+		this.setBounds(0, 0, 905, 315);
 		//设置布局
 		this.setLayout(null);
 		//设置面板透明
@@ -62,9 +74,24 @@ public class SaleDetailPanel extends JPanel{
 		pane.getViewport().setOpaque(false);//设置透明
 		pane.setBorder(null);
 		pane.setBounds(0, 0, 400, 315);
+		
+	       //查询面板
+        checkJP=new JPeditForSaleDetail();
+    	checkJP.setLocation(905, 36);
+		//查询功能按钮
+		inquire.setIcon(searchIconW);
+		inquire.setBounds(720, 20, 50, 50);
+		inquire.addMouseListener(new MouseListenerOfButton(1));
+		//导出功能按钮
+		download.setIcon(downloadIconW);
+		download.setBounds(720, 85, 50, 50);
+		download.addMouseListener(new MouseListenerOfButton(2));
 				
-		this.add(pane,0);
-		this.add(jpbg1,1);
+		this.add(checkJP,0);
+		this.add(inquire,1);
+		this.add(download,2);
+		this.add(pane,3);
+		this.add(jpbg1,4);
 	}
 	
 	public void update(InquirySaleVO isv) {
@@ -74,7 +101,69 @@ public class SaleDetailPanel extends JPanel{
 		model.setDataVector(data, names);
 		table.updateUI();
 	}
-	
+	public class MouseListenerOfButton implements MouseListener{
+
+		private int num;
+		public MouseListenerOfButton(int N){
+			num=N;
+		}
+		public void mouseClicked(MouseEvent e)
+		{
+			// TODO Auto-generated method stub
+			
+		}
+
+		public void mousePressed(MouseEvent e)
+		{
+			// TODO Auto-generated method stub
+			switch(num){
+				case 1:
+					inquire.setIcon(searchIconR);
+					break;
+				case 2:
+					download.setIcon(downloadIconR);
+					break;
+			}
+			
+		}
+
+		public void mouseReleased(MouseEvent e)
+		{
+			// TODO Auto-generated method stub
+			switch(num){
+				case 1:
+					inquire.setIcon(searchIconW);
+					//调出查询面板
+					checkJP.leftMove();
+					break;
+				case 2:
+					download.setIcon(downloadIconW);
+					break;
+			}
+			
+		}
+
+		public void mouseEntered(MouseEvent e)
+		{
+			// TODO Auto-generated method stub
+			
+		}
+
+		public void mouseExited(MouseEvent e)
+		{
+			// TODO Auto-generated method stub
+			switch(num){
+				case 1:
+					inquire.setIcon(searchIconW);
+					break;
+				case 2:
+					download.setIcon(downloadIconW);
+					break;
+			}
+			
+		}
+		
+	}
 	private Object[][] getSaleDetail(InquirySaleVO isv) {
 		ArrayList<SaleSheetVO> saleSheet = financial.getSaleSaleSheet(isv);
 		ArrayList<SaleBackSheetVO> saleBackSheet = financial.getSaleSaleBackSheet(isv);
@@ -193,16 +282,22 @@ public class SaleDetailPanel extends JPanel{
 			
 			year1 = new JTextField();
 			year1.setBounds(40, 37, 50, 20);
+			year1.setOpaque(false);
+			year1.setForeground(Color.white);
 			add(year1);
 			year1.setColumns(10);
 			
 			month1 = new JTextField();
 			month1.setColumns(10);
+			month1.setOpaque(false);
+			month1.setForeground(Color.white);
 			month1.setBounds(113, 37, 43, 21);
 			add(month1);
 			
 			date1 = new JTextField();
 			date1.setColumns(10);
+			date1.setOpaque(false);
+			date1.setForeground(Color.white);
 			date1.setBounds(178, 37, 36, 21);
 			add(date1);
 			
@@ -220,16 +315,22 @@ public class SaleDetailPanel extends JPanel{
 			
 			year2 = new JTextField();
 			year2.setColumns(10);
+			year2.setOpaque(false);
+			year2.setForeground(Color.white);
 			year2.setBounds(40, 90, 50, 20);
 			add(year2);
 			
 			month2 = new JTextField();
 			month2.setColumns(10);
+			month2.setOpaque(false);
+			month2.setForeground(Color.white);
 			month2.setBounds(113, 90, 43, 21);
 			add(month2);
 			
 			date2 = new JTextField();
 			date2.setColumns(10);
+			date2.setOpaque(false);
+			date2.setForeground(Color.white);
 			date2.setBounds(178, 90, 36, 21);
 			add(date2);
 			
@@ -259,6 +360,8 @@ public class SaleDetailPanel extends JPanel{
 			
 			commodityName = new JTextField();
 			commodityName.setColumns(10);
+			commodityName.setOpaque(false);
+			commodityName.setForeground(Color.white);
 			commodityName.setBounds(104, 121, 126, 20);
 			add(commodityName);
 			
@@ -277,6 +380,8 @@ public class SaleDetailPanel extends JPanel{
 			}
 			customerCombo = new JComboBox(customerS2);
 			customerCombo.setBounds(74, 145, 156, 20);
+			customerCombo.setBackground(Color.gray);
+			customerCombo.setForeground(Color.white);
 			add(customerCombo);
 			
 			JLabel label_2 = new JLabel("业务员");
@@ -293,12 +398,16 @@ public class SaleDetailPanel extends JPanel{
 			
 			salemanTxt = new JTextField();
 			salemanTxt.setColumns(10);
+			salemanTxt.setOpaque(false);
+			salemanTxt.setForeground(Color.white);
 			salemanTxt.setBounds(90, 171, 140, 20);
 			add(salemanTxt);
 			
 			String[] warehouseStr={"仓库1"};
 			warehouseCombo = new JComboBox(warehouseStr);
 			warehouseCombo.setBounds(74, 196, 156, 20);
+	   		warehouseCombo.setBackground(Color.gray);
+    		warehouseCombo.setForeground(Color.white);
 			add(warehouseCombo);
 			
 			JLabel bg = new JLabel("New label");

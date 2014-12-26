@@ -42,20 +42,23 @@ public class AccountBuildIndexPanel extends JPanel{
 		this.setLayout(null);
 		this.setOpaque(false);
 		this.setBounds(0, 0, 960, 600);
-		
+		//背景
+		JLabel bg = new JLabel("New label");
+		bg.setIcon(new ImageIcon("src\\image\\passBill\\passBillBlock1.png"));
+		bg.setBounds(55, 233, 445, 330);
 		//label初始化
 		this.add(clientInfo,0);
-		clientInfo.setBounds(100, 280, 100, 100);
+		clientInfo.setBounds(65, 248, 100, 100);
 		clientInfo.setIcon(clientInfoIcon0);
 		clientInfo.addMouseListener(new MouseListenOfButton(21));
 		//label初始化
 		this.add(commodityInfo,1);
-		commodityInfo.setBounds(200, 280, 100, 100);
+		commodityInfo.setBounds(170, 248, 100, 100);
 		commodityInfo.setIcon(commodityInfoIcon0);
 		commodityInfo.addMouseListener(new MouseListenOfButton(22));
 		//label初始化
 		this.add(accountInfo,2);
-		accountInfo.setBounds(300, 280, 100, 100);
+		accountInfo.setBounds(275, 248, 100, 100);
 		accountInfo.setIcon(accountInfoIcon0);
 		accountInfo.addMouseListener(new MouseListenOfButton(23));
 		
@@ -63,6 +66,8 @@ public class AccountBuildIndexPanel extends JPanel{
 		buildButton.setBounds(800, 450, 50, 50);
 		buildButton.setIcon(buildIcon0);
 		buildButton.addMouseListener(new MouseListenOfButton(24));
+		
+		this.add(bg,4);
 	}
 	
 	public class MouseListenOfButton implements MouseListener{

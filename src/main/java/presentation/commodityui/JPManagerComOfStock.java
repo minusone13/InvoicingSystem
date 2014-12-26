@@ -93,6 +93,7 @@ public class JPManagerComOfStock extends JPanel {
 	
  	public void getFrame( Frame f){
  		frame=f;
+ 		manageCom.getFrame(f);
 	}
 	 
 	public class MouseListenerOfButton implements MouseListener{

@@ -24,8 +24,8 @@ public class StubStrategyPool {
 	/*构造函数*/
 	public StubStrategyPool(){
 	
-		//清除保存的记录
-		save();
+//		//清除保存的记录
+//		save();
 
 		read();
 	}
