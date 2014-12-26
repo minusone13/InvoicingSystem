@@ -77,8 +77,8 @@ public class Inquiry {
 			}
 			
             //业务员
-			if(isv.getUserID()!=null) {
-				if(sale.getUserID().equals(sale.getUserID())){}
+			if(isv.getDeSaler()!=null) {
+				if(sale.getcustomer().getdeSaler().equals(isv.getDeSaler())){}
 				else continue;				
 			}
 			saleSheetVO.add(sale.getVO());
@@ -133,8 +133,8 @@ public class Inquiry {
 				else continue;
 			}
 			//业务员
-			if(isv.getUserID()!=null) {
-				if(saleback.getUserID().equals(saleback.getUserID())){}
+			if(isv.getDeSaler()!=null) {
+				if(saleback.getcustomer().getdeSaler().equals(isv.getDeSaler())){}
 				else continue;				
 			}
 			saleBackSheetVO.add(saleback.getVO());

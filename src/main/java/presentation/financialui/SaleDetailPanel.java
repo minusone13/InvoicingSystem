@@ -171,36 +171,89 @@ public class SaleDetailPanel extends JPanel{
 		int size1 = saleSheet.size();
 		int size2 = saleBackSheet.size();
 		int size = size1 + size2;
-		 Object[][] data = new Object[size][];
-		 for(int i=0;i<size1;i++) {
-			 SaleSheetVO vo = saleSheet.get(i);
-			 ArrayList<CommodityVO> list = vo.getsheet();
-			 int sizeOfList = list.size();
-			 CommodityVO commodity=null;
-			 for(int j=0;j<sizeOfList;j++) {
-				 commodity = list.get(j);
-				 if(commodity.getName().equals(isv.getCommodityName())) break;
+		if(isv.getCommodityName()!=null) { 
+			 Object[][] data = new Object[size][];
+			 for(int i=0;i<size1;i++) {
+				 SaleSheetVO vo = saleSheet.get(i);
+				 ArrayList<CommodityVO> list = vo.getsheet();
+				 int sizeOfList = list.size();
+				 CommodityVO commodity=null;
+				 
+			 	for(int j=0;j<sizeOfList;j++) {
+					 commodity = list.get(j);
+					 if(commodity.getName().equals(isv.getCommodityName())) break;
+				 }
+				 double total = commodity.getOut()*commodity.getNumber();
+				 Object[] temp ={vo.getdate(), commodity.getName(), commodity.getModel(), 
+						 commodity.getNumber(), commodity.getOut(), total};
+				 data[i] = temp;
 			 }
-			 double total = commodity.getOut()*commodity.getNumber();
-			 Object[] temp ={vo.getdate(), commodity.getName(), commodity.getModel(), 
-					 commodity.getNumber(), commodity.getOut(), total};
-			 data[i] = temp;
-		 }
-		 for(int i=size1;i<size;i++) {
-			 SaleBackSheetVO vo = saleBackSheet.get(i);
-			 ArrayList<CommodityVO> list = vo.getsheet();
-			 int sizeOfList = list.size();
-			 CommodityVO commodity=null;
-			 for(int j=0;j<sizeOfList;j++) {
-				 commodity = list.get(j);
-				 if(commodity.getName().equals(isv.getCommodityName())) break;
+			 for(int i=size1;i<size;i++) {
+				 SaleBackSheetVO vo = saleBackSheet.get(i);
+				 ArrayList<CommodityVO> list = vo.getsheet();
+				 int sizeOfList = list.size();
+				 CommodityVO commodity=null;
+				 for(int j=0;j<sizeOfList;j++) {
+					 commodity = list.get(j);
+					 if(commodity.getName().equals(isv.getCommodityName())) break;
+				 }
+				 double total =0 - commodity.getOut()*commodity.getNumber();
+				 Object[] temp ={vo.getdate(), commodity.getName(), commodity.getModel(), 
+						 0-commodity.getNumber(), commodity.getOut(), total};
+				 data[i] = temp;
 			 }
-			 double total =0 - commodity.getOut()*commodity.getNumber();
-			 Object[] temp ={vo.getdate(), commodity.getName(), commodity.getModel(), 
-					 0-commodity.getNumber(), commodity.getOut(), total};
-			 data[i] = temp;
-		 }
-		return data;
+			 return data;
+		}	else {//如果没选商品名
+			int len=0;
+			for(int i=0;i<size1;i++) {
+				SaleSheetVO vo = saleSheet.get(i);
+				 ArrayList<CommodityVO> list = vo.getsheet();
+				 int sizeOfList = list.size();
+				 len += sizeOfList;
+				 
+			}//for
+			
+			for(int i=size1;i<size;i++) {
+				SaleBackSheetVO vo = saleBackSheet.get(i);
+				 ArrayList<CommodityVO> list = vo.getsheet();
+				 int sizeOfList = list.size();
+				 len += sizeOfList;
+				 
+			}//for
+			 Object[][] data = new Object[len][];
+			 for(int i=0;i<size1;i++) {
+				 SaleSheetVO vo = saleSheet.get(i);
+				 ArrayList<CommodityVO> list = vo.getsheet();
+				 int sizeOfList = list.size();
+				 CommodityVO commodity=null;
+				 
+			 	for(int j=0;j<sizeOfList;j++) {
+					 commodity = list.get(j);
+					 double total = commodity.getOut()*commodity.getNumber();
+					 Object[] temp ={vo.getdate(), commodity.getName(), commodity.getModel(), 
+							 commodity.getNumber(), commodity.getOut(), total};
+					 data[i] = temp;
+				 }
+				 
+			 }
+			 for(int i=size1;i<size;i++) {
+				 SaleBackSheetVO vo = saleBackSheet.get(i);
+				 ArrayList<CommodityVO> list = vo.getsheet();
+				 int sizeOfList = list.size();
+				 CommodityVO commodity=null;
+				 for(int j=0;j<sizeOfList;j++) {
+					 commodity = list.get(j);
+					 double total =0 - commodity.getOut()*commodity.getNumber();
+					 Object[] temp ={vo.getdate(), commodity.getName(), commodity.getModel(), 
+							 0-commodity.getNumber(), commodity.getOut(), total};
+					 data[i] = temp;
+				 }
+				 
+			 }
+			 return data;
+			
+		}//else
+		
 	}
 	
 	public String[][] getSaleDetailExport() {
@@ -218,9 +271,9 @@ public class SaleDetailPanel extends JPanel{
 		return data;
 	}
 	
-	public void export() {
+	public void export(String pathName) {
 		String[][] data = getSaleDetailExport();
-		new Export("销售明细表",data);
+		new Export(pathName,data);
 	}
 	public class JPeditForSaleDetail extends JPanel
 	{
