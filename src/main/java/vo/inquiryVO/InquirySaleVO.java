@@ -4,17 +4,19 @@ public class InquirySaleVO {
 	
 	private String commodityName;
 	private String customer;
-	private String operator;
 	private String stock;
 	private String timeBefore;
 	private String timeAfter;
-	private String userID;
+	private String deSaler;//业务员
 	
-	public String getUserID() {
-		return userID;
+	
+	public String getDeSaler()
+	{
+		return deSaler;
 	}
-	public void setUserID(String userID) {
-		this.userID = userID;
+	public void setDeSaler(String deSaler)
+	{
+		this.deSaler = deSaler;
 	}
 	public String getTimeBefore() {
 		return timeBefore;
@@ -40,12 +42,7 @@ public class InquirySaleVO {
 	public void setCustomer(String customer) {
 		this.customer = customer;
 	}
-	public String getOperator() {
-		return operator;
-	}
-	public void setOperator(String operator) {
-		this.operator = operator;
-	}
+	
 	public String getStock() {
 		return stock;
 	}
