@@ -8,20 +8,24 @@ public class InquiryProcessVO {
 	String timeBefore;
 	String timeAfter;
 	String customer;
-	String operator;
-	String stock;
-	String userID;
 	
+	String stock;
+	String deSaler;
+	
+	public String getDeSaler()
+	{
+		return deSaler;
+	}
+
+	public void setDeSaler(String deSaler)
+	{
+		this.deSaler = deSaler;
+	}
 	BillStyle billstyle;
 	public BillStyle getBillstyle() {
 		return billstyle;
 	}
-	public String getUserID() {
-		return userID;
-	}
-	public void setUserID(String userID) {
-		this.userID = userID;
-	}
+	
 	public void setBillstyle(BillStyle billstyle) {
 		this.billstyle = billstyle;
 	}
@@ -44,12 +48,7 @@ public class InquiryProcessVO {
 	public void setCustomer(String customer) {
 		this.customer = customer;
 	}
-	public String getOperator() {
-		return operator;
-	}
-	public void setOperator(String operator) {
-		this.operator = operator;
-	}
+	
 	public String getStock() {
 		return stock;
 	}
