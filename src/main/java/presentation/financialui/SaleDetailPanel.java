@@ -503,8 +503,41 @@ public class SaleDetailPanel extends JPanel{
 				case 3:
 					confirm.setIcon(confirm0);
 					//查找
-					String startTime=year1.getText()+"/"+month1.getText()+"/"+date1.getText();
-					String lastTime=year2.getText()+"/"+month2.getText()+"/"+date2.getText();
+					String startTime=null;
+					String lastTime=null;
+					String Name=null;
+					String customer=null;
+					String stock=null;
+					String deSaler=null;//业务员
+					if(!year1.getText().equals("")
+							&&!month1.getText().equals("")
+							&&!date1.getText().equals("")
+							&&!year2.getText().equals("")
+							&&!month2.getText().equals("")
+							&&!date2.getText().equals("")){
+						startTime=year1.getText()+"/"+month1.getText()+"/"+date1.getText();
+						lastTime=year2.getText()+"/"+month2.getText()+"/"+date2.getText();
+					}
+					if(!customerCombo.getSelectedItem().toString().equals("")){
+						customer=customerCombo.getSelectedItem().toString();
+					}
+					if(!warehouseCombo.getSelectedItem().toString().equals("")){
+						stock=warehouseCombo.getSelectedItem().toString();
+					}
+					if(!commodityName.getText().equals("")){
+						Name=commodityName.getText();
+					}
+					if(!salemanTxt.getText().equals("")){
+						deSaler=salemanTxt.getText();
+					}
+					InquirySaleVO vo=new InquirySaleVO();
+					vo.setCommodityName(Name);
+					vo.setCustomer(customer);
+					vo.setDeSaler(deSaler);
+					vo.setStock(stock);
+					vo.setTimeBefore(startTime);
+					vo.setTimeAfter(lastTime);
+					SaleDetailPanel.this.update(vo);
 					break;
 				}
 			}

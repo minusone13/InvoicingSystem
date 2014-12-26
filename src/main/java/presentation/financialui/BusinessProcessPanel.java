@@ -16,8 +16,6 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
-import presentation.financialui.BusinessConditionPanel.JPeditForSituation;
-import presentation.financialui.BusinessConditionPanel.MouseListenerOfButton;
 import tool.Export;
 import vo.AlertBillVO;
 import vo.CustomerVO;
@@ -31,6 +29,7 @@ import vo.financialBillVO.CashPaymentVO;
 import vo.financialBillVO.PaymentVO;
 import vo.financialBillVO.ReceiptVO;
 import vo.inquiryVO.InquiryProcessVO;
+import vo.inquiryVO.InquirySaleVO;
 import vo.stockvo.CommodityVO;
 import businesslogic.customerbl.CustomerList;
 import businesslogic.financialbl.Financial;
@@ -117,6 +116,39 @@ public class BusinessProcessPanel extends JPanel{
         table1.setForeground(Color.white);
         table1.setBorder(null);
         table1.setShowVerticalLines(false);
+        table1.addMouseListener(new MouseListener(){
+
+			public void mouseReleased(MouseEvent e)
+			{
+				// TODO Auto-generated method stub
+				updateTable2(choose,table1.getSelectedRow());
+			}
+
+			public void mouseClicked(MouseEvent e)
+			{
+				// TODO Auto-generated method stub
+				
+			}
+
+			public void mousePressed(MouseEvent e)
+			{
+				// TODO Auto-generated method stub
+				
+			}
+
+			public void mouseEntered(MouseEvent e)
+			{
+				// TODO Auto-generated method stub
+				
+			}
+
+			public void mouseExited(MouseEvent e)
+			{
+				// TODO Auto-generated method stub
+				
+			}
+        
+        });
         
         table2.setOpaque(false);
         DefaultTableCellRenderer render2 = new DefaultTableCellRenderer();   
@@ -991,8 +1023,6 @@ public class BusinessProcessPanel extends JPanel{
     			switch(num){
     			case 1:
     				right.setIcon(right1);
-    				//右移
-    				RightMove();
     				break;
     			case 3:
     				confirm.setIcon(confirm1);
@@ -1005,9 +1035,62 @@ public class BusinessProcessPanel extends JPanel{
     			switch(num){
     			case 1:
     				right.setIcon(right0);
+    				//右移
+    				RightMove();
     				break;
     			case 3:
     				confirm.setIcon(confirm0);
+    				int type=0;
+    				if(billTypeCombo.getSelectedItem().toString().equals("付款收款单")){
+    					  //单据类型
+    					type = 1;//1：付款收款单；2：现金费用单；3：进货单据；4：销售单据；5：赠送单；6：报警单和报溢报损
+    				}
+    				else if(billTypeCombo.getSelectedItem().toString().equals("现金费用单")){
+    					type = 2;
+    				}
+    				else if(billTypeCombo.getSelectedItem().toString().equals("进货类单据")){
+    					type = 3;
+    				}
+    				else if(billTypeCombo.getSelectedItem().toString().equals("销售类单据")){
+    					type = 4;
+    				}
+    				else if(billTypeCombo.getSelectedItem().toString().equals("赠送单")){
+    					type = 5;
+    				}
+    				else if(billTypeCombo.getSelectedItem().toString().equals("报警单和报溢报损单")){
+    					type = 6;
+    				}
+    				//查找
+					String startTime=null;
+					String lastTime=null;
+					String customer=null;
+					String stock=null;
+					String deSaler=null;//业务员
+					if(!year1.getText().equals("")
+							&&!month1.getText().equals("")
+							&&!date1.getText().equals("")
+							&&!year2.getText().equals("")
+							&&!month2.getText().equals("")
+							&&!date2.getText().equals("")){
+						startTime=year1.getText()+"/"+month1.getText()+"/"+date1.getText();
+						lastTime=year2.getText()+"/"+month2.getText()+"/"+date2.getText();
+					}
+					if(!customerCombo.getSelectedItem().toString().equals("")){
+						customer=customerCombo.getSelectedItem().toString();
+					}
+					if(!warehouseCombo.getSelectedItem().toString().equals("")){
+						stock=warehouseCombo.getSelectedItem().toString();
+					}
+					if(!salemanTxt.getText().equals("")){
+						deSaler=salemanTxt.getText();
+					}
+					InquiryProcessVO vo=new InquiryProcessVO();
+					vo.setCustomer(customer);
+					vo.setDeSaler(deSaler);
+					vo.setStock(stock);
+					vo.setTimeBefore(startTime);
+					vo.setTimeAfter(lastTime);
+    				updateTable1(type,vo);
     				break;
     			}
     		}

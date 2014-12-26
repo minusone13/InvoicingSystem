@@ -446,9 +446,15 @@ public class BusinessConditionPanel extends JPanel{
 					String y2 = year2.getText();
 					String m2 = month2.getText();
 					String d2 = date2.getText();
-					String timeBefore = y1+"/"+m1+"/"+d1;
-					String timeAfter = y2+"/"+m2+"/"+d2;
-					BusinessConditionPanel.this.update(timeBefore, timeAfter);				
+					if(!y1.equals("")&&!m1.equals("")&&!d1.equals("")&&!y2.equals("")&&!m2.equals("")&&!d2.equals("")){
+						String timeBefore = y1+"/"+m1+"/"+d1;
+						String timeAfter = y2+"/"+m2+"/"+d2;
+						BusinessConditionPanel.this.update(timeBefore, timeAfter);				
+					}
+					else{
+						frame.getWarning().showWarning("请正确输入时间区间");
+					}
+				
 					break;
 				}
 			}
