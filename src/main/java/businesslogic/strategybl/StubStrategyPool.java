@@ -8,11 +8,16 @@ import java.util.ArrayList;
 
 import po.BarginStrategyPO;
 import po.LevelStrategyPO;
+import po.RM;
 import po.ReachStrategyPO;
+import presentation.userui.Login;
 import businesslogic.LevelStrategyStyle;
 import businesslogic.ReachStrategyStyle;
 import businesslogic.commoditybl.MockCommodity;
-import data.strategydata.StrategySaver;
+import businesslogic.userbl.OperationRecord;
+import businesslogic.userbl.User;
+import businesslogic.userbl.UserController;
+import businesslogic.userservice.UserService;
 import dataservice.strategydataservice.StrategySaverService;
 
 public class StubStrategyPool {
@@ -21,11 +26,13 @@ public class StubStrategyPool {
 	private ArrayList<StubBarginStrategy> alOfBarginStrategy=new ArrayList<StubBarginStrategy>();
 	private ArrayList<StubReachStrategy> alOfReachStrategy=new ArrayList<StubReachStrategy>();
 	//StrategySaverService ss=new StrategySaver();
+	//需要用到记录操作的接口
+	UserService userService=new UserController();
 	/*构造函数*/
 	public StubStrategyPool(){
 	
-//		//清除保存的记录
-//		save();
+		//清除保存的记录
+		save();
 
 		read();
 	}
@@ -52,11 +59,13 @@ public class StubStrategyPool {
 		read();
 		for(int i=0;i<alOfLevelStrategy.size();i++){
 			if(alOfLevelStrategy.get(i).getID().equals(ID)){
+				//保存记录
+				userService.addRecord(new OperationRecord(new User(Login.user),"删除客户策略:"+ID,RM.done));
 				alOfLevelStrategy.remove(i);
-				System.out.println("已删除这条客户策略");
 				break;
 			}
 		}
+
 		//保存
 		this.save();
 	}
@@ -65,11 +74,13 @@ public class StubStrategyPool {
 		read();
 		for(int i=0;i<alOfBarginStrategy.size();i++){
 			if(alOfBarginStrategy.get(i).getID().equals(ID)){
+				//保存记录
+				userService.addRecord(new OperationRecord(new User(Login.user),"删除特价包策略:"+ID,RM.done));
 				alOfBarginStrategy.remove(i);
-				System.out.println("已删除这条特价包策略");
 				break;
 			}
 		}
+
 		//保存
 		this.save();
 	}
@@ -78,11 +89,13 @@ public class StubStrategyPool {
 		read();
 		for(int i=0;i<alOfReachStrategy.size();i++){
 			if(alOfReachStrategy.get(i).getID().equals(ID)){
+				//保存记录
+				userService.addRecord(new OperationRecord(new User(Login.user),"删除满额促销策略:"+ID,RM.done));
 				alOfReachStrategy.remove(i);
-				System.out.println("已删除这条满额促销策略");
 				break;
 			}
 		}
+
 		//保存
 		this.save();
 	}
@@ -97,6 +110,8 @@ public class StubStrategyPool {
 		ls.setStartTime(StartTime);
 		ls.setLastTime(LastTime);
 		alOfLevelStrategy.add(ls);
+		//保存记录
+		userService.addRecord(new OperationRecord(new User(Login.user),"新增客户策略:"+ls.getID(),RM.done));
 		//保存
 		this.save();
 	}
@@ -110,6 +125,8 @@ public class StubStrategyPool {
 		ls.setStartTime(StartTime);
 		ls.setLastTime(LastTime);
 		alOfLevelStrategy.add(ls);
+		//保存记录
+		userService.addRecord(new OperationRecord(new User(Login.user),"新增客户策略:"+ls.getID(),RM.done));
 		//保存
 		this.save();
 	}
@@ -123,6 +140,8 @@ public class StubStrategyPool {
 		ls.setStartTime(StartTime);
 		ls.setLastTime(LastTime);
 		alOfLevelStrategy.add(ls);
+		//保存记录
+		userService.addRecord(new OperationRecord(new User(Login.user),"新增客户策略:"+ls.getID(),RM.done));
 		//保存
 		this.save();
 	}
@@ -136,6 +155,8 @@ public class StubStrategyPool {
 		bs.setStartTime(StartTime);
 		bs.setLastTime(LastTime);
 		alOfBarginStrategy.add(bs);
+		//保存记录
+		userService.addRecord(new OperationRecord(new User(Login.user),"新增特价包策略:"+bs.getID(),RM.done));
 		//保存
 		this.save();
 	}
@@ -149,6 +170,8 @@ public class StubStrategyPool {
 		rs.setStartTime(StartTime);
 		rs.setLastTime(LastTime);
 		alOfReachStrategy.add(rs);
+		//保存记录
+		userService.addRecord(new OperationRecord(new User(Login.user),"新增满额促销策略:"+rs.getID(),RM.done));
 		//保存
 		this.save();
 	}
@@ -162,6 +185,8 @@ public class StubStrategyPool {
 		rs.setStartTime(StartTime);
 		rs.setLastTime(LastTime);
 		alOfReachStrategy.add(rs);
+		//保存记录
+		userService.addRecord(new OperationRecord(new User(Login.user),"新增满额促销策略:"+rs.getID(),RM.done));
 		//保存
 		this.save();
 	}

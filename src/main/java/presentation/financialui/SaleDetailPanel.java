@@ -432,8 +432,6 @@ public class SaleDetailPanel extends JPanel{
 				switch(num){
 				case 1:
 					right.setIcon(right1);
-					//右移
-					RightMove();
 					break;
 				case 3:
 					confirm.setIcon(confirm1);
@@ -446,9 +444,14 @@ public class SaleDetailPanel extends JPanel{
 				switch(num){
 				case 1:
 					right.setIcon(right0);
+					//右移
+					RightMove();
 					break;
 				case 3:
 					confirm.setIcon(confirm0);
+					//查找
+					String startTime=year1.getText()+"/"+month1.getText()+"/"+date1.getText();
+					String lastTime=year2.getText()+"/"+month2.getText()+"/"+date2.getText();
 					break;
 				}
 			}

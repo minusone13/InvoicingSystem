@@ -8,6 +8,8 @@ import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -20,7 +22,6 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
-import presentation.commodityui.JPmanageBills2.MouseListenerOfButton;
 import vo.stockvo.CommodityVO;
 import businesslogic.stockmanagerbl.StubStockController;
 import businesslogicservice.commodityblservice.StubCommodityBlService;
@@ -37,8 +38,7 @@ public class StockCheckPanel extends JPanel{
 	JPeditForCheck checkJP;
 	//查询按钮
 	private JLabel inquire=new JLabel();
-	//导出按钮
-	private JLabel download=new JLabel();
+
 	//图片
 	private ImageIcon searchIconW=new ImageIcon("src/image/function/searchW.png");
 	private ImageIcon searchIconR=new ImageIcon("src/image/function/searchR.png");
@@ -100,16 +100,12 @@ public class StockCheckPanel extends JPanel{
 		inquire.setIcon(searchIconW);
 		inquire.setBounds(820, 20, 50, 50);
 		inquire.addMouseListener(new MouseListenerOfButton(1));
-		//导出功能按钮
-		download.setIcon(downloadIconW);
-		download.setBounds(820, 85, 50, 50);
-		download.addMouseListener(new MouseListenerOfButton(2));
+	
 		
 		add(checkJP,0);
 		add(pane,1);
 		add(inquire,2);
-		add(download,3);
-		add(jpbg1,4);
+		add(jpbg1,3);
 		
 	}
 	public class MouseListenerOfButton implements MouseListener{
@@ -132,7 +128,6 @@ public class StockCheckPanel extends JPanel{
 					inquire.setIcon(searchIconR);
 					break;
 				case 2:
-					download.setIcon(downloadIconR);
 					break;
 			}
 			
@@ -148,7 +143,6 @@ public class StockCheckPanel extends JPanel{
 					checkJP.leftMove();
 					break;
 				case 2:
-					download.setIcon(downloadIconW);
 					break;
 			}
 			
@@ -168,7 +162,6 @@ public class StockCheckPanel extends JPanel{
 					inquire.setIcon(searchIconW);
 					break;
 				case 2:
-					download.setIcon(downloadIconW);
 					break;
 			}
 			
@@ -351,8 +344,6 @@ public class StockCheckPanel extends JPanel{
 				switch(num){
 				case 1:
 					right.setIcon(right1);
-					//右移
-					RightMove();
 					break;
 				case 3:
 					confirm.setIcon(confirm1);
@@ -365,9 +356,50 @@ public class StockCheckPanel extends JPanel{
 				switch(num){
 				case 1:
 					right.setIcon(right0);
+					//右移
+					RightMove();
 					break;
 				case 3:
 					confirm.setIcon(confirm0);
+					//点击搜索
+					String y1 = year1.getText();
+					String m1 = month1.getText();
+					String d1 = date1.getText();
+					String y2 = year2.getText();
+					String m2 = month2.getText();
+					String d2 = date2.getText();
+					if(!y1.equals("")&&!m1.equals("")&&!d1.equals("")&&!y2.equals("")&&!m2.equals("")&&!d2.equals("")){
+						String timeBefore = y1+"/"+m1+"/"+d1;
+						String timeAfter = y2+"/"+m2+"/"+d2;
+						String pattern="YYYY/MM/dd";
+						SimpleDateFormat sdf=new SimpleDateFormat(pattern);
+						Date before=null;
+						try
+						{
+							before = sdf.parse(timeBefore);
+						}
+						catch (ParseException e1)
+						{
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+						Date After=null;
+						try
+						{
+							After = sdf.parse(timeAfter);
+						}
+						catch (ParseException e1)
+						{
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+						
+						StockCheckPanel.this.update(before,After);
+					}
+					else{
+						frame.getWarning().showWarning("请正确输入时间区间");
+					}
+					
 					break;
 				}
 			}

@@ -422,8 +422,6 @@ public class BusinessConditionPanel extends JPanel{
 				switch(num){
 				case 1:
 					right.setIcon(right1);
-					//右移
-					RightMove();
 					break;
 				case 3:
 					confirm.setIcon(confirm1);
@@ -436,6 +434,8 @@ public class BusinessConditionPanel extends JPanel{
 				switch(num){
 				case 1:
 					right.setIcon(right0);
+					//右移
+					RightMove();
 					break;
 				case 3:
 					confirm.setIcon(confirm0);

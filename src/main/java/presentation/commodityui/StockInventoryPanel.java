@@ -129,6 +129,8 @@ public class StockInventoryPanel extends JPanel{
 			switch(num){
 				case 2:
 					download.setIcon(downloadIconW);
+					//导出
+					stockbl.ExportCount("D:\\", stockbl.count());
 					break;
 			}
 			

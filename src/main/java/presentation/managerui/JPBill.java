@@ -1002,11 +1002,21 @@ public class JPBill extends JPanel {
 		JLabel note=new JLabel(ps.getwords());
 		JLabel operator=new JLabel(ps.getop());
 		
+		customer.setBounds(337, 4, 100, 20);
+		warehouse.setBounds(337, 21, 100, 20);
+		totalMoney.setBounds(354, 38, 100, 20);
+		note.setBounds(337, 54, 100, 20);
+		operator.setBounds(337, 70, 100, 20);
 		//将组件加到面板上
 		this.add(right,0);
 		this.add(left,1);
 		this.add(ID,2);
-		this.add(bg,3);
+		this.add(customer,3);
+		this.add(warehouse,4);
+		this.add(totalMoney,5);
+		this.add(note,6);
+		this.add(operator,7);
+		this.add(bg,8);
 	}
 	public JPBill(PurBackSheetVO pbs){
 		//区分面板种类

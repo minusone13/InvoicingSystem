@@ -22,16 +22,23 @@ public class JPinquire extends JPanel {
 	private JLabel businessProcess = new JLabel("New label");
 	private JLabel businessSituation = new JLabel("New label");
 	private JLabel salesDetail = new JLabel("New label");
+	
+	private JLabel systemRecord = new JLabel("New label");
 	//图片
 	ImageIcon businessProcessIcon0=new ImageIcon("src\\image\\functions/financial/businessProcess0.png");
 	ImageIcon businessSituationIcon0=new ImageIcon("src\\image\\functions/financial/businessSituation0.png");
 	ImageIcon salesDetailIcon0=new ImageIcon("src\\image\\functions/financial/salesDetail0.png");
+	ImageIcon systemRecordIcon0=new ImageIcon("src\\image\\functions/financial/record0.png");
+	
 	ImageIcon businessProcessIcon=new ImageIcon("src\\image\\functions/financial/businessProcess.png");
 	ImageIcon businessSituationIcon=new ImageIcon("src\\image\\functions/financial/businessSituation.png");
 	ImageIcon salesDetailIcon=new ImageIcon("src\\image\\functions/financial/salesDetail.png");
+	ImageIcon systemRecordIcon=new ImageIcon("src\\image\\functions/financial/record.png");
+	
 	ImageIcon businessProcessIcon1=new ImageIcon("src\\image\\functions/financial/businessProcess1.png");
 	ImageIcon businessSituationIcon1=new ImageIcon("src\\image\\functions/financial/businessSituation1.png");
 	ImageIcon salesDetailIcon1=new ImageIcon("src\\image\\functions/financial/salesDetail1.png");
+	ImageIcon systemRecordIcon1=new ImageIcon("src\\image\\functions/financial/record1.png");
 	//frame的引用
     Frame frame;
     //逻辑层的财务人员接口
@@ -65,7 +72,11 @@ public class JPinquire extends JPanel {
 		salesDetail.addMouseListener(new MouseListenOfButton(23));
 		add(salesDetail,2);
 		
-		add(bg,3);
+		systemRecord.setIcon(systemRecordIcon0);
+		systemRecord.setBounds(325, 15, 100, 100);
+		systemRecord.addMouseListener(new MouseListenOfButton(24));
+		add(systemRecord,3);
+		add(bg,4);
 	}
 	/*获取frame的引用*/
 	public void getFrame( Frame f){
@@ -90,6 +101,8 @@ public class JPinquire extends JPanel {
 			case 22:businessSituation.setIcon(businessSituationIcon1);
 				break;
 			case 23:salesDetail.setIcon(salesDetailIcon1);
+				break;
+			case 24:systemRecord.setIcon(systemRecordIcon1);
 				break;
 			}
 		}
@@ -137,6 +150,20 @@ public class JPinquire extends JPanel {
 					frame.getManager().setPanelType(PanelType.SaleDetailPanel);
 				}
 				break;
+			case 24:systemRecord.setIcon(systemRecordIcon);
+				JPinquire.this.setVisible(false);
+				if(Login.user.getR()==Role.FINANCIAL_STAFF){
+//					frame.getFinancial().getSaleDetail().setVisible(true);
+//					//标记当前面板，用于后退按钮
+//					frame.getFinancial().setPanelType(PanelType.SaleDetailPanel);
+				}
+				else if(Login.user.getR()==Role.MANAGER){
+					frame.getManager().getSystemRecord().updateTable();
+					frame.getManager().getSystemRecord().setVisible(true);
+					//标记当前面板，用于后退按钮
+					frame.getManager().setPanelType(PanelType.JPSystemRecord);
+				}
+				break;
 			}
 		}
 
@@ -149,6 +176,8 @@ public class JPinquire extends JPanel {
 				break;
 			case 23:salesDetail.setIcon(salesDetailIcon);
 				break;
+			case 24:systemRecord.setIcon(systemRecordIcon);
+				break;
 			}
 		}
 
@@ -160,6 +189,8 @@ public class JPinquire extends JPanel {
 			case 22:businessSituation.setIcon(businessSituationIcon0);
 				break;
 			case 23:salesDetail.setIcon(salesDetailIcon0);
+				break;
+			case 24:systemRecord.setIcon(systemRecordIcon0);
 				break;
 			}
 		}

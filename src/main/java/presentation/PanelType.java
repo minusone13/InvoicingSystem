@@ -20,6 +20,7 @@ public enum PanelType {
 	JPmanageCustomer,
 	StockInventoryPanel,
 	StockCheckPanel,
-	JPStcokShow
+	JPStcokShow,
+	JPSystemRecord
 	
 }

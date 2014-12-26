@@ -880,6 +880,12 @@ public class JPmanageBills2 extends JPanel {
 									PurSheetVO newPur=new PurSheetVO();
 									String[] temp=customerCombo.getSelectedItem().toString().split(":");
 									newPur.setCustomer(customerbl.findCustomer(temp[1]));
+									if(customerbl.findCustomer(temp[1])==null){
+										System.out.println("查找客户空指针");
+									}
+									else{
+										System.out.println("新进货单客户是"+customerbl.findCustomer(temp[1]).getname());
+									}
 									newPur.setstock(warehouseCombo.getSelectedItem().toString());
 									newPur.setsheet(output);
 									newPur.setcommoditywords(outputNotes);
@@ -931,6 +937,10 @@ public class JPmanageBills2 extends JPanel {
 						case PurBackSheet:
 							if(!billID.getText().equals("")){
 								PurSheetVO pursheet=sbl.findPurSheet(billID.getText());
+								if(pursheet.getcustomer()==null){
+									System.out.println("返回的进货单客户空指针");
+								}
+							
 								customerTxt.setText(pursheet.getcustomer().getname()+":"+pursheet.getcustomer().getid());
 								warehouseTxt.setText(pursheet.getstock());
 								output=pursheet.getsheet();

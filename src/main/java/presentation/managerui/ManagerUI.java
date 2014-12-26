@@ -45,6 +45,8 @@ public class ManagerUI extends JPanel {
 	private BusinessProcessPanel businessProgress=new BusinessProcessPanel();
 	//销售明细表
 	private SaleDetailPanel saleDetail=new SaleDetailPanel();
+	//系统日志
+	private JPSystemRecord systemRecord=new JPSystemRecord();
 	//商品选择面板
 	private JPManagerCom commodityChoose=new JPManagerCom();
 	//当前面板标记，用于后退跳转
@@ -108,7 +110,9 @@ public class ManagerUI extends JPanel {
 		commodityChoose.setLocation(55, 210);
 		commodityChoose.setRole(Role.MANAGER);
 		commodityChoose.setVisible(false);
-		
+		//系统日志
+		systemRecord.setLocation(55, 233);
+		systemRecord.setVisible(false);
 		//home
 		home.setIcon(new ImageIcon("src/image/home.png") );
 		home.setBounds(690, 165, 90, 32);
@@ -138,7 +142,8 @@ public class ManagerUI extends JPanel {
 		this.add(businessCondition,13);
 		this.add(businessProgress,14);
 		this.add(saleDetail,15);
-		this.add(bg,16);
+		this.add(systemRecord,16);
+		this.add(bg,17);
 		
 	}
 	/*获取frame的引用*/
@@ -151,6 +156,7 @@ public class ManagerUI extends JPanel {
   		managerStrategy2.getFrame(frame);
   		inquire.getFrame(frame);
   		commodityChoose.getFrame(frame);
+  		systemRecord.getFrame(f);
     }
 	public JPManagerCom getCommodityChoose() {
 		return commodityChoose;
@@ -198,6 +204,7 @@ public class ManagerUI extends JPanel {
 				ManagerUI.this.getBusinessProgress().setVisible(false);
 				ManagerUI.this.getSaleDetail().setVisible(false);
 				ManagerUI.this.getCommodityChoose().setVisible(false);
+				ManagerUI.this.getSystemRecord().setVisible(false);
 				ManagerUI.this.getFunction().setVisible(true);
 				//标记当前面板，用于后退按钮
 				ManagerUI.this.setPanelType(PanelType.JPfunction);
@@ -258,6 +265,14 @@ public class ManagerUI extends JPanel {
 					inquire.setVisible(true);
 					//标记当前面板，用于后退按钮
 					ManagerUI.this.setPanelType(PanelType.JPinquire);
+					
+					break;
+				case JPSystemRecord:
+					systemRecord.setVisible(false);
+					inquire.setVisible(true);
+					//标记当前面板，用于后退按钮
+					ManagerUI.this.setPanelType(PanelType.JPinquire);
+					
 					break;
 				}
 				break;
@@ -360,5 +375,13 @@ public class ManagerUI extends JPanel {
 	}
 	public void setPanelType(PanelType panelType) {
 		this.panelType = panelType;
+	}
+	public JPSystemRecord getSystemRecord()
+	{
+		return systemRecord;
+	}
+	public void setSystemRecord(JPSystemRecord systemRecord)
+	{
+		this.systemRecord = systemRecord;
 	}
 }
