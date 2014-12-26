@@ -212,9 +212,19 @@ public class JPtreeContent extends JPanel {
 		RM rm=stockbl.deleteCategory(rePath(node));
 		if(rm==RM.done){
 			treeModel.removeNodeFromParent(node);
+			JPmanagerCom.getFrame().getWarning().showWarning("删除分类成功");//by lhw
+		}
+		else if(rm==RM.alreadyHaveUnremoveableContents){
+			JPmanagerCom.getFrame().getWarning().showWarning("删除失败，已有子分类或者商品");
+		}
+		else if(rm==RM.RMIError){
+			JPmanagerCom.getFrame().getWarning().showWarning(WarningText.RMIError);
+		}
+		else if(rm==RM.notfound){
+			JPmanagerCom.getFrame().getWarning().showWarning("没有对应分类，请重试");
 		}
 		else{
-			JPmanagerCom.getFrame().getWarning().showWarning("删除失败，已有子分类或者商品");
+			JPmanagerCom.getFrame().getWarning().showWarning(WarningText.unknownerror);
 		}
 	}
 	/*返回最后选择的节点*/
@@ -230,12 +240,19 @@ public class JPtreeContent extends JPanel {
 		RM rm=stockbl.addCategory(newCategory);
 		if(rm==RM.done){
 			treeModel.insertNodeInto(newChild, parent, parent.getChildCount());
+			JPmanagerCom.getFrame().getWarning().showWarning("添加分类成功");//added by lhw
 		}
 		else if(rm==RM.treeerror){
 			JPmanagerCom.getFrame().getWarning().showWarning("该分类下已有商品，不能创建分类");
 		}
 		else if(rm==RM.redundance){
 			JPmanagerCom.getFrame().getWarning().showWarning("已存在该分类");
+		}
+		else if(rm==RM.RMIError){
+			JPmanagerCom.getFrame().getWarning().showWarning(WarningText.RMIError);
+		}
+		else{
+			JPmanagerCom.getFrame().getWarning().showWarning(WarningText.unknownerror);
 		}
 	}
 	/*删除当前选中的节点*/

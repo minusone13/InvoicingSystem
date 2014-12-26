@@ -387,12 +387,19 @@ public class JPManagerComOfStock extends JPanel {
 								if(rm==RM.done){
 									//加到界面层
 									manageCom.getCommodities().addCommodity(commmodity);
+									frame.getWarning().showWarning("添加商品成功");//added by lhw
 								}
 								else if(rm==RM.redundance){
 									frame.getWarning().showWarning("商品重复");
 								}
 								else if(rm==RM.treeerror){
 									frame.getWarning().showWarning("分类下已有分类，不能添加商品");
+								}
+								else if(rm==RM.RMIError){//added by lhw
+									frame.getWarning().showWarning(WarningText.RMIError);
+								}
+								else{
+									frame.getWarning().showWarning(WarningText.unknownerror);
 								}
 							}
 							else{
@@ -429,6 +436,7 @@ public class JPManagerComOfStock extends JPanel {
 							RM rm=manageCom.getContent().getStockbl().updateCommodity(modifyVO);
 							if(rm==RM.done){
 								manageCom.getCommodities().changeChosen(modifyVO);
+								frame.getWarning().showWarning("修改商品成功");//added by lhw
 							}
 							else{
 								frame.getWarning().showWarning("修改结果是"+rm);
