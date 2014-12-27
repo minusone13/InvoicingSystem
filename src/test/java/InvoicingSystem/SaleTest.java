@@ -82,7 +82,7 @@ public class SaleTest extends TestCase{
 			salebillController controller = new salebillController();
 			boolean result2 = controller.createSaleBackSheet(vo);
 			assertTrue(result2);
-		}
+		}*/
 		
 		public void testCreatePurSheet(){
 			PurSheetVO vo = new PurSheetVO();
@@ -92,7 +92,6 @@ public class SaleTest extends TestCase{
 			vo.setdate(new Date());
 			vo.setstock("1");
 			vo.setusername("学长");
-			vo.setid("JHD-2014-12-14-00009");
 			vo.setuserid("208");
 			vo.setop("学长208");
 			ArrayList<CommodityVO> sheet = new ArrayList<CommodityVO>();
@@ -108,6 +107,7 @@ public class SaleTest extends TestCase{
 			assertTrue(result3);
 		}
 		
+		/*
 		public void testCreatePurBackSheet(){
 			PurBackSheetVO vo = new PurBackSheetVO();
 			salebillController controller = new salebillController();
@@ -130,14 +130,15 @@ public class SaleTest extends TestCase{
 			vo.setmoney1(100.0);
 			boolean result3 = controller.createPurBackSheet(vo);
 			assertTrue(result3);
-		}
+		}*/
 		
 		public void testgetPurSheet(){
 			salebillController controller = new salebillController();
-			boolean result5 = controller.getPurSheet("JHD-2014-12-14-00009");
+			boolean result5 = controller.getPurSheet("JHD-2014-12-27-00001");
 			assertTrue(result5);
 		}
 		
+		/*
 		public void testgetPurBackSheet(){
 			salebillController controller = new salebillController();
 			boolean result6 = controller.getPurBackSheet("JHTHD-2014-12-14-00009");
@@ -188,7 +189,7 @@ public class SaleTest extends TestCase{
 			assertTrue(result10);
 		}*/
 		
-		public void testfindCustomer(){
+		/*public void testfindCustomer(){
 			CustomerList customerlist = new CustomerList();
 			CustomerVO tempvo = null;
 			tempvo = customerlist.findCustomer("5");
@@ -199,7 +200,7 @@ public class SaleTest extends TestCase{
 				System.out.println(tempvo.getname());
 			}
 			assertTrue(result11);
-		}
+		}*/
 
 		/*public void testsureReachStrategy(){
 			salebillController controller = new salebillController();
