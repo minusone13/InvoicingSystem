@@ -347,10 +347,20 @@ public class JPcommodity extends JPanel implements MouseListener{
 		String s="";
 		String in=String.valueOf(commodity.getIn());
 		String out=String.valueOf(commodity.getOut());
-		String lastin=String.valueOf(commodity.getLastin());
-		String lastout=String.valueOf(commodity.getLastout());
-		
-		s="进价："+in+" 售价："+out+" 最近进价："+lastin+" 最近售价"+lastout;
+		//String lastin=String.valueOf(commodity.getLastin());deleted by lhw
+		//String lastout=String.valueOf(commodity.getLastout());deleted by lhw
+		//below are added by lhw
+		String lastin,lastout;
+		double li=commodity.getLastin(),lo=commodity.getLastout();
+		if(li==-1)
+			lastin="空";
+		else
+			lastin=String.valueOf(li);
+		if(lo==-1)
+			lastout="空";
+		else
+			lastout=String.valueOf(lo);
+		s="进价："+in+" 售价："+out+" 最近进价："+lastin+" 最近售价："+lastout;
 		JPmanagerCom.showDetail(s);
 	}
 	public void mouseExited(MouseEvent e) {
