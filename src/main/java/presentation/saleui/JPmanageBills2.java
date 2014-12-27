@@ -936,7 +936,7 @@ public class JPmanageBills2 extends JPanel {
 						switch(style){
 						case PurBackSheet:
 							if(!billID.getText().equals("")){
-								PurSheetVO pursheet=sbl.findPurSheet(billID.getText());
+								PurSheetVO pursheet=sbl.findPurSheet(billIDTxt.getText());
 								if(pursheet.getcustomer()==null){
 									System.out.println("返回的进货单客户空指针");
 								}

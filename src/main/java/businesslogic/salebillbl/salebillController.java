@@ -216,6 +216,9 @@ public class salebillController implements SaleBillBlService,salebillForFinancia
 			listOfPurSheet=pool.getPurSheet();
 			PurSheetVO result = new PurSheetVO();
 			for(PurSheet pursheet:listOfPurSheet){
+				System.out.println(pursheet.getid());
+				System.out.println(id);
+				
 				if(pursheet==null){
 					System.out.println("sheet");
 				}
@@ -223,6 +226,7 @@ public class salebillController implements SaleBillBlService,salebillForFinancia
 					System.out.println("id");
 				}
 				if(pursheet.getid().equals(id)){
+					System.out.println("getVO");
 					result=pursheet.getVO();
 					break;
 				}

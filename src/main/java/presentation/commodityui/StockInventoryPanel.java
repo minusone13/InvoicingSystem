@@ -130,7 +130,7 @@ public class StockInventoryPanel extends JPanel{
 				case 2:
 					download.setIcon(downloadIconW);
 					//导出
-					stockbl.ExportCount("D:\\", stockbl.count());
+					stockbl.ExportCount("库存盘点", stockbl.count());
 					break;
 			}
 			

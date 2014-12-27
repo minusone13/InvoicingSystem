@@ -332,7 +332,9 @@ public class JPmanagerStrategy2 extends JPanel {
 			private JTextField limitText=new JTextField(10);
 			private JTextField discountText=new JTextField(10);
 			private JTextField couponText=new JTextField(10);
-			private JTextField startText=new JTextField(10);
+			private JTextField startText1=new JTextField(10);
+			private JTextField startText2=new JTextField(10);
+			private JTextField startText3=new JTextField(10);
 			private JTextField lastText=new JTextField(10);
 			private JTextField originalTotalPriceText=new JTextField(10);
 			public JTextField getOriginalTotalPriceText() {
@@ -442,9 +444,17 @@ public class JPmanagerStrategy2 extends JPanel {
 					couponText.setOpaque(false);//文本框透明
 					couponText.setForeground(Color.white);//前景色
 					//起始时间文本框
-					startText.setBounds(105,170, 130, 20);
-					startText.setOpaque(false);//文本框透明
-					startText.setForeground(Color.white);//前景色
+					startText1.setBounds(105,170, 40, 20);
+					startText1.setOpaque(false);//文本框透明
+					startText1.setForeground(Color.white);//前景色
+					
+					startText2.setBounds(150,170, 40, 20);
+					startText2.setOpaque(false);//文本框透明
+					startText2.setForeground(Color.white);//前景色
+					
+					startText3.setBounds(195,170, 40, 20);
+					startText3.setOpaque(false);//文本框透明
+					startText3.setForeground(Color.white);//前景色
 					//持续时间文本框
 					lastText.setBounds(145,195,90, 20);
 					lastText.setOpaque(false);//文本框透明
@@ -491,10 +501,12 @@ public class JPmanagerStrategy2 extends JPanel {
 					this.add(addButton,12);
 					this.add(couponText,13);
 					this.add(discountText,14);
-					this.add(startText,15);
-					this.add(lastText,16);
-					this.add(confirm,17);
-					this.add(back,18);
+					this.add(startText1,15);
+					this.add(startText2,16);
+					this.add(startText3,17);
+					this.add(lastText,18);
+					this.add(confirm,19);
+					this.add(back,20);
 					break;
 				case BarginStrategy:
 					//设置标签大小位置
@@ -522,9 +534,17 @@ public class JPmanagerStrategy2 extends JPanel {
 					numText.setOpaque(false);//文本框透明
 					numText.setForeground(Color.white);//前景色
 					//起始时间文本框
-					startText.setBounds(105,150, 130, 20);
-					startText.setOpaque(false);//文本框透明
-					startText.setForeground(Color.white);//前景色
+					startText1.setBounds(105,150, 40, 20);
+					startText1.setOpaque(false);//文本框透明
+					startText1.setForeground(Color.white);//前景色
+					
+					startText2.setBounds(150,150, 40, 20);
+					startText2.setOpaque(false);//文本框透明
+					startText2.setForeground(Color.white);//前景色
+					
+					startText3.setBounds(195,150, 40, 20);
+					startText3.setOpaque(false);//文本框透明
+					startText3.setForeground(Color.white);//前景色
 					//持续时间文本框
 					lastText.setBounds(145,180, 90, 20);
 					lastText.setOpaque(false);//文本框透明
@@ -541,10 +561,12 @@ public class JPmanagerStrategy2 extends JPanel {
 					this.add(originalTotalPriceText,8);
 					this.add(decreasePriceText,9);
 					this.add(numText,10);
-					this.add(startText,11);
-					this.add(lastText,12);
-					this.add(confirm,13);
-					this.add(back,14);
+					this.add(startText1,11);
+					this.add(startText2,12);
+					this.add(startText3,13);
+					this.add(lastText,14);
+					this.add(confirm,15);
+					this.add(back,16);
 					break;
 				case ReachStrategy:
 					//设置标签大小位置
@@ -576,9 +598,17 @@ public class JPmanagerStrategy2 extends JPanel {
 					couponText.setOpaque(false);//文本框透明
 					couponText.setForeground(Color.white);//前景色
 					//起始时间文本框
-					startText.setBounds(105,150, 130, 20);
-					startText.setOpaque(false);//文本框透明
-					startText.setForeground(Color.white);//前景色
+					startText1.setBounds(105,150, 40, 20);
+					startText1.setOpaque(false);//文本框透明
+					startText1.setForeground(Color.white);//前景色
+					
+					startText2.setBounds(150,150, 40, 20);
+					startText2.setOpaque(false);//文本框透明
+					startText2.setForeground(Color.white);//前景色
+					
+					startText3.setBounds(195,150, 40, 20);
+					startText3.setOpaque(false);//文本框透明
+					startText3.setForeground(Color.white);//前景色
 					//持续时间文本框
 					lastText.setBounds(145,180, 90, 20);
 					lastText.setOpaque(false);//文本框透明
@@ -610,10 +640,12 @@ public class JPmanagerStrategy2 extends JPanel {
 					this.add(limitText,8);
 					this.add(addButton,9);
 					this.add(couponText,10);
-					this.add(startText,11);
-					this.add(lastText,12);
-					this.add(confirm,13);
-					this.add(back,14);
+					this.add(startText1,11);
+					this.add(startText2,12);
+					this.add(startText3,13);
+					this.add(lastText,14);
+					this.add(confirm,15);
+					this.add(back,16);
 					break;
 				}
 			}
@@ -677,7 +709,9 @@ public class JPmanagerStrategy2 extends JPanel {
 								boolean legal=false;
 								if(
 										!limitText.getText().equals("")&&
-										!startText.getText().equals("")&&
+										!startText1.getText().equals("")&&
+										!startText2.getText().equals("")&&
+										!startText3.getText().equals("")&&
 										!lastText.getText().equals("")&&
 										output.size()!=0){
 									legal=true;
@@ -704,13 +738,15 @@ public class JPmanagerStrategy2 extends JPanel {
 									newLevel.setLevel(level);
 									newLevel.setLimit(Double.parseDouble(limitText.getText()));
 									newLevel.setAlOfCommodity(output);
-									newLevel.setStartTime(startText.getText());
+									newLevel.setStartTime(startText1.getText()+"/"+startText2.getText()+"/"+startText3.getText());
 									newLevel.setLastTime(Integer.parseInt(lastText.getText()));
 									billList.addLevelStrategy(newLevel);
 									
 									//清空信息
 									limitText.setText("");
-									startText.setText("");
+									startText1.setText("");
+									startText2.setText("");
+									startText3.setText("");
 									lastText.setText("");
 									output.clear();
 								}
@@ -722,7 +758,9 @@ public class JPmanagerStrategy2 extends JPanel {
 							else if(strategyTypeCombo.getSelectedItem().toString().equals("赠送代金券")){
 								boolean legal=false;
 								if(!limitText.getText().equals("")&&
-										!startText.getText().equals("")&&
+										!startText1.getText().equals("")&&
+										!startText2.getText().equals("")&&
+										!startText3.getText().equals("")&&
 										!lastText.getText().equals("")&&
 										!couponText.getText().equals("")){
 									legal=true;
@@ -749,13 +787,15 @@ public class JPmanagerStrategy2 extends JPanel {
 									newLevel.setLevel(level);
 									newLevel.setLimit(Double.parseDouble(limitText.getText()));
 									newLevel.setCouponrate(Double.parseDouble(couponText.getText()));
-									newLevel.setStartTime(startText.getText());
+									newLevel.setStartTime(startText1.getText()+"/"+startText2.getText()+"/"+startText3.getText());
 									newLevel.setLastTime(Integer.parseInt(lastText.getText()));
 									billList.addLevelStrategy(newLevel);
 									
 									//清空信息
 									limitText.setText("");
-									startText.setText("");
+									startText1.setText("");
+									startText2.setText("");
+									startText3.setText("");
 									lastText.setText("");
 									couponText.setText("");
 								}
@@ -767,7 +807,9 @@ public class JPmanagerStrategy2 extends JPanel {
 							else if(strategyTypeCombo.getSelectedItem().toString().equals("打折")){
 								boolean legal=false;
 								if(!limitText.getText().equals("")&&
-										!startText.getText().equals("")&&
+										!startText1.getText().equals("")&&
+										!startText2.getText().equals("")&&
+										!startText3.getText().equals("")&&
 										!lastText.getText().equals("")&&
 										!discountText.getText().equals("")){
 									legal=true;
@@ -794,13 +836,15 @@ public class JPmanagerStrategy2 extends JPanel {
 									newLevel.setLevel(level);
 									newLevel.setLimit(Double.parseDouble(limitText.getText()));
 									newLevel.setDiscountrate(Double.parseDouble(discountText.getText()));
-									newLevel.setStartTime(startText.getText());
+									newLevel.setStartTime(startText1.getText()+"/"+startText2.getText()+"/"+startText3.getText());
 									newLevel.setLastTime(Integer.parseInt(lastText.getText()));
 									billList.addLevelStrategy(newLevel);
 									
 									//清空信息
 									limitText.setText("");
-									startText.setText("");
+									startText1.setText("");
+									startText2.setText("");
+									startText3.setText("");
 									lastText.setText("");
 									discountText.setText("");
 								}
@@ -816,7 +860,9 @@ public class JPmanagerStrategy2 extends JPanel {
 									!originalTotalPriceText.getText().equals("")&&
 									!decreasePriceText.getText().equals("")&&
 									!numText.getText().equals("")&&
-									!startText.getText().equals("")&&
+									!startText1.getText().equals("")&&
+									!startText2.getText().equals("")&&
+									!startText3.getText().equals("")&&
 									!lastText.getText().equals("")&&
 									output.size()!=0){
 								Legal=true;
@@ -826,7 +872,7 @@ public class JPmanagerStrategy2 extends JPanel {
 								newBargin.setNum(Integer.parseInt(numText.getText()));
 								newBargin.setDiscount(Double.parseDouble(decreasePriceText.getText()));
 								newBargin.setAlOfCommodity(output);
-								newBargin.setStartTime(startText.getText());
+								newBargin.setStartTime(startText1.getText()+"/"+startText2.getText()+"/"+startText3.getText());
 								newBargin.setLastTime(Integer.parseInt(lastText.getText()));
 								billList.addBarginStrategy(newBargin);
 								
@@ -834,7 +880,9 @@ public class JPmanagerStrategy2 extends JPanel {
 								originalTotalPriceText.setText("");
 								decreasePriceText.setText("");
 								numText.setText("");
-								startText.setText("");
+								startText1.setText("");
+								startText2.setText("");
+								startText3.setText("");
 								lastText.setText("");
 								output.clear();
 							}
@@ -846,7 +894,9 @@ public class JPmanagerStrategy2 extends JPanel {
 							if(strategyTypeCombo.getSelectedItem().toString().equals("赠送赠品")){
 								boolean legal=false;
 								if(!limitText.getText().equals("")&&
-										!startText.getText().equals("")&&
+										!startText1.getText().equals("")&&
+										!startText2.getText().equals("")&&
+										!startText3.getText().equals("")&&
 										!lastText.getText().equals("")&&
 										output.size()!=0){
 									legal=true;
@@ -856,13 +906,15 @@ public class JPmanagerStrategy2 extends JPanel {
 									newReach.setReach_strategy_style(ReachStrategyStyle.Gift);
 									newReach.setLimit(Double.parseDouble(limitText.getText()));
 									newReach.setAlOfCommodity(output);
-									newReach.setStartTime(startText.getText());
+									newReach.setStartTime(startText1.getText()+"/"+startText2.getText()+"/"+startText3.getText());
 									newReach.setLastTime(Integer.parseInt(lastText.getText()));
 									billList.addReachStrategy(newReach);
 									
 									//清空信息
 									limitText.setText("");
-									startText.setText("");
+									startText1.setText("");
+									startText2.setText("");
+									startText3.setText("");
 									lastText.setText("");
 									output.clear();
 								}
@@ -874,7 +926,9 @@ public class JPmanagerStrategy2 extends JPanel {
 							else if(strategyTypeCombo.getSelectedItem().toString().equals("赠送代金券")){
 								boolean legal=false;
 								if(!limitText.getText().equals("")&&
-										!startText.getText().equals("")&&
+										!startText1.getText().equals("")&&
+										!startText2.getText().equals("")&&
+										!startText3.getText().equals("")&&
 										!lastText.getText().equals("")&&
 										!couponText.getText().equals("")){
 									legal=true;
@@ -884,13 +938,15 @@ public class JPmanagerStrategy2 extends JPanel {
 									newReach.setReach_strategy_style(ReachStrategyStyle.Coupon);
 									newReach.setLimit(Double.parseDouble(limitText.getText()));
 									newReach.setCouponrate(Double.parseDouble(couponText.getText()));
-									newReach.setStartTime(startText.getText());
+									newReach.setStartTime(startText1.getText()+"/"+startText2.getText()+"/"+startText3.getText());
 									newReach.setLastTime(Integer.parseInt(lastText.getText()));
 									billList.addReachStrategy(newReach);
 									
 									//清空信息
 									limitText.setText("");
-									startText.setText("");
+									startText1.setText("");
+									startText2.setText("");
+									startText3.setText("");
 									lastText.setText("");
 									couponText.setText("");
 								}

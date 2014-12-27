@@ -147,6 +147,7 @@ public class Login extends JPanel {
 					frame.getFinancial().getBusinessProgress().setVisible(false);
 					frame.getFinancial().getSaleDetail().setVisible(false);
 					frame.getFinancial().getAccountInfomation().setVisible(false);
+					frame.getFinancial().getSystemRecord().setVisible(false);
 					frame.getFinancial().getFunction().setVisible(true);
 					Login.this.setVisible(false);
 					frame.getFinancial().setVisible(true);

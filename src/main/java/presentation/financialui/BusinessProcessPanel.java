@@ -230,6 +230,7 @@ public class BusinessProcessPanel extends JPanel{
 					break;
 				case 2:
 					download.setIcon(downloadIconW);
+					export(choose);
 					break;
 			}
 			
@@ -497,7 +498,8 @@ public class BusinessProcessPanel extends JPanel{
 			new Export("经营历程表--库存类单据",data);
 		}
 	}
-	public void updateTable1(int choose, InquiryProcessVO ipv){
+	public void updateTable1( InquiryProcessVO ipv){
+		
 		switch(choose){
 		
 		case 1: receipt = financial.getProcessReceipt(ipv);
@@ -1060,6 +1062,7 @@ public class BusinessProcessPanel extends JPanel{
     				else if(billTypeCombo.getSelectedItem().toString().equals("报警单和报溢报损单")){
     					type = 6;
     				}
+    				choose=type;
     				//查找
 					String startTime=null;
 					String lastTime=null;
@@ -1090,7 +1093,7 @@ public class BusinessProcessPanel extends JPanel{
 					vo.setStock(stock);
 					vo.setTimeBefore(startTime);
 					vo.setTimeAfter(lastTime);
-    				updateTable1(type,vo);
+    				updateTable1(vo);
     				break;
     			}
     		}
