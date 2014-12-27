@@ -5,8 +5,10 @@ import java.util.Date;
 
 import po.BillState;
 import vo.CustomerVO;
+import vo.LevelStrategyVO;
 import vo.PurBackSheetVO;
 import vo.PurSheetVO;
+import vo.ReachStrategyVO;
 import vo.SaleBackSheetVO;
 import vo.SaleSheetVO;
 
@@ -59,5 +61,11 @@ public interface SaleBillBlService {
 		public ArrayList<PurBackSheetVO> getAllPurBackSheet();
 		public ArrayList<SaleSheetVO> getAllSaleSheet();
 		public ArrayList<SaleBackSheetVO> getAllSaleBackSheet();
+		
+		public ArrayList<ReachStrategyVO> getSomeReachStrategy(SaleSheetVO vo);
+		public ArrayList<LevelStrategyVO> getSomeLevelStrategy(SaleSheetVO vo);
+		public SaleSheetVO getCompletedSaleSheet1(SaleSheetVO salesheetvo,LevelStrategyVO lsvo);
+		public SaleSheetVO getCompletedSaleSheet2(SaleSheetVO salesheetvo,ReachStrategyVO rsvo);
+		
 		
 }

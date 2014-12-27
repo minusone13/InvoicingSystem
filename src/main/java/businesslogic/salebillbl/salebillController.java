@@ -1,6 +1,5 @@
 package businesslogic.salebillbl;
 
-import java.rmi.RemoteException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -14,14 +13,12 @@ import vo.PurSheetVO;
 import vo.ReachStrategyVO;
 import vo.SaleBackSheetVO;
 import vo.SaleSheetVO;
-import vo.financialBillVO.ReceiptVO;
 import vo.stockvo.CommodityVO;
 import businesslogic.LevelStrategyStyle;
 import businesslogic.commoditybillbl.StubGiftBill;
 import businesslogic.commoditybl.MockCommodity;
 import businesslogic.customerbl.CustomerList;
 import businesslogic.examinebl.StubBillPool;
-import businesslogic.financialbillbl.ReceiptBill;
 import businesslogic.managerbl.StubManager;
 import businesslogic.salebillServicec.salebillForFinancial;
 import businesslogicservice.customerblservice.CustomerBlService;
@@ -443,5 +440,50 @@ public class salebillController implements SaleBillBlService,salebillForFinancia
 				}
 			}
 			return words;
+		}
+
+		public ArrayList<ReachStrategyVO> getSomeReachStrategy(SaleSheetVO vo)
+		{
+			ArrayList<ReachStrategyVO> result = new ArrayList<ReachStrategyVO>();
+			StubManagerBlService straController = new StubManager();
+			ArrayList<ReachStrategyVO> rsvo = straController.ShowReachStrategy();//读取的所有策略;
+			for(ReachStrategyVO tempvo:rsvo){
+				if(tempvo.getLimit()>=vo.getmoney1()){
+					//判断实践我暂时还没处理，先凑合一下;
+					result.add(tempvo);
+				}
+			}
+			return result;
+		}
+
+		public ArrayList<LevelStrategyVO> getSomeLevelStrategy(SaleSheetVO vo)
+		{
+			ArrayList<LevelStrategyVO> result = new ArrayList<LevelStrategyVO>();
+			StubManagerBlService straController = new StubManager();
+			ArrayList<LevelStrategyVO> lsvo = straController.ShowLevelStrategy();//读取的所有策略;
+			for(LevelStrategyVO tempvo:lsvo){
+				if(tempvo.getLimit()>=vo.getmoney1()&&(tempvo.getLevel()==vo.getcustomer().getlevel())){
+					//判断实践我暂时还没处理，先凑合一下;
+					result.add(tempvo);
+				}
+			}
+			return result;
+		}
+
+		public SaleSheetVO getCompletedSaleSheet1(SaleSheetVO salesheetvo,LevelStrategyVO lsvo)
+		{
+			salesheetvo.setdiscount((salesheetvo.getmoney1()-salesheetvo.getmoney2())*lsvo.getDiscountrate());
+			salesheetvo.setpmoney(salesheetvo.getmoney1()-salesheetvo.getmoney2()-salesheetvo.getdiscount());
+			salesheetvo.setwords("赠送代金券:"+String.valueOf(salesheetvo.getpmoney()*lsvo.getCouponrate()-salesheetvo.getpmoney()*lsvo.getCouponrate()/10));
+			return salesheetvo;
+		}
+
+		public SaleSheetVO getCompletedSaleSheet2(SaleSheetVO salesheetvo,ReachStrategyVO rsvo)
+		{
+			
+			salesheetvo.setdiscount(0.0);
+			salesheetvo.setpmoney(salesheetvo.getmoney1()-salesheetvo.getmoney2()-salesheetvo.getdiscount());
+			salesheetvo.setwords("赠送代金券:"+String.valueOf(salesheetvo.getpmoney()*rsvo.getCouponrate()-salesheetvo.getpmoney()*rsvo.getCouponrate()/10));
+			return salesheetvo;
 		}
 }
