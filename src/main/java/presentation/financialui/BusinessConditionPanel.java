@@ -63,6 +63,9 @@ public class BusinessConditionPanel extends JPanel{
 	public BusinessConditionPanel() {
 		initial();
 	}
+	public void reHome(){
+		checkJP.reHome();
+	}
 	 public void getFrame( Frame f){
 	 		frame=f;
 	 }
@@ -293,6 +296,16 @@ public class BusinessConditionPanel extends JPanel{
 		private ImageIcon right1=new ImageIcon("src/image/function/rightR.png");
 		private ImageIcon confirm0=new ImageIcon("src/image/function/confirmW.png");
 		private ImageIcon confirm1=new ImageIcon("src/image/function/confirmR.png");
+		
+		public void reHome(){
+			this.setLocation(905, 36);
+			year1.setText("");
+			month1.setText("");
+			date1.setText("");
+			year2.setText("");
+			month2.setText("");
+			date2.setText("");
+		}
 		public JPeditForSituation(){
 			//面板大小
 			this.setSize(240,270);

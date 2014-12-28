@@ -43,35 +43,10 @@ public class JPmanagerStrategy2 extends JPanel {
 		private JLabel add=new JLabel();
 		//编辑面板
 		private JPanelEdit JPeditOfLevel;
-		public JPanelEdit getJPeditOfLevel() {
-			return JPeditOfLevel;
-		}
-		public void setJPeditOfLevel(JPanelEdit jPeditOfLevel) {
-			JPeditOfLevel = jPeditOfLevel;
-		}
-		public JPanelEdit getJPeditOfBargin() {
-			return JPeditOfBargin;
-		}
-		public void setJPeditOfBargin(JPanelEdit jPeditOfBargin) {
-			JPeditOfBargin = jPeditOfBargin;
-		}
-		public JPanelEdit getJPeditOfReach() {
-			return JPeditOfReach;
-		}
-		public void setJPeditOfReach(JPanelEdit jPeditOfReach) {
-			JPeditOfReach = jPeditOfReach;
-		}
 		//编辑面板
 		private JPanelEdit JPeditOfBargin;
 		//编辑面板
 		private JPanelEdit JPeditOfReach;
-	
-		public JPBillList getBillList() {
-			return billList;
-		}
-		public void setBillList(JPBillList billList) {
-			this.billList = billList;
-		}
 		//单据类型
 		private StrategyStyle style;
 		//图片
@@ -92,6 +67,11 @@ public class JPmanagerStrategy2 extends JPanel {
 		ImageIcon addIconR=new ImageIcon("src/image/function/addR.png");
 		//frame的引用
 	    Frame frame;
+	    public void reHome(){
+	    	JPeditOfLevel.reHome();
+	    	JPeditOfBargin.reHome();
+	    	JPeditOfReach.reHome();
+	    }
 		public JPmanagerStrategy2(){//参数决定编辑板的类型
 			//面板大小
 			this.setSize(905, 342);
@@ -291,12 +271,6 @@ public class JPmanagerStrategy2 extends JPanel {
 		}
 		/*编辑栏面板*/
 		public class JPanelEdit extends JPanel{
-			public ArrayList<CommodityVO> getOutput() {
-				return output;
-			}
-			public void setOutput(ArrayList<CommodityVO> output) {
-				this.output = output;
-			}
 
 			//背景
 			private JLabel back=new JLabel();
@@ -337,15 +311,22 @@ public class JPmanagerStrategy2 extends JPanel {
 			private JTextField startText3=new JTextField(10);
 			private JTextField lastText=new JTextField(10);
 			private JTextField originalTotalPriceText=new JTextField(10);
-			public JTextField getOriginalTotalPriceText() {
-				return originalTotalPriceText;
-			}
-			public void setOriginalTotalPriceText(JTextField originalTotalPriceText) {
-				this.originalTotalPriceText = originalTotalPriceText;
-			}
-
 			private JTextField decreasePriceText=new JTextField(10);
 			private JTextField numText=new JTextField(10);
+			public void reHome(){
+				this.setLocation(905, 36);
+				limitText.setText("");
+				discountText.setText("");
+				couponText.setText("");
+				startText1.setText("");
+				startText2.setText("");
+				startText3.setText("");
+				lastText.setText("");
+				originalTotalPriceText.setText("");
+				decreasePriceText.setText("");
+				numText.setText("");
+				output.clear();
+			}
 			public JPanelEdit(StrategyStyle style){
 				//面板大小
 				this.setSize(240,270);
@@ -1029,7 +1010,43 @@ public class JPmanagerStrategy2 extends JPanel {
 				
 			}
 	
-
+			public ArrayList<CommodityVO> getOutput() {
+				return output;
+			}
+			public void setOutput(ArrayList<CommodityVO> output) {
+				this.output = output;
+			}
+			public JTextField getOriginalTotalPriceText() {
+				return originalTotalPriceText;
+			}
+			public void setOriginalTotalPriceText(JTextField originalTotalPriceText) {
+				this.originalTotalPriceText = originalTotalPriceText;
+			}
+		}
+		public JPanelEdit getJPeditOfLevel() {
+			return JPeditOfLevel;
+		}
+		public void setJPeditOfLevel(JPanelEdit jPeditOfLevel) {
+			JPeditOfLevel = jPeditOfLevel;
+		}
+		public JPanelEdit getJPeditOfBargin() {
+			return JPeditOfBargin;
+		}
+		public void setJPeditOfBargin(JPanelEdit jPeditOfBargin) {
+			JPeditOfBargin = jPeditOfBargin;
+		}
+		public JPanelEdit getJPeditOfReach() {
+			return JPeditOfReach;
+		}
+		public void setJPeditOfReach(JPanelEdit jPeditOfReach) {
+			JPeditOfReach = jPeditOfReach;
+		}
+		
+		public JPBillList getBillList() {
+			return billList;
+		}
+		public void setBillList(JPBillList billList) {
+			this.billList = billList;
 		}
 }
 

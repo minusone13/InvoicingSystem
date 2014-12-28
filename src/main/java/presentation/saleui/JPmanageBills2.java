@@ -98,6 +98,12 @@ public class JPmanageBills2 extends JPanel {
 	    CustomerBlService customerbl=new CustomerList();
 	    SaleBillBlService sbl=new salebillController();
 	    StubManagerBlService mbl=new StubManager();
+	    public void reHome(){
+	    	JPeditOfPur.reHome();
+	    	JPeditOfPurBack.reHome();
+	    	JPeditOfSale.reHome();
+	    	JPeditOfSaleBack.reHome();
+	    }
 		public JPmanageBills2(){
 			//面板大小
 			this.setSize(905, 342);
@@ -474,6 +480,19 @@ public class JPmanageBills2 extends JPanel {
 			private ArrayList<CommodityVO> output;
 			//接收输出的备注
 			private ArrayList<String> outputNotes;
+			public void reHome(){
+				this.setLocation(905, 36);
+				customerTxt.setText("");
+				warehouseTxt.setText("");
+				totalText.setText("");
+				noteText.setText("");
+				couponText.setText("");
+				discountText.setText("");
+				finalTotalText.setText("");
+				billIDTxt.setText("");
+				output=null;
+				outputNotes=null;
+			}
 			public JPanelEdit(BillStyle style){
 				//确认种类
 				billStyle=style;

@@ -50,7 +50,9 @@ public class SaleDetailPanel extends JPanel{
 	public SaleDetailPanel(){
 		initial();
 	}
-	
+	public void reHome(){
+		checkJP.reHome();
+	}
 	private void initial() {
 		this.setBounds(0, 0, 905, 315);
 		//设置布局
@@ -299,6 +301,18 @@ public class SaleDetailPanel extends JPanel{
 		private ImageIcon confirm1=new ImageIcon("src/image/function/confirmR.png");
 	    //调用逻辑层
 	    CustomerBlService customerbl=new CustomerList();
+	    
+	    public void reHome(){
+	    	this.setLocation(905, 36);
+	    	year1.setText("");
+	    	month1.setText("");
+	    	date1.setText("");
+	    	year2.setText("");
+	    	month2.setText("");
+	    	date2.setText("");
+	    	commodityName.setText("");
+	    	salemanTxt.setText("");
+	    }
 		public JPeditForSaleDetail(){
 			//面板大小
 			this.setSize(240,270);

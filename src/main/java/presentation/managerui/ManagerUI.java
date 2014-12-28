@@ -283,6 +283,11 @@ public class ManagerUI extends JPanel {
 				ManagerUI.this.setVisible(false);
 				break;
 			}
+			//以下面板的编辑面板归位
+			ManagerUI.this.getManagerStrategy2().reHome();
+			ManagerUI.this.getBusinessCondition().reHome();
+			ManagerUI.this.getBusinessProgress().reHome();
+			ManagerUI.this.getSaleDetail().reHome();
 		}
 
 		public void mouseEntered(MouseEvent e) {

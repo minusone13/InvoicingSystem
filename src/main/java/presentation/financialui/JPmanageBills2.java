@@ -50,12 +50,7 @@ public class JPmanageBills2 extends JPanel {
 		private JPanelEdit JPeditOfPay;
 		//编辑面板
 		private JPanelEdit JPeditOfRec;
-		public JPBillList getBillList() {
-			return billList;
-		}
-		public void setBillList(JPBillList billList) {
-			this.billList = billList;
-		}
+
 		//单据类型
 		private BillStyle style;
 		//图片
@@ -76,6 +71,11 @@ public class JPmanageBills2 extends JPanel {
 		ImageIcon addIconR=new ImageIcon("src/image/function/addR.png");
 		//frame的引用
 	    Frame frame;
+	    public void reHome(){
+	    	JPeditOfCash.reHome();
+	    	JPeditOfPay.reHome();
+	    	JPeditOfRec.reHome();
+	    }
 		public JPmanageBills2(){//参数决定编辑板的类型
 			//面板大小
 			this.setSize(905, 342);
@@ -416,6 +416,20 @@ public class JPmanageBills2 extends JPanel {
 			private JComboBox customerCombo;
 			private JTextField tranTotalText=new JTextField(10);
 			private JPaddList tranListEdit=new JPaddList(BillStyle.PaymentBill);//隐藏的条目编辑面板
+			
+			public void reHome(){
+				this.setLocation(905, 36);
+				accountText.setText("");
+				totalText.setText("");
+				tranTotalText.setText("");
+				
+				tranListEdit.reHome();
+				tranListEdit.setVisible(false);
+				ListEdit.reHome();
+				ListEdit.setVisible(false);
+				
+			}
+			
 			public JPanelEdit(BillStyle style){
 				//确认种类
 				billStyle=style;
@@ -985,6 +999,17 @@ public class JPmanageBills2 extends JPanel {
 				private ArrayList<Double> moneyArray=new ArrayList<Double>();
 				private ArrayList<String> noteArray=new ArrayList<String>();
 				
+				public void reHome(){
+					listTxt.setText("");
+					moneyTxt.setText("");
+					noteTxt.setText("");
+					tranListTxt.setText("");
+					tranMoneyTxt.setText("");
+					tranNoteTxt.setText("");
+					listArray.clear();
+					moneyArray.clear();
+					noteArray.clear();
+				}
 				/*条目编辑面板*/
 				public JPaddList(BillStyle style){
 					//面板大小
@@ -1169,5 +1194,11 @@ public class JPmanageBills2 extends JPanel {
 				}
 			}
 
+		}
+		public JPBillList getBillList() {
+			return billList;
+		}
+		public void setBillList(JPBillList billList) {
+			this.billList = billList;
 		}
 }

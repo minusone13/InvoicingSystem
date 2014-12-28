@@ -238,6 +238,10 @@ public class Stock extends JPanel {
 				Stock.this.setVisible(false);
 				break;
 			}
+			//以下面板的编辑面板归位
+			Stock.this.getManageBills2().reHome();
+			Stock.this.getManagerComs().reHome();
+			Stock.this.getStockCheck().reHome();
 		}
 
 		public void mouseEntered(MouseEvent e) {

@@ -35,15 +35,13 @@ public class StockCheckPanel extends JPanel{
 	JTable table = new JTable(model);
 	JScrollPane pane = new JScrollPane(table);
 	//查询面板
-	JPeditForCheck checkJP;
+	private JPeditForCheck checkJP;
 	//查询按钮
 	private JLabel inquire=new JLabel();
 
 	//图片
 	private ImageIcon searchIconW=new ImageIcon("src/image/function/searchW.png");
 	private ImageIcon searchIconR=new ImageIcon("src/image/function/searchR.png");
-	private ImageIcon downloadIconW=new ImageIcon("src/image/function/downLoadW.png");
-	private ImageIcon downloadIconR=new ImageIcon("src/image/function/downLoadR.png");
 	//frame的引用
     Frame frame;
     //逻辑层接口
@@ -51,7 +49,9 @@ public class StockCheckPanel extends JPanel{
 	public StockCheckPanel() {
 		initial();
 	}
-	
+	public void reHome(){
+		checkJP.reHome();
+	}
 	public void initial() {
 		//逻辑层接口
 		StockManagerDriver smd=new StockManagerDriver();
@@ -214,6 +214,16 @@ public class StockCheckPanel extends JPanel{
 		private ImageIcon right1=new ImageIcon("src/image/function/rightR.png");
 		private ImageIcon confirm0=new ImageIcon("src/image/function/confirmW.png");
 		private ImageIcon confirm1=new ImageIcon("src/image/function/confirmR.png");
+		
+		public void reHome(){
+			this.setLocation(905, 36);
+			year1.setText("");
+			month1.setText("");
+			date1.setText("");
+			year2.setText("");
+			month2.setText("");
+			date2.setText("");
+		}
 		public JPeditForCheck(){
 			//面板大小
 			this.setSize(240,270);

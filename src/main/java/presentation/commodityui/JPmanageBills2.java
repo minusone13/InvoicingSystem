@@ -142,6 +142,9 @@ public class JPmanageBills2 extends JPanel {
 			this.add(table,9);
 			this.add(bg,10);
 		}
+		public void reHome(){
+			JPeditOfSpoil.reHome();
+		}
 		  /*获取frame引用*/
 	    public void getFrame( Frame f){
 	    		frame=f;

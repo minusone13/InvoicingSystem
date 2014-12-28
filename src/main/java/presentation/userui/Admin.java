@@ -114,6 +114,8 @@ public class Admin extends JPanel{
 					//实现登出跳转
 					frame.getLogin().setVisible(true);
 					Admin.this.setVisible(false);
+					//一下面板的编辑面板归位
+					Admin.this.getManageUser().reHome();
 					break;
 				case 4:
 					modifyPasswords.setIcon(new ImageIcon("src/image/modifyPassword1.png"));

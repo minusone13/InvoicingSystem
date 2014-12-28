@@ -69,6 +69,10 @@ public class JPmanageAccount extends JPanel {
 			//frame的引用
 		    Frame frame;
 		    FinancialBlService fbl=new Financial();
+		    public void reHome(){
+		    	JPedit.reHome();
+		    	JPsearch.reHome();
+		    }
 			public JPmanageAccount(){//参数决定编辑板的类型
 				//面板大小
 				this.setSize(905, 342);
@@ -295,8 +299,6 @@ public class JPmanageAccount extends JPanel {
 				//图片
 				private ImageIcon right0=new ImageIcon("src/image/function/rightW.png");
 				private ImageIcon right1=new ImageIcon("src/image/function/rightR.png");
-				private ImageIcon scan0=new ImageIcon("src/image/function/littleScanW.png");
-				private ImageIcon scan1=new ImageIcon("src/image/function/littleScanR.png");
 				private ImageIcon confirm0=new ImageIcon("src/image/function/confirmW.png");
 				private ImageIcon confirm1=new ImageIcon("src/image/function/confirmR.png");
 				
@@ -305,6 +307,12 @@ public class JPmanageAccount extends JPanel {
 				private JLabel money=new JLabel("金额");
 				private JTextField nameText=new JTextField(10);
 				private JTextField moneyText=new JTextField(10);
+				
+				public void reHome(){
+					this.setLocation(905, 36);
+					nameText.setText("");
+					moneyText.setText("");
+				}
 				public JPanelEdit(){
 					//面板大小
 					this.setSize(240,270);
@@ -535,6 +543,11 @@ public class JPmanageAccount extends JPanel {
 				//报溢报损单的附件
 				private JLabel searchjl=new JLabel("查找 ");
 				private JTextField searchTxt=new JTextField(10);
+				
+				public void reHome(){
+					this.setLocation(905, 36);
+					searchTxt.setText("");
+				}
 				public JPanelSearch(){
 					//面板大小
 					this.setSize(240,270);

@@ -188,6 +188,9 @@ public class Sale extends JPanel{
 					Sale.this.setVisible(false);
 					break;
 				}
+				//以下面板的编辑面板归位
+				Sale.this.getManageBills2().reHome();
+				Sale.this.getCustomerManage().reHome();
 			}
 
 			public void mouseEntered(MouseEvent e) {
