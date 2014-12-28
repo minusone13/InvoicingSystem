@@ -757,7 +757,7 @@ public class JPmanagerStrategy2 extends JPanel {
 							}
 							else if(strategyTypeCombo.getSelectedItem().toString().equals("赠送代金券")){
 								boolean legal=false;
-								if(!limitText.getText().equals("")&&
+								if(
 										!startText1.getText().equals("")&&
 										!startText2.getText().equals("")&&
 										!startText3.getText().equals("")&&
@@ -785,14 +785,12 @@ public class JPmanagerStrategy2 extends JPanel {
 										level=5;
 									}
 									newLevel.setLevel(level);
-									newLevel.setLimit(Double.parseDouble(limitText.getText()));
 									newLevel.setCouponrate(Double.parseDouble(couponText.getText()));
 									newLevel.setStartTime(startText1.getText()+"/"+startText2.getText()+"/"+startText3.getText());
 									newLevel.setLastTime(Integer.parseInt(lastText.getText()));
 									billList.addLevelStrategy(newLevel);
 									
 									//清空信息
-									limitText.setText("");
 									startText1.setText("");
 									startText2.setText("");
 									startText3.setText("");
@@ -806,7 +804,7 @@ public class JPmanagerStrategy2 extends JPanel {
 							}
 							else if(strategyTypeCombo.getSelectedItem().toString().equals("打折")){
 								boolean legal=false;
-								if(!limitText.getText().equals("")&&
+								if(
 										!startText1.getText().equals("")&&
 										!startText2.getText().equals("")&&
 										!startText3.getText().equals("")&&
@@ -834,14 +832,12 @@ public class JPmanagerStrategy2 extends JPanel {
 										level=5;
 									}
 									newLevel.setLevel(level);
-									newLevel.setLimit(Double.parseDouble(limitText.getText()));
 									newLevel.setDiscountrate(Double.parseDouble(discountText.getText()));
 									newLevel.setStartTime(startText1.getText()+"/"+startText2.getText()+"/"+startText3.getText());
 									newLevel.setLastTime(Integer.parseInt(lastText.getText()));
 									billList.addLevelStrategy(newLevel);
 									
 									//清空信息
-									limitText.setText("");
 									startText1.setText("");
 									startText2.setText("");
 									startText3.setText("");

@@ -424,5 +424,23 @@ public class StubManager implements StubManagerBlService{
 		return new BusinessSituationVO();
 	
 	}
+	public LevelStrategyVO findLevelStrategy(String id)
+	{
+		// TODO Auto-generated method stub
+		
+		return strategyPool.findLevelStrategy(id).getVO();
+	}
+	public BarginStrategyVO findBarginStrategy(String id)
+	{
+		// TODO Auto-generated method stub
+		
+		return strategyPool.findBarginStrategy(id).getVO();
+	}
+	public ReachStrategyVO findReachStrategy(String id)
+	{
+		// TODO Auto-generated method stub
+		
+		return strategyPool.findReachStrategy(id).getVO();
+	}
 
 }

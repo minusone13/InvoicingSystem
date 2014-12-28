@@ -2,9 +2,12 @@ package presentation.saleui;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -13,20 +16,25 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import entrance.Frame;
 import po.BillState;
 import po.BillStyle;
 import presentation.managerui.JPBillList;
 import presentation.managerui.JTableOfList;
 import presentation.managerui.MouseListenerGetXY;
 import vo.CustomerVO;
+import vo.LevelStrategyVO;
 import vo.PurBackSheetVO;
 import vo.PurSheetVO;
+import vo.ReachStrategyVO;
+import vo.SaleSheetVO;
 import vo.stockvo.CommodityVO;
 import businesslogic.customerbl.CustomerList;
+import businesslogic.managerbl.StubManager;
 import businesslogic.salebillbl.salebillController;
 import businesslogicservice.customerblservice.CustomerBlService;
+import businesslogicservice.managerblservice.StubManagerBlService;
 import businesslogicservice.salebillblservice.SaleBillBlService;
+import entrance.Frame;
 
 public class JPmanageBills2 extends JPanel {
 	//背景
@@ -89,6 +97,7 @@ public class JPmanageBills2 extends JPanel {
 	    //调用逻辑层
 	    CustomerBlService customerbl=new CustomerList();
 	    SaleBillBlService sbl=new salebillController();
+	    StubManagerBlService mbl=new StubManager();
 		public JPmanageBills2(){
 			//面板大小
 			this.setSize(905, 342);
@@ -675,11 +684,46 @@ public class JPmanageBills2 extends JPanel {
 					addList.setBounds(105,63, 24, 24);
 					addList.addMouseListener(new MouseListenerOfButton(2));
 					//优惠策略选择下拉框
-					strategyCombo = new JComboBox();
+					String[] temp={"回车获取对应优惠"};
+					strategyCombo = new JComboBox(temp);
 					strategyCombo.setFont(new Font("宋体",Font.BOLD,14));
 					strategyCombo.setBounds(80,140, 150, 20);
 					strategyCombo.setBackground(Color.gray);
 					strategyCombo.setForeground(Color.white);
+					strategyCombo.addActionListener(new ActionListener() {
+					      public void actionPerformed(final ActionEvent e) {
+					    	  if(strategyCombo.getSelectedItem()!=null){
+					    		  if(!customerCombo.getSelectedItem().toString().equals("")
+											&&!warehouseCombo.getSelectedItem().toString().equals("")
+											&&output!=null
+											&&!totalText.getText().equals("")
+											&&!couponText.getText().equals("")
+											&&!strategyCombo.getSelectedItem().toString().equals("")){
+										SaleSheetVO vo=new SaleSheetVO();
+										String[] temp=customerCombo.getSelectedItem().toString().split(":");
+										vo.setCustomer(customerbl.findCustomer(temp[1]));
+										vo.setstock(warehouseCombo.getSelectedItem().toString());
+										vo.setsheet(output);
+										vo.setcommoditywords(outputNotes);
+										vo.setmoney1(Double.parseDouble(totalText.getText()));
+										vo.setmoney2(Double.parseDouble(couponText.getText()));
+										//根据选择的策略完善销售单
+										String strategyid=strategyCombo.getSelectedItem().toString();
+										String[] temp2=strategyid.split("-");
+										if(temp2[0].equals("KHCL")){
+											vo=sbl.getCompletedSaleSheet(vo, mbl.findLevelStrategy(strategyid));
+										}
+										else if(temp2[0].equals("MECL")){
+											vo=sbl.getCompletedSaleSheet(vo, mbl.findReachStrategy(strategyid));
+										}
+										//显示剩余信息
+										discountText.setText(String.valueOf(vo.getdiscount()));
+										finalTotalText.setText(String.valueOf(vo.getpmoney()));
+										noteText.setText(vo.getwords());
+						    	  }
+					    	  }
+					      }
+					});
 					//总额文本框
 					totalText.setBounds(80,90, 150, 20);
 					totalText.setOpaque(false);//文本框透明
@@ -688,6 +732,7 @@ public class JPmanageBills2 extends JPanel {
 					couponText.setBounds(125,115, 105, 20);
 					couponText.setOpaque(false);//文本框透明
 					couponText.setForeground(Color.white);//前景色
+					couponText.addKeyListener(new KeyAdapterOfSignIn());
 					//折让文本框
 					discountText.setBounds(110,165, 120, 20);
 					discountText.setOpaque(false);//文本框透明
@@ -817,11 +862,47 @@ public class JPmanageBills2 extends JPanel {
 					break;
 				}
 			}
-			/*返回收款付款单编辑栏的客户选择下拉框*/
-			public JComboBox getCustomerCombo(){
-				return customerCombo;
-			}
-		
+			/*回车获取促销策略*/
+		    public class KeyAdapterOfSignIn extends KeyAdapter{
+		    	public void keyPressed(KeyEvent e){
+					if(e.getKeyChar()==KeyEvent.VK_ENTER){
+						//判断以上信息是否完整
+						if(!customerCombo.getSelectedItem().toString().equals("")
+								&&!warehouseCombo.getSelectedItem().toString().equals("")
+								&&output!=null
+								&&!totalText.getText().equals("")
+								&&!couponText.getText().equals("")){
+							SaleSheetVO vo=new SaleSheetVO();
+							String[] temp=customerCombo.getSelectedItem().toString().split(":");
+							vo.setCustomer(customerbl.findCustomer(temp[1]));
+							vo.setstock(warehouseCombo.getSelectedItem().toString());
+							vo.setsheet(output);
+							vo.setcommoditywords(outputNotes);
+							vo.setmoney1(Double.parseDouble(totalText.getText()));
+							vo.setmoney2(Double.parseDouble(couponText.getText()));
+							//获取相应的策略信息
+							ArrayList<LevelStrategyVO> level=sbl.getSomeLevelStrategy(vo);
+							ArrayList<ReachStrategyVO> reach=sbl.getSomeReachStrategy(vo);
+							//将数组加到下拉框
+							strategyCombo.removeAllItems();
+							for(int i=0;i<level.size();i++){
+								strategyCombo.addItem(level.get(i).getID());
+							}
+							for(int i=0;i<reach.size();i++){
+								strategyCombo.addItem(reach.get(i).getID());
+							}
+							if(level.size()==0&&reach.size()==0){
+								//没有优惠，显示其余信息
+								//显示剩余信息
+								discountText.setText("0");
+								finalTotalText.setText(String.valueOf(Double.parseDouble(totalText.getText())-Double.parseDouble(couponText.getText())));
+								noteText.setText("无任何优惠");
+								
+							}
+						}
+					}
+				}
+		    }
 			public class MouseListenerOfButton implements MouseListener{
 
 				private int num;//1、右移 2、加号 3、确认4、查找
@@ -922,6 +1003,31 @@ public class JPmanageBills2 extends JPanel {
 								}
 							break;
 							case SaleSheet:
+								if(!customerCombo.getSelectedItem().toString().equals("")
+										&&!warehouseCombo.getSelectedItem().toString().equals("")
+										&&output!=null
+										&&!totalText.getText().equals("")
+										&&!couponText.getText().equals("")
+										&&!discountText.getText().equals("")
+										&&!finalTotalText.getText().equals("")
+										&&!noteText.getText().equals("")
+										
+										){
+									SaleSheetVO vo=new SaleSheetVO();
+									String[] temp=customerCombo.getSelectedItem().toString().split(":");
+									vo.setCustomer(customerbl.findCustomer(temp[1]));
+									vo.setstock(warehouseCombo.getSelectedItem().toString());
+									vo.setsheet(output);
+									vo.setcommoditywords(outputNotes);
+									vo.setmoney1(Double.parseDouble(totalText.getText()));
+									vo.setmoney2(Double.parseDouble(couponText.getText()));
+									vo.setdiscount(Double.parseDouble(discountText.getText()));
+									vo.setpmoney(Double.parseDouble(finalTotalText.getText()));
+									vo.setwords(noteText.getText());
+									
+									billList.addSaleSheet(vo);
+									
+								}
 							case SaleBackSheet:
 								break;
 							}

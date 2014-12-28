@@ -19,16 +19,9 @@ import vo.financialBillVO.CashPaymentVO;
 import vo.financialBillVO.PaymentVO;
 import vo.financialBillVO.ReceiptVO;
 import vo.inquiryVO.BusinessSituationVO;
-import businesslogic.commoditybillbl.StubAlertBill;
-import businesslogic.commoditybillbl.StubGiftBill;
-import businesslogic.commoditybillbl.StubSpillsLossBill;
-import businesslogic.financialbillbl.CashPaymentBill;
-import businesslogic.financialbillbl.PaymentBill;
-import businesslogic.financialbillbl.ReceiptBill;
-import businesslogic.salebillbl.PurBackSheet;
-import businesslogic.salebillbl.PurSheet;
-import businesslogic.salebillbl.SaleBackSheet;
-import businesslogic.salebillbl.SaleSheet;
+import businesslogic.strategybl.StubBarginStrategy;
+import businesslogic.strategybl.StubLevelStrategy;
+import businesslogic.strategybl.StubReachStrategy;
 
 public interface StubManagerBlService {
 	/*需要从单据池筛选指定状态的所有赠送单*/
@@ -102,6 +95,12 @@ public interface StubManagerBlService {
 	public ArrayList<BarginStrategyVO> ShowBarginStrategy ();
 	/*返回所有满额促销策略信息*/
 	public ArrayList<ReachStrategyVO> ShowReachStrategy  ();
+	/*通过id找策略*/
+	public LevelStrategyVO findLevelStrategy(String id);
+	/*通过id找策略*/
+	public BarginStrategyVO findBarginStrategy(String id);
+	/*通过id找策略*/
+	public ReachStrategyVO findReachStrategy(String id);
 	/*需要删除一条客户分层策略*/
 	public boolean Remove (LevelStrategyVO ls);
 	/*需要删除一条特价包策略*/
