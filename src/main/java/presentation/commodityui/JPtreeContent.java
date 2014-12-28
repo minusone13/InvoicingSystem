@@ -22,7 +22,6 @@ import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeNode;
 
-import data.commoditydata.StubStockDataController;
 import dataservice.commoditydataservice.StubCommodityDataService;
 import po.RM;
 import vo.stockvo.CategoryVO;
