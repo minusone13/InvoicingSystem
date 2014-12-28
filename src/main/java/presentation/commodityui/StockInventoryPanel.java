@@ -3,6 +3,7 @@ package presentation.commodityui;
 import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.File;
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
@@ -12,15 +13,19 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 import presentation.commodityui.StockCheckPanel.MouseListenerOfButton;
 import vo.stockvo.CommodityVO;
+import vo.stockvo.CountVO;
 import businesslogic.stockmanagerbl.StubStockController;
 import businesslogicservice.commodityblservice.StubCommodityBlService;
 import dataservice.commoditydataservice.StubCommodityDataService;
@@ -100,6 +105,7 @@ public class StockInventoryPanel extends JPanel{
 		add(download,2);
 		
 	}
+	CountVO count;
 	public class MouseListenerOfButton implements MouseListener{
 
 		private int num;
@@ -130,7 +136,15 @@ public class StockInventoryPanel extends JPanel{
 				case 2:
 					download.setIcon(downloadIconW);
 					//导出
-					stockbl.ExportCount("库存盘点", stockbl.count());
+					JFileChooser c = new JFileChooser();
+					FileFilter filter = new FileNameExtensionFilter("Excel文件(*.xls)", "xls");
+					c.addChoosableFileFilter(filter);
+					c.setFileFilter(filter);
+					c.setDialogTitle("保存文件");
+					int result = c.showSaveDialog(getParent());
+					if (result == JFileChooser.APPROVE_OPTION) {
+						stockbl.ExportCount(c.getSelectedFile().getAbsolutePath()+".xls", count);
+					}
 					break;
 			}
 			
@@ -155,15 +169,16 @@ public class StockInventoryPanel extends JPanel{
 		
 	}
 	public void update(){
-		Date date=stockbl.count().getDate();
+		count = stockbl.count();
+		Date date=count.getDate();
 	    SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
 	    //获取批次和批号
 		String currentTime = format.format(date);
-		int no=stockbl.count().getNo();
+		int no=count.getNo();
 		//获取商品列表
-		ArrayList<CommodityVO> commodities=stockbl.count().getList();
+		ArrayList<CommodityVO> commodities=count.getList();
 		//填充表格数据
-		Object[][] data=new Object[stockbl.count().getList().size()][];
+		Object[][] data=new Object[count.getList().size()][];
 		for(int i=0;i<commodities.size();i++){
 			Object[] temp={i+1,
 					commodities.get(i).getName(),
