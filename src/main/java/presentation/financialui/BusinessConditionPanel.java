@@ -200,6 +200,7 @@ public class BusinessConditionPanel extends JPanel{
 					break;
 				case 2:
 					download.setIcon(downloadIconW);
+					export("经营情况表");
 					break;
 			}
 			
@@ -261,7 +262,7 @@ public class BusinessConditionPanel extends JPanel{
 		tableOfProfit.updateUI();
 	}
 	
-	public void export() {
+	public void export(String addr) {
 		String[] names = {"折让后总收入","折让","销售收入","商品报溢收入","成本调价收入","代金券与实际收款差额收入","总支出","销售成本","商品报损","商品赠出","利润"};
 		String[][] data = new String[2][];
 		data[0] = names;
@@ -272,7 +273,7 @@ public class BusinessConditionPanel extends JPanel{
 				tableOfPay.getValueAt(0, 2).toString(), tableOfPay.getValueAt(0, 3).toString(),
 				tableOfProfit.getValueAt(0, 0).toString()};
 		data[1] = temp;
-		new Export("经营情况表", data);
+		new Export(addr, data);
 	} 
 	//查找条件输入面板
 	public class JPeditForSituation extends JPanel
