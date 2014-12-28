@@ -9,17 +9,20 @@ import po.BillStyle;
 import po.PO;
 import po.ReceiptPO;
 import po.Role;
+import presentation.userui.Login;
 import businesslogic.GetVOandPO;
 import businesslogic.examinebl.Bill;
 import businesslogic.examinebl.StubBillPool;
 import vo.VO;
 import vo.financialBillVO.ReceiptVO;
+import vo.uservo.UserVO;
 
 public class ReceiptBill extends Bill implements GetVOandPO{
 	//userVO修改的
-		private String userID = "001";
-		private String userName = "梅杰";
-		private Role role = Role.FINANCIAL_MANAGER;//权限
+	UserVO user = Login.user;
+		private String userID =user.getID();
+		private String userName = user.getName();
+		private Role role = user.getR();//权限
 	
 	
 	private BillStyle billstyle=BillStyle.ReceiptBill;
@@ -63,9 +66,6 @@ public class ReceiptBill extends Bill implements GetVOandPO{
 		this.op = op;
 	}
 	
-	public String getOperator() {
-		return this.op;
-	}
 	public String getUserName() {
 		return userName;
 	}

@@ -13,14 +13,17 @@ import po.CashPaymentPO;
 import po.PO;
 import po.ReceiptPO;
 import po.Role;
+import presentation.userui.Login;
 import vo.VO;
 import vo.financialBillVO.CashPaymentVO;
+import vo.uservo.UserVO;
 
 public class CashPaymentBill extends Bill implements GetVOandPO{
 	//userVO初始化
-	private Role role = Role.FINANCIAL_MANAGER;
-	private String userID ="001";
-	private String userName = "梅杰";
+	UserVO user = Login.user;
+	private String userID =user.getID();
+	private String userName = user.getName();
+	private Role role = user.getR();//权限
 	
 	
 	

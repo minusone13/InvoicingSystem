@@ -10,17 +10,20 @@ import po.PO;
 import po.PaymentPO;
 import po.ReceiptPO;
 import po.Role;
+import presentation.userui.Login;
 import businesslogic.GetVOandPO;
 import businesslogic.examinebl.Bill;
 import businesslogic.examinebl.StubBillPool;
 import vo.VO;
 import vo.financialBillVO.PaymentVO;
+import vo.uservo.UserVO;
 
 public class PaymentBill extends Bill implements GetVOandPO{
 	//userVO初始化
-		private Role role = Role.FINANCIAL_MANAGER;
-		private String userID = "001";
-		private String userName = "梅杰";
+	UserVO user = Login.user;
+	private String userID =user.getID();
+	private String userName = user.getName();
+	private Role role = user.getR();//权限
 		
 	private BillStyle billstyle=BillStyle.PaymentBill;
 	private String ID;
