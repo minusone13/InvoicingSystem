@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import entrance.Frame;
+import presentation.StringJudger;
 import presentation.managerui.JPBillList;
 import presentation.managerui.MouseListenerGetXY;
 import vo.CustomerVO;
@@ -60,6 +61,8 @@ public class JPmanageCustomer extends JPanel {
 		    Frame frame;
 		    //客户管理逻辑层接口
 		    CustomerBlService customerbl=new CustomerList();
+		 	//字符串类型判断
+		    StringJudger stringJg=new StringJudger();
 		    public void reHome(){
 		    	JPedit.reHome();
 		    	JPsearch.reHome();
@@ -296,7 +299,7 @@ public class JPmanageCustomer extends JPanel {
 				private JTextField salemanText=new JTextField(10);
 				
 				public void reHome(){
-					this.setLocation(905, 36);
+					this.RightMove();
 					nameText.setText("");
 					phoneNumberText.setText("");
 					addressText.setText("");
@@ -373,26 +376,32 @@ public class JPmanageCustomer extends JPanel {
 					nameText.setBounds(80,70, 150, 20);
 					nameText.setOpaque(false);//文本框透明
 					nameText.setForeground(Color.white);//前景色
+					nameText.setCaretColor(Color.white);
 					//业务员文本框
 					salemanText.setBounds(125,95,105, 20);
 					salemanText.setOpaque(false);//文本框透明
 					salemanText.setForeground(Color.white);//前景色
+					salemanText.setCaretColor(Color.white);
 					//电话文本框
 					phoneNumberText.setBounds(80,120, 150, 20);
 					phoneNumberText.setOpaque(false);//文本框透明
 					phoneNumberText.setForeground(Color.white);//前景色
+					phoneNumberText.setCaretColor(Color.white);
 					//邮箱文本框
 					emailText.setBounds(80,145, 150, 20);
 					emailText.setOpaque(false);//文本框透明
 					emailText.setForeground(Color.white);//前景色
+					emailText.setCaretColor(Color.white);
 					//邮编文本框
 					postcodeText.setBounds(80,170, 150, 20);
 					postcodeText.setOpaque(false);//文本框透明
 					postcodeText.setForeground(Color.white);//前景色
+					postcodeText.setCaretColor(Color.white);
 					//地址文本框
 					addressText.setBounds(80,195, 150, 20);
 					addressText.setOpaque(false);//文本框透明
 					addressText.setForeground(Color.white);//前景色
+					addressText.setCaretColor(Color.white);
 					
 					this.add(right,0);
 					this.add(confirm,1);
@@ -474,39 +483,57 @@ public class JPmanageCustomer extends JPanel {
 										&&!postcodeText.getText().equals("")
 										&&!addressText.getText().equals("")
 									){
-									int level=0;
-									if(rankCombo.getSelectedItem().toString().equals("一级")){
-										level=1;
+									if(stringJg.judgestring(phoneNumberText.getText())==3&&
+											phoneNumberText.getText().toCharArray().length==11
+											){
+										if(stringJg.judgestring(postcodeText.getText())==3&&
+												postcodeText.getText().toCharArray().length==6){
+											if(stringJg.judgestring(emailText.getText())==1){
+												int level=0;
+												if(rankCombo.getSelectedItem().toString().equals("一级")){
+													level=1;
+												}
+												else if(rankCombo.getSelectedItem().toString().equals("二级")){
+													level=2;
+												}
+												else if(rankCombo.getSelectedItem().toString().equals("三级")){
+													level=3;
+												}
+												else if(rankCombo.getSelectedItem().toString().equals("四级")){
+													level=4;
+												}
+												else if(rankCombo.getSelectedItem().toString().equals("五级")){
+													level=5;
+												}
+												int type=0;
+												if(categoryCombo.getSelectedItem().toString().equals("进货商")){
+													type=0;
+												}
+												else if(categoryCombo.getSelectedItem().toString().equals("销售商")){
+													type=1;
+												}
+												CustomerVO newCus=new CustomerVO();
+												newCus.settype(type);
+												newCus.setlevel(level);
+												newCus.setname(nameText.getText());
+												newCus.setdeSaler(salemanText.getText());
+												newCus.setphonenumber(phoneNumberText.getText());
+												newCus.setemail(emailText.getText());
+												newCus.setpostcode(postcodeText.getText());
+												newCus.setaddress(addressText.getText());
+												billList.addCustomer(newCus);
+											}
+											else{
+												frame.getWarning().showWarning("邮箱格式错误");
+											}
+										}
+										else{
+											frame.getWarning().showWarning("邮编输入有误");
+										}
 									}
-									else if(rankCombo.getSelectedItem().toString().equals("二级")){
-										level=2;
+									else{
+										frame.getWarning().showWarning("电话号码输入有误");
 									}
-									else if(rankCombo.getSelectedItem().toString().equals("三级")){
-										level=3;
-									}
-									else if(rankCombo.getSelectedItem().toString().equals("四级")){
-										level=4;
-									}
-									else if(rankCombo.getSelectedItem().toString().equals("五级")){
-										level=5;
-									}
-									int type=0;
-									if(categoryCombo.getSelectedItem().toString().equals("进货商")){
-										type=0;
-									}
-									else if(categoryCombo.getSelectedItem().toString().equals("销售商")){
-										type=1;
-									}
-									CustomerVO newCus=new CustomerVO();
-									newCus.settype(type);
-									newCus.setlevel(level);
-									newCus.setname(nameText.getText());
-									newCus.setdeSaler(salemanText.getText());
-									newCus.setphonenumber(phoneNumberText.getText());
-									newCus.setemail(emailText.getText());
-									newCus.setpostcode(postcodeText.getText());
-									newCus.setaddress(addressText.getText());
-									billList.addCustomer(newCus);
 								}
 								else{
 									frame.getWarning().showWarning("请输入完整信息");
@@ -537,31 +564,56 @@ public class JPmanageCustomer extends JPanel {
 									else if(categoryCombo.getSelectedItem().toString().equals("销售商")){
 										type=1;
 									}
-									CustomerVO modifyCus=billList.getChosen().getCustomerVO();
-									modifyCus.settype(type);
-									modifyCus.setlevel(level);
-									
-									if(!nameText.getText().equals("")
-											){
-										modifyCus.setname(nameText.getText());
-									}
-									if(!salemanText.getText().equals("")){
-										modifyCus.setdeSaler(salemanText.getText());
-									}
+									boolean legal=true;
 									if(!phoneNumberText.getText().equals("")){
-										modifyCus.setphonenumber(phoneNumberText.getText());
+										if(stringJg.judgestring(phoneNumberText.getText())!=3||
+												phoneNumberText.getText().toCharArray().length!=11
+												){
+											legal=false;
+											frame.getWarning().showWarning("电话号码输入有误");
+										}
 									}
 									if(!emailText.getText().equals("")){
-										modifyCus.setemail(emailText.getText());
+										if(stringJg.judgestring(emailText.getText())!=1
+												){
+											legal=false;
+											frame.getWarning().showWarning("邮箱格式错误");
+										}
 									}
 									if(!postcodeText.getText().equals("")){
-										modifyCus.setpostcode(postcodeText.getText());
+										if(stringJg.judgestring(postcodeText.getText())!=3||
+												postcodeText.getText().toCharArray().length!=6){
+											legal=false;
+											frame.getWarning().showWarning("邮编输入有误");
+										}
 									}
-									if(!addressText.getText().equals("")){
-										modifyCus.setaddress(addressText.getText());
+									if(legal){
+										CustomerVO modifyCus=billList.getChosen().getCustomerVO();
+										modifyCus.settype(type);
+										modifyCus.setlevel(level);
+										if(!nameText.getText().equals("")
+												){
+											modifyCus.setname(nameText.getText());
+										}
+										if(!salemanText.getText().equals("")){
+											modifyCus.setdeSaler(salemanText.getText());
+										}
+										if(!phoneNumberText.getText().equals("")){
+											modifyCus.setphonenumber(phoneNumberText.getText());
+										}
+										if(!emailText.getText().equals("")){
+											modifyCus.setemail(emailText.getText());
+										}
+										if(!postcodeText.getText().equals("")){
+											modifyCus.setpostcode(postcodeText.getText());
+										}
+										if(!addressText.getText().equals("")){
+											modifyCus.setaddress(addressText.getText());
+										}
+										//进行修改
+										billList.changeChosen(modifyCus);
 									}
-									//进行修改
-									billList.changeChosen(modifyCus);
+									
 								}
 								else if(billList.getChosenNum()==0){
 									frame.getWarning().showWarning("请选择要修改的客户");
@@ -665,7 +717,7 @@ public class JPmanageCustomer extends JPanel {
 				private JTextField searchTxt=new JTextField(10);
 				
 				public void reHome(){
-					this.setLocation(905, 36);
+					this.RightMove();
 					searchTxt.setText("");
 				}
 				public JPanelSearch(){
@@ -699,6 +751,7 @@ public class JPmanageCustomer extends JPanel {
 					searchTxt.setBounds(80,30, 140, 20);
 					searchTxt.setOpaque(false);//文本框透明
 					searchTxt.setForeground(Color.white);//前景色
+					searchTxt.setCaretColor(Color.white);
 					
 					this.add(right,0);
 					this.add(searchButton,1);

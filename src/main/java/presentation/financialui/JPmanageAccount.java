@@ -13,6 +13,7 @@ import javax.swing.JTextField;
 
 import entrance.Frame;
 import presentation.PanelType;
+import presentation.StringJudger;
 import presentation.managerui.JPBillList;
 import presentation.managerui.MouseListenerGetXY;
 import vo.accountVO.AccountVO;
@@ -69,6 +70,8 @@ public class JPmanageAccount extends JPanel {
 			//frame的引用
 		    Frame frame;
 		    FinancialBlService fbl=new Financial();
+		 	//字符串类型判断
+		    StringJudger stringJg=new StringJudger();
 		    public void reHome(){
 		    	JPedit.reHome();
 		    	JPsearch.reHome();
@@ -309,7 +312,7 @@ public class JPmanageAccount extends JPanel {
 				private JTextField moneyText=new JTextField(10);
 				
 				public void reHome(){
-					this.setLocation(905, 36);
+					this.RightMove();
 					nameText.setText("");
 					moneyText.setText("");
 				}
@@ -348,10 +351,12 @@ public class JPmanageAccount extends JPanel {
 					nameText.setBounds(80,30, 150, 20);
 					nameText.setOpaque(false);//文本框透明
 					nameText.setForeground(Color.white);//前景色
+					nameText.setCaretColor(Color.white);
 					//余额文本框
 					moneyText.setBounds(80,60, 150, 20);
 					moneyText.setOpaque(false);//文本框透明
 					moneyText.setForeground(Color.white);//前景色
+					moneyText.setCaretColor(Color.white);
 					
 					this.add(right,0);
 					this.add(confirm,1);
@@ -424,10 +429,15 @@ public class JPmanageAccount extends JPanel {
 							if(isAdd){//如果是增加账户
 								if(!nameText.getText().equals("")&&
 										!moneyText.getText().equals("")){
-									AccountVO newAccount=new AccountVO();
-									newAccount.setName(nameText.getText());
-									newAccount.setBalance(Double.parseDouble(moneyText.getText()));
-									billList.addAccount(newAccount);
+									if(stringJg.judgestring(moneyText.getText())==3){
+										AccountVO newAccount=new AccountVO();
+										newAccount.setName(nameText.getText());
+										newAccount.setBalance(Double.parseDouble(moneyText.getText()));
+										billList.addAccount(newAccount);
+									}
+									else{
+										frame.getWarning().showWarning("金额必须为数字");
+									}
 								}
 								else{
 									frame.getWarning().showWarning("请输入完整信息");
@@ -579,6 +589,7 @@ public class JPmanageAccount extends JPanel {
 					searchTxt.setBounds(80,30, 140, 20);
 					searchTxt.setOpaque(false);//文本框透明
 					searchTxt.setForeground(Color.white);//前景色
+					searchTxt.setCaretColor(Color.white);
 					
 					this.add(right,0);
 					this.add(searchButton,1);

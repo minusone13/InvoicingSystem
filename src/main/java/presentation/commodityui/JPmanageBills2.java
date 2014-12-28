@@ -15,6 +15,7 @@ import entrance.Frame;
 import po.BillState;
 import po.BillStyle;
 import po.SpillsLossBillPO.Type;
+import presentation.StringJudger;
 import presentation.managerui.JPBillList;
 import presentation.managerui.JTableOfList;
 import presentation.managerui.MouseListenerGetXY;
@@ -65,6 +66,8 @@ public class JPmanageBills2 extends JPanel {
 		ImageIcon addIconR=new ImageIcon("src/image/function/addR.png");
 		//frame的引用
 	    Frame frame;
+	    //字符串类型判断
+	    StringJudger stringJg=new StringJudger();
 		public JPmanageBills2(){//参数决定编辑板的类型
 			//面板大小
 			this.setSize(905, 342);
@@ -392,7 +395,7 @@ public class JPmanageBills2 extends JPanel {
 		
 			/*归位并清空数据*/
 			public void reHome(){
-				this.setLocation(905, 36);
+				this.RightMove();
 				chosenVO=null;
 				commodityText.setText("");
 				typeText.setText("");
@@ -455,15 +458,18 @@ public class JPmanageBills2 extends JPanel {
 				commodityText.setOpaque(false);//文本框透明
 				commodityText.setEditable(false);
 				commodityText.setForeground(Color.white);//前景色
+				commodityText.setCaretColor(Color.white);
 				//型号文本框
 				typeText.setBounds(80,120, 150, 20);
 				typeText.setOpaque(false);//文本框透明
 				typeText.setEditable(false);
 				typeText.setForeground(Color.white);//前景色
+				typeText.setCaretColor(Color.white);
 				//数量文本框
 				numText.setBounds(80,150, 150, 20);
 				numText.setOpaque(false);//文本框透明
 				numText.setForeground(Color.white);//前景色
+				numText.setCaretColor(Color.white);
 				
 				this.add(right,0);
 				this.add(confirm,1);
@@ -540,17 +546,22 @@ public class JPmanageBills2 extends JPanel {
 						if(isAdd){
 							//生成报溢报损单
 							if(chosenVO!=null&&!numText.getText().equals("")){
-								chosenVO.setNumber(Integer.parseInt(numText.getText()));
-								SpillsLossBillVO newSpills=new SpillsLossBillVO();
-								frame.getWarning().showWarning(chosenVO.getName()+":"+chosenVO.getModel()+":"+chosenVO.getNumber());
-								newSpills.setCom(chosenVO);
-								if(typeCombo.getSelectedItem().toString().equals("报损单")){
-									newSpills.setT(Type.Loss);
+								if(stringJg.judgestring(numText.getText())==3){
+									chosenVO.setNumber(Integer.parseInt(numText.getText()));
+									SpillsLossBillVO newSpills=new SpillsLossBillVO();
+									frame.getWarning().showWarning(chosenVO.getName()+":"+chosenVO.getModel()+":"+chosenVO.getNumber());
+									newSpills.setCom(chosenVO);
+									if(typeCombo.getSelectedItem().toString().equals("报损单")){
+										newSpills.setT(Type.Loss);
+									}
+									else if(typeCombo.getSelectedItem().toString().equals("报溢单")){
+										newSpills.setT(Type.Spills);
+									}
+									billList.addSpillsLossBill(newSpills);
 								}
-								else if(typeCombo.getSelectedItem().toString().equals("报溢单")){
-									newSpills.setT(Type.Spills);
+								else{
+									frame.getWarning().showWarning("数量必须为数字");
 								}
-								billList.addSpillsLossBill(newSpills);
 							}
 							else{
 								frame.getWarning().showWarning("请填写完整信息");
@@ -565,7 +576,13 @@ public class JPmanageBills2 extends JPanel {
 										temp.setModel(chosenVO.getModel());
 									}
 									if(!numText.getText().equals("")){
-										temp.setNumber(chosenVO.getNumber());
+										if(stringJg.judgestring(numText.getText())==3){
+											temp.setNumber(chosenVO.getNumber());
+										}
+										else{
+											frame.getWarning().showWarning("数量必须为数字");
+											break;
+										}
 									}
 									if(typeCombo.getSelectedItem().toString().equals("报损单")){
 										modifyVO.setT(Type.Loss);
@@ -574,6 +591,8 @@ public class JPmanageBills2 extends JPanel {
 										modifyVO.setT(Type.Spills);
 									}
 									modifyVO.setCom(temp);
+									
+									billList.changeChosen(modifyVO);
 							}
 							else if(billList.getChosenNum()==0){
 								frame.getWarning().showWarning("请选择要修改的单据");

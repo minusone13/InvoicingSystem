@@ -18,6 +18,7 @@ import javax.swing.JTextField;
 
 import po.BillState;
 import po.BillStyle;
+import presentation.StringJudger;
 import presentation.managerui.JPBillList;
 import presentation.managerui.JTableOfList;
 import presentation.managerui.MouseListenerGetXY;
@@ -26,6 +27,7 @@ import vo.LevelStrategyVO;
 import vo.PurBackSheetVO;
 import vo.PurSheetVO;
 import vo.ReachStrategyVO;
+import vo.SaleBackSheetVO;
 import vo.SaleSheetVO;
 import vo.stockvo.CommodityVO;
 import businesslogic.customerbl.CustomerList;
@@ -94,6 +96,8 @@ public class JPmanageBills2 extends JPanel {
 		ImageIcon addIconR=new ImageIcon("src/image/function/addR.png");
 		//frame的引用
 	    Frame frame;
+	 	//字符串类型判断
+	    StringJudger stringJg=new StringJudger();
 	    //调用逻辑层
 	    CustomerBlService customerbl=new CustomerList();
 	    SaleBillBlService sbl=new salebillController();
@@ -481,7 +485,7 @@ public class JPmanageBills2 extends JPanel {
 			//接收输出的备注
 			private ArrayList<String> outputNotes;
 			public void reHome(){
-				this.setLocation(905, 36);
+				this.RightMove();
 				customerTxt.setText("");
 				warehouseTxt.setText("");
 				totalText.setText("");
@@ -567,10 +571,12 @@ public class JPmanageBills2 extends JPanel {
 					totalText.setBounds(80,120, 150, 20);
 					totalText.setOpaque(false);//文本框透明
 					totalText.setForeground(Color.white);//前景色
+					totalText.setCaretColor(Color.white);
 					//备注文本框
 					noteText.setBounds(80,150, 150, 20);
 					noteText.setOpaque(false);//文本框透明
 					noteText.setForeground(Color.white);//前景色
+					noteText.setCaretColor(Color.white);
 					
 					this.add(customer,0);
 					this.add(warehouse,1);
@@ -610,27 +616,32 @@ public class JPmanageBills2 extends JPanel {
 					billIDTxt.setBounds(80,30, 120, 20);
 					billIDTxt.setOpaque(false);//文本框透明
 					billIDTxt.setForeground(Color.white);//前景色
+					billIDTxt.setCaretColor(Color.white);
 					//客户文本框
 					customerTxt.setBounds(80,60, 150, 20);
 					customerTxt.setEditable(false);
 					customerTxt.setOpaque(false);//文本框透明
 					customerTxt.setForeground(Color.white);//前景色
+					customerTxt.setCaretColor(Color.white);
 					//仓库文本框
 					warehouseTxt.setBounds(80,90, 150, 20);
 					warehouseTxt.setEditable(false);
 					warehouseTxt.setOpaque(false);//文本框透明
 					warehouseTxt.setForeground(Color.white);//前景色
+					warehouseTxt.setCaretColor(Color.white);
 				
 					//总额文本框
 					totalText.setBounds(80,120, 150, 20);
 					totalText.setEditable(false);
 					totalText.setOpaque(false);//文本框透明
 					totalText.setForeground(Color.white);//前景色
+					totalText.setCaretColor(Color.white);
 					//备注文本框
 					noteText.setBounds(80,150, 150, 20);
 					noteText.setEditable(false);
 					noteText.setOpaque(false);//文本框透明
 					noteText.setForeground(Color.white);//前景色
+					noteText.setCaretColor(Color.white);
 					
 					this.add(customer,0);
 					this.add(warehouse,1);
@@ -718,28 +729,37 @@ public class JPmanageBills2 extends JPanel {
 											&&!totalText.getText().equals("")
 											&&!couponText.getText().equals("")
 											&&!strategyCombo.getSelectedItem().toString().equals("")){
-										SaleSheetVO vo=new SaleSheetVO();
-										String[] temp=customerCombo.getSelectedItem().toString().split(":");
-										vo.setCustomer(customerbl.findCustomer(temp[1]));
-										vo.setstock(warehouseCombo.getSelectedItem().toString());
-										vo.setsheet(output);
-										vo.setcommoditywords(outputNotes);
-										vo.setmoney1(Double.parseDouble(totalText.getText()));
-										vo.setmoney2(Double.parseDouble(couponText.getText()));
-										//根据选择的策略完善销售单
-										String strategyid=strategyCombo.getSelectedItem().toString();
-										String[] temp2=strategyid.split("-");
-										if(temp2[0].equals("KHCL")){
-											vo=sbl.getCompletedSaleSheet(vo, mbl.findLevelStrategy(strategyid));
-										}
-										else if(temp2[0].equals("MECL")){
-											vo=sbl.getCompletedSaleSheet(vo, mbl.findReachStrategy(strategyid));
-										}
-										//显示剩余信息
-										discountText.setText(String.valueOf(vo.getdiscount()));
-										finalTotalText.setText(String.valueOf(vo.getpmoney()));
-										noteText.setText(vo.getwords());
+					    			  if(stringJg.judgestring(totalText.getText())==3&&
+					    					  stringJg.judgestring(couponText.getText())==3 ){
+					    				  SaleSheetVO vo=new SaleSheetVO();
+											String[] temp=customerCombo.getSelectedItem().toString().split(":");
+											vo.setCustomer(customerbl.findCustomer(temp[1]));
+											vo.setstock(warehouseCombo.getSelectedItem().toString());
+											vo.setsheet(output);
+											vo.setcommoditywords(outputNotes);
+											vo.setmoney1(Double.parseDouble(totalText.getText()));
+											vo.setmoney2(Double.parseDouble(couponText.getText()));
+											//根据选择的策略完善销售单
+											String strategyid=strategyCombo.getSelectedItem().toString();
+											String[] temp2=strategyid.split("-");
+											if(temp2[0].equals("KHCL")){
+												vo=sbl.getCompletedSaleSheet(vo, mbl.findLevelStrategy(strategyid));
+											}
+											else if(temp2[0].equals("MECL")){
+												vo=sbl.getCompletedSaleSheet(vo, mbl.findReachStrategy(strategyid));
+											}
+											//显示剩余信息
+											discountText.setText(String.valueOf(vo.getdiscount()));
+											finalTotalText.setText(String.valueOf(vo.getpmoney()));
+											noteText.setText(vo.getwords());
+					    			  }
+					    			  else{
+					    				  frame.getWarning().showWarning("总额与使用代金券金额必须是数字");
+					    			  }
 						    	  }
+					    		  else{
+					    			  frame.getWarning().showWarning("以上信息不完整");
+					    		  }
 					    	  }
 					      }
 					});
@@ -747,23 +767,28 @@ public class JPmanageBills2 extends JPanel {
 					totalText.setBounds(80,90, 150, 20);
 					totalText.setOpaque(false);//文本框透明
 					totalText.setForeground(Color.white);//前景色
+					totalText.setCaretColor(Color.white);
 					//使用代金券文本框
 					couponText.setBounds(125,115, 105, 20);
 					couponText.setOpaque(false);//文本框透明
 					couponText.setForeground(Color.white);//前景色
+					couponText.setCaretColor(Color.white);
 					couponText.addKeyListener(new KeyAdapterOfSignIn());
 					//折让文本框
 					discountText.setBounds(110,165, 120, 20);
 					discountText.setOpaque(false);//文本框透明
 					discountText.setForeground(Color.white);//前景色
+					discountText.setCaretColor(Color.white);
 					//最终总额文本框
 					finalTotalText.setBounds(110,190, 120, 20);
 					finalTotalText.setOpaque(false);//文本框透明
 					finalTotalText.setForeground(Color.white);//前景色
+					finalTotalText.setCaretColor(Color.white);
 					//备注文本框
 					noteText.setBounds(80,215, 150, 20);
 					noteText.setOpaque(false);//文本框透明
 					noteText.setForeground(Color.white);//前景色
+					noteText.setCaretColor(Color.white);
 					
 					this.add(customer,0);
 					this.add(warehouse,1);
@@ -822,41 +847,49 @@ public class JPmanageBills2 extends JPanel {
 					billIDTxt.setBounds(80,20, 120, 20);
 					billIDTxt.setOpaque(false);//文本框透明
 					billIDTxt.setForeground(Color.white);//前景色
+					billIDTxt.setCaretColor(Color.white);
 					//客户文本框
 					customerTxt.setBounds(80,45, 150, 20);
 					customerTxt.setEditable(false);
 					customerTxt.setOpaque(false);//文本框透明
 					customerTxt.setForeground(Color.white);//前景色
+					customerTxt.setCaretColor(Color.white);
 					//仓库文本框
 					warehouseTxt.setBounds(80,70, 150, 20);
 					warehouseTxt.setEditable(false);
 					warehouseTxt.setOpaque(false);//文本框透明
 					warehouseTxt.setForeground(Color.white);//前景色
+					warehouseTxt.setCaretColor(Color.white);
 					//总额文本框
 					totalText.setBounds(80,95, 150, 20);
 					totalText.setEditable(false);
 					totalText.setOpaque(false);//文本框透明
 					totalText.setForeground(Color.white);//前景色
+					totalText.setCaretColor(Color.white);
 					//使用代金券文本框
 					couponText.setBounds(125,120, 105, 20);
 					couponText.setEditable(false);
 					couponText.setOpaque(false);//文本框透明
 					couponText.setForeground(Color.white);//前景色
+					couponText.setCaretColor(Color.white);
 					//折让文本框
 					discountText.setBounds(110,145, 120, 20);
 					discountText.setEditable(false);
 					discountText.setOpaque(false);//文本框透明
 					discountText.setForeground(Color.white);//前景色
+					discountText.setCaretColor(Color.white);
 					//最终总额文本框
 					finalTotalText.setBounds(110,170, 120, 20);
 					finalTotalText.setEditable(false);
 					finalTotalText.setOpaque(false);//文本框透明
 					finalTotalText.setForeground(Color.white);//前景色
+					finalTotalText.setCaretColor(Color.white);
 					//备注文本框
 					noteText.setBounds(80,195, 150, 20);
 					noteText.setEditable(false);
 					noteText.setOpaque(false);//文本框透明
 					noteText.setForeground(Color.white);//前景色
+					noteText.setCaretColor(Color.white);
 					
 					this.add(customer,0);
 					this.add(warehouse,1);
@@ -891,33 +924,42 @@ public class JPmanageBills2 extends JPanel {
 								&&output!=null
 								&&!totalText.getText().equals("")
 								&&!couponText.getText().equals("")){
-							SaleSheetVO vo=new SaleSheetVO();
-							String[] temp=customerCombo.getSelectedItem().toString().split(":");
-							vo.setCustomer(customerbl.findCustomer(temp[1]));
-							vo.setstock(warehouseCombo.getSelectedItem().toString());
-							vo.setsheet(output);
-							vo.setcommoditywords(outputNotes);
-							vo.setmoney1(Double.parseDouble(totalText.getText()));
-							vo.setmoney2(Double.parseDouble(couponText.getText()));
-							//获取相应的策略信息
-							ArrayList<LevelStrategyVO> level=sbl.getSomeLevelStrategy(vo);
-							ArrayList<ReachStrategyVO> reach=sbl.getSomeReachStrategy(vo);
-							//将数组加到下拉框
-							strategyCombo.removeAllItems();
-							for(int i=0;i<level.size();i++){
-								strategyCombo.addItem(level.get(i).getID());
+							if(stringJg.judgestring(totalText.getText())==3&&
+									stringJg.judgestring(couponText.getText())==3){
+								SaleSheetVO vo=new SaleSheetVO();
+								String[] temp=customerCombo.getSelectedItem().toString().split(":");
+								vo.setCustomer(customerbl.findCustomer(temp[1]));
+								vo.setstock(warehouseCombo.getSelectedItem().toString());
+								vo.setsheet(output);
+								vo.setcommoditywords(outputNotes);
+								vo.setmoney1(Double.parseDouble(totalText.getText()));
+								vo.setmoney2(Double.parseDouble(couponText.getText()));
+								//获取相应的策略信息
+								ArrayList<LevelStrategyVO> level=sbl.getSomeLevelStrategy(vo);
+								ArrayList<ReachStrategyVO> reach=sbl.getSomeReachStrategy(vo);
+								//将数组加到下拉框
+								strategyCombo.removeAllItems();
+								for(int i=0;i<level.size();i++){
+									strategyCombo.addItem(level.get(i).getID());
+								}
+								for(int i=0;i<reach.size();i++){
+									strategyCombo.addItem(reach.get(i).getID());
+								}
+								if(level.size()==0&&reach.size()==0){
+									//没有优惠，显示其余信息
+									//显示剩余信息
+									discountText.setText("0");
+									finalTotalText.setText(String.valueOf(Double.parseDouble(totalText.getText())-Double.parseDouble(couponText.getText())));
+									noteText.setText("无任何优惠");
+									
+								}
 							}
-							for(int i=0;i<reach.size();i++){
-								strategyCombo.addItem(reach.get(i).getID());
+							else{
+								frame.getWarning().showWarning("总额与使用代金券金额必须是数字");
 							}
-							if(level.size()==0&&reach.size()==0){
-								//没有优惠，显示其余信息
-								//显示剩余信息
-								discountText.setText("0");
-								finalTotalText.setText(String.valueOf(Double.parseDouble(totalText.getText())-Double.parseDouble(couponText.getText())));
-								noteText.setText("无任何优惠");
-								
-							}
+						}
+						else{
+							frame.getWarning().showWarning("以上信息不完整");
 						}
 					}
 				}
@@ -973,26 +1015,27 @@ public class JPmanageBills2 extends JPanel {
 						if(isAdd){
 							switch(style){
 							case PurSheet:
-								if(output!=null
+								if(!customerCombo.getSelectedItem().toString().equals("")
+										&&!warehouseCombo.getSelectedItem().toString().equals("")
+										&&output!=null
 								&&!totalText.getText().equals("")
 								&&!noteText.getText().equals("")){
 							
-									PurSheetVO newPur=new PurSheetVO();
-									String[] temp=customerCombo.getSelectedItem().toString().split(":");
-									newPur.setCustomer(customerbl.findCustomer(temp[1]));
-									if(customerbl.findCustomer(temp[1])==null){
-										System.out.println("查找客户空指针");
+									if(stringJg.judgestring(totalText.getText())==3){
+										PurSheetVO newPur=new PurSheetVO();
+										String[] temp=customerCombo.getSelectedItem().toString().split(":");
+										newPur.setCustomer(customerbl.findCustomer(temp[1]));
+										newPur.setstock(warehouseCombo.getSelectedItem().toString());
+										newPur.setsheet(output);
+										newPur.setcommoditywords(outputNotes);
+										newPur.setmoney1(Double.parseDouble(totalText.getText()));
+										newPur.setwords(noteText.getText());
+										
+										billList.addPurSheet(newPur);
 									}
 									else{
-										System.out.println("新进货单客户是"+customerbl.findCustomer(temp[1]).getname());
+										frame.getWarning().showWarning("总额必须为数字");
 									}
-									newPur.setstock(warehouseCombo.getSelectedItem().toString());
-									newPur.setsheet(output);
-									newPur.setcommoditywords(outputNotes);
-									newPur.setmoney1(Double.parseDouble(totalText.getText()));
-									newPur.setwords(noteText.getText());
-									
-									billList.addPurSheet(newPur);
 								}
 								else{
 									frame.getWarning().showWarning("请输入完整信息");
@@ -1005,20 +1048,25 @@ public class JPmanageBills2 extends JPanel {
 								&&!totalText.getText().equals("")
 								&&!noteText.getText().equals("")){
 							
-									PurBackSheetVO newPurBack=new PurBackSheetVO();
+									if(stringJg.judgestring(totalText.getText())==3){
+										PurBackSheetVO newPurBack=new PurBackSheetVO();
 
-									String[] temp=customerTxt.getText().split(":");
-									newPurBack.setCustomer(customerbl.findCustomer(temp[1]));
-									newPurBack.setstock(warehouseTxt.getText());
-									newPurBack.setsheet(output);
-									newPurBack.setcommoditywords(outputNotes);
-									newPurBack.setmoney1(Double.parseDouble(totalText.getText()));
-									newPurBack.setwords(noteText.getText());
-									
-									billList.addPurBackSheet(newPurBack);
+										String[] temp=customerTxt.getText().split(":");
+										newPurBack.setCustomer(customerbl.findCustomer(temp[1]));
+										newPurBack.setstock(warehouseTxt.getText());
+										newPurBack.setsheet(output);
+										newPurBack.setcommoditywords(outputNotes);
+										newPurBack.setmoney1(Double.parseDouble(totalText.getText()));
+										newPurBack.setwords(noteText.getText());
+										
+										billList.addPurBackSheet(newPurBack);
+									}
+									else{
+										frame.getWarning().showWarning("总额必须为数字");
+									}
 								}
 								else{
-									frame.getWarning().showWarning("请填写对应进货单编号进行搜索");
+									frame.getWarning().showWarning("信息不完整，请填写对应进货单编号进行搜索");
 								}
 							break;
 							case SaleSheet:
@@ -1032,26 +1080,178 @@ public class JPmanageBills2 extends JPanel {
 										&&!noteText.getText().equals("")
 										
 										){
-									SaleSheetVO vo=new SaleSheetVO();
-									String[] temp=customerCombo.getSelectedItem().toString().split(":");
-									vo.setCustomer(customerbl.findCustomer(temp[1]));
-									vo.setstock(warehouseCombo.getSelectedItem().toString());
-									vo.setsheet(output);
-									vo.setcommoditywords(outputNotes);
-									vo.setmoney1(Double.parseDouble(totalText.getText()));
-									vo.setmoney2(Double.parseDouble(couponText.getText()));
-									vo.setdiscount(Double.parseDouble(discountText.getText()));
-									vo.setpmoney(Double.parseDouble(finalTotalText.getText()));
-									vo.setwords(noteText.getText());
-									
-									billList.addSaleSheet(vo);
+									if(stringJg.judgestring(totalText.getText())==3
+											&&stringJg.judgestring(couponText.getText())==3
+											&&stringJg.judgestring(discountText.getText())==3
+											&&stringJg.judgestring(finalTotalText.getText())==3
+											){
+										SaleSheetVO vo=new SaleSheetVO();
+										String[] temp=customerCombo.getSelectedItem().toString().split(":");
+										vo.setCustomer(customerbl.findCustomer(temp[1]));
+										vo.setstock(warehouseCombo.getSelectedItem().toString());
+										vo.setsheet(output);
+										vo.setcommoditywords(outputNotes);
+										vo.setmoney1(Double.parseDouble(totalText.getText()));
+										vo.setmoney2(Double.parseDouble(couponText.getText()));
+										vo.setdiscount(Double.parseDouble(discountText.getText()));
+										vo.setpmoney(Double.parseDouble(finalTotalText.getText()));
+										vo.setwords(noteText.getText());
+										
+										billList.addSaleSheet(vo);
+									}
+									else{
+										frame.getWarning().showWarning("总额与比例必须为数字");
+									}
 									
 								}
+								else{
+									frame.getWarning().showWarning("请输入完整信息");
+								}
+								break;
 							case SaleBackSheet:
+								if(!customerTxt.getText().equals("")
+										&&!warehouseTxt.getText().equals("")
+										&&output!=null
+										&&!totalText.getText().equals("")
+										&&!couponText.getText().equals("")
+										&&!discountText.getText().equals("")
+										&&!finalTotalText.getText().equals("")
+										&&!noteText.getText().equals("")
+										){
+									if(stringJg.judgestring(totalText.getText())==3
+											&&stringJg.judgestring(couponText.getText())==3
+											&&stringJg.judgestring(discountText.getText())==3
+											&&stringJg.judgestring(finalTotalText.getText())==3
+											){
+										SaleBackSheetVO newSaleback=new SaleBackSheetVO();
+										String[] temp=customerTxt.getText().split(":");
+										newSaleback.setCustomer(customerbl.findCustomer(temp[1]));
+										newSaleback.setstock(warehouseTxt.getText());
+										newSaleback.setsheet(output);
+										newSaleback.setcommoditywords(outputNotes);
+										newSaleback.setmoney1(Double.parseDouble(totalText.getText()));
+										newSaleback.setmoney2(Double.parseDouble(couponText.getText()));
+										newSaleback.setdiscount(Double.parseDouble(discountText.getText()));
+										newSaleback.setpmoney(Double.parseDouble(finalTotalText.getText()));
+										newSaleback.setwords(noteText.getText());
+										
+										billList.addSaleBackSheet(newSaleback);
+									}
+									else{
+										frame.getWarning().showWarning("总额与比例必须为数字");
+									}
+								}
+								else{
+									frame.getWarning().showWarning("信息不完整，请填写对应进货单编号进行搜索");
+								}
 								break;
 							}
 						}
 						else{//修改单据
+							if(billList.getChosenNum()==1){
+								switch(style){
+									case PurSheet:
+										boolean legal=true;
+										if(!customerCombo.getSelectedItem().toString().equals("")
+												||!warehouseCombo.getSelectedItem().toString().equals("")
+												||output!=null
+												||!totalText.getText().equals("")
+												||!noteText.getText().equals("")){
+											if(!totalText.getText().equals("")&&stringJg.judgestring(totalText.getText())!=3){
+												legal=false;
+												frame.getWarning().showWarning("总额必须为数字");
+											}
+											if(legal){
+												PurSheetVO modifyPur=billList.getChosen().getPurVO();
+												if(!customerCombo.getSelectedItem().toString().equals("")){
+													String[] temp=customerCombo.getSelectedItem().toString().split(":");
+													modifyPur.setCustomer(customerbl.findCustomer(temp[1]));
+												}
+												if(!warehouseCombo.getSelectedItem().toString().equals("")){
+													modifyPur.setstock(warehouseCombo.getSelectedItem().toString());
+												}
+												if(output!=null){
+													modifyPur.setsheet(output);
+													modifyPur.setcommoditywords(outputNotes);
+												}
+												if(!totalText.getText().equals("")){
+													modifyPur.setmoney1(Double.parseDouble(totalText.getText()));
+												}
+												if(!noteText.getText().equals("")){
+													modifyPur.setwords(noteText.getText());
+												}
+												
+												billList.changeChosen(modifyPur);
+											}
+										}
+										break;
+									case PurBackSheet:
+										break;
+									case SaleSheet:
+										boolean legal2=true;
+										if(!customerCombo.getSelectedItem().toString().equals("")
+												||!warehouseCombo.getSelectedItem().toString().equals("")
+												||output!=null
+												||!totalText.getText().equals("")
+												||!couponText.getText().equals("")
+												||!discountText.getText().equals("")
+												||!finalTotalText.getText().equals("")
+												||!noteText.getText().equals("")
+												){
+											if(!couponText.getText().equals("")&&stringJg.judgestring(couponText.getText())!=3){
+												legal2=false;
+												frame.getWarning().showWarning("使用代金券金额必须为数字");
+											}
+											if(!discountText.getText().equals("")&&stringJg.judgestring(discountText.getText())!=3){
+												legal2=false;
+												frame.getWarning().showWarning("打折比例必须为数字");
+											}
+											if(!finalTotalText.getText().equals("")&&stringJg.judgestring(finalTotalText.getText())!=3){
+												legal2=false;
+												frame.getWarning().showWarning("最终总额必须为数字");
+											}
+											if(!totalText.getText().equals("")&&stringJg.judgestring(totalText.getText())!=3){
+												legal2=false;
+												frame.getWarning().showWarning("总额必须为数字");
+											}
+											if(legal2){
+												SaleSheetVO modifySale=billList.getChosen().getSaleVO();
+												if(!customerCombo.getSelectedItem().toString().equals("")){
+													String[] temp=customerCombo.getSelectedItem().toString().split(":");
+													modifySale.setCustomer(customerbl.findCustomer(temp[1]));
+												}
+												if(!warehouseCombo.getSelectedItem().toString().equals("")){
+													modifySale.setstock(warehouseCombo.getSelectedItem().toString());
+												}
+												if(output!=null){
+													modifySale.setsheet(output);
+													modifySale.setcommoditywords(outputNotes);
+												}
+												if(!totalText.getText().equals("")){
+													modifySale.setmoney1(Double.parseDouble(totalText.getText()));
+												}
+												if(!couponText.getText().equals("")){
+													modifySale.setmoney2(Double.parseDouble(couponText.getText()));
+												}
+												if(!discountText.getText().equals("")){
+													modifySale.setdiscount(Double.parseDouble(discountText.getText()));
+												}
+												if(!finalTotalText.getText().equals("")){
+													modifySale.setpmoney(Double.parseDouble(finalTotalText.getText()));
+												}
+												if(!noteText.getText().equals("")){
+													modifySale.setwords(noteText.getText());
+												}
+											
+												billList.changeChosen(modifySale);
+											}
+										}
+										break;
+									case SaleBackSheet:
+										break;
+								}
+								
+							}
 							
 						}
 						
@@ -1060,12 +1260,8 @@ public class JPmanageBills2 extends JPanel {
 						find.setIcon(confirm0);
 						switch(style){
 						case PurBackSheet:
-							if(!billID.getText().equals("")){
+							if(!billIDTxt.getText().equals("")){
 								PurSheetVO pursheet=sbl.findPurSheet(billIDTxt.getText());
-								if(pursheet.getcustomer()==null){
-									System.out.println("返回的进货单客户空指针");
-								}
-							
 								customerTxt.setText(pursheet.getcustomer().getname()+":"+pursheet.getcustomer().getid());
 								warehouseTxt.setText(pursheet.getstock());
 								output=pursheet.getsheet();
@@ -1078,6 +1274,22 @@ public class JPmanageBills2 extends JPanel {
 							}
 							break;
 						case SaleBackSheet:
+						
+							if(!billIDTxt.getText().equals("")){
+								SaleSheetVO salesheet=sbl.findSaleSheet(billIDTxt.getText());
+								customerTxt.setText(salesheet.getcustomer().getname()+":"+salesheet.getcustomer().getid());
+								warehouseTxt.setText(salesheet.getstock());
+								output=salesheet.getsheet();
+								outputNotes=salesheet.getcommoditywords();
+								totalText.setText(String.valueOf(salesheet.getmoney1()));
+								couponText.setText(String.valueOf(salesheet.getmoney2()));
+								discountText.setText(String.valueOf(salesheet.getdiscount()));
+								finalTotalText.setText(String.valueOf(salesheet.getpmoney()));
+								noteText.setText(salesheet.getwords());
+							}
+							else{
+								frame.getWarning().showWarning("请填写对应进货单编号进行搜索");
+							}
 							break;
 						}
 						break;

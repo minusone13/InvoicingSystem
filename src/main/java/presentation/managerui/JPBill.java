@@ -1109,11 +1109,29 @@ public class JPBill extends JPanel {
 		JLabel operator=new JLabel(ss.getop());
 		JLabel coupon=new JLabel(String.valueOf(ss.getmoney2()));
 		JLabel finalMoney=new JLabel(String.valueOf(ss.getpmoney()));
+		
+		customer.setBounds(324,2, 100, 20);
+		totalMoney.setBounds(341,21, 100, 20);
+		discount.setBounds(324, 38, 100, 20);
+		warehouse.setBounds(324, 55, 100, 20);
+		note.setBounds(324,72, 100, 20);
+		operator.setBounds(460, 4, 100, 20);
+		coupon.setBounds(460, 21, 100, 20);
+		finalMoney.setBounds(475,58, 100, 20);
+		
 		//将组件加到面板上
 		this.add(right,0);
 		this.add(left,1);
 		this.add(ID,2);
-		this.add(bg,3);
+		this.add(customer,3);
+		this.add(totalMoney,4);
+		this.add(discount,5);
+		this.add(warehouse,6);
+		this.add(note,7);
+		this.add(operator,8);
+		this.add(coupon,9);
+		this.add(finalMoney,10);
+		this.add(bg,11);
 	}
 	public JPBill(SaleBackSheetVO sbs){
 		//区分面板种类
@@ -1158,11 +1176,28 @@ public class JPBill extends JPanel {
 		JLabel operator=new JLabel(sbs.getop());
 		JLabel coupon=new JLabel(String.valueOf(sbs.getmoney2()));
 		JLabel finalMoney=new JLabel(String.valueOf(sbs.getpmoney()));
+		
+		customer.setBounds(324,2, 100, 20);
+		totalMoney.setBounds(341,21, 100, 20);
+		discount.setBounds(324, 38, 100, 20);
+		warehouse.setBounds(324, 55, 100, 20);
+		note.setBounds(324,72, 100, 20);
+		operator.setBounds(460, 4, 100, 20);
+		coupon.setBounds(460, 21, 100, 20);
+		finalMoney.setBounds(475,58, 100, 20);
 		//将组件加到面板上
 		this.add(right,0);
 		this.add(left,1);
 		this.add(ID,2);
-		this.add(bg,3);
+		this.add(customer,3);
+		this.add(totalMoney,4);
+		this.add(discount,5);
+		this.add(warehouse,6);
+		this.add(note,7);
+		this.add(operator,8);
+		this.add(coupon,9);
+		this.add(finalMoney,10);
+		this.add(bg,11);
 	}
 	/*收款单构造界面*/
 	public JPBill(ReceiptVO rb){

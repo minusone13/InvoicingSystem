@@ -15,6 +15,7 @@ import javax.swing.JTextField;
 import entrance.Frame;
 import po.BillState;
 import po.BillStyle;
+import presentation.StringJudger;
 import presentation.managerui.JPBillList;
 import presentation.managerui.JTableOfList;
 import presentation.managerui.MouseListenerGetXY;
@@ -71,6 +72,8 @@ public class JPmanageBills2 extends JPanel {
 		ImageIcon addIconR=new ImageIcon("src/image/function/addR.png");
 		//frame的引用
 	    Frame frame;
+	 	//字符串类型判断
+	    StringJudger stringJg=new StringJudger();
 	    public void reHome(){
 	    	JPeditOfCash.reHome();
 	    	JPeditOfPay.reHome();
@@ -418,7 +421,7 @@ public class JPmanageBills2 extends JPanel {
 			private JPaddList tranListEdit=new JPaddList(BillStyle.PaymentBill);//隐藏的条目编辑面板
 			
 			public void reHome(){
-				this.setLocation(905, 36);
+				this.RightMove();
 				accountText.setText("");
 				totalText.setText("");
 				tranTotalText.setText("");
@@ -477,6 +480,7 @@ public class JPmanageBills2 extends JPanel {
 					tranTotalText.setBounds(80,90, 150, 20);
 					tranTotalText.setOpaque(false);//文本框透明
 					tranTotalText.setForeground(Color.white);//前景色
+					tranTotalText.setCaretColor(Color.white);
 					//增加条目按钮
 					addList.setIcon(add0);
 					addList.setBounds(100, 58, 24, 24);
@@ -519,6 +523,7 @@ public class JPmanageBills2 extends JPanel {
 					tranTotalText.setBounds(80,90, 150, 20);
 					tranTotalText.setOpaque(false);//文本框透明
 					tranTotalText.setForeground(Color.white);//前景色
+					tranTotalText.setCaretColor(Color.white);
 					//增加条目按钮
 					addList.setIcon(add0);
 					addList.setBounds(100, 58, 24, 24);
@@ -555,9 +560,12 @@ public class JPmanageBills2 extends JPanel {
 					accountText.setBounds(80,28, 150, 20);
 					accountText.setOpaque(false);//文本框透明
 					accountText.setForeground(Color.white);//前景色
+					accountText.setCaretColor(Color.white);
+					
 					totalText.setBounds(80,90, 150, 20);
 					totalText.setOpaque(false);//文本框透明
 					totalText.setForeground(Color.white);//前景色
+					tranTotalText.setCaretColor(Color.white);
 					//增加条目按钮
 					addList.setIcon(add0);
 					addList.setBounds(80, 58, 24, 24);
@@ -649,6 +657,14 @@ public class JPmanageBills2 extends JPanel {
 									
 									if(!customerIsEmpty&&!totalIsEmpty&&!listIsEmpty){
 										legal=true;
+										if(stringJg.judgestring(tranTotalText.getText())!=3){
+											legal=false;
+											frame.getWarning().showWarning("总额必须为数字");
+										}
+				
+									}
+									else{
+										frame.getWarning().showWarning("单据信息不完整，请检查是否填写了转账列表");
 									}
 									if(legal){
 										//生成新的单据加入到billList
@@ -668,9 +684,7 @@ public class JPmanageBills2 extends JPanel {
 										tranListEdit.getMoneyArray().clear();
 										tranListEdit.getNoteArray().clear();
 									}
-									else{
-										frame.getWarning().showWarning("单据信息不完整，请检查是否填写了转账列表");
-									}
+								
 								}
 								break;
 							case PaymentBill:
@@ -685,6 +699,13 @@ public class JPmanageBills2 extends JPanel {
 									
 									if(!customerIsEmpty2&&!totalIsEmpty2&&!listIsEmpty2){
 										legal2=true;
+										if(stringJg.judgestring(tranTotalText.getText())!=3){
+											legal2=false;
+											frame.getWarning().showWarning("总额必须为数字");
+										}
+									}
+									else{
+										frame.getWarning().showWarning("单据信息不完整，请检查是否填写了转账列表");
 									}
 									if(legal2){
 										//生成新的单据加入到billList
@@ -704,9 +725,7 @@ public class JPmanageBills2 extends JPanel {
 										tranListEdit.getMoneyArray().clear();
 										tranListEdit.getNoteArray().clear();
 									}
-									else{
-										frame.getWarning().showWarning("单据信息不完整，请检查是否填写了转账列表");
-									}
+									
 								}
 								break;
 							case CashPaymentBill:
@@ -717,6 +736,13 @@ public class JPmanageBills2 extends JPanel {
 								
 								if(!accountIsEmpty&&!totalIsEmpty3&&!listIsEmpty3){
 									legal3=true;
+									if(stringJg.judgestring(totalText.getText())!=3){
+										legal3=false;
+										frame.getWarning().showWarning("总额必须为数字");
+									}
+								}
+								else{
+									frame.getWarning().showWarning("单据信息不完整，请检查是否填写了转账列表");
 								}
 								if(legal3){
 									//生成新的单据加入到billList
@@ -751,9 +777,7 @@ public class JPmanageBills2 extends JPanel {
 									ListEdit.getMoneyArray().clear();
 									ListEdit.getNoteArray().clear();
 								}
-								else{
-									frame.getWarning().showWarning("单据信息不完整，请检查是否填写了转账列表");
-								}
+								
 								break;
 							}
 						}
@@ -772,6 +796,16 @@ public class JPmanageBills2 extends JPanel {
 									
 									if(!customerIsEmpty||!totalIsEmpty||!listIsEmpty){
 										legal=true;
+										if(!totalIsEmpty){
+											if(stringJg.judgestring(tranTotalText.getText())!=3){
+												legal=false;
+												frame.getWarning().showWarning("总额必须为数字");
+											}
+										}
+				
+									}
+									else{
+										frame.getWarning().showWarning("请输入修改数据");
 									}
 									if(legal){
 										if(!listIsEmpty){
@@ -795,9 +829,7 @@ public class JPmanageBills2 extends JPanel {
 										tranListEdit.getMoneyArray().clear();
 										tranListEdit.getNoteArray().clear();
 									}
-									else{
-										frame.getWarning().showWarning("请输入修改数据");
-									}
+								
 								}
 								break;
 							case PaymentBill:
@@ -812,6 +844,15 @@ public class JPmanageBills2 extends JPanel {
 									
 									if(!customerIsEmpty2||!totalIsEmpty2||!listIsEmpty2){
 										legal2=true;
+										if(!totalIsEmpty2){
+											if(stringJg.judgestring(tranTotalText.getText())!=3){
+												legal2=false;
+												frame.getWarning().showWarning("总额必须为数字");
+											}
+										}
+									}
+									else{
+										frame.getWarning().showWarning("请输入修改数据");
 									}
 									if(legal2){
 										//生成新的单据加入到billList
@@ -837,9 +878,7 @@ public class JPmanageBills2 extends JPanel {
 										tranListEdit.getMoneyArray().clear();
 										tranListEdit.getNoteArray().clear();
 									}
-									else{
-										frame.getWarning().showWarning("请输入修改数据");
-									}
+								
 								}
 								break;
 							case CashPaymentBill:
@@ -850,6 +889,15 @@ public class JPmanageBills2 extends JPanel {
 								
 								if(!accountIsEmpty||!totalIsEmpty3||!listIsEmpty3){
 									legal3=true;
+									if(!totalIsEmpty3){
+										if(stringJg.judgestring(totalText.getText())!=3){
+											legal3=false;
+											frame.getWarning().showWarning("总额必须为数字");
+										}
+									}
+								}
+								else{
+									frame.getWarning().showWarning("请输入修改数据");
 								}
 								if(legal3){
 									//生成新的单据加入到billList
@@ -883,9 +931,7 @@ public class JPmanageBills2 extends JPanel {
 									ListEdit.getMoneyArray().clear();
 									ListEdit.getNoteArray().clear();
 								}
-								else{
-									frame.getWarning().showWarning("请输入修改数据");
-								}
+								
 								break;
 							}
 						}
@@ -1052,12 +1098,15 @@ public class JPmanageBills2 extends JPanel {
 						tranListTxt.setBounds(70,30, 100, 20);
 						tranListTxt.setOpaque(false);//文本框透明
 						tranListTxt.setForeground(Color.white);//前景色
+						tranListTxt.setCaretColor(Color.white);
 						tranMoneyTxt.setBounds(70,60, 100, 20);
 						tranMoneyTxt.setOpaque(false);//文本框透明
 						tranMoneyTxt.setForeground(Color.white);//前景色
+						tranMoneyTxt.setCaretColor(Color.white);
 						tranNoteTxt.setBounds(70,90, 100, 20);
 						tranNoteTxt.setOpaque(false);//文本框透明
 						tranNoteTxt.setForeground(Color.white);//前景色
+						tranNoteTxt.setCaretColor(Color.white);
 						
 						this.add(tranListName,0);
 						this.add(tranMoney,1);
@@ -1089,12 +1138,15 @@ public class JPmanageBills2 extends JPanel {
 						listTxt.setBounds(70,30, 100, 20);
 						listTxt.setOpaque(false);//文本框透明
 						listTxt.setForeground(Color.white);//前景色
+						listTxt.setCaretColor(Color.white);
 						moneyTxt.setBounds(70,60, 100, 20);
 						moneyTxt.setOpaque(false);//文本框透明
 						moneyTxt.setForeground(Color.white);//前景色
+						moneyTxt.setCaretColor(Color.white);
 						noteTxt.setBounds(70,90, 100, 20);
 						noteTxt.setOpaque(false);//文本框透明
 						noteTxt.setForeground(Color.white);//前景色
+						noteTxt.setCaretColor(Color.white);
 						
 						this.add(listName,0);
 						this.add(money,1);
@@ -1146,8 +1198,14 @@ public class JPmanageBills2 extends JPanel {
 						boolean legal=false;
 						if(!list.equals("")&&!money.equals("")&&!note.equals("")){
 							legal=true;
+							if(stringJg.judgestring(money)!=3){
+								legal=false;
+								frame.getWarning().showWarning("金额必须为数字");
+							}
 						}
-						
+						else{
+							frame.getWarning().showWarning("请完整输入信息，若无备注请填写“无”！");
+						}
 						if(legal){
 							//合法则将信息加入到数组
 							double mon=Double.parseDouble(money);
@@ -1174,9 +1232,7 @@ public class JPmanageBills2 extends JPanel {
 							//合法操作才隐藏板块
 							JPaddList.this.setVisible(false);
 						}
-						else{
-							frame.getWarning().showWarning("请完整输入信息，若无备注请填写“无”！");
-						}
+					
 						
 						
 					}

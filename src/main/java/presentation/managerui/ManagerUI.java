@@ -157,6 +157,9 @@ public class ManagerUI extends JPanel {
   		inquire.getFrame(frame);
   		commodityChoose.getFrame(frame);
   		systemRecord.getFrame(f);
+  		businessCondition.getFrame(f);
+  		businessProgress.getFrame(f);
+  		saleDetail.getFrame(f);
     }
 	public JPManagerCom getCommodityChoose() {
 		return commodityChoose;

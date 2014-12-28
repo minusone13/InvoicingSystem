@@ -16,6 +16,8 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
+import entrance.Frame;
+import presentation.StringJudger;
 import tool.Export;
 import vo.AlertBillVO;
 import vo.CustomerVO;
@@ -85,9 +87,16 @@ public class BusinessProcessPanel extends JPanel{
 	private ImageIcon searchIconR=new ImageIcon("src/image/function/searchR.png");
 	private ImageIcon downloadIconW=new ImageIcon("src/image/function/downLoadW.png");
 	private ImageIcon downloadIconR=new ImageIcon("src/image/function/downLoadR.png");
+	 //字符串类型判断
+    StringJudger stringJg=new StringJudger();
+	//frame的引用
+    Frame frame;
     public BusinessProcessPanel() {
     	initial();
 	}
+	 public void getFrame( Frame f){
+	 		frame=f;
+	 }
 	public void reHome(){
 		checkJP.reHome();
 	}
@@ -841,7 +850,7 @@ public class BusinessProcessPanel extends JPanel{
         CustomerBlService customerbl=new CustomerList();
         
         public void reHome(){
-        	this.setLocation(905, 36);
+        	this.RightMove();
         	year1.setText("");
         	month1.setText("");
         	date1.setText("");
@@ -889,12 +898,14 @@ public class BusinessProcessPanel extends JPanel{
     		year1.setBounds(40, 33, 50, 20);
     		year1.setOpaque(false);//文本框透明
     		year1.setForeground(Color.white);//前景色
+    		year1.setCaretColor(Color.white);
     		add(year1);
     		year1.setColumns(10);
     		
     		month1 = new JTextField();
     		month1.setOpaque(false);//文本框透明
     		month1.setForeground(Color.white);//前景色
+    		month1.setCaretColor(Color.white);
     		month1.setColumns(10);
     		month1.setBounds(113, 33, 43, 21);
     		add(month1);
@@ -902,6 +913,7 @@ public class BusinessProcessPanel extends JPanel{
     		date1 = new JTextField();
     		date1.setOpaque(false);//文本框透明
     		date1.setForeground(Color.white);//前景色
+    		date1.setCaretColor(Color.white);
     		date1.setColumns(10);
     		date1.setBounds(178, 33, 36, 21);
     		add(date1);
@@ -921,6 +933,7 @@ public class BusinessProcessPanel extends JPanel{
     		year2 = new JTextField();
     		year2.setOpaque(false);//文本框透明
     		year2.setForeground(Color.white);//前景色
+    		year2.setCaretColor(Color.white);
     		year2.setColumns(10);
     		year2.setBounds(40, 90, 50, 20);
     		add(year2);
@@ -928,6 +941,7 @@ public class BusinessProcessPanel extends JPanel{
     		month2 = new JTextField();
     		month2.setOpaque(false);//文本框透明
     		month2.setForeground(Color.white);//前景色
+    		month2.setCaretColor(Color.white);
     		month2.setColumns(10);
     		month2.setBounds(113, 90, 43, 21);
     		add(month2);
@@ -935,6 +949,7 @@ public class BusinessProcessPanel extends JPanel{
     		date2 = new JTextField();
     		date2.setOpaque(false);//文本框透明
 			date2.setForeground(Color.white);//前景色
+			date2.setCaretColor(Color.white);
     		date2.setColumns(10);
     		date2.setBounds(178, 90, 36, 21);
     		add(date2);
@@ -1004,6 +1019,7 @@ public class BusinessProcessPanel extends JPanel{
     		salemanTxt = new JTextField();
     		salemanTxt.setOpaque(false);//文本框透明
     		salemanTxt.setForeground(Color.white);//前景色
+    		salemanTxt.setCaretColor(Color.white);
     		salemanTxt.setColumns(10);
     		salemanTxt.setBounds(90, 168, 140, 20);
     		add(salemanTxt);
@@ -1054,6 +1070,7 @@ public class BusinessProcessPanel extends JPanel{
     				break;
     			case 3:
     				confirm.setIcon(confirm0);
+    				boolean legal=true;
     				int type=0;
     				if(billTypeCombo.getSelectedItem().toString().equals("付款收款单")){
     					  //单据类型
@@ -1074,7 +1091,7 @@ public class BusinessProcessPanel extends JPanel{
     				else if(billTypeCombo.getSelectedItem().toString().equals("报警单和报溢报损单")){
     					type = 6;
     				}
-    				choose=type;
+    				
     				//查找
 					String startTime=null;
 					String lastTime=null;
@@ -1089,6 +1106,15 @@ public class BusinessProcessPanel extends JPanel{
 							&&!date2.getText().equals("")){
 						startTime=year1.getText()+"/"+month1.getText()+"/"+date1.getText();
 						lastTime=year2.getText()+"/"+month2.getText()+"/"+date2.getText();
+						if(stringJg.judgestring(year1.getText())!=3
+								||stringJg.judgestring(month1.getText())!=3
+								||stringJg.judgestring(date1.getText())!=3
+								||stringJg.judgestring(year2.getText())!=3
+								||stringJg.judgestring(month2.getText())!=3
+								||stringJg.judgestring(date2.getText())!=3){
+							legal=false;
+							frame.getWarning().showWarning("时间必须为数字");
+						}
 					}
 					if(!customerCombo.getSelectedItem().toString().equals("")){
 						customer=customerCombo.getSelectedItem().toString();
@@ -1099,13 +1125,17 @@ public class BusinessProcessPanel extends JPanel{
 					if(!salemanTxt.getText().equals("")){
 						deSaler=salemanTxt.getText();
 					}
-					InquiryProcessVO vo=new InquiryProcessVO();
-					vo.setCustomer(customer);
-					vo.setDeSaler(deSaler);
-					vo.setStock(stock);
-					vo.setTimeBefore(startTime);
-					vo.setTimeAfter(lastTime);
-    				updateTable1(type,vo);
+					if(legal){
+						InquiryProcessVO vo=new InquiryProcessVO();
+						vo.setCustomer(customer);
+						vo.setDeSaler(deSaler);
+						vo.setStock(stock);
+						vo.setTimeBefore(startTime);
+						vo.setTimeAfter(lastTime);
+	    				updateTable1(type,vo);
+	    				choose=type;
+					}
+				
     				break;
     			}
     		}

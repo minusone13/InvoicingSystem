@@ -152,6 +152,9 @@ public class FinancialUI extends JPanel {
     		businessCondition.getFrame(frame);
     		accountBuildIndex.getFrame(frame);
     		systemRecord.getFrame(f);
+    		businessCondition.getFrame(f);
+      		businessProgress.getFrame(f);
+      		saleDetail.getFrame(f);
     }
 
 	public class MouseListenerOfButton implements MouseListener{
