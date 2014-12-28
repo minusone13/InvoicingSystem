@@ -42,12 +42,7 @@ public class JPtreeContent extends JPanel {
 	//逻辑层接口
 	private StubCommodityBlService stockbl=new StubStockController();
 	
-	public StubCommodityBlService getStockbl() {
-		return stockbl;
-	}
-	public void setStockbl(StubCommodityBlService stockbl) {
-		this.stockbl = stockbl;
-	}
+
 	public JPtreeContent(){
 		//逻辑层接口
 		StockManagerDriver smd=new StockManagerDriver();
@@ -294,5 +289,11 @@ public class JPtreeContent extends JPanel {
 	}
 	public void setJPmanagerCom(JPManagerCom jPmanagerCom) {
 		JPmanagerCom = jPmanagerCom;
+	}
+	public StubCommodityBlService getStockbl() {
+		return stockbl;
+	}
+	public void setStockbl(StubCommodityBlService stockbl) {
+		this.stockbl = stockbl;
 	}
 }

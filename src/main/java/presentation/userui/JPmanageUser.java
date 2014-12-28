@@ -66,6 +66,10 @@ public class JPmanageUser extends JPanel {
 		    Frame frame;
 		    //逻辑层接口
 		    StubUserBlService userbl=new UserController();
+		    public void reHome(){
+		    	JPedit.reHome();
+		    	JPsearch.reHome();
+		    }
 			public JPmanageUser(){//参数决定编辑板的类型
 				//面板大小
 				this.setSize(905, 342);
@@ -267,8 +271,6 @@ public class JPmanageUser extends JPanel {
 				//图片
 				private ImageIcon right0=new ImageIcon("src/image/function/rightW.png");
 				private ImageIcon right1=new ImageIcon("src/image/function/rightR.png");
-				private ImageIcon scan0=new ImageIcon("src/image/function/littleScanW.png");
-				private ImageIcon scan1=new ImageIcon("src/image/function/littleScanR.png");
 				private ImageIcon confirm0=new ImageIcon("src/image/function/confirmW.png");
 				private ImageIcon confirm1=new ImageIcon("src/image/function/confirmR.png");
 				
@@ -277,6 +279,10 @@ public class JPmanageUser extends JPanel {
 				private JLabel code=new JLabel("密码");
 				private JComboBox  roleCombo;
 				private JTextField codeText=new JTextField(10);
+				public void reHome(){
+					this.setLocation(905, 36);
+					codeText.setText("");
+				}
 				public JPanelEdit(){
 					//面板大小
 					this.setSize(240,270);
@@ -495,6 +501,10 @@ public class JPmanageUser extends JPanel {
 				//报溢报损单的附件
 				private JLabel searchjl=new JLabel("查找 ");
 				private JTextField searchTxt=new JTextField(10);
+				public void reHome(){
+					this.setLocation(905, 36);
+					searchTxt.setText("");
+				}
 				public JPanelSearch(){
 					//面板大小
 					this.setSize(240,270);

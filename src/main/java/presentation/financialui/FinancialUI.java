@@ -278,6 +278,12 @@ public class FinancialUI extends JPanel {
 				FinancialUI.this.setVisible(false);
 				break;
 			}
+			//一下面板的编辑面板归位
+			FinancialUI.this.getManageBills2().reHome();
+			FinancialUI.this.getAccount().reHome();
+			FinancialUI.this.getBusinessCondition().reHome();
+			FinancialUI.this.getBusinessProgress().reHome();
+			FinancialUI.this.getSaleDetail().reHome();
 		}
 
 		public void mouseEntered(MouseEvent e) {

@@ -14,24 +14,7 @@ public class LevelStrategyVO extends VO{
 	private LevelStrategyStyle level_strategy_style=LevelStrategyStyle.Default;
 	
 	private String ID;
-	public StrategyStyle getStrategystyle() {
-		return strategystyle;
-	}
-	public void setStrategystyle(StrategyStyle strategystyle) {
-		this.strategystyle = strategystyle;
-	}
-	public LevelStrategyStyle getLevel_strategy_style() {
-		return level_strategy_style;
-	}
-	public void setLevel_strategy_style(LevelStrategyStyle level_strategy_style) {
-		this.level_strategy_style = level_strategy_style;
-	}
-	public String getID() {
-		return ID;
-	}
-	public void setID(String iD) {
-		ID = iD;
-	}
+	
 	private int level;//客户等级
 	private double Limit;//消费金额下限
 	
@@ -86,5 +69,23 @@ public class LevelStrategyVO extends VO{
 	}
 	public void setAlOfCommodity(ArrayList<CommodityVO> alOfCommodity) {
 		this.alOfCommodity = alOfCommodity;
+	}
+	public StrategyStyle getStrategystyle() {
+		return strategystyle;
+	}
+	public void setStrategystyle(StrategyStyle strategystyle) {
+		this.strategystyle = strategystyle;
+	}
+	public LevelStrategyStyle getLevel_strategy_style() {
+		return level_strategy_style;
+	}
+	public void setLevel_strategy_style(LevelStrategyStyle level_strategy_style) {
+		this.level_strategy_style = level_strategy_style;
+	}
+	public String getID() {
+		return ID;
+	}
+	public void setID(String iD) {
+		ID = iD;
 	}
 }

@@ -31,7 +31,7 @@ public class JPManagerComOfStock extends JPanel {
 	//创建按钮
 	private JLabel editCom=new JLabel();
 	//商品编辑面板
-	JPanelEdit JPeditOfCom=new JPanelEdit();
+	private JPanelEdit JPeditOfCom=new JPanelEdit();
 	//图片
 	ImageIcon addFolderW=new ImageIcon("src/image/function/addFolder.png");
 	ImageIcon deleteFolderW=new ImageIcon("src/image/function/deleteFolder.png");
@@ -90,7 +90,9 @@ public class JPManagerComOfStock extends JPanel {
 		this.add(deleteCom,5);
 		this.add(editCom,6);
 	}
-	
+	public void reHome(){
+		JPeditOfCom.reHome();
+	}
  	public void getFrame( Frame f){
  		frame=f;
  		manageCom.getFrame(f);
@@ -225,6 +227,15 @@ public class JPManagerComOfStock extends JPanel {
 		private JTextField inpriceText=new JTextField(10);
 		private JTextField outpriceText=new JTextField(10);
 		private JTextField alertText=new JTextField(10);
+		
+		public void reHome(){
+			this.setLocation(905, 36);
+			nameText.setText("");
+			typeText.setText("");
+			inpriceText.setText("");
+			outpriceText.setText("");
+			alertText.setText("");
+		}
 		public JPanelEdit(){
 			//面板大小
 			this.setSize(240,270);

@@ -45,18 +45,6 @@ public class JPmanageBills2 extends JPanel {
 		//编辑面板
 		private JPanelEdit JPeditOfSpoil;
 	
-		public JPanelEdit getJPeditOfSpoil() {
-			return JPeditOfSpoil;
-		}
-		public void setJPeditOfSpoil(JPanelEdit jPeditOfSpoil) {
-			JPeditOfSpoil = jPeditOfSpoil;
-		}
-		public JPBillList getBillList() {
-			return billList;
-		}
-		public void setBillList(JPBillList billList) {
-			this.billList = billList;
-		}
 		//单据类型
 		private BillStyle style;
 		//图片
@@ -153,6 +141,9 @@ public class JPmanageBills2 extends JPanel {
 			this.add(add,8);
 			this.add(table,9);
 			this.add(bg,10);
+		}
+		public void reHome(){
+			JPeditOfSpoil.reHome();
 		}
 		  /*获取frame引用*/
 	    public void getFrame( Frame f){
@@ -399,6 +390,15 @@ public class JPmanageBills2 extends JPanel {
 			//接收商品
 			private CommodityVO chosenVO;
 		
+			/*归位并清空数据*/
+			public void reHome(){
+				this.setLocation(905, 36);
+				chosenVO=null;
+				commodityText.setText("");
+				typeText.setText("");
+				numText.setText("");
+			}
+			
 			public JPanelEdit(BillStyle style){
 				//确认种类
 				billStyle=style;
@@ -677,5 +677,16 @@ public class JPmanageBills2 extends JPanel {
 				this.chosenVO = chosenVO;
 			}
 		}
-		
+		public JPanelEdit getJPeditOfSpoil() {
+			return JPeditOfSpoil;
+		}
+		public void setJPeditOfSpoil(JPanelEdit jPeditOfSpoil) {
+			JPeditOfSpoil = jPeditOfSpoil;
+		}
+		public JPBillList getBillList() {
+			return billList;
+		}
+		public void setBillList(JPBillList billList) {
+			this.billList = billList;
+		}
 }

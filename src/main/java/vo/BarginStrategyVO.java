@@ -54,4 +54,12 @@ public class BarginStrategyVO extends VO {
 	public void setAlOfCommodity(ArrayList<CommodityVO> alOfCommodity) {
 		this.alOfCommodity = alOfCommodity;
 	}
+	public String getID()
+	{
+		return ID;
+	}
+	public void setID(String iD)
+	{
+		ID = iD;
+	}
 }

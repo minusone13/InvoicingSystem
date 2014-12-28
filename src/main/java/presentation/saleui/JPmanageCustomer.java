@@ -42,12 +42,6 @@ public class JPmanageCustomer extends JPanel {
 			private JPanelEdit JPedit;
 			//查找面板
 			private JPanelSearch JPsearch;
-			public JPBillList getBillList() {
-				return billList;
-			}
-			public void setBillList(JPBillList billList) {
-				this.billList = billList;
-			}
 			//图片
 			ImageIcon upIconW=new ImageIcon("src/image/upW.png");
 			ImageIcon downIconW=new ImageIcon("src/image/downW.png");
@@ -66,6 +60,10 @@ public class JPmanageCustomer extends JPanel {
 		    Frame frame;
 		    //客户管理逻辑层接口
 		    CustomerBlService customerbl=new CustomerList();
+		    public void reHome(){
+		    	JPedit.reHome();
+		    	JPsearch.reHome();
+		    }
 			public JPmanageCustomer(){//参数决定编辑板的类型
 				//面板大小
 				this.setSize(905, 342);
@@ -296,6 +294,16 @@ public class JPmanageCustomer extends JPanel {
 				private JTextField emailText=new JTextField(10);
 				private JTextField postcodeText=new JTextField(10);
 				private JTextField salemanText=new JTextField(10);
+				
+				public void reHome(){
+					this.setLocation(905, 36);
+					nameText.setText("");
+					phoneNumberText.setText("");
+					addressText.setText("");
+					emailText.setText("");
+					postcodeText.setText("");
+					salemanText.setText("");
+				}
 				public JPanelEdit(){
 					//面板大小
 					this.setSize(240,270);
@@ -655,6 +663,11 @@ public class JPmanageCustomer extends JPanel {
 				//报溢报损单的附件
 				private JLabel searchjl=new JLabel("查找 ");
 				private JTextField searchTxt=new JTextField(10);
+				
+				public void reHome(){
+					this.setLocation(905, 36);
+					searchTxt.setText("");
+				}
 				public JPanelSearch(){
 					//面板大小
 					this.setSize(240,270);
@@ -825,6 +838,12 @@ public class JPmanageCustomer extends JPanel {
 				}
 		
 
+			}
+			public JPBillList getBillList() {
+				return billList;
+			}
+			public void setBillList(JPBillList billList) {
+				this.billList = billList;
 			}
 	
 }

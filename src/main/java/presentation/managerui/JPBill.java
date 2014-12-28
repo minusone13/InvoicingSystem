@@ -120,7 +120,7 @@ public class JPBill extends JPanel {
 		StockManagerDriver smd=new StockManagerDriver();
 		try
 		{
-			smd.start(stockbl,(StubCommodityDataService)Naming.lookup("rmi://127.0.0.1:1099/StubStockDataController.getInstance()"));
+			smd.start(stockbl,(StubCommodityDataService)Naming.lookup("rmi://127.0.0.1:1099/StubStockDataController"));
 		}
 		catch (MalformedURLException e)
 		{
@@ -1690,7 +1690,7 @@ public class JPBill extends JPanel {
 					list4[i][2]=saleVO.getsheet().get(i).getModel();
 					list4[i][3]=String.valueOf(saleVO.getsheet().get(i).getNumber());
 					list4[i][4]=String.valueOf(saleVO.getsheet().get(i).getOut());
-					list4[i][5]=String.valueOf(saleVO.getsheet().get(i).getOut()*purVO.getsheet().get(i).getNumber());
+					list4[i][5]=String.valueOf(saleVO.getsheet().get(i).getOut()*saleVO.getsheet().get(i).getNumber());
 					list4[i][6]=saleVO.getcommoditywords().get(i);
 				}
 				table.setList(list4);
@@ -1706,7 +1706,7 @@ public class JPBill extends JPanel {
 					list5[i][2]=salebackVO.getsheet().get(i).getModel();
 					list5[i][3]=String.valueOf(salebackVO.getsheet().get(i).getNumber());
 					list5[i][4]=String.valueOf(salebackVO.getsheet().get(i).getOut());
-					list5[i][5]=String.valueOf(salebackVO.getsheet().get(i).getOut()*purVO.getsheet().get(i).getNumber());
+					list5[i][5]=String.valueOf(salebackVO.getsheet().get(i).getOut()*salebackVO.getsheet().get(i).getNumber());
 					list5[i][6]=salebackVO.getcommoditywords().get(i);
 				}
 				table.setList(list5);

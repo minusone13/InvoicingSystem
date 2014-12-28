@@ -31,8 +31,8 @@ public class StubStrategyPool {
 	/*构造函数*/
 	public StubStrategyPool(){
 	
-		//清除保存的记录
-		save();
+//		//清除保存的记录
+//		save();
 
 		read();
 	}
@@ -52,6 +52,39 @@ public class StubStrategyPool {
 	public ArrayList<StubReachStrategy> getReachStrategy (){
 		read();
 		return alOfReachStrategy;
+		
+	}
+	/*通过id找策略*/
+	public StubLevelStrategy findLevelStrategy(String id){
+		read();
+		for(int i=0;i<alOfLevelStrategy.size();i++){
+			if(alOfLevelStrategy.get(i).getID().equals(id)){
+				return alOfLevelStrategy.get(i);
+			}
+		}
+		return null;
+		
+	}
+	/*通过id找策略*/
+	public StubBarginStrategy findBarginStrategy(String id){
+		read();
+		for(int i=0;i<alOfBarginStrategy.size();i++){
+			if(alOfBarginStrategy.get(i).getID().equals(id)){
+				return alOfBarginStrategy.get(i);
+			}
+		}
+		return null;
+		
+	}
+	/*通过id找策略*/
+	public StubReachStrategy findReachStrategy(String id){
+		read();
+		for(int i=0;i<alOfReachStrategy.size();i++){
+			if(alOfReachStrategy.get(i).getID().equals(id)){
+				return alOfReachStrategy.get(i);
+			}
+		}
+		return null;
 		
 	}
 	/*需要删除一条客户分层策略*/
