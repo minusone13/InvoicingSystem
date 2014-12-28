@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 
 import entrance.Frame;
 import presentation.PanelType;
+import presentation.managerui.JPSystemRecord;
 import presentation.managerui.ManagerUI;
 
 public class FinancialUI extends JPanel {
@@ -46,6 +47,8 @@ public class FinancialUI extends JPanel {
 	private AccountBuildIndexPanel accountBuildIndex=new AccountBuildIndexPanel();
 	//期初建账信息
 	private InitialInfoPanel accountInfomation=new InitialInfoPanel();
+	//系统日志
+	private JPSystemRecord systemRecord=new JPSystemRecord();
 	//当前面板标记，用于后退跳转
 	private PanelType panelType=PanelType.JPfunction;
 	//frame的引用
@@ -102,6 +105,9 @@ public class FinancialUI extends JPanel {
 			//期初建账信息
 			accountInfomation.setLocation(55, 233);
 			accountInfomation.setVisible(false);
+			//系统日志
+			systemRecord.setLocation(55, 233);
+			systemRecord.setVisible(false);
 			//home
 			home.setIcon(new ImageIcon("src/image/home.png") );
 			home.setBounds(690, 165, 90, 32);
@@ -130,7 +136,8 @@ public class FinancialUI extends JPanel {
 			this.add(accountInfomation,13);
 			this.add(businessProgress,14);
 			this.add(saleDetail,15);
-			this.add(bg,16);
+			this.add(systemRecord,16);
+			this.add(bg,17);
 			
 		}
     
@@ -144,6 +151,7 @@ public class FinancialUI extends JPanel {
     		account.getFrame(frame);
     		businessCondition.getFrame(frame);
     		accountBuildIndex.getFrame(frame);
+    		systemRecord.getFrame(f);
     }
 
 	public class MouseListenerOfButton implements MouseListener{
@@ -186,6 +194,7 @@ public class FinancialUI extends JPanel {
 				FinancialUI.this.getBusinessProgress().setVisible(false);
 				FinancialUI.this.getSaleDetail().setVisible(false);
 				FinancialUI.this.getAccountInfomation().setVisible(false);
+				FinancialUI.this.getSystemRecord().setVisible(false);
 				FinancialUI.this.getFunction().setVisible(true);
 				//标记当前面板，用于后退按钮
 				frame.getFinancial().setPanelType(PanelType.JPfunction);
@@ -252,6 +261,13 @@ public class FinancialUI extends JPanel {
 					accountBuildIndex.setVisible(true);
 					//标记当前面板，用于后退按钮
 					frame.getFinancial().setPanelType(PanelType.AccountBuildIndexPanel);
+					break;
+				case JPSystemRecord:
+					systemRecord.setVisible(false);
+					inquire.setVisible(true);
+					//标记当前面板，用于后退按钮
+					frame.getFinancial().setPanelType(PanelType.JPinquire);
+					
 					break;
 				}
 				break;
@@ -361,6 +377,16 @@ public class FinancialUI extends JPanel {
 
 	public void setPanelType(PanelType panelType) {
 		this.panelType = panelType;
+	}
+
+	public JPSystemRecord getSystemRecord()
+	{
+		return systemRecord;
+	}
+
+	public void setSystemRecord(JPSystemRecord systemRecord)
+	{
+		this.systemRecord = systemRecord;
 	}
 }
 	

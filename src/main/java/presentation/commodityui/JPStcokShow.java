@@ -94,6 +94,7 @@ public class JPStcokShow extends JPanel {
 			case 11:stcokTack.setIcon(stcokTackIcon);
 				//切换
 				JPStcokShow.this.setVisible(false);
+				frame.getStock().getStockTack().update();
 				frame.getStock().getStockTack().setVisible(true);
 				//标记当前面板，用于后退按钮
 				frame.getStock().setPanelType(PanelType.StockInventoryPanel);

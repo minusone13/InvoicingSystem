@@ -138,6 +138,7 @@ public class SaleDetailPanel extends JPanel{
 					break;
 				case 2:
 					download.setIcon(downloadIconW);
+					export("销售明细表");
 					break;
 			}
 			

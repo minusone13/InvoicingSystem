@@ -153,9 +153,10 @@ public class JPinquire extends JPanel {
 			case 24:systemRecord.setIcon(systemRecordIcon);
 				JPinquire.this.setVisible(false);
 				if(Login.user.getR()==Role.FINANCIAL_STAFF){
-//					frame.getFinancial().getSaleDetail().setVisible(true);
-//					//标记当前面板，用于后退按钮
-//					frame.getFinancial().setPanelType(PanelType.SaleDetailPanel);
+					frame.getFinancial().getSystemRecord().updateTable();
+					frame.getFinancial().getSystemRecord().setVisible(true);
+					//标记当前面板，用于后退按钮
+					frame.getFinancial().setPanelType(PanelType.JPSystemRecord);
 				}
 				else if(Login.user.getR()==Role.MANAGER){
 					frame.getManager().getSystemRecord().updateTable();

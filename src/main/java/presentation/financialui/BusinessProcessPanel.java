@@ -230,6 +230,7 @@ public class BusinessProcessPanel extends JPanel{
 					break;
 				case 2:
 					download.setIcon(downloadIconW);
+					export();
 					break;
 			}
 			
@@ -256,7 +257,7 @@ public class BusinessProcessPanel extends JPanel{
 		}
 		
 	}
-	public void export(int choose) {
+	public void export() {
 		if(choose==1) {
 			int size = table1.getRowCount();
 			int size1 = receipt.size();
@@ -1060,6 +1061,7 @@ public class BusinessProcessPanel extends JPanel{
     				else if(billTypeCombo.getSelectedItem().toString().equals("报警单和报溢报损单")){
     					type = 6;
     				}
+    				choose=type;
     				//查找
 					String startTime=null;
 					String lastTime=null;
