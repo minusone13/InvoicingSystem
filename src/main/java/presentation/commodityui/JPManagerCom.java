@@ -4,6 +4,10 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.net.MalformedURLException;
+import java.rmi.Naming;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -11,6 +15,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import dataservice.commoditydataservice.StubCommodityDataService;
+import businesslogic.stockmanagerbl.StubStockController;
+import businesslogicservice.commodityblservice.StubCommodityBlService;
 import entrance.Frame;
 import po.Role;
 import presentation.managerui.MouseListenerGetXY;
@@ -18,24 +25,6 @@ import vo.stockvo.CommodityVO;
 
 public class JPManagerCom extends JPanel{
 
-	public JLabel getAddIcon() {
-		return addIcon;
-	}
-	public void setAddIcon(JLabel addIcon) {
-		this.addIcon = addIcon;
-	}
-	public JPanel getHead() {
-		return head;
-	}
-	public void setHead(JPanel head) {
-		this.head = head;
-	}
-	public JPanel getBottom() {
-		return bottom;
-	}
-	public void setBottom(JPanel bottom) {
-		this.bottom = bottom;
-	}
 	//树状结果目录
 	private JPtreeContent content=new JPtreeContent();
 	//商品显示面板
@@ -58,13 +47,30 @@ public class JPManagerCom extends JPanel{
 	private JTextField detail=new JTextField(16);
 	//frame的引用
 	private Frame frame;
-	public Frame getFrame() {
-		return frame;
-	}
-	public void setFrame(Frame frame) {
-		this.frame = frame;
-	}
+
+	//逻辑层接口
+	private StubCommodityBlService stockbl=new StubStockController();
 	public JPManagerCom(){
+		//逻辑层接口
+		StockManagerDriver smd=new StockManagerDriver();
+		
+		try
+		{
+			smd.start(stockbl,(StubCommodityDataService)Naming.lookup("rmi://127.0.0.1:1099/StubStockDataController"));
+		}
+		catch (MalformedURLException e)
+		{
+			e.printStackTrace();
+		}
+		catch (RemoteException e)
+		{
+			e.printStackTrace();
+		}
+		catch (NotBoundException e)
+		{
+			e.printStackTrace();
+		}
+		//学长你这里为什么要调用数据层！
 		this.setSize(617, 370);
 		this.setLayout(null);
 		//设置面板透明
@@ -188,6 +194,16 @@ public class JPManagerCom extends JPanel{
 			switch(num){
 			case 1:
 				findIcon.setIcon(new ImageIcon("src/image/ChooseCom/littleScan.png") );
+				if(!findCom.getText().equals("")){
+					//模糊查找商品
+					ArrayList<CommodityVO> comFound=stockbl.fuzzyFindCommodity(findCom.getText(), 1);
+					//将商品显示
+					commodities.getCommodities().clear();
+					commodities.addCommodities(comFound);
+				}
+				else{
+					frame.getWarning().showWarning("请输入查找关键字");
+				}
 				break;
 			case 2:
 				comfirm.setIcon(new ImageIcon("src/image/ChooseCom/confirm.png") );
@@ -324,5 +340,29 @@ public class JPManagerCom extends JPanel{
 	public void setRole(Role role) {
 		this.role = role;
 	}
-	
+
+	public JLabel getAddIcon() {
+		return addIcon;
+	}
+	public void setAddIcon(JLabel addIcon) {
+		this.addIcon = addIcon;
+	}
+	public JPanel getHead() {
+		return head;
+	}
+	public void setHead(JPanel head) {
+		this.head = head;
+	}
+	public JPanel getBottom() {
+		return bottom;
+	}
+	public void setBottom(JPanel bottom) {
+		this.bottom = bottom;
+	}
+	public Frame getFrame() {
+		return frame;
+	}
+	public void setFrame(Frame frame) {
+		this.frame = frame;
+	}
 }
