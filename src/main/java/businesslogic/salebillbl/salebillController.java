@@ -37,7 +37,6 @@ public class salebillController implements SaleBillBlService,salebillForFinancia
 			if(vo==null) return false;
 			PurSheet pursheet = new PurSheet(vo);
 			pool.add(pursheet);
-			//添加之后的保存是怎样的机制？
 			return true;
 		}
 
@@ -167,6 +166,7 @@ public class salebillController implements SaleBillBlService,salebillForFinancia
 			return result;
 		}
 		
+		//是不是应该调用库存管理员的方法;
 		public void changeState_PurSheet(String ID,BillState state) {
 			StubBillPool pool = new StubBillPool();
 			pool.transformState(BillStyle.PurSheet, ID, state);
@@ -448,8 +448,8 @@ public class salebillController implements SaleBillBlService,salebillForFinancia
 			StubManagerBlService straController = new StubManager();
 			ArrayList<ReachStrategyVO> rsvo = straController.ShowReachStrategy();//读取的所有策略;
 			for(ReachStrategyVO tempvo:rsvo){
-				if(tempvo.getLimit()>=vo.getmoney1()){
-					//判断实践我暂时还没处理，先凑合一下;
+				if(tempvo.getLimit()==vo.getmoney1()){
+					//判断时间我暂时还没处理，先凑合一下;
 					result.add(tempvo);
 				}
 			}
@@ -462,8 +462,8 @@ public class salebillController implements SaleBillBlService,salebillForFinancia
 			StubManagerBlService straController = new StubManager();
 			ArrayList<LevelStrategyVO> lsvo = straController.ShowLevelStrategy();//读取的所有策略;
 			for(LevelStrategyVO tempvo:lsvo){
-				if(tempvo.getLimit()>=vo.getmoney1()&&(tempvo.getLevel()==vo.getcustomer().getlevel())){
-					//判断实践我暂时还没处理，先凑合一下;
+				if(tempvo.getLimit()==vo.getmoney1()&&(tempvo.getLevel()==vo.getcustomer().getlevel())){
+					//判断时间我暂时还没处理，先凑合一下;
 					result.add(tempvo);
 				}
 			}
@@ -480,7 +480,6 @@ public class salebillController implements SaleBillBlService,salebillForFinancia
 
 		public SaleSheetVO getCompletedSaleSheet(SaleSheetVO salesheetvo,ReachStrategyVO rsvo)
 		{
-			
 			salesheetvo.setdiscount(0.0);
 			salesheetvo.setpmoney(salesheetvo.getmoney1()-salesheetvo.getmoney2()-salesheetvo.getdiscount());
 			salesheetvo.setwords("赠送代金券:"+String.valueOf(salesheetvo.getpmoney()*rsvo.getCouponrate()-salesheetvo.getpmoney()*rsvo.getCouponrate()/10));
