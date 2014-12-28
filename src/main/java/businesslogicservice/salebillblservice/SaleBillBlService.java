@@ -64,8 +64,8 @@ public interface SaleBillBlService {
 		
 		public ArrayList<ReachStrategyVO> getSomeReachStrategy(SaleSheetVO vo);
 		public ArrayList<LevelStrategyVO> getSomeLevelStrategy(SaleSheetVO vo);
-		public SaleSheetVO getCompletedSaleSheet1(SaleSheetVO salesheetvo,LevelStrategyVO lsvo);
-		public SaleSheetVO getCompletedSaleSheet2(SaleSheetVO salesheetvo,ReachStrategyVO rsvo);
+		public SaleSheetVO getCompletedSaleSheet(SaleSheetVO salesheetvo,LevelStrategyVO lsvo);
+		public SaleSheetVO getCompletedSaleSheet(SaleSheetVO salesheetvo,ReachStrategyVO rsvo);
 		
 		
 }

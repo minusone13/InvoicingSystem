@@ -470,7 +470,7 @@ public class salebillController implements SaleBillBlService,salebillForFinancia
 			return result;
 		}
 
-		public SaleSheetVO getCompletedSaleSheet1(SaleSheetVO salesheetvo,LevelStrategyVO lsvo)
+		public SaleSheetVO getCompletedSaleSheet(SaleSheetVO salesheetvo,LevelStrategyVO lsvo)
 		{
 			salesheetvo.setdiscount((salesheetvo.getmoney1()-salesheetvo.getmoney2())*lsvo.getDiscountrate());
 			salesheetvo.setpmoney(salesheetvo.getmoney1()-salesheetvo.getmoney2()-salesheetvo.getdiscount());
@@ -478,7 +478,7 @@ public class salebillController implements SaleBillBlService,salebillForFinancia
 			return salesheetvo;
 		}
 
-		public SaleSheetVO getCompletedSaleSheet2(SaleSheetVO salesheetvo,ReachStrategyVO rsvo)
+		public SaleSheetVO getCompletedSaleSheet(SaleSheetVO salesheetvo,ReachStrategyVO rsvo)
 		{
 			
 			salesheetvo.setdiscount(0.0);

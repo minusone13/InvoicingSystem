@@ -289,7 +289,7 @@ public class JPManagerCom extends JPanel{
 				addIcon.setIcon(new ImageIcon("src/image/function/littleAddW.png") );
 				//加选择的商品到输出
 				commodities.addToOutput();
-				
+				frame.getWarning().showWarning("已添加到打包中");
 				break;
 			}
 		}

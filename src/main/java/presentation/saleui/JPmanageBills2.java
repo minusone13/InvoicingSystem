@@ -644,9 +644,9 @@ public class JPmanageBills2 extends JPanel {
 					customer.setBounds(40,15, 40, 20);
 					warehouse.setBounds(40,40, 40, 20);
 					list.setBounds(40,65, 60, 20);
-					strategy.setBounds(40,90, 60, 20);
-					total.setBounds(40,115, 40, 20);
-					coupon.setBounds(40,140, 75, 20);
+					strategy.setBounds(40,140, 60, 20);
+					total.setBounds(40,90, 40, 20);
+					coupon.setBounds(40,115, 75, 20);
 					discount.setBounds(40,165, 60, 20);
 					finalTotal.setBounds(40,190, 60, 20);
 					note.setBounds(40,215, 40, 20);
@@ -677,15 +677,15 @@ public class JPmanageBills2 extends JPanel {
 					//优惠策略选择下拉框
 					strategyCombo = new JComboBox();
 					strategyCombo.setFont(new Font("宋体",Font.BOLD,14));
-					strategyCombo.setBounds(80,90, 150, 20);
+					strategyCombo.setBounds(80,140, 150, 20);
 					strategyCombo.setBackground(Color.gray);
 					strategyCombo.setForeground(Color.white);
 					//总额文本框
-					totalText.setBounds(80,115, 150, 20);
+					totalText.setBounds(80,90, 150, 20);
 					totalText.setOpaque(false);//文本框透明
 					totalText.setForeground(Color.white);//前景色
 					//使用代金券文本框
-					couponText.setBounds(125,140, 105, 20);
+					couponText.setBounds(125,115, 105, 20);
 					couponText.setOpaque(false);//文本框透明
 					couponText.setForeground(Color.white);//前景色
 					//折让文本框
@@ -936,7 +936,7 @@ public class JPmanageBills2 extends JPanel {
 						switch(style){
 						case PurBackSheet:
 							if(!billID.getText().equals("")){
-								PurSheetVO pursheet=sbl.findPurSheet(billID.getText());
+								PurSheetVO pursheet=sbl.findPurSheet(billIDTxt.getText());
 								if(pursheet.getcustomer()==null){
 									System.out.println("返回的进货单客户空指针");
 								}
