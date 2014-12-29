@@ -6,6 +6,7 @@ import java.awt.event.ItemListener;
 import java.util.ArrayList;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 import vo.CustomerVO;
@@ -17,7 +18,6 @@ import businesslogicservice.financialblservice.FinancialBlService;
 public class InitialInfoPanel extends JPanel{
 	FinancialBlService financial = new Financial();
 	String[] nameOfClent = {"姓名","编号","分类","级别","电话","地址","邮编","电子邮箱","应收额度","应收","应付","默认业务员"};
-	String[] nameOfCommodity = {"商品名","编号","商品分类","型号","进价","售价","库存数量","最近进价","最近售价"};
 	String[] nameOfAccount = {"姓名","金额"};
 	
 	DefaultTableModel model = new DefaultTableModel();
@@ -45,9 +45,22 @@ public class InitialInfoPanel extends JPanel{
 		bg.setBounds(0, 0, 750, 300);
 		bg1.setBounds(0, 15, 750, 30);
 		
-		
+		//设置表格透明
 		table.setEnabled(false);
-		pane = new JScrollPane(table);
+		table.setOpaque(false);
+		DefaultTableCellRenderer render1 = new DefaultTableCellRenderer();   
+        render1.setOpaque(false); //将渲染器设置为透明  
+        table.setDefaultRenderer(Object.class,render1);  
+        table.setForeground(Color.white);
+        table.setBorder(null);
+        table.setShowVerticalLines(false);
+        
+      //滚动面板透明
+        pane = new JScrollPane(table);
+        pane.setOpaque(false);//设置透明
+		pane.getViewport().setOpaque(false);//设置透明
+		pane.setBorder(null);
+		
 		box = new JComboBox();
 		this.add(pane,0);
 		pane.setBounds(0, 50, 750, 250);
@@ -71,10 +84,16 @@ public class InitialInfoPanel extends JPanel{
 		this.type = t;
 		versions = financial.getVersions();
 		int size = versions.size();
+		int num = box.getItemCount();
+		for(int i=0;i<num;i++) box.removeItemAt(0);
+		for(int i=0;i<size;i++){
+			box.addItem(versions.get(i));
+		}
 		Object[][] data;
 		switch(type) {
 		case 1: update(versions.get(size-1));
-				break;
+		pane.setBounds(0, 50, 750, 250);	
+		break;
 		case 2: update(versions.get(size-1));
 		pane.setBounds(0, 50, 250, 250);
 				break;
@@ -82,6 +101,7 @@ public class InitialInfoPanel extends JPanel{
 	}
 	
 	public void update(String version) {
+		
 		Object[][] data;
 		switch(type) {
 		case 1: data = getOldCustomersInfo(version);
@@ -97,6 +117,7 @@ public class InitialInfoPanel extends JPanel{
 	private Object[][] getOldCustomersInfo(String version) {
 		 ArrayList<CustomerVO> customer = financial.getOldCustomersInfo(version);
 		 int size = customer.size();
+		
 		 Object[][] data = new Object[size][];
 		 for(int i=0;i<size;i++) {
 			 CustomerVO vo = customer.get(i);

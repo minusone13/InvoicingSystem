@@ -5,10 +5,13 @@ import java.awt.event.MouseListener;
 
 import javax.swing.*;
 
+import businesslogic.financialbl.Financial;
+import businesslogicservice.financialblservice.FinancialBlService;
 import presentation.PanelType;
 import entrance.Frame;
 
 public class AccountBuildIndexPanel extends JPanel{
+	FinancialBlService financial = new Financial();
 	private JLabel clientInfo = new JLabel("New label");
 	private JLabel commodityInfo = new JLabel("New label");
 	private JLabel accountInfo = new JLabel("New label");
@@ -115,7 +118,8 @@ public class AccountBuildIndexPanel extends JPanel{
 				frame.getFinancial().setPanelType(PanelType.InitialInfoPanel);
 				break;
 			case 24:buildButton.setLocation(800,450);
-					//buildButton.setIcon(buildIcon);	
+				financial.buildAccount();
+			//buildButton.setIcon(buildIcon);	
 					break;
 			}
 		}
