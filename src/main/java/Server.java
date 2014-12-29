@@ -29,6 +29,7 @@ public class Server
 	public static void main(String args[]){
 		 try
 		{
+			 	
 			 	String ip = "114.212.43.63:1099";
 				CustomerDataService customerdataservice= new CustomerData();
 				AccountDataService accountdataservice = new AccountData();
