@@ -3,8 +3,6 @@ package po;
 import java.util.ArrayList;
 
 import po.stockpo.CommodityPO;
-import businesslogic.LevelStrategyStyle;
-import businesslogic.StrategyStyle;
 
 public class LevelStrategyPO extends PO{
 	private StrategyStyle strategystyle=StrategyStyle.LevelStrategy;

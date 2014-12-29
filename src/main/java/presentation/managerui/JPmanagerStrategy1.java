@@ -9,8 +9,8 @@ import javax.swing.JPanel;
 
 import entrance.Frame;
 import po.BillStyle;
+import po.StrategyStyle;
 import presentation.PanelType;
-import businesslogic.StrategyStyle;
 import businesslogic.financialbl.Financial;
 import businesslogic.managerbl.StubManager;
 import businesslogicservice.financialblservice.FinancialBlService;

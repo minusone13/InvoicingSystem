@@ -14,15 +14,15 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import po.LevelStrategyStyle;
+import po.ReachStrategyStyle;
+import po.StrategyStyle;
 import presentation.StringJudger;
 import entrance.Frame;
 import vo.BarginStrategyVO;
 import vo.LevelStrategyVO;
 import vo.ReachStrategyVO;
 import vo.stockvo.CommodityVO;
-import businesslogic.LevelStrategyStyle;
-import businesslogic.ReachStrategyStyle;
-import businesslogic.StrategyStyle;
 
 public class JPmanagerStrategy2 extends JPanel {
         public StrategyStyle getStyle() {

@@ -6,11 +6,11 @@ import java.util.Calendar;
 import java.util.Date;
 
 import po.BarginStrategyPO;
+import po.StrategyStyle;
 import po.stockpo.CommodityPO;
 import vo.BarginStrategyVO;
 import vo.stockvo.CommodityVO;
 import businesslogic.GetVOandPO;
-import businesslogic.StrategyStyle;
 import businesslogic.commoditybl.MockCommodity;
 
 public class StubBarginStrategy implements GetVOandPO{

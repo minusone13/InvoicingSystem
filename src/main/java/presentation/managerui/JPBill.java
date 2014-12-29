@@ -18,6 +18,7 @@ import po.BillState;
 import po.BillStyle;
 import po.RM;
 import po.Role;
+import po.StrategyStyle;
 import presentation.commodityui.StockManagerDriver;
 import vo.AlertBillVO;
 import vo.BarginStrategyVO;
@@ -35,7 +36,6 @@ import vo.financialBillVO.CashPaymentVO;
 import vo.financialBillVO.PaymentVO;
 import vo.financialBillVO.ReceiptVO;
 import vo.uservo.UserVO;
-import businesslogic.StrategyStyle;
 import businesslogic.customerbl.CustomerList;
 import businesslogic.financialbl.Financial;
 import businesslogic.managerbl.StubManager;
@@ -1235,9 +1235,9 @@ public class JPBill extends JPanel {
 		ID.setFont(new Font("",Font.BOLD,14));
 		ID.setBounds(31,5, 200, 20);
 		//单据信息
-		operatorOfPR.setBounds(345, 15, 50, 16);
-		customerOfPR.setBounds(330, 33, 50, 16);
-		moneyOfPR.setBounds(330, 49, 50, 16);
+		operatorOfPR.setBounds(345, 15, 150, 16);
+		customerOfPR.setBounds(330, 33, 150, 16);
+		moneyOfPR.setBounds(330, 49, 150, 16);
 		
 		operatorOfPR.setText(rb.getOp());
 		customerOfPR.setText(rb.getCustomer());
@@ -1292,9 +1292,9 @@ public class JPBill extends JPanel {
 		ID.setFont(new Font("",Font.BOLD,14));
 		ID.setBounds(31,5, 200, 20);
 		//单据信息
-		operatorOfPR.setBounds(345, 15, 50, 16);
-		customerOfPR.setBounds(330, 33, 50, 16);
-		moneyOfPR.setBounds(330, 49, 50, 16);
+		operatorOfPR.setBounds(345, 15, 150, 16);
+		customerOfPR.setBounds(330, 33, 150, 16);
+		moneyOfPR.setBounds(330, 49,150, 16);
 		
 		operatorOfPR.setText(pb.getOp());
 		customerOfPR.setText(pb.getCustomer());

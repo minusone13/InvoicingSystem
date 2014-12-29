@@ -8,12 +8,14 @@ import java.util.ArrayList;
 
 import po.BarginStrategyPO;
 import po.LevelStrategyPO;
+import po.LevelStrategyStyle;
 import po.RM;
 import po.ReachStrategyPO;
+import po.ReachStrategyStyle;
 import presentation.userui.Login;
-import businesslogic.LevelStrategyStyle;
-import businesslogic.ReachStrategyStyle;
 import businesslogic.commoditybl.MockCommodity;
+import businesslogic.stockmanagerbl.StubStockController;
+import businesslogic.stockservice.StockBlForManager;
 import businesslogic.userbl.OperationRecord;
 import businesslogic.userbl.User;
 import businesslogic.userbl.UserController;
@@ -28,6 +30,8 @@ public class StubStrategyPool {
 	//StrategySaverService ss=new StrategySaver();
 	//需要用到记录操作的接口
 	UserService userService=new UserController();
+	//新增特价包的接口
+	StockBlForManager stockbl=new StubStockController();
 	/*构造函数*/
 	public StubStrategyPool(){
 	
@@ -192,6 +196,8 @@ public class StubStrategyPool {
 		userService.addRecord(new OperationRecord(new User(Login.user),"新增特价包策略:"+bs.getID(),RM.done));
 		//保存
 		this.save();
+		//同时生成特价包
+		stockbl.addPack(bargin, num, discount);
 	}
 	/*需要制定一条赠送赠品的满额促销策略*/
 	public void addReachStrategy (double Limit,ArrayList<MockCommodity> gift,String StartTime,int LastTime){

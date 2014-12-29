@@ -4,14 +4,14 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Date;
 
+import po.LevelStrategyStyle;
+import po.ReachStrategyStyle;
 import vo.CustomerVO;
 import vo.PurBackSheetVO;
 import vo.PurSheetVO;
 import vo.SaleBackSheetVO;
 import vo.SaleSheetVO;
 import vo.stockvo.CommodityVO;
-import businesslogic.LevelStrategyStyle;
-import businesslogic.ReachStrategyStyle;
 import businesslogic.commoditybl.MockCommodity;
 import businesslogic.customerbl.Customer;
 import businesslogic.customerbl.CustomerList;
