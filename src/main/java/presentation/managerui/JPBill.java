@@ -1868,5 +1868,9 @@ public class JPBill extends JPanel {
 	public void setSalebackVO(SaleBackSheetVO salebackVO) {
 		this.salebackVO = salebackVO;
 	}
+	public void setState(BillState state)
+	{
+		this.state = state;
+	}
 
 }

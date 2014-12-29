@@ -23,7 +23,7 @@ public class CustomerList implements CustomerForFinancial, CustomerBlService{
 			Customer customer = new Customer(newCustomer);
 			CustomerPO po = customer.getPO();
 			try{
-				CustomerDataService customerdata = (CustomerDataService)Naming.lookup("rmi://127.0.0.1:1099/CustomerData");
+				CustomerDataService customerdata = (CustomerDataService)Naming.lookup("rmi://"+entrance.Test.ipOfServer+"/CustomerData");
 				return customerdata.addCustomer(po);}
 			catch(Exception e){
 				System.out.println("addCustomer 异常"+e);
@@ -33,7 +33,7 @@ public class CustomerList implements CustomerForFinancial, CustomerBlService{
 		
 		public boolean deleteCustomer(String id){
 			try{
-				CustomerDataService customerdata = (CustomerDataService)Naming.lookup("rmi://127.0.0.1:1099/CustomerData");
+				CustomerDataService customerdata = (CustomerDataService)Naming.lookup("rmi://"+entrance.Test.ipOfServer+"/CustomerData");
 				return customerdata.deleteCustomer(id);}
 			catch(Exception e){
 				System.out.println("deteleCustomer 异常");
@@ -50,7 +50,7 @@ public class CustomerList implements CustomerForFinancial, CustomerBlService{
 				{
 					 try
 					{
-						customerdata = (CustomerDataService)Naming.lookup("rmi://127.0.0.1:1099/CustomerData");
+						customerdata = (CustomerDataService)Naming.lookup("rmi://"+entrance.Test.ipOfServer+"/CustomerData");
 					}
 					catch (MalformedURLException e)
 					{
@@ -85,7 +85,7 @@ public class CustomerList implements CustomerForFinancial, CustomerBlService{
 			CustomerPO po = new CustomerPO();
 			po = newCustomer.getPO();
 			try{
-				CustomerDataService customerdata = (CustomerDataService)Naming.lookup("rmi://127.0.0.1:1099/CustomerData");
+				CustomerDataService customerdata = (CustomerDataService)Naming.lookup("rmi://"+entrance.Test.ipOfServer+"/CustomerData");
 				return customerdata.updateCustomer(po);}
 			catch(Exception e){
 				System.out.println("updateCustomer 异常");
@@ -96,7 +96,7 @@ public class CustomerList implements CustomerForFinancial, CustomerBlService{
 		public ArrayList<CustomerVO> getAllCustomer(String address){
 			ArrayList<CustomerVO> listOfCustomerVO = new ArrayList<CustomerVO>();
 			try{
-				CustomerDataService customerdata = (CustomerDataService)Naming.lookup("rmi://127.0.0.1:1099/CustomerData");
+				CustomerDataService customerdata = (CustomerDataService)Naming.lookup("rmi://"+entrance.Test.ipOfServer+"/CustomerData");
 				ArrayList<CustomerPO> listOfCustomerPO = customerdata.getAllCustomer(address);
 				if(listOfCustomerPO==null) return new ArrayList<CustomerVO>();
 				for(CustomerPO po: listOfCustomerPO){
@@ -127,7 +127,7 @@ public class CustomerList implements CustomerForFinancial, CustomerBlService{
 					listOfCustomerPO.add(po);
 				}
 				try{
-					CustomerDataService customerdata = (CustomerDataService)Naming.lookup("rmi://127.0.0.1:1099/CustomerData");
+					CustomerDataService customerdata = (CustomerDataService)Naming.lookup("rmi://"+entrance.Test.ipOfServer+"/CustomerData");
 					customerdata.saveAllCustomer(listOfCustomerPO,address);
 				}catch(Exception e){
 					System.out.println("saveAllCustomer 异常1");
@@ -135,7 +135,7 @@ public class CustomerList implements CustomerForFinancial, CustomerBlService{
 			}
 			else {
 				try{
-					CustomerDataService customerdata = (CustomerDataService)Naming.lookup("rmi://127.0.0.1:1099/CustomerData");
+					CustomerDataService customerdata = (CustomerDataService)Naming.lookup("rmi://"+entrance.Test.ipOfServer+"/CustomerData");
 					customerdata.saveAllCustomer(null,address);
 				}catch(Exception e){
 					System.out.println("saveAllCustomer 异常2");

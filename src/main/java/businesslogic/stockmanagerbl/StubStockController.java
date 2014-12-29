@@ -40,7 +40,7 @@ public class StubStockController implements StubCommodityBlService,
 	{
 		try
 		{
-			comdata = (StubCommodityDataService)Naming.lookup("rmi://127.0.0.1:1099/StubStockDataController");
+			comdata = (StubCommodityDataService)Naming.lookup("rmi://"+entrance.Test.ipOfServer+"/StubStockDataController");
 		}
 		catch (MalformedURLException e)
 		{
