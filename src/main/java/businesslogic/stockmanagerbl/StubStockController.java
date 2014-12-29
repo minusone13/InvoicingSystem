@@ -40,7 +40,7 @@ public class StubStockController implements StubCommodityBlService,
 	{
 		try
 		{
-			comdata = (StubCommodityDataService)Naming.lookup("rmi://127.0.0.1:1099/StubStockDataController");
+			comdata = (StubCommodityDataService)Naming.lookup("rmi://"+entrance.Test.ipOfServer+"/StubStockDataController");
 		}
 		catch (MalformedURLException e)
 		{
@@ -405,5 +405,16 @@ public class StubStockController implements StubCommodityBlService,
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public ArrayList<PackVO> getAllPacks() throws RemoteException
+	{
+		ArrayList<PackPO> pos = comdata.getAllPacks();
+		ArrayList<PackVO> vos = new ArrayList<PackVO>();
+		for(int i=0;i<pos.size();i++)
+		{
+			vos.add(new StubPack(pos.get(i)).toVO());
+		}
+		return vos;
 	}
 }

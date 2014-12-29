@@ -31,7 +31,7 @@ import businesslogic.userbl.UserList;
 import businesslogic.userservice.UserService;
 import businesslogicservice.financialblservice.FinancialBlService;
 
-public class Financial implements FinancialBlService{
+public class Financial implements FinancialBlService, ServiceForUpdateMoney{
 	String name;
 	String password;
 	Role role = Role.FINANCIAL_MANAGER;

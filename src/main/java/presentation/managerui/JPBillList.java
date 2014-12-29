@@ -9,8 +9,11 @@ import java.util.ArrayList;
 import javax.swing.JPanel;
 
 import po.BillState;
+import po.BillStyle;
+import po.RM;
 import po.Role;
 import presentation.commodityui.StockManagerDriver;
+import presentation.commodityui.WarningText;
 import presentation.managerui.JPBill.JPbillType;
 import vo.AlertBillVO;
 import vo.BarginStrategyVO;
@@ -714,7 +717,30 @@ public class JPBillList extends JPanel {
 		if(getChosenNum()>=1&&isTheSameState()&&stateOfChosen()==BillState.DRAFT){
 			for(int i=0;i<JPbillList.size();i++){
 				if(JPbillList.get(i).getChoose()){
-					JPbillList.get(i).transformState(BillState.SUBMITED);
+					JPBill jpt = JPbillList.get(i);
+					BillStyle bst = jpt.getStyle();
+					if(bst!=BillStyle.GiftBill && bst!=BillStyle.SpillsLossBill)//added by lhw
+						JPbillList.get(i).transformState(BillState.SUBMITED);
+					else
+					{
+						RM result=RM.done;
+						if(bst == BillStyle.GiftBill)
+							result = stockbl.submit(jpt.getGiftVO());
+						else
+							result = stockbl.submit(jpt.getSpillsLossVO());
+						if(result == RM.insufficient)
+							frame.getWarning().showWarning(WarningText.insufficient);
+						else if(result == RM.RMIError)
+							frame.getWarning().showWarning(WarningText.RMIError);
+						else if(result != RM.done)
+							frame.getWarning().showWarning(WarningText.unknownerror);
+						else if(result == RM.done)
+						{
+							jpt.setState(BillState.SUBMITED);
+							//修改背景
+							jpt.setBillBg(bst,BillState.SUBMITED,2);
+						}
+					}
 				}
 			}
 			//更新面板

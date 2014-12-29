@@ -25,7 +25,7 @@ public class AccountList {
 		try {
 			try
 			{
-				a = (AccountDataService)Naming.lookup("rmi://127.0.0.1:1099/AccountData");
+				a = (AccountDataService)Naming.lookup("rmi://"+entrance.Test.ipOfServer+"/AccountData");
 			}
 			catch (MalformedURLException e)
 			{
@@ -56,7 +56,7 @@ public class AccountList {
 		try {
 			try
 			{
-				a = (AccountDataService)Naming.lookup("rmi://127.0.0.1:1099/AccountData");
+				a = (AccountDataService)Naming.lookup("rmi://"+entrance.Test.ipOfServer+"/AccountData");
 			}
 			catch (MalformedURLException e)
 			{
@@ -86,7 +86,7 @@ public class AccountList {
 		try {
 			try
 			{
-				a = (AccountDataService)Naming.lookup("rmi://127.0.0.1:1099/AccountData");
+				a = (AccountDataService)Naming.lookup("rmi://"+entrance.Test.ipOfServer+"/AccountData");
 			}
 			catch (MalformedURLException e)
 			{
@@ -117,7 +117,7 @@ public class AccountList {
 		try {
 			try
 			{
-				a = (AccountDataService)Naming.lookup("rmi://127.0.0.1:1099/AccountData");
+				a = (AccountDataService)Naming.lookup("rmi://"+entrance.Test.ipOfServer+"/AccountData");
 			}
 			catch (MalformedURLException e)
 			{
@@ -154,7 +154,7 @@ public class AccountList {
 		try {
 			try
 			{
-				a = (AccountDataService)Naming.lookup("rmi://127.0.0.1:1099/AccountData");
+				a = (AccountDataService)Naming.lookup("rmi://"+entrance.Test.ipOfServer+"/AccountData");
 			}
 			catch (MalformedURLException e)
 			{
@@ -189,7 +189,7 @@ public class AccountList {
 		AccountBuildService build = null;
 		try
 		{
-			build = (AccountBuildService)Naming.lookup("rmi://127.0.0.1:1099/AccountBuild");
+			build = (AccountBuildService)Naming.lookup("rmi://"+entrance.Test.ipOfServer+"/AccountBuild");
 		}
 		catch (MalformedURLException e)
 		{
@@ -209,7 +209,7 @@ public class AccountList {
 		AccountBuildService build = null;
 		try
 		{
-			build = (AccountBuildService)Naming.lookup("rmi://127.0.0.1:1099/AccountBuild");
+			build = (AccountBuildService)Naming.lookup("rmi://"+entrance.Test.ipOfServer+"/AccountBuild");
 		}
 		catch (MalformedURLException e)
 		{
@@ -242,7 +242,7 @@ public class AccountList {
 		AccountBuildService build = null;
 		try
 		{
-			build = (AccountBuildService)Naming.lookup("rmi://127.0.0.1:1099/AccountBuild");
+			build = (AccountBuildService)Naming.lookup("rmi://"+entrance.Test.ipOfServer+"/AccountBuild");
 		}
 		catch (MalformedURLException e)
 		{
@@ -279,7 +279,7 @@ public class AccountList {
 		try {
 			try
 			{
-				a = (AccountDataService)Naming.lookup("rmi://127.0.0.1:1099/AccountData");
+				a = (AccountDataService)Naming.lookup("rmi://"+entrance.Test.ipOfServer+"/AccountData");
 			}
 			catch (MalformedURLException e)
 			{
@@ -317,7 +317,7 @@ public class AccountList {
 		try {
 			try
 			{
-				a = (AccountDataService)Naming.lookup("rmi://127.0.0.1:1099/AccountData");
+				a = (AccountDataService)Naming.lookup("rmi://"+entrance.Test.ipOfServer+"/AccountData");
 			}
 			catch (MalformedURLException e)
 			{

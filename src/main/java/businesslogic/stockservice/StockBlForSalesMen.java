@@ -1,15 +1,19 @@
 package businesslogic.stockservice;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import po.RM;
 import vo.GiftBillVO;
+import vo.PackVO;
 import vo.stockvo.CommodityVO;
 
 public interface StockBlForSalesMen
 {// 这是给进货销售人员层内的接口，由StubStockController实现
 	public ArrayList<CommodityVO> findCommodity(String name);// 通过商品名称返回一系列的商品VO,这样可通过型号查找具体商品信息，通过最低库存判断是否可以生成单据
 	// 如输入飞利浦， 有可能返回飞利浦 SR01, 飞利浦 SR02等一系列商品
+	
+	public ArrayList<PackVO> getAllPacks() throws RemoteException;//得到所有特价包
 
 	public boolean isEnough(String name, String model, int n);// 在填写单据时检查，给出的是潜在库存最小值，也就是最保险的值
 

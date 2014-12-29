@@ -7,6 +7,8 @@ import java.util.Date;
 import businesslogic.GetVOandPO;
 import businesslogic.examinebl.Bill;
 import businesslogic.examinebl.StubBillPool;
+import businesslogic.financialbl.Financial;
+import businesslogic.financialbl.ServiceForUpdateMoney;
 import po.BillState;
 import po.BillStyle;
 import po.CashPaymentPO;
@@ -116,6 +118,14 @@ public class CashPaymentBill extends Bill implements GetVOandPO{
 		return state;
 	}
 	public void setState(BillState state) {
+		ServiceForUpdateMoney f = new Financial();
+		if(state == BillState.OVER) {
+			int size = itemList.size();
+			for(int i=0;i<size;i++) {
+				Item temp = itemList.get(i);
+				f.updateCashPaymentMoney(account, temp.getMoney());
+			}
+		} 
 		this.state = state;
 	}
 	public Date getDate() {
