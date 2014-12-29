@@ -258,7 +258,9 @@ public class JPcommodity extends JPanel implements MouseListener{
 						&&!inputPriceTxtOfSale.getText().equals("")
 						&&!inputNoteTxtOfSale.getText().equals("")){
 					//如果潜在库存足够
-					if(stockbl.isEnough(commodity.getName(), commodity.getModel(), Integer.parseInt(inputNumTxtOfSale.getText()))){
+					if(stockbl.isEnough(commodity.getName(), commodity.getModel(), Integer.parseInt(inputNumTxtOfSale.getText()))
+							&&(JPmanagerCom.getFrame().getSale().getManageBills2().getStyle()==BillStyle.SaleSheet
+									   )||JPmanagerCom.getFrame().getSale().getManageBills2().getStyle()==BillStyle.PurSheet){
 						//设置不可编辑
 						inputNumTxtOfSale.setEditable(false);
 						inputPriceTxtOfSale.setEditable(false);

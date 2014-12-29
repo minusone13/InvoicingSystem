@@ -50,7 +50,7 @@ public class Login extends JPanel {
     private JPasswordField passwords=new JPasswordField(16); 
 	//用户登录与注册接口
     StubUserBlService userService=new UserController();
-    
+    StubCommodityBlService stockbl=new StubStockController();
     //frame的引用
     Frame frame;
     KeyAdapterOfSignIn keyAdapt;//键盘回车监听
@@ -132,6 +132,8 @@ public class Login extends JPanel {
 				System.out.println("登录的是："+userVO.getR());
 				//将当前操作员信息赋值给当前登录面板的静态变量
 				user=userVO;
+				//传给逻辑层
+				stockbl.setUser(userVO);
 				//切换面板
 				switch(userVO.getR()){
 				case ADMINISTRATOR:
@@ -153,6 +155,7 @@ public class Login extends JPanel {
 					frame.getFinancial().getSaleDetail().setVisible(false);
 					frame.getFinancial().getAccountInfomation().setVisible(false);
 					frame.getFinancial().getSystemRecord().setVisible(false);
+					frame.getFinancial().getAccountOfComs().setVisible(false);
 					frame.getFinancial().getFunction().setVisible(true);
 					Login.this.setVisible(false);
 					frame.getFinancial().setVisible(true);
