@@ -136,9 +136,11 @@ public class ReceiptBill extends Bill implements GetVOandPO{
 	}
 	
 	public ReceiptVO getVO() {
+		
 		ReceiptVO vo = new ReceiptVO();
 		vo.setCustomer(customer);
 		vo.setID(ID);
+		System.out.println(ID);
 		vo.setBillStyle(billstyle);
 		vo.setRole(role);
 		vo.setTotal(total);

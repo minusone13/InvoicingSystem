@@ -124,6 +124,7 @@ public class BusinessProcessPanel extends JPanel{
 		table2 = new JTable(model2);
 		
 		table1.setOpaque(false);
+		table1.setSelectionForeground(Color.white);
         DefaultTableCellRenderer render1 = new DefaultTableCellRenderer();   
         render1.setOpaque(false); //将渲染器设置为透明  
         table1.setDefaultRenderer(Object.class,render1);  
@@ -163,7 +164,7 @@ public class BusinessProcessPanel extends JPanel{
 			}
         
         });
-        
+        table2.setSelectionForeground(Color.white);
         table2.setOpaque(false);
         DefaultTableCellRenderer render2 = new DefaultTableCellRenderer();   
         render2.setOpaque(false); //将渲染器设置为透明  
@@ -533,6 +534,7 @@ public class BusinessProcessPanel extends JPanel{
 	        Object[][] dataOfReAndPay = new Object[size][];
 	        
 	        for(int i=0;i<size1;i++){
+	        	System.out.println("receipt");
 	        	ReceiptVO tempReceipt = receipt.get(i);
 	        	Object[] temp ={tempReceipt.getID(),tempReceipt.getCustomer(), 
 	        			tempReceipt.getOp(), tempReceipt.getTotal(), 
@@ -541,6 +543,7 @@ public class BusinessProcessPanel extends JPanel{
 	        }
 	        
 	        for(int i=size1;i<size;i++){
+	        	System.out.println("payment");
 	        	PaymentVO tempPayment = payment.get(i);
 	        	Object[] temp ={tempPayment.getID(),tempPayment.getCustomer(), 
 	        			tempPayment.getOp(), tempPayment.getTotal(), 
@@ -549,6 +552,7 @@ public class BusinessProcessPanel extends JPanel{
 	        }
 	        
 			 model1.setDataVector(dataOfReAndPay, columnNames1);
+	System.out.println("~~~~~~~~~~~");
 			 table1.updateUI();
 			 model2.setDataVector(new Object[][]{}, columnNames1s);
 			 table2.updateUI();
@@ -1146,8 +1150,10 @@ public class BusinessProcessPanel extends JPanel{
 						vo.setStock(stock);
 						vo.setTimeBefore(startTime);
 						vo.setTimeAfter(lastTime);
-	    				updateTable1(type,vo);
-	    				choose=type;
+						choose=type;
+						updateTable1(type,vo);
+	    	
+	    				
 					}
 				
     				break;
