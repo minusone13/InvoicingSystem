@@ -734,6 +734,12 @@ public class JPBillList extends JPanel {
 							frame.getWarning().showWarning(WarningText.RMIError);
 						else if(result != RM.done)
 							frame.getWarning().showWarning(WarningText.unknownerror);
+						else if(result == RM.done)
+						{
+							jpt.setState(BillState.SUBMITED);
+							//修改背景
+							jpt.setBillBg(bst,BillState.SUBMITED,2);
+						}
 					}
 				}
 			}
