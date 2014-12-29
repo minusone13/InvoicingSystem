@@ -87,21 +87,25 @@ public class BusinessConditionPanel extends JPanel{
 		jpbg1.setIcon(new ImageIcon("src/image/block/blockForTable2.png"));
 		
 		paneOfEarn1 = new JScrollPane(tableOfEarn1);
+		tableOfEarn1.setSelectionBackground(Color.white);
 		this.add(paneOfEarn1,0);
 		paneOfEarn1.setBounds(0,55, 400, 50);
 		tableOfEarn1.setOpaque(false);
 		
 		paneOfEarn2 = new JScrollPane(tableOfEarn2);
+		tableOfEarn2.setSelectionForeground(Color.white);
 		this.add(paneOfEarn2,1);
 		paneOfEarn2.setBounds(0,160, 400, 50);
 		tableOfEarn2.setOpaque(false);
 		
 		paneOfPay = new JScrollPane(tableOfPay);
+		tableOfPay.setSelectionForeground(Color.white);
 		this.add(paneOfPay,2);
 		paneOfPay.setBounds(0,265, 300, 50);
 		tableOfPay.setOpaque(false);
 		
 		paneOfProfit = new JScrollPane(tableOfProfit);
+		tableOfProfit.setSelectionForeground(Color.white);
 		this.add(paneOfProfit,3);
 		paneOfProfit.setBounds(300,265, 100, 50);		
 		tableOfProfit.setOpaque(false);

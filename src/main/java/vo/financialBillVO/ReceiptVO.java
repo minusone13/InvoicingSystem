@@ -87,7 +87,7 @@ public class ReceiptVO extends VO{
 		return ID;
 	}
 	public void setID(String ID) {
-		ID = ID;
+		this.ID = ID;
 	}
 	public Role getRole() {
 		return role;

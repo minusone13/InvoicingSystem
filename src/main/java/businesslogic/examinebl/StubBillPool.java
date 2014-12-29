@@ -69,7 +69,7 @@ public class StubBillPool {
 	
 		
 		//清除保存的记录
-		save();
+		//save();
 		
 		read();
 		
@@ -624,7 +624,9 @@ public class StubBillPool {
 			break;
 		case ReceiptBill:
 			for(int i=0;i<alOfReceiptBill.size();i++){
+				System.out.println(alOfReceiptBill.get(i).getID()+":"+ID);
 				if(alOfReceiptBill.get(i).getID().equals(ID)){
+					System.out.println("找到并修改");
 					alOfReceiptBill.get(i).setState(state);
 				}
 			}

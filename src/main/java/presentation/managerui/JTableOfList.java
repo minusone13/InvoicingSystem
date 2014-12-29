@@ -50,6 +50,7 @@ public class JTableOfList extends JPanel{
         table.setForeground(Color.white);
         table.setBorder(null);
         table.setShowGrid(false);
+        table.setSelectionForeground(Color.white);
 		SCR.setViewportView(table);
 	}
 	/*test*/
