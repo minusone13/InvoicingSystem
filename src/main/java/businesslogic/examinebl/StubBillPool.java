@@ -50,9 +50,9 @@ public class StubBillPool {
 
 
 
-	private ArrayList<StubGiftBill> alOfGiftBill=new ArrayList<StubGiftBill>();
-	private ArrayList<StubSpillsLossBill> alOfSpillsLossBill=new ArrayList<StubSpillsLossBill>();
-	private ArrayList<StubAlertBill> alOfAlertBill=new ArrayList<StubAlertBill>();
+	private static ArrayList<StubGiftBill> alOfGiftBill=new ArrayList<StubGiftBill>();//change these 3 bill list to static to avoid a bug by lhw
+	private static ArrayList<StubSpillsLossBill> alOfSpillsLossBill=new ArrayList<StubSpillsLossBill>();
+	private static ArrayList<StubAlertBill> alOfAlertBill=new ArrayList<StubAlertBill>();
 	private ArrayList<PurSheet> alOfPurSheet=new ArrayList<PurSheet>();
 	private ArrayList<PurBackSheet> alOfPurBackSheet=new ArrayList<PurBackSheet>();
 	private ArrayList<SaleSheet> alOfSaleSheet=new ArrayList<SaleSheet>();
