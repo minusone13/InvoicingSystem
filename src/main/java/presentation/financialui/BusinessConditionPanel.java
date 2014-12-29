@@ -6,11 +6,14 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
@@ -206,7 +209,18 @@ public class BusinessConditionPanel extends JPanel{
 					break;
 				case 2:
 					download.setIcon(downloadIconW);
-					export("经营情况表");
+				
+					//导出
+					System.out.println("hahahahaha");
+					JFileChooser c = new JFileChooser();
+					FileFilter filter = new FileNameExtensionFilter("Excel文件(*.xls)", "xls");
+					c.addChoosableFileFilter(filter);
+					c.setFileFilter(filter);
+					c.setDialogTitle("保存文件");
+					int result = c.showSaveDialog(getParent());
+					if (result == JFileChooser.APPROVE_OPTION) {
+						export(c.getSelectedFile().getAbsolutePath()+".xls");
+					}
 					break;
 			}
 			
@@ -460,6 +474,7 @@ public class BusinessConditionPanel extends JPanel{
 					//右移
 					RightMove();
 					break;
+				
 				case 3:
 					confirm.setIcon(confirm0);
 					//点击查询
