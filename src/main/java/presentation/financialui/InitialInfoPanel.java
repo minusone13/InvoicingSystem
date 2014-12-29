@@ -56,6 +56,7 @@ public class InitialInfoPanel extends JPanel{
         table.setShowVerticalLines(false);
         
       //滚动面板透明
+        
         pane = new JScrollPane(table);
         pane.setOpaque(false);//设置透明
 		pane.getViewport().setOpaque(false);//设置透明
