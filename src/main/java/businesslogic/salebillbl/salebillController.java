@@ -169,21 +169,69 @@ public class salebillController implements SaleBillBlService,salebillForFinancia
 		//是不是应该调用库存管理员的方法;
 		public void changeState_PurSheet(String ID,BillState state) {
 			StubBillPool pool = new StubBillPool();
+			switch(state){
+				case SUBMITED : 
+					//稍候
+					break;
+				case EXAMINED : 
+					
+					break;
+				case OVER     : 
+				
+					break;
+				
+			}
 			pool.transformState(BillStyle.PurSheet, ID, state);
 		}
 
 		public void changeState_PurBackSheet(String ID,BillState state) {
 			StubBillPool pool = new StubBillPool();
+			switch(state){
+				case SUBMITED : 
+					
+					break;
+				case EXAMINED : 
+					
+					break;
+				case OVER     : 
+				
+					break;
+				
+			}
 			pool.transformState(BillStyle.PurBackSheet, ID, state);
 		}
 
 		public void changeState_Salesheet(String ID,BillState state) {
 			StubBillPool pool = new StubBillPool();
+			switch(state){
+				case SUBMITED : 
+					
+					break;
+				case EXAMINED : 
+					
+					break;
+				case OVER     : 
+				
+					break;
+				
+			}
 			pool.transformState(BillStyle.SaleSheet, ID, state);
 		}
 
 		public void changeState_SaleBackSheet(String ID,BillState state) {
 			StubBillPool pool = new StubBillPool();
+			switch(state){
+				case SUBMITED : 
+					
+					break;
+				case EXAMINED : 
+					
+					break;
+				case OVER     : 
+				
+					break;
+				
+			}
 			pool.transformState(BillStyle.SaleBackSheet, ID, state);
 		}
 
