@@ -19,6 +19,7 @@ import presentation.StringJudger;
 import presentation.managerui.JPBillList;
 import presentation.managerui.JTableOfList;
 import presentation.managerui.MouseListenerGetXY;
+import presentation.userui.Login;
 import vo.SpillsLossBillVO;
 import vo.stockvo.CommodityVO;
 
@@ -557,6 +558,7 @@ public class JPmanageBills2 extends JPanel {
 									else if(typeCombo.getSelectedItem().toString().equals("报溢单")){
 										newSpills.setT(Type.Spills);
 									}
+									newSpills.setOperator(Login.user.getName()+":"+Login.user.getID());
 									billList.addSpillsLossBill(newSpills);
 								}
 								else{
@@ -591,7 +593,7 @@ public class JPmanageBills2 extends JPanel {
 										modifyVO.setT(Type.Spills);
 									}
 									modifyVO.setCom(temp);
-									
+									modifyVO.setOperator(Login.user.getName()+":"+Login.user.getID());
 									billList.changeChosen(modifyVO);
 							}
 							else if(billList.getChosenNum()==0){

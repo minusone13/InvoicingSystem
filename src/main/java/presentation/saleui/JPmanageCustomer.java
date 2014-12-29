@@ -14,9 +14,11 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import entrance.Frame;
+import po.Role;
 import presentation.StringJudger;
 import presentation.managerui.JPBillList;
 import presentation.managerui.MouseListenerGetXY;
+import presentation.userui.Login;
 import vo.CustomerVO;
 import businesslogic.customerbl.CustomerList;
 import businesslogicservice.customerblservice.CustomerBlService;
@@ -289,6 +291,7 @@ public class JPmanageCustomer extends JPanel {
 				private JLabel email=new JLabel("邮箱");
 				private JLabel postcode=new JLabel("邮编");
 				private JLabel saleman=new JLabel("默认业务员");
+				private JLabel maxOwe=new JLabel("应收额度");
 				private JComboBox  categoryCombo;
 				private JComboBox  rankCombo;
 				private JTextField nameText=new JTextField(10);
@@ -297,6 +300,7 @@ public class JPmanageCustomer extends JPanel {
 				private JTextField emailText=new JTextField(10);
 				private JTextField postcodeText=new JTextField(10);
 				private JTextField salemanText=new JTextField(10);
+				private JTextField maxOweText=new JTextField(10);
 				
 				public void reHome(){
 					this.RightMove();
@@ -337,6 +341,7 @@ public class JPmanageCustomer extends JPanel {
 					email.setFont(new Font("宋体",Font.BOLD,14));
 					postcode.setFont(new Font("宋体",Font.BOLD,14));
 					saleman.setFont(new Font("宋体",Font.BOLD,14));
+					maxOwe.setFont(new Font("宋体",Font.BOLD,14));
 					//设置字体颜色
 					phoneNumber.setForeground(Color.white);
 					category.setForeground(Color.white);
@@ -346,21 +351,24 @@ public class JPmanageCustomer extends JPanel {
 					email.setForeground(Color.white);
 					postcode.setForeground(Color.white);
 					saleman.setForeground(Color.white);
+					maxOwe.setForeground(Color.white);
 					//设置标签大小位置
-					category.setBounds(40, 20, 40, 20);
-					rank.setBounds(40, 45, 40, 20);
-					name.setBounds(40, 70, 40, 20);
-					saleman.setBounds(40, 95,120, 20);
-					phoneNumber.setBounds(40,120, 40, 20);
-					email.setBounds(40,145, 40, 20);
-					postcode.setBounds(40,170, 40, 20);
-					address.setBounds(40,195, 40, 20);
+					category.setBounds(40, 10, 40, 20);
+					rank.setBounds(40, 35, 40, 20);
+					name.setBounds(40, 60, 40, 20);
+					saleman.setBounds(40, 85,120, 20);
+					phoneNumber.setBounds(40,110, 40, 20);
+					email.setBounds(40,135, 40, 20);
+					postcode.setBounds(40,160, 40, 20);
+					address.setBounds(40,185, 40, 20);
+					maxOwe.setBounds(40,210, 100, 20);
+					
 					
 					//客户等级选择下拉框
 					String[] categorycomb={"销售商","进货商"};
 					categoryCombo = new JComboBox(categorycomb);
 					categoryCombo.setFont(new Font("宋体",Font.BOLD,14));
-					categoryCombo.setBounds(80,20, 150, 20);
+					categoryCombo.setBounds(80,10, 150, 20);
 					categoryCombo.setBackground(Color.gray);
 					categoryCombo.setForeground(Color.white);
 					
@@ -368,41 +376,48 @@ public class JPmanageCustomer extends JPanel {
 					String[] levelcomb={"一级","二级","三级","四级","五级"};
 					rankCombo = new JComboBox(levelcomb);
 					rankCombo.setFont(new Font("宋体",Font.BOLD,14));
-					rankCombo.setBounds(80,45, 150, 20);
+					rankCombo.setBounds(80,35, 150, 20);
 					rankCombo.setBackground(Color.gray);
 					rankCombo.setForeground(Color.white);
 					
 					//姓名文本框
-					nameText.setBounds(80,70, 150, 20);
+					nameText.setBounds(80,60, 150, 20);
 					nameText.setOpaque(false);//文本框透明
 					nameText.setForeground(Color.white);//前景色
 					nameText.setCaretColor(Color.white);
 					//业务员文本框
-					salemanText.setBounds(125,95,105, 20);
+					salemanText.setBounds(125,85,105, 20);
 					salemanText.setOpaque(false);//文本框透明
 					salemanText.setForeground(Color.white);//前景色
 					salemanText.setCaretColor(Color.white);
 					//电话文本框
-					phoneNumberText.setBounds(80,120, 150, 20);
+					phoneNumberText.setBounds(80,110, 150, 20);
 					phoneNumberText.setOpaque(false);//文本框透明
 					phoneNumberText.setForeground(Color.white);//前景色
 					phoneNumberText.setCaretColor(Color.white);
 					//邮箱文本框
-					emailText.setBounds(80,145, 150, 20);
+					emailText.setBounds(80,135, 150, 20);
 					emailText.setOpaque(false);//文本框透明
 					emailText.setForeground(Color.white);//前景色
 					emailText.setCaretColor(Color.white);
 					//邮编文本框
-					postcodeText.setBounds(80,170, 150, 20);
+					postcodeText.setBounds(80,160, 150, 20);
 					postcodeText.setOpaque(false);//文本框透明
 					postcodeText.setForeground(Color.white);//前景色
 					postcodeText.setCaretColor(Color.white);
 					//地址文本框
-					addressText.setBounds(80,195, 150, 20);
+					addressText.setBounds(80,185, 150, 20);
 					addressText.setOpaque(false);//文本框透明
 					addressText.setForeground(Color.white);//前景色
 					addressText.setCaretColor(Color.white);
-					
+					//应收额度文本框
+					maxOweText.setBounds(105,210, 125, 20);
+					maxOweText.setOpaque(false);//文本框透明
+					maxOweText.setForeground(Color.white);//前景色
+					maxOweText.setCaretColor(Color.white);
+					//默认不可见，确认为经理且修改才可见
+					maxOwe.setVisible(false);
+					maxOweText.setVisible(false);
 					this.add(right,0);
 					this.add(confirm,1);
 					this.add(phoneNumber,2);
@@ -421,9 +436,19 @@ public class JPmanageCustomer extends JPanel {
 					this.add(emailText,15);
 					this.add(postcodeText,16);
 					this.add(addressText,17);
-					this.add(back,18);
+					this.add(maxOwe,18);
+					this.add(maxOweText,19);
+					this.add(back,20);
 				}
 				public void leftMove(){
+					if(Login.user.getR()==Role.PURCHASE_SALE_STAFF){
+						maxOwe.setVisible(false);
+						maxOweText.setVisible(false);
+					}
+					else if(Login.user.getR()==Role.PURCHASE_SALE_MANAGER&&!isAdd){
+						maxOwe.setVisible(true);
+						maxOweText.setVisible(true);
+					}
 					Thread t=new Thread(new TreadOfLeft());
 					t.start();
 				}
@@ -587,6 +612,11 @@ public class JPmanageCustomer extends JPanel {
 											frame.getWarning().showWarning("邮编输入有误");
 										}
 									}
+									if(!maxOweText.getText().equals("")&&stringJg.judgestring(maxOweText.getText())!=3){
+										legal=false;
+										frame.getWarning().showWarning("应收额度必须为数字");
+									}
+					
 									if(legal){
 										CustomerVO modifyCus=billList.getChosen().getCustomerVO();
 										modifyCus.settype(type);
@@ -610,6 +640,10 @@ public class JPmanageCustomer extends JPanel {
 										if(!addressText.getText().equals("")){
 											modifyCus.setaddress(addressText.getText());
 										}
+										if(!maxOweText.getText().equals("")){
+											modifyCus.setmaxOwe(Double.parseDouble(maxOweText.getText()));
+										}
+											
 										//进行修改
 										billList.changeChosen(modifyCus);
 									}
@@ -760,6 +794,7 @@ public class JPmanageCustomer extends JPanel {
 					this.add(back,4);
 				}
 				public void leftMove(){
+					
 					Thread t=new Thread(new TreadOfLeft());
 					t.start();
 				}

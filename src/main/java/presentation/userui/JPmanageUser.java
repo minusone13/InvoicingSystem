@@ -10,9 +10,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import entrance.Frame;
 import po.Role;
 import presentation.StringJudger;
 import presentation.managerui.JPBillList;
@@ -20,6 +20,7 @@ import presentation.managerui.MouseListenerGetXY;
 import vo.uservo.UserVO;
 import businesslogic.userbl.UserController;
 import businesslogicservice.userblservice.StubUserBlService;
+import entrance.Frame;
 
 public class JPmanageUser extends JPanel {
 
@@ -41,6 +42,7 @@ public class JPmanageUser extends JPanel {
 			private JLabel pass=new JLabel();
 			//编辑面板
 			private JPanelEdit JPedit;
+
 			//查找面板
 			private JPanelSearch JPsearch;
 			public JPBillList getBillList() {
@@ -217,6 +219,7 @@ public class JPmanageUser extends JPanel {
 					case 5:
 						edit.setIcon(editIconW);
 						if(billList.getChosenNum()==1){
+							JPedit.setAdmin(false);
 							JPedit.leftMove();//调出编辑板
 						}
 						else if(billList.getChosenNum()==0){
@@ -281,7 +284,11 @@ public class JPmanageUser extends JPanel {
 				private JLabel roleChoose=new JLabel("权限");
 				private JLabel code=new JLabel("密码");
 				private JComboBox  roleCombo;
-				private JTextField codeText=new JTextField(10);
+				private JPasswordField codeText=new JPasswordField(10);
+				private JLabel originalcode=new JLabel("原始密码");
+				private JPasswordField originalcodeText=new JPasswordField(10);
+				//标记是不是改管理员的密码
+				private boolean isAdmin=false;//默认不是
 				public void reHome(){
 					this.RightMove();
 					codeText.setText("");
@@ -309,12 +316,15 @@ public class JPmanageUser extends JPanel {
 				
 					//设置标签字体
 					roleChoose.setFont(new Font("宋体",Font.BOLD,14));
+					originalcode.setFont(new Font("宋体",Font.BOLD,14));
 					code.setFont(new Font("宋体",Font.BOLD,14));
 					//设置字体颜色
 					roleChoose.setForeground(Color.white);
+					originalcode.setForeground(Color.white);
 					code.setForeground(Color.white);
 					//设置标签大小位置
 					roleChoose.setBounds(40, 30, 40, 20);
+					originalcode.setBounds(40, 30, 100, 20);
 					code.setBounds(40,60, 40, 20);
 					
 					//用户权限选择下拉框
@@ -325,6 +335,11 @@ public class JPmanageUser extends JPanel {
 					roleCombo.setBackground(Color.gray);
 					roleCombo.setForeground(Color.white);
 					
+					//原始密码文本框
+					originalcodeText.setBounds(110,30, 125, 20);
+					originalcodeText.setOpaque(false);//文本框透明
+					originalcodeText.setForeground(Color.white);//前景色
+					originalcodeText.setCaretColor(Color.white);
 					//密码文本框
 					codeText.setBounds(80,60, 150, 20);
 					codeText.setOpaque(false);//文本框透明
@@ -337,7 +352,9 @@ public class JPmanageUser extends JPanel {
 					this.add(code,3);
 					this.add(roleCombo,4);
 					this.add(codeText,5);
-					this.add(back,6);
+					this.add(originalcode,6);
+					this.add(originalcodeText,7);
+					this.add(back,8);
 				}
 				public void leftMove(){
 					Thread t=new Thread(new TreadOfLeft());
@@ -346,6 +363,26 @@ public class JPmanageUser extends JPanel {
 				public void RightMove(){
 					Thread t=new Thread(new TreadOfRight());
 					t.start();
+				}
+				public boolean isAdmin()
+				{
+					return isAdmin;
+				}
+				public void setAdmin(boolean isAdmin)
+				{
+					if(isAdmin){
+						roleChoose.setVisible(false);
+						roleCombo.setVisible(false);
+						originalcode.setVisible(true);
+						originalcodeText.setVisible(true);
+					}
+					else{
+						roleChoose.setVisible(true);
+						roleCombo.setVisible(true);
+						originalcode.setVisible(false);
+						originalcodeText.setVisible(false);
+					}
+					this.isAdmin = isAdmin;
 				}
 				public class MouseListenerOfButton implements MouseListener{
 
@@ -386,38 +423,67 @@ public class JPmanageUser extends JPanel {
 						case 3:
 							confirm.setIcon(confirm0);
 							//修改
-							
-							
-								Role r=null;
-								if(roleCombo.getSelectedItem().toString().equals("总经理")){
-									r=Role.MANAGER;
+							if(isAdmin()==false){//如果是修改客户
+								if(billList.getChosenNum()==1){
+									Role r=null;
+									if(roleCombo.getSelectedItem().toString().equals("总经理")){
+										r=Role.MANAGER;
+									}
+									else if(roleCombo.getSelectedItem().toString().equals("财务经理")){
+										r=Role.FINANCIAL_MANAGER;
+									}
+									else if(roleCombo.getSelectedItem().toString().equals("财务人员")){
+										r=Role.FINANCIAL_STAFF;
+									}
+									else if(roleCombo.getSelectedItem().toString().equals("进销经理")){
+										r=Role.PURCHASE_SALE_MANAGER;
+									}
+									else if(roleCombo.getSelectedItem().toString().equals("进销人员")){
+										r=Role.PURCHASE_SALE_STAFF;
+									}
+									else if(roleCombo.getSelectedItem().toString().equals("库存管理人员")){
+										r=Role.STOCK_STAFF;
+									}
+									UserVO temp=billList.getChosen().getUserVO();
+									if(!new String(codeText.getPassword()).equals("")&&stringJg.judgestring(new String(codeText.getPassword()))==4){
+										frame.getWarning().showWarning("密码不能有文字");
+									}
+									else if(new String(codeText.getPassword()).equals("")){
+										billList.changeChosen(temp,r);
+										frame.getWarning().showWarning("修改成功");
+									}
+									else{
+										temp.setPassword(new String(codeText.getPassword()));
+										billList.changeChosen(temp,r);
+										frame.getWarning().showWarning("修改成功");
+									}
 								}
-								else if(roleCombo.getSelectedItem().toString().equals("财务经理")){
-									r=Role.FINANCIAL_MANAGER;
-								}
-								else if(roleCombo.getSelectedItem().toString().equals("财务人员")){
-									r=Role.FINANCIAL_STAFF;
-								}
-								else if(roleCombo.getSelectedItem().toString().equals("进销经理")){
-									r=Role.PURCHASE_SALE_MANAGER;
-								}
-								else if(roleCombo.getSelectedItem().toString().equals("进销人员")){
-									r=Role.PURCHASE_SALE_STAFF;
-								}
-								else if(roleCombo.getSelectedItem().toString().equals("库存管理人员")){
-									r=Role.STOCK_STAFF;
-								}
-								UserVO temp=billList.getChosen().getUserVO();
-								if(!codeText.getText().equals("")&&stringJg.judgestring(codeText.getText())==4){
-									frame.getWarning().showWarning("密码不能有文字");
-								}
-								else if(codeText.getText().equals("")){
-									billList.changeChosen(temp,r);
+								else if(billList.getChosenNum()==0){
+									frame.getWarning().showWarning("请选择要修改的客户");
 								}
 								else{
-									temp.setPassword(codeText.getText());
-									billList.changeChosen(temp,r);
+									frame.getWarning().showWarning("只能同时修改一个客户");
 								}
+							}
+							else{//如果是修改管理员密码
+								if(!new String(originalcodeText.getPassword()).equals("")
+										&&!new String(codeText.getPassword()).equals("")){
+									if(stringJg.judgestring(new String(codeText.getPassword()))==4){
+										frame.getWarning().showWarning("新密码不能有文字");
+									}
+									else{
+										UserVO temp=Login.user;
+										temp.setPassword(new String(codeText.getPassword()));
+										userbl.changePassword(temp, new String(originalcodeText.getPassword()));
+										frame.getWarning().showWarning("修改成功");
+									}
+								}
+								else{
+									frame.getWarning().showWarning("请填写完整信息");
+								}
+							}
+							
+								
 			
 							break;
 						}
@@ -686,6 +752,14 @@ public class JPmanageUser extends JPanel {
 				}
 		
 
+			}
+			public JPanelEdit getJPedit()
+			{
+				return JPedit;
+			}
+			public void setJPedit(JPanelEdit jPedit)
+			{
+				JPedit = jPedit;
 			}
 	
 }

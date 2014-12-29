@@ -24,6 +24,7 @@ public class StubBarginStrategy implements GetVOandPO{
 	
 	private String StartTime;//开始日期
 	private int LastTime;//策略持续时间（天）
+	private String operator;
 	/*构造方法*/
 	public StubBarginStrategy(){
 	     Calendar ca = Calendar.getInstance();
@@ -48,6 +49,7 @@ public class StubBarginStrategy implements GetVOandPO{
 		result.setNum(this.getNum());
 		result.setStartTime(this.getStartTime());
 		result.setLastTime(this.getLastTime());
+		result.setOperator(this.getOperator());
 		return result;
 	}
 
@@ -64,6 +66,7 @@ public class StubBarginStrategy implements GetVOandPO{
 		result.setNum(this.getNum());
 		result.setStartTime(this.getStartTime());
 		result.setLastTime(this.getLastTime());
+		result.setOperator(this.getOperator());
 		return result;
 	}
 	
@@ -104,6 +107,7 @@ public class StubBarginStrategy implements GetVOandPO{
 		this.setNum(po.getNum());
 		this.setLastTime(po.getLastTime());
 		this.setStartTime(po.getStartTime());
+		this.setOperator(po.getOperator());
 	}
 	public String getID() {
 		return ID;
@@ -116,6 +120,14 @@ public class StubBarginStrategy implements GetVOandPO{
 	}
 	public void setAlOfCommodity(ArrayList<MockCommodity> alOfCommodity) {
 		this.alOfCommodity = alOfCommodity;
+	}
+	public String getOperator()
+	{
+		return operator;
+	}
+	public void setOperator(String operator)
+	{
+		this.operator = operator;
 	}
 
 }
