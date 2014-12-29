@@ -545,8 +545,8 @@ public class JPmanageBills2 extends JPanel {
 					note.setBounds(40, 150, 40, 20);
 					
 					//客户选择下拉框
-						ArrayList<CustomerVO> customers = null;
-						customers = customerbl.getAllCustomer("Customer.txt");
+					ArrayList<CustomerVO> customers = null;
+					customers = customerbl.getAllCustomer("Customer.txt");
 					String[] customerS=new String[customers.size()];
 					for(int i=0;i<customers.size();i++){
 						customerS[i]=customers.get(i).getname()+":"+customers.get(i).getid();
