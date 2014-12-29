@@ -169,15 +169,20 @@ public class salebillController implements SaleBillBlService,salebillForFinancia
 		//是不是应该调用库存管理员的方法;
 		public void changeState_PurSheet(String ID,BillState state) {
 			StubBillPool pool = new StubBillPool();
+			CustomerList list = new CustomerList();
+			String customerid = new String();
+			PurSheetVO vo = this.findPurSheet(ID);
 			switch(state){
 				case SUBMITED : 
 					//稍候
 					break;
 				case EXAMINED : 
-					
+					//这里是我调用吗？
+					customerid = vo.getcustomer().getid();
+					list.changeShouldPay(ID, vo.getmoney1());
 					break;
 				case OVER     : 
-				
+					
 					break;
 				
 			}
@@ -186,12 +191,17 @@ public class salebillController implements SaleBillBlService,salebillForFinancia
 
 		public void changeState_PurBackSheet(String ID,BillState state) {
 			StubBillPool pool = new StubBillPool();
+			CustomerList list = new CustomerList();
+			String customerid = new String();
+			PurBackSheetVO vo = this.findPurBackSheet(ID);
 			switch(state){
 				case SUBMITED : 
 					
 					break;
 				case EXAMINED : 
-					
+					//这里是我调用吗？
+					customerid = vo.getcustomer().getid();
+					list.changeShouldTake(ID, vo.getmoney1());
 					break;
 				case OVER     : 
 				
@@ -203,12 +213,16 @@ public class salebillController implements SaleBillBlService,salebillForFinancia
 
 		public void changeState_Salesheet(String ID,BillState state) {
 			StubBillPool pool = new StubBillPool();
+			CustomerList list = new CustomerList();
+			String customerid = new String();
+			SaleSheetVO vo = this.findSaleSheet(ID);
 			switch(state){
 				case SUBMITED : 
 					
 					break;
 				case EXAMINED : 
-					
+					customerid = vo.getcustomer().getid();
+					list.changeShouldTake(ID, vo.getmoney2());
 					break;
 				case OVER     : 
 				
@@ -220,12 +234,16 @@ public class salebillController implements SaleBillBlService,salebillForFinancia
 
 		public void changeState_SaleBackSheet(String ID,BillState state) {
 			StubBillPool pool = new StubBillPool();
+			CustomerList list = new CustomerList();
+			String customerid = new String();
+			SaleBackSheetVO vo = this.findSaleBackSheet(ID);
 			switch(state){
 				case SUBMITED : 
 					
 					break;
 				case EXAMINED : 
-					
+					customerid = vo.getcustomer().getid();
+					list.changeShouldPay(ID, vo.getmoney2());
 					break;
 				case OVER     : 
 				
