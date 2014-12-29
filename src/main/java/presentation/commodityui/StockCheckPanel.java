@@ -26,7 +26,7 @@ import presentation.StringJudger;
 import vo.stockvo.CommodityVO;
 import businesslogic.stockmanagerbl.StubStockController;
 import businesslogicservice.commodityblservice.StubCommodityBlService;
-import dataservice.commoditydataservice.StubCommodityDataService;
+//import dataservice.commoditydataservice.StubCommodityDataService;
 import entrance.Frame;
 
 public class StockCheckPanel extends JPanel{
@@ -58,7 +58,7 @@ public class StockCheckPanel extends JPanel{
 	public void initial() {
 		//逻辑层接口
 		StockManagerDriver smd=new StockManagerDriver();
-		try
+		/*try
 		{
 			smd.start(stockbl,(StubCommodityDataService)Naming.lookup("rmi://127.0.0.1:1099/StubStockDataController"));
 		}
@@ -73,7 +73,7 @@ public class StockCheckPanel extends JPanel{
 		catch (NotBoundException e)
 		{
 			e.printStackTrace();
-		}
+		}*/
 		this.setBounds(0, 0,905, 315);
 		//设置布局
 		this.setLayout(null);
