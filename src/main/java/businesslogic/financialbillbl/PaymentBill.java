@@ -14,6 +14,8 @@ import presentation.userui.Login;
 import businesslogic.GetVOandPO;
 import businesslogic.examinebl.Bill;
 import businesslogic.examinebl.StubBillPool;
+import businesslogic.financialbl.Financial;
+import businesslogic.financialbl.ServiceForUpdateMoney;
 import vo.VO;
 import vo.financialBillVO.PaymentVO;
 import vo.uservo.UserVO;
@@ -120,6 +122,14 @@ public class PaymentBill extends Bill implements GetVOandPO{
 		return state;
 	}
 	public void setState(BillState state) {
+		ServiceForUpdateMoney f = new Financial();
+		if(state == BillState.OVER) {
+			int size = transferlist.size();
+			for(int i=0;i<size;i++) {
+				TransferAccount temp = transferlist.get(i);
+				f.updatePaymentMoney(customer, temp.getAccount(), temp.getMoney());
+			}
+		} 
 		this.state = state;
 	}
 	public ArrayList<TransferAccount> getTransferlist() {
