@@ -91,7 +91,7 @@ public class StubBillPool {
 	}
 	/*需要向单据池中加入一张库存报警单*/
 	public void add (StubAlertBill ab){
-		read();
+		//read();deleted by lhw
 		alOfAlertBill.add(ab);
 		//保存
 		this.save();
@@ -290,7 +290,7 @@ public class StubBillPool {
 	}
 	/*获取单据池的所有库存报警单*/
 	public ArrayList<StubAlertBill> getAlertBill (){
-		read();
+		//read();deleted by lhw
 		return alOfAlertBill;
 	}
 	/*获取单据池的所有进货单*/

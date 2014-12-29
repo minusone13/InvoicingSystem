@@ -12,6 +12,8 @@ import javax.swing.JTextField;
 
 import po.BillStyle;
 import vo.stockvo.CommodityVO;
+import businesslogic.stockmanagerbl.StubStockController;
+import businesslogic.stockservice.StockBlForSalesMen;
 
 public class JPcommodity extends JPanel implements MouseListener{
 
@@ -42,6 +44,7 @@ public class JPcommodity extends JPanel implements MouseListener{
 	private String out;//vo的原始默认售价
 	private String note="";//对应的备注
 	private JPManagerCom JPmanagerCom;//引用
+	StockBlForSalesMen stockbl=new StubStockController();
 	public CommodityVO getCommodity() {
 		return commodity;
 	}
@@ -254,27 +257,33 @@ public class JPcommodity extends JPanel implements MouseListener{
 				if(!inputNumTxtOfSale.getText().equals("")
 						&&!inputPriceTxtOfSale.getText().equals("")
 						&&!inputNoteTxtOfSale.getText().equals("")){
-					//设置不可编辑
-					inputNumTxtOfSale.setEditable(false);
-					inputPriceTxtOfSale.setEditable(false);
-					inputNoteTxtOfSale.setEditable(false);
-					//改变VO对象信息
-					commodity.setNumber(Integer.parseInt(inputNumTxtOfSale.getText()));
-					
-					if(JPmanagerCom.getFrame().getSale().getManageBills2().getStyle()==BillStyle.PurSheet
-					   ||JPmanagerCom.getFrame().getSale().getManageBills2().getStyle()==BillStyle.PurBackSheet){
-						commodity.setIn(Double.parseDouble(inputPriceTxtOfSale.getText()));
+					//如果潜在库存足够
+					if(stockbl.isEnough(commodity.getName(), commodity.getModel(), Integer.parseInt(inputNumTxtOfSale.getText()))){
+						//设置不可编辑
+						inputNumTxtOfSale.setEditable(false);
+						inputPriceTxtOfSale.setEditable(false);
+						inputNoteTxtOfSale.setEditable(false);
+						//改变VO对象信息
+						commodity.setNumber(Integer.parseInt(inputNumTxtOfSale.getText()));
+						
+						if(JPmanagerCom.getFrame().getSale().getManageBills2().getStyle()==BillStyle.PurSheet
+						   ||JPmanagerCom.getFrame().getSale().getManageBills2().getStyle()==BillStyle.PurBackSheet){
+							commodity.setIn(Double.parseDouble(inputPriceTxtOfSale.getText()));
+						}
+						else{
+							commodity.setOut(Double.parseDouble(inputPriceTxtOfSale.getText()));
+						}
+						//改变备注信息
+						note=inputNoteTxtOfSale.getText();
+						
+						//隐藏确认按钮
+						comfirmOfSale.setVisible(false);
+						//标记选中
+						chosen=true;
 					}
 					else{
-						commodity.setOut(Double.parseDouble(inputPriceTxtOfSale.getText()));
+						JPmanagerCom.getFrame().getWarning().showWarning("潜在库存不足");
 					}
-					//改变备注信息
-					note=inputNoteTxtOfSale.getText();
-					
-					//隐藏确认按钮
-					comfirmOfSale.setVisible(false);
-					//标记选中
-					chosen=true;
 				}
 				else{
 					JPmanagerCom.getFrame().getWarning().showWarning("请输入完整信息");

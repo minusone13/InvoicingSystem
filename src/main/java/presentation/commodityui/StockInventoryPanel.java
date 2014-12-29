@@ -114,13 +114,13 @@ public class StockInventoryPanel extends JPanel{
 		}
 		public void mouseClicked(MouseEvent e)
 		{
-			// TODO Auto-generated method stub
+	
 			
 		}
 
 		public void mousePressed(MouseEvent e)
 		{
-			// TODO Auto-generated method stub
+	
 			switch(num){
 				case 2:
 					download.setIcon(downloadIconR);

@@ -19,7 +19,7 @@ import vo.financialBillVO.CashPaymentVO;
 import vo.uservo.UserVO;
 
 public class CashPaymentBill extends Bill implements GetVOandPO{
-	//userVO初始化
+	
 	
 	private String userID ;
 	private String userName ;
