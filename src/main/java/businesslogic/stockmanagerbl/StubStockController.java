@@ -406,4 +406,15 @@ public class StubStockController implements StubCommodityBlService,
 			e.printStackTrace();
 		}
 	}
+	
+	public ArrayList<PackVO> getAllPacks() throws RemoteException
+	{
+		ArrayList<PackPO> pos = comdata.getAllPacks();
+		ArrayList<PackVO> vos = new ArrayList<PackVO>();
+		for(int i=0;i<pos.size();i++)
+		{
+			vos.add(new StubPack(pos.get(i)).toVO());
+		}
+		return vos;
+	}
 }
