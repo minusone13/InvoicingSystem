@@ -397,7 +397,7 @@ public class StockCheckPanel extends JPanel{
 								&&stringJg.judgestring(date2.getText())==3){
 							String timeBefore = y1+"/"+m1+"/"+d1;
 							String timeAfter = y2+"/"+m2+"/"+d2;
-							String pattern="YYYY/MM/dd";
+							String pattern="yyyy/MM/dd";//modified by lhw
 							SimpleDateFormat sdf=new SimpleDateFormat(pattern);
 							Date before=null;
 							try
@@ -419,7 +419,6 @@ public class StockCheckPanel extends JPanel{
 								// TODO Auto-generated catch block
 								e1.printStackTrace();
 							}
-							
 							StockCheckPanel.this.update(before,After);
 						}
 						else{
