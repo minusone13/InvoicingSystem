@@ -36,7 +36,10 @@ public class JPcommodity extends JPanel implements MouseListener{
 	private JLabel comfirmOfSale=new JLabel();//进销人员编辑面板的确认按钮
 	private JPanel showOfStock=new JPanel();//显示已选
 	
+	
 	private CommodityVO commodity;//对应的VO
+	private String in;//vo的原始默认进价
+	private String out;//vo的原始默认售价
 	private String note="";//对应的备注
 	private JPManagerCom JPmanagerCom;//引用
 	public CommodityVO getCommodity() {
@@ -195,6 +198,8 @@ public class JPcommodity extends JPanel implements MouseListener{
 	public JPcommodity(CommodityVO com){
 		this(com.getName(),com.getModel(),com.getNumber());
 		commodity=com;
+		in=String.valueOf(commodity.getIn());
+		out=String.valueOf(commodity.getOut());
 	}
 	/*修改商品*/
 	public void change(CommodityVO commodity){
@@ -315,6 +320,14 @@ public class JPcommodity extends JPanel implements MouseListener{
 				inputNumTxtOfSale.setEditable(true);
 				inputPriceTxtOfSale.setEditable(true);
 				inputNoteTxtOfSale.setEditable(true);
+				//填写默认值
+				if(JPmanagerCom.getFrame().getSale().getManageBills2().getStyle()==BillStyle.PurSheet){
+					inputPriceTxtOfSale.setText(in);//制定进货单时填写默认进价
+				}
+				else if(JPmanagerCom.getFrame().getSale().getManageBills2().getStyle()==BillStyle.SaleSheet){
+					inputPriceTxtOfSale.setText(out);//制定销售单时填写默认售价
+				}
+				inputNoteTxtOfSale.setText("无");//备注默认无
 				//显示确认按钮
 				comfirmOfSale.setVisible(true);
 				//显示编辑面板
@@ -360,7 +373,7 @@ public class JPcommodity extends JPanel implements MouseListener{
 			lastout="空";
 		else
 			lastout=String.valueOf(lo);
-		s="进价："+in+" 售价："+out+" 最近进价："+lastin+" 最近售价："+lastout;
+		s="进价："+in+" 售价："+out+" 最近进价："+lastin+" 最近售价："+lastout+" 警戒值："+commodity.getAlertLine();
 		JPmanagerCom.showDetail(s);
 	}
 	public void mouseExited(MouseEvent e) {

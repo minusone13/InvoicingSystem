@@ -6,6 +6,7 @@ import java.util.Date;
 
 import po.BillState;
 import po.BillStyle;
+import po.LevelStrategyStyle;
 import vo.CustomerVO;
 import vo.LevelStrategyVO;
 import vo.PurBackSheetVO;
@@ -14,7 +15,6 @@ import vo.ReachStrategyVO;
 import vo.SaleBackSheetVO;
 import vo.SaleSheetVO;
 import vo.stockvo.CommodityVO;
-import businesslogic.LevelStrategyStyle;
 import businesslogic.commoditybillbl.StubGiftBill;
 import businesslogic.commoditybl.MockCommodity;
 import businesslogic.customerbl.CustomerList;

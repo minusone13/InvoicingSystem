@@ -6,12 +6,12 @@ import java.util.Calendar;
 import java.util.Date;
 
 import po.ReachStrategyPO;
+import po.ReachStrategyStyle;
+import po.StrategyStyle;
 import po.stockpo.CommodityPO;
 import vo.ReachStrategyVO;
 import vo.stockvo.CommodityVO;
 import businesslogic.GetVOandPO;
-import businesslogic.ReachStrategyStyle;
-import businesslogic.StrategyStyle;
 import businesslogic.commoditybl.MockCommodity;
 
 public class StubReachStrategy implements GetVOandPO{
