@@ -12,6 +12,8 @@ import javax.swing.JTextField;
 
 import po.BillStyle;
 import vo.stockvo.CommodityVO;
+import businesslogic.stockmanagerbl.StubStockController;
+import businesslogic.stockservice.StockBlForSalesMen;
 
 public class JPcommodity extends JPanel implements MouseListener{
 
@@ -36,9 +38,13 @@ public class JPcommodity extends JPanel implements MouseListener{
 	private JLabel comfirmOfSale=new JLabel();//进销人员编辑面板的确认按钮
 	private JPanel showOfStock=new JPanel();//显示已选
 	
+	
 	private CommodityVO commodity;//对应的VO
+	private String in;//vo的原始默认进价
+	private String out;//vo的原始默认售价
 	private String note="";//对应的备注
 	private JPManagerCom JPmanagerCom;//引用
+	StockBlForSalesMen stockbl=new StubStockController();
 	public CommodityVO getCommodity() {
 		return commodity;
 	}
@@ -195,6 +201,8 @@ public class JPcommodity extends JPanel implements MouseListener{
 	public JPcommodity(CommodityVO com){
 		this(com.getName(),com.getModel(),com.getNumber());
 		commodity=com;
+		in=String.valueOf(commodity.getIn());
+		out=String.valueOf(commodity.getOut());
 	}
 	/*修改商品*/
 	public void change(CommodityVO commodity){
@@ -249,27 +257,33 @@ public class JPcommodity extends JPanel implements MouseListener{
 				if(!inputNumTxtOfSale.getText().equals("")
 						&&!inputPriceTxtOfSale.getText().equals("")
 						&&!inputNoteTxtOfSale.getText().equals("")){
-					//设置不可编辑
-					inputNumTxtOfSale.setEditable(false);
-					inputPriceTxtOfSale.setEditable(false);
-					inputNoteTxtOfSale.setEditable(false);
-					//改变VO对象信息
-					commodity.setNumber(Integer.parseInt(inputNumTxtOfSale.getText()));
-					
-					if(JPmanagerCom.getFrame().getSale().getManageBills2().getStyle()==BillStyle.PurSheet
-					   ||JPmanagerCom.getFrame().getSale().getManageBills2().getStyle()==BillStyle.PurBackSheet){
-						commodity.setIn(Double.parseDouble(inputPriceTxtOfSale.getText()));
+					//如果潜在库存足够
+					if(stockbl.isEnough(commodity.getName(), commodity.getModel(), Integer.parseInt(inputNumTxtOfSale.getText()))){
+						//设置不可编辑
+						inputNumTxtOfSale.setEditable(false);
+						inputPriceTxtOfSale.setEditable(false);
+						inputNoteTxtOfSale.setEditable(false);
+						//改变VO对象信息
+						commodity.setNumber(Integer.parseInt(inputNumTxtOfSale.getText()));
+						
+						if(JPmanagerCom.getFrame().getSale().getManageBills2().getStyle()==BillStyle.PurSheet
+						   ||JPmanagerCom.getFrame().getSale().getManageBills2().getStyle()==BillStyle.PurBackSheet){
+							commodity.setIn(Double.parseDouble(inputPriceTxtOfSale.getText()));
+						}
+						else{
+							commodity.setOut(Double.parseDouble(inputPriceTxtOfSale.getText()));
+						}
+						//改变备注信息
+						note=inputNoteTxtOfSale.getText();
+						
+						//隐藏确认按钮
+						comfirmOfSale.setVisible(false);
+						//标记选中
+						chosen=true;
 					}
 					else{
-						commodity.setOut(Double.parseDouble(inputPriceTxtOfSale.getText()));
+						JPmanagerCom.getFrame().getWarning().showWarning("潜在库存不足");
 					}
-					//改变备注信息
-					note=inputNoteTxtOfSale.getText();
-					
-					//隐藏确认按钮
-					comfirmOfSale.setVisible(false);
-					//标记选中
-					chosen=true;
 				}
 				else{
 					JPmanagerCom.getFrame().getWarning().showWarning("请输入完整信息");
@@ -315,6 +329,14 @@ public class JPcommodity extends JPanel implements MouseListener{
 				inputNumTxtOfSale.setEditable(true);
 				inputPriceTxtOfSale.setEditable(true);
 				inputNoteTxtOfSale.setEditable(true);
+				//填写默认值
+				if(JPmanagerCom.getFrame().getSale().getManageBills2().getStyle()==BillStyle.PurSheet){
+					inputPriceTxtOfSale.setText(in);//制定进货单时填写默认进价
+				}
+				else if(JPmanagerCom.getFrame().getSale().getManageBills2().getStyle()==BillStyle.SaleSheet){
+					inputPriceTxtOfSale.setText(out);//制定销售单时填写默认售价
+				}
+				inputNoteTxtOfSale.setText("无");//备注默认无
 				//显示确认按钮
 				comfirmOfSale.setVisible(true);
 				//显示编辑面板
@@ -360,7 +382,7 @@ public class JPcommodity extends JPanel implements MouseListener{
 			lastout="空";
 		else
 			lastout=String.valueOf(lo);
-		s="进价："+in+" 售价："+out+" 最近进价："+lastin+" 最近售价："+lastout;
+		s="进价："+in+" 售价："+out+" 最近进价："+lastin+" 最近售价："+lastout+" 警戒值："+commodity.getAlertLine();
 		JPmanagerCom.showDetail(s);
 	}
 	public void mouseExited(MouseEvent e) {

@@ -28,7 +28,7 @@ import vo.stockvo.CommodityVO;
 import vo.stockvo.CountVO;
 import businesslogic.stockmanagerbl.StubStockController;
 import businesslogicservice.commodityblservice.StubCommodityBlService;
-import dataservice.commoditydataservice.StubCommodityDataService;
+//import dataservice.commoditydataservice.StubCommodityDataService;
 import entrance.Frame;
 
 /*
@@ -57,7 +57,7 @@ public class StockInventoryPanel extends JPanel{
 	public void initial() {
 		//逻辑层接口
 		StockManagerDriver smd=new StockManagerDriver();
-		try
+		/*try
 		{
 			smd.start(stockbl,(StubCommodityDataService)Naming.lookup("rmi://127.0.0.1:1099/StubStockDataController"));
 		}
@@ -72,7 +72,7 @@ public class StockInventoryPanel extends JPanel{
 		catch (NotBoundException e)
 		{
 			e.printStackTrace();
-		}
+		}*/
 		this.setBounds(0, 0, 800, 315);
 		//设置布局
 		this.setLayout(null);
@@ -114,13 +114,13 @@ public class StockInventoryPanel extends JPanel{
 		}
 		public void mouseClicked(MouseEvent e)
 		{
-			// TODO Auto-generated method stub
+	
 			
 		}
 
 		public void mousePressed(MouseEvent e)
 		{
-			// TODO Auto-generated method stub
+	
 			switch(num){
 				case 2:
 					download.setIcon(downloadIconR);

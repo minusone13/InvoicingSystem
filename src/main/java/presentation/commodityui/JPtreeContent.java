@@ -29,7 +29,7 @@ import vo.stockvo.StockVO;
 import vo.stockvo.StockVO.Type;
 import businesslogic.stockmanagerbl.StubStockController;
 import businesslogicservice.commodityblservice.StubCommodityBlService;
-import dataservice.commoditydataservice.StubCommodityDataService;
+//import dataservice.commoditydataservice.StubCommodityDataService;
 
 public class JPtreeContent extends JPanel {
 
@@ -46,7 +46,7 @@ public class JPtreeContent extends JPanel {
 		//逻辑层接口
 		StockManagerDriver smd=new StockManagerDriver();
 		
-		try
+		/*try
 		{
 			smd.start(stockbl,(StubCommodityDataService)Naming.lookup("rmi://127.0.0.1:1099/StubStockDataController"));
 		}
@@ -61,7 +61,7 @@ public class JPtreeContent extends JPanel {
 		catch (NotBoundException e)
 		{
 			e.printStackTrace();
-		}
+		}*/
 		//学长你这里为什么要调用数据层！
 		
 		this.setSize(150, 350);
@@ -157,15 +157,50 @@ public class JPtreeContent extends JPanel {
         public void editingStopped(ChangeEvent e) {
         	DefaultMutableTreeNode thisNode=(DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
         	System.out.println(thisNode.getUserObject().toString());
-//        	String parentID=rePath((DefaultMutableTreeNode)thisNode.getParent());
-//        	
-//        	CategoryVO categryvo=new CategoryVO(parentID,thisNode.getUserObject().toString());
-//        	
-//        	String newName=thisNode.getUserObject().toString();
-//        	//逻辑层改变节点名字的接口
-//        	RM rm=stockbl.updateCategory(categryvo,newName);
+        	
+        	String parentID=rePath((DefaultMutableTreeNode)thisNode.getParent());
+        	
+        	CategoryVO categryvo=new CategoryVO(parentID,thisNode.getUserObject().toString());
+        	
+        	TreeNode[] path=thisNode.getPath();
+        	Thread t=new Thread(new editorOfCat(categryvo,path));
+        	t.start();
+        
         }  
     }  
+	public class editorOfCat  implements Runnable{
+
+		private CategoryVO vo;
+		private TreeNode[] path;
+		public editorOfCat(CategoryVO vo,TreeNode[] path){
+			this.vo=vo;
+			this.path=path;
+		}
+		public void run()
+		{
+			try
+			{
+				Thread.sleep(1000);
+			}
+			catch (InterruptedException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			// TODO Auto-generated method stub
+			
+			//进行修改
+			//逻辑层改变节点名字的接口
+        	RM rm=stockbl.updateCategory(vo,new DefaultMutableTreeNode(path).getUserObject().toString());
+        	if(rm==RM.done){
+        		System.out.println("修改成功，新名称："+new DefaultMutableTreeNode(path).getUserObject().toString());
+        	}
+        	else{
+        		System.out.println("修改结果"+rm);
+        	}
+		}
+		
+	}
 	/*返回逻辑层对应路径*/
 	public String rePath(DefaultMutableTreeNode node){
 		//路径转换成逻辑层的对应格式

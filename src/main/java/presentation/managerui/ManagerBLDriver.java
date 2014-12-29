@@ -2,12 +2,12 @@ package presentation.managerui;
 
 import java.util.ArrayList;
 
+import po.LevelStrategyStyle;
 import vo.BarginStrategyVO;
 import vo.GiftBillVO;
 import vo.LevelStrategyVO;
 import vo.ReachStrategyVO;
 import vo.VO;
-import businesslogic.LevelStrategyStyle;
 import businesslogicservice.managerblservice.StubManagerBlService;
 
 public class ManagerBLDriver {

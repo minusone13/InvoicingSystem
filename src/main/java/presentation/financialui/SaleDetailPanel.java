@@ -8,11 +8,14 @@ import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
@@ -149,7 +152,16 @@ public class SaleDetailPanel extends JPanel{
 					break;
 				case 2:
 					download.setIcon(downloadIconW);
-					export("销售明细表");
+					//导出
+					JFileChooser c = new JFileChooser();
+					FileFilter filter = new FileNameExtensionFilter("Excel文件(*.xls)", "xls");
+					c.addChoosableFileFilter(filter);
+					c.setFileFilter(filter);
+					c.setDialogTitle("保存文件");
+					int result = c.showSaveDialog(getParent());
+					if (result == JFileChooser.APPROVE_OPTION) {
+						export(c.getSelectedFile().getAbsolutePath()+".xls");
+					}
 					break;
 			}
 			
@@ -532,6 +544,7 @@ public class SaleDetailPanel extends JPanel{
 					//右移
 					RightMove();
 					break;
+				
 				case 3:
 					confirm.setIcon(confirm0);
 					boolean legal=true;

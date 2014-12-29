@@ -1051,10 +1051,10 @@ public class JPmanageBills2 extends JPanel {
 				private JTextField listTxt=new JTextField(10);
 				private JTextField moneyTxt=new JTextField(10);
 				private JTextField noteTxt=new JTextField(10);
-				//文本框（付款收款单）
-				private JTextField tranListTxt=new JTextField(10);
-				private JTextField tranMoneyTxt=new JTextField(10);
-				private JTextField tranNoteTxt=new JTextField(10);
+//				//文本框（付款收款单）
+//				private JTextField tranListTxt=new JTextField(10);
+//				private JTextField tranMoneyTxt=new JTextField(10);
+//				private JTextField tranNoteTxt=new JTextField(10);
 				//图片
 				private ImageIcon confirmW=new ImageIcon("src/image/function/confirmW.png");
 				private ImageIcon confirmR=new ImageIcon("src/image/function/confirmR.png");
@@ -1067,9 +1067,9 @@ public class JPmanageBills2 extends JPanel {
 					listTxt.setText("");
 					moneyTxt.setText("");
 					noteTxt.setText("");
-					tranListTxt.setText("");
-					tranMoneyTxt.setText("");
-					tranNoteTxt.setText("");
+//					tranListTxt.setText("");
+//					tranMoneyTxt.setText("");
+//					tranNoteTxt.setText("");
 					listArray.clear();
 					moneyArray.clear();
 					noteArray.clear();
@@ -1113,25 +1113,25 @@ public class JPmanageBills2 extends JPanel {
 						tranMoney.setBounds(25, 60, 40, 20);
 						tranNote.setBounds(25, 90, 40, 20);
 						//文本框
-						tranListTxt.setBounds(70,30, 100, 20);
-						tranListTxt.setOpaque(false);//文本框透明
-						tranListTxt.setForeground(Color.white);//前景色
-						tranListTxt.setCaretColor(Color.white);
-						tranMoneyTxt.setBounds(70,60, 100, 20);
-						tranMoneyTxt.setOpaque(false);//文本框透明
-						tranMoneyTxt.setForeground(Color.white);//前景色
-						tranMoneyTxt.setCaretColor(Color.white);
-						tranNoteTxt.setBounds(70,90, 100, 20);
-						tranNoteTxt.setOpaque(false);//文本框透明
-						tranNoteTxt.setForeground(Color.white);//前景色
-						tranNoteTxt.setCaretColor(Color.white);
+						listTxt.setBounds(70,30, 100, 20);
+						listTxt.setOpaque(false);//文本框透明
+						listTxt.setForeground(Color.white);//前景色
+						listTxt.setCaretColor(Color.white);
+						moneyTxt.setBounds(70,60, 100, 20);
+						moneyTxt.setOpaque(false);//文本框透明
+						moneyTxt.setForeground(Color.white);//前景色
+						moneyTxt.setCaretColor(Color.white);
+						noteTxt.setBounds(70,90, 100, 20);
+						noteTxt.setOpaque(false);//文本框透明
+						noteTxt.setForeground(Color.white);//前景色
+						noteTxt.setCaretColor(Color.white);
 						
 						this.add(tranListName,0);
 						this.add(tranMoney,1);
 						this.add(tranNote,2);
-						this.add(tranListTxt,3);
-						this.add(tranMoneyTxt,4);
-						this.add(tranNoteTxt,5);
+						this.add(listTxt,3);
+						this.add(moneyTxt,4);
+						this.add(noteTxt,5);
 						this.add(confirm,6);
 						this.add(bg,7);
 						break;

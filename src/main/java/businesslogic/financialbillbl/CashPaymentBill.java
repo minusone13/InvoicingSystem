@@ -19,11 +19,11 @@ import vo.financialBillVO.CashPaymentVO;
 import vo.uservo.UserVO;
 
 public class CashPaymentBill extends Bill implements GetVOandPO{
-	//userVO初始化
-	UserVO user = Login.user;
-	private String userID =user.getID();
-	private String userName = user.getName();
-	private Role role = user.getR();//权限
+	
+	
+	private String userID ;
+	private String userName ;
+	private Role role ;//权限
 	
 	
 	
@@ -48,8 +48,10 @@ public class CashPaymentBill extends Bill implements GetVOandPO{
 		}
 		this.account = vo.getAccount();
 		this.total = vo.getTotal();
-		state = vo.getBillState();
+		this.userID = vo.getUserID();
+		this.userName = vo.getUserName();
 		this.role = vo.getRole();
+		state = vo.getBillState();
 		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
 		String currentTime = format.format(new Date());
 		this.date = new Date();

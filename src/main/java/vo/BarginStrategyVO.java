@@ -2,9 +2,9 @@ package vo;
 
 import java.util.ArrayList;
 
+import po.LevelStrategyStyle;
+import po.StrategyStyle;
 import vo.stockvo.CommodityVO;
-import businesslogic.LevelStrategyStyle;
-import businesslogic.StrategyStyle;
 import businesslogic.commoditybl.MockCommodity;
 
 public class BarginStrategyVO extends VO {

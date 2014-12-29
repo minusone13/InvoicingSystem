@@ -1,4 +1,4 @@
-package businesslogic;
+package po;
 
 public enum ReachStrategyStyle {
 

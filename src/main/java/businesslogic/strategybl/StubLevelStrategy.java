@@ -6,12 +6,12 @@ import java.util.Calendar;
 import java.util.Date;
 
 import po.LevelStrategyPO;
+import po.LevelStrategyStyle;
+import po.StrategyStyle;
 import po.stockpo.CommodityPO;
 import vo.LevelStrategyVO;
 import vo.stockvo.CommodityVO;
 import businesslogic.GetVOandPO;
-import businesslogic.LevelStrategyStyle;
-import businesslogic.StrategyStyle;
 import businesslogic.commoditybl.MockCommodity;
 
 public class StubLevelStrategy implements GetVOandPO{
