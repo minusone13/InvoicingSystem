@@ -157,6 +157,7 @@ public class JPtreeContent extends JPanel {
         public void editingStopped(ChangeEvent e) {
         	DefaultMutableTreeNode thisNode=(DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
         	System.out.println(thisNode.getUserObject().toString());
+        	
 //        	String parentID=rePath((DefaultMutableTreeNode)thisNode.getParent());
 //        	
 //        	CategoryVO categryvo=new CategoryVO(parentID,thisNode.getUserObject().toString());
