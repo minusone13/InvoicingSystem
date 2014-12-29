@@ -357,6 +357,7 @@ public class StubBillPool {
 				//修改报溢报损的商品数量
 				alOfSpillsLossBill.get(i).setCom(new MockCommodity(slb.getCom()));
 				//修改操作员
+				alOfSpillsLossBill.get(i).setOperator(slb.getOperator());
 				//修改完毕
 				break;
 			}
@@ -387,7 +388,11 @@ public class StubBillPool {
 				//修改操作员
 				alOfPurSheet.get(i).setop(ps.getop());
 				//修改商品清单
-				
+				ArrayList<MockCommodity> temp=new ArrayList<MockCommodity>();
+				for(int j=0;j<ps.getsheet().size();j++){
+					temp.add(new MockCommodity(ps.getsheet().get(j)));
+				}
+				alOfPurSheet.get(i).setsheet(temp);
 				//修改总金额
 				alOfPurSheet.get(i).setmoney1(ps.getmoney1());
 				//修改备注
@@ -411,7 +416,11 @@ public class StubBillPool {
 				//修改操作员
 				alOfPurBackSheet.get(i).setop(pbs.getop());
 				//修改商品清单
-				
+				ArrayList<MockCommodity> temp=new ArrayList<MockCommodity>();
+				for(int j=0;j<pbs.getsheet().size();j++){
+					temp.add(new MockCommodity(pbs.getsheet().get(j)));
+				}
+				alOfPurBackSheet.get(i).setsheet(temp);
 				//修改总金额
 				alOfPurBackSheet.get(i).setmoney1(pbs.getmoney1());
 				//修改备注
@@ -435,7 +444,11 @@ public class StubBillPool {
 				//修改操作员
 				alOfSaleSheet.get(i).setop(ss.getop());
 				//修改商品清单
-				
+				ArrayList<MockCommodity> temp=new ArrayList<MockCommodity>();
+				for(int j=0;j<ss.getsheet().size();j++){
+					temp.add(new MockCommodity(ss.getsheet().get(j)));
+				}
+				alOfSaleSheet.get(i).setsheet(temp);
 				//修改总金额
 				alOfSaleSheet.get(i).setmoney1(ss.getmoney1());
 				//修改使用代金券
@@ -465,7 +478,11 @@ public class StubBillPool {
 				//修改操作员
 				alOfSaleBackSheet.get(i).setop(sbs.getop());
 				//修改商品清单
-				
+				ArrayList<MockCommodity> temp=new ArrayList<MockCommodity>();
+				for(int j=0;j<sbs.getsheet().size();j++){
+					temp.add(new MockCommodity(sbs.getsheet().get(j)));
+				}
+				alOfSaleBackSheet.get(i).setsheet(temp);
 				//修改总金额
 				alOfSaleBackSheet.get(i).setmoney1(sbs.getmoney1());
 				//修改使用代金券

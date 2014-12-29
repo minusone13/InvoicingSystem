@@ -27,6 +27,7 @@ public class StubReachStrategy implements GetVOandPO{
 	
 	private String StartTime;//开始日期
 	private int LastTime;//策略持续时间（天）
+	private String operator;
 	/*构造方法*/
 	public StubReachStrategy(){
 	     Calendar ca = Calendar.getInstance();
@@ -55,6 +56,7 @@ public class StubReachStrategy implements GetVOandPO{
 		
 		result.setStartTime(this.getStartTime());
 		result.setLastTime(this.getLastTime());
+		result.setOperator(this.getOperator());
 		return result;
 	}
 
@@ -74,6 +76,7 @@ public class StubReachStrategy implements GetVOandPO{
 		
 		result.setStartTime(this.getStartTime());
 		result.setLastTime(this.getLastTime());
+		result.setOperator(this.getOperator());
 		return result;
 	}
 
@@ -130,6 +133,7 @@ public class StubReachStrategy implements GetVOandPO{
 		this.setLimit(po.getLimit());
 		this.setReach_strategy_style(po.getReach_strategy_style());
 		this.setStartTime(po.getStartTime());
+		this.setOperator(po.getOperator());
 	}
 
 	public String getID() {
@@ -146,5 +150,15 @@ public class StubReachStrategy implements GetVOandPO{
 
 	public void setAlOfCommodity(ArrayList<MockCommodity> alOfCommodity) {
 		this.alOfCommodity = alOfCommodity;
+	}
+
+	public String getOperator()
+	{
+		return operator;
+	}
+
+	public void setOperator(String operator)
+	{
+		this.operator = operator;
 	}
 }

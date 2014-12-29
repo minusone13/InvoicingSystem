@@ -22,6 +22,7 @@ import presentation.StringJudger;
 import presentation.managerui.JPBillList;
 import presentation.managerui.JTableOfList;
 import presentation.managerui.MouseListenerGetXY;
+import presentation.userui.Login;
 import vo.CustomerVO;
 import vo.LevelStrategyVO;
 import vo.PurBackSheetVO;
@@ -1030,7 +1031,7 @@ public class JPmanageBills2 extends JPanel {
 										newPur.setcommoditywords(outputNotes);
 										newPur.setmoney1(Double.parseDouble(totalText.getText()));
 										newPur.setwords(noteText.getText());
-										
+										newPur.setop(Login.user.getName()+":"+Login.user.getID());
 										billList.addPurSheet(newPur);
 									}
 									else{
@@ -1058,7 +1059,7 @@ public class JPmanageBills2 extends JPanel {
 										newPurBack.setcommoditywords(outputNotes);
 										newPurBack.setmoney1(Double.parseDouble(totalText.getText()));
 										newPurBack.setwords(noteText.getText());
-										
+										newPurBack.setop(Login.user.getName()+":"+Login.user.getID());
 										billList.addPurBackSheet(newPurBack);
 									}
 									else{
@@ -1096,7 +1097,7 @@ public class JPmanageBills2 extends JPanel {
 										vo.setdiscount(Double.parseDouble(discountText.getText()));
 										vo.setpmoney(Double.parseDouble(finalTotalText.getText()));
 										vo.setwords(noteText.getText());
-										
+										vo.setop(Login.user.getName()+":"+Login.user.getID());
 										billList.addSaleSheet(vo);
 									}
 									else{
@@ -1134,7 +1135,7 @@ public class JPmanageBills2 extends JPanel {
 										newSaleback.setdiscount(Double.parseDouble(discountText.getText()));
 										newSaleback.setpmoney(Double.parseDouble(finalTotalText.getText()));
 										newSaleback.setwords(noteText.getText());
-										
+										newSaleback.setop(Login.user.getName()+":"+Login.user.getID());
 										billList.addSaleBackSheet(newSaleback);
 									}
 									else{
@@ -1180,7 +1181,7 @@ public class JPmanageBills2 extends JPanel {
 												if(!noteText.getText().equals("")){
 													modifyPur.setwords(noteText.getText());
 												}
-												
+												modifyPur.setop(Login.user.getName()+":"+Login.user.getID());
 												billList.changeChosen(modifyPur);
 											}
 										}
@@ -1242,7 +1243,7 @@ public class JPmanageBills2 extends JPanel {
 												if(!noteText.getText().equals("")){
 													modifySale.setwords(noteText.getText());
 												}
-											
+												modifySale.setop(Login.user.getName()+":"+Login.user.getID());
 												billList.changeChosen(modifySale);
 											}
 										}

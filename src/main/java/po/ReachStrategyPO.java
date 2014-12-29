@@ -17,6 +17,7 @@ public class ReachStrategyPO extends PO{
 	
 	private String StartTime;//开始日期
 	private int LastTime;//策略持续时间（天）
+	private String operator;
 	public ReachStrategyStyle getReach_strategy_style() {
 		return reach_strategy_style;
 	}
@@ -59,5 +60,13 @@ public class ReachStrategyPO extends PO{
 	}
 	public void setID(String iD) {
 		ID = iD;
+	}
+	public String getOperator()
+	{
+		return operator;
+	}
+	public void setOperator(String operator)
+	{
+		this.operator = operator;
 	}
 }

@@ -18,6 +18,7 @@ public class LevelStrategyPO extends PO{
 	
 	private String StartTime;//开始日期
 	private int LastTime;//策略持续时间（天）
+	private String operator;
 	public ArrayList<CommodityPO> getAlOfCommodity() {
 		return alOfCommodity;
 	}
@@ -72,5 +73,13 @@ public class LevelStrategyPO extends PO{
 	}
 	public void setID(String iD) {
 		ID = iD;
+	}
+	public String getOperator()
+	{
+		return operator;
+	}
+	public void setOperator(String operator)
+	{
+		this.operator = operator;
 	}
 }
