@@ -24,7 +24,9 @@ import presentation.WarningPanel;
 import presentation.commodityui.Stock;
 import presentation.saleui.Sale;
 import vo.uservo.UserVO;
+import businesslogic.stockmanagerbl.StubStockController;
 import businesslogic.userbl.UserController;
+import businesslogicservice.commodityblservice.StubCommodityBlService;
 import businesslogicservice.userblservice.StubUserBlService;
 
 
@@ -176,6 +178,8 @@ public class Login extends JPanel {
 					break;
 				case STOCK_STAFF:
 					
+					StubCommodityBlService stockbl = new StubStockController();//added by lhw
+					stockbl.setUser(user);//added by lhw
 					frame.getStock().getManageBills().setVisible(false);
 					frame.getStock().getManageBills2().setVisible(false);
 					frame.getStock().getManagerComs().setVisible(false);
