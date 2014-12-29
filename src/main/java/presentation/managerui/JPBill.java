@@ -848,12 +848,16 @@ public class JPBill extends JPanel {
 		String[] remark=gb.getRemark();
 		JLabel reason=new JLabel(remark[0]);
 		JLabel customer=new JLabel(remark[1]);
+		reason.setBounds(356, 10, 150, 20);
+		customer.setBounds(356, 30, 150, 20);
 		
 		//将组件加到面板上
 		this.add(right,0);
 		this.add(left,1);
 		this.add(ID,2);
-		this.add(bg,3);
+		this.add(reason,3);
+		this.add(customer,4);
+		this.add(bg,5);
 	}
 	public JPBill(SpillsLossBillVO slb){
 		//区分面板种类
@@ -953,13 +957,18 @@ public class JPBill extends JPanel {
 		JLabel commodity=new JLabel(ab.getCom().getName());
 		JLabel model=new JLabel(ab.getCom().getModel());
 		JLabel num=new JLabel(String.valueOf(ab.getCom().getNumber()));
-		
+		commodity.setBounds(318, 20, 150, 20);
+		model.setBounds(318, 40, 150, 20);
+		num.setBounds(356, 63, 150, 20);
 		
 		//将组件加到面板上
 		this.add(right,0);
 		this.add(left,1);
 		this.add(ID,2);
-		this.add(bg,3);
+		this.add(commodity,3);
+		this.add(model,4);
+		this.add(num,5);
+		this.add(bg,6);
 	}
 	public JPBill(PurSheetVO ps){
 		//区分面板种类
@@ -1002,11 +1011,11 @@ public class JPBill extends JPanel {
 		JLabel note=new JLabel(ps.getwords());
 		JLabel operator=new JLabel(ps.getop());
 		
-		customer.setBounds(337, 4, 100, 20);
+		customer.setBounds(337, 2, 100, 20);
 		warehouse.setBounds(337, 21, 100, 20);
 		totalMoney.setBounds(354, 38, 100, 20);
 		note.setBounds(337, 54, 100, 20);
-		operator.setBounds(337, 70, 100, 20);
+		operator.setBounds(354, 72, 100, 20);
 		//将组件加到面板上
 		this.add(right,0);
 		this.add(left,1);
@@ -1059,11 +1068,21 @@ public class JPBill extends JPanel {
 		JLabel note=new JLabel(pbs.getwords());
 		JLabel operator=new JLabel(pbs.getop());
 		
+		customer.setBounds(337, 2, 100, 20);
+		warehouse.setBounds(337, 21, 100, 20);
+		totalMoney.setBounds(354, 38, 100, 20);
+		note.setBounds(337, 54, 100, 20);
+		operator.setBounds(354, 72, 100, 20);
 		//将组件加到面板上
 		this.add(right,0);
 		this.add(left,1);
 		this.add(ID,2);
-		this.add(bg,3);
+		this.add(customer,3);
+		this.add(warehouse,4);
+		this.add(totalMoney,5);
+		this.add(note,6);
+		this.add(operator,7);
+		this.add(bg,8);
 	}
 	public JPBill(SaleSheetVO ss){
 		

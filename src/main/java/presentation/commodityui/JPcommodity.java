@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import po.BillStyle;
+import po.StrategyStyle;
 import vo.stockvo.CommodityVO;
 import businesslogic.stockmanagerbl.StubStockController;
 import businesslogic.stockservice.StockBlForSalesMen;
@@ -236,18 +237,26 @@ public class JPcommodity extends JPanel implements MouseListener{
 			switch(num){
 			case 1:
 				if(!inputNumTxtOfManager.getText().equals("")){
-					//隐藏输入面板
-					editOfManager.setVisible(false);
-					//标记选中
-					chosen=true;
-					//显示数字在标签上
-					showNumOfManager.setText(inputNumTxtOfManager.getText());
-					//改变VO对象的数量信息
-					commodity.setNumber(Integer.parseInt(inputNumTxtOfManager.getText()));
-					//显示选中面板
-					showOfManager.setVisible(true);
-					//清空输入框
-					inputNumTxtOfManager.setText("");
+					if(stockbl.isEnough(commodity.getName(), commodity.getModel(), Integer.parseInt(inputNumTxtOfManager.getText()))
+							&&JPmanagerCom.getFrame().getManager().getManagerStrategy2().getStyle()==StrategyStyle.BarginStrategy//制定特价包时要判断潜在库存是否充足
+							||JPmanagerCom.getFrame().getManager().getManagerStrategy2().getStyle()==StrategyStyle.LevelStrategy
+							||JPmanagerCom.getFrame().getManager().getManagerStrategy2().getStyle()==StrategyStyle.ReachStrategy){
+						//隐藏输入面板
+						editOfManager.setVisible(false);
+						//标记选中
+						chosen=true;
+						//显示数字在标签上
+						showNumOfManager.setText(inputNumTxtOfManager.getText());
+						//改变VO对象的数量信息
+						commodity.setNumber(Integer.parseInt(inputNumTxtOfManager.getText()));
+						//显示选中面板
+						showOfManager.setVisible(true);
+						//清空输入框
+						inputNumTxtOfManager.setText("");
+					}
+					else{
+						JPmanagerCom.getFrame().getWarning().showWarning("潜在库存不足");
+					}
 				}
 				else{
 					JPmanagerCom.getFrame().getWarning().showWarning("请输入数量");
