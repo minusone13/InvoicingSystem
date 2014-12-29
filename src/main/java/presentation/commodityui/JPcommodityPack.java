@@ -13,7 +13,7 @@ import po.RM;
 import vo.stockvo.CommodityVO;
 import businesslogic.stockmanagerbl.StubStockController;
 import businesslogicservice.commodityblservice.StubCommodityBlService;
-import data.commoditydata.StubStockDataController;
+
 /**
  * 显示子节点商品的板块
  * @author wyc
@@ -32,15 +32,15 @@ public class JPcommodityPack extends JPanel {
 	public JPcommodityPack(){
 		//逻辑层接口
 		StockManagerDriver smd=new StockManagerDriver();
-		try
+		/*try
 		{
-			smd.start(stockbl,StubStockDataController.getInstance());
+			smd.start(stockbl,()StubStockDataController.getInstance());
 		}
 		catch (RemoteException e)
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 		this.setSize(467, 300);
 		//设置布局
 		this.setLayout(null);

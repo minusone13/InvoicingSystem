@@ -29,7 +29,7 @@ import vo.stockvo.StockVO;
 import vo.stockvo.StockVO.Type;
 import businesslogic.stockmanagerbl.StubStockController;
 import businesslogicservice.commodityblservice.StubCommodityBlService;
-import dataservice.commoditydataservice.StubCommodityDataService;
+//import dataservice.commoditydataservice.StubCommodityDataService;
 
 public class JPtreeContent extends JPanel {
 
@@ -46,7 +46,7 @@ public class JPtreeContent extends JPanel {
 		//逻辑层接口
 		StockManagerDriver smd=new StockManagerDriver();
 		
-		try
+		/*try
 		{
 			smd.start(stockbl,(StubCommodityDataService)Naming.lookup("rmi://127.0.0.1:1099/StubStockDataController"));
 		}
@@ -61,7 +61,7 @@ public class JPtreeContent extends JPanel {
 		catch (NotBoundException e)
 		{
 			e.printStackTrace();
-		}
+		}*/
 		//学长你这里为什么要调用数据层！
 		
 		this.setSize(150, 350);
