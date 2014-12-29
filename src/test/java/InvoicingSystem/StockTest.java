@@ -781,6 +781,7 @@ public class StockTest{
 		controller.checkIn("JHD-20141204-00002","迪迪防盗门","dd02", 20, 500);
 		
 		//创建赠送单
+		System.out.println("0"+pool.getAlertBill().size());
 		GiftBillVO vo = new GiftBillVO();
 		ArrayList<CommodityVO> coms = new ArrayList<CommodityVO>();
 		CommodityPO po = null;
@@ -806,10 +807,11 @@ public class StockTest{
 			e.printStackTrace();
 		}
 		com = new MockCommodity(po).toVO();
-		com.setNumber(15);
+		com.setNumber(5);
 		coms.add(com);
 		vo.setComs(coms);
 		
+		System.out.println("0"+pool.getAlertBill().size());
 		combl.creat(vo);
 		StockBlForSalesMen sc=new StubStockController();
 		
@@ -819,13 +821,14 @@ public class StockTest{
 		gb = pool.getGiftBill().get(pool.getGiftBill().size()-1);
 		pool.transformState(BillStyle.GiftBill, gb.getID(), BillState.EXAMINED);
 		combl.over(gb.getVO());
+		System.out.println("0"+pool.getAlertBill().size());
 		
 		//创建第二个赠送单，同时会产生一个报警单
 		vo = new GiftBillVO();
 		coms = new ArrayList<CommodityVO>();
 		try
 		{
-			po = data.findCommodity("迪迪防盗门","dd02");
+			po = data.findCommodity("好好防盗门", "fdm05");
 		}
 		catch (RemoteException e)
 		{
@@ -845,6 +848,7 @@ public class StockTest{
 		gb = pool.getGiftBill().get(pool.getGiftBill().size()-1);
 		pool.transformState(BillStyle.GiftBill, gb.getID(), BillState.EXAMINED);
 		combl.over(gb.getVO());
+		System.out.println("1"+pool.getAlertBill().size());
 		
 		
 		//创建一个报损单，这张报损单没有提交，如果提交了将产生一个报警单
@@ -860,7 +864,7 @@ public class StockTest{
 			e1.printStackTrace();
 		}
 		CommodityVO com1 = new MockCommodity(compo).toVO();
-		com1.setNumber(30);
+		com1.setNumber(5);
 		vo1.setCom(com1);
 		vo1.setT(vo1.getT().Loss);
 		
@@ -869,10 +873,10 @@ public class StockTest{
 		
 		StubSpillsLossBill gb1 = pool.getSpillsLossBill().get(pool.getSpillsLossBill().size()-1);
 		combl.submit(gb1.getVO());
-		
 		gb1 = pool.getSpillsLossBill().get(pool.getSpillsLossBill().size()-1);
 		pool.transformState(BillStyle.SpillsLossBill, gb1.getID(), BillState.EXAMINED);
-		combl.over(gb1.getVO());
+		System.out.println("1"+pool.getAlertBill().size());
+		//combl.over(gb1.getVO());
 		
 		
 		//创建一个报溢单
@@ -900,5 +904,6 @@ public class StockTest{
 		gb1 = pool.getSpillsLossBill().get(pool.getSpillsLossBill().size()-1);
 		pool.transformState(BillStyle.SpillsLossBill, gb1.getID(), BillState.EXAMINED);
 		combl.over(gb1.getVO());
+		System.out.println("1"+pool.getAlertBill().size());
 	}
 }
