@@ -29,6 +29,7 @@ public class StubLevelStrategy implements GetVOandPO{
 	
 	private String StartTime;//开始日期
 	private int LastTime;//策略持续时间（天）
+	private String operator;
 	public StubLevelStrategy(){
 	     Calendar ca = Calendar.getInstance();
 	     int minute=ca.get(Calendar.MINUTE);//分 
@@ -58,6 +59,7 @@ public class StubLevelStrategy implements GetVOandPO{
 		
 		result.setStartTime(this.getStartTime());
 		result.setLastTime(this.getLastTime());
+		result.setOperator(this.getOperator());
 		return result;
 	}
 
@@ -80,6 +82,7 @@ public class StubLevelStrategy implements GetVOandPO{
 		
 		result.setStartTime(this.getStartTime());
 		result.setLastTime(this.getLastTime());
+		result.setOperator(this.getOperator());
 		return result;
 	}
 	/*成员变量的设置与获取*/
@@ -147,11 +150,20 @@ public class StubLevelStrategy implements GetVOandPO{
 		this.setDiscountrate(po.getDiscountrate());
 		this.setLastTime(po.getLastTime());
 		this.setStartTime(po.getStartTime());
+		this.setOperator(po.getOperator());
 	}
 	public String getID() {
 		return ID;
 	}
 	public void setID(String iD) {
 		ID = iD;
+	}
+	public String getOperator()
+	{
+		return operator;
+	}
+	public void setOperator(String operator)
+	{
+		this.operator = operator;
 	}
 }

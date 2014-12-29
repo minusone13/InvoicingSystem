@@ -81,6 +81,7 @@ public class Admin extends JPanel{
 	    /*获取frame引用*/
 	    public void getFrame( Frame f){
 	    		frame=f;
+	    		manageUser.getFrame(f);
 	    }
 
 		public class MouseListenerOfButton implements MouseListener{
@@ -119,6 +120,8 @@ public class Admin extends JPanel{
 					break;
 				case 4:
 					modifyPasswords.setIcon(new ImageIcon("src/image/modifyPassword1.png"));
+					Admin.this.getManageUser().getJPedit().setAdmin(true);
+					Admin.this.getManageUser().getJPedit().leftMove();
 					break;
 				}
 			}

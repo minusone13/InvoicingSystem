@@ -21,7 +21,7 @@ public class ReachStrategyVO extends VO{
 	
 	private String StartTime;//开始日期
 	private int LastTime;//策略持续时间（天）
-	
+	private String operator;
 	public double getLimit() {
 		return Limit;
 	}
@@ -72,5 +72,13 @@ public class ReachStrategyVO extends VO{
 	public void setID(String iD)
 	{
 		ID = iD;
+	}
+	public String getOperator()
+	{
+		return operator;
+	}
+	public void setOperator(String operator)
+	{
+		this.operator = operator;
 	}
 }

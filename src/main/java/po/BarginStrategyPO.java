@@ -16,7 +16,7 @@ public class BarginStrategyPO extends PO{
 	
 	private String StartTime;//开始日期
 	private int LastTime;//策略持续时间（天）
-	
+	private String operator;
 	/*成员变量的set和get*/
 
 	public double getDiscount() {
@@ -54,6 +54,14 @@ public class BarginStrategyPO extends PO{
 	}
 	public void setID(String iD) {
 		ID = iD;
+	}
+	public String getOperator()
+	{
+		return operator;
+	}
+	public void setOperator(String operator)
+	{
+		this.operator = operator;
 	}
 	
 }

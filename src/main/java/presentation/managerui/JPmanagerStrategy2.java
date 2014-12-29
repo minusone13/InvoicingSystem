@@ -18,6 +18,7 @@ import po.LevelStrategyStyle;
 import po.ReachStrategyStyle;
 import po.StrategyStyle;
 import presentation.StringJudger;
+import presentation.userui.Login;
 import entrance.Frame;
 import vo.BarginStrategyVO;
 import vo.LevelStrategyVO;
@@ -755,6 +756,7 @@ public class JPmanagerStrategy2 extends JPanel {
 									newLevel.setAlOfCommodity(output);
 									newLevel.setStartTime(startText1.getText()+"/"+startText2.getText()+"/"+startText3.getText());
 									newLevel.setLastTime(Integer.parseInt(lastText.getText()));
+									newLevel.setOperator(Login.user.getName()+":"+Login.user.getID());
 									billList.addLevelStrategy(newLevel);
 									
 									//清空信息
@@ -812,6 +814,7 @@ public class JPmanagerStrategy2 extends JPanel {
 									newLevel.setCouponrate(Double.parseDouble(couponText.getText()));
 									newLevel.setStartTime(startText1.getText()+"/"+startText2.getText()+"/"+startText3.getText());
 									newLevel.setLastTime(Integer.parseInt(lastText.getText()));
+									newLevel.setOperator(Login.user.getName()+":"+Login.user.getID());
 									billList.addLevelStrategy(newLevel);
 									
 									//清空信息
@@ -868,6 +871,7 @@ public class JPmanagerStrategy2 extends JPanel {
 									newLevel.setDiscountrate(Double.parseDouble(discountText.getText()));
 									newLevel.setStartTime(startText1.getText()+"/"+startText2.getText()+"/"+startText3.getText());
 									newLevel.setLastTime(Integer.parseInt(lastText.getText()));
+									newLevel.setOperator(Login.user.getName()+":"+Login.user.getID());
 									billList.addLevelStrategy(newLevel);
 									
 									//清空信息
@@ -914,6 +918,7 @@ public class JPmanagerStrategy2 extends JPanel {
 								newBargin.setAlOfCommodity(output);
 								newBargin.setStartTime(startText1.getText()+"/"+startText2.getText()+"/"+startText3.getText());
 								newBargin.setLastTime(Integer.parseInt(lastText.getText()));
+								newBargin.setOperator(Login.user.getName()+":"+Login.user.getID());
 								billList.addBarginStrategy(newBargin);
 								
 								//清空信息
@@ -958,6 +963,7 @@ public class JPmanagerStrategy2 extends JPanel {
 									newReach.setAlOfCommodity(output);
 									newReach.setStartTime(startText1.getText()+"/"+startText2.getText()+"/"+startText3.getText());
 									newReach.setLastTime(Integer.parseInt(lastText.getText()));
+									newReach.setOperator(Login.user.getName()+":"+Login.user.getID());
 									billList.addReachStrategy(newReach);
 									
 									//清空信息
@@ -1001,6 +1007,7 @@ public class JPmanagerStrategy2 extends JPanel {
 									newReach.setCouponrate(Double.parseDouble(couponText.getText()));
 									newReach.setStartTime(startText1.getText()+"/"+startText2.getText()+"/"+startText3.getText());
 									newReach.setLastTime(Integer.parseInt(lastText.getText()));
+									newReach.setOperator(Login.user.getName()+":"+Login.user.getID());
 									billList.addReachStrategy(newReach);
 									
 									//清空信息

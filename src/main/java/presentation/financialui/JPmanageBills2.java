@@ -694,6 +694,7 @@ public class JPmanageBills2 extends JPanel {
 										newRec.setAccounts(tranListEdit.getListArray());
 										newRec.setMoney(tranListEdit.getMoneyArray());
 										newRec.setRemark(tranListEdit.getNoteArray());
+										newRec.setOp(Login.user.getName()+":"+Login.user.getID());
 										//将设置好数据的单据VO加到billList
 										billList.addReceiptBill(newRec);
 										//清空信息
@@ -735,6 +736,7 @@ public class JPmanageBills2 extends JPanel {
 										newPay.setAccounts(tranListEdit.getListArray());
 										newPay.setMoney(tranListEdit.getMoneyArray());
 										newPay.setRemark(tranListEdit.getNoteArray());
+										newPay.setOp(Login.user.getName()+":"+Login.user.getID());
 										//将设置好数据的单据VO加到billList
 										billList.addPaymentBill(newPay);
 										//清空信息
@@ -785,7 +787,7 @@ public class JPmanageBills2 extends JPanel {
 									newCash.setTotal(Double.parseDouble(totalText.getText()));
 									
 									//操作员
-									newCash.setOp("临时操作员");
+									newCash.setOp(Login.user.getName()+":"+Login.user.getID());
 									//将设置好数据的单据VO加到billList
 									billList.addCashPaymentBill(newCash);
 									//清空信息
@@ -838,7 +840,7 @@ public class JPmanageBills2 extends JPanel {
 										if(!totalIsEmpty){
 											newRec.setTotal(Double.parseDouble(tranTotalText.getText()));
 										}
-										newRec.setOp(Login.user.getName()+Login.user.getID());//修改操作员
+										newRec.setOp(Login.user.getName()+":"+Login.user.getID());//修改操作员
 										//修改billList中被选中的单据
 										billList.changeChosen(newRec);
 										//清空信息
@@ -887,7 +889,7 @@ public class JPmanageBills2 extends JPanel {
 											newPay.setMoney(tranListEdit.getMoneyArray());
 											newPay.setRemark(tranListEdit.getNoteArray());
 										}
-										newPay.setOp(Login.user.getName()+Login.user.getID());//修改操作员
+										newPay.setOp(Login.user.getName()+":"+Login.user.getID());//修改操作员
 										//修改billList中被选中的单据
 										billList.changeChosen(newPay);
 										//清空信息
@@ -938,7 +940,7 @@ public class JPmanageBills2 extends JPanel {
 										}
 									}
 									
-									newCash.setOp(Login.user.getName()+Login.user.getID());//修改操作员
+									newCash.setOp(Login.user.getName()+":"+Login.user.getID());//修改操作员
 									//修改billList中被选中的单据
 									billList.changeChosen(newCash);
 									frame.getWarning().showWarning("修改cash");
