@@ -12,6 +12,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import businesslogic.customerbl.CustomerList;
+import businesslogic.salebillbl.salebillController;
+import businesslogicservice.customerblservice.CustomerBlService;
+import businesslogicservice.salebillblservice.SaleBillBlService;
 import entrance.Frame;
 import po.BillState;
 import po.BillStyle;
@@ -20,6 +24,7 @@ import presentation.managerui.JPBillList;
 import presentation.managerui.JTableOfList;
 import presentation.managerui.MouseListenerGetXY;
 import presentation.userui.Login;
+import vo.CustomerVO;
 import vo.financialBillVO.CashPaymentVO;
 import vo.financialBillVO.PaymentVO;
 import vo.financialBillVO.ReceiptVO;
@@ -74,6 +79,7 @@ public class JPmanageBills2 extends JPanel {
 	    Frame frame;
 	 	//字符串类型判断
 	    StringJudger stringJg=new StringJudger();
+	    CustomerBlService customerbl=new CustomerList();
 	    public void reHome(){
 	    	JPeditOfCash.reHome();
 	    	JPeditOfPay.reHome();
@@ -419,7 +425,7 @@ public class JPmanageBills2 extends JPanel {
 			private JComboBox customerCombo;
 			private JTextField tranTotalText=new JTextField(10);
 			private JPaddList tranListEdit=new JPaddList(BillStyle.PaymentBill);//隐藏的条目编辑面板
-			
+			private SaleBillBlService sbl=new salebillController();
 			public void reHome(){
 				this.RightMove();
 				accountText.setText("");
@@ -471,7 +477,13 @@ public class JPmanageBills2 extends JPanel {
 					tranList.setBounds(40, 60, 60, 20);
 					tranTotal.setBounds(40, 90, 40, 20);
 					//客户选择下拉框
-					customerCombo = new JComboBox();
+					ArrayList<CustomerVO> customers = null;
+					customers = customerbl.getAllCustomer("Customer.txt");
+					String[] customerS=new String[customers.size()];
+					for(int i=0;i<customers.size();i++){
+						customerS[i]=customers.get(i).getname()+":"+customers.get(i).getid();
+					}
+					customerCombo = new JComboBox(customerS);
 					customerCombo.setFont(new Font("宋体",Font.BOLD,14));
 					customerCombo.setBounds(80,28, 150, 20);
 					customerCombo.setBackground(Color.gray);
@@ -514,7 +526,13 @@ public class JPmanageBills2 extends JPanel {
 					tranList.setBounds(40, 60, 60, 20);
 					tranTotal.setBounds(40, 90, 40, 20);
 					//客户选择下拉框
-					customerCombo = new JComboBox();
+					ArrayList<CustomerVO> customers1 = null;
+					customers1 = customerbl.getAllCustomer("Customer.txt");
+					String[] customerS1=new String[customers1.size()];
+					for(int i=0;i<customers1.size();i++){
+						customerS1[i]=customers1.get(i).getname()+":"+customers1.get(i).getid();
+					}
+					customerCombo = new JComboBox(customerS1);
 					customerCombo.setFont(new Font("宋体",Font.BOLD,14));
 					customerCombo.setBounds(80,28, 150, 20);
 					customerCombo.setBackground(Color.gray);

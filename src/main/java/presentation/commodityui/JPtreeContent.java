@@ -22,7 +22,6 @@ import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeNode;
 
-import dataservice.commoditydataservice.StubCommodityDataService;
 import po.RM;
 import vo.stockvo.CategoryVO;
 import vo.stockvo.CommodityVO;
@@ -30,6 +29,7 @@ import vo.stockvo.StockVO;
 import vo.stockvo.StockVO.Type;
 import businesslogic.stockmanagerbl.StubStockController;
 import businesslogicservice.commodityblservice.StubCommodityBlService;
+import dataservice.commoditydataservice.StubCommodityDataService;
 
 public class JPtreeContent extends JPanel {
 
@@ -146,6 +146,7 @@ public class JPtreeContent extends JPanel {
         
         }
         });
+        
         tree.getCellEditor().addCellEditorListener(new CellEditorAction());  
         SCR.setViewportView(tree);
 	}
@@ -155,13 +156,14 @@ public class JPtreeContent extends JPanel {
         }  
         public void editingStopped(ChangeEvent e) {
         	DefaultMutableTreeNode thisNode=(DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
-        	String parentID=rePath((DefaultMutableTreeNode)thisNode.getParent());
-        	
-        	CategoryVO categryvo=new CategoryVO(parentID,thisNode.getUserObject().toString());
-        	
-        	String newName=thisNode.getUserObject().toString();
-        	//逻辑层改变节点名字的接口
-        	RM rm=stockbl.updateCategory(categryvo,newName);
+        	System.out.println(thisNode.getUserObject().toString());
+//        	String parentID=rePath((DefaultMutableTreeNode)thisNode.getParent());
+//        	
+//        	CategoryVO categryvo=new CategoryVO(parentID,thisNode.getUserObject().toString());
+//        	
+//        	String newName=thisNode.getUserObject().toString();
+//        	//逻辑层改变节点名字的接口
+//        	RM rm=stockbl.updateCategory(categryvo,newName);
         }  
     }  
 	/*返回逻辑层对应路径*/

@@ -5,8 +5,7 @@ public class StringJudger {
 		public int judgestring(String str){
 			
 			try {
-			    int num1=Integer.valueOf(str);//把字符串强制转换为数字
-			    double num2=Double.parseDouble(str);
+			    double num=Double.parseDouble(str);//只要能强制转换成浮点数就是数字字符串
 			    return 3;//如果是数字，返回3
 			   } catch (Exception e) {
 				   //如果抛出异常，就进行其他判断
