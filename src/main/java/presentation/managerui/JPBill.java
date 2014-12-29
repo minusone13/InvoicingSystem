@@ -1254,7 +1254,8 @@ public class JPBill extends JPanel {
 		this.add(operatorOfPR,2);
 		this.add(customerOfPR,3);
 		this.add(moneyOfPR,4);
-		this.add(bg,5);
+		this.add(ID,5);
+		this.add(bg,6);
 	}
 	/*付款单构造界面*/
 	public JPBill(PaymentVO pb){
@@ -1311,7 +1312,8 @@ public class JPBill extends JPanel {
 		this.add(operatorOfPR,2);
 		this.add(customerOfPR,3);
 		this.add(moneyOfPR,4);
-		this.add(bg,5);
+		this.add(ID,5);
+		this.add(bg,6);
 	}
 	/*现金费用单构造界面*/
 	public JPBill(CashPaymentVO cb){

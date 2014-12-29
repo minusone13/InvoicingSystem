@@ -69,7 +69,7 @@ public class StubBillPool {
 	
 		
 		//清除保存的记录
-		save();
+		//save();
 		
 		read();
 		
@@ -91,7 +91,7 @@ public class StubBillPool {
 	}
 	/*需要向单据池中加入一张库存报警单*/
 	public void add (StubAlertBill ab){
-		read();
+		//read();deleted by lhw
 		alOfAlertBill.add(ab);
 		//保存
 		this.save();
@@ -290,7 +290,7 @@ public class StubBillPool {
 	}
 	/*获取单据池的所有库存报警单*/
 	public ArrayList<StubAlertBill> getAlertBill (){
-		read();
+		//read();deleted by lhw
 		return alOfAlertBill;
 	}
 	/*获取单据池的所有进货单*/
@@ -641,7 +641,9 @@ public class StubBillPool {
 			break;
 		case ReceiptBill:
 			for(int i=0;i<alOfReceiptBill.size();i++){
+				System.out.println(alOfReceiptBill.get(i).getID()+":"+ID);
 				if(alOfReceiptBill.get(i).getID().equals(ID)){
+					System.out.println("找到并修改");
 					alOfReceiptBill.get(i).setState(state);
 				}
 			}

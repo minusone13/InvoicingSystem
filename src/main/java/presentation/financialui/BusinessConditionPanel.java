@@ -6,11 +6,14 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
@@ -84,21 +87,25 @@ public class BusinessConditionPanel extends JPanel{
 		jpbg1.setIcon(new ImageIcon("src/image/block/blockForTable2.png"));
 		
 		paneOfEarn1 = new JScrollPane(tableOfEarn1);
+		tableOfEarn1.setSelectionBackground(Color.white);
 		this.add(paneOfEarn1,0);
 		paneOfEarn1.setBounds(0,55, 400, 50);
 		tableOfEarn1.setOpaque(false);
 		
 		paneOfEarn2 = new JScrollPane(tableOfEarn2);
+		tableOfEarn2.setSelectionForeground(Color.white);
 		this.add(paneOfEarn2,1);
 		paneOfEarn2.setBounds(0,160, 400, 50);
 		tableOfEarn2.setOpaque(false);
 		
 		paneOfPay = new JScrollPane(tableOfPay);
+		tableOfPay.setSelectionForeground(Color.white);
 		this.add(paneOfPay,2);
 		paneOfPay.setBounds(0,265, 300, 50);
 		tableOfPay.setOpaque(false);
 		
 		paneOfProfit = new JScrollPane(tableOfProfit);
+		tableOfProfit.setSelectionForeground(Color.white);
 		this.add(paneOfProfit,3);
 		paneOfProfit.setBounds(300,265, 100, 50);		
 		tableOfProfit.setOpaque(false);
@@ -206,7 +213,18 @@ public class BusinessConditionPanel extends JPanel{
 					break;
 				case 2:
 					download.setIcon(downloadIconW);
-					export("经营情况表");
+				
+					//导出
+					System.out.println("hahahahaha");
+					JFileChooser c = new JFileChooser();
+					FileFilter filter = new FileNameExtensionFilter("Excel文件(*.xls)", "xls");
+					c.addChoosableFileFilter(filter);
+					c.setFileFilter(filter);
+					c.setDialogTitle("保存文件");
+					int result = c.showSaveDialog(getParent());
+					if (result == JFileChooser.APPROVE_OPTION) {
+						export(c.getSelectedFile().getAbsolutePath()+".xls");
+					}
 					break;
 			}
 			
@@ -460,6 +478,7 @@ public class BusinessConditionPanel extends JPanel{
 					//右移
 					RightMove();
 					break;
+				
 				case 3:
 					confirm.setIcon(confirm0);
 					//点击查询

@@ -84,6 +84,7 @@ public class StockInventoryPanel extends JPanel{
 		jpbg1.setIcon(new ImageIcon("src/image/block/blockForTable.png"));
 		//表格透明
 		table.setOpaque(false);
+		table.setEnabled(false);
         DefaultTableCellRenderer render1 = new DefaultTableCellRenderer();   
         render1.setOpaque(false); //将渲染器设置为透明  
         table.setDefaultRenderer(Object.class,render1);  
@@ -114,13 +115,13 @@ public class StockInventoryPanel extends JPanel{
 		}
 		public void mouseClicked(MouseEvent e)
 		{
-			// TODO Auto-generated method stub
+	
 			
 		}
 
 		public void mousePressed(MouseEvent e)
 		{
-			// TODO Auto-generated method stub
+	
 			switch(num){
 				case 2:
 					download.setIcon(downloadIconR);

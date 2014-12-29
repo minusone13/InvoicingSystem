@@ -8,11 +8,14 @@ import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
@@ -121,6 +124,7 @@ public class BusinessProcessPanel extends JPanel{
 		table2 = new JTable(model2);
 		
 		table1.setOpaque(false);
+		table1.setSelectionForeground(Color.white);
         DefaultTableCellRenderer render1 = new DefaultTableCellRenderer();   
         render1.setOpaque(false); //将渲染器设置为透明  
         table1.setDefaultRenderer(Object.class,render1);  
@@ -160,7 +164,7 @@ public class BusinessProcessPanel extends JPanel{
 			}
         
         });
-        
+        table2.setSelectionForeground(Color.white);
         table2.setOpaque(false);
         DefaultTableCellRenderer render2 = new DefaultTableCellRenderer();   
         render2.setOpaque(false); //将渲染器设置为透明  
@@ -241,7 +245,17 @@ public class BusinessProcessPanel extends JPanel{
 					break;
 				case 2:
 					download.setIcon(downloadIconW);
-					export();
+					//导出
+					System.out.println("hahahahaha");
+					JFileChooser c = new JFileChooser();
+					FileFilter filter = new FileNameExtensionFilter("Excel文件(*.xls)", "xls");
+					c.addChoosableFileFilter(filter);
+					c.setFileFilter(filter);
+					c.setDialogTitle("保存文件");
+					int result = c.showSaveDialog(getParent());
+					if (result == JFileChooser.APPROVE_OPTION) {
+						export(c.getSelectedFile().getAbsolutePath());
+					}
 					break;
 			}
 			
@@ -268,7 +282,7 @@ public class BusinessProcessPanel extends JPanel{
 		}
 		
 	}
-	public void export() {
+	public void export(String pathName) {
 		if(choose==1) {
 			int size = table1.getRowCount();
 			int size1 = receipt.size();
@@ -314,7 +328,7 @@ public class BusinessProcessPanel extends JPanel{
 				
 				 data[i+1] = temp;
 			 }
-			new Export("经营历程表--付款收款单",data);
+			new Export(pathName+"经营历程表--付款收款单.xls",data);
 		} else if(choose == 2) {
 			int size = table1.getRowCount();
 			String[][] data = new String[size+1][];
@@ -340,7 +354,7 @@ public class BusinessProcessPanel extends JPanel{
 				
 				 data[i+1] = temp;
 			 }
-			new Export("经营历程表--现金费用单",data);
+			new Export(pathName+"经营历程表--现金费用单.xls",data);
 		} else if(choose == 3) {
 			int size = table1.getRowCount();
 			int size1 = purSheet.size();
@@ -399,7 +413,7 @@ public class BusinessProcessPanel extends JPanel{
 				
 				 data[i+1] = temp;
 			 }
-			new Export("经营历程表--进货类单据",data);
+			new Export(pathName+"经营历程表--进货类单据.xls",data);
 		} else if(choose == 4) {
 			
 			int size = table1.getRowCount();
@@ -463,7 +477,7 @@ public class BusinessProcessPanel extends JPanel{
 				
 				 data[i+1] = temp;
 			 }
-			new Export("经营历程表--销售类单据",data);
+			new Export(pathName+"经营历程表--销售类单据.xls",data);
 		} else if(choose == 5) {
 			int size = table1.getRowCount();		
 			String[][] data = new String[size+1][];
@@ -488,7 +502,7 @@ public class BusinessProcessPanel extends JPanel{
 				
 				 data[i+1] = temp;
 			 }
-			new Export("经营历程表--赠送单",data);
+			new Export(pathName+"经营历程表--赠送单.xls",data);
 		} else if(choose == 6) {
 			int size = table1.getRowCount();
 			String[][] data = new String[size+1][];
@@ -506,7 +520,7 @@ public class BusinessProcessPanel extends JPanel{
 				
 				 data[i+1] = temp;
 			 }
-			new Export("经营历程表--库存类单据",data);
+			new Export(pathName+"经营历程表--库存类单据.xls",data);
 		}
 	}
 	public void updateTable1(int choose, InquiryProcessVO ipv){
@@ -520,6 +534,7 @@ public class BusinessProcessPanel extends JPanel{
 	        Object[][] dataOfReAndPay = new Object[size][];
 	        
 	        for(int i=0;i<size1;i++){
+	        	System.out.println("receipt");
 	        	ReceiptVO tempReceipt = receipt.get(i);
 	        	Object[] temp ={tempReceipt.getID(),tempReceipt.getCustomer(), 
 	        			tempReceipt.getOp(), tempReceipt.getTotal(), 
@@ -528,6 +543,7 @@ public class BusinessProcessPanel extends JPanel{
 	        }
 	        
 	        for(int i=size1;i<size;i++){
+	        	System.out.println("payment");
 	        	PaymentVO tempPayment = payment.get(i);
 	        	Object[] temp ={tempPayment.getID(),tempPayment.getCustomer(), 
 	        			tempPayment.getOp(), tempPayment.getTotal(), 
@@ -536,6 +552,7 @@ public class BusinessProcessPanel extends JPanel{
 	        }
 	        
 			 model1.setDataVector(dataOfReAndPay, columnNames1);
+	System.out.println("~~~~~~~~~~~");
 			 table1.updateUI();
 			 model2.setDataVector(new Object[][]{}, columnNames1s);
 			 table2.updateUI();
@@ -1068,6 +1085,7 @@ public class BusinessProcessPanel extends JPanel{
     				//右移
     				RightMove();
     				break;
+    			
     			case 3:
     				confirm.setIcon(confirm0);
     				boolean legal=true;
@@ -1132,8 +1150,10 @@ public class BusinessProcessPanel extends JPanel{
 						vo.setStock(stock);
 						vo.setTimeBefore(startTime);
 						vo.setTimeAfter(lastTime);
-	    				updateTable1(type,vo);
-	    				choose=type;
+						choose=type;
+						updateTable1(type,vo);
+	    	
+	    				
 					}
 				
     				break;
