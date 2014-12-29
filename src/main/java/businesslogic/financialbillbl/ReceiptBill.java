@@ -19,10 +19,10 @@ import vo.uservo.UserVO;
 
 public class ReceiptBill extends Bill implements GetVOandPO{
 	//userVO修改的
-	UserVO user = Login.user;
-		private String userID =user.getID();
-		private String userName = user.getName();
-		private Role role = user.getR();//权限
+	
+		private String userID;
+		private String userName;
+		private Role role;//权限
 	
 	
 	private BillStyle billstyle=BillStyle.ReceiptBill;
@@ -48,6 +48,10 @@ public class ReceiptBill extends Bill implements GetVOandPO{
 		this.date = new Date();
 		this.customer = vo.getCustomer();
 		this.total = vo.getTotal();
+		this.userID = vo.getUserID();
+		this.userName = vo.getUserName();
+		this.role = vo.getRole();
+		
 		state = vo.getBillState();
 		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
 		String currentTime = format.format(new Date());
