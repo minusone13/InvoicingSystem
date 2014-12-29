@@ -21,7 +21,7 @@ import vo.stockvo.*;
 public class StubCommodityList
 {// 商品列表 haha
 	static StubCommodityDataService comdata;
-	static User user;
+	public static User user;//王雨城加了public  此变量用于逻辑层调用来记录系统日志，有问题联系我
 
 	public CommodityVO findCommodity(String name, String model)
 	{

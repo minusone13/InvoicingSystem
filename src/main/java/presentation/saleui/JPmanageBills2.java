@@ -159,7 +159,7 @@ public class JPmanageBills2 extends JPanel {
 			delete.addMouseListener(new MouseListenerOfButton(4));
 			//编辑功能按钮
 			edit.setIcon(editIconW);
-			edit.setBounds(720, 215, 50, 50);
+			edit.setBounds(720, 280, 50, 50);
 			edit.addMouseListener(new MouseListenerOfButton(5));
 			//提交功能按钮
 			submit.setIcon(submitIconW);
@@ -167,7 +167,7 @@ public class JPmanageBills2 extends JPanel {
 			submit.addMouseListener(new MouseListenerOfButton(6));
 			//创建功能按钮
 			add.setIcon(addIconW);
-			add.setBounds(720, 280, 50, 50);
+			add.setBounds(720, 215, 50, 50);
 			add.addMouseListener(new MouseListenerOfButton(7));
 			//编辑面板
 			JPeditOfPur=new JPanelEdit(BillStyle.PurSheet);
@@ -227,7 +227,7 @@ public class JPmanageBills2 extends JPanel {
 				table.setList(new String[1][7]);
 				table.updateShow();
 				table.setVisible(true);
-				edit.setVisible(true);
+				edit.setVisible(false);
 				add.setVisible(true);
 				break;
 			case SaleSheet:
@@ -247,7 +247,7 @@ public class JPmanageBills2 extends JPanel {
 				table.setList(new String[1][7]);
 				table.updateShow();
 				table.setVisible(true);
-				edit.setVisible(true);
+				edit.setVisible(false);
 				add.setVisible(true);
 				break;
 			case ReceiptBill:
@@ -1186,8 +1186,6 @@ public class JPmanageBills2 extends JPanel {
 											}
 										}
 										break;
-									case PurBackSheet:
-										break;
 									case SaleSheet:
 										boolean legal2=true;
 										if(!customerCombo.getSelectedItem().toString().equals("")
@@ -1247,8 +1245,6 @@ public class JPmanageBills2 extends JPanel {
 												billList.changeChosen(modifySale);
 											}
 										}
-										break;
-									case SaleBackSheet:
 										break;
 								}
 								

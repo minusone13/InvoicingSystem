@@ -70,7 +70,6 @@ public class JPManagerCom extends JPanel{
 		{
 			e.printStackTrace();
 		}*/
-		//学长你这里为什么要调用数据层！
 		this.setSize(617, 370);
 		this.setLayout(null);
 		//设置面板透明
