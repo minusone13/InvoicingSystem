@@ -3,7 +3,6 @@ package po;
 import java.util.ArrayList;
 
 import po.stockpo.CommodityPO;
-import businesslogic.commoditybl.MockCommodity;
 
 public class ReachStrategyPO extends PO{
 	private StrategyStyle strategystyle=StrategyStyle.ReachStrategy;

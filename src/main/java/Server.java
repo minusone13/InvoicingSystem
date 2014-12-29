@@ -29,27 +29,28 @@ public class Server
 	public static void main(String args[]){
 		 try
 		{
-			CustomerDataService customerdataservice= new CustomerData();
-			AccountDataService accountdataservice = new AccountData();
-			CommodityBillSaverService commoditybillsaver = new CommodityBillSaver();
-			FinancialBillSaverService financialbillsaver = new FinancialBillSaver();
-			SaleBillSaverService salebillsaver = new SaleBillSaver();
-			StubCommodityDataService commoditydata = StubStockDataController.getInstance();
-			StrategySaverService strategysaver = new StrategySaver();
-			StubUserDataService userdatacontroller = UserDataController.getInstance();
-			AccountBuildService accountbuild = new AccountBuild();
-			
-			LocateRegistry.createRegistry(1099);
-			Naming.bind("rmi://127.0.0.1:1099/CustomerData",customerdataservice);
-			Naming.bind("rmi://127.0.0.1:1099/AccountData",accountdataservice);
-			Naming.bind("rmi://127.0.0.1:1099/CommodityBillSaver",commoditybillsaver);
-			Naming.bind("rmi://127.0.0.1:1099/FinancialBillSaver",financialbillsaver);
-			Naming.bind("rmi://127.0.0.1:1099/SaleBillSaver",salebillsaver);
-			Naming.bind("rmi://127.0.0.1:1099/StubStockDataController",commoditydata);
-			Naming.bind("rmi://127.0.0.1:1099/StrategySaver",strategysaver);
-			Naming.bind("rmi://127.0.0.1:1099/UserDataController",userdatacontroller);
-			Naming.bind("rmi://127.0.0.1:1099/AccountBuild",accountbuild);
-			System.out.println("服务器启动完成");
+			 	String ip = "114.212.43.63:1099";
+				CustomerDataService customerdataservice= new CustomerData();
+				AccountDataService accountdataservice = new AccountData();
+				CommodityBillSaverService commoditybillsaver = new CommodityBillSaver();
+				FinancialBillSaverService financialbillsaver = new FinancialBillSaver();
+				SaleBillSaverService salebillsaver = new SaleBillSaver();
+				StubCommodityDataService commoditydata = StubStockDataController.getInstance();
+				StrategySaverService strategysaver = new StrategySaver();
+				StubUserDataService userdatacontroller = UserDataController.getInstance();
+				AccountBuildService accountbuild = new AccountBuild();
+				
+				LocateRegistry.createRegistry(1099);
+				Naming.bind("rmi://"+ip+"/CustomerData",customerdataservice);
+				Naming.bind("rmi://"+ip+"/AccountData",accountdataservice);
+				Naming.bind("rmi://"+ip+"/CommodityBillSaver",commoditybillsaver);
+				Naming.bind("rmi://"+ip+"/FinancialBillSaver",financialbillsaver);
+				Naming.bind("rmi://"+ip+"/SaleBillSaver",salebillsaver);
+				Naming.bind("rmi://"+ip+"/StubStockDataController",commoditydata);
+				Naming.bind("rmi://"+ip+"/StrategySaver",strategysaver);
+				Naming.bind("rmi://"+ip+"/UserDataController",userdatacontroller);
+				Naming.bind("rmi://"+ip+"/AccountBuild",accountbuild);
+				System.out.println("本地服务器启动完成");
 		}
 		catch (RemoteException e)
 		{

@@ -21,7 +21,7 @@ public class UserList
 	{
 		try
 		{
-			data = (StubUserDataService) Naming.lookup("rmi://127.0.0.1:1099/UserDataController");
+			data = (StubUserDataService) Naming.lookup("rmi://"+entrance.Test.ipOfServer+"/UserDataController");
 		}
 		catch (MalformedURLException e)
 		{

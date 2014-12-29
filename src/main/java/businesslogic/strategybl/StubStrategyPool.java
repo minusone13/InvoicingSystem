@@ -240,7 +240,7 @@ public class StubStrategyPool {
 			StrategySaverService ss = null;
 			try
 			{
-				ss = (StrategySaverService)Naming.lookup("rmi://127.0.0.1:1099/StrategySaver");
+				ss = (StrategySaverService)Naming.lookup("rmi://"+entrance.Test.ipOfServer+"/StrategySaver");
 			}
 			catch (MalformedURLException e)
 			{
@@ -267,7 +267,7 @@ public class StubStrategyPool {
 			StrategySaverService ss = null;
 			try
 			{
-				ss = (StrategySaverService)Naming.lookup("rmi://127.0.0.1:1099/StrategySaver");
+				ss = (StrategySaverService)Naming.lookup("rmi://"+entrance.Test.ipOfServer+"/StrategySaver");
 			}
 			catch (MalformedURLException e)
 			{
@@ -295,7 +295,7 @@ public class StubStrategyPool {
 			StrategySaverService ss = null;
 			try
 			{
-				ss = (StrategySaverService)Naming.lookup("rmi://127.0.0.1:1099/StrategySaver");
+				ss = (StrategySaverService)Naming.lookup("rmi://"+entrance.Test.ipOfServer+"/StrategySaver");
 			}
 			catch (MalformedURLException e)
 			{
@@ -323,7 +323,7 @@ public class StubStrategyPool {
 		StrategySaverService ss = null;
 		try
 		{
-			ss = (StrategySaverService)Naming.lookup("rmi://127.0.0.1:1099/StrategySaver");
+			ss = (StrategySaverService)Naming.lookup("rmi://"+entrance.Test.ipOfServer+"/StrategySaver");
 		}
 		catch (MalformedURLException e1)
 		{
