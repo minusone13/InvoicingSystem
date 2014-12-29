@@ -19,6 +19,7 @@ import entrance.Frame;
 import po.RM;
 import po.Role;
 import presentation.PanelType;
+import presentation.StringJudger;
 import presentation.WarningPanel;
 import presentation.commodityui.Stock;
 import presentation.saleui.Sale;
@@ -51,6 +52,8 @@ public class Login extends JPanel {
     //frame的引用
     Frame frame;
     KeyAdapterOfSignIn keyAdapt;//键盘回车监听
+ 	//字符串类型判断
+    StringJudger stringJg=new StringJudger();
     public Login(){
     	
 		//设置窗口大小
@@ -411,6 +414,10 @@ public class Login extends JPanel {
 					//判断输入是否合法
 					if(!s1.equals("")&&!s2.equals("")&&!s3.equals("")){
 						legal=true;
+						if(stringJg.judgestring(s3)==4){
+							legal=false;
+							frame.getWarning().showWarning("密码不能有文字");
+						}
 					}
 					//如果合法就注册
 					if(legal){

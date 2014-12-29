@@ -16,6 +16,8 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
+import entrance.Frame;
+import presentation.StringJudger;
 import presentation.financialui.BusinessConditionPanel.JPeditForSituation;
 import presentation.financialui.BusinessConditionPanel.MouseListenerOfButton;
 import tool.Export;
@@ -47,11 +49,18 @@ public class SaleDetailPanel extends JPanel{
 	private ImageIcon searchIconR=new ImageIcon("src/image/function/searchR.png");
 	private ImageIcon downloadIconW=new ImageIcon("src/image/function/downLoadW.png");
 	private ImageIcon downloadIconR=new ImageIcon("src/image/function/downLoadR.png");
+	//frame的引用
+    Frame frame;
+    //字符串类型判断
+    StringJudger stringJg=new StringJudger();
 	public SaleDetailPanel(){
 		initial();
 	}
 	public void reHome(){
 		checkJP.reHome();
+	}
+	public void getFrame( Frame f){
+	 		frame=f;
 	}
 	private void initial() {
 		this.setBounds(0, 0, 905, 315);
@@ -303,7 +312,7 @@ public class SaleDetailPanel extends JPanel{
 	    CustomerBlService customerbl=new CustomerList();
 	    
 	    public void reHome(){
-	    	this.setLocation(905, 36);
+	    	this.RightMove();
 	    	year1.setText("");
 	    	month1.setText("");
 	    	date1.setText("");
@@ -352,6 +361,7 @@ public class SaleDetailPanel extends JPanel{
 			year1.setBounds(40, 37, 50, 20);
 			year1.setOpaque(false);
 			year1.setForeground(Color.white);
+			year1.setCaretColor(Color.white);
 			add(year1);
 			year1.setColumns(10);
 			
@@ -359,6 +369,7 @@ public class SaleDetailPanel extends JPanel{
 			month1.setColumns(10);
 			month1.setOpaque(false);
 			month1.setForeground(Color.white);
+			month1.setCaretColor(Color.white);
 			month1.setBounds(113, 37, 43, 21);
 			add(month1);
 			
@@ -366,6 +377,7 @@ public class SaleDetailPanel extends JPanel{
 			date1.setColumns(10);
 			date1.setOpaque(false);
 			date1.setForeground(Color.white);
+			date1.setCaretColor(Color.white);
 			date1.setBounds(178, 37, 36, 21);
 			add(date1);
 			
@@ -385,6 +397,7 @@ public class SaleDetailPanel extends JPanel{
 			year2.setColumns(10);
 			year2.setOpaque(false);
 			year2.setForeground(Color.white);
+			year2.setCaretColor(Color.white);
 			year2.setBounds(40, 90, 50, 20);
 			add(year2);
 			
@@ -392,6 +405,7 @@ public class SaleDetailPanel extends JPanel{
 			month2.setColumns(10);
 			month2.setOpaque(false);
 			month2.setForeground(Color.white);
+			month2.setCaretColor(Color.white);
 			month2.setBounds(113, 90, 43, 21);
 			add(month2);
 			
@@ -399,6 +413,7 @@ public class SaleDetailPanel extends JPanel{
 			date2.setColumns(10);
 			date2.setOpaque(false);
 			date2.setForeground(Color.white);
+			date2.setCaretColor(Color.white);
 			date2.setBounds(178, 90, 36, 21);
 			add(date2);
 			
@@ -430,6 +445,7 @@ public class SaleDetailPanel extends JPanel{
 			commodityName.setColumns(10);
 			commodityName.setOpaque(false);
 			commodityName.setForeground(Color.white);
+			commodityName.setCaretColor(Color.white);
 			commodityName.setBounds(104, 121, 126, 20);
 			add(commodityName);
 			
@@ -468,6 +484,7 @@ public class SaleDetailPanel extends JPanel{
 			salemanTxt.setColumns(10);
 			salemanTxt.setOpaque(false);
 			salemanTxt.setForeground(Color.white);
+			salemanTxt.setCaretColor(Color.white);
 			salemanTxt.setBounds(90, 171, 140, 20);
 			add(salemanTxt);
 			
@@ -517,6 +534,7 @@ public class SaleDetailPanel extends JPanel{
 					break;
 				case 3:
 					confirm.setIcon(confirm0);
+					boolean legal=true;
 					//查找
 					String startTime=null;
 					String lastTime=null;
@@ -532,6 +550,15 @@ public class SaleDetailPanel extends JPanel{
 							&&!date2.getText().equals("")){
 						startTime=year1.getText()+"/"+month1.getText()+"/"+date1.getText();
 						lastTime=year2.getText()+"/"+month2.getText()+"/"+date2.getText();
+						if(stringJg.judgestring(year1.getText())==3
+								&&stringJg.judgestring(month1.getText())==3
+								&&stringJg.judgestring(date1.getText())==3
+								&&stringJg.judgestring(year2.getText())==3
+								&&stringJg.judgestring(month2.getText())==3
+								&&stringJg.judgestring(date2.getText())==3){
+							legal=false;
+							frame.getWarning().showWarning("时间必须为数字");
+						}
 					}
 					if(!customerCombo.getSelectedItem().toString().equals("")){
 						customer=customerCombo.getSelectedItem().toString();
@@ -545,14 +572,16 @@ public class SaleDetailPanel extends JPanel{
 					if(!salemanTxt.getText().equals("")){
 						deSaler=salemanTxt.getText();
 					}
-					InquirySaleVO vo=new InquirySaleVO();
-					vo.setCommodityName(Name);
-					vo.setCustomer(customer);
-					vo.setDeSaler(deSaler);
-					vo.setStock(stock);
-					vo.setTimeBefore(startTime);
-					vo.setTimeAfter(lastTime);
-					SaleDetailPanel.this.update(vo);
+					if(legal){
+						InquirySaleVO vo=new InquirySaleVO();
+						vo.setCommodityName(Name);
+						vo.setCustomer(customer);
+						vo.setDeSaler(deSaler);
+						vo.setStock(stock);
+						vo.setTimeBefore(startTime);
+						vo.setTimeAfter(lastTime);
+						SaleDetailPanel.this.update(vo);
+					}
 					break;
 				}
 			}

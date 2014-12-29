@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import presentation.StringJudger;
 import entrance.Frame;
 import vo.BarginStrategyVO;
 import vo.LevelStrategyVO;
@@ -67,6 +68,8 @@ public class JPmanagerStrategy2 extends JPanel {
 		ImageIcon addIconR=new ImageIcon("src/image/function/addR.png");
 		//frame的引用
 	    Frame frame;
+		 //字符串类型判断
+	     StringJudger stringJg=new StringJudger();
 	    public void reHome(){
 	    	JPeditOfLevel.reHome();
 	    	JPeditOfBargin.reHome();
@@ -314,7 +317,7 @@ public class JPmanagerStrategy2 extends JPanel {
 			private JTextField decreasePriceText=new JTextField(10);
 			private JTextField numText=new JTextField(10);
 			public void reHome(){
-				this.setLocation(905, 36);
+				this.RightMove();
 				limitText.setText("");
 				discountText.setText("");
 				couponText.setText("");
@@ -411,6 +414,7 @@ public class JPmanagerStrategy2 extends JPanel {
 					limitText.setBounds(105,70, 130, 20);
 					limitText.setOpaque(false);//文本框透明
 					limitText.setForeground(Color.white);//前景色
+					limitText.setCaretColor(Color.white);
 					//浏览按钮
 					addButton.setIcon(add0);
 					addButton.setBounds(105,93, 24, 24);
@@ -420,26 +424,32 @@ public class JPmanagerStrategy2 extends JPanel {
 					discountText.setBounds(105,120, 130, 20);
 					discountText.setOpaque(false);//文本框透明
 					discountText.setForeground(Color.white);//前景色
+					discountText.setCaretColor(Color.white);
 					//代金券赠送比例文本框
 					couponText.setBounds(150,145,85, 20);
 					couponText.setOpaque(false);//文本框透明
 					couponText.setForeground(Color.white);//前景色
+					couponText.setCaretColor(Color.white);
 					//起始时间文本框
 					startText1.setBounds(105,170, 40, 20);
 					startText1.setOpaque(false);//文本框透明
 					startText1.setForeground(Color.white);//前景色
+					startText1.setCaretColor(Color.white);
 					
 					startText2.setBounds(150,170, 40, 20);
 					startText2.setOpaque(false);//文本框透明
 					startText2.setForeground(Color.white);//前景色
+					startText2.setCaretColor(Color.white);
 					
 					startText3.setBounds(195,170, 40, 20);
 					startText3.setOpaque(false);//文本框透明
 					startText3.setForeground(Color.white);//前景色
+					startText3.setCaretColor(Color.white);
 					//持续时间文本框
 					lastText.setBounds(145,195,90, 20);
 					lastText.setOpaque(false);//文本框透明
 					lastText.setForeground(Color.white);//前景色
+					lastText.setCaretColor(Color.white);
 					
 					//起始状态，选择的是赠品
 					 discountText.setEditable(false);
@@ -506,30 +516,37 @@ public class JPmanagerStrategy2 extends JPanel {
 					originalTotalPriceText.setBounds(105,60, 130, 20);
 					originalTotalPriceText.setOpaque(false);//文本框透明
 					originalTotalPriceText.setForeground(Color.white);//前景色
+					originalTotalPriceText.setCaretColor(Color.white);
 					//降价金额文本框
 					decreasePriceText.setBounds(105,90, 130, 20);
 					decreasePriceText.setOpaque(false);//文本框透明
 					decreasePriceText.setForeground(Color.white);//前景色
+					decreasePriceText.setCaretColor(Color.white);
 					//打包数量文本框
 					numText.setBounds(105,120, 130, 20);
 					numText.setOpaque(false);//文本框透明
 					numText.setForeground(Color.white);//前景色
+					numText.setCaretColor(Color.white);
 					//起始时间文本框
 					startText1.setBounds(105,150, 40, 20);
 					startText1.setOpaque(false);//文本框透明
 					startText1.setForeground(Color.white);//前景色
+					startText1.setCaretColor(Color.white);
 					
 					startText2.setBounds(150,150, 40, 20);
 					startText2.setOpaque(false);//文本框透明
 					startText2.setForeground(Color.white);//前景色
+					startText2.setCaretColor(Color.white);
 					
 					startText3.setBounds(195,150, 40, 20);
 					startText3.setOpaque(false);//文本框透明
 					startText3.setForeground(Color.white);//前景色
+					startText3.setCaretColor(Color.white);
 					//持续时间文本框
 					lastText.setBounds(145,180, 90, 20);
 					lastText.setOpaque(false);//文本框透明
 					lastText.setForeground(Color.white);//前景色
+					lastText.setCaretColor(Color.white);
 					
 					this.add(commodity,0);
 					this.add(originalTotalPrice,1);
@@ -569,6 +586,7 @@ public class JPmanagerStrategy2 extends JPanel {
 					limitText.setBounds(105,60, 130, 20);
 					limitText.setOpaque(false);//文本框透明
 					limitText.setForeground(Color.white);//前景色
+					limitText.setCaretColor(Color.white);
 					//浏览按钮
 					addButton.setIcon(add0);
 					addButton.setBounds(105,88, 24, 24);
@@ -578,22 +596,27 @@ public class JPmanagerStrategy2 extends JPanel {
 					couponText.setBounds(150,120, 85, 20);
 					couponText.setOpaque(false);//文本框透明
 					couponText.setForeground(Color.white);//前景色
+					couponText.setCaretColor(Color.white);
 					//起始时间文本框
 					startText1.setBounds(105,150, 40, 20);
 					startText1.setOpaque(false);//文本框透明
 					startText1.setForeground(Color.white);//前景色
+					startText1.setCaretColor(Color.white);
 					
 					startText2.setBounds(150,150, 40, 20);
 					startText2.setOpaque(false);//文本框透明
 					startText2.setForeground(Color.white);//前景色
+					startText2.setCaretColor(Color.white);
 					
 					startText3.setBounds(195,150, 40, 20);
 					startText3.setOpaque(false);//文本框透明
 					startText3.setForeground(Color.white);//前景色
+					startText3.setCaretColor(Color.white);
 					//持续时间文本框
 					lastText.setBounds(145,180, 90, 20);
 					lastText.setOpaque(false);//文本框透明
 					lastText.setForeground(Color.white);//前景色
+					lastText.setCaretColor(Color.white);
 					
 					//起始状态，选择的是赠送赠品
 					couponText.setEditable(false);
@@ -696,6 +719,17 @@ public class JPmanagerStrategy2 extends JPanel {
 										!lastText.getText().equals("")&&
 										output.size()!=0){
 									legal=true;
+									if(stringJg.judgestring(limitText.getText())!=3
+											||stringJg.judgestring(startText1.getText())!=3
+											||stringJg.judgestring(startText2.getText())!=3
+											||stringJg.judgestring(startText3.getText())!=3
+											||stringJg.judgestring(lastText.getText())!=3){
+										legal=false;
+										frame.getWarning().showWarning("时间与消费下限必须为数字");
+									}
+								}
+								else{
+									frame.getWarning().showWarning("请填写完整策略信息");
 								}
 								if(legal){
 									LevelStrategyVO newLevel=new LevelStrategyVO();
@@ -731,9 +765,7 @@ public class JPmanagerStrategy2 extends JPanel {
 									lastText.setText("");
 									output.clear();
 								}
-								else{
-									frame.getWarning().showWarning("请填写完整策略信息"+output.size());
-								}
+								
 										
 							}
 							else if(strategyTypeCombo.getSelectedItem().toString().equals("赠送代金券")){
@@ -745,6 +777,17 @@ public class JPmanagerStrategy2 extends JPanel {
 										!lastText.getText().equals("")&&
 										!couponText.getText().equals("")){
 									legal=true;
+									if(stringJg.judgestring(couponText.getText())!=3
+											||stringJg.judgestring(startText1.getText())!=3
+											||stringJg.judgestring(startText2.getText())!=3
+											||stringJg.judgestring(startText3.getText())!=3
+											||stringJg.judgestring(lastText.getText())!=3){
+										legal=false;
+										frame.getWarning().showWarning("时间与赠送比例必须为数字");
+									}
+								}
+								else{
+									frame.getWarning().showWarning("请填写完整策略信息");
 								}
 								if(legal){
 									LevelStrategyVO newLevel=new LevelStrategyVO();
@@ -778,9 +821,7 @@ public class JPmanagerStrategy2 extends JPanel {
 									lastText.setText("");
 									couponText.setText("");
 								}
-								else{
-									frame.getWarning().showWarning("请填写完整策略信息");
-								}
+								
 										
 							}
 							else if(strategyTypeCombo.getSelectedItem().toString().equals("打折")){
@@ -792,6 +833,17 @@ public class JPmanagerStrategy2 extends JPanel {
 										!lastText.getText().equals("")&&
 										!discountText.getText().equals("")){
 									legal=true;
+									if(stringJg.judgestring(discountText.getText())!=3
+											||stringJg.judgestring(startText1.getText())!=3
+											||stringJg.judgestring(startText2.getText())!=3
+											||stringJg.judgestring(startText3.getText())!=3
+											||stringJg.judgestring(lastText.getText())!=3){
+										legal=false;
+										frame.getWarning().showWarning("时间与打折比例必须为数字");
+									}
+								}
+								else{
+									frame.getWarning().showWarning("请填写完整策略信息");
 								}
 								if(legal){
 									LevelStrategyVO newLevel=new LevelStrategyVO();
@@ -825,9 +877,7 @@ public class JPmanagerStrategy2 extends JPanel {
 									lastText.setText("");
 									discountText.setText("");
 								}
-								else{
-									frame.getWarning().showWarning("请填写完整策略信息");
-								}
+								
 										
 							}
 							break;
@@ -843,6 +893,19 @@ public class JPmanagerStrategy2 extends JPanel {
 									!lastText.getText().equals("")&&
 									output.size()!=0){
 								Legal=true;
+								if(stringJg.judgestring(originalTotalPriceText.getText())!=3
+										||stringJg.judgestring(startText1.getText())!=3
+										||stringJg.judgestring(startText2.getText())!=3
+										||stringJg.judgestring(startText3.getText())!=3
+										||stringJg.judgestring(lastText.getText())!=3
+										||stringJg.judgestring(decreasePriceText.getText())!=3
+										||stringJg.judgestring(numText.getText())!=3){
+									Legal=false;
+									frame.getWarning().showWarning("价格、数量与时间必须为数字");
+								}
+							}
+							else{
+								frame.getWarning().showWarning("请填写完整策略信息");
 							}
 							if(Legal){
 								BarginStrategyVO newBargin=new BarginStrategyVO();
@@ -863,9 +926,7 @@ public class JPmanagerStrategy2 extends JPanel {
 								lastText.setText("");
 								output.clear();
 							}
-							else{
-								frame.getWarning().showWarning("请填写完整策略信息");
-							}
+							
 							break;
 						case ReachStrategy:
 							if(strategyTypeCombo.getSelectedItem().toString().equals("赠送赠品")){
@@ -877,6 +938,18 @@ public class JPmanagerStrategy2 extends JPanel {
 										!lastText.getText().equals("")&&
 										output.size()!=0){
 									legal=true;
+									if(stringJg.judgestring(limitText.getText())!=3
+											||stringJg.judgestring(startText1.getText())!=3
+											||stringJg.judgestring(startText2.getText())!=3
+											||stringJg.judgestring(startText3.getText())!=3
+											||stringJg.judgestring(lastText.getText())!=3
+											){
+										legal=false;
+										frame.getWarning().showWarning("时间与消费下限必须为数字");
+									}
+								}
+								else{
+									frame.getWarning().showWarning("请填写完整策略信息");
 								}
 								if(legal){
 									ReachStrategyVO newReach=new ReachStrategyVO();
@@ -895,9 +968,7 @@ public class JPmanagerStrategy2 extends JPanel {
 									lastText.setText("");
 									output.clear();
 								}
-								else{
-									frame.getWarning().showWarning("请填写完整策略信息");
-								}
+								
 										
 							}
 							else if(strategyTypeCombo.getSelectedItem().toString().equals("赠送代金券")){
@@ -909,6 +980,19 @@ public class JPmanagerStrategy2 extends JPanel {
 										!lastText.getText().equals("")&&
 										!couponText.getText().equals("")){
 									legal=true;
+									if(stringJg.judgestring(limitText.getText())!=3
+											||stringJg.judgestring(startText1.getText())!=3
+											||stringJg.judgestring(startText2.getText())!=3
+											||stringJg.judgestring(startText3.getText())!=3
+											||stringJg.judgestring(lastText.getText())!=3
+											||stringJg.judgestring(couponText.getText())!=3
+											){
+										legal=false;
+										frame.getWarning().showWarning("时间、赠送比例与消费下限必须为数字");
+									}
+								}
+								else{
+									frame.getWarning().showWarning("请填写完整策略信息");
 								}
 								if(legal){
 									ReachStrategyVO newReach=new ReachStrategyVO();
@@ -927,9 +1011,7 @@ public class JPmanagerStrategy2 extends JPanel {
 									lastText.setText("");
 									couponText.setText("");
 								}
-								else{
-									frame.getWarning().showWarning("请填写完整策略信息");
-								}
+								
 										
 							}
 							break;

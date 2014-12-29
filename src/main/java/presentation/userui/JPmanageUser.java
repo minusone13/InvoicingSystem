@@ -14,6 +14,7 @@ import javax.swing.JTextField;
 
 import entrance.Frame;
 import po.Role;
+import presentation.StringJudger;
 import presentation.managerui.JPBillList;
 import presentation.managerui.MouseListenerGetXY;
 import vo.uservo.UserVO;
@@ -66,6 +67,8 @@ public class JPmanageUser extends JPanel {
 		    Frame frame;
 		    //逻辑层接口
 		    StubUserBlService userbl=new UserController();
+		 	//字符串类型判断
+		    StringJudger stringJg=new StringJudger();
 		    public void reHome(){
 		    	JPedit.reHome();
 		    	JPsearch.reHome();
@@ -280,7 +283,7 @@ public class JPmanageUser extends JPanel {
 				private JComboBox  roleCombo;
 				private JTextField codeText=new JTextField(10);
 				public void reHome(){
-					this.setLocation(905, 36);
+					this.RightMove();
 					codeText.setText("");
 				}
 				public JPanelEdit(){
@@ -322,10 +325,11 @@ public class JPmanageUser extends JPanel {
 					roleCombo.setBackground(Color.gray);
 					roleCombo.setForeground(Color.white);
 					
-					//姓名文本框
+					//密码文本框
 					codeText.setBounds(80,60, 150, 20);
 					codeText.setOpaque(false);//文本框透明
 					codeText.setForeground(Color.white);//前景色
+					codeText.setCaretColor(Color.white);
 					
 					this.add(right,0);
 					this.add(confirm,1);
@@ -404,10 +408,17 @@ public class JPmanageUser extends JPanel {
 									r=Role.STOCK_STAFF;
 								}
 								UserVO temp=billList.getChosen().getUserVO();
-								if(!codeText.getText().equals("")){
-									temp.setPassword(codeText.getText());
+								if(!codeText.getText().equals("")&&stringJg.judgestring(codeText.getText())==4){
+									frame.getWarning().showWarning("密码不能有文字");
 								}
-								billList.changeChosen(temp,r);
+								else if(codeText.getText().equals("")){
+									billList.changeChosen(temp,r);
+								}
+								else{
+									temp.setPassword(codeText.getText());
+									billList.changeChosen(temp,r);
+								}
+			
 							break;
 						}
 					}

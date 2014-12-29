@@ -10,11 +10,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import entrance.Frame;
 import po.RM;
 import po.Role;
+import presentation.StringJudger;
 import presentation.managerui.MouseListenerGetXY;
 import vo.stockvo.CommodityVO;
+import entrance.Frame;
 
 public class JPManagerComOfStock extends JPanel {
 
@@ -46,6 +47,8 @@ public class JPManagerComOfStock extends JPanel {
 	ImageIcon editComR=new ImageIcon("src/image/function/editR.png");
 	//frame的引用
     Frame frame;
+    //字符串类型判断
+    StringJudger stringJg=new StringJudger();
 	public JPManagerComOfStock(){
 		//面板大小
 		this.setSize(905, 370);
@@ -229,7 +232,7 @@ public class JPManagerComOfStock extends JPanel {
 		private JTextField alertText=new JTextField(10);
 		
 		public void reHome(){
-			this.setLocation(905, 36);
+			this.RightMove();
 			nameText.setText("");
 			typeText.setText("");
 			inpriceText.setText("");
@@ -279,22 +282,27 @@ public class JPManagerComOfStock extends JPanel {
 			nameText.setBounds(80,30, 150, 20);
 			nameText.setOpaque(false);//文本框透明
 			nameText.setForeground(Color.white);//前景色
+			nameText.setCaretColor(Color.white);
 			//型号文本框
 			typeText.setBounds(80,60, 150, 20);
 			typeText.setOpaque(false);//文本框透明
 			typeText.setForeground(Color.white);//前景色
+			typeText.setCaretColor(Color.white);
 			//进价文本框
 			inpriceText.setBounds(80,90, 150, 20);
 			inpriceText.setOpaque(false);//文本框透明
 			inpriceText.setForeground(Color.white);//前景色
+			inpriceText.setCaretColor(Color.white);
 			//售价文本框
 			outpriceText.setBounds(80,120, 150, 20);
 			outpriceText.setOpaque(false);//文本框透明
 			outpriceText.setForeground(Color.white);//前景色
+			outpriceText.setCaretColor(Color.white);
 			//警戒值文本框
 			alertText.setBounds(95,150, 135, 20);
 			alertText.setOpaque(false);//文本框透明
 			alertText.setForeground(Color.white);//前景色
+			alertText.setCaretColor(Color.white);
 			
 			this.add(right,0);
 			this.add(confirm,1);
@@ -384,6 +392,17 @@ public class JPManagerComOfStock extends JPanel {
 								&&!outpriceText.getText().equals("")
 								&&!alertText.getText().equals("")){
 							legal=true;
+							if(stringJg.judgestring(typeText.getText())==4){
+								legal=false;
+								frame.getWarning().showWarning("型号不能为文字");
+							}
+							if(stringJg.judgestring(inpriceText.getText())!=3
+									||stringJg.judgestring(outpriceText.getText())!=3
+									||stringJg.judgestring(alertText.getText())!=3){
+								legal=false;
+								frame.getWarning().showWarning("价格与警戒值必须为数字");
+							}
+							
 						}
 						if(legal){
 							//加到逻辑层
@@ -431,6 +450,24 @@ public class JPManagerComOfStock extends JPanel {
 								||!outpriceText.getText().equals("")
 								||!alertText.getText().equals("")){
 							legal=true;
+							if(!inpriceText.getText().equals("")){
+								if(stringJg.judgestring(inpriceText.getText())!=3){
+									legal=false;
+									frame.getWarning().showWarning("进价必须为数字");
+								}
+							}
+							if(!outpriceText.getText().equals("")){
+								if(stringJg.judgestring(outpriceText.getText())!=3){
+									legal=false;
+									frame.getWarning().showWarning("售价必须为数字");
+								}
+							}
+							if(!alertText.getText().equals("")){
+								if(stringJg.judgestring(alertText.getText())!=3){
+									legal=false;
+									frame.getWarning().showWarning("警戒值必须为数字");
+								}
+							}
 						}
 						if(legal){
 							//修改VO数据

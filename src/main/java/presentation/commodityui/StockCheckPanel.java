@@ -22,6 +22,7 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
+import presentation.StringJudger;
 import vo.stockvo.CommodityVO;
 import businesslogic.stockmanagerbl.StubStockController;
 import businesslogicservice.commodityblservice.StubCommodityBlService;
@@ -46,6 +47,8 @@ public class StockCheckPanel extends JPanel{
     Frame frame;
     //逻辑层接口
   	 StubCommodityBlService stockbl=new StubStockController();
+  	 //字符串类型判断
+     StringJudger stringJg=new StringJudger();
 	public StockCheckPanel() {
 		initial();
 	}
@@ -216,7 +219,7 @@ public class StockCheckPanel extends JPanel{
 		private ImageIcon confirm1=new ImageIcon("src/image/function/confirmR.png");
 		
 		public void reHome(){
-			this.setLocation(905, 36);
+			this.RightMove();
 			year1.setText("");
 			month1.setText("");
 			date1.setText("");
@@ -263,6 +266,7 @@ public class StockCheckPanel extends JPanel{
 			year1 = new JTextField();
 			year1.setOpaque(false);//文本框透明
 			year1.setForeground(Color.white);//前景色
+			year1.setCaretColor(Color.white);
 			year1.setBounds(40, 60, 50, 20);
 			add(year1);
 			year1.setColumns(10);
@@ -270,6 +274,7 @@ public class StockCheckPanel extends JPanel{
 			month1 = new JTextField();
 			month1.setOpaque(false);//文本框透明
 			month1.setForeground(Color.white);//前景色
+			month1.setCaretColor(Color.white);
 			month1.setColumns(10);
 			month1.setBounds(113, 60, 43, 21);
 			add(month1);
@@ -277,6 +282,7 @@ public class StockCheckPanel extends JPanel{
 			date1 = new JTextField();
 			date1.setOpaque(false);//文本框透明
 			date1.setForeground(Color.white);//前景色
+			date1.setCaretColor(Color.white);
 			date1.setColumns(10);
 			date1.setBounds(178, 60, 36, 21);
 			add(date1);
@@ -296,6 +302,7 @@ public class StockCheckPanel extends JPanel{
 			year2 = new JTextField();
 			year2.setOpaque(false);//文本框透明
 			year2.setForeground(Color.white);//前景色
+			year2.setCaretColor(Color.white);
 			year2.setColumns(10);
 			year2.setBounds(40, 120, 50, 20);
 			add(year2);
@@ -303,6 +310,7 @@ public class StockCheckPanel extends JPanel{
 			month2 = new JTextField();
 			month2.setOpaque(false);//文本框透明
 			month2.setForeground(Color.white);//前景色
+			month2.setCaretColor(Color.white);
 			month2.setColumns(10);
 			month2.setBounds(113, 120, 43, 21);
 			add(month2);
@@ -310,6 +318,7 @@ public class StockCheckPanel extends JPanel{
 			date2 = new JTextField();
 			date2.setOpaque(false);//文本框透明
 			date2.setForeground(Color.white);//前景色
+			date2.setCaretColor(Color.white);
 			date2.setColumns(10);
 			date2.setBounds(178, 120, 36, 21);
 			add(date2);
@@ -379,35 +388,45 @@ public class StockCheckPanel extends JPanel{
 					String m2 = month2.getText();
 					String d2 = date2.getText();
 					if(!y1.equals("")&&!m1.equals("")&&!d1.equals("")&&!y2.equals("")&&!m2.equals("")&&!d2.equals("")){
-						String timeBefore = y1+"/"+m1+"/"+d1;
-						String timeAfter = y2+"/"+m2+"/"+d2;
-						String pattern="YYYY/MM/dd";
-						SimpleDateFormat sdf=new SimpleDateFormat(pattern);
-						Date before=null;
-						try
-						{
-							before = sdf.parse(timeBefore);
+						if(stringJg.judgestring(year1.getText())==3
+								&&stringJg.judgestring(month1.getText())==3
+								&&stringJg.judgestring(date1.getText())==3
+								&&stringJg.judgestring(year2.getText())==3
+								&&stringJg.judgestring(month2.getText())==3
+								&&stringJg.judgestring(date2.getText())==3){
+							String timeBefore = y1+"/"+m1+"/"+d1;
+							String timeAfter = y2+"/"+m2+"/"+d2;
+							String pattern="YYYY/MM/dd";
+							SimpleDateFormat sdf=new SimpleDateFormat(pattern);
+							Date before=null;
+							try
+							{
+								before = sdf.parse(timeBefore);
+							}
+							catch (ParseException e1)
+							{
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+							Date After=null;
+							try
+							{
+								After = sdf.parse(timeAfter);
+							}
+							catch (ParseException e1)
+							{
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+							
+							StockCheckPanel.this.update(before,After);
 						}
-						catch (ParseException e1)
-						{
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
+						else{
+							frame.getWarning().showWarning("时间必须为数字");
 						}
-						Date After=null;
-						try
-						{
-							After = sdf.parse(timeAfter);
-						}
-						catch (ParseException e1)
-						{
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						}
-						
-						StockCheckPanel.this.update(before,After);
 					}
 					else{
-						frame.getWarning().showWarning("请正确输入时间区间");
+						frame.getWarning().showWarning("请输入完整时间区间");
 					}
 					
 					break;
