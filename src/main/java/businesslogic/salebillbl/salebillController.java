@@ -539,6 +539,7 @@ public class salebillController implements SaleBillBlService,salebillForFinancia
 		}
 
 		
+		
 		public ArrayList<ReachStrategyVO> getSomeReachStrategy(SaleSheetVO vo)
 		{
 			ArrayList<ReachStrategyVO> result = new ArrayList<ReachStrategyVO>();
@@ -613,6 +614,13 @@ public class salebillController implements SaleBillBlService,salebillForFinancia
 					break;
 			}
 		
+			return salesheetvo;
+		}
+		
+		public SaleSheetVO getCompletedSaleSheet(SaleSheetVO salesheetvo,BarginStrategyVO bsvo){
+			//允许有几个特价包？
+			//按照我的理解特价包应该是优先级最高的优惠;
+			//salesheetvo.setmoney1(0);
 			return salesheetvo;
 		}
 
