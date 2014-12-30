@@ -620,7 +620,7 @@ public class salebillController implements SaleBillBlService,salebillForFinancia
 		public SaleSheetVO getCompletedSaleSheet(SaleSheetVO salesheetvo,BarginStrategyVO bsvo){
 			//允许有几个特价包？
 			//按照我的理解特价包应该是优先级最高的优惠;
-			//salesheetvo.setmoney1(0);
+			salesheetvo.setmoney1(salesheetvo.getmoney1()-bsvo.getDiscount());
 			return salesheetvo;
 		}
 
