@@ -34,7 +34,7 @@ public class StubStockController implements StubCommodityBlService,
 	UserService us = new UserController();
 	static StubCommodityDataService comdata = null;
 	static StubBillPool pool = new StubBillPool();
-	User user = new User("I0000", Role.STOCK_STAFF, "DefaultStock", "default",
+	static User user = new User("I0000", Role.STOCK_STAFF, "DefaultStock", "default",
 			"Liu");
 	static
 	{
@@ -64,11 +64,6 @@ public class StubStockController implements StubCommodityBlService,
 	}
 	public StubStockController()
 	{
-		UserVO temp = Login.user;
-		if (temp != null)
-		{
-			user = new User(temp);
-		}
 		l.setUser(user);
 		bl.setUser(user);
 		bl.setPool(pool);
@@ -84,7 +79,7 @@ public class StubStockController implements StubCommodityBlService,
 	public RM addCommodity(CommodityVO vo)
 	{
 		RM result = l.addCommodity(vo);
-		us.addRecord(new OperationRecord(user, "addCommodity", result));
+		us.addRecord(new OperationRecord(user, "addCommodity:"+vo.getName()+vo.getModel(), result));
 		return result;
 	}
 
@@ -117,7 +112,7 @@ public class StubStockController implements StubCommodityBlService,
 	public RM addCategory(CategoryVO vo)
 	{
 		RM result = l.addCategory(vo);
-		us.addRecord(new OperationRecord(user, "addCategory", result));
+		us.addRecord(new OperationRecord(user, "addCategory:"+vo.getId(), result));
 		return result;
 	}
 
@@ -199,14 +194,14 @@ public class StubStockController implements StubCommodityBlService,
 	public RM deleteCommodity(String name, String model)
 	{// 有可能返回RM。done，若已有进出记录，返回alreadyHaveUnremoveableContents
 		RM result = l.deleteCommodity(name, model);
-		us.addRecord(new OperationRecord(user, "deleteCommodity", result));
+		us.addRecord(new OperationRecord(user, "deleteCommodity:"+name+model, result));
 		return result;
 	}
 
 	public RM deleteCategory(String id)
 	{// 有可能返回RM。done，若已有子分类或商品，返回alreadyHaveUnremoveableContents
 		RM result = l.deleteCategory(id);
-		us.addRecord(new OperationRecord(user, "deleteCategory", result));
+		us.addRecord(new OperationRecord(user, "deleteCategory:"+id, result));
 		return result;
 	}
 
@@ -214,6 +209,7 @@ public class StubStockController implements StubCommodityBlService,
 	{
 		user = new User(vo);
 		l.setUser(user);
+		bl.setUser(user);
 	}
 
 	public double getSpillsTotal(Date d1, Date d2)
@@ -242,25 +238,27 @@ public class StubStockController implements StubCommodityBlService,
 	public RM updateCommodity(CommodityVO vo)
 	{
 		RM result = l.updateCommodity(vo);
-		us.addRecord(new OperationRecord(user, "updateCommodity", result));
+		us.addRecord(new OperationRecord(user, "updateCommodity:"+vo.getName()+vo.getModel(), result));
 		return result;
 	}
 
-	public RM updateCommodity(CommodityVO vo, String newName)
-	{
-		RM result = l.updateCommodity(vo);
-		us.addRecord(new OperationRecord(user, "updateCommodity", result));
-		return result;
-	}
+	//public RM updateCommodity(CommodityVO vo, String newName)
+	//{
+		//RM result = l.updateCommodity(vo);
+		//us.addRecord(new OperationRecord(user, "updateCommodity", result));
+		//return result;
+	//}
 
 	public RM updateCategory(CategoryVO vo)
-	{
+	{//此方法错掉了，所以一直返回未知错误
 		return RM.unknownerror;
 	}
 
 	public RM updateCategory(CategoryVO vo, String newName)
 	{
-		return l.updateCategory(vo, newName);
+		RM result = l.updateCategory(vo, newName);
+		us.addRecord(new OperationRecord(user, "updateCategory:"+newName, result));
+		return result;
 	}
 
 	// 单据方法
@@ -375,6 +373,7 @@ public class StubStockController implements StubCommodityBlService,
 	// 库存查看，库存盘点
 	public CountVO count()
 	{// 库存盘点
+		us.addRecord(new OperationRecord(user, "库存盘点", RM.done));
 		return l.count();
 	}
 
