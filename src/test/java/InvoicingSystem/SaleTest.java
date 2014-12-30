@@ -132,11 +132,12 @@ public class SaleTest extends TestCase{
 			assertTrue(result3);
 		}*/
 		
-		/*public void testgetPurSheet(){
+		public void testgetPurSheet(){
 			salebillController controller = new salebillController();
 			boolean result5 = controller.getPurSheet("JHD-20141230-00001");
+			System.out.println(controller.findPurSheet("JHD-20141230-00001").getcustomer().getname());
 			assertTrue(result5);
-		}*/
+		}
 		
 	/*	
 		public void testgetPurBackSheet(){
@@ -196,13 +197,11 @@ public class SaleTest extends TestCase{
 		/*public void testfindCustomer(){
 			CustomerList customerlist = new CustomerList();
 			CustomerVO tempvo = null;
-			tempvo = customerlist.findCustomer("5");
+			tempvo = customerlist.findCustomer("4");
+			System.out.println(tempvo.getname()+tempvo.getid());
+			
 			boolean result11=true;
-			if(tempvo.getname().equals("没人")){
-				result11=false;
-			}else{
-				System.out.println(tempvo.getname());
-			}
+			
 			assertTrue(result11);
 		}*/
 
