@@ -25,12 +25,12 @@ public class StubSpillsLossBill extends Bill implements GetVOandPO
 
 	public SpillsLossBillVO getVO()
 	{
-		return new SpillsLossBillVO(operator, ID, t, com.toVO(), state);
+		return new SpillsLossBillVO(date,operator, ID, t, com.toVO(), state);
 	}
 
 	public SpillsLossBillPO getPO()
 	{
-		return new SpillsLossBillPO(operator, ID, t, com.toPO().clone(), state);
+		return new SpillsLossBillPO(date,operator, ID, t, com.toPO().clone(), state);
 	}
 
 	public boolean setPO(SpillsLossBillPO po)
