@@ -142,7 +142,7 @@ public class JPManagerCom extends JPanel{
 		addIcon.addMouseListener(new MouseListenerOfButton(3));
 		//期初建账版本选择
 		box = new JComboBox();
-		box.setBounds(0,5, 120, 20);
+		box.setBounds(10,10, 120, 20);
 		box.setForeground(Color.white);
 		box.setBackground(Color.black);
 		
@@ -183,6 +183,7 @@ public class JPManagerCom extends JPanel{
 			if(e.getStateChange() == ItemEvent.SELECTED) {
 				String s = e.getItem().toString();
 				stockbl.setFilePath("accountBuild/commodity/"+s+".ser");
+				System.out.println("accountBuild/commodity/"+s+".ser");
 				content.innitial();
 			}
 		}

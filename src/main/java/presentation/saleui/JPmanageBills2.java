@@ -317,6 +317,7 @@ public class JPmanageBills2 extends JPanel {
 					break;	
 				case 3:
 					done.setIcon(checkIconR);
+					billList.doneChosen();
 					break;
 				case 4:
 					delete.setIcon(deleteIconR);
@@ -347,6 +348,7 @@ public class JPmanageBills2 extends JPanel {
 					break;
 				case 6:
 					submit.setIcon(submitIconR);
+					billList.submitChosen();
 					break;
 				case 7:
 					add.setIcon(addIconR);
