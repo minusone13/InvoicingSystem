@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import po.RM;
+import presentation.WarningText;
 import vo.stockvo.CommodityVO;
 import businesslogic.stockmanagerbl.StubStockController;
 import businesslogicservice.commodityblservice.StubCommodityBlService;

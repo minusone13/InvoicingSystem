@@ -7,6 +7,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import businesslogic.stockmanagerbl.StubStockController;
+import businesslogicservice.commodityblservice.StubCommodityBlService;
 import entrance.Frame;
 import presentation.PanelType;
 import presentation.managerui.JPSystemRecord;
@@ -55,6 +57,8 @@ public class FinancialUI extends JPanel {
 	private PanelType panelType=PanelType.JPfunction;
 	//frame的引用
 	private Frame frame;
+	//逻辑层接口
+	private StubCommodityBlService stockbl=new StubStockController();
 	public FinancialUI(){
 
 			//设置窗口大小
@@ -301,6 +305,11 @@ public class FinancialUI extends JPanel {
 			FinancialUI.this.getBusinessCondition().reHome();
 			FinancialUI.this.getBusinessProgress().reHome();
 			FinancialUI.this.getSaleDetail().reHome();
+			//如果是期初建账 商品界面退出 就把地址set回去
+			if(FinancialUI.this.getPanelType()==PanelType.JPaccountOfComs){
+				stockbl.setFilePath("Stock.ser");
+			}
+			
 		}
 
 		public void mouseEntered(MouseEvent e) {

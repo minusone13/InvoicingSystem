@@ -281,26 +281,34 @@ public class JPmanageBills2 extends JPanel {
 					break;
 				case 5:
 					edit.setIcon(editIconR);
-					if(billList.getChosenNum()==1&&billList.stateOfChosen()==BillState.DRAFT){
-						switch(style){
-						case CashPaymentBill:
-							JPeditOfCash.setIsAdd(false);//不是加单据是修改单据
-							JPeditOfCash.leftMove();//调出编辑板
-							break;
-						case PaymentBill:
-							JPeditOfPay.setIsAdd(false);//不是加单据是修改单据
-							JPeditOfPay.leftMove();//调出编辑板
-							break;
-						case ReceiptBill:
-							JPeditOfRec.setIsAdd(false);//不是加单据是修改单据
-							JPeditOfRec.leftMove();//调出编辑板
-							break;
+					if(billList.getChosenNum()==1){
+						if(billList.stateOfChosen()==BillState.DRAFT){
+							switch(style){
+								case CashPaymentBill:
+									JPeditOfCash.setIsAdd(false);//不是加单据是修改单据
+									JPeditOfCash.leftMove();//调出编辑板
+									break;
+								case PaymentBill:
+									JPeditOfPay.setIsAdd(false);//不是加单据是修改单据
+									JPeditOfPay.leftMove();//调出编辑板
+									break;
+								case ReceiptBill:
+									JPeditOfRec.setIsAdd(false);//不是加单据是修改单据
+									JPeditOfRec.leftMove();//调出编辑板
+									break;
+							}
+						
+						}
+						else{
+							frame.getWarning().showWarning("只能修改草稿状态的单据");
 						}
 						
-						
+					}
+					else if(billList.getChosenNum()==0){
+						frame.getWarning().showWarning("请选择要修改的单据");
 					}
 					else{
-						frame.getWarning().showWarning("只能修改一张草稿状态的单据");
+						frame.getWarning().showWarning("只能修改一张单据");
 					}
 					break;
 				case 6:
@@ -805,7 +813,7 @@ public class JPmanageBills2 extends JPanel {
 							switch(billStyle){
 							case ReceiptBill:
 								if(customerCombo.getSelectedItem()==null){
-									frame.getWarning().showWarning("没有客户，不能创建单据");
+									frame.getWarning().showWarning("没有客户，不能修改单据");
 								}
 								else{
 									boolean legal=false;

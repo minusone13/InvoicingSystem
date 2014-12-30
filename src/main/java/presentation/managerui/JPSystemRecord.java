@@ -44,6 +44,7 @@ public class JPSystemRecord extends JPanel
 		jpbg1.setIcon(new ImageIcon("src/image/block/blockForTable3.png"));
 	
 		//表格透明
+		table.setSelectionForeground(Color.white);
 		table.setOpaque(false);
         DefaultTableCellRenderer render1 = new DefaultTableCellRenderer();   
         render1.setOpaque(false); //将渲染器设置为透明  
@@ -87,22 +88,25 @@ public class JPSystemRecord extends JPanel
 				else if(records.get(i).getUser().getR()==null){
 					System.out.println("职务空指针");
 				}
-				switch(records.get(i).getUser().getR()){
-					case ADMINISTRATOR:Role="管理员";
-						break;
-					case FINANCIAL_STAFF:Role="财务人员";
-						break;
-					case FINANCIAL_MANAGER:Role="财务经理";
-						break;
-					case MANAGER:Role="总经理";
-						break;
-					case STOCK_STAFF:Role="库存管理人员";
-						break;
-					case PURCHASE_SALE_STAFF:Role="进销人员";
-						break;
-					case PURCHASE_SALE_MANAGER:Role="销售经理 ";
-						break;
+				if(records.get(i).getUser().getR()!=null)//added by lhw
+					switch(records.get(i).getUser().getR()){
+						case ADMINISTRATOR:Role="管理员";
+							break;
+						case FINANCIAL_STAFF:Role="财务人员";
+							break;
+						case FINANCIAL_MANAGER:Role="财务经理";
+							break;
+						case MANAGER:Role="总经理";
+							break;
+						case STOCK_STAFF:Role="库存管理人员";
+							break;
+						case PURCHASE_SALE_STAFF:Role="进销人员";
+							break;
+						case PURCHASE_SALE_MANAGER:Role="销售经理 ";
+							break;
 				}
+				else
+					Role="未知用户";
 				Object[] temp={Time,
 						Role+records.get(i).getUser().getID()+":"+records.get(i).getUser().getName(),
 						records.get(i).getOperation(),

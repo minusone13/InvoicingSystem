@@ -13,6 +13,7 @@ import javax.swing.JTextField;
 import po.RM;
 import po.Role;
 import presentation.StringJudger;
+import presentation.WarningText;
 import presentation.managerui.MouseListenerGetXY;
 import vo.stockvo.CommodityVO;
 import entrance.Frame;

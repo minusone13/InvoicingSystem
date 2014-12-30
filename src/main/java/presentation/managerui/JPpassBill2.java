@@ -12,18 +12,18 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import entrance.Frame;
-import po.BillState;
 import po.BillStyle;
-import presentation.financialui.JPmanageBills2.JPanelEdit;
-import presentation.financialui.JPmanageBills2.MouseListenerOfButton;
-import presentation.financialui.JPmanageBills2.JPanelEdit.JPaddList;
-import presentation.financialui.JPmanageBills2.JPanelEdit.TreadOfLeft;
-import presentation.financialui.JPmanageBills2.JPanelEdit.TreadOfRight;
+import po.Role;
+import presentation.StringJudger;
 import presentation.userui.Login;
+import vo.CustomerVO;
+import vo.GiftBillVO;
+import vo.PurSheetVO;
 import vo.financialBillVO.CashPaymentVO;
-import vo.financialBillVO.PaymentVO;
-import vo.financialBillVO.ReceiptVO;
+import vo.stockvo.CommodityVO;
+import businesslogic.customerbl.CustomerList;
+import businesslogicservice.customerblservice.CustomerBlService;
+import entrance.Frame;
 
 public class JPpassBill2 extends JPanel {
 
@@ -69,6 +69,37 @@ public class JPpassBill2 extends JPanel {
 	ImageIcon editIconR=new ImageIcon("src/image/function/editR.png");
 	//frame的引用
     Frame frame;
+    //调用逻辑层
+    CustomerBlService customerbl=new CustomerList();
+    public JPanelEdit getJPeditOfGift()
+	{
+		return JPeditOfGift;
+	}
+	public void setJPeditOfGift(JPanelEdit jPeditOfGift)
+	{
+		JPeditOfGift = jPeditOfGift;
+	}
+	public JPanelEdit getJPeditOfPur()
+	{
+		return JPeditOfPur;
+	}
+	public void setJPeditOfPur(JPanelEdit jPeditOfPur)
+	{
+		JPeditOfPur = jPeditOfPur;
+	}
+	public JPanelEdit getJPeditOfCash()
+	{
+		return JPeditOfCash;
+	}
+	public void setJPeditOfCash(JPanelEdit jPeditOfCash)
+	{
+		JPeditOfCash = jPeditOfCash;
+	}
+	public void reHome(){
+    	JPeditOfGift.reHome();
+    	JPeditOfPur.reHome();
+    	JPeditOfCash.reHome();
+    }
 	public JPpassBill2(){
 		//面板大小
 		this.setSize(905, 342);
@@ -351,6 +382,8 @@ public class JPpassBill2 extends JPanel {
 		//现金费用单的附件
 		private JLabel total=new JLabel("总额");
 		private JTextField totalText=new JTextField(10);
+
+
 		//赠送单的附件
 		private JLabel addList=new JLabel();//增加商品按钮
 		private JLabel reason=new JLabel("赠送原因");
@@ -363,6 +396,18 @@ public class JPpassBill2 extends JPanel {
 		private JComboBox customerCombo;
 		private JComboBox warehouseCombo;
 		private JTextField noteText=new JTextField(10);
+		//接收输出的商品
+		private ArrayList<CommodityVO> output=new ArrayList<CommodityVO>();
+		//接收输出的备注
+		private ArrayList<String> outputNotes;
+		//字符串类型判断
+	    StringJudger stringJg=new StringJudger();
+		public void reHome(){
+			this.RightMove();
+			totalText.setText("");
+			reasonTxt.setText("");
+			noteText.setText("");
+		}
 		public JPanelEdit(BillStyle style){
 			//确认种类
 			billStyle=style;
@@ -402,10 +447,11 @@ public class JPpassBill2 extends JPanel {
 				addList.setIcon(add0);
 				addList.setBounds(105, 28, 24, 24);
 				addList.addMouseListener(new MouseListenerOfButton(2));
-				//总额文本框
+				//赠送原因文本框
 				reasonTxt.setBounds(110,60, 120, 20);
 				reasonTxt.setOpaque(false);//文本框透明
 				reasonTxt.setForeground(Color.white);//前景色
+				reasonTxt.setCaretColor(Color.white);
 				
 				this.add(list,0);
 				this.add(reason,1);
@@ -435,13 +481,20 @@ public class JPpassBill2 extends JPanel {
 				total.setBounds(40, 120, 40, 20);
 				note.setBounds(40, 150, 40, 20);
 				//客户选择下拉框
-				customerCombo = new JComboBox();
+				ArrayList<CustomerVO> customers = null;
+				customers = customerbl.getAllCustomer("Customer.txt");
+				String[] customerS=new String[customers.size()];
+				for(int i=0;i<customers.size();i++){
+					customerS[i]=customers.get(i).getname()+":"+customers.get(i).getid();
+				}
+				customerCombo = new JComboBox(customerS);
 				customerCombo.setFont(new Font("宋体",Font.BOLD,14));
 				customerCombo.setBounds(80,30, 150, 20);
 				customerCombo.setBackground(Color.gray);
 				customerCombo.setForeground(Color.white);
 				//仓库选择下拉框
-				warehouseCombo = new JComboBox();
+				String[] warehouseS={"仓库1"};
+				warehouseCombo = new JComboBox(warehouseS);
 				warehouseCombo.setFont(new Font("宋体",Font.BOLD,14));
 				warehouseCombo.setBounds(80,60, 150, 20);
 				warehouseCombo.setBackground(Color.gray);
@@ -454,10 +507,12 @@ public class JPpassBill2 extends JPanel {
 				totalText.setBounds(80,120, 150, 20);
 				totalText.setOpaque(false);//文本框透明
 				totalText.setForeground(Color.white);//前景色
+				totalText.setCaretColor(Color.white);
 				//备注文本框
 				noteText.setBounds(80,150, 150, 20);
 				noteText.setOpaque(false);//文本框透明
 				noteText.setForeground(Color.white);//前景色
+				noteText.setCaretColor(Color.white);
 				
 				this.add(customer,0);
 				this.add(warehouse,1);
@@ -484,6 +539,7 @@ public class JPpassBill2 extends JPanel {
 				totalText.setBounds(80,30, 150, 20);
 				totalText.setOpaque(false);//文本框透明
 				totalText.setForeground(Color.white);//前景色
+				totalText.setCaretColor(Color.white);
 				
 				this.add(total,0);
 				this.add(totalText,1);
@@ -501,6 +557,22 @@ public class JPpassBill2 extends JPanel {
 		public void RightMove(){
 			Thread t=new Thread(new TreadOfRight());
 			t.start();
+		}
+		public ArrayList<CommodityVO> getOutput()
+		{
+			return output;
+		}
+		public void setOutput(ArrayList<CommodityVO> output)
+		{
+			this.output = output;
+		}
+		public ArrayList<String> getOutputNotes()
+		{
+			return outputNotes;
+		}
+		public void setOutputNotes(ArrayList<String> outputNotes)
+		{
+			this.outputNotes = outputNotes;
 		}
 		public class MouseListenerOfButton implements MouseListener{
 
@@ -524,11 +596,14 @@ public class JPpassBill2 extends JPanel {
 					break;
 				case 2:
 					addList.setIcon(add1);
-					//显示编辑赠品面板
+					//显示编辑商品面板
 					switch(billStyle){
 					case GiftBill:
+						frame.getManager().getCommodityChoose().setVisible(true);
 						break;
 					case PurSheet:
+						frame.getManager().getCommodityChoose().setRole(Role.PURCHASE_SALE_STAFF);
+						frame.getManager().getCommodityChoose().setVisible(true);
 						break;
 					case CashPaymentBill:
 					}
@@ -536,14 +611,89 @@ public class JPpassBill2 extends JPanel {
 					break;
 				case 3:
 					confirm.setIcon(confirm1);
+					if(billList.getChosenNum()==1){
 						switch(billStyle){
-						case ReceiptBill:
-							break;
-						case PaymentBill:
-							break;
-						case CashPaymentBill:
-							break;
+							case GiftBill:
+								if(!reasonTxt.getText().equals("")||output!=null){
+									GiftBillVO modifyGift=billList.getChosen().getGiftVO();
+									if(!reasonTxt.getText().equals("")){
+										String[] temp=modifyGift.getRemark();
+										temp[0]=reasonTxt.getText();//修改赠送原因
+										modifyGift.setRemark(temp);
+									}
+									if(output!=null){
+										modifyGift.setComs(output);
+									}
+									billList.changeChosen(modifyGift);
+									frame.getWarning().showWarning("修改成功");
+								}
+								else{
+									frame.getWarning().showWarning("请输入修改信息");
+								}
+								break;
+							case PurSheet:
+								boolean legal=true;
+								if(!customerCombo.getSelectedItem().toString().equals("")
+										||!warehouseCombo.getSelectedItem().toString().equals("")
+										||output!=null
+										||!totalText.getText().equals("")
+										||!noteText.getText().equals("")){
+									if(!totalText.getText().equals("")&&stringJg.judgestring(totalText.getText())!=3){
+										legal=false;
+										frame.getWarning().showWarning("总额必须为数字");
+									}
+									if(legal){
+										PurSheetVO modifyPur=billList.getChosen().getPurVO();
+										if(!customerCombo.getSelectedItem().toString().equals("")){
+											String[] temp=customerCombo.getSelectedItem().toString().split(":");
+											modifyPur.setCustomer(customerbl.findCustomer(temp[1]));
+										}
+										if(!warehouseCombo.getSelectedItem().toString().equals("")){
+											modifyPur.setstock(warehouseCombo.getSelectedItem().toString());
+										}
+										if(output!=null){
+											modifyPur.setsheet(output);
+											modifyPur.setcommoditywords(outputNotes);
+										}
+										if(!totalText.getText().equals("")){
+											modifyPur.setmoney1(Double.parseDouble(totalText.getText()));
+										}
+										if(!noteText.getText().equals("")){
+											modifyPur.setwords(noteText.getText());
+										}
+										modifyPur.setop(Login.user.getName()+":"+Login.user.getID());
+										billList.changeChosen(modifyPur);
+									}
+								}
+								else{
+									frame.getWarning().showWarning("请输入修改信息");
+								}
+								break;
+							case CashPaymentBill:
+								if(!totalText.getText().equals("")){
+									if(stringJg.judgestring(totalText.getText())!=3){
+										frame.getWarning().showWarning("总额必须为数字");
+									}
+									else{
+										CashPaymentVO modifyCash=billList.getChosen().getCashVO();
+										modifyCash.setTotal(Double.parseDouble(totalText.getText()));
+										billList.changeChosen(modifyCash);
+										frame.getWarning().showWarning("修改成功");
+									}
+								}
+								else{
+									frame.getWarning().showWarning("请输入修改信息");
+								}
+								break;
 						}
+					}
+					else if(billList.getChosenNum()==0){
+						frame.getWarning().showWarning("请选择要修改的单据");
+					}
+					else{
+						frame.getWarning().showWarning("只能同时修改一张单据");
+					}
+					
 					break;
 				}
 			}
@@ -633,6 +783,14 @@ public class JPpassBill2 extends JPanel {
 			}
 			
 		}
-		
+		public JTextField getTotalText()
+		{
+			return totalText;
+		}
+		public void setTotalText(JTextField totalText)
+		{
+			this.totalText = totalText;
+		}
 	}
+	
 }

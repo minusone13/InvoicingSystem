@@ -91,7 +91,7 @@ public class StockCheckPanel extends JPanel{
         table.setForeground(Color.white);
         table.setBorder(null);
         table.setShowVerticalLines(false);
-        table.setEnabled(false);
+        table.setSelectionForeground(Color.white);
 		//滚动面板透明
         pane.setOpaque(false);//设置透明
 		pane.getViewport().setOpaque(false);//设置透明
