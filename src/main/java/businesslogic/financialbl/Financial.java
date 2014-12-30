@@ -17,6 +17,7 @@ import vo.inquiryVO.InquiryProcessVO;
 import vo.inquiryVO.InquirySaleVO;
 import businesslogic.accountbl.Account;
 import businesslogic.accountbl.AccountList;
+import businesslogic.commoditybl.StubCommodityList;
 import businesslogic.customerService.CustomerForFinancial;
 import businesslogic.customerbl.CustomerList;
 import businesslogic.financialbillbl.CashPaymentBill;
@@ -54,7 +55,7 @@ public class Financial implements FinancialBlService, ServiceForUpdateMoney{
 		
 		RM rm = RM.unknownerror;
 		if(result) rm=RM.done;
-		userSer.addRecord(new OperationRecord(new User(), "Add a account", rm));		
+		userSer.addRecord(new OperationRecord(StubCommodityList.user, "Add a account", rm));		
 		return result;	
 	}
 	
@@ -64,7 +65,7 @@ public class Financial implements FinancialBlService, ServiceForUpdateMoney{
 		boolean result = a.deleteAccount(new Account(name));
 		RM rm = RM.unknownerror;
 		if(result) rm=RM.done;
-		userSer.addRecord(new OperationRecord(new User(), "Delete a account", rm));		
+		userSer.addRecord(new OperationRecord(StubCommodityList.user, "Delete a account", rm));		
 		return result;
 	}
 	
@@ -72,7 +73,11 @@ public class Financial implements FinancialBlService, ServiceForUpdateMoney{
 	
 	public ArrayList<AccountVO> fuzzyFindAccount(String s , int precision) {
 		AccountList a = new AccountList();
-		return a.fuzzyFindAccount(s, precision);
+		ArrayList<AccountVO> result = a.fuzzyFindAccount(s, precision);
+		RM rm = RM.unknownerror;
+		if(result!=null) rm=RM.done;
+		userSer.addRecord(new OperationRecord(StubCommodityList.user, "Find a account", rm));		
+		return result;
 	}
 	
 	public AccountVO findAccount(String name) {
@@ -90,7 +95,7 @@ public class Financial implements FinancialBlService, ServiceForUpdateMoney{
 		boolean result = a.updateAccount(new Account(oldname),newname);
 		RM rm = RM.unknownerror;
 		if(result) rm=RM.done;
-		userSer.addRecord(new OperationRecord(new User(), "Update a account", rm));		
+		userSer.addRecord(new OperationRecord(StubCommodityList.user, "Update a account", rm));		
 		return result;
 	}
 	
@@ -117,7 +122,7 @@ public class Financial implements FinancialBlService, ServiceForUpdateMoney{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		userSer.addRecord(new OperationRecord(new User(), "Build a account at the beginning", RM.done));		
+		userSer.addRecord(new OperationRecord(StubCommodityList.user, "Build a account at the beginning", RM.done));		
 	}
 	
 	//得到版本编号
@@ -129,12 +134,15 @@ public class Financial implements FinancialBlService, ServiceForUpdateMoney{
 	//得到过去版本的期初客户信息
 	public ArrayList<CustomerVO> getOldCustomersInfo(String version) {
 		AccountList a = new AccountList();
+		userSer.addRecord(new OperationRecord(StubCommodityList.user, "Inquiry the old version infomation of customers", RM.done));
 		return a.getOldCustomersInfo(version);
+		
 	}
 	
 	//得到过去版本的期初账户信息
 	public ArrayList<AccountVO> getOldAccountsInfo(String version) {
 		AccountList a = new AccountList();
+		userSer.addRecord(new OperationRecord(StubCommodityList.user, "Inquiry the old version infomation of accounts", RM.done));
 		return a.getOldAccountsInfo(version);
 	}
 	//得到销售明细表中的销售单
@@ -222,13 +230,15 @@ public class Financial implements FinancialBlService, ServiceForUpdateMoney{
 		boolean result = financialList.creatReceiptBill(rv);
 		RM rm = RM.unknownerror;
 		if(result) rm=RM.done;
-		userSer.addRecord(new OperationRecord(new User(), "Creat a receipt", rm));		
+		userSer.addRecord(new OperationRecord(StubCommodityList.user, "Creat a receipt", rm));		
 		return result; 
 	}
 	
 	//修改收款单
 	public void updateReceipt(ReceiptVO vo) {
 		financialList.updateReceiptBill(vo);
+		userSer.addRecord(new OperationRecord(StubCommodityList.user, "Update a receipt", RM.done));		
+
 	}
 	
 	//创建付款单
@@ -236,13 +246,15 @@ public class Financial implements FinancialBlService, ServiceForUpdateMoney{
 		boolean result = financialList.creatPaymentBill(pv);
 		RM rm = RM.unknownerror;
 		if(result) rm=RM.done;
-		userSer.addRecord(new OperationRecord(new User(), "Creat a payment", rm));		
+		userSer.addRecord(new OperationRecord(StubCommodityList.user, "Creat a payment", rm));		
 		return result;
 	}
 
 	//修改付款单
 	public void updatePayment(PaymentVO vo) {
 		financialList.updatePaymentBill(vo);
+		userSer.addRecord(new OperationRecord(StubCommodityList.user, "Update a payment", RM.done));		
+
 	}
 	
 	//创建现金费用单
@@ -250,13 +262,15 @@ public class Financial implements FinancialBlService, ServiceForUpdateMoney{
 		boolean result =financialList.creatCashPaymentBill(cpv);
 		RM rm = RM.unknownerror;
 		if(result) rm=RM.done;
-		userSer.addRecord(new OperationRecord(new User(), "Creat a cashpayment", rm));		
+		userSer.addRecord(new OperationRecord(StubCommodityList.user, "Creat a cashpayment", rm));		
 		return result;		
 	}
 	
 	//修改现金费用单
 	public void updateCashPayment(CashPaymentVO vo) {
 		financialList.updateCashPaymentBill(vo);
+		userSer.addRecord(new OperationRecord(StubCommodityList.user, "Update a cashpayment", RM.done));		
+
 	}
 	
 	/*需要从单据池筛选指定状态的所有收款单*/

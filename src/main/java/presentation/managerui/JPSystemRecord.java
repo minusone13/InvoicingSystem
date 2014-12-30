@@ -44,6 +44,7 @@ public class JPSystemRecord extends JPanel
 		jpbg1.setIcon(new ImageIcon("src/image/block/blockForTable3.png"));
 	
 		//表格透明
+		table.setSelectionForeground(Color.white);
 		table.setOpaque(false);
         DefaultTableCellRenderer render1 = new DefaultTableCellRenderer();   
         render1.setOpaque(false); //将渲染器设置为透明  

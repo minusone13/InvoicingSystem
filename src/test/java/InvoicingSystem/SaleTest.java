@@ -138,7 +138,7 @@ public class SaleTest extends TestCase{
 			assertTrue(result5);
 		}*/
 		
-		
+	/*	
 		public void testgetPurBackSheet(){
 			salebillController controller = new salebillController();
 			ArrayList<PurBackSheetVO> list = controller.getAllPurBackSheet();

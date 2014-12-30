@@ -30,7 +30,7 @@ public class Server
 		 try
 		{
 			 	
-			 	String ip = "127.0.0.1:1099";
+			 	String ip = "192.168.253.1:1099";
 				CustomerDataService customerdataservice= new CustomerData();
 				AccountDataService accountdataservice = new AccountData();
 				CommodityBillSaverService commoditybillsaver = new CommodityBillSaver();

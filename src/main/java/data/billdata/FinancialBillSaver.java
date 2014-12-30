@@ -122,7 +122,7 @@ public class FinancialBillSaver extends UnicastRemoteObject implements Financial
 		
 	}
 	/*获取收款单*/
-	public ArrayList<ReceiptPO> getReceipt()throws RemoteException{
+	public ArrayList<ReceiptPO> getReceipt() throws RemoteException{
 		File filename = Tool.Opendoc("ReceiptPO.txt");
 		
 		ArrayList<ReceiptPO> receiptbillList = null;
