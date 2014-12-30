@@ -7,6 +7,7 @@ import java.util.Date;
 import po.BillState;
 import po.BillStyle;
 import po.LevelStrategyStyle;
+import vo.BarginStrategyVO;
 import vo.CustomerVO;
 import vo.LevelStrategyVO;
 import vo.PurBackSheetVO;
@@ -174,15 +175,14 @@ public class salebillController implements SaleBillBlService,salebillForFinancia
 			PurSheetVO vo = this.findPurSheet(ID);
 			switch(state){
 				case SUBMITED : 
-					//稍候
+					//nothing happened.
 					break;
 				case EXAMINED : 
-					//这里是我调用吗？
-					customerid = vo.getcustomer().getid();
-					list.changeShouldPay(ID, vo.getmoney1());
+					//still nothing.
 					break;
 				case OVER     : 
-					
+					customerid = vo.getcustomer().getid();
+					list.changeShouldPay(ID, vo.getmoney1());
 					break;
 				
 			}
@@ -196,15 +196,14 @@ public class salebillController implements SaleBillBlService,salebillForFinancia
 			PurBackSheetVO vo = this.findPurBackSheet(ID);
 			switch(state){
 				case SUBMITED : 
-					
+					//nothing happened.
 					break;
 				case EXAMINED : 
-					//这里是我调用吗？
-					customerid = vo.getcustomer().getid();
-					list.changeShouldTake(ID, vo.getmoney1());
+					//nothing happened.
 					break;
 				case OVER     : 
-				
+					customerid = vo.getcustomer().getid();
+					list.changeShouldTake(ID, vo.getmoney1());
 					break;
 				
 			}
@@ -218,9 +217,10 @@ public class salebillController implements SaleBillBlService,salebillForFinancia
 			SaleSheetVO vo = this.findSaleSheet(ID);
 			switch(state){
 				case SUBMITED : 
-					
+					//check should
 					break;
 				case EXAMINED : 
+					//
 					customerid = vo.getcustomer().getid();
 					list.changeShouldTake(ID, vo.getmoney2());
 					break;
@@ -508,7 +508,37 @@ public class salebillController implements SaleBillBlService,salebillForFinancia
 			}
 			return words;
 		}
+		
+		/*判断传入的a是否属于b*/
+		public boolean isBelong(ArrayList<CommodityVO> a,ArrayList<CommodityVO> b){
+			boolean hasFound = false;
+			for(CommodityVO avo:a){
+				for(CommodityVO bvo:b){
+					if(avo.equals(bvo)){
+						hasFound=true;
+					}
+				}
+				if(!hasFound){
+					return false;
+				}
+				hasFound=false;
+			}
+			return true;
+		}
 
+		public ArrayList<BarginStrategyVO> getSomeBarginStrategy(SaleSheetVO vo){
+			ArrayList<BarginStrategyVO> result = new ArrayList<BarginStrategyVO>();
+			StubManagerBlService straController = new StubManager();
+			ArrayList<BarginStrategyVO> bsvo = straController.ShowBarginStrategy();//读取的所有策略;
+			for(BarginStrategyVO tempvo:bsvo){
+				if(this.isBelong(tempvo.getAlOfCommodity(), vo.getsheet())){
+					result.add(tempvo);
+				}
+			}
+			return result;
+		}
+
+		
 		public ArrayList<ReachStrategyVO> getSomeReachStrategy(SaleSheetVO vo)
 		{
 			ArrayList<ReachStrategyVO> result = new ArrayList<ReachStrategyVO>();
