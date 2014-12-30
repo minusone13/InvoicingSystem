@@ -587,5 +587,12 @@ public class JPManagerComOfStock extends JPanel {
 
 
 	}
-	
+	public JPManagerCom getManageCom()
+	{
+		return manageCom;
+	}
+	public void setManageCom(JPManagerCom manageCom)
+	{
+		this.manageCom = manageCom;
+	}
 }

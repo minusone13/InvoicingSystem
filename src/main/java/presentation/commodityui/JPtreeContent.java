@@ -23,11 +23,13 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeNode;
 
 import po.RM;
+import po.Role;
 import presentation.WarningText;
 import vo.stockvo.CategoryVO;
 import vo.stockvo.CommodityVO;
 import vo.stockvo.StockVO;
 import vo.stockvo.StockVO.Type;
+import businesslogic.commoditybl.StubCommodityList;
 import businesslogic.stockmanagerbl.StubStockController;
 import businesslogicservice.commodityblservice.StubCommodityBlService;
 //import dataservice.commoditydataservice.StubCommodityDataService;
@@ -80,6 +82,13 @@ public class JPtreeContent extends JPanel {
         tree= new JTree(treeModel);
 		  //根据逻辑层数据构建树
 		top.removeAllChildren();
+		//如果是在界面初始化和非财务人员操作时，要从stock读取商品信息
+		if(StubCommodityList.user==null||
+				StubCommodityList.user.getR()!=Role.FINANCIAL_STAFF
+				&&StubCommodityList.user.getR()!=Role.FINANCIAL_MANAGER){
+			stockbl.setFilePath("Stock.ser");
+			System.out.println("还原");
+		}
         ArrayList<StockVO> stockList=stockbl.openCategory("1");
         if(stockList.size()!=0){
         	 if(stockList.get(0).getT()==Type.Category){
@@ -143,9 +152,8 @@ public class JPtreeContent extends JPanel {
         	String parentID=rePath((DefaultMutableTreeNode)thisNode.getParent());
         	
         	CategoryVO categryvo=new CategoryVO(parentID,thisNode.getUserObject().toString());
-        	
-        	TreeNode[] path=thisNode.getPath();
-        	Thread t=new Thread(new editorOfCat(categryvo,path));
+        	//修改名称线程
+        	Thread t=new Thread(new editorOfCat(categryvo,thisNode));
         	t.start();
         
         }  
@@ -153,16 +161,16 @@ public class JPtreeContent extends JPanel {
 	public class editorOfCat  implements Runnable{
 
 		private CategoryVO vo;
-		private TreeNode[] path;
-		public editorOfCat(CategoryVO vo,TreeNode[] path){
+		private DefaultMutableTreeNode modifyNode;
+		public editorOfCat(CategoryVO vo,DefaultMutableTreeNode modifyNode){
 			this.vo=vo;
-			this.path=path;
+			this.modifyNode=modifyNode;
 		}
 		public void run()
 		{
 			try
 			{
-				Thread.sleep(1000);
+				Thread.sleep(500);
 			}
 			catch (InterruptedException e)
 			{
@@ -173,12 +181,13 @@ public class JPtreeContent extends JPanel {
 			
 			//进行修改
 			//逻辑层改变节点名字的接口
-        	RM rm=stockbl.updateCategory(vo,new DefaultMutableTreeNode(path).getUserObject().toString());
+        	RM rm=stockbl.updateCategory(vo,modifyNode.getUserObject().toString());
         	if(rm==RM.done){
-        		System.out.println("修改成功，新名称："+new DefaultMutableTreeNode(path).getUserObject().toString());
+        		JPmanagerCom.getFrame().getWarning().showWarning("修改成功");
         	}
         	else{
-        		System.out.println("修改结果"+rm);
+        		JPmanagerCom.getFrame().getWarning().showWarning("修改结果"+rm);
+        		modifyNode.setUserObject(vo.getName());
         	}
 		}
 		

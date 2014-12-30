@@ -22,6 +22,8 @@ import vo.uservo.UserVO;
 public class ReceiptBill extends Bill implements GetVOandPO{
 	//userVO修改的
 	
+		private String userID;
+		private String userName;
 		private Role role;//权限
 	
 	
@@ -48,7 +50,8 @@ public class ReceiptBill extends Bill implements GetVOandPO{
 		this.date = new Date();
 		this.customer = vo.getCustomer();
 		this.total = vo.getTotal();
-		
+		this.userID = vo.getUserID();
+		this.userName = vo.getUserName();
 		this.role = vo.getRole();
 		
 		state = vo.getBillState();
@@ -59,7 +62,7 @@ public class ReceiptBill extends Bill implements GetVOandPO{
 		ArrayList<ReceiptBill> list = pool.getReceiptBill();
 		ID = "SKD-"+currentTime+"-"+String.format("%05d", list.size()+1);
 		
-		op = vo.getOp();
+		op = getUserName()+" "+getUserID();
 	}
 	
 	public String getOp() {
@@ -69,6 +72,20 @@ public class ReceiptBill extends Bill implements GetVOandPO{
 		this.op = op;
 	}
 	
+	public String getUserName() {
+		return userName;
+	}
+	
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	
+	public String getUserID() {
+		return userID;
+	}
+	public void setUserID(String userID) {
+		this.userID = userID;
+	}
 	
 	public BillStyle getBillstyle() {
 		return billstyle;
@@ -155,6 +172,8 @@ public class ReceiptBill extends Bill implements GetVOandPO{
 		vo.setRemark(remark);
 		vo.setBillState(state);
 		vo.setOp(op);
+		vo.setUserID(userID);
+		vo.setUserName(userName);
 		vo.setDate(date);
 		return vo;
 	}
@@ -182,7 +201,8 @@ public class ReceiptBill extends Bill implements GetVOandPO{
 		po.setRemark(remark);
 		po.setStyle(billstyle);
 		po.setOp(op);
-		
+		po.setUserID(userID);
+		po.setUserName(userName);
 		po.setDate(date);
 		return po;
 	}
@@ -201,7 +221,8 @@ public class ReceiptBill extends Bill implements GetVOandPO{
 		role = po.getRole();
 		billstyle = po.getStyle();
 		op = po.getOp();
-		
+		userID = po.getUserID();
+		userName = po.getUserName();
 		date = po.getDate();
 	}
 }

@@ -69,8 +69,8 @@ public class StubBillPool {
 	
 		
 
-////		清除保存的记录
-//		save();
+//		清除保存的记录
+		save();
 		
 		read();
 		

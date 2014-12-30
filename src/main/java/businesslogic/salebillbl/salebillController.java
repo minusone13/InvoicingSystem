@@ -221,11 +221,11 @@ public class salebillController implements SaleBillBlService,salebillForFinancia
 					break;
 				case EXAMINED : 
 					//
-					
-					break;
-				case OVER     : 
 					customerid = vo.getcustomer().getid();
 					list.changeShouldTake(ID, vo.getmoney2());
+					break;
+				case OVER     : 
+				
 					break;
 				
 			}
@@ -242,11 +242,11 @@ public class salebillController implements SaleBillBlService,salebillForFinancia
 					
 					break;
 				case EXAMINED : 
-					
-					break;
-				case OVER     : 
 					customerid = vo.getcustomer().getid();
 					list.changeShouldPay(ID, vo.getmoney2());
+					break;
+				case OVER     : 
+					
 					break;
 				
 			}

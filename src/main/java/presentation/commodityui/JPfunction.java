@@ -87,6 +87,7 @@ public class JPfunction extends JPanel {
 			case 1:
 				function1.setIcon(new ImageIcon("src/image/stockUI/Commodity.png"));
 				JPfunction.this.setVisible(false);
+				frame.getStock().getManagerComs().getManageCom().getContent().innitial();
 				frame.getStock().getManagerComs().setVisible(true);
 				//标记当前面板，用于后退按钮
 				frame.getStock().setPanelType(PanelType.JPManagerComOfStock);
