@@ -23,8 +23,6 @@ import vo.uservo.UserVO;
 public class PaymentBill extends Bill implements GetVOandPO{
 	//userVO初始化
 	
-	private String userID ;
-	private String userName ;
 	private Role role;//权限
 		
 	private BillStyle billstyle=BillStyle.PaymentBill;
@@ -52,8 +50,7 @@ public class PaymentBill extends Bill implements GetVOandPO{
 		}
 		this.customer = vo.getCustomer(); ;
 		this.total = vo.getTotal(); 
-		this.userID = vo.getUserID();
-		this.userName = vo.getUserName();
+		
 		this.role = vo.getRole();
 		
 		state = vo.getBillState();
@@ -64,7 +61,7 @@ public class PaymentBill extends Bill implements GetVOandPO{
 		ArrayList<PaymentBill> list = pool.getPaymentBill();
 		ID = "FKD-"+currentTime+"-"+String.format("%05d", list.size()+1);
 		
-		op = getUserName()+" "+getUserID();
+		op = vo.getOp();
 	}
 	
 	public String getOperator() {
@@ -73,20 +70,7 @@ public class PaymentBill extends Bill implements GetVOandPO{
 	public void setOp(String op) {
 		this.op = op;
 	}
-	public String getUserName() {
-		return userName;
-	}
 	
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-	
-	public String getUserID() {
-		return userID;
-	}
-	public void setUserID(String userID) {
-		this.userID = userID;
-	}
 	
 	public BillStyle getBillStyle() {
 		return billstyle;
@@ -168,8 +152,8 @@ public class PaymentBill extends Bill implements GetVOandPO{
 		vo.setRemark(remark);
 		vo.setBillStyle(billstyle);
 		vo.setDate(date);
-		vo.setUserID(userID);
-		vo.setUserName(userName);
+		
+	
 		vo.setOp(op);		
 		return vo;
 	}
@@ -196,8 +180,6 @@ public class PaymentBill extends Bill implements GetVOandPO{
 		po.setMoney(money);
 		po.setRemark(remark);
 		po.setStyle(billstyle);
-		po.setUserID(userID);
-		po.setUserName(userName);
 		po.setOp(op);
 		po.setDate(date);
 		return po;
@@ -216,8 +198,6 @@ public class PaymentBill extends Bill implements GetVOandPO{
 		}
 		role = po.getRole();
 		billstyle = po.getStyle();
-		userID = po.getUserID();
-		userName = po.getUserName();
 		op = po.getOp();
 		date = po.getDate();
 	}
