@@ -354,16 +354,13 @@ public class Inquiry {
 				
 				//客户
 				if(ipv.getCustomer()!=null) {
-					String[] temp = ipv.getCustomer().split(":");
-					System.out.println(pur.getcustomer().getid());
-					if(pur.getcustomer().getid().equals(temp[1])){} 
+					if(pur.getcustomer().getname().equals(ipv.getCustomer())){} 
 					else continue;
 				}
 				
 				
 				purSheetVO.add(pur.getVO());
 			}
-			System.out.println("~~~~~~~~"+purSheetVO.size());
 			
 			return purSheetVO;
 			
