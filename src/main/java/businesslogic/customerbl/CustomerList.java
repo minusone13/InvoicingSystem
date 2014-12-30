@@ -87,6 +87,7 @@ public class CustomerList implements CustomerForFinancial, CustomerBlService{
 			CustomerPO po = new CustomerPO();
 			po = newCustomer.getPO();
 			try{
+				System.out.println("我曾来过");
 				CustomerDataService customerdata = (CustomerDataService)Naming.lookup("rmi://"+entrance.Test.ipOfServer+"/CustomerData");
 				return customerdata.updateCustomer(po);}
 			catch(Exception e){

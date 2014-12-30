@@ -22,6 +22,8 @@ import businesslogic.customerbl.CustomerList;
 import businesslogic.examinebl.StubBillPool;
 import businesslogic.managerbl.StubManager;
 import businesslogic.salebillServicec.salebillForFinancial;
+import businesslogic.stockmanagerbl.StubStockController;
+import businesslogic.stockservice.StockBlForSalesMen;
 import businesslogicservice.customerblservice.CustomerBlService;
 import businesslogicservice.managerblservice.StubManagerBlService;
 import businesslogicservice.salebillblservice.SaleBillBlService;
@@ -173,12 +175,19 @@ public class salebillController implements SaleBillBlService,salebillForFinancia
 			CustomerList list = new CustomerList();
 			String customerid = new String();
 			PurSheetVO vo = this.findPurSheet(ID);
+			StockBlForSalesMen stockservice = new StubStockController(); 
+			
 			switch(state){
 				case SUBMITED : 
-					//nothing happened.
+					//那个返回的结果有什么用？
+					for(CommodityVO tempvo:vo.getsheet()){
+						stockservice.readyForIn(tempvo.getId(), tempvo.getName(), tempvo.getModel(), tempvo.getNumber(), tempvo.getIn());
+					}
 					break;
 				case EXAMINED : 
-					//still nothing.
+					for(CommodityVO tempvo:vo.getsheet()){
+						stockservice.checkIn(tempvo.getId(),  tempvo.getName(), tempvo.getModel(), tempvo.getNumber(), tempvo.getIn());
+					}
 					break;
 				case OVER     : 
 					customerid = vo.getcustomer().getid();
@@ -194,12 +203,17 @@ public class salebillController implements SaleBillBlService,salebillForFinancia
 			CustomerList list = new CustomerList();
 			String customerid = new String();
 			PurBackSheetVO vo = this.findPurBackSheet(ID);
+			StockBlForSalesMen stockservice = new StubStockController(); 
 			switch(state){
 				case SUBMITED : 
-					//nothing happened.
+					for(CommodityVO tempvo:vo.getsheet()){
+						stockservice.readyForOut(tempvo.getId(), tempvo.getName(), tempvo.getModel(), tempvo.getNumber(), tempvo.getOut());
+					}
 					break;
 				case EXAMINED : 
-					//nothing happened.
+					for(CommodityVO tempvo:vo.getsheet()){
+						stockservice.undoCheckOut(tempvo.getId(),  tempvo.getName(), tempvo.getModel(), tempvo.getNumber(), tempvo.getOut());
+					}
 					break;
 				case OVER     : 
 					customerid = vo.getcustomer().getid();
@@ -215,17 +229,21 @@ public class salebillController implements SaleBillBlService,salebillForFinancia
 			CustomerList list = new CustomerList();
 			String customerid = new String();
 			SaleSheetVO vo = this.findSaleSheet(ID);
+			StockBlForSalesMen stockservice = new StubStockController(); 
 			switch(state){
 				case SUBMITED : 
-					//check should
+					for(CommodityVO tempvo:vo.getsheet()){
+						stockservice.readyForOut(tempvo.getId(), tempvo.getName(), tempvo.getModel(), tempvo.getNumber(), tempvo.getOut());
+					}
 					break;
 				case EXAMINED : 
-					//
-					customerid = vo.getcustomer().getid();
-					list.changeShouldTake(ID, vo.getmoney2());
+					for(CommodityVO tempvo:vo.getsheet()){
+						stockservice.checkOut(tempvo.getId(),  tempvo.getName(), tempvo.getModel(), tempvo.getNumber(), tempvo.getOut());
+					}
 					break;
 				case OVER     : 
-				
+					customerid = vo.getcustomer().getid();
+					list.changeShouldTake(ID, vo.getmoney2());
 					break;
 				
 			}
@@ -237,16 +255,21 @@ public class salebillController implements SaleBillBlService,salebillForFinancia
 			CustomerList list = new CustomerList();
 			String customerid = new String();
 			SaleBackSheetVO vo = this.findSaleBackSheet(ID);
+			StockBlForSalesMen stockservice = new StubStockController(); 
 			switch(state){
 				case SUBMITED : 
-					
+					for(CommodityVO tempvo:vo.getsheet()){
+						stockservice.readyForIn(tempvo.getId(), tempvo.getName(), tempvo.getModel(), tempvo.getNumber(), tempvo.getIn());
+					}
 					break;
 				case EXAMINED : 
-					customerid = vo.getcustomer().getid();
-					list.changeShouldPay(ID, vo.getmoney2());
+					for(CommodityVO tempvo:vo.getsheet()){
+						stockservice.undoCheckIn(tempvo.getId(),  tempvo.getName(), tempvo.getModel(), tempvo.getNumber(), tempvo.getIn());
+					}
 					break;
 				case OVER     : 
-					
+					customerid = vo.getcustomer().getid();
+					list.changeShouldPay(ID, vo.getmoney2());
 					break;
 				
 			}
@@ -560,7 +583,6 @@ public class salebillController implements SaleBillBlService,salebillForFinancia
 			StubManagerBlService straController = new StubManager();
 			ArrayList<LevelStrategyVO> lsvo = straController.ShowLevelStrategy();//读取的所有策略;
 			for(LevelStrategyVO tempvo:lsvo){
-
 				if(tempvo.getLevel_strategy_style()==LevelStrategyStyle.Gift){
 					if(tempvo.getLimit()<=vo.getmoney1()&&(tempvo.getLevel()==vo.getcustomer().getlevel())){
 					//判断实践我暂时还没处理，先凑合一下;
@@ -621,6 +643,7 @@ public class salebillController implements SaleBillBlService,salebillForFinancia
 			//允许有几个特价包？
 			//按照我的理解特价包应该是优先级最高的优惠;
 			salesheetvo.setmoney1(salesheetvo.getmoney1()-bsvo.getDiscount());
+			salesheetvo.setwords("商品中存在特价包");
 			return salesheetvo;
 		}
 
@@ -644,7 +667,10 @@ public class salebillController implements SaleBillBlService,salebillForFinancia
 					 String currentTime = format.format(new Date());
 					 ArrayList<StubGiftBill> list=pool.getGiftBill();
 					 giftbill.setID("XJFYD-"+currentTime+"-"+String.format("%05d", list.size()+1));
-					 giftbill.setRemark(null);
+					 String[] remark = new String[2];
+					 remark[0]=salesheetvo.getid();
+					 remark[1]=salesheetvo.getcustomer().getname();
+					 giftbill.setRemark(remark);
 					 giftbill.setOperator(salesheetvo.getop());
 					 pool.add(giftbill);
 					 salesheetvo.setwords("赠品单编号："+giftbill.getID());

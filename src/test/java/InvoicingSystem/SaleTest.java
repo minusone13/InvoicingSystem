@@ -132,12 +132,12 @@ public class SaleTest extends TestCase{
 			assertTrue(result3);
 		}*/
 		
-		public void testgetPurSheet(){
+		/*public void testgetPurSheet(){
 			salebillController controller = new salebillController();
 			boolean result5 = controller.getPurSheet("JHD-20141230-00001");
 			System.out.println(controller.findPurSheet("JHD-20141230-00001").getcustomer().getname());
 			assertTrue(result5);
-		}
+		}*/
 		
 	/*	
 		public void testgetPurBackSheet(){
@@ -194,19 +194,19 @@ public class SaleTest extends TestCase{
 			assertTrue(result10);
 		}*/
 		
-//		public void testfindCustomer(){
-//			CustomerList customerlist = new CustomerList();
-//			CustomerVO tempvo = null;
-//			tempvo = customerlist.findCustomer("4");
-//			System.out.println(tempvo.getname()+tempvo.getid());
-//			
-//			boolean result11=true;
-//			tempvo.setShouldTake(100.0);
-//			customerlist.updateCustomer(tempvo);
-//			tempvo = customerlist.findCustomer("1");
-//			System.out.println(tempvo.getShouldTake());
-//			assertTrue(result11);
-//		}
+		/*public void testfindCustomer(){
+			CustomerList customerlist = new CustomerList();
+			CustomerVO tempvo = null;
+		tempvo = customerlist.findCustomer("4");
+		System.out.println(tempvo.getname()+tempvo.getid());
+		
+			boolean result11=true;
+		tempvo.setShouldTake(100.0);
+		customerlist.updateCustomer(tempvo);
+			tempvo = customerlist.findCustomer("1");
+			System.out.println(tempvo.getShouldTake());
+			assertTrue(result11);
+		}*/
 
 		/*public void testsureReachStrategy(){
 			salebillController controller = new salebillController();
@@ -216,6 +216,19 @@ public class SaleTest extends TestCase{
 			assertTrue(result12);
 		}*/
 		
+		public void testupdateCustomer(){
+			CustomerList customerlist = new CustomerList();
+			CustomerVO tempvo = null;
+			tempvo = customerlist.findCustomer("00001");
+			System.out.println(tempvo.getname());
+			System.out.println(tempvo.getShouldTake());
+			tempvo.setShouldTake(100.0);
+			System.out.println(tempvo.getShouldTake());
+			customerlist.updateCustomer(tempvo);
+			tempvo=customerlist.findCustomer("00001");
+			System.out.println(tempvo.getname());
+			assertTrue(true);
+		}
 		
 		
 }
