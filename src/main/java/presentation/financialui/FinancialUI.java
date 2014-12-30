@@ -306,9 +306,7 @@ public class FinancialUI extends JPanel {
 			FinancialUI.this.getBusinessProgress().reHome();
 			FinancialUI.this.getSaleDetail().reHome();
 			//如果是期初建账 商品界面退出 就把地址set回去
-			if(FinancialUI.this.getPanelType()==PanelType.JPaccountOfComs){
-				stockbl.setFilePath("Stock.ser");
-			}
+	
 			
 		}
 

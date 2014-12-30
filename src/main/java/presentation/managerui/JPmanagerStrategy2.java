@@ -700,10 +700,11 @@ public class JPmanagerStrategy2 extends JPanel {
 						break;
 					case 2:
 						addButton.setIcon(add0);
-						//调出商品选择面板
-						frame.getManager().getCommodityChoose().setVisible(true);
 						//初始化目录
 						frame.getManager().getCommodityChoose().getContent().innitial();
+						//调出商品选择面板
+						frame.getManager().getCommodityChoose().setVisible(true);
+						
 						break;
 					case 3:
 						confirm.setIcon(confirm0);

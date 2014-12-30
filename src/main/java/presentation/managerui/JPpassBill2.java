@@ -615,10 +615,12 @@ public class JPpassBill2 extends JPanel {
 					//显示编辑商品面板
 					switch(billStyle){
 					case GiftBill:
+						frame.getManager().getCommodityChoose().getContent().innitial();
 						frame.getManager().getCommodityChoose().setVisible(true);
 						break;
 					case PurSheet:
 						frame.getManager().getCommodityChoose().setRole(Role.PURCHASE_SALE_STAFF);
+						frame.getManager().getCommodityChoose().getContent().innitial();
 						frame.getManager().getCommodityChoose().setVisible(true);
 						break;
 					case CashPaymentBill:
