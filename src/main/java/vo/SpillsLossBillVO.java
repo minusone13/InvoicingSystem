@@ -14,7 +14,7 @@ public class SpillsLossBillVO extends VO
 	private BillStyle billstyle = BillStyle.SpillsLossBill;// 订单种类
 	private String operator;
 	private String ID;// 单据编号
-	private Date date;
+	private Date date = new Date();
 	private Type t;// 溢出、损坏种类
 	private CommodityVO com;// 报告的商品，其中的数量属性为溢出损坏数量
 	private BillState state = BillState.DRAFT;// 单据状态

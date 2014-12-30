@@ -11,7 +11,7 @@ public class AlertBillVO extends VO
 {
 	private String ID;// 订单编号
 	String operator;
-	private Date date;
+	private Date date = new Date();
 	private BillStyle billstyle = BillStyle.AlertBill;// 订单种类
 	private CommodityVO com;// 需要报警的商品信息
 	private int shortage;// 短缺数量

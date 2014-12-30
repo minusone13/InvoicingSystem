@@ -143,7 +143,7 @@ public class StubCommodityBill
 			Date d = temp.getDate();
 			if (d.after(d1) && d.before(d2))
 			{
-				for (int j = 0; j < temp.getComs().size(); i++)
+				for (int j = 0; j < temp.getComs().size(); j++)
 				{
 					MockCommodity com = temp.getComs().get(j);
 					sum += com.getIn() * com.getNumber();

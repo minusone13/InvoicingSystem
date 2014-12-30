@@ -12,7 +12,7 @@ import businesslogic.examinebl.Bill;
 public class StubAlertBill extends Bill implements GetVOandPO
 {// 报警单对象，统一进入单据池管理和存储
 	//参见大作业要求
-	Date date;
+	Date date = new Date();
 	String ID;
 	String operator;
 	MockCommodity com;
