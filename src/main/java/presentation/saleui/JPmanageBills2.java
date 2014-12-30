@@ -1183,7 +1183,11 @@ public class JPmanageBills2 extends JPanel {
 												}
 												modifyPur.setop(Login.user.getName()+":"+Login.user.getID());
 												billList.changeChosen(modifyPur);
+												frame.getWarning().showWarning("修改成功");
 											}
+										}
+										else{
+											frame.getWarning().showWarning("请输入修改信息");
 										}
 										break;
 									case SaleSheet:
@@ -1243,7 +1247,12 @@ public class JPmanageBills2 extends JPanel {
 												}
 												modifySale.setop(Login.user.getName()+":"+Login.user.getID());
 												billList.changeChosen(modifySale);
+												
+												frame.getWarning().showWarning("修改成功");
 											}
+										}
+										else{
+											frame.getWarning().showWarning("请输入修改信息");
 										}
 										break;
 								}

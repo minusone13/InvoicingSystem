@@ -66,7 +66,7 @@ public class AccountBuildIndexPanel extends JPanel{
 		accountInfo.addMouseListener(new MouseListenOfButton(23));
 		
 		this.add(buildButton,3);
-		buildButton.setBounds(800, 400, 50, 50);
+		buildButton.setBounds(800, 450, 50, 50);
 		buildButton.setIcon(buildIcon0);
 		buildButton.addMouseListener(new MouseListenOfButton(24));
 		
