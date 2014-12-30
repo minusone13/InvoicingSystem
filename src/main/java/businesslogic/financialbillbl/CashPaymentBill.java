@@ -22,11 +22,7 @@ import vo.uservo.UserVO;
 
 public class CashPaymentBill extends Bill implements GetVOandPO{
 	
-	
-	private String userID ;
-	private String userName ;
 	private Role role ;//权限
-	
 	
 	
 	private BillStyle billstyle=BillStyle.CashPaymentBill;
@@ -50,8 +46,7 @@ public class CashPaymentBill extends Bill implements GetVOandPO{
 		}
 		this.account = vo.getAccount();
 		this.total = vo.getTotal();
-		this.userID = vo.getUserID();
-		this.userName = vo.getUserName();
+	
 		this.role = vo.getRole();
 		state = vo.getBillState();
 		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
@@ -61,7 +56,7 @@ public class CashPaymentBill extends Bill implements GetVOandPO{
 		ArrayList<CashPaymentBill> list = pool.getCashPaymentBill();
 		ID = "XJFYD-"+currentTime+"-"+String.format("%05d", list.size()+1);
 		
-		op = getUserName()+" "+getUserID();
+		op = vo.getOp();
 	}
 	
 	public String getOperator() {
@@ -70,19 +65,7 @@ public class CashPaymentBill extends Bill implements GetVOandPO{
 	public void setOp(String op) {
 		this.op = op;
 	}
-	public String getUserName() {
-		return userName;
-	}
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
 
-	public String getUserID() {
-		return userID;
-	}
-	public void setUserID(String userID) {
-		this.userID = userID;
-	}
 	public BillStyle getBillstyle() {
 		return billstyle;
 	}
@@ -161,8 +144,6 @@ public class CashPaymentBill extends Bill implements GetVOandPO{
 		vo.setRole(role);
 		vo.setBillStyle(billstyle);
 		vo.setBillState(state);	
-		vo.setUserID(userID);
-		vo.setUserName(userName);
 		vo.setOp(op);
 		vo.setDate(date);
 		return vo;
@@ -191,8 +172,6 @@ public class CashPaymentBill extends Bill implements GetVOandPO{
 		po.setStyle(billstyle);
 		po.setTotal(total);
 		po.setDate(date);
-		po.setUserID(userID);
-		po.setUserName(userName);
 		po.setOp(op);
 		return po;
 	}
@@ -213,8 +192,6 @@ public class CashPaymentBill extends Bill implements GetVOandPO{
 		}
 		role = po.getRole();
 		date = po.getDate();
-		userID = po.getUserID();
-		userName = po.getUserName();
 		op = po.getOp();
 	}
 }

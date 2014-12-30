@@ -583,7 +583,7 @@ public class BusinessProcessPanel extends JPanel{
 			Object[][] dataOfPurAndBackSheet = new Object[sizeOfPurAndBackSheet][];
 	        for(int i=0;i<sizeOfPurSheet;i++){
 	        	PurSheetVO tempPurSheet= purSheet.get(i);
-	        	Object[] temp ={tempPurSheet.getid(),tempPurSheet.getcustomer(),
+	        	Object[] temp ={tempPurSheet.getid(),tempPurSheet.getcustomer().getname(),
 	        			tempPurSheet.getstock(),tempPurSheet.getop(),
 	        			tempPurSheet.getwords(),tempPurSheet.getmoney1(),
 	        			tempPurSheet.getState()};
@@ -591,7 +591,7 @@ public class BusinessProcessPanel extends JPanel{
 	        }
 	        for(int i=sizeOfPurSheet;i<sizeOfPurAndBackSheet;i++){
 	        	PurBackSheetVO tempPurBackSheet= purBackSheet.get(i);
-	        	Object[] temp ={tempPurBackSheet.getid(),tempPurBackSheet.getcustomer(),
+	        	Object[] temp ={tempPurBackSheet.getid(),tempPurBackSheet.getcustomer().getname(),
 	        			tempPurBackSheet.getstock(),tempPurBackSheet.getop(),
 	        			tempPurBackSheet.getwords(),tempPurBackSheet.getmoney1(),
 	        			tempPurBackSheet.getState()};
@@ -603,7 +603,7 @@ public class BusinessProcessPanel extends JPanel{
 			model2.setDataVector(new Object[][]{}, columnNames3s);
 			table2.updateUI();
 			break;
-//有问题，业务员=========================================
+
 		case 4:
 	    	saleSheet = financial.getProcessSaleSheet(ipv);
 	    	saleBackSheet = financial.getProcessSaleBackSheet(ipv);
@@ -614,8 +614,8 @@ public class BusinessProcessPanel extends JPanel{
 	        Object[][] dataOfSaleAndBack = new Object[sizeOfSaleAndBack][];
 	        for(int i=0;i<sizeOfSale;i++){
 	        	SaleSheetVO saleVO = saleSheet.get(i);
-	        	Object[] temp ={saleVO.getid(),saleVO.getcustomer(),
-	        			saleVO.getop(), 
+	        	Object[] temp ={saleVO.getid(),saleVO.getcustomer().getname(),
+	        			saleVO.getcustomer().getdeSaler(),saleVO.getop(), 
 	        			saleVO.getstock(),saleVO.getmoney1(),saleVO.getdiscount(),
 	        			saleVO.getmoney2(),saleVO.getpmoney(),saleVO.getwords(),
 	        			saleVO.getState()};
@@ -624,8 +624,8 @@ public class BusinessProcessPanel extends JPanel{
 	        }
 	        for(int i=sizeOfSale;i<sizeOfSaleAndBack;i++){
 	        	SaleBackSheetVO saleBackVO = saleBackSheet.get(i);
-	        	Object[] temp ={saleBackVO.getid(),saleBackVO.getcustomer(),
-	        			saleBackVO.getop(), 
+	        	Object[] temp ={saleBackVO.getid(),saleBackVO.getcustomer().getname(),
+	        			saleBackVO.getcustomer().getdeSaler(),saleBackVO.getop(), 
 	        			saleBackVO.getstock(),saleBackVO.getmoney1(),saleBackVO.getdiscount(),
 	        			saleBackVO.getmoney2(),saleBackVO.getpmoney(),saleBackVO.getwords(),
 	        			saleBackVO.getState()};
