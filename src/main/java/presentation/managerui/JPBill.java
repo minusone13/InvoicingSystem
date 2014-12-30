@@ -976,7 +976,7 @@ public class JPBill extends JPanel {
 		//设置单据编号，状态，种类
 		state=ps.getState();
 		style=ps.getStyle();
-		ID=ps.getID();
+		ID=ps.getid();
 		//传递VO
 		purVO=ps;
 		//面板大小
@@ -1033,7 +1033,7 @@ public class JPBill extends JPanel {
 		//设置单据编号，状态，种类
 		state=pbs.getState();
 		style=pbs.getStyle();
-		ID=pbs.getID();
+		ID=pbs.getid();
 		//传递VO
 		purbackVO=pbs;
 		//面板大小
@@ -1091,7 +1091,7 @@ public class JPBill extends JPanel {
 		//设置单据编号，状态，种类
 		state=ss.getState();
 		style=ss.getStyle();
-		ID=ss.getID();
+		ID=ss.getid();
 		//传递VO
 		saleVO=ss;
 		//面板大小
@@ -1158,7 +1158,7 @@ public class JPBill extends JPanel {
 		//设置单据编号，状态，种类
 		state=sbs.getState();
 		style=sbs.getStyle();
-		ID=sbs.getID();
+		ID=sbs.getid();
 		//传递VO
 		salebackVO=sbs;
 		//面板大小
