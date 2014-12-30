@@ -35,22 +35,6 @@ public class StartUp {
 		//库存管理人员的启动程序
 	//	initial.initialStock();
 		StockManagerDriver smd=new StockManagerDriver();
-		try
-		{
-			smd.start(new StubStockController(),(StubCommodityDataService)Naming.lookup("rmi://127.0.0.1:1099/StubStockDataController.getInstance()"));
-		}
-		catch (MalformedURLException e)
-		{
-			e.printStackTrace();
-		}
-		catch (RemoteException e)
-		{
-			e.printStackTrace();
-		}
-		catch (NotBoundException e)
-		{
-			e.printStackTrace();
-		}
 			
 	}
 }
