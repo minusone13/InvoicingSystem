@@ -193,18 +193,17 @@ public class SaleTest extends TestCase{
 			assertTrue(result10);
 		}*/
 		
-		/*public void testfindCustomer(){
+		public void testfindCustomer(){
 			CustomerList customerlist = new CustomerList();
 			CustomerVO tempvo = null;
-			tempvo = customerlist.findCustomer("5");
+			tempvo = customerlist.findCustomer("1");
 			boolean result11=true;
-			if(tempvo.getname().equals("没人")){
-				result11=false;
-			}else{
-				System.out.println(tempvo.getname());
-			}
+			tempvo.setShouldTake(100.0);
+			customerlist.updateCustomer(tempvo);
+			tempvo = customerlist.findCustomer("1");
+			System.out.println(tempvo.getShouldTake());
 			assertTrue(result11);
-		}*/
+		}
 
 		/*public void testsureReachStrategy(){
 			salebillController controller = new salebillController();

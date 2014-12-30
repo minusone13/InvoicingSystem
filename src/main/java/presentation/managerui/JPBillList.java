@@ -87,7 +87,7 @@ public class JPBillList extends JPanel {
 		StockManagerDriver smd=new StockManagerDriver();
 		try
 		{
-			smd.start(stockbl,(StubCommodityDataService)Naming.lookup("rmi://127.0.0.1:1099/StubStockDataController"));
+			smd.start(stockbl,(StubCommodityDataService)Naming.lookup("rmi://"+entrance.Test.ipOfServer+"/StubStockDataController"));
 		}
 		catch (MalformedURLException e)
 		{
