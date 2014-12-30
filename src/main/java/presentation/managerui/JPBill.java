@@ -1412,16 +1412,24 @@ public class JPBill extends JPanel {
 		return result;
 	}
 	//修改用户密码
-	public void change(UserVO us){
+	public boolean change(UserVO us){
 		
 		//调用逻辑层修改对应单据的数据
 		RM rm=userbl.changePassword(us);//修改密码
+		if(rm==RM.done){
+			return true;
+		}
+		return false;
 	}
 	//修改用户职务
-	public void changeRole(UserVO us,Role r){
+	public boolean changeRole(UserVO us,Role r){
 		
 		//调用逻辑层修改对应单据的数据
 		RM rm=userbl.changeRole(us, r);
+		if(rm==RM.done){
+			return true;
+		}
+		return false;
 	}
 	public void change(GiftBillVO gb){
 	

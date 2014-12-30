@@ -325,25 +325,36 @@ public class JPmanageBills2 extends JPanel {
 					break;
 				case 5:
 					edit.setIcon(editIconR);
-					if(billList.getChosenNum()==1&&billList.stateOfChosen()==BillState.DRAFT){
-						switch(style){
-						case PurSheet:
-							JPeditOfPur.setAdd(false);//不是加单据是修改单据
-							JPeditOfPur.leftMove();//调出编辑板
-							break;
-						case PurBackSheet:
-							JPeditOfPurBack.setAdd(false);//不是加单据是修改单据
-							JPeditOfPurBack.leftMove();//调出编辑板
-							break;
-						case SaleSheet:
-							JPeditOfSale.setAdd(false);//不是加单据是修改单据
-							JPeditOfSale.leftMove();//调出编辑板
-							break;
-						case SaleBackSheet:
-							JPeditOfSaleBack.setAdd(false);//不是加单据是修改单据
-							JPeditOfSaleBack.leftMove();//调出编辑板
-							break;
+					if(billList.getChosenNum()==1){
+						if(billList.stateOfChosen()==BillState.DRAFT){
+							switch(style){
+							case PurSheet:
+								JPeditOfPur.setAdd(false);//不是加单据是修改单据
+								JPeditOfPur.leftMove();//调出编辑板
+								break;
+							case PurBackSheet:
+								JPeditOfPurBack.setAdd(false);//不是加单据是修改单据
+								JPeditOfPurBack.leftMove();//调出编辑板
+								break;
+							case SaleSheet:
+								JPeditOfSale.setAdd(false);//不是加单据是修改单据
+								JPeditOfSale.leftMove();//调出编辑板
+								break;
+							case SaleBackSheet:
+								JPeditOfSaleBack.setAdd(false);//不是加单据是修改单据
+								JPeditOfSaleBack.leftMove();//调出编辑板
+								break;
+							}
 						}
+						else{
+							frame.getWarning().showWarning("只能修改草稿状态的单据");
+						}
+					}
+					else if(billList.getChosenNum()==0){
+						frame.getWarning().showWarning("请选择要修改的单据");
+					}
+					else{
+						frame.getWarning().showWarning("只能同时修改一张单据");
 					}
 					break;
 				case 6:

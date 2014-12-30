@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import po.BillState;
 import po.BillStyle;
 import po.Role;
 import presentation.StringJudger;
@@ -292,19 +293,34 @@ public class JPpassBill2 extends JPanel {
 				break;
 			case 5:
 				edit.setIcon(editIconR);
-				switch(style){
-				case GiftBill:
-					JPeditOfGift.leftMove();
-					break;
-				case PurSheet:
-					JPeditOfPur.leftMove();
-					break;
-				case CashPaymentBill:
-					JPeditOfCash.leftMove();
-					break;
-				default:
-					frame.getWarning().showWarning("您无权修改此单据");
+				if(billList.getChosenNum()==1){
+					if(billList.stateOfChosen()==BillState.SUBMITED){
+						switch(style){
+							case GiftBill:
+								JPeditOfGift.leftMove();
+								break;
+							case PurSheet:
+								JPeditOfPur.leftMove();
+								break;
+							case CashPaymentBill:
+								JPeditOfCash.leftMove();
+								break;
+							default:
+								frame.getWarning().showWarning("您无权修改此单据");
+							}
+					}
+					else{
+						frame.getWarning().showWarning("总经理只能修改提交状态的单据");
+					}
+					
 				}
+				else if(billList.getChosenNum()==0){
+					frame.getWarning().showWarning("请选择要修改的单据");
+				}
+				else{
+					frame.getWarning().showWarning("只能同时修改一张单据");
+				}
+				
 				break;
 			}
 		}
