@@ -246,7 +246,7 @@ public class salebillController implements SaleBillBlService,salebillForFinancia
 					list.changeShouldPay(ID, vo.getmoney2());
 					break;
 				case OVER     : 
-				
+					
 					break;
 				
 			}
@@ -337,6 +337,7 @@ public class salebillController implements SaleBillBlService,salebillForFinancia
 
 		
 		//写下面四个函数时，注意要对时间进行判断，而且要筛选单据的状态；
+		//
 		public int getAllVoucher(Date start, Date end) {
 			int number=0;
 			StubBillPool pool = new StubBillPool();
@@ -539,8 +540,6 @@ public class salebillController implements SaleBillBlService,salebillForFinancia
 						result.add(tempvo);
 					}
 				}
-				
-				
 			}
 			return result;
 		}
@@ -579,8 +578,8 @@ public class salebillController implements SaleBillBlService,salebillForFinancia
 					salesheetvo.setdiscount(0.0);
 					salesheetvo.setpmoney(salesheetvo.getmoney1()-salesheetvo.getmoney2()-salesheetvo.getdiscount());
 					salesheetvo.setwords("赠送代金券:"+String.valueOf(salesheetvo.getpmoney()*lsvo.getCouponrate()-salesheetvo.getpmoney()*lsvo.getCouponrate()%10));
-					System.out.println(salesheetvo.getpmoney()*lsvo.getCouponrate());
-					System.out.println(salesheetvo.getpmoney()*lsvo.getCouponrate()%10);
+					//System.out.println(salesheetvo.getpmoney()*lsvo.getCouponrate());
+					//System.out.println(salesheetvo.getpmoney()*lsvo.getCouponrate()%10);
 					break;
 			}
 		
@@ -589,6 +588,36 @@ public class salebillController implements SaleBillBlService,salebillForFinancia
 
 		public SaleSheetVO getCompletedSaleSheet(SaleSheetVO salesheetvo,ReachStrategyVO rsvo)
 		{
+			switch(rsvo.getReach_strategy_style()){
+				case Gift  :
+					salesheetvo.setdiscount(0.0);
+					salesheetvo.setpmoney(salesheetvo.getmoney1()-salesheetvo.getmoney2()-salesheetvo.getdiscount());
+					ArrayList<CommodityVO> givelist =new ArrayList<CommodityVO>();
+					givelist=rsvo.getAlOfCommodity();
+					  StubBillPool pool = new StubBillPool();
+					  StubGiftBill giftbill = new StubGiftBill();
+					  giftbill.setDate(new Date());
+					  ArrayList<MockCommodity> coms = new ArrayList<MockCommodity>();
+					  for(CommodityVO temp:givelist){
+						  coms.add(new MockCommodity(temp));
+					  }
+					 giftbill.setComs(coms);
+					 SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+					 String currentTime = format.format(new Date());
+					 ArrayList<StubGiftBill> list=pool.getGiftBill();
+					 giftbill.setID("XJFYD-"+currentTime+"-"+String.format("%05d", list.size()+1));
+					 giftbill.setRemark(null);
+					 giftbill.setOperator(salesheetvo.getop());
+					 pool.add(giftbill);
+					 salesheetvo.setwords("赠品单编号："+giftbill.getID());
+					break;
+				case Coupon:
+					salesheetvo.setdiscount(0.0);
+					salesheetvo.setpmoney(salesheetvo.getmoney1()-salesheetvo.getmoney2()-salesheetvo.getdiscount());
+					salesheetvo.setwords("赠送代金券:"+String.valueOf(salesheetvo.getpmoney()*rsvo.getCouponrate()-salesheetvo.getpmoney()*rsvo.getCouponrate()%10));
+					break;
+				
+			}
 			salesheetvo.setdiscount(0.0);
 			salesheetvo.setpmoney(salesheetvo.getmoney1()-salesheetvo.getmoney2()-salesheetvo.getdiscount());
 			salesheetvo.setwords("赠送代金券:"+String.valueOf(salesheetvo.getpmoney()*rsvo.getCouponrate()-salesheetvo.getpmoney()*rsvo.getCouponrate()%10));

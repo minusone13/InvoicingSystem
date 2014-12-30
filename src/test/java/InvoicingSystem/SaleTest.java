@@ -84,16 +84,16 @@ public class SaleTest extends TestCase{
 			assertTrue(result2);
 		}*/
 		
-		public void testCreatePurSheet(){
+		/*public void testCreatePurSheet(){
 			PurSheetVO vo = new PurSheetVO();
 			salebillController controller = new salebillController();
 			Customer customer = new Customer("CC"); 
 			vo.setCustomer(customer.getVO());
 			vo.setdate(new Date());
 			vo.setstock("1");
-			vo.setusername("学长");
-			vo.setuserid("208");
-			vo.setop("学长208");
+			//vo.setusername("学长");
+			//vo.setuserid("208");
+			//vo.setop("学长208");
 			ArrayList<CommodityVO> sheet = new ArrayList<CommodityVO>();
 			CommodityVO mockvo=new CommodityVO("1\\门","好好防盗门","fdm02",200,300,10);
 			sheet.add(mockvo);
@@ -105,20 +105,20 @@ public class SaleTest extends TestCase{
 			vo.setmoney1(100.0);
 			boolean result3 = controller.createPurSheet(vo);
 			assertTrue(result3);
-		}
+		}*/
 		
-		/*
-		public void testCreatePurBackSheet(){
+		
+		/*public void testCreatePurBackSheet(){
 			PurBackSheetVO vo = new PurBackSheetVO();
 			salebillController controller = new salebillController();
 			Customer customer = new Customer("CC"); 
 			vo.setCustomer(customer.getVO());
 			vo.setdate(new Date());
-			vo.setid("JHTHD-2014-12-14-00009");
+		//	vo.setid("JHTHD-2014-12-14-00009");
 			vo.setstock("1");
-			vo.setusername("学长");
-			vo.setuserid("208");
-			vo.setop("学长208");
+			//vo.setusername("学长");
+			//vo.setuserid("208");
+			//vo.setop("学长208");
 			ArrayList<CommodityVO> sheet = new ArrayList<CommodityVO>();
 			CommodityVO mockvo=new CommodityVO("1\\门","好好防盗门","fdm02",200,300,10);
 			sheet.add(mockvo);
@@ -132,19 +132,23 @@ public class SaleTest extends TestCase{
 			assertTrue(result3);
 		}*/
 		
-		public void testgetPurSheet(){
+		/*public void testgetPurSheet(){
 			salebillController controller = new salebillController();
-			boolean result5 = controller.getPurSheet("JHD-2014-12-27-00001");
+			boolean result5 = controller.getPurSheet("JHD-20141230-00001");
 			assertTrue(result5);
-		}
+		}*/
 		
-		/*
+		
 		public void testgetPurBackSheet(){
 			salebillController controller = new salebillController();
-			boolean result6 = controller.getPurBackSheet("JHTHD-2014-12-14-00009");
+			ArrayList<PurBackSheetVO> list = controller.getAllPurBackSheet();
+			System.out.println(list.size());
+			System.out.println(controller.findPurBackSheet("JHTHD-20141230-00001").getcustomer().getname());
+			boolean result6 = controller.getPurBackSheet("JHTHD-20141230-00001");
 			assertTrue(result6);
 		}
 		
+		/*
 		public void testgetSaleSheet(){
 			salebillController controller = new salebillController();
 			boolean result7 = controller.getSaleSheet("XSD-2014-12-14-00009");
