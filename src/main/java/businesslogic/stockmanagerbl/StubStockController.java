@@ -38,6 +38,10 @@ public class StubStockController implements StubCommodityBlService,
 			"Liu");
 	static
 	{
+		connect();
+	}
+	public static void connect()
+	{
 		try
 		{
 			comdata = (StubCommodityDataService)Naming.lookup("rmi://"+entrance.Test.ipOfServer+"/StubStockDataController");
@@ -405,6 +409,7 @@ public class StubStockController implements StubCommodityBlService,
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		connect();
 	}
 	
 	public ArrayList<PackVO> getAllPacks() throws RemoteException
