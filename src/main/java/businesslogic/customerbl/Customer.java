@@ -56,7 +56,7 @@ public class Customer{
 	public void aotusetid(){
 		CustomerList customerlist = new CustomerList();
 		int nowhas = customerlist.getAllCustomer("Customer.txt").size();
-		this.setid(nowhas+1+"");
+		this.setid(String.format("%05d", nowhas+1));
 	}
 	
 	public int getlevel(){
