@@ -524,6 +524,7 @@ public class JPBillList extends JPanel {
 			if(JPbillList.get(i).getChoose()){
 				boolean result=JPbillList.get(i).change(oldname,newName);
 				if(result){
+					frame.getWarning().showWarning("修改成功");
 					//从逻辑层读取数据更新界面
 					JPbillList.clear();
 					this.addAccountList(fbl.getAllAccountInfo());
@@ -539,8 +540,12 @@ public class JPBillList extends JPanel {
 	public void changeChosen(UserVO us,Role r){
 		for(int i=0;i<JPbillList.size();i++){
 			if(JPbillList.get(i).getChoose()){
-				JPbillList.get(i).change(us);//先改密码，ID没变
-				JPbillList.get(i).changeRole(userbl.find(us.getAccount()),r);//修改职务，ID可能变化
+				boolean r1=JPbillList.get(i).change(us);//先改密码，ID没变
+				boolean r2=JPbillList.get(i).changeRole(userbl.find(us.getAccount()),r);//修改职务，ID可能变化
+				
+				if(r1&&r2){
+					frame.getWarning().showWarning("修改成功");
+				}
 				//从逻辑层读取数据更新界面
 				JPbillList.clear();
 				this.addUserList(userbl.showUsers());
@@ -554,12 +559,13 @@ public class JPBillList extends JPanel {
 			if(JPbillList.get(i).getChoose()){
 				boolean result=JPbillList.get(i).change(cus);
 				if(result){
+					frame.getWarning().showWarning("修改成功");
 					//从逻辑层读取数据更新界面
 					JPbillList.clear();
 					this.addCustomerList(customerbl.getAllCustomer("Customer.txt"));
 				}
 				else{
-					
+					frame.getWarning().showWarning("修改失败");
 				}
 			
 			
@@ -705,6 +711,7 @@ public class JPBillList extends JPanel {
 					JPbillList.get(i).transformState(BillState.EXAMINED);
 				}
 			}
+			frame.getWarning().showWarning("成功审批");
 			//更新面板
 			updateJP();
 		}
@@ -743,6 +750,7 @@ public class JPBillList extends JPanel {
 					}
 				}
 			}
+			frame.getWarning().showWarning("成功提交");
 			//更新面板
 			updateJP();
 		}
@@ -758,6 +766,7 @@ public class JPBillList extends JPanel {
 					JPbillList.get(i).transformState(BillState.OVER);
 				}
 			}
+			frame.getWarning().showWarning("成功处理");
 			//更新面板
 			updateJP();
 		}
@@ -773,6 +782,7 @@ public class JPBillList extends JPanel {
 					JPbillList.get(i).authorize();
 				}
 			}
+			frame.getWarning().showWarning("成功授权");
 			//从数据层重新读取更新面板
 			JPbillList.clear();
 			this.addUserList(userbl.showUsers());
@@ -794,6 +804,7 @@ public class JPBillList extends JPanel {
 							i--;
 						}
 					}
+					frame.getWarning().showWarning("成功删除");
 					//重新加到底板上
 					updateJP();
 				}

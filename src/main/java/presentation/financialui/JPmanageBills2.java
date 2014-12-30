@@ -657,12 +657,15 @@ public class JPmanageBills2 extends JPanel {
 						switch(billStyle){
 						case ReceiptBill:
 							tranListEdit.setVisible(true);
+							tranListEdit.getNoteTxt().setText("无");
 							break;
 						case PaymentBill:
 							tranListEdit.setVisible(true);
+							tranListEdit.getNoteTxt().setText("无");
 							break;
 						case CashPaymentBill:
 							ListEdit.setVisible(true);
+							ListEdit.getNoteTxt().setText("无");
 						}
 						
 						break;
@@ -1061,10 +1064,6 @@ public class JPmanageBills2 extends JPanel {
 				private JTextField listTxt=new JTextField(10);
 				private JTextField moneyTxt=new JTextField(10);
 				private JTextField noteTxt=new JTextField(10);
-//				//文本框（付款收款单）
-//				private JTextField tranListTxt=new JTextField(10);
-//				private JTextField tranMoneyTxt=new JTextField(10);
-//				private JTextField tranNoteTxt=new JTextField(10);
 				//图片
 				private ImageIcon confirmW=new ImageIcon("src/image/function/confirmW.png");
 				private ImageIcon confirmR=new ImageIcon("src/image/function/confirmR.png");
@@ -1077,9 +1076,6 @@ public class JPmanageBills2 extends JPanel {
 					listTxt.setText("");
 					moneyTxt.setText("");
 					noteTxt.setText("");
-//					tranListTxt.setText("");
-//					tranMoneyTxt.setText("");
-//					tranNoteTxt.setText("");
 					listArray.clear();
 					moneyArray.clear();
 					noteArray.clear();
@@ -1189,6 +1185,14 @@ public class JPmanageBills2 extends JPanel {
 					
 					
 				}
+				public JTextField getNoteTxt()
+				{
+					return noteTxt;
+				}
+				public void setNoteTxt(JTextField noteTxt)
+				{
+					this.noteTxt = noteTxt;
+				}
 				//返回信息数组
 				public ArrayList<String> getListArray(){
 					return listArray;
@@ -1231,8 +1235,12 @@ public class JPmanageBills2 extends JPanel {
 								frame.getWarning().showWarning("金额必须为数字");
 							}
 						}
+						else if(list.equals("")&&money.equals("")&&note.equals("")){
+							//隐藏板块
+							JPaddList.this.setVisible(false);
+						}
 						else{
-							frame.getWarning().showWarning("请完整输入信息，若无备注请填写“无”！");
+							frame.getWarning().showWarning("请输入完整信息");
 						}
 						if(legal){
 							//合法则将信息加入到数组
@@ -1285,4 +1293,5 @@ public class JPmanageBills2 extends JPanel {
 		public void setBillList(JPBillList billList) {
 			this.billList = billList;
 		}
+		
 }
