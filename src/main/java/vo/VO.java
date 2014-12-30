@@ -38,16 +38,6 @@ public class VO {
 		return strategystyle;
 		
 	}
-	/*获取单据ID*/
-	public String getID(){
-		return ID;
-		
-	}
-	/*设置单据ID*/
-	public  void setID(String s){
-
-		ID=s;
-	}
 	/*获取满额促销种类*/
 	public ReachStrategyStyle getReach_strategy_style() {
 		return reach_strategy_style;

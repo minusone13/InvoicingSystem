@@ -380,7 +380,7 @@ public class StubBillPool {
 	public void change(PurSheetVO ps){
 		read();
 		for(int i=0;i<alOfPurSheet.size();i++){
-			if(alOfPurSheet.get(i).getID().equals(ps.getID())){//寻找相同编号
+			if(alOfPurSheet.get(i).getid().equals(ps.getid())){//寻找相同编号
 				//进行修改
 				//修改客户
 				alOfPurSheet.get(i).setCustomer(new Customer(ps.getcustomer()));//阿超改动了一下；如有问题，快来告诉我;
@@ -408,7 +408,7 @@ public class StubBillPool {
 	public void change(PurBackSheetVO pbs){
 		read();
 		for(int i=0;i<alOfPurBackSheet.size();i++){
-			if(alOfPurBackSheet.get(i).getID().equals(pbs.getID())){//寻找相同编号
+			if(alOfPurBackSheet.get(i).getid().equals(pbs.getid())){//寻找相同编号
 				//进行修改
 				//修改客户
 				alOfPurBackSheet.get(i).setCustomer(new Customer(pbs.getcustomer()));//阿超改动了一下；如有问题，快来告诉我;
@@ -436,7 +436,7 @@ public class StubBillPool {
 	public void change(SaleSheetVO ss){
 		read();
 		for(int i=0;i<alOfSaleSheet.size();i++){
-			if(alOfSaleSheet.get(i).getID().equals(ss.getID())){//寻找相同编号
+			if(alOfSaleSheet.get(i).getid().equals(ss.getid())){//寻找相同编号
 				//进行修改
 				//修改客户
 				alOfSaleSheet.get(i).setCustomer(new Customer(ss.getcustomer()));//阿超改动了一下；如有问题，快来告诉我;
@@ -470,7 +470,7 @@ public class StubBillPool {
 	public void change(SaleBackSheetVO sbs){
 		read();
 		for(int i=0;i<alOfSaleBackSheet.size();i++){
-			if(alOfSaleBackSheet.get(i).getID().equals(sbs.getID())){//寻找相同编号
+			if(alOfSaleBackSheet.get(i).getid().equals(sbs.getid())){//寻找相同编号
 				//进行修改
 				//修改客户
 				alOfSaleBackSheet.get(i).setCustomer(new Customer(sbs.getcustomer()));//阿超改动了一下；如有问题，快来告诉我;
@@ -614,28 +614,29 @@ public class StubBillPool {
 			break;
 		case PurSheet:
 			for(int i=0;i<alOfPurSheet.size();i++){
-				if(alOfPurSheet.get(i).getID().equals(ID)){
+				System.out.println(ID+" : "+alOfPurSheet.get(i).getid());
+				if(alOfPurSheet.get(i).getid().equals(ID)){
 					alOfPurSheet.get(i).setState(state);
 				}
 			}
 			break;
 		case PurBackSheet:
 			for(int i=0;i<alOfPurBackSheet.size();i++){
-				if(alOfPurBackSheet.get(i).getID().equals(ID)){
+				if(alOfPurBackSheet.get(i).getid().equals(ID)){
 					alOfPurBackSheet.get(i).setState(state);
 				}
 			}
 			break;
 		case SaleSheet:
 			for(int i=0;i<alOfSaleSheet.size();i++){
-				if(alOfSaleSheet.get(i).getID().equals(ID)){
+				if(alOfSaleSheet.get(i).getid().equals(ID)){
 					alOfSaleSheet.get(i).setState(state);
 				}
 			}
 			break;
 		case SaleBackSheet:
 			for(int i=0;i<alOfSaleBackSheet.size();i++){
-				if(alOfSaleBackSheet.get(i).getID().equals(ID)){
+				if(alOfSaleBackSheet.get(i).getid().equals(ID)){
 					alOfSaleBackSheet.get(i).setState(state);
 				}
 			}

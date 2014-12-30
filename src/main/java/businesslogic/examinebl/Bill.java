@@ -13,19 +13,11 @@ public class Bill {
 		state=st;
 	}
 	
-	/*设置单据编号*/
-	public  void setID(String s){
-		ID=s;
-	}
 	
 	/*获取单据状态*/
 	public BillState getState(){
 		return state;
 		
-	}
-	/*获取单据编号*/
-	public String getID(){
-		return ID;	
 	}
 	/*获取单据类型*/
 

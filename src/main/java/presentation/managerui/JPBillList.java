@@ -87,7 +87,7 @@ public class JPBillList extends JPanel {
 		StockManagerDriver smd=new StockManagerDriver();
 		try
 		{
-			smd.start(stockbl,(StubCommodityDataService)Naming.lookup("rmi://127.0.0.1:1099/StubStockDataController"));
+			smd.start(stockbl,(StubCommodityDataService)Naming.lookup("rmi://"+entrance.Test.ipOfServer+"/StubStockDataController"));
 		}
 		catch (MalformedURLException e)
 		{
@@ -524,6 +524,7 @@ public class JPBillList extends JPanel {
 			if(JPbillList.get(i).getChoose()){
 				boolean result=JPbillList.get(i).change(oldname,newName);
 				if(result){
+					frame.getWarning().showWarning("修改成功");
 					//从逻辑层读取数据更新界面
 					JPbillList.clear();
 					this.addAccountList(fbl.getAllAccountInfo());
@@ -539,8 +540,12 @@ public class JPBillList extends JPanel {
 	public void changeChosen(UserVO us,Role r){
 		for(int i=0;i<JPbillList.size();i++){
 			if(JPbillList.get(i).getChoose()){
-				JPbillList.get(i).change(us);//先改密码，ID没变
-				JPbillList.get(i).changeRole(userbl.find(us.getAccount()),r);//修改职务，ID可能变化
+				boolean r1=JPbillList.get(i).change(us);//先改密码，ID没变
+				boolean r2=JPbillList.get(i).changeRole(userbl.find(us.getAccount()),r);//修改职务，ID可能变化
+				
+				if(r1&&r2){
+					frame.getWarning().showWarning("修改成功");
+				}
 				//从逻辑层读取数据更新界面
 				JPbillList.clear();
 				this.addUserList(userbl.showUsers());
@@ -554,12 +559,13 @@ public class JPBillList extends JPanel {
 			if(JPbillList.get(i).getChoose()){
 				boolean result=JPbillList.get(i).change(cus);
 				if(result){
+					frame.getWarning().showWarning("修改成功");
 					//从逻辑层读取数据更新界面
 					JPbillList.clear();
 					this.addCustomerList(customerbl.getAllCustomer("Customer.txt"));
 				}
 				else{
-					
+					frame.getWarning().showWarning("修改失败");
 				}
 			
 			
@@ -705,6 +711,7 @@ public class JPBillList extends JPanel {
 					JPbillList.get(i).transformState(BillState.EXAMINED);
 				}
 			}
+			frame.getWarning().showWarning("成功审批");
 			//更新面板
 			updateJP();
 		}
@@ -714,56 +721,70 @@ public class JPBillList extends JPanel {
 	}
 	/*提交选中的*/
 	public void submitChosen(){
-		if(getChosenNum()>=1&&isTheSameState()&&stateOfChosen()==BillState.DRAFT){
-			for(int i=0;i<JPbillList.size();i++){
-				if(JPbillList.get(i).getChoose()){
-					JPBill jpt = JPbillList.get(i);
-					BillStyle bst = jpt.getStyle();
-					if(bst!=BillStyle.GiftBill && bst!=BillStyle.SpillsLossBill)//added by lhw
-						JPbillList.get(i).transformState(BillState.SUBMITED);
-					else
-					{
-						RM result=RM.done;
-						if(bst == BillStyle.GiftBill)
-							result = stockbl.submit(jpt.getGiftVO());
+		if(getChosenNum()>=1){
+			if(isTheSameState()&&stateOfChosen()==BillState.DRAFT){
+				for(int i=0;i<JPbillList.size();i++){
+					if(JPbillList.get(i).getChoose()){
+						JPBill jpt = JPbillList.get(i);
+						BillStyle bst = jpt.getStyle();
+						if(bst!=BillStyle.GiftBill && bst!=BillStyle.SpillsLossBill)//added by lhw
+							JPbillList.get(i).transformState(BillState.SUBMITED);
 						else
-							result = stockbl.submit(jpt.getSpillsLossVO());
-						if(result == RM.insufficient)
-							frame.getWarning().showWarning(WarningText.insufficient);
-						else if(result == RM.RMIError)
-							frame.getWarning().showWarning(WarningText.RMIError);
-						else if(result != RM.done)
-							frame.getWarning().showWarning(WarningText.unknownerror);
-						else if(result == RM.done)
 						{
-							jpt.setState(BillState.SUBMITED);
-							//修改背景
-							jpt.setBillBg(bst,BillState.SUBMITED,2);
+							RM result=RM.done;
+							if(bst == BillStyle.GiftBill)
+								result = stockbl.submit(jpt.getGiftVO());
+							else
+								result = stockbl.submit(jpt.getSpillsLossVO());
+							if(result == RM.insufficient)
+								frame.getWarning().showWarning(WarningText.insufficient);
+							else if(result == RM.RMIError)
+								frame.getWarning().showWarning(WarningText.RMIError);
+							else if(result != RM.done)
+								frame.getWarning().showWarning(WarningText.unknownerror);
+							else if(result == RM.done)
+							{
+								jpt.setState(BillState.SUBMITED);
+								//修改背景
+								jpt.setBillBg(bst,BillState.SUBMITED,2);
+							}
 						}
 					}
 				}
+				frame.getWarning().showWarning("成功提交");
+				//更新面板
+				updateJP();
 			}
-			//更新面板
-			updateJP();
+			else{
+				frame.getWarning().showWarning("只有草稿状态的单据能够提交");
+			}
 		}
 		else{
-			frame.getWarning().showWarning("只有草稿状态的单据能够提交");
+			frame.getWarning().showWarning("请选择要提交的单据");
 		}
+		
 	}
 	/*处理选中的*/
 	public void doneChosen(){
-		if(getChosenNum()>=1&&isTheSameState()&&stateOfChosen()==BillState.EXAMINED){
-			for(int i=0;i<JPbillList.size();i++){
-				if(JPbillList.get(i).getChoose()){
-					JPbillList.get(i).transformState(BillState.OVER);
+		if(getChosenNum()>=1){
+			if(isTheSameState()&&stateOfChosen()==BillState.EXAMINED){
+				for(int i=0;i<JPbillList.size();i++){
+					if(JPbillList.get(i).getChoose()){
+						JPbillList.get(i).transformState(BillState.OVER);
+					}
 				}
+				frame.getWarning().showWarning("成功处理");
+				//更新面板
+				updateJP();
 			}
-			//更新面板
-			updateJP();
+			else{
+				frame.getWarning().showWarning("只有已经通过审批的单据能够处理");
+			}
 		}
 		else{
-			frame.getWarning().showWarning("只有已经通过审批的单据能够处理");
+			frame.getWarning().showWarning("请选择要处理的单据");
 		}
+		
 	}
 	/*授权选中的用户*/
 	public void authorizeChosen(){
@@ -773,6 +794,7 @@ public class JPBillList extends JPanel {
 					JPbillList.get(i).authorize();
 				}
 			}
+			frame.getWarning().showWarning("成功授权");
 			//从数据层重新读取更新面板
 			JPbillList.clear();
 			this.addUserList(userbl.showUsers());
@@ -794,6 +816,7 @@ public class JPBillList extends JPanel {
 							i--;
 						}
 					}
+					frame.getWarning().showWarning("成功删除");
 					//重新加到底板上
 					updateJP();
 				}
