@@ -317,6 +317,7 @@ public class JPmanageBills2 extends JPanel {
 					break;	
 				case 3:
 					done.setIcon(checkIconR);
+					billList.doneChosen();
 					break;
 				case 4:
 					delete.setIcon(deleteIconR);
@@ -347,6 +348,7 @@ public class JPmanageBills2 extends JPanel {
 					break;
 				case 6:
 					submit.setIcon(submitIconR);
+					billList.submitChosen();
 					break;
 				case 7:
 					add.setIcon(addIconR);
@@ -1183,7 +1185,11 @@ public class JPmanageBills2 extends JPanel {
 												}
 												modifyPur.setop(Login.user.getName()+":"+Login.user.getID());
 												billList.changeChosen(modifyPur);
+												frame.getWarning().showWarning("修改成功");
 											}
+										}
+										else{
+											frame.getWarning().showWarning("请输入修改信息");
 										}
 										break;
 									case SaleSheet:
@@ -1243,7 +1249,12 @@ public class JPmanageBills2 extends JPanel {
 												}
 												modifySale.setop(Login.user.getName()+":"+Login.user.getID());
 												billList.changeChosen(modifySale);
+												
+												frame.getWarning().showWarning("修改成功");
 											}
+										}
+										else{
+											frame.getWarning().showWarning("请输入修改信息");
 										}
 										break;
 								}

@@ -7,6 +7,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import businesslogic.customerbl.CustomerList;
+import businesslogicservice.customerblservice.CustomerBlService;
 import entrance.Frame;
 import po.Role;
 import presentation.PanelType;
@@ -59,6 +61,7 @@ public class ManagerUI extends JPanel {
 	private JLabel signout=new JLabel();
 	//frame的引用
 	private Frame frame;
+  
 	public ManagerUI(){
 		//设置窗口大小
 		this.setSize(960, 600);
@@ -288,6 +291,7 @@ public class ManagerUI extends JPanel {
 			}
 			//以下面板的编辑面板归位
 			ManagerUI.this.getManagerStrategy2().reHome();
+			ManagerUI.this.getPassbill2().reHome();
 			ManagerUI.this.getBusinessCondition().reHome();
 			ManagerUI.this.getBusinessProgress().reHome();
 			ManagerUI.this.getSaleDetail().reHome();

@@ -23,6 +23,7 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeNode;
 
 import po.RM;
+import presentation.WarningText;
 import vo.stockvo.CategoryVO;
 import vo.stockvo.CommodityVO;
 import vo.stockvo.StockVO;
@@ -46,24 +47,6 @@ public class JPtreeContent extends JPanel {
 		//逻辑层接口
 		StockManagerDriver smd=new StockManagerDriver();
 		
-		/*try
-		{
-			smd.start(stockbl,(StubCommodityDataService)Naming.lookup("rmi://127.0.0.1:1099/StubStockDataController"));
-		}
-		catch (MalformedURLException e)
-		{
-			e.printStackTrace();
-		}
-		catch (RemoteException e)
-		{
-			e.printStackTrace();
-		}
-		catch (NotBoundException e)
-		{
-			e.printStackTrace();
-		}*/
-		//学长你这里为什么要调用数据层！
-		
 		this.setSize(150, 350);
 		this.setLayout(null);
 		//设置面板透明
@@ -83,12 +66,11 @@ public class JPtreeContent extends JPanel {
         //根据数据层初始化树
         innitial();
       
-      
-//        tree.startEditingAtPath(tree.getSelectionPath());  
-        
-        
 		add(SCR,0);
 		add(back,1);
+	}
+	public void clear(){
+		top.removeAllChildren();
 	}
 	public void innitial(){
 		top= new DefaultMutableTreeNode("商品分类");

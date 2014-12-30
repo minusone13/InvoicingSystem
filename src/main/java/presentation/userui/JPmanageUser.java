@@ -13,8 +13,10 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import po.RM;
 import po.Role;
 import presentation.StringJudger;
+import presentation.WarningText;
 import presentation.managerui.JPBillList;
 import presentation.managerui.MouseListenerGetXY;
 import vo.uservo.UserVO;
@@ -474,8 +476,11 @@ public class JPmanageUser extends JPanel {
 									else{
 										UserVO temp=Login.user;
 										temp.setPassword(new String(codeText.getPassword()));
-										userbl.changePassword(temp, new String(originalcodeText.getPassword()));
-										frame.getWarning().showWarning("修改成功");
+										RM rm = userbl.changePassword(temp, new String(originalcodeText.getPassword()));
+										if(rm == RM.done)
+											frame.getWarning().showWarning("修改成功");
+										else if(rm == RM.invalid)
+											frame.getWarning().showWarning(WarningText.invalid);
 									}
 								}
 								else{

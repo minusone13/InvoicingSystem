@@ -2,6 +2,8 @@ package presentation.commodityui;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.net.MalformedURLException;
@@ -11,15 +13,27 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+
+
+
+
+
+
+import businesslogic.commoditybl.StubCommodityList;
+import businesslogic.financialbl.Financial;
 //import dataservice.commoditydataservice.StubCommodityDataService;
 import businesslogic.stockmanagerbl.StubStockController;
 import businesslogicservice.commodityblservice.StubCommodityBlService;
+import businesslogicservice.financialblservice.FinancialBlService;
 import entrance.Frame;
 import po.Role;
+import presentation.PanelType;
+import presentation.financialui.InitialInfoPanel.versionItemListener;
 import presentation.managerui.MouseListenerGetXY;
 import vo.stockvo.CommodityVO;
 
@@ -47,9 +61,13 @@ public class JPManagerCom extends JPanel{
 	private JTextField detail=new JTextField(16);
 	//frame的引用
 	private Frame frame;
-
 	//逻辑层接口
 	private StubCommodityBlService stockbl=new StubStockController();
+	private FinancialBlService financial = new Financial();
+	//财务人员期初建账的附件
+	private ArrayList<String> versions = financial.getVersions();
+	private JComboBox box;
+	
 	public JPManagerCom(){
 		//逻辑层接口
 		StockManagerDriver smd=new StockManagerDriver();
@@ -122,6 +140,19 @@ public class JPManagerCom extends JPanel{
 		addIcon.setBounds(545, 3, 24, 24);
 		addIcon.setIcon(new ImageIcon("src/image/function/littleAddW.png") );
 		addIcon.addMouseListener(new MouseListenerOfButton(3));
+		//期初建账版本选择
+		box = new JComboBox();
+		box.setBounds(10,10, 120, 20);
+		box.setForeground(Color.white);
+		box.setBackground(Color.black);
+		
+		int size = versions.size();
+		for(int i=0;i<size;i++){
+			box.addItem(versions.get(i));
+		}
+		box.setEditable(false);
+		box.setVisible(false);
+		box.addItemListener(new versionItemListener());
 		
 		detail.setBounds(15, 5, 550, 20);
 		detail.setOpaque(false);//文本框透明
@@ -132,7 +163,8 @@ public class JPManagerCom extends JPanel{
 		head.add(findCom,0);
 		head.add(find,1);
 		head.add(findIcon,2);
-		head.add(bgOfHead,3);
+		head.add(box,3);
+		head.add(bgOfHead,4);
 		
 		bottom.add(comfirm,0);
 		bottom.add(addIcon,1);
@@ -144,6 +176,17 @@ public class JPManagerCom extends JPanel{
 		this.add(head,2);
 		this.add(bottom,3);
 		this.addMouseListener(new MouseListenerGetXY());
+	}
+	public class versionItemListener implements ItemListener {
+
+		public void itemStateChanged(ItemEvent e) {
+			if(e.getStateChange() == ItemEvent.SELECTED) {
+				String s = e.getItem().toString();
+				stockbl.setFilePath("accountBuild/commodity/"+s+".ser");
+				System.out.println("accountBuild/commodity/"+s+".ser");
+				content.innitial();
+			}
+		}
 	}
 	/*获取frame的引用*/
 	public void getFrame( Frame f){
@@ -214,23 +257,29 @@ public class JPManagerCom extends JPanel{
 					for(CommodityVO vo:commodities.getOutput()){
 						temp.add(vo);
 					}
-					switch(frame.getManager().getManagerStrategy2().getStyle()){
-					case LevelStrategy:
-						frame.getManager().getManagerStrategy2().getJPeditOfLevel().setOutput(temp);
-						break;
-					case BarginStrategy:
-						frame.getManager().getManagerStrategy2().getJPeditOfBargin().setOutput(temp);
-						//自动计算总价
-						Double total=0.0;
-						for(int i=0;i<temp.size();i++){
-							total+=temp.get(i).getOut()*temp.get(i).getNumber();
-						}
-						frame.getManager().getManagerStrategy2().getJPeditOfBargin().getOriginalTotalPriceText().setText(String.valueOf(total));
-						break;
-					case ReachStrategy:
-						frame.getManager().getManagerStrategy2().getJPeditOfReach().setOutput(temp);
-						break;
+					if(frame.getManager().getPanelType()==PanelType.JPmanagerStrategy2){
+						switch(frame.getManager().getManagerStrategy2().getStyle()){
+							case LevelStrategy:
+								frame.getManager().getManagerStrategy2().getJPeditOfLevel().setOutput(temp);
+								break;
+							case BarginStrategy:
+								frame.getManager().getManagerStrategy2().getJPeditOfBargin().setOutput(temp);
+								//自动计算总价
+								Double total=0.0;
+								for(int i=0;i<temp.size();i++){
+									total+=temp.get(i).getOut()*temp.get(i).getNumber();
+								}
+								frame.getManager().getManagerStrategy2().getJPeditOfBargin().getOriginalTotalPriceText().setText(String.valueOf(total));
+								break;
+							case ReachStrategy:
+								frame.getManager().getManagerStrategy2().getJPeditOfReach().setOutput(temp);
+								break;
+							}
 					}
+					else if(frame.getManager().getPanelType()==PanelType.JPpassBill2){
+						frame.getManager().getPassbill2().getJPeditOfGift().setOutput(temp);
+					}
+					
 					//清除选择痕迹
 					commodities.getOutput().clear();
 					commodities.getCommodities().clear();
@@ -256,29 +305,39 @@ public class JPManagerCom extends JPanel{
 					for(int i=0;i<temp2.size();i++){
 						total2+=temp2.get(i).getOut()*temp2.get(i).getNumber();
 					}
-					
-					switch(frame.getSale().getManageBills2().getStyle()){
-					case PurSheet:
-						frame.getSale().getManageBills2().getJPeditOfPur().setOutput(temp2);
-						frame.getSale().getManageBills2().getJPeditOfPur().setOutputNotes(tempNotes);
-						frame.getSale().getManageBills2().getJPeditOfPur().getTotalText().setText(String.valueOf(total));
-						break;
-					case PurBackSheet:
-						frame.getSale().getManageBills2().getJPeditOfPurBack().setOutput(temp2);
-						frame.getSale().getManageBills2().getJPeditOfPurBack().setOutputNotes(tempNotes);
-						frame.getSale().getManageBills2().getJPeditOfPurBack().getTotalText().setText(String.valueOf(total));
-						break;
-					case SaleSheet:
-						frame.getSale().getManageBills2().getJPeditOfSale().setOutput(temp2);
-						frame.getSale().getManageBills2().getJPeditOfSale().setOutputNotes(tempNotes);
-						frame.getSale().getManageBills2().getJPeditOfSale().getTotalText().setText(String.valueOf(total2));
-						break;
-					case SaleBackSheet:
-						frame.getSale().getManageBills2().getJPeditOfSaleBack().setOutput(temp2);
-						frame.getSale().getManageBills2().getJPeditOfSaleBack().setOutputNotes(tempNotes);
-						frame.getSale().getManageBills2().getJPeditOfSaleBack().getTotalText().setText(String.valueOf(total2));
-						break;
+					//如果是总经理审批时修改单据
+					if(StubCommodityList.user.getR()==Role.MANAGER){
+						frame.getManager().getPassbill2().getJPeditOfPur().setOutput(temp2);
+						frame.getManager().getPassbill2().getJPeditOfPur().setOutputNotes(tempNotes);
+						frame.getManager().getPassbill2().getJPeditOfPur().getTotalText().setText(String.valueOf(total));
 					}
+					//如果是进销人员制定修改单据
+					else if(StubCommodityList.user.getR()==Role.PURCHASE_SALE_STAFF
+							||StubCommodityList.user.getR()==Role.PURCHASE_SALE_MANAGER){
+						switch(frame.getSale().getManageBills2().getStyle()){
+							case PurSheet:
+								frame.getSale().getManageBills2().getJPeditOfPur().setOutput(temp2);
+								frame.getSale().getManageBills2().getJPeditOfPur().setOutputNotes(tempNotes);
+								frame.getSale().getManageBills2().getJPeditOfPur().getTotalText().setText(String.valueOf(total));
+								break;
+							case PurBackSheet:
+								frame.getSale().getManageBills2().getJPeditOfPurBack().setOutput(temp2);
+								frame.getSale().getManageBills2().getJPeditOfPurBack().setOutputNotes(tempNotes);
+								frame.getSale().getManageBills2().getJPeditOfPurBack().getTotalText().setText(String.valueOf(total));
+								break;
+							case SaleSheet:
+								frame.getSale().getManageBills2().getJPeditOfSale().setOutput(temp2);
+								frame.getSale().getManageBills2().getJPeditOfSale().setOutputNotes(tempNotes);
+								frame.getSale().getManageBills2().getJPeditOfSale().getTotalText().setText(String.valueOf(total2));
+								break;
+							case SaleBackSheet:
+								frame.getSale().getManageBills2().getJPeditOfSaleBack().setOutput(temp2);
+								frame.getSale().getManageBills2().getJPeditOfSaleBack().setOutputNotes(tempNotes);
+								frame.getSale().getManageBills2().getJPeditOfSaleBack().getTotalText().setText(String.valueOf(total2));
+								break;
+							}
+					}
+					
 					//清除选择痕迹
 					commodities.getOutput().clear();
 					commodities.getCommodities().clear();
@@ -338,6 +397,9 @@ public class JPManagerCom extends JPanel{
 	}
 	public void setRole(Role role) {
 		this.role = role;
+		if(role==Role.FINANCIAL_STAFF){
+			box.setVisible(true);
+		}
 	}
 
 	public JLabel getAddIcon() {
