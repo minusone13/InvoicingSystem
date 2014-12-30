@@ -834,24 +834,24 @@ public class JPBillList extends JPanel {
 							JPbillList.remove(i);
 							i--;
 						}
-						if(JPbillList.get(i).getBarginStrategyVO()!=null){
+						else if(JPbillList.get(i).getBarginStrategyVO()!=null){
 							mbl.Remove(JPbillList.get(i).getBarginStrategyVO());
 							JPbillList.remove(i);
 							i--;
 						}
-						if(JPbillList.get(i).getReachStrategyVO()!=null){
+						else if(JPbillList.get(i).getReachStrategyVO()!=null){
 							mbl.Remove(JPbillList.get(i).getReachStrategyVO());
 							JPbillList.remove(i);
 							i--;
 						}
 						//如果是用户
-						if(JPbillList.get(i).getUserVO()!=null){
+						else if(JPbillList.get(i).getUserVO()!=null){
 							userbl.deleteUser(JPbillList.get(i).getUserVO());
 							JPbillList.remove(i);
 							i--;
 						}
 						//如果是客户
-						if(JPbillList.get(i).getCustomerVO()!=null){
+						else if(JPbillList.get(i).getCustomerVO()!=null){
 							boolean result = false;
 							result = customerbl.deleteCustomer(JPbillList.get(i).getCustomerVO().getid());
 						
@@ -864,7 +864,7 @@ public class JPBillList extends JPanel {
 							}
 						}
 						//如果是账户
-						if(JPbillList.get(i).getAccountVO()!=null){
+						else if(JPbillList.get(i).getAccountVO()!=null){
 							boolean result=fbl.deleteAccount(JPbillList.get(i).getAccountVO().getName());
 						
 							if(result){
