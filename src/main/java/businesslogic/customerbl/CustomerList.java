@@ -21,10 +21,12 @@ public class CustomerList implements CustomerForFinancial, CustomerBlService{
 	
 		public boolean addCustomer(CustomerVO newCustomer){
 			Customer customer = new Customer(newCustomer);
+			//customer.setid();
 			CustomerPO po = customer.getPO();
 			try{
 				CustomerDataService customerdata = (CustomerDataService)Naming.lookup("rmi://"+entrance.Test.ipOfServer+"/CustomerData");
-				return customerdata.addCustomer(po);}
+				return customerdata.addCustomer(po);
+				}
 			catch(Exception e){
 				System.out.println("addCustomer 异常"+e);
 			}

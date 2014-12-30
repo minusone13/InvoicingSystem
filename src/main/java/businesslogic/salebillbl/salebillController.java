@@ -277,7 +277,7 @@ public class salebillController implements SaleBillBlService,salebillForFinancia
 			StubBillPool pool = new StubBillPool();
 			ArrayList<PurSheet> listOfPurSheet= new ArrayList<PurSheet>();
 			listOfPurSheet=pool.getPurSheet();
-			PurSheetVO result = new PurSheetVO();
+			PurSheetVO result =null;
 			for(PurSheet pursheet:listOfPurSheet){
 				if(pursheet==null){
 					System.out.println("sheet");

@@ -1005,7 +1005,7 @@ public class JPBill extends JPanel {
 		ID.setFont(new Font("",Font.BOLD,14));
 		ID.setBounds(31,5, 200, 20);
 		
-		JLabel customer=new JLabel(ps.getcustomer().getname());
+		JLabel customer=new JLabel(ps.getcustomer().getname()+":"+ps.getcustomer().getid());
 		JLabel warehouse=new JLabel(ps.getstock());
 		JLabel totalMoney=new JLabel(String.valueOf(ps.getmoney1()));
 		JLabel note=new JLabel(ps.getwords());
