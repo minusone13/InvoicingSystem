@@ -210,6 +210,7 @@ public class SaleSheet extends Bill implements GetVOandPO{
 			vo.setusername(username);
 			vo.setState(billstate);
 			vo.setcommoditywords(commoditywords);
+			vo.setpmoney(pmoney);//王雨城加
 			return vo;
 		}
 		
@@ -233,6 +234,7 @@ public class SaleSheet extends Bill implements GetVOandPO{
 			po.setusername(username);
 			po.setState(billstate);
 			po.setcommoditywords(commoditywords);
+			po.setpmoney(pmoney);//王雨城加
 			return po;
 		}
 		
