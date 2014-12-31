@@ -332,7 +332,7 @@ public class Inquiry {
 			ArrayList<PurSheet> purSheet = bp.getPurSheet();
 			ArrayList<PurSheetVO> purSheetVO = new ArrayList<PurSheetVO>();
 			
-			int size = purSheet.size();			
+			int size = purSheet.size();	
 			for(int i=0;i<size;i++) {
 				PurSheet pur = purSheet.get(i);
 				
