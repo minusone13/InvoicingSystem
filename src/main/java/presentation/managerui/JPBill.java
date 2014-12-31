@@ -280,7 +280,6 @@ public class JPBill extends JPanel {
 		//单据信息未完
 		JLabel originalTotalPrice=new JLabel("原始总价");
 		JLabel decreasePrice=new JLabel("降价金额");
-		JLabel num=new JLabel("打包数量");
 		JLabel start=new JLabel("起始时间");
 		JLabel last=new JLabel("持续时间");
 		
@@ -291,34 +290,29 @@ public class JPBill extends JPanel {
 		//单据信息未完
 		JLabel originalTotalPriceTxt=new JLabel(String.valueOf(originalTotal));
 		JLabel decreasePriceTxt=new JLabel(String.valueOf(bs.getDiscount()));
-		JLabel numTxt=new JLabel(String.valueOf(bs.getNum()));
 		JLabel startTxt=new JLabel(bs.getStartTime());
 		JLabel lastTxt=new JLabel(String.valueOf(bs.getLastTime()));
 		//字体
 		originalTotalPrice.setFont(new Font("楷体",Font.BOLD,15));
 		decreasePrice.setFont(new Font("楷体",Font.BOLD,15));
-		num.setFont(new Font("楷体",Font.BOLD,15));
 		start.setFont(new Font("楷体",Font.BOLD,15));
 		last.setFont(new Font("楷体",Font.BOLD,15));
 		
 		//字体颜色
 		originalTotalPrice.setForeground(Color.white);
 		decreasePrice.setForeground(Color.white);
-		num.setForeground(Color.white);
 		start.setForeground(Color.white);
 		last.setForeground(Color.white);
 		
 		originalTotalPrice.setBounds(280, 4, 100, 17);
 		decreasePrice.setBounds(280, 21, 100, 17);
-		num.setBounds(280,38, 100, 17);
-		start.setBounds(280,55, 160, 17);
-		last.setBounds(280,72, 100, 17);
+		start.setBounds(280,38, 160, 17);
+		last.setBounds(280,55, 100, 17);
 		
 		originalTotalPriceTxt.setBounds(370, 4, 100, 17);
 		decreasePriceTxt.setBounds(370, 21, 100, 17);
-		numTxt.setBounds(370,38, 100, 17);
-		startTxt.setBounds(370,55, 160, 17);
-		lastTxt.setBounds(370,72, 100, 17);
+		startTxt.setBounds(370,38, 160, 17);
+		lastTxt.setBounds(370,55, 100, 17);
 		
 		//将组件加到面板上
 		this.add(right,0);
@@ -326,15 +320,13 @@ public class JPBill extends JPanel {
 		this.add(ID,2);
 		this.add(originalTotalPrice,3);
 		this.add(decreasePrice,4);
-		this.add(num,5);
-		this.add(start,6);
-		this.add(last,7);
-		this.add(originalTotalPriceTxt,8);
-		this.add(decreasePriceTxt,9);
-		this.add(numTxt,10);
-		this.add(startTxt,11);
-		this.add(lastTxt,12);
-		this.add(bg,13);
+		this.add(start,5);
+		this.add(last,6);
+		this.add(originalTotalPriceTxt,7);
+		this.add(decreasePriceTxt,8);
+		this.add(startTxt,9);
+		this.add(lastTxt,10);
+		this.add(bg,11);
 	}
 	public JPBill(ReachStrategyVO rs){
 		//区分面板种类

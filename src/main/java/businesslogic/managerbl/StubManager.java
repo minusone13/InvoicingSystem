@@ -388,7 +388,7 @@ public class StubManager implements StubManagerBlService{
 			MockCommodity temp=new MockCommodity(bsvo.getAlOfCommodity().get(i));
 			pack.add(temp);
 		}
-		strategyPool.addBarginStrategy(pack,bsvo.getDiscount(), bsvo.getNum(), bsvo.getStartTime(), bsvo.getLastTime());
+		strategyPool.addBarginStrategy(pack,bsvo.getDiscount(), bsvo.getStartTime(), bsvo.getLastTime());
 		return true;
 		
 	}
