@@ -11,6 +11,7 @@ import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
 import po.*;
 import po.stockpo.*;
+import po.stockpo.StockPO.Type;
 import businesslogic.commoditybillbl.StubAlertBill;
 import businesslogic.commoditybillbl.StubCommodityBill;
 import businesslogic.stockmanagerbl.*;
@@ -781,6 +782,22 @@ public class StubCommodityList
 
 	public RM updateCategory(CategoryVO vo, String newName)
 	{
+		ArrayList<StockPO> pos = new ArrayList<StockPO>(); 
+		try 
+		{ 
+			pos = comdata.openCategory(vo.getParent()); 
+		} 
+		catch (RemoteException e1) 
+		{ 
+			e1.printStackTrace(); 
+		 	return RM.RMIError; 
+		}
+		for(int i = 0; i<pos.size(); i++) 
+			if(pos.get(i).getT() != Type.Category) 
+			 	return RM.unknownerror; 
+		for(int i = 0; i<pos.size(); i++) 
+			if(pos.get(i).getCat().getName().equals(newName)) 
+				return RM.redundance;
 		try
 		{
 			return comdata.update(new StubCategory(vo).toPO(), newName);
