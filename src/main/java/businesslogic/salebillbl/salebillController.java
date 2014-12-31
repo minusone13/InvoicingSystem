@@ -399,10 +399,14 @@ public class salebillController implements SaleBillBlService,salebillForFinancia
 			ArrayList<SaleBackSheet> listOfSaleBackSheet= new ArrayList<SaleBackSheet>();
 			listOfSaleBackSheet=pool.getSaleBackSheet();
 			for(SaleSheet salesheet:listOfSaleSheet){
-				number += salesheet.getpmoney();
+				if(salesheet.getState().equals(BillState.OVER)){
+					number += salesheet.getpmoney();
+				}
 			}
 			for(SaleBackSheet salebacksheet:listOfSaleBackSheet){
-				number -= salebacksheet.getpmoney();
+				if(salebacksheet.getState().equals(BillState.OVER)){
+					number -= salebacksheet.getpmoney();
+				}
 			}
 			return number;
 		}
@@ -618,6 +622,9 @@ public class salebillController implements SaleBillBlService,salebillForFinancia
 					  String currentTime = format.format(new Date());
 					  ArrayList<StubGiftBill> list=pool.getGiftBill();
 					  giftbill.setID("XJFYD-"+currentTime+"-"+String.format("%05d", list.size()+1));
+					  String[] remark = new String[2];
+					  remark[0] = salesheetvo.getid();
+					  remark[1] = salesheetvo.getcustomer().getid();
 					  giftbill.setRemark(null);
 					  giftbill.setOperator(salesheetvo.getop());
 					  pool.add(giftbill);
