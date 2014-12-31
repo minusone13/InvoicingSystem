@@ -12,11 +12,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import businesslogic.customerbl.CustomerList;
-import businesslogic.salebillbl.salebillController;
-import businesslogicservice.customerblservice.CustomerBlService;
-import businesslogicservice.salebillblservice.SaleBillBlService;
-import entrance.Frame;
 import po.BillState;
 import po.BillStyle;
 import presentation.StringJudger;
@@ -28,6 +23,13 @@ import vo.CustomerVO;
 import vo.financialBillVO.CashPaymentVO;
 import vo.financialBillVO.PaymentVO;
 import vo.financialBillVO.ReceiptVO;
+import businesslogic.customerbl.CustomerList;
+import businesslogic.financialbl.Financial;
+import businesslogic.salebillbl.salebillController;
+import businesslogicservice.customerblservice.CustomerBlService;
+import businesslogicservice.financialblservice.FinancialBlService;
+import businesslogicservice.salebillblservice.SaleBillBlService;
+import entrance.Frame;
 
 public class JPmanageBills2 extends JPanel {
 	    //背景
@@ -433,7 +435,9 @@ public class JPmanageBills2 extends JPanel {
 			private JComboBox customerCombo;
 			private JTextField tranTotalText=new JTextField(10);
 			private JPaddList tranListEdit=new JPaddList(BillStyle.PaymentBill);//隐藏的条目编辑面板
+			//逻辑层接口
 			private SaleBillBlService sbl=new salebillController();
+			private FinancialBlService fbl=new Financial();
 			public void reHome(){
 				this.RightMove();
 				accountText.setText("");
@@ -665,10 +669,13 @@ public class JPmanageBills2 extends JPanel {
 						//显示编辑条目面板
 						switch(billStyle){
 						case ReceiptBill:
-							tranListEdit.setVisible(true);
-							tranListEdit.getNoteTxt().setText("无");
-							break;
 						case PaymentBill:
+							//初始化账户下拉框
+							tranListEdit.getAccount().removeAllItems();
+							for(int i=0;i<fbl.getAllAccountInfo().size();i++){
+								tranListEdit.getAccount().addItem(fbl.getAllAccountInfo().get(i).getName());
+							}
+							//显示
 							tranListEdit.setVisible(true);
 							tranListEdit.getNoteTxt().setText("无");
 							break;
@@ -1073,6 +1080,8 @@ public class JPmanageBills2 extends JPanel {
 				private JTextField listTxt=new JTextField(10);
 				private JTextField moneyTxt=new JTextField(10);
 				private JTextField noteTxt=new JTextField(10);
+				//账户下拉框
+				private JComboBox account;
 				//图片
 				private ImageIcon confirmW=new ImageIcon("src/image/function/confirmW.png");
 				private ImageIcon confirmR=new ImageIcon("src/image/function/confirmR.png");
@@ -1127,11 +1136,13 @@ public class JPmanageBills2 extends JPanel {
 						tranListName.setBounds(25, 30, 40, 20);
 						tranMoney.setBounds(25, 60, 40, 20);
 						tranNote.setBounds(25, 90, 40, 20);
+						
+						account = new JComboBox();
+						account.setFont(new Font("宋体",Font.BOLD,14));
+						account.setBounds(70,30, 100, 20);
+						account.setBackground(Color.gray);
+						account.setForeground(Color.white);
 						//文本框
-						listTxt.setBounds(70,30, 100, 20);
-						listTxt.setOpaque(false);//文本框透明
-						listTxt.setForeground(Color.white);//前景色
-						listTxt.setCaretColor(Color.white);
 						moneyTxt.setBounds(70,60, 100, 20);
 						moneyTxt.setOpaque(false);//文本框透明
 						moneyTxt.setForeground(Color.white);//前景色
@@ -1144,7 +1155,7 @@ public class JPmanageBills2 extends JPanel {
 						this.add(tranListName,0);
 						this.add(tranMoney,1);
 						this.add(tranNote,2);
-						this.add(listTxt,3);
+						this.add(account,3);
 						this.add(moneyTxt,4);
 						this.add(noteTxt,5);
 						this.add(confirm,6);
@@ -1194,6 +1205,14 @@ public class JPmanageBills2 extends JPanel {
 					
 					
 				}
+				public JComboBox getAccount()
+				{
+					return account;
+				}
+				public void setAccount(JComboBox account)
+				{
+					this.account = account;
+				}
 				public JTextField getNoteTxt()
 				{
 					return noteTxt;
@@ -1233,10 +1252,20 @@ public class JPmanageBills2 extends JPanel {
 						// TODO Auto-generated method stub
 						JPaddList.this.confirm.setIcon(confirmW);
 						//功能
-						String list=listTxt.getText();
+						String list="";
+						switch(billStyle){
+							case ReceiptBill:
+							case PaymentBill:
+								list=account.getSelectedItem().toString();
+								break;
+							case CashPaymentBill:
+								list=listTxt.getText();
+								break;
+						}
 						String money=moneyTxt.getText();
 						String note=noteTxt.getText();
 						boolean legal=false;
+						//填写完整
 						if(!list.equals("")&&!money.equals("")&&!note.equals("")){
 							legal=true;
 							if(stringJg.judgestring(money)!=3){
@@ -1244,10 +1273,23 @@ public class JPmanageBills2 extends JPanel {
 								frame.getWarning().showWarning("金额必须为数字");
 							}
 						}
-						else if(list.equals("")&&money.equals("")&&note.equals("")){
-							//隐藏板块
-							JPaddList.this.setVisible(false);
+						//一个都不填默认用户取消编辑
+						else if(money.equals("")&&note.equals("")){
+							switch(billStyle){
+								case ReceiptBill:
+								case PaymentBill:
+									//隐藏板块
+									JPaddList.this.setVisible(false);
+									break;
+								case CashPaymentBill:
+									if(list.equals("")){
+										//隐藏板块
+										JPaddList.this.setVisible(false);
+									}
+									break;
+							}
 						}
+						//填入部分信息默认用户没有填写完整
 						else{
 							frame.getWarning().showWarning("请输入完整信息");
 						}
@@ -1273,6 +1315,7 @@ public class JPmanageBills2 extends JPanel {
 								break;
 							case CashPaymentBill:
 								totalText.setText(String.valueOf(totalMoney));
+								break;
 							}
 							//合法操作才隐藏板块
 							JPaddList.this.setVisible(false);
