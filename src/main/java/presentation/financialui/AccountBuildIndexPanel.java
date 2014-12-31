@@ -120,9 +120,11 @@ public class AccountBuildIndexPanel extends JPanel{
 				//标记当前面板，用于后退按钮
 				frame.getFinancial().setPanelType(PanelType.InitialInfoPanel);
 				break;
-			case 24:buildButton.setLocation(800,450);
-				financial.buildAccount();
-			//buildButton.setIcon(buildIcon);	
+			case 24:
+				buildButton.setLocation(800,450);
+				financial.buildAccount();//建账
+				//更新商品面板的version
+				frame.getFinancial().getAccountOfComs().getAccountOfComs().updateVersion();
 					break;
 			}
 		}

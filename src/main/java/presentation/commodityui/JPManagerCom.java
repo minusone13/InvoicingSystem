@@ -65,7 +65,7 @@ public class JPManagerCom extends JPanel{
 	private StubCommodityBlService stockbl=new StubStockController();
 	private FinancialBlService financial = new Financial();
 	//财务人员期初建账的附件
-	private ArrayList<String> versions = financial.getVersions();
+	
 	private JComboBox box;
 	
 	public JPManagerCom(){
@@ -145,11 +145,7 @@ public class JPManagerCom extends JPanel{
 		box.setBounds(10,10, 120, 20);
 		box.setForeground(Color.white);
 		box.setBackground(Color.black);
-		
-		int size = versions.size();
-		for(int i=0;i<size;i++){
-			box.addItem(versions.get(i));
-		}
+		updateVersion();
 		box.setEditable(false);
 		box.setVisible(false);
 		box.addItemListener(new versionItemListener());
@@ -186,6 +182,14 @@ public class JPManagerCom extends JPanel{
 				System.out.println("accountBuild/commodity/"+s+".ser");
 				content.innitial();
 			}
+		}
+	}
+	public void updateVersion(){
+		box.removeAllItems();
+		ArrayList<String> versions = financial.getVersions();
+		int size = versions.size();
+		for(int i=0;i<size;i++){
+			box.addItem(versions.get(i));
 		}
 	}
 	/*获取frame的引用*/
