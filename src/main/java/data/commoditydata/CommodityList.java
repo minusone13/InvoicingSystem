@@ -7,13 +7,13 @@ import java.util.*;
 import po.*;
 import po.stockpo.*;
 
-public class StubCommodityList implements Serializable
+public class CommodityList implements Serializable
 {
-	ArrayList<StubCategoryData> cats;
+	ArrayList<CategoryData> cats;
 	ArrayList<PackPO> packs;
 	ArrayList<AdjustmentRecordPO> adjusts;
-	StubCategoryData cat;// =cats.get(0);
-	ArrayList<MockCommodityData> flatlist;// 平铺式的商品列表，便于搜索操作。注意商品增删时候的同步操作
+	CategoryData cat;// =cats.get(0);
+	ArrayList<CommodityData> flatlist;// 平铺式的商品列表，便于搜索操作。注意商品增删时候的同步操作
 	Date countDate = new Date();
 	int countNo = 0;
 
@@ -29,7 +29,7 @@ public class StubCommodityList implements Serializable
 
 	public RM deleteCategory(String id)
 	{
-		StubCategoryData cattemp = getFather(id);
+		CategoryData cattemp = getFather(id);
 		String a[] = id.split("\\\\");
 		String name = a[a.length - 1];
 		RM result = cattemp.delete(name);
@@ -41,12 +41,12 @@ public class StubCommodityList implements Serializable
 		int i = searchCommodity(name, model);
 		if (i == -1)
 			return RM.notfound;
-		MockCommodityData com = flatlist.get(i);
+		CommodityData com = flatlist.get(i);
 		String s = com.getParent();
 		String a[] = s.split("\\\\");
 		if (!a[0].equals("1"))// default root is 1
 			return RM.unknownerror;
-		StubCategoryData temp = cat.goThrow(a, 1);
+		CategoryData temp = cat.goThrow(a, 1);
 		if (temp == null)
 			return RM.unknownerror;
 		RM result = temp.delete(name, model);
@@ -55,10 +55,10 @@ public class StubCommodityList implements Serializable
 		return result;
 	}
 
-	public StubCategoryData findCategory(String id)
+	public CategoryData findCategory(String id)
 	{
 		String a[] = id.split("\\\\");
-		StubCategoryData result = cat.goThrow(a, 1);
+		CategoryData result = cat.goThrow(a, 1);
 		return result;
 	}
 
@@ -67,14 +67,14 @@ public class StubCommodityList implements Serializable
 		ArrayList<CommodityPO> result = new ArrayList<CommodityPO>();
 		for (int i = 0; i < flatlist.size(); i++)
 		{
-			MockCommodityData com = flatlist.get(i);
+			CommodityData com = flatlist.get(i);
 			if (com.getName().equals(name))
 				result.add(com.getPo());
 		}
 		return result;
 	}
 
-	public MockCommodityData findCommodity(String name, String model)
+	public CommodityData findCommodity(String name, String model)
 	{
 		int i = searchCommodity(name, model);
 		if (i == -1)
@@ -163,19 +163,19 @@ public class StubCommodityList implements Serializable
 		return countNo;
 	}
 
-	public StubCategoryData getFather(MockCommodityData c)
+	public CategoryData getFather(CommodityData c)
 	{
 		String s = c.getParent();
 		String a[] = s.split("\\\\");
 		if (!a[0].equals("1"))// default root is 1
 			return null;
-		StubCategoryData temp = cat.goThrow(a, 1);
+		CategoryData temp = cat.goThrow(a, 1);
 		if (temp == null)
 			return null;
 		return temp;
 	}
 
-	public StubCategoryData getFather(String id)
+	public CategoryData getFather(String id)
 	{
 		String a[] = id.split("\\\\");
 		StringBuffer sb = new StringBuffer();
@@ -184,17 +184,17 @@ public class StubCommodityList implements Serializable
 		sb.append(a[a.length - 2]);
 		String s = sb.toString();
 		String temp[] = s.split("\\\\");
-		StubCategoryData result = cat.goThrow(temp, 1);
+		CategoryData result = cat.goThrow(temp, 1);
 		return result;
 	}
 
-	public StubCategoryData getFather(StubCategoryData c)
+	public CategoryData getFather(CategoryData c)
 	{
 		String s = c.getParent();
 		String a[] = s.split("\\\\");
 		if (!a[0].equals("1"))// default root is 1
 			return null;
-		StubCategoryData temp = cat.goThrow(a, 1);
+		CategoryData temp = cat.goThrow(a, 1);
 		if (temp == null)
 			return null;
 		return temp;
@@ -202,12 +202,12 @@ public class StubCommodityList implements Serializable
 
 	public boolean initial()
 	{// 初始化方法，程序第一次运行或测试与调试阶段使用
-		cats = new ArrayList<StubCategoryData>();
-		cats.add(new StubCategoryData("0", "1"));
+		cats = new ArrayList<CategoryData>();
+		cats.add(new CategoryData("0", "1"));
 		packs = new ArrayList<PackPO>();
 		cat = cats.get(0);
-		cat.add(new StubCategoryData("1", "default category"));
-		flatlist = new ArrayList<MockCommodityData>();
+		cat.add(new CategoryData("1", "default category"));
+		flatlist = new ArrayList<CommodityData>();
 		adjusts = new ArrayList<AdjustmentRecordPO>();
 		return true;
 	}
@@ -223,12 +223,12 @@ public class StubCommodityList implements Serializable
 		String a[] = po.getParent().split("\\\\");
 		if (!a[0].equals("1"))// default root is 1
 			return RM.unknownerror;
-		StubCategoryData temp = cat.goThrow(a, 1);
+		CategoryData temp = cat.goThrow(a, 1);
 		if (temp == null)
 			return RM.unknownerror;
 		if (temp.findSubCat(po.getName()) != null)
 			return RM.redundance;
-		RM result = temp.add(new StubCategoryData(po));
+		RM result = temp.add(new CategoryData(po));
 		return result;
 	}
 
@@ -238,10 +238,10 @@ public class StubCommodityList implements Serializable
 		String a[] = s.split("\\\\");
 		if (!a[0].equals("1"))// default root is 1
 			return RM.unknownerror;
-		StubCategoryData temp = cat.goThrow(a, 1);
+		CategoryData temp = cat.goThrow(a, 1);
 		if (temp == null)
 			return RM.unknownerror;
-		MockCommodityData com = new MockCommodityData(po);
+		CommodityData com = new CommodityData(po);
 		RM result = temp.add(com);
 		if(result == RM.done)
 			flatlist.add(com);
@@ -258,7 +258,7 @@ public class StubCommodityList implements Serializable
 	{// Search in flatlist
 		for (int i = 0; i < flatlist.size(); i++)
 		{
-			MockCommodityData com = flatlist.get(i);
+			CommodityData com = flatlist.get(i);
 			if (com.getName().equals(name) && com.getModel().equals(model))
 				return i;
 		}
@@ -281,12 +281,12 @@ public class StubCommodityList implements Serializable
 		String a[] = po.getParent().split("\\\\");
 		if (!a[0].equals("1"))// default root is 1
 			return RM.unknownerror;
-		StubCategoryData temp = cat.goThrow(a, 1);
+		CategoryData temp = cat.goThrow(a, 1);
 		if (temp == null)
 			return RM.unknownerror;
 		if (temp.findSubCat(po.getName()) == null)
 			return RM.notfound;
-		StubCategoryData cat = findCategory(po.getId());
+		CategoryData cat = findCategory(po.getId());
 		if (cat == null)
 			return RM.notfound;
 		else
@@ -298,7 +298,7 @@ public class StubCommodityList implements Serializable
 
 	public boolean update(CommodityPO po)
 	{
-		MockCommodityData com = findCommodity(po.getName(), po.getModel());
+		CommodityData com = findCommodity(po.getName(), po.getModel());
 		if (com == null)
 			return false;
 		else

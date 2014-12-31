@@ -3,13 +3,13 @@ package data.commoditydata;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class StubPackData implements Serializable
+public class PackData implements Serializable
 {
-	ArrayList<MockCommodityData> coms;
+	ArrayList<CommodityData> coms;
 	int quantity;
 	double price;
 
-	public ArrayList<MockCommodityData> getComs()
+	public ArrayList<CommodityData> getComs()
 	{
 		return coms;
 	}
@@ -24,7 +24,7 @@ public class StubPackData implements Serializable
 		return quantity;
 	}
 
-	public void setComs(ArrayList<MockCommodityData> coms)
+	public void setComs(ArrayList<CommodityData> coms)
 	{
 		this.coms = coms;
 	}

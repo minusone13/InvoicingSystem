@@ -21,7 +21,7 @@ public class StubStockDataController extends UnicastRemoteObject implements Stub
 	}
 
 	private static StubStockDataController instance = null;
-	StubCommodityList l;
+	CommodityList l;
 
 	File f;
 
@@ -50,7 +50,7 @@ public class StubStockDataController extends UnicastRemoteObject implements Stub
 	public CategoryPO findCategory(String id)throws RemoteException
 	{
 		read();
-		StubCategoryData result = l.findCategory(id);
+		CategoryData result = l.findCategory(id);
 		if (result == null)
 			return null;
 		return result.getPo().clone();
@@ -65,7 +65,7 @@ public class StubStockDataController extends UnicastRemoteObject implements Stub
 	public CommodityPO findCommodity(String name, String model)throws RemoteException
 	{
 		read();
-		MockCommodityData result = l.findCommodity(name, model);
+		CommodityData result = l.findCommodity(name, model);
 		if (result == null)
 			return null;
 		return result.getPo().clone();
@@ -116,7 +116,7 @@ public class StubStockDataController extends UnicastRemoteObject implements Stub
 		return l.getCountNo();
 	}
 
-	public StubCommodityList getL()
+	public CommodityList getL()
 	{
 		read();
 		return l;
@@ -144,7 +144,7 @@ public class StubStockDataController extends UnicastRemoteObject implements Stub
 		}
 		try
 		{
-			oos.writeObject(new StubCommodityList());
+			oos.writeObject(new CommodityList());
 		}
 		catch (IOException e1)
 		{
@@ -202,7 +202,7 @@ public class StubStockDataController extends UnicastRemoteObject implements Stub
 	public ArrayList<StockPO> openCategory(String id)throws RemoteException
 	{
 		read();
-		StubCategoryData cat = l.findCategory(id);
+		CategoryData cat = l.findCategory(id);
 		if (cat == null)
 			return null;
 		return l.findCategory(id).open();
@@ -227,10 +227,10 @@ public class StubStockDataController extends UnicastRemoteObject implements Stub
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		StubCommodityList temp = null;
+		CommodityList temp = null;
 		try
 		{
-			temp = (StubCommodityList) ois.readObject();
+			temp = (CommodityList) ois.readObject();
 		}
 		catch (ClassNotFoundException e)
 		{
@@ -315,7 +315,7 @@ public class StubStockDataController extends UnicastRemoteObject implements Stub
 		}
 	}
 
-	public void setL(StubCommodityList l)
+	public void setL(CommodityList l)
 	{
 		read();
 		this.l = l;
