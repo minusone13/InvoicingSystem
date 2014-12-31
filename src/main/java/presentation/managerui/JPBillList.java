@@ -722,11 +722,13 @@ public class JPBillList extends JPanel {
 	/*提交选中的*/
 	public void submitChosen(){
 		if(getChosenNum()>=1){
+			JPBill jpt = JPbillList.get(0);
+			BillStyle bst = jpt.getStyle();
 			if(isTheSameState()&&stateOfChosen()==BillState.DRAFT){
 				for(int i=0;i<JPbillList.size();i++){
 					if(JPbillList.get(i).getChoose()){
-						JPBill jpt = JPbillList.get(i);
-						BillStyle bst = jpt.getStyle();
+						jpt = JPbillList.get(i);
+						bst = jpt.getStyle();
 						if(bst!=BillStyle.GiftBill && bst!=BillStyle.SpillsLossBill)//added by lhw
 							JPbillList.get(i).transformState(BillState.SUBMITED);
 						else
@@ -747,11 +749,13 @@ public class JPBillList extends JPanel {
 								jpt.setState(BillState.SUBMITED);
 								//修改背景
 								jpt.setBillBg(bst,BillState.SUBMITED,2);
+								frame.getWarning().showWarning("成功提交");
 							}
 						}
 					}
 				}
-				frame.getWarning().showWarning("成功提交");
+				if(bst!=BillStyle.GiftBill && bst!=BillStyle.SpillsLossBill)//added by lhw.exclude stock specific handles
+					frame.getWarning().showWarning("成功提交");
 				//更新面板
 				updateJP();
 			}
@@ -767,11 +771,13 @@ public class JPBillList extends JPanel {
 	/*处理选中的*/
 	public void doneChosen(){
 		if(getChosenNum()>=1){
+			JPBill jpt = JPbillList.get(0);//added by lhw
+			BillStyle bst = jpt.getStyle();//added by lhw
 			if(isTheSameState()&&stateOfChosen()==BillState.EXAMINED){
 				for(int i=0;i<JPbillList.size();i++){
 					if(JPbillList.get(i).getChoose()){
-						JPBill jpt = JPbillList.get(i);
-						BillStyle bst = jpt.getStyle();
+						jpt = JPbillList.get(i);
+						bst = jpt.getStyle();
 						if(bst!=BillStyle.GiftBill && bst!=BillStyle.SpillsLossBill)//added by lhw
 							JPbillList.get(i).transformState(BillState.OVER);
 						else
@@ -792,11 +798,13 @@ public class JPBillList extends JPanel {
 								jpt.setState(BillState.OVER);
 								//修改背景
 								jpt.setBillBg(bst,BillState.OVER,2);
+								frame.getWarning().showWarning("成功处理");
 							}
 						}
 					}
 				}
-				frame.getWarning().showWarning("成功处理");
+				if(bst!=BillStyle.GiftBill && bst!=BillStyle.SpillsLossBill)//added by lhw
+					frame.getWarning().showWarning("成功处理");
 				//更新面板
 				updateJP();
 			}
