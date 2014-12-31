@@ -153,7 +153,8 @@ public class CustomerList implements CustomerForFinancial, CustomerBlService{
 		public void changeShouldPay(String id, double hadPay) {
 			CustomerVO vo = null;
 			vo = this.findCustomer(id);
-			vo.setShouldPay(vo.getShouldPay()-hadPay);
+			double temp =vo.getShouldPay();
+			vo.setShouldPay(temp-hadPay);
 			this.updateCustomer(vo);
 			
 		}//修改应付;对应于收款单;hadpay公司给了客户多少，对应于付款单;
@@ -161,7 +162,8 @@ public class CustomerList implements CustomerForFinancial, CustomerBlService{
 		public void changeShouldTake(String id, double hadGive) {
 			CustomerVO vo = null;
 			vo = this.findCustomer(id);
-			vo.setShouldTake(vo.getShouldTake()-hadGive);
+			double temp =vo.getShouldTake();
+			vo.setShouldTake(temp-hadGive);
 			this.updateCustomer(vo);
 			
 		}//修改应收;对应于收款单;hadtake公司收了客户多少，对应于收款单;

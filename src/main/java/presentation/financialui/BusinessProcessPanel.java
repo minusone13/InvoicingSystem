@@ -542,17 +542,17 @@ public class BusinessProcessPanel extends JPanel{
 	        	dataOfReAndPay[i] = temp;
 	        }
 	        
-	        for(int i=size1;i<size;i++){
+	        for(int i=0;i<size2;i++){
 	        	System.out.println("payment");
 	        	PaymentVO tempPayment = payment.get(i);
 	        	Object[] temp ={tempPayment.getID(),tempPayment.getCustomer(), 
 	        			tempPayment.getOp(), tempPayment.getTotal(), 
 	        			tempPayment.getBillState()};
-	        	dataOfReAndPay[i] = temp;
+	        	dataOfReAndPay[i+size1] = temp;
 	        }
 	        
 			 model1.setDataVector(dataOfReAndPay, columnNames1);
-	System.out.println("~~~~~~~~~~~");
+	
 			 table1.updateUI();
 			 model2.setDataVector(new Object[][]{}, columnNames1s);
 			 table2.updateUI();
@@ -589,13 +589,13 @@ public class BusinessProcessPanel extends JPanel{
 	        			tempPurSheet.getState()};
 	        	dataOfPurAndBackSheet[i] = temp;
 	        }
-	        for(int i=sizeOfPurSheet;i<sizeOfPurAndBackSheet;i++){
+	        for(int i=0;i<sizeOfPurBackSheet;i++){
 	        	PurBackSheetVO tempPurBackSheet= purBackSheet.get(i);
 	        	Object[] temp ={tempPurBackSheet.getid(),tempPurBackSheet.getcustomer(),
 	        			tempPurBackSheet.getstock(),tempPurBackSheet.getop(),
 	        			tempPurBackSheet.getwords(),tempPurBackSheet.getmoney1(),
 	        			tempPurBackSheet.getState()};
-	        	dataOfPurAndBackSheet[i] = temp;
+	        	dataOfPurAndBackSheet[i+sizeOfPurSheet] = temp;
 	        }
 			  
 	        model1.setDataVector(dataOfPurAndBackSheet, columnNames3);
@@ -623,7 +623,7 @@ public class BusinessProcessPanel extends JPanel{
 	        	
 	        	dataOfSaleAndBack[i] = temp;
 	        }
-	        for(int i=sizeOfSale;i<sizeOfSaleAndBack;i++){
+	        for(int i=0;i<sizeOfSaleBack;i++){
 	        	SaleBackSheetVO saleBackVO = saleBackSheet.get(i);
 	        	Object[] temp ={saleBackVO.getid(),saleBackVO.getcustomer().getname(),
 	        			saleBackVO.getcustomer().getdeSaler(), saleBackVO.getop(), 
@@ -631,7 +631,7 @@ public class BusinessProcessPanel extends JPanel{
 	        			saleBackVO.getmoney2(),saleBackVO.getpmoney(),saleBackVO.getwords(),
 	        			saleBackVO.getState()};
 	        	
-	        	dataOfSaleAndBack[i] = temp;
+	        	dataOfSaleAndBack[i+sizeOfSale] = temp;
 	        }
 	        
 	        model1.setDataVector(dataOfSaleAndBack, columnNames4);
@@ -671,11 +671,11 @@ public class BusinessProcessPanel extends JPanel{
 						spillLossVO.getCom().getModel(), spillLossVO.getCom().getNumber()};
 				dataOfSpillLossAndAlert[i] = temp;
 			}
-			for(int i=sizeOfSpillLoss;i<sizeOfSpillLossAndAlert;i++) {
+			for(int i=0;i<sizeOfAlert;i++) {
 				AlertBillVO alertVO = alert.get(i);
 				Object[] temp ={alertVO.getID(), alertVO.getCom().getName(),
 						alertVO.getCom().getModel(), alertVO.getCom().getNumber()};
-				dataOfSpillLossAndAlert[i] = temp;
+				dataOfSpillLossAndAlert[i+sizeOfAlert] = temp;
 			}
 			 model1.setDataVector(dataOfSpillLossAndAlert, columnNames6);		  
 			 table1.updateUI();

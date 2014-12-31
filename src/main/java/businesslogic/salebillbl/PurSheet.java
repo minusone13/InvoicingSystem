@@ -13,8 +13,11 @@ import vo.stockvo.CommodityVO;
 import businesslogic.GetVOandPO;
 import businesslogic.commoditybl.MockCommodity;
 import businesslogic.customerbl.Customer;
+import businesslogic.customerbl.CustomerList;
 import businesslogic.examinebl.Bill;
 import businesslogic.examinebl.StubBillPool;
+import businesslogic.stockmanagerbl.StubStockController;
+import businesslogic.stockservice.StockBlForSalesMen;
 
 public class PurSheet extends Bill implements GetVOandPO{
 	private BillStyle billstyle=BillStyle.PurSheet;
@@ -71,6 +74,27 @@ public class PurSheet extends Bill implements GetVOandPO{
 	}
 	
 	public  void setState(BillState billstate){
+		StockBlForSalesMen stockservice = new StubStockController();
+		CustomerList list = new CustomerList();
+		PurSheetVO vo = this.getVO();
+		System.out.println(billstate+"i am here");
+		switch(billstate){
+			case SUBMITED : 
+				//那个返回的结果有什么用？
+				for(CommodityVO tempvo:vo.getsheet()){
+					stockservice.readyForIn(tempvo.getId(), tempvo.getName(), tempvo.getModel(), tempvo.getNumber(), tempvo.getIn());
+				}
+				break;
+			case EXAMINED : 
+				for(CommodityVO tempvo:vo.getsheet()){
+					stockservice.checkIn(tempvo.getId(),  tempvo.getName(), tempvo.getModel(), tempvo.getNumber(), tempvo.getIn());
+				}
+				break;
+			case OVER     : 
+				System.out.println(this.getcustomer().getid());
+				list.changeShouldPay(this.getcustomer().getid(), -vo.getmoney1());
+				break;
+		}
 		this.billstate= billstate;
 	}
 	

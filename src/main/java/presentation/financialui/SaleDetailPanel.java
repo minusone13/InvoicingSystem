@@ -213,7 +213,7 @@ public class SaleDetailPanel extends JPanel{
 						 commodity.getNumber(), commodity.getOut(), total};
 				 data[i] = temp;
 			 }
-			 for(int i=size1;i<size;i++) {
+			 for(int i=0;i<size2;i++) {
 				 SaleBackSheetVO vo = saleBackSheet.get(i);
 				 ArrayList<CommodityVO> list = vo.getsheet();
 				 int sizeOfList = list.size();
@@ -238,7 +238,7 @@ public class SaleDetailPanel extends JPanel{
 				 
 			}//for
 			
-			for(int i=size1;i<size;i++) {
+			for(int i=0;i<size2;i++) {
 				SaleBackSheetVO vo = saleBackSheet.get(i);
 				 ArrayList<CommodityVO> list = vo.getsheet();
 				 int sizeOfList = list.size();
@@ -261,7 +261,7 @@ public class SaleDetailPanel extends JPanel{
 				 }
 				 
 			 }
-			 for(int i=size1;i<size;i++) {
+			 for(int i=0;i<size2;i++) {
 				 SaleBackSheetVO vo = saleBackSheet.get(i);
 				 ArrayList<CommodityVO> list = vo.getsheet();
 				 int sizeOfList = list.size();
