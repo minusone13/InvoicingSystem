@@ -35,7 +35,7 @@ public class StubAlertBill extends Bill implements GetVOandPO
 
 	public AlertBillVO getVO()
 	{
-		return new AlertBillVO(date, operator, ID, new CommodityVO(), shortage,
+		return new AlertBillVO(date, operator, ID, com.toVO(), shortage,
 				state);
 	}
 
