@@ -8,7 +8,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import data.commoditydata.StubStockDataController;
+import data.commoditydata.StockDataController;
 import entrance.Frame;
 import po.BillStyle;
 import presentation.PanelType;
@@ -58,7 +58,7 @@ public class JPmanageBills1  extends JPanel {
 		StockManagerDriver smd=new StockManagerDriver();
 		try
 		{
-			smd.start(stockbl,StubStockDataController.getInstance());
+			smd.start(stockbl,StockDataController.getInstance());
 		}
 		catch (RemoteException e)
 		{

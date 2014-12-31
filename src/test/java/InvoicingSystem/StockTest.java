@@ -28,14 +28,14 @@ import businesslogic.stockservice.StockBlForSalesMen;
 import businesslogicservice.commodityblservice.StubCommodityBlService;
 import data.commoditydata.*;
 import data.initial.Initial;
-import dataservice.commoditydataservice.StubCommodityDataService;
+import dataservice.commoditydataservice.CommodityDataService;
 import vo.*;
 import vo.stockvo.*;
 
 
 public class StockTest{
 	static StockManagerDriver smd=new StockManagerDriver();
-	static StubStockDataController data;
+	static StockDataController data;
 	static StubCommodityBlService combl;
 	static StubStockController controller;
 	static StubBillPool pool;
@@ -43,7 +43,7 @@ public class StockTest{
 	{
 		try
 		{
-			data=StubStockDataController.getInstance();
+			data=StockDataController.getInstance();
 		}
 		catch (RemoteException e1)
 		{

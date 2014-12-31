@@ -19,9 +19,9 @@ import businesslogic.userbl.User;
 import dataservice.commoditydataservice.*;
 import vo.stockvo.*;
 
-public class StubCommodityList
+public class CommodityListbl
 {// 商品列表 haha
-	static StubCommodityDataService comdata;
+	static CommodityDataService comdata;
 	public static User user;//王雨城加了public  此变量用于逻辑层调用来记录系统日志，有问题联系我
 
 	public CommodityVO findCommodity(String name, String model)
@@ -186,7 +186,7 @@ public class StubCommodityList
 		return RM.RMIError;
 	}
 
-	public void setcomdata(StubCommodityDataService comdata)
+	public void setcomdata(CommodityDataService comdata)
 	{//原用于启动程序
 		this.comdata = comdata;
 	}
@@ -810,14 +810,14 @@ public class StubCommodityList
 		return RM.RMIError;
 	}
 
-	public static StubCommodityDataService getComdata()
+	public static CommodityDataService getComdata()
 	{
 		return comdata;
 	}
 
-	public static void setComdata(StubCommodityDataService comdata)
+	public static void setComdata(CommodityDataService comdata)
 	{
-		StubCommodityList.comdata = comdata;
+		CommodityListbl.comdata = comdata;
 	}
 
 	public User getUser()

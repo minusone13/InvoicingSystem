@@ -16,12 +16,12 @@ import dataservice.userdataservice.*;
 
 public class UserList
 {
-	static StubUserDataService data = null;// need
+	static UserDataService data = null;// need
 	static
 	{
 		try
 		{
-			data = (StubUserDataService) Naming.lookup("rmi://"+entrance.Test.ipOfServer+"/UserDataController");
+			data = (UserDataService) Naming.lookup("rmi://"+entrance.Test.ipOfServer+"/UserDataController");
 		}
 		catch (MalformedURLException e)
 		{
@@ -354,17 +354,17 @@ public class UserList
 		return hexValue.toString();
 	}
 
-	public void setdataobject(StubUserDataService data)
+	public void setdataobject(UserDataService data)
 	{
 		this.data = data;
 	}
 
-	public static StubUserDataService getData()
+	public static UserDataService getData()
 	{
 		return data;
 	}
 
-	public static void setData(StubUserDataService data)
+	public static void setData(UserDataService data)
 	{
 		UserList.data = data;
 	}

@@ -29,10 +29,10 @@ import vo.uservo.UserVO;
 public class StubStockController implements StubCommodityBlService,
 		StockBlForSalesMen, StockBlForManager, StockBlForFinancial
 {// 负责与界面及其他程序员的交互
-	StubCommodityList l = new StubCommodityList();
+	CommodityListbl l = new CommodityListbl();
 	CommodityBill bl = new CommodityBill();
 	UserService us = new UserController();
-	static StubCommodityDataService comdata = null;
+	static CommodityDataService comdata = null;
 	static StubBillPool pool = new StubBillPool();
 	static User user = new User("D0000", Role.ADMINISTRATOR, "Default", "password",
 			"Test");
@@ -44,7 +44,7 @@ public class StubStockController implements StubCommodityBlService,
 	{
 		try
 		{
-			comdata = (StubCommodityDataService)Naming.lookup("rmi://"+entrance.Test.ipOfServer+"/StubStockDataController");
+			comdata = (CommodityDataService)Naming.lookup("rmi://"+entrance.Test.ipOfServer+"/StubStockDataController");
 		}
 		catch (MalformedURLException e)
 		{
@@ -70,7 +70,7 @@ public class StubStockController implements StubCommodityBlService,
 		l.setcomdata(comdata);
 	}
 
-	public StubCommodityList getCommodityList()
+	public CommodityListbl getCommodityList()
 	{
 		return l;
 	}
@@ -116,7 +116,7 @@ public class StubStockController implements StubCommodityBlService,
 		return result;
 	}
 
-	public void setdataobject(StubCommodityDataService comdata)
+	public void setdataobject(CommodityDataService comdata)
 	{
 		this.comdata = comdata;
 		l.setcomdata(comdata);

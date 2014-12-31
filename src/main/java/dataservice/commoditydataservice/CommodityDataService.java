@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import po.*;
 import po.stockpo.*;
 
-public interface StubCommodityDataService extends Remote
+public interface CommodityDataService extends Remote
 {
 	public void setFilePath(String s) throws RemoteException;//用于查看期初建账信息
 

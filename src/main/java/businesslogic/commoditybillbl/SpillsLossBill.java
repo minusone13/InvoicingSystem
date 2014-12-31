@@ -116,7 +116,7 @@ public class SpillsLossBill extends Bill implements GetVOandPO
 
 	public void setState(BillState state)
 	{
-		StubCommodityList l = new StubCommodityList();
+		CommodityListbl l = new CommodityListbl();
 		if (this.state == BillState.DRAFT && state == BillState.SUBMITED)
 		{
 			if (t == Type.Loss)

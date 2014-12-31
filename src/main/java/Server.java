@@ -9,7 +9,7 @@ import data.accountdata.AccountData;
 import data.billdata.CommodityBillSaver;
 import data.billdata.FinancialBillSaver;
 import data.billdata.SaleBillSaver;
-import data.commoditydata.StubStockDataController;
+import data.commoditydata.StockDataController;
 import data.customerdata.CustomerData;
 import data.strategydata.StrategySaver;
 import data.userdata.UserDataController;
@@ -18,10 +18,10 @@ import dataservice.accountdataservice.AccountDataService;
 import dataservice.billdataservice.CommodityBillSaverService;
 import dataservice.billdataservice.FinancialBillSaverService;
 import dataservice.billdataservice.SaleBillSaverService;
-import dataservice.commoditydataservice.StubCommodityDataService;
+import dataservice.commoditydataservice.CommodityDataService;
 import dataservice.customerdataservice.CustomerDataService;
 import dataservice.strategydataservice.StrategySaverService;
-import dataservice.userdataservice.StubUserDataService;
+import dataservice.userdataservice.UserDataService;
 
 
 public class Server
@@ -36,9 +36,9 @@ public class Server
 				CommodityBillSaverService commoditybillsaver = new CommodityBillSaver();
 				FinancialBillSaverService financialbillsaver = new FinancialBillSaver();
 				SaleBillSaverService salebillsaver = new SaleBillSaver();
-				StubCommodityDataService commoditydata = StubStockDataController.getInstance();
+				CommodityDataService commoditydata = StockDataController.getInstance();
 				StrategySaverService strategysaver = new StrategySaver();
-				StubUserDataService userdatacontroller = UserDataController.getInstance();
+				UserDataService userdatacontroller = UserDataController.getInstance();
 				AccountBuildService accountbuild = new AccountBuild();
 				
 				LocateRegistry.createRegistry(1099);

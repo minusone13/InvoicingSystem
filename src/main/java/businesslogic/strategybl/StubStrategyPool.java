@@ -14,7 +14,7 @@ import po.ReachStrategyPO;
 import po.ReachStrategyStyle;
 import presentation.userui.Login;
 import businesslogic.commoditybl.Commodity;
-import businesslogic.commoditybl.StubCommodityList;
+import businesslogic.commoditybl.CommodityListbl;
 import businesslogic.stockmanagerbl.StubStockController;
 import businesslogic.stockservice.StockBlForManager;
 import businesslogic.userbl.OperationRecord;
@@ -98,7 +98,7 @@ public class StubStrategyPool {
 		for(int i=0;i<alOfLevelStrategy.size();i++){
 			if(alOfLevelStrategy.get(i).getID().equals(ID)){
 				//保存记录
-				userService.addRecord(new OperationRecord(StubCommodityList.user,"删除客户策略:"+ID,RM.done));
+				userService.addRecord(new OperationRecord(CommodityListbl.user,"删除客户策略:"+ID,RM.done));
 				alOfLevelStrategy.remove(i);
 				break;
 			}
@@ -113,7 +113,7 @@ public class StubStrategyPool {
 		for(int i=0;i<alOfBarginStrategy.size();i++){
 			if(alOfBarginStrategy.get(i).getID().equals(ID)){
 				//保存记录
-				userService.addRecord(new OperationRecord(StubCommodityList.user,"删除特价包策略:"+ID,RM.done));
+				userService.addRecord(new OperationRecord(CommodityListbl.user,"删除特价包策略:"+ID,RM.done));
 				alOfBarginStrategy.remove(i);
 				break;
 			}
@@ -128,7 +128,7 @@ public class StubStrategyPool {
 		for(int i=0;i<alOfReachStrategy.size();i++){
 			if(alOfReachStrategy.get(i).getID().equals(ID)){
 				//保存记录
-				userService.addRecord(new OperationRecord(StubCommodityList.user,"删除满额促销策略:"+ID,RM.done));
+				userService.addRecord(new OperationRecord(CommodityListbl.user,"删除满额促销策略:"+ID,RM.done));
 				alOfReachStrategy.remove(i);
 				break;
 			}
@@ -149,7 +149,7 @@ public class StubStrategyPool {
 		ls.setLastTime(LastTime);
 		alOfLevelStrategy.add(ls);
 		//保存记录
-		userService.addRecord(new OperationRecord(StubCommodityList.user,"新增客户策略:"+ls.getID(),RM.done));
+		userService.addRecord(new OperationRecord(CommodityListbl.user,"新增客户策略:"+ls.getID(),RM.done));
 		//保存
 		this.save();
 	}
@@ -164,7 +164,7 @@ public class StubStrategyPool {
 		ls.setLastTime(LastTime);
 		alOfLevelStrategy.add(ls);
 		//保存记录
-		userService.addRecord(new OperationRecord(StubCommodityList.user,"新增客户策略:"+ls.getID(),RM.done));
+		userService.addRecord(new OperationRecord(CommodityListbl.user,"新增客户策略:"+ls.getID(),RM.done));
 		//保存
 		this.save();
 	}
@@ -179,7 +179,7 @@ public class StubStrategyPool {
 		ls.setLastTime(LastTime);
 		alOfLevelStrategy.add(ls);
 		//保存记录
-		userService.addRecord(new OperationRecord(StubCommodityList.user,"新增客户策略:"+ls.getID(),RM.done));
+		userService.addRecord(new OperationRecord(CommodityListbl.user,"新增客户策略:"+ls.getID(),RM.done));
 		//保存
 		this.save();
 	}
@@ -194,7 +194,7 @@ public class StubStrategyPool {
 		bs.setLastTime(LastTime);
 		alOfBarginStrategy.add(bs);
 		//保存记录
-		userService.addRecord(new OperationRecord(StubCommodityList.user,"新增特价包策略:"+bs.getID(),RM.done));
+		userService.addRecord(new OperationRecord(CommodityListbl.user,"新增特价包策略:"+bs.getID(),RM.done));
 		//保存
 		this.save();
 //		//同时生成特价包
@@ -211,7 +211,7 @@ public class StubStrategyPool {
 		rs.setLastTime(LastTime);
 		alOfReachStrategy.add(rs);
 		//保存记录
-		userService.addRecord(new OperationRecord(StubCommodityList.user,"新增满额促销策略:"+rs.getID(),RM.done));
+		userService.addRecord(new OperationRecord(CommodityListbl.user,"新增满额促销策略:"+rs.getID(),RM.done));
 		//保存
 		this.save();
 	}
@@ -226,7 +226,7 @@ public class StubStrategyPool {
 		rs.setLastTime(LastTime);
 		alOfReachStrategy.add(rs);
 		//保存记录
-		userService.addRecord(new OperationRecord(StubCommodityList.user,"新增满额促销策略:"+rs.getID(),RM.done));
+		userService.addRecord(new OperationRecord(CommodityListbl.user,"新增满额促销策略:"+rs.getID(),RM.done));
 		//保存
 		this.save();
 	}

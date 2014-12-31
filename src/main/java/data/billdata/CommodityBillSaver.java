@@ -16,7 +16,7 @@ import po.AlertBillPO;
 import po.GiftBillPO;
 import po.SpillsLossBillPO;
 import po.Tool;
-import data.commoditydata.StubStockDataController;
+import data.commoditydata.StockDataController;
 import dataservice.billdataservice.CommodityBillSaverService;
 
 public class CommodityBillSaver extends UnicastRemoteObject implements CommodityBillSaverService{

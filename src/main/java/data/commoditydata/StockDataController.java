@@ -10,22 +10,22 @@ import dataservice.commoditydataservice.*;
 import po.*;
 import po.stockpo.*;
 
-public class StubStockDataController extends UnicastRemoteObject implements StubCommodityDataService,
+public class StockDataController extends UnicastRemoteObject implements CommodityDataService,
 		StockDataForFinancial
 {// 这是一个单体模式的类，因为这样读写文件方便些
-	public static StubStockDataController getInstance()throws RemoteException
+	public static StockDataController getInstance()throws RemoteException
 	{// 单体模式
 		if (instance == null)
-			instance = new StubStockDataController();
+			instance = new StockDataController();
 		return instance;
 	}
 
-	private static StubStockDataController instance = null;
+	private static StockDataController instance = null;
 	CommodityList l;
 
 	File f;
 
-	private StubStockDataController()throws RemoteException
+	private StockDataController()throws RemoteException
 	{
 		read();
 	}
@@ -298,7 +298,7 @@ public class StubStockDataController extends UnicastRemoteObject implements Stub
 	public void setDefaultFile()throws RemoteException
 	{
 		Tool.stock = Tool.defaultstock;
-		instance = new StubStockDataController();
+		instance = new StockDataController();
 	}
 
 	public void setFilePath(String s) throws RemoteException
@@ -306,7 +306,7 @@ public class StubStockDataController extends UnicastRemoteObject implements Stub
 		Tool.stock = s;
 		try
 		{
-			instance = new StubStockDataController();
+			instance = new StockDataController();
 		}
 		catch (RemoteException e)
 		{

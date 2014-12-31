@@ -11,7 +11,7 @@ import vo.VO;
 import vo.stockvo.CommodityVO;
 import businesslogic.GetVOandPO;
 import businesslogic.commoditybl.Commodity;
-import businesslogic.commoditybl.StubCommodityList;
+import businesslogic.commoditybl.CommodityListbl;
 import businesslogic.examinebl.Bill;
 
 public class GiftBill extends Bill implements GetVOandPO
@@ -130,7 +130,7 @@ public class GiftBill extends Bill implements GetVOandPO
 
 	public void setState(BillState state)
 	{
-		StubCommodityList l = new StubCommodityList();
+		CommodityListbl l = new CommodityListbl();
 		if (this.state == BillState.DRAFT && state == BillState.SUBMITED)
 		{
 			for (int i = 0; i < coms.size(); i++)

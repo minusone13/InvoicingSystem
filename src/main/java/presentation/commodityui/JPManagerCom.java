@@ -24,7 +24,7 @@ import javax.swing.JTextField;
 
 
 
-import businesslogic.commoditybl.StubCommodityList;
+import businesslogic.commoditybl.CommodityListbl;
 import businesslogic.financialbl.Financial;
 //import dataservice.commoditydataservice.StubCommodityDataService;
 import businesslogic.stockmanagerbl.StubStockController;
@@ -312,14 +312,14 @@ public class JPManagerCom extends JPanel{
 						total2+=temp2.get(i).getOut()*temp2.get(i).getNumber();
 					}
 					//如果是总经理审批时修改单据
-					if(StubCommodityList.user.getR()==Role.MANAGER){
+					if(CommodityListbl.user.getR()==Role.MANAGER){
 						frame.getManager().getPassbill2().getJPeditOfPur().setOutput(temp2);
 						frame.getManager().getPassbill2().getJPeditOfPur().setOutputNotes(tempNotes);
 						frame.getManager().getPassbill2().getJPeditOfPur().getTotalText().setText(String.valueOf(total));
 					}
 					//如果是进销人员制定修改单据
-					else if(StubCommodityList.user.getR()==Role.PURCHASE_SALE_STAFF
-							||StubCommodityList.user.getR()==Role.PURCHASE_SALE_MANAGER){
+					else if(CommodityListbl.user.getR()==Role.PURCHASE_SALE_STAFF
+							||CommodityListbl.user.getR()==Role.PURCHASE_SALE_MANAGER){
 						switch(frame.getSale().getManageBills2().getStyle()){
 							case PurSheet:
 								frame.getSale().getManageBills2().getJPeditOfPur().setOutput(temp2);

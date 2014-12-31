@@ -12,7 +12,7 @@ import dataservice.userdataservice.*;
 
 public class UserController implements StubUserBlService, UserService
 {
-	static StubUserDataService data;
+	static UserDataService data;
 	UserList l = new UserList();
 
 	public UserVO login(String account, String password)
@@ -45,18 +45,18 @@ public class UserController implements StubUserBlService, UserService
 		return l.changePassword(vo, oldPassword);
 	}
 
-	public void setdataobject(StubUserDataService data)
+	public void setdataobject(UserDataService data)
 	{
 		this.data = data;
 		l.setdataobject(data);
 	}
 
-	public static StubUserDataService getData()
+	public static UserDataService getData()
 	{
 		return data;
 	}
 
-	public static void setData(StubUserDataService data)
+	public static void setData(UserDataService data)
 	{
 		UserController.data = data;
 	}
