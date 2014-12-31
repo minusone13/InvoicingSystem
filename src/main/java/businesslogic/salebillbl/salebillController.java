@@ -393,6 +393,7 @@ public class salebillController implements SaleBillBlService,salebillForFinancia
 		public double getAllSalesIncome(Date start,Date end) {
 			double number=0.0;
 			StubBillPool pool = new StubBillPool();
+			System.out.println("决战2014!");
 			ArrayList<SaleSheet> listOfSaleSheet= new ArrayList<SaleSheet>();
 			listOfSaleSheet=pool.getSaleSheet();
 			ArrayList<SaleBackSheet> listOfSaleBackSheet= new ArrayList<SaleBackSheet>();
