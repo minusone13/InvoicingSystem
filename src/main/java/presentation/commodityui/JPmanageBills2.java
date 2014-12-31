@@ -406,10 +406,7 @@ public class JPmanageBills2 extends JPanel {
 			/*归位并清空数据*/
 			public void reHome(){
 				this.RightMove();
-				chosenVO=null;
-				commodityText.setText("");
-				typeText.setText("");
-				numText.setText("");
+			
 			}
 			
 			public JPanelEdit(BillStyle style){
@@ -500,6 +497,10 @@ public class JPmanageBills2 extends JPanel {
 				t.start();
 			}
 			public void RightMove(){
+				chosenVO=null;
+				commodityText.setText("");
+				typeText.setText("");
+				numText.setText("");
 				Thread t=new Thread(new TreadOfRight());
 				t.start();
 			}

@@ -320,12 +320,7 @@ public class BusinessConditionPanel extends JPanel{
 		
 		public void reHome(){
 			this.RightMove();
-			year1.setText("");
-			month1.setText("");
-			date1.setText("");
-			year2.setText("");
-			month2.setText("");
-			date2.setText("");
+			
 		}
 		public JPeditForSituation(){
 			//面板大小
@@ -583,6 +578,12 @@ public class BusinessConditionPanel extends JPanel{
 			t.start();
 		}
 		public void RightMove(){
+			year1.setText("");
+			month1.setText("");
+			date1.setText("");
+			year2.setText("");
+			month2.setText("");
+			date2.setText("");
 			Thread t=new Thread(new TreadOfRight());
 			t.start();
 		}

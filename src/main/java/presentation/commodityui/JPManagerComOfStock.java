@@ -234,11 +234,7 @@ public class JPManagerComOfStock extends JPanel {
 		
 		public void reHome(){
 			this.RightMove();
-			nameText.setText("");
-			typeText.setText("");
-			inpriceText.setText("");
-			outpriceText.setText("");
-			alertText.setText("");
+			
 		}
 		public JPanelEdit(){
 			//面板大小
@@ -324,6 +320,11 @@ public class JPManagerComOfStock extends JPanel {
 			t.start();
 		}
 		public void RightMove(){
+			nameText.setText("");
+			typeText.setText("");
+			inpriceText.setText("");
+			outpriceText.setText("");
+			alertText.setText("");
 			Thread t=new Thread(new TreadOfRight());
 			t.start();
 		}

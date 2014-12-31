@@ -184,12 +184,12 @@ public class StubStrategyPool {
 		this.save();
 	}
 	/*需要制定一条特价包促销策略*/
-	public void addBarginStrategy (ArrayList<MockCommodity> bargin,double discount,int num,String StartTime,int LastTime){
+	public void addBarginStrategy (ArrayList<MockCommodity> bargin,double discount,String StartTime,int LastTime){
 		read();
 		StubBarginStrategy bs=new StubBarginStrategy();
 		bs.setAlOfCommodity(bargin);
 		bs.setDiscount(discount);
-		bs.setNum(num);
+//		bs.setNum(num);
 		bs.setStartTime(StartTime);
 		bs.setLastTime(LastTime);
 		alOfBarginStrategy.add(bs);
@@ -197,8 +197,8 @@ public class StubStrategyPool {
 		userService.addRecord(new OperationRecord(StubCommodityList.user,"新增特价包策略:"+bs.getID(),RM.done));
 		//保存
 		this.save();
-		//同时生成特价包
-		stockbl.addPack(bargin, num, discount);
+//		//同时生成特价包
+//		stockbl.addPack(bargin, num, discount);
 	}
 	/*需要制定一条赠送赠品的满额促销策略*/
 	public void addReachStrategy (double Limit,ArrayList<MockCommodity> gift,String StartTime,int LastTime){

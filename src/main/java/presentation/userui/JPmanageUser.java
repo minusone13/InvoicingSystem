@@ -293,7 +293,7 @@ public class JPmanageUser extends JPanel {
 				private boolean isAdmin=false;//默认不是
 				public void reHome(){
 					this.RightMove();
-					codeText.setText("");
+					
 				}
 				public JPanelEdit(){
 					//面板大小
@@ -363,6 +363,7 @@ public class JPmanageUser extends JPanel {
 					t.start();
 				}
 				public void RightMove(){
+					codeText.setText("");
 					Thread t=new Thread(new TreadOfRight());
 					t.start();
 				}
@@ -584,8 +585,8 @@ public class JPmanageUser extends JPanel {
 				private JLabel searchjl=new JLabel("查找 ");
 				private JTextField searchTxt=new JTextField(10);
 				public void reHome(){
-					this.setLocation(905, 36);
-					searchTxt.setText("");
+					this.RightMove();
+					
 				}
 				public JPanelSearch(){
 					//面板大小
@@ -630,6 +631,7 @@ public class JPmanageUser extends JPanel {
 					t.start();
 				}
 				public void RightMove(){
+					searchTxt.setText("");
 					Thread t=new Thread(new TreadOfRight());
 					t.start();
 				}

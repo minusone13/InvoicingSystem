@@ -420,9 +420,7 @@ public class JPpassBill2 extends JPanel {
 	    StringJudger stringJg=new StringJudger();
 		public void reHome(){
 			this.RightMove();
-			totalText.setText("");
-			reasonTxt.setText("");
-			noteText.setText("");
+			
 		}
 		public JPanelEdit(BillStyle style){
 			//确认种类
@@ -497,13 +495,13 @@ public class JPpassBill2 extends JPanel {
 				total.setBounds(40, 120, 40, 20);
 				note.setBounds(40, 150, 40, 20);
 				//客户选择下拉框
-				ArrayList<CustomerVO> customers = null;
-				customers = customerbl.getAllCustomer("Customer.txt");
-				String[] customerS=new String[customers.size()];
-				for(int i=0;i<customers.size();i++){
-					customerS[i]=customers.get(i).getname()+":"+customers.get(i).getid();
-				}
-				customerCombo = new JComboBox(customerS);
+//				ArrayList<CustomerVO> customers = null;
+//				customers = customerbl.getAllCustomer("Customer.txt");
+//				String[] customerS=new String[customers.size()];
+//				for(int i=0;i<customers.size();i++){
+//					customerS[i]=customers.get(i).getname()+":"+customers.get(i).getid();
+//				}
+				customerCombo = new JComboBox();
 				customerCombo.setFont(new Font("宋体",Font.BOLD,14));
 				customerCombo.setBounds(80,30, 150, 20);
 				customerCombo.setBackground(Color.gray);
@@ -573,13 +571,18 @@ public class JPpassBill2 extends JPanel {
 				ArrayList<CustomerVO> customers = null;
 				customers = customerbl.getAllCustomer("Customer.txt");
 				for(int i=0;i<customers.size();i++){
-					customerCombo.addItem(customers.get(i).getname()+":"+customers.get(i).getid());
+					if(customers.get(i).gettype()==0){
+						customerCombo.addItem(customers.get(i).getname()+":"+customers.get(i).getid());
+					}
 				}
 			}
 			Thread t=new Thread(new TreadOfLeft());
 			t.start();
 		}
 		public void RightMove(){
+			totalText.setText("");
+			reasonTxt.setText("");
+			noteText.setText("");
 			Thread t=new Thread(new TreadOfRight());
 			t.start();
 		}

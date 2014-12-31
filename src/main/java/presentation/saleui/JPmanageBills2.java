@@ -501,16 +501,7 @@ public class JPmanageBills2 extends JPanel {
 			private ArrayList<String> outputNotes;
 			public void reHome(){
 				this.RightMove();
-				customerTxt.setText("");
-				warehouseTxt.setText("");
-				totalText.setText("");
-				noteText.setText("");
-				couponText.setText("");
-				discountText.setText("");
-				finalTotalText.setText("");
-				billIDTxt.setText("");
-				output=null;
-				outputNotes=null;
+			
 			}
 			public JPanelEdit(BillStyle style){
 				//确认种类
@@ -560,13 +551,13 @@ public class JPmanageBills2 extends JPanel {
 					note.setBounds(40, 150, 40, 20);
 					
 					//客户选择下拉框
-					ArrayList<CustomerVO> customers = null;
-					customers = customerbl.getAllCustomer("Customer.txt");
-					String[] customerS=new String[customers.size()];
-					for(int i=0;i<customers.size();i++){
-						customerS[i]=customers.get(i).getname()+":"+customers.get(i).getid();
-					}
-					customerCombo = new JComboBox(customerS);
+//					ArrayList<CustomerVO> customers = null;
+//					customers = customerbl.getAllCustomer("Customer.txt");
+//					String[] customerS=new String[customers.size()];
+//					for(int i=0;i<customers.size();i++){
+//						customerS[i]=customers.get(i).getname()+":"+customers.get(i).getid();
+//					}
+					customerCombo = new JComboBox();
 					customerCombo.setFont(new Font("宋体",Font.BOLD,14));
 					customerCombo.setBounds(80,30, 150, 20);
 					customerCombo.setBackground(Color.gray);
@@ -706,13 +697,13 @@ public class JPmanageBills2 extends JPanel {
 					note.setBounds(40,215, 40, 20);
 					KeyAdapterOfSignIn KeyFindStrategy=new KeyAdapterOfSignIn();
 					//客户选择下拉框
-					ArrayList<CustomerVO> customers2 = null;
-					customers2 = customerbl.getAllCustomer("Customer.txt");
-					String[] customerS2=new String[customers2.size()];
-					for(int i=0;i<customers2.size();i++){
-						customerS2[i]=customers2.get(i).getname()+":"+customers2.get(i).getid();
-					}
-					customerCombo = new JComboBox(customerS2);
+//					ArrayList<CustomerVO> customers2 = null;
+//					customers2 = customerbl.getAllCustomer("Customer.txt");
+//					String[] customerS2=new String[customers2.size()];
+//					for(int i=0;i<customers2.size();i++){
+//						customerS2[i]=customers2.get(i).getname()+":"+customers2.get(i).getid();
+//					}
+					customerCombo = new JComboBox();
 					customerCombo.setFont(new Font("宋体",Font.BOLD,14));
 					customerCombo.setBounds(80,15, 150, 20);
 					customerCombo.setBackground(Color.gray);
@@ -1429,19 +1420,40 @@ public class JPmanageBills2 extends JPanel {
 				this.finalTotalText = finalTotalText;
 			}
 			public void leftMove(){
-				if(style==BillStyle.PurSheet||style==BillStyle.SaleSheet){
+				if(style==BillStyle.PurSheet){
 					customerCombo.removeAllItems();
-					
 					ArrayList<CustomerVO> customers = null;
 					customers = customerbl.getAllCustomer("Customer.txt");
 					for(int i=0;i<customers.size();i++){
-						customerCombo.addItem(customers.get(i).getname()+":"+customers.get(i).getid());
+						if(customers.get(i).gettype()==0){
+							customerCombo.addItem(customers.get(i).getname()+":"+customers.get(i).getid());
+						}
+					}
+				}
+				else if(style==BillStyle.SaleSheet){
+					customerCombo.removeAllItems();
+					ArrayList<CustomerVO> customers = null;
+					customers = customerbl.getAllCustomer("Customer.txt");
+					for(int i=0;i<customers.size();i++){
+						if(customers.get(i).gettype()==1){
+							customerCombo.addItem(customers.get(i).getname()+":"+customers.get(i).getid());
+						}
 					}
 				}
 				Thread t=new Thread(new TreadOfLeft());
 				t.start();
 			}
 			public void RightMove(){
+				customerTxt.setText("");
+				warehouseTxt.setText("");
+				totalText.setText("");
+				noteText.setText("");
+				couponText.setText("");
+				discountText.setText("");
+				finalTotalText.setText("");
+				billIDTxt.setText("");
+				output=null;
+				outputNotes=null;
 				Thread t=new Thread(new TreadOfRight());
 				t.start();
 			}
