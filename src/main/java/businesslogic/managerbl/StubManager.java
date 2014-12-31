@@ -19,10 +19,10 @@ import vo.financialBillVO.CashPaymentVO;
 import vo.financialBillVO.PaymentVO;
 import vo.financialBillVO.ReceiptVO;
 import vo.inquiryVO.BusinessSituationVO;
-import businesslogic.commoditybillbl.StubAlertBill;
-import businesslogic.commoditybillbl.StubGiftBill;
-import businesslogic.commoditybillbl.StubSpillsLossBill;
-import businesslogic.commoditybl.MockCommodity;
+import businesslogic.commoditybillbl.AlertBill;
+import businesslogic.commoditybillbl.GiftBill;
+import businesslogic.commoditybillbl.SpillsLossBill;
+import businesslogic.commoditybl.Commodity;
 import businesslogic.examinebl.StubBillPool;
 import businesslogic.financialbillbl.CashPaymentBill;
 import businesslogic.financialbillbl.PaymentBill;
@@ -51,8 +51,8 @@ public class StubManager implements StubManagerBlService{
 	/*需要从单据池筛选指定状态的所有赠送单*/
 	public ArrayList<GiftBillVO> getGiftBill (BillState st){
 		ArrayList<GiftBillVO> result=new ArrayList<GiftBillVO>();
-		ArrayList<StubGiftBill> billList=billPool.getGiftBill(st);
-		for(StubGiftBill temp: billList){
+		ArrayList<GiftBill> billList=billPool.getGiftBill(st);
+		for(GiftBill temp: billList){
 			result.add(temp.getVO());
 		}
 		
@@ -62,8 +62,8 @@ public class StubManager implements StubManagerBlService{
 	/*需要从单据池筛选指定状态的所有报溢/报损单*/
 	public ArrayList<SpillsLossBillVO> getSpillsLossBill (BillState st){
 		ArrayList<SpillsLossBillVO> result=new ArrayList<SpillsLossBillVO>();
-		ArrayList<StubSpillsLossBill> billList=billPool.getSpillsLossBill(st);
-		for(StubSpillsLossBill temp: billList){
+		ArrayList<SpillsLossBill> billList=billPool.getSpillsLossBill(st);
+		for(SpillsLossBill temp: billList){
 			result.add(temp.getVO());
 		}
 		
@@ -74,8 +74,8 @@ public class StubManager implements StubManagerBlService{
 	/*需要从单据池筛选指定状态的所有库存报警单*/
 	public ArrayList<AlertBillVO> getAlertBill (BillState st){
 		ArrayList<AlertBillVO> result=new ArrayList<AlertBillVO>();
-		ArrayList<StubAlertBill> billList=billPool.getAlertBill(st);
-		for(StubAlertBill temp: billList){
+		ArrayList<AlertBill> billList=billPool.getAlertBill(st);
+		for(AlertBill temp: billList){
 			result.add(temp.getVO());
 		}
 		
@@ -162,8 +162,8 @@ public class StubManager implements StubManagerBlService{
 	/*获取单据池所有赠送单*/
 	public ArrayList<GiftBillVO> getGiftBill (){
 		ArrayList<GiftBillVO> result=new ArrayList<GiftBillVO>();
-		ArrayList<StubGiftBill> billList=billPool.getGiftBill();
-		for(StubGiftBill temp: billList){
+		ArrayList<GiftBill> billList=billPool.getGiftBill();
+		for(GiftBill temp: billList){
 			result.add(temp.getVO());
 		}
 		
@@ -173,8 +173,8 @@ public class StubManager implements StubManagerBlService{
 	/*获取单据池的所有报溢/报损单*/
 	public ArrayList<SpillsLossBillVO> getSpillsLossBill (){
 		ArrayList<SpillsLossBillVO> result=new ArrayList<SpillsLossBillVO>();
-		ArrayList<StubSpillsLossBill> billList=billPool.getSpillsLossBill();
-		for(StubSpillsLossBill temp: billList){
+		ArrayList<SpillsLossBill> billList=billPool.getSpillsLossBill();
+		for(SpillsLossBill temp: billList){
 			result.add(temp.getVO());
 		}
 		
@@ -183,8 +183,8 @@ public class StubManager implements StubManagerBlService{
 	/*获取单据池的所有库存报警单*/
 	public ArrayList<AlertBillVO> getAlertBill (){
 		ArrayList<AlertBillVO> result=new ArrayList<AlertBillVO>();
-		ArrayList<StubAlertBill> billList=billPool.getAlertBill();
-		for(StubAlertBill temp: billList){
+		ArrayList<AlertBill> billList=billPool.getAlertBill();
+		for(AlertBill temp: billList){
 			result.add(temp.getVO());
 		}
 		
@@ -362,9 +362,9 @@ public class StubManager implements StubManagerBlService{
 	}
 	/*需要制定一个赠送赠品的客户分层策略*/
 	public boolean addGiftLevelStrategy (LevelStrategyVO lsvo){
-		ArrayList<MockCommodity> gift=new ArrayList<MockCommodity>();
+		ArrayList<Commodity> gift=new ArrayList<Commodity>();
 		for(int i=0;i<lsvo.getAlOfCommodity().size();i++){
-			MockCommodity temp=new MockCommodity(lsvo.getAlOfCommodity().get(i));
+			Commodity temp=new Commodity(lsvo.getAlOfCommodity().get(i));
 			gift.add(temp);
 		}
 		strategyPool.addGiftLevelStrategy(lsvo.getLevel(), lsvo.getLimit(),gift , lsvo.getStartTime(), lsvo.getLastTime());
@@ -383,9 +383,9 @@ public class StubManager implements StubManagerBlService{
 	}
 	/*需要制定一条特价包促销策略*/
 	public boolean addBarginStrategy (BarginStrategyVO bsvo){
-		ArrayList<MockCommodity> pack=new ArrayList<MockCommodity>();
+		ArrayList<Commodity> pack=new ArrayList<Commodity>();
 		for(int i=0;i<bsvo.getAlOfCommodity().size();i++){
-			MockCommodity temp=new MockCommodity(bsvo.getAlOfCommodity().get(i));
+			Commodity temp=new Commodity(bsvo.getAlOfCommodity().get(i));
 			pack.add(temp);
 		}
 		strategyPool.addBarginStrategy(pack,bsvo.getDiscount(), bsvo.getStartTime(), bsvo.getLastTime());
@@ -394,9 +394,9 @@ public class StubManager implements StubManagerBlService{
 	}
 	/*需要制定一条赠送赠品的满额促销策略*/
 	public boolean addGiftReachStrategy (ReachStrategyVO rsvo){
-		ArrayList<MockCommodity> gift=new ArrayList<MockCommodity>();
+		ArrayList<Commodity> gift=new ArrayList<Commodity>();
 		for(int i=0;i<rsvo.getAlOfCommodity().size();i++){
-			MockCommodity temp=new MockCommodity(rsvo.getAlOfCommodity().get(i));
+			Commodity temp=new Commodity(rsvo.getAlOfCommodity().get(i));
 			gift.add(temp);
 		}
 		strategyPool.addReachStrategy(rsvo.getLimit(), gift, rsvo.getStartTime(),rsvo.getLastTime());

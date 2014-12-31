@@ -6,7 +6,7 @@ import java.util.Calendar;
 import po.LevelStrategyStyle;
 import po.StrategyStyle;
 import vo.stockvo.CommodityVO;
-import businesslogic.commoditybl.MockCommodity;
+import businesslogic.commoditybl.Commodity;
 
 public class LevelStrategyVO extends VO{
 

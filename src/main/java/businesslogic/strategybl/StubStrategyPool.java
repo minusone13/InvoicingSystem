@@ -13,7 +13,7 @@ import po.RM;
 import po.ReachStrategyPO;
 import po.ReachStrategyStyle;
 import presentation.userui.Login;
-import businesslogic.commoditybl.MockCommodity;
+import businesslogic.commoditybl.Commodity;
 import businesslogic.commoditybl.StubCommodityList;
 import businesslogic.stockmanagerbl.StubStockController;
 import businesslogic.stockservice.StockBlForManager;
@@ -138,7 +138,7 @@ public class StubStrategyPool {
 		this.save();
 	}
 	/*需要制定一个赠送赠品的客户分层策略*/
-	public void addGiftLevelStrategy (int level,double Limit,ArrayList<MockCommodity> gift,String StartTime,int LastTime){
+	public void addGiftLevelStrategy (int level,double Limit,ArrayList<Commodity> gift,String StartTime,int LastTime){
 		read();
 		StubLevelStrategy ls=new StubLevelStrategy();
 		ls.setLevel_strategy_style(LevelStrategyStyle.Gift);
@@ -184,7 +184,7 @@ public class StubStrategyPool {
 		this.save();
 	}
 	/*需要制定一条特价包促销策略*/
-	public void addBarginStrategy (ArrayList<MockCommodity> bargin,double discount,String StartTime,int LastTime){
+	public void addBarginStrategy (ArrayList<Commodity> bargin,double discount,String StartTime,int LastTime){
 		read();
 		StubBarginStrategy bs=new StubBarginStrategy();
 		bs.setAlOfCommodity(bargin);
@@ -201,7 +201,7 @@ public class StubStrategyPool {
 //		stockbl.addPack(bargin, num, discount);
 	}
 	/*需要制定一条赠送赠品的满额促销策略*/
-	public void addReachStrategy (double Limit,ArrayList<MockCommodity> gift,String StartTime,int LastTime){
+	public void addReachStrategy (double Limit,ArrayList<Commodity> gift,String StartTime,int LastTime){
 		read();
 		StubReachStrategy rs=new StubReachStrategy();
 		rs.setReach_strategy_style(ReachStrategyStyle.Gift);

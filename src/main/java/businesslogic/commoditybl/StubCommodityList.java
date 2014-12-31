@@ -12,8 +12,8 @@ import jxl.write.WritableWorkbook;
 import po.*;
 import po.stockpo.*;
 import po.stockpo.StockPO.Type;
-import businesslogic.commoditybillbl.StubAlertBill;
-import businesslogic.commoditybillbl.StubCommodityBill;
+import businesslogic.commoditybillbl.AlertBill;
+import businesslogic.commoditybillbl.CommodityBill;
 import businesslogic.stockmanagerbl.*;
 import businesslogic.userbl.User;
 import dataservice.commoditydataservice.*;
@@ -38,7 +38,7 @@ public class StubCommodityList
 		}
 		if (po == null)
 			return null;
-		MockCommodity com = new MockCommodity(po);
+		Commodity com = new Commodity(po);
 		return com.toVO();
 	}
 
@@ -59,7 +59,7 @@ public class StubCommodityList
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		ArrayList<MockCommodity> coms = posToCom(pos);
+		ArrayList<Commodity> coms = posToCom(pos);
 		ArrayList<CommodityVO> vos = toVOs(coms);
 		return vos;
 	}
@@ -78,11 +78,11 @@ public class StubCommodityList
 		}
 		ArrayList<CommodityVO> result = new ArrayList<CommodityVO>();
 		for (int i = 0; i < pos.size(); i++)
-			result.add(new MockCommodity(pos.get(i)).toVO());
+			result.add(new Commodity(pos.get(i)).toVO());
 		return result;
 	}
 
-	public RM addPack(ArrayList<MockCommodity> commodityarray, int quantity,
+	public RM addPack(ArrayList<Commodity> commodityarray, int quantity,
 			double discount)
 	{//特价包中每个商品的数量在商品 number属性中,RM可能返回done insufficient unknownerror notfound
 		SimpleDateFormat dateformat = new SimpleDateFormat(
@@ -97,7 +97,7 @@ public class StubCommodityList
 		ArrayList<CommodityPO> compos = new ArrayList<CommodityPO>();
 		for (int i = 0; i < commodityarray.size(); i++)
 		{// 加入特价包时给定了特价包的数量，响应商品要预留数量，如不足将报不足错误
-			MockCommodity com = commodityarray.get(i);
+			Commodity com = commodityarray.get(i);
 			CommodityPO po = null;
 			try
 			{
@@ -114,14 +114,14 @@ public class StubCommodityList
 		}
 		for (int i = 0; i < commodityarray.size(); i++)
 		{// 加入特价包时给定了特价包的数量，响应商品要预留数量，如不足将报不足错误
-			MockCommodity com = commodityarray.get(i);
+			Commodity com = commodityarray.get(i);
 			if (!isEnough(com.getName(), com.getModel(), com.getNumber()
 					* quantity))
 				return RM.insufficient;
 		}
 		for (int i = 0; i < commodityarray.size(); i++)
 		{// 准备相应商品数量
-			MockCommodity com = commodityarray.get(i);
+			Commodity com = commodityarray.get(i);
 			readyForOut(ID, com.getName(), com.getModel(), com.getNumber()
 					* quantity, 0);
 			compos.add(com.toPO());
@@ -154,7 +154,7 @@ public class StubCommodityList
 			return RM.redundance;
 		else
 		{
-			MockCommodity com = new MockCommodity(vo);
+			Commodity com = new Commodity(vo);
 			com.setNumber(0);
 			com.setLastin(-1);
 			com.setLastout(-1);
@@ -176,7 +176,7 @@ public class StubCommodityList
 	{
 		try
 		{
-			return comdata.insert(new StubCategory(vo).toPO());
+			return comdata.insert(new Category(vo).toPO());
 		}
 		catch (RemoteException e)
 		{
@@ -207,7 +207,7 @@ public class StubCommodityList
 		}
 		if (po == null)// not found
 			return RM.notfound;
-		MockCommodity com = new MockCommodity(po);
+		Commodity com = new Commodity(po);
 		int num = com.getNumber();
 		CommodityRecord r;
 		if (price != 0)
@@ -265,7 +265,7 @@ public class StubCommodityList
 		}
 		if (po == null)// not found
 			return RM.notfound;
-		MockCommodity com = new MockCommodity(po);
+		Commodity com = new Commodity(po);
 		int num = com.getNumber();
 		if (num < quantity)
 			return RM.insufficient;
@@ -306,8 +306,8 @@ public class StubCommodityList
 		int shortage = com.checkAlert();
 		if (shortage > 0)
 		{
-			StubAlertBill ab = new StubAlertBill(user.getID(), com, shortage);
-			StubCommodityBill cb = new StubCommodityBill();
+			AlertBill ab = new AlertBill(user.getID(), com, shortage);
+			CommodityBill cb = new CommodityBill();
 			cb.add(ab);
 		}
 		if (result)
@@ -331,7 +331,7 @@ public class StubCommodityList
 		}
 		if (po == null)// not found
 			return RM.notfound;
-		MockCommodity com = new MockCommodity(po);
+		Commodity com = new Commodity(po);
 		int num = com.getPotential();
 		if (num < quantity)
 			return RM.insufficient;
@@ -369,7 +369,7 @@ public class StubCommodityList
 		}
 		if (po == null)// not found
 			return RM.notfound;
-		MockCommodity com = new MockCommodity(po);
+		Commodity com = new Commodity(po);
 		if (com.getPotential() < quantity)
 			return RM.insufficient;
 		CommodityRecord r = new CommodityRecord(id, new Date(), quantity, 0,
@@ -406,7 +406,7 @@ public class StubCommodityList
 		}
 		if (po == null)// not found
 			return RM.notfound;
-		MockCommodity com = new MockCommodity(po);
+		Commodity com = new Commodity(po);
 		int num = com.getNumber();
 		if (num < quantity)
 			return RM.insufficient;
@@ -435,8 +435,8 @@ public class StubCommodityList
 		int shortage = com.checkAlert();
 		if (shortage > 0)
 		{
-			StubAlertBill ab = new StubAlertBill(user.getID(), com, shortage);
-			StubCommodityBill cb = new StubCommodityBill();
+			AlertBill ab = new AlertBill(user.getID(), com, shortage);
+			CommodityBill cb = new CommodityBill();
 			cb.add(ab);
 		}
 		if (result)
@@ -460,7 +460,7 @@ public class StubCommodityList
 		}
 		if (po == null)// not found
 			return RM.notfound;
-		MockCommodity com = new MockCommodity(po);
+		Commodity com = new Commodity(po);
 		int num = com.getNumber();
 		CommodityRecord r;
 		if (price != 0)
@@ -516,13 +516,13 @@ public class StubCommodityList
 		}
 		if (po == null)// not found
 			return RM.notfound;
-		StubPack pack = new StubPack(po);
+		Pack pack = new Pack(po);
 		int num = pack.getQuantity();
 		if (num < quantity)
 			return RM.insufficient;
 		for (int i = 0; i < pack.getComs().size(); i++)
 		{
-			MockCommodity com = pack.getComs().get(i);
+			Commodity com = pack.getComs().get(i);
 			checkOut(pack.getID(), com.getName(), com.getModel(), 0, 0);
 			checkOut(id, com.getName(), com.getModel(),
 					quantity * com.getNumber(), 0);
@@ -562,7 +562,7 @@ public class StubCommodityList
 		}
 		if (po == null)// not found
 			return RM.notfound;
-		StubPack pack = new StubPack(po);
+		Pack pack = new Pack(po);
 		if (pack.getPotential() < quantity)
 			return RM.insufficient;
 		CommodityRecord r = new CommodityRecord(id, new Date(), quantity, 0,
@@ -595,11 +595,11 @@ public class StubCommodityList
 		}
 		if (po == null)// not found
 			return RM.notfound;
-		StubPack pack = new StubPack(po);
+		Pack pack = new Pack(po);
 		int num = pack.getQuantity();
 		for (int i = 0; i < pack.getComs().size(); i++)
 		{
-			MockCommodity com = pack.getComs().get(i);
+			Commodity com = pack.getComs().get(i);
 			checkOut(pack.getID(), com.getName(), com.getModel(), 0, 0);
 			checkIn(id, com.getName(), com.getModel(),
 					quantity * com.getNumber(), 0);
@@ -639,7 +639,7 @@ public class StubCommodityList
 		}
 		if (po == null)
 			return false;
-		MockCommodity com = new MockCommodity(po);
+		Commodity com = new Commodity(po);
 		int potential = com.getPotential();
 		return (n <= potential);
 	}
@@ -658,22 +658,22 @@ public class StubCommodityList
 		}
 		if (po == null)
 			return false;
-		StubPack pack = new StubPack(po);
+		Pack pack = new Pack(po);
 		int potential = pack.getPotential();
 		return (n <= potential);
 	}
 
-	private ArrayList<MockCommodity> posToCom(ArrayList<CommodityPO> h)
+	private ArrayList<Commodity> posToCom(ArrayList<CommodityPO> h)
 	{
-		ArrayList<MockCommodity> result = new ArrayList<MockCommodity>();
+		ArrayList<Commodity> result = new ArrayList<Commodity>();
 		for (int i = 0; i < h.size(); i++)
 		{
-			result.add(new MockCommodity(h.get(i)));
+			result.add(new Commodity(h.get(i)));
 		}
 		return result;
 	}
 
-	private ArrayList<CommodityVO> toVOs(ArrayList<MockCommodity> h)
+	private ArrayList<CommodityVO> toVOs(ArrayList<Commodity> h)
 	{
 		ArrayList<CommodityVO> result = new ArrayList<CommodityVO>();
 		for (int i = 0; i < h.size(); i++)
@@ -702,9 +702,9 @@ public class StubCommodityList
 		{
 			StockPO stockpo = pos.get(i);
 			if (stockpo.getT() == StockPO.Type.Category)
-				vos.add(new StockVO(new StubCategory(stockpo.getCat()).toVO()));
+				vos.add(new StockVO(new Category(stockpo.getCat()).toVO()));
 			else
-				vos.add(new StockVO(new MockCommodity(stockpo.getCom()).toVO()));
+				vos.add(new StockVO(new Commodity(stockpo.getCom()).toVO()));
 		}
 		return vos;
 	}
@@ -754,7 +754,7 @@ public class StubCommodityList
 		}
 		if (po == null)// not found
 			return RM.notfound;
-		MockCommodity com = new MockCommodity(vo);
+		Commodity com = new Commodity(vo);
 		double income = (com.getIn() - po.getIn()) * com.getNumber();
 		try
 		{
@@ -800,7 +800,7 @@ public class StubCommodityList
 				return RM.redundance;
 		try
 		{
-			return comdata.update(new StubCategory(vo).toPO(), newName);
+			return comdata.update(new Category(vo).toPO(), newName);
 		}
 		catch (RemoteException e)
 		{
@@ -869,7 +869,7 @@ public class StubCommodityList
 		}
 		ArrayList<CommodityVO> result = new ArrayList<CommodityVO>();
 		for (int i = 0; i < temp.size(); i++)
-			result.add(new MockCommodity(temp.get(i)).toVO());
+			result.add(new Commodity(temp.get(i)).toVO());
 		try
 		{
 			return new CountVO(result, new Date(), comdata.getCountNo());
@@ -956,7 +956,7 @@ public class StubCommodityList
 		}
 		for (int i = 0; i < temp.size(); i++)
 		{
-			MockCommodity com = new MockCommodity(temp.get(i));
+			Commodity com = new Commodity(temp.get(i));
 			com.computeRecordsTotal(d1, d2);
 			result.add(com.toVO());
 		}

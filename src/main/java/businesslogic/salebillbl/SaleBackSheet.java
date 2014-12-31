@@ -12,7 +12,7 @@ import vo.SaleBackSheetVO;
 import vo.SaleSheetVO;
 import vo.stockvo.CommodityVO;
 import businesslogic.GetVOandPO;
-import businesslogic.commoditybl.MockCommodity;
+import businesslogic.commoditybl.Commodity;
 import businesslogic.customerbl.Customer;
 import businesslogic.customerbl.CustomerList;
 import businesslogic.examinebl.Bill;
@@ -29,7 +29,7 @@ public class SaleBackSheet extends Bill implements GetVOandPO{
 	Date date;
 	Customer customer;
 	String stock;
-	ArrayList<MockCommodity> sheet;//销售单据，商品名，数量，单价
+	ArrayList<Commodity> sheet;//销售单据，商品名，数量，单价
 	double money1;//折前总金额
 	double money2;//代金券金额
 	double discount;//折让金额；
@@ -58,9 +58,9 @@ public class SaleBackSheet extends Bill implements GetVOandPO{
 		ArrayList<SaleBackSheet> list = pool.getSaleBackSheet();
 		this.ID = "XSTHD-"+currentTime+"-"+String.format("%05d", list.size()+1);
 		this.customer=new Customer(vo.getcustomer());
-		ArrayList<MockCommodity> temp=new ArrayList<MockCommodity>();
+		ArrayList<Commodity> temp=new ArrayList<Commodity>();
 		for(int i=0;i<vo.getsheet().size();i++){
-			temp.add(new MockCommodity(vo.getsheet().get(i)));
+			temp.add(new Commodity(vo.getsheet().get(i)));
 		}
 		this.sheet=temp;
 		this.discount=vo.getdiscount();
@@ -186,11 +186,11 @@ public class SaleBackSheet extends Bill implements GetVOandPO{
 		this.stock=stock;
 	}
 	
-	public ArrayList<MockCommodity> getsheet(){
+	public ArrayList<Commodity> getsheet(){
 		return sheet;
 	}
 	
-	public void setsheet(ArrayList<MockCommodity> sheet){
+	public void setsheet(ArrayList<Commodity> sheet){
 		this.sheet=sheet;
 	}
 	
@@ -214,9 +214,9 @@ public class SaleBackSheet extends Bill implements GetVOandPO{
 		this.date=po.getdate();
 		this.ID=po.getid();
 		this.customer=new Customer(po.getcustomer());
-		ArrayList<MockCommodity> temp=new ArrayList<MockCommodity>();
+		ArrayList<Commodity> temp=new ArrayList<Commodity>();
 		for(int i=0;i<po.getsheet().size();i++){
-			temp.add(new MockCommodity(po.getsheet().get(i)));
+			temp.add(new Commodity(po.getsheet().get(i)));
 		}
 		this.sheet=temp;
 		this.discount=po.getdiscount();

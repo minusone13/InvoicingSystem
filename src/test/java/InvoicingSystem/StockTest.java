@@ -15,11 +15,11 @@ import po.RM;
 import po.stockpo.*;
 import po.stockpo.StockPO.Type;
 import presentation.commodityui.StockManagerDriver;
-import businesslogic.commoditybillbl.StubAlertBill;
-import businesslogic.commoditybillbl.StubGiftBill;
-import businesslogic.commoditybillbl.StubSpillsLossBill;
-import businesslogic.commoditybl.MockCommodity;
-import businesslogic.commoditybl.StubPack;
+import businesslogic.commoditybillbl.AlertBill;
+import businesslogic.commoditybillbl.GiftBill;
+import businesslogic.commoditybillbl.SpillsLossBill;
+import businesslogic.commoditybl.Commodity;
+import businesslogic.commoditybl.Pack;
 import businesslogic.examinebl.StubBillPool;
 import businesslogic.stockmanagerbl.StubStockController;
 import businesslogic.stockservice.StockBlForFinancial;
@@ -319,7 +319,7 @@ public class StockTest{
 		StockBlForSalesMen sc=new StubStockController();
 		RM result=sc.checkOut("XSD-20141206-00001", "好好防盗门", "fdm05", 41, 300);
 		assertEquals(RM.done,result);
-		ArrayList<StubAlertBill> h2 = pool.getAlertBill();
+		ArrayList<AlertBill> h2 = pool.getAlertBill();
 		assertEquals(h1+1,h2.size());
 	}
 	
@@ -330,7 +330,7 @@ public class StockTest{
 		GiftBillVO vo = new GiftBillVO();
 		ArrayList<CommodityVO> coms = new ArrayList<CommodityVO>();
 		CommodityPO po = data.findCommodity("好好防盗门", "fdm05");
-		CommodityVO com = new MockCommodity(po).toVO();
+		CommodityVO com = new Commodity(po).toVO();
 		com.setNumber(10);
 		coms.add(com);
 		vo.setComs(coms);
@@ -342,7 +342,7 @@ public class StockTest{
 		b = sc.isEnough("好好防盗门", "fdm05", 41);
 		assertTrue(b);
 		
-		StubGiftBill gb = pool.getGiftBill().get(pool.getGiftBill().size()-1);
+		GiftBill gb = pool.getGiftBill().get(pool.getGiftBill().size()-1);
 		result = combl.submit(gb.getVO());
 		assertEquals(RM.done,result);
 		b = sc.isEnough("好好防盗门", "fdm05", 40);
@@ -364,7 +364,7 @@ public class StockTest{
 		boolean b;
 		SpillsLossBillVO vo = new SpillsLossBillVO();
 		CommodityPO compo = data.findCommodity("好好防盗门", "fdm05");
-		CommodityVO com = new MockCommodity(compo).toVO();
+		CommodityVO com = new Commodity(compo).toVO();
 		com.setNumber(10);
 		vo.setCom(com);
 		vo.setT(po.SpillsLossBillPO.Type.Loss);
@@ -376,7 +376,7 @@ public class StockTest{
 		b = sc.isEnough("好好防盗门", "fdm05", 41);
 		assertTrue(b);
 		
-		StubSpillsLossBill gb = pool.getSpillsLossBill().get(pool.getSpillsLossBill().size()-1);
+		SpillsLossBill gb = pool.getSpillsLossBill().get(pool.getSpillsLossBill().size()-1);
 		result = combl.submit(gb.getVO());
 		assertEquals(RM.done,result);
 		b = sc.isEnough("好好防盗门", "fdm05", 40);
@@ -403,7 +403,7 @@ public class StockTest{
 		boolean b;
 		SpillsLossBillVO vo = new SpillsLossBillVO();
 		CommodityPO compo = data.findCommodity("好好防盗门", "fdm05");
-		CommodityVO com = new MockCommodity(compo).toVO();
+		CommodityVO com = new Commodity(compo).toVO();
 		com.setNumber(20);
 		vo.setCom(com);
 		vo.setT(po.SpillsLossBillPO.Type.Spills);
@@ -415,7 +415,7 @@ public class StockTest{
 		b = sc.isEnough("好好防盗门", "fdm05", 50);
 		assertTrue(b);
 		
-		StubSpillsLossBill gb = pool.getSpillsLossBill().get(pool.getSpillsLossBill().size()-1);
+		SpillsLossBill gb = pool.getSpillsLossBill().get(pool.getSpillsLossBill().size()-1);
 		result = combl.submit(gb.getVO());
 		assertEquals(RM.done,result);
 		b = sc.isEnough("好好防盗门", "fdm05", 50);
@@ -450,7 +450,7 @@ public class StockTest{
 		assertEquals(RM.done,result);
 		result=sc.checkOut("XSD-20141206-00001", "好好防盗门", "fdm05", 1, 300);
 		assertEquals(RM.done,result);
-		ArrayList<StubAlertBill> h2 = pool.getAlertBill();
+		ArrayList<AlertBill> h2 = pool.getAlertBill();
 		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
 		String currentTime = format.format(new Date());
 		for(int i=0; i<h2.size(); i++)
@@ -468,7 +468,7 @@ public class StockTest{
 	{
 		SpillsLossBillVO vo = new SpillsLossBillVO();
 		CommodityPO compo = data.findCommodity("好好防盗门", "fdm05");
-		CommodityVO com = new MockCommodity(compo).toVO();
+		CommodityVO com = new Commodity(compo).toVO();
 		com.setNumber(20);
 		vo.setCom(com);
 		vo.setT(po.SpillsLossBillPO.Type.Spills);
@@ -485,7 +485,7 @@ public class StockTest{
 		result = combl.creat(vo);
 		assertEquals(RM.done,result);
 		
-		ArrayList<StubSpillsLossBill> h2 = pool.getSpillsLossBill();
+		ArrayList<SpillsLossBill> h2 = pool.getSpillsLossBill();
 		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
 		String currentTime = format.format(new Date());
 		for(int i=0; i<h2.size(); i++)
@@ -504,7 +504,7 @@ public class StockTest{
 		GiftBillVO vo = new GiftBillVO();
 		ArrayList<CommodityVO> coms = new ArrayList<CommodityVO>();
 		CommodityPO po = data.findCommodity("好好防盗门", "fdm05");
-		CommodityVO com = new MockCommodity(po).toVO();
+		CommodityVO com = new Commodity(po).toVO();
 		com.setNumber(10);
 		coms.add(com);
 		vo.setComs(coms);
@@ -521,7 +521,7 @@ public class StockTest{
 		result = combl.creat(vo);
 		assertEquals(RM.done,result);
 		
-		ArrayList<StubGiftBill> h2 = pool.getGiftBill();
+		ArrayList<GiftBill> h2 = pool.getGiftBill();
 		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
 		String currentTime = format.format(new Date());
 		for(int i=0; i<h2.size(); i++)
@@ -572,8 +572,8 @@ public class StockTest{
 		CommodityPO compo = data.findCommodity("好好防盗门", "fdm05");
 		int oldNum = compo.getNumber();
 		CommodityVO vo = combl.findCommodity("好好防盗门", "fdm05");
-		MockCommodity com = new MockCommodity(vo);
-		ArrayList<MockCommodity> h = new ArrayList<MockCommodity>();
+		Commodity com = new Commodity(vo);
+		ArrayList<Commodity> h = new ArrayList<Commodity>();
 		com.setNumber(2);
 		h.add(com);
 		//StubPack pack = new StubPack(h,10,300);
@@ -793,7 +793,7 @@ public class StockTest{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		CommodityVO com = new MockCommodity(po).toVO();
+		CommodityVO com = new Commodity(po).toVO();
 		com.setNumber(10);
 		coms.add(com);
 		try
@@ -805,7 +805,7 @@ public class StockTest{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		com = new MockCommodity(po).toVO();
+		com = new Commodity(po).toVO();
 		com.setNumber(5);
 		coms.add(com);
 		vo.setComs(coms);
@@ -815,7 +815,7 @@ public class StockTest{
 		combl.creat(vo);
 		StockBlForSalesMen sc=new StubStockController();
 		
-		StubGiftBill gb = pool.getGiftBill().get(pool.getGiftBill().size()-1);
+		GiftBill gb = pool.getGiftBill().get(pool.getGiftBill().size()-1);
 		combl.submit(gb.getVO());
 		
 		gb = pool.getGiftBill().get(pool.getGiftBill().size()-1);
@@ -834,7 +834,7 @@ public class StockTest{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		com = new MockCommodity(po).toVO();
+		com = new Commodity(po).toVO();
 		com.setNumber(26);
 		coms.add(com);
 		vo.setComs(coms);
@@ -861,7 +861,7 @@ public class StockTest{
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		CommodityVO com1 = new MockCommodity(compo).toVO();
+		CommodityVO com1 = new Commodity(compo).toVO();
 		com1.setNumber(5);
 		vo1.setCom(com1);
 		vo1.setT(vo1.getT().Loss);
@@ -869,7 +869,7 @@ public class StockTest{
 		combl.creat(vo1);
 		sc.isEnough("好好防盗门", "fdm05", 41);
 		
-		StubSpillsLossBill gb1 = pool.getSpillsLossBill().get(pool.getSpillsLossBill().size()-1);
+		SpillsLossBill gb1 = pool.getSpillsLossBill().get(pool.getSpillsLossBill().size()-1);
 		combl.submit(gb1.getVO());
 		gb1 = pool.getSpillsLossBill().get(pool.getSpillsLossBill().size()-1);
 		pool.transformState(BillStyle.SpillsLossBill, gb1.getID(), BillState.EXAMINED);
@@ -887,7 +887,7 @@ public class StockTest{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		com1 = new MockCommodity(compo).toVO();
+		com1 = new Commodity(compo).toVO();
 		com1.setNumber(1);
 		vo1.setCom(com1);
 		vo1.setT(vo1.getT().Spills);

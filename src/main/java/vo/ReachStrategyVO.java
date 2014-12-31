@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import po.ReachStrategyStyle;
 import po.StrategyStyle;
 import vo.stockvo.CommodityVO;
-import businesslogic.commoditybl.MockCommodity;
+import businesslogic.commoditybl.Commodity;
 
 public class ReachStrategyVO extends VO{
 	private StrategyStyle strategystyle=StrategyStyle.ReachStrategy;

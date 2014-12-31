@@ -6,10 +6,10 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import po.BillState;
-import businesslogic.commoditybillbl.StubAlertBill;
-import businesslogic.commoditybillbl.StubGiftBill;
-import businesslogic.commoditybillbl.StubSpillsLossBill;
-import businesslogic.commoditybl.MockCommodity;
+import businesslogic.commoditybillbl.AlertBill;
+import businesslogic.commoditybillbl.GiftBill;
+import businesslogic.commoditybillbl.SpillsLossBill;
+import businesslogic.commoditybl.Commodity;
 import businesslogic.examinebl.StubBillPool;
 import businesslogic.financialbillbl.CashPaymentBill;
 import businesslogic.financialbillbl.PaymentBill;
@@ -58,11 +58,11 @@ public class Inquiry {
 			
 			//商品名，商品清单包含多个商品
 			if(isv.getCommodityName()!=null) {
-				ArrayList<MockCommodity> sheet = sale.getsheet();
+				ArrayList<Commodity> sheet = sale.getsheet();
 				int size = sheet.size();
 				int j=0,tag=0;//tag表示遍历完以后没有符合的就置为1
 				for(;j<size;j++) {//遍历商品清单
-					MockCommodity temp = sheet.get(j);
+					Commodity temp = sheet.get(j);
 					String comName = temp.getName();
 					if(comName.equals(isv.getCommodityName())) {break;}//如果有满足条件的商品，跳出内循环
 					if(j==size-1) tag=1;
@@ -116,11 +116,11 @@ public class Inquiry {
 			
 			//商品名，商品清单包含多个商品
 			if(isv.getCommodityName()!=null) {
-				ArrayList<MockCommodity> sheet = saleback.getsheet();
+				ArrayList<Commodity> sheet = saleback.getsheet();
 				int size = sheet.size();
 				int j=0,tag=0;//tag表示遍历完以后没有符合的就置为1
 				for(;j<size;j++) {//遍历商品清单
-					MockCommodity temp = sheet.get(j);
+					Commodity temp = sheet.get(j);
 					String comName = temp.getName();
 					if(comName.equals(isv.getCommodityName())) {break;}//如果有满足条件的商品，跳出内循环
 					if(j==size-1) tag=1;
@@ -146,13 +146,13 @@ public class Inquiry {
 	
 	//得到经营历程表的赠送单
 	public ArrayList<GiftBillVO> getProcessGift(InquiryProcessVO ipv) {
-		ArrayList<StubGiftBill> gift = bp.getGiftBill();
+		ArrayList<GiftBill> gift = bp.getGiftBill();
 		ArrayList<GiftBillVO> giftVO = new ArrayList<GiftBillVO>();
 		
 		int size = gift.size();
 		
 		for(int i=0;i<size;i++) {
-			StubGiftBill g = gift.get(i);
+			GiftBill g = gift.get(i);
 			
 			if((ipv.getTimeBefore()!=null)&&(ipv.getTimeAfter()!=null)) {
 				Date dateBefore=null;
@@ -178,13 +178,13 @@ public class Inquiry {
 	
 	//得到经营历程表的报溢报损单
 		public ArrayList<SpillsLossBillVO> getProcessSpillLoss(InquiryProcessVO ipv) {
-			ArrayList<StubSpillsLossBill> spillsLoss = bp.getSpillsLossBill();
+			ArrayList<SpillsLossBill> spillsLoss = bp.getSpillsLossBill();
 			ArrayList<SpillsLossBillVO> spillsLossVO = new ArrayList<SpillsLossBillVO>();
 			
 			int size = spillsLoss.size();
 			
 			for(int i=0;i<size;i++) {
-				StubSpillsLossBill sl = spillsLoss.get(i);
+				SpillsLossBill sl = spillsLoss.get(i);
 				
 				if((ipv.getTimeBefore()!=null)&&(ipv.getTimeAfter()!=null)) {
 					Date dateBefore=null;
@@ -210,12 +210,12 @@ public class Inquiry {
 		
 		//得到经营历程表的报警单
 		public ArrayList<AlertBillVO> getProcessAlert(InquiryProcessVO ipv) {
-			ArrayList<StubAlertBill> alert  =bp.getAlertBill();	
+			ArrayList<AlertBill> alert  =bp.getAlertBill();	
 			ArrayList<AlertBillVO> alertVO = new ArrayList<AlertBillVO>();
 			int size = alert.size();
 			
 			for(int i=0;i<size;i++) {
-				StubAlertBill a = alert.get(i);
+				AlertBill a = alert.get(i);
 				
 				if((ipv.getTimeBefore()!=null)&&(ipv.getTimeAfter()!=null)) {
 					Date dateBefore=null;

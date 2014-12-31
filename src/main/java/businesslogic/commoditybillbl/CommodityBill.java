@@ -7,22 +7,22 @@ import java.util.Date;
 import po.BillState;
 import po.RM;
 import po.Role;
-import businesslogic.commoditybl.MockCommodity;
+import businesslogic.commoditybl.Commodity;
 import businesslogic.examinebl.StubBillPool;
 import businesslogic.userbl.User;
 import vo.*;
 import vo.uservo.UserVO;
 
-public class StubCommodityBill
+public class CommodityBill
 {// 统一管理了库存单据，相当于一个对内的Controller
-	ArrayList<StubAlertBill> alerts;//这三个事实上是省去了下面的变量定义，实际的List从单据Pool里面取出来
-	ArrayList<StubGiftBill> gifts;
-	ArrayList<StubSpillsLossBill> sls;
+	ArrayList<AlertBill> alerts;//这三个事实上是省去了下面的变量定义，实际的List从单据Pool里面取出来
+	ArrayList<GiftBill> gifts;
+	ArrayList<SpillsLossBill> sls;
 	static StubBillPool pool = new StubBillPool();
 	User user = new User("I0000", Role.STOCK_STAFF, "stockdefault", "default",
 			"Liu");
 
-	public RM add(StubSpillsLossBill bill)
+	public RM add(SpillsLossBill bill)
 	{
 		sls = pool.getSpillsLossBill();
 		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
@@ -49,7 +49,7 @@ public class StubCommodityBill
 		return RM.done;
 	}
 
-	public RM add(StubGiftBill bill)
+	public RM add(GiftBill bill)
 	{
 		gifts = pool.getGiftBill();
 		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
@@ -76,7 +76,7 @@ public class StubCommodityBill
 		return RM.done;
 	}
 
-	public RM add(StubAlertBill bill)
+	public RM add(AlertBill bill)
 	{
 		alerts = pool.getAlertBill();
 		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
@@ -111,7 +111,7 @@ public class StubCommodityBill
 		double sum = 0;
 		for (int i = 0; i < sls.size(); i++)
 		{
-			StubSpillsLossBill temp = sls.get(i);
+			SpillsLossBill temp = sls.get(i);
 			Date d = temp.getDate();
 			if (temp.t == temp.t.Spills && d.after(d1) && d.before(d2))
 				sum += temp.getCom().getIn() * temp.getCom().getNumber();
@@ -125,7 +125,7 @@ public class StubCommodityBill
 		double sum = 0;
 		for (int i = 0; i < sls.size(); i++)
 		{
-			StubSpillsLossBill temp = sls.get(i);
+			SpillsLossBill temp = sls.get(i);
 			Date d = temp.getDate();
 			if (temp.t == temp.t.Loss && d.after(d1) && d.before(d2))
 				sum += temp.getCom().getIn() * temp.getCom().getNumber();
@@ -139,13 +139,13 @@ public class StubCommodityBill
 		double sum = 0;
 		for (int i = 0; i < gifts.size(); i++)
 		{
-			StubGiftBill temp = gifts.get(i);
+			GiftBill temp = gifts.get(i);
 			Date d = temp.getDate();
 			if (d.after(d1) && d.before(d2))
 			{
 				for (int j = 0; j < temp.getComs().size(); j++)
 				{
-					MockCommodity com = temp.getComs().get(j);
+					Commodity com = temp.getComs().get(j);
 					sum += com.getIn() * com.getNumber();
 				}
 			}

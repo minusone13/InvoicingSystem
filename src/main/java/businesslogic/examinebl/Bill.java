@@ -2,7 +2,7 @@ package businesslogic.examinebl;
 
 import po.BillState;
 import po.BillStyle;
-import businesslogic.commoditybillbl.StubAlertBill;
+import businesslogic.commoditybillbl.AlertBill;
 
 public class Bill {
 	private BillStyle billstyle;//单据类型

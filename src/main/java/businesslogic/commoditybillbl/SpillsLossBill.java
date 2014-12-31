@@ -12,13 +12,13 @@ import businesslogic.*;
 import businesslogic.commoditybl.*;
 import businesslogic.examinebl.Bill;
 
-public class StubSpillsLossBill extends Bill implements GetVOandPO
+public class SpillsLossBill extends Bill implements GetVOandPO
 {// 报溢报损单，统一进入单据池管理和存储
 	//参见大作业要求
 	Date date;
 	String operator;
 	private BillStyle style = BillStyle.SpillsLossBill;
-	private MockCommodity com;
+	private Commodity com;
 	String ID;
 	Type t;
 	BillState state = BillState.DRAFT;
@@ -42,7 +42,7 @@ public class StubSpillsLossBill extends Bill implements GetVOandPO
 		}
 		date = po.getDate();
 		operator = po.getOperator();
-		com = new MockCommodity(po.getComPO());
+		com = new Commodity(po.getComPO());
 		style = BillStyle.SpillsLossBill;
 		t = po.getT();
 		ID = po.getID();
@@ -60,7 +60,7 @@ public class StubSpillsLossBill extends Bill implements GetVOandPO
 		}
 		date = vo.getDate();
 		operator = vo.getOperator();
-		com = new MockCommodity(vo.getCom());
+		com = new Commodity(vo.getCom());
 		style = BillStyle.SpillsLossBill;
 		t = vo.getT();
 		ID = vo.getID();
@@ -79,12 +79,12 @@ public class StubSpillsLossBill extends Bill implements GetVOandPO
 		this.style = style;
 	}
 
-	public MockCommodity getCom()
+	public Commodity getCom()
 	{
 		return com;
 	}
 
-	public void setCom(MockCommodity com)
+	public void setCom(Commodity com)
 	{
 		this.com = com;
 	}

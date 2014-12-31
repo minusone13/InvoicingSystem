@@ -30,7 +30,7 @@ public class StubStockController implements StubCommodityBlService,
 		StockBlForSalesMen, StockBlForManager, StockBlForFinancial
 {// 负责与界面及其他程序员的交互
 	StubCommodityList l = new StubCommodityList();
-	StubCommodityBill bl = new StubCommodityBill();
+	CommodityBill bl = new CommodityBill();
 	UserService us = new UserController();
 	static StubCommodityDataService comdata = null;
 	static StubBillPool pool = new StubBillPool();
@@ -103,7 +103,7 @@ public class StubStockController implements StubCommodityBlService,
 		return l.fuzzyFindCommodity(s, precision);
 	}
 
-	public RM addPack(ArrayList<MockCommodity> commodityarray, int quantity,
+	public RM addPack(ArrayList<Commodity> commodityarray, int quantity,
 			double discount)
 	{//增加特价包
 		return l.addPack(commodityarray, quantity, discount);
@@ -214,13 +214,13 @@ public class StubStockController implements StubCommodityBlService,
 
 	public double getSpillsTotal(Date d1, Date d2)
 	{// including d1 and d2
-		StubCommodityBill cb = new StubCommodityBill();
+		CommodityBill cb = new CommodityBill();
 		return cb.getSpillsTotal(d1, d2);
 	}
 
 	public double getLossTotal(Date d1, Date d2)
 	{// see above
-		StubCommodityBill cb = new StubCommodityBill();
+		CommodityBill cb = new CommodityBill();
 		return cb.getLossTotal(d1, d2);
 	}
 
@@ -231,7 +231,7 @@ public class StubStockController implements StubCommodityBlService,
 
 	public double getGiftBillTotal(Date d1, Date d2)
 	{// 赠送单支出。这个返回值可能为非负
-		StubCommodityBill cb = new StubCommodityBill();
+		CommodityBill cb = new CommodityBill();
 		return cb.getGiftBillTotal(d1, d2);
 	}
 
@@ -264,7 +264,7 @@ public class StubStockController implements StubCommodityBlService,
 	// 单据方法
 	public RM creat(GiftBillVO vo)
 	{
-		StubGiftBill gb = new StubGiftBill();
+		GiftBill gb = new GiftBill();
 		gb.setVO(vo);
 		RM result = bl.add(gb);
 		return result;
@@ -272,7 +272,7 @@ public class StubStockController implements StubCommodityBlService,
 
 	public RM creat(SpillsLossBillVO vo)
 	{
-		StubSpillsLossBill gb = new StubSpillsLossBill();
+		SpillsLossBill gb = new SpillsLossBill();
 		gb.setVO(vo);
 		RM result = bl.add(gb);
 		return result;
@@ -280,7 +280,7 @@ public class StubStockController implements StubCommodityBlService,
 
 	public RM creat(AlertBillVO vo)
 	{
-		StubAlertBill gb = new StubAlertBill();
+		AlertBill gb = new AlertBill();
 		gb.setVO(vo);
 		RM result = bl.add(gb);
 		return result;
@@ -308,7 +308,7 @@ public class StubStockController implements StubCommodityBlService,
 	{
 		for (int i = 0; i < vo.getComs().size(); i++)
 		{
-			MockCommodity com = new MockCommodity(vo.getComs().get(i));
+			Commodity com = new Commodity(vo.getComs().get(i));
 			if (!isEnough(com.getName(), com.getModel(), com.getNumber()))
 				return RM.insufficient;
 		}
@@ -319,7 +319,7 @@ public class StubStockController implements StubCommodityBlService,
 
 	public RM submit(SpillsLossBillVO vo)
 	{
-		MockCommodity com = new MockCommodity(vo.getCom());
+		Commodity com = new Commodity(vo.getCom());
 		if (!isEnough(com.getName(), com.getModel(), com.getNumber()))
 			return RM.insufficient;
 		pool.transformState(vo.getBillstyle(), vo.getID(), BillState.SUBMITED);
@@ -350,7 +350,7 @@ public class StubStockController implements StubCommodityBlService,
 
 	public ArrayList<GiftBillVO> showGiftBills()
 	{
-		ArrayList<StubGiftBill> h = pool.getGiftBill();
+		ArrayList<GiftBill> h = pool.getGiftBill();
 		ArrayList<GiftBillVO> result = new ArrayList<GiftBillVO>();
 		for (int i = 0; i < h.size(); i++)
 			result.add(h.get(i).getVO());
@@ -359,7 +359,7 @@ public class StubStockController implements StubCommodityBlService,
 
 	public ArrayList<SpillsLossBillVO> showSpillsLossBills()
 	{
-		ArrayList<StubSpillsLossBill> h = pool.getSpillsLossBill();
+		ArrayList<SpillsLossBill> h = pool.getSpillsLossBill();
 		ArrayList<SpillsLossBillVO> result = new ArrayList<SpillsLossBillVO>();
 		for (int i = 0; i < h.size(); i++)
 			result.add(h.get(i).getVO());
@@ -368,7 +368,7 @@ public class StubStockController implements StubCommodityBlService,
 
 	public ArrayList<AlertBillVO> showAlertBills()
 	{
-		ArrayList<StubAlertBill> h = pool.getAlertBill();
+		ArrayList<AlertBill> h = pool.getAlertBill();
 		ArrayList<AlertBillVO> result = new ArrayList<AlertBillVO>();
 		for (int i = 0; i < h.size(); i++)
 			result.add(h.get(i).getVO());
@@ -422,7 +422,7 @@ public class StubStockController implements StubCommodityBlService,
 		ArrayList<PackVO> vos = new ArrayList<PackVO>();
 		for(int i=0;i<pos.size();i++)
 		{
-			vos.add(new StubPack(pos.get(i)).toVO());
+			vos.add(new Pack(pos.get(i)).toVO());
 		}
 		return vos;
 	}

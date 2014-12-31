@@ -10,18 +10,18 @@ import vo.GiftBillVO;
 import vo.VO;
 import vo.stockvo.CommodityVO;
 import businesslogic.GetVOandPO;
-import businesslogic.commoditybl.MockCommodity;
+import businesslogic.commoditybl.Commodity;
 import businesslogic.commoditybl.StubCommodityList;
 import businesslogic.examinebl.Bill;
 
-public class StubGiftBill extends Bill implements GetVOandPO
+public class GiftBill extends Bill implements GetVOandPO
 {// 赠送单类，统一进入单据池管理和存储
 	//参见大作业要求
 	Date date;
 	private BillStyle billstyle = BillStyle.GiftBill;
 	String operator;
 	private String ID;
-	ArrayList<MockCommodity> coms = new ArrayList<MockCommodity>();// 王雨城加
+	ArrayList<Commodity> coms = new ArrayList<Commodity>();// 王雨城加
 	BillState state = BillState.DRAFT;
 	String remark[];
 
@@ -51,7 +51,7 @@ public class StubGiftBill extends Bill implements GetVOandPO
 			return false;
 		}
 		for (int i = 0; i < po.getComs().size(); i++)
-			coms.add(new MockCommodity(po.getComs().get(i)));
+			coms.add(new Commodity(po.getComs().get(i)));
 		ID = po.getID();
 		state = po.getState();
 		remark = po.getRemark();
@@ -71,7 +71,7 @@ public class StubGiftBill extends Bill implements GetVOandPO
 			return false;
 		}
 		for (int i = 0; i < vo.getComs().size(); i++)
-			coms.add(new MockCommodity(vo.getComs().get(i)));
+			coms.add(new Commodity(vo.getComs().get(i)));
 		ID = vo.getID();
 		state = vo.getState();
 		remark = vo.getRemark();
@@ -103,12 +103,12 @@ public class StubGiftBill extends Bill implements GetVOandPO
 		ID = iD;
 	}
 
-	public ArrayList<MockCommodity> getComs()
+	public ArrayList<Commodity> getComs()
 	{
 		return coms;
 	}
 
-	public void setComs(ArrayList<MockCommodity> coms)
+	public void setComs(ArrayList<Commodity> coms)
 	{
 		this.coms = coms;
 	}
@@ -135,7 +135,7 @@ public class StubGiftBill extends Bill implements GetVOandPO
 		{
 			for (int i = 0; i < coms.size(); i++)
 			{
-				MockCommodity com = coms.get(i);
+				Commodity com = coms.get(i);
 				l.readyForOut(ID, com.getName(), com.getModel(),
 						com.getNumber(), 0);
 			}
@@ -144,7 +144,7 @@ public class StubGiftBill extends Bill implements GetVOandPO
 		{// 当审批订单后，实现系统中的库存数量修改
 			for (int i = 0; i < coms.size(); i++)
 			{
-				MockCommodity com = coms.get(i);
+				Commodity com = coms.get(i);
 				l.checkOut(ID, com.getName(), com.getModel(), com.getNumber(),
 						0);
 			}

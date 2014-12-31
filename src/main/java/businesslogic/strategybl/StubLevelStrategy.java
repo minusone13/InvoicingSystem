@@ -12,7 +12,7 @@ import po.stockpo.CommodityPO;
 import vo.LevelStrategyVO;
 import vo.stockvo.CommodityVO;
 import businesslogic.GetVOandPO;
-import businesslogic.commoditybl.MockCommodity;
+import businesslogic.commoditybl.Commodity;
 
 public class StubLevelStrategy implements GetVOandPO{
 
@@ -23,7 +23,7 @@ public class StubLevelStrategy implements GetVOandPO{
 	private int level;//客户等级
 	private double Limit;//消费金额下限
 	
-	private ArrayList<MockCommodity> alOfCommodity=new ArrayList<MockCommodity>();//赠品信息数组
+	private ArrayList<Commodity> alOfCommodity=new ArrayList<Commodity>();//赠品信息数组
 	private double discountrate;//打折比例
 	private double couponrate;//代金券赠送比例
 	
@@ -98,10 +98,10 @@ public class StubLevelStrategy implements GetVOandPO{
 	public void setLimit(double limit) {
 		Limit = limit;
 	}
-	public ArrayList<MockCommodity> getAlOfCommodity() {
+	public ArrayList<Commodity> getAlOfCommodity() {
 		return alOfCommodity;
 	}
-	public void setAlOfCommodity(ArrayList<MockCommodity> alOfCommodity) {
+	public void setAlOfCommodity(ArrayList<Commodity> alOfCommodity) {
 		this.alOfCommodity = alOfCommodity;
 	}
 	public double getDiscountrate() {
@@ -138,9 +138,9 @@ public class StubLevelStrategy implements GetVOandPO{
 	public void setPO(LevelStrategyPO po){
 	
 		this.setLevel_strategy_style(po.getLevel_strategy_style());
-		ArrayList<MockCommodity> temp=new ArrayList<MockCommodity>();//用于临时转换
+		ArrayList<Commodity> temp=new ArrayList<Commodity>();//用于临时转换
 		for(int i=0;i<po.getAlOfCommodity().size();i++){
-			temp.add(new MockCommodity(po.getAlOfCommodity().get(i)));
+			temp.add(new Commodity(po.getAlOfCommodity().get(i)));
 		}
 		this.setID(po.getID());
 		this.setAlOfCommodity(temp);
