@@ -304,12 +304,7 @@ public class JPmanageCustomer extends JPanel {
 				
 				public void reHome(){
 					this.RightMove();
-					nameText.setText("");
-					phoneNumberText.setText("");
-					addressText.setText("");
-					emailText.setText("");
-					postcodeText.setText("");
-					salemanText.setText("");
+					
 				}
 				public JPanelEdit(){
 					//面板大小
@@ -453,6 +448,12 @@ public class JPmanageCustomer extends JPanel {
 					t.start();
 				}
 				public void RightMove(){
+					nameText.setText("");
+					phoneNumberText.setText("");
+					addressText.setText("");
+					emailText.setText("");
+					postcodeText.setText("");
+					salemanText.setText("");
 					Thread t=new Thread(new TreadOfRight());
 					t.start();
 				}
@@ -752,7 +753,7 @@ public class JPmanageCustomer extends JPanel {
 				
 				public void reHome(){
 					this.RightMove();
-					searchTxt.setText("");
+					
 				}
 				public JPanelSearch(){
 					//面板大小
@@ -799,6 +800,7 @@ public class JPmanageCustomer extends JPanel {
 					t.start();
 				}
 				public void RightMove(){
+					searchTxt.setText("");
 					Thread t=new Thread(new TreadOfRight());
 					t.start();
 				}

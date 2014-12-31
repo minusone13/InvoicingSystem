@@ -440,15 +440,6 @@ public class JPmanageBills2 extends JPanel {
 			private FinancialBlService fbl=new Financial();
 			public void reHome(){
 				this.RightMove();
-				accountText.setText("");
-				totalText.setText("");
-				tranTotalText.setText("");
-				
-				tranListEdit.reHome();
-				tranListEdit.setVisible(false);
-				ListEdit.reHome();
-				ListEdit.setVisible(false);
-				
 			}
 			
 			public JPanelEdit(BillStyle style){
@@ -635,6 +626,14 @@ public class JPmanageBills2 extends JPanel {
 				t.start();
 			}
 			public void RightMove(){
+				accountText.setText("");
+				totalText.setText("");
+				tranTotalText.setText("");
+				
+				tranListEdit.reHome();
+				tranListEdit.setVisible(false);
+				ListEdit.reHome();
+				ListEdit.setVisible(false);
 				Thread t=new Thread(new TreadOfRight());
 				t.start();
 			}

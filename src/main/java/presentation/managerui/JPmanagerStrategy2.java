@@ -317,16 +317,7 @@ public class JPmanagerStrategy2 extends JPanel {
 			private JTextField decreasePriceText=new JTextField(10);
 			public void reHome(){
 				this.RightMove();
-				limitText.setText("");
-				discountText.setText("");
-				couponText.setText("");
-				startText1.setText("");
-				startText2.setText("");
-				startText3.setText("");
-				lastText.setText("");
-				originalTotalPriceText.setText("");
-				decreasePriceText.setText("");
-				output.clear();
+			
 			}
 			public JPanelEdit(StrategyStyle style){
 				//面板大小
@@ -646,6 +637,16 @@ public class JPmanagerStrategy2 extends JPanel {
 				t.start();
 			}
 			public void RightMove(){
+				limitText.setText("");
+				discountText.setText("");
+				couponText.setText("");
+				startText1.setText("");
+				startText2.setText("");
+				startText3.setText("");
+				lastText.setText("");
+				originalTotalPriceText.setText("");
+				decreasePriceText.setText("");
+				output.clear();
 				Thread t=new Thread(new TreadOfRight());
 				t.start();
 			}

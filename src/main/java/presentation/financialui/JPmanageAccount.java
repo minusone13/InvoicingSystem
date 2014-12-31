@@ -313,8 +313,7 @@ public class JPmanageAccount extends JPanel {
 				
 				public void reHome(){
 					this.RightMove();
-					nameText.setText("");
-					moneyText.setText("");
+				
 				}
 				public JPanelEdit(){
 					//面板大小
@@ -371,6 +370,8 @@ public class JPmanageAccount extends JPanel {
 					t.start();
 				}
 				public void RightMove(){
+					nameText.setText("");
+					moneyText.setText("");
 					Thread t=new Thread(new TreadOfRight());
 					t.start();
 				}
@@ -555,8 +556,8 @@ public class JPmanageAccount extends JPanel {
 				private JTextField searchTxt=new JTextField(10);
 				
 				public void reHome(){
-					this.setLocation(905, 36);
-					searchTxt.setText("");
+					this.RightMove();
+					
 				}
 				public JPanelSearch(){
 					//面板大小
@@ -602,6 +603,7 @@ public class JPmanageAccount extends JPanel {
 					t.start();
 				}
 				public void RightMove(){
+					searchTxt.setText("");
 					Thread t=new Thread(new TreadOfRight());
 					t.start();
 				}

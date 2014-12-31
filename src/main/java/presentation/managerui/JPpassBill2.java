@@ -423,9 +423,7 @@ public class JPpassBill2 extends JPanel {
 	    StringJudger stringJg=new StringJudger();
 		public void reHome(){
 			this.RightMove();
-			totalText.setText("");
-			reasonTxt.setText("");
-			noteText.setText("");
+			
 		}
 		public JPanelEdit(BillStyle style){
 			//确认种类
@@ -585,6 +583,9 @@ public class JPpassBill2 extends JPanel {
 			t.start();
 		}
 		public void RightMove(){
+			totalText.setText("");
+			reasonTxt.setText("");
+			noteText.setText("");
 			Thread t=new Thread(new TreadOfRight());
 			t.start();
 		}

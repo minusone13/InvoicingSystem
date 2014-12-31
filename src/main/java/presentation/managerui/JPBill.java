@@ -1120,7 +1120,6 @@ public class JPBill extends JPanel {
 		JLabel operator=new JLabel(ss.getop());
 		JLabel coupon=new JLabel(String.valueOf(ss.getmoney2()));
 		JLabel finalMoney=new JLabel(String.valueOf(ss.getpmoney()));
-		System.out.println("初始化时"+String.valueOf(ss.getpmoney()));
 		customer.setBounds(324,2, 100, 20);
 		totalMoney.setBounds(341,21, 100, 20);
 		discount.setBounds(324, 38, 100, 20);

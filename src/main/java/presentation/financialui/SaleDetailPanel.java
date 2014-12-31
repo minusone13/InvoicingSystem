@@ -326,14 +326,7 @@ public class SaleDetailPanel extends JPanel{
 	    
 	    public void reHome(){
 	    	this.RightMove();
-	    	year1.setText("");
-	    	month1.setText("");
-	    	date1.setText("");
-	    	year2.setText("");
-	    	month2.setText("");
-	    	date2.setText("");
-	    	commodityName.setText("");
-	    	salemanTxt.setText("");
+	    	
 	    }
 		public JPeditForSaleDetail(){
 			//面板大小
@@ -672,6 +665,14 @@ public class SaleDetailPanel extends JPanel{
 			t.start();
 		}
 		public void RightMove(){
+			year1.setText("");
+	    	month1.setText("");
+	    	date1.setText("");
+	    	year2.setText("");
+	    	month2.setText("");
+	    	date2.setText("");
+	    	commodityName.setText("");
+	    	salemanTxt.setText("");
 			Thread t=new Thread(new TreadOfRight());
 			t.start();
 		}

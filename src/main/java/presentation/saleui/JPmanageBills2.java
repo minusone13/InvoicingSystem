@@ -501,16 +501,7 @@ public class JPmanageBills2 extends JPanel {
 			private ArrayList<String> outputNotes;
 			public void reHome(){
 				this.RightMove();
-				customerTxt.setText("");
-				warehouseTxt.setText("");
-				totalText.setText("");
-				noteText.setText("");
-				couponText.setText("");
-				discountText.setText("");
-				finalTotalText.setText("");
-				billIDTxt.setText("");
-				output=null;
-				outputNotes=null;
+			
 			}
 			public JPanelEdit(BillStyle style){
 				//确认种类
@@ -1124,7 +1115,6 @@ public class JPmanageBills2 extends JPanel {
 										vo.setmoney2(Double.parseDouble(couponText.getText()));
 										vo.setdiscount(Double.parseDouble(discountText.getText()));
 										vo.setpmoney(Double.parseDouble(finalTotalText.getText()));
-										System.out.println("vo中"+vo.getpmoney()+":"+"text中"+Double.parseDouble(finalTotalText.getText()));
 										vo.setwords(noteText.getText());
 										vo.setop(Login.user.getName()+":"+Login.user.getID());
 										billList.addSaleSheet(vo);
@@ -1454,6 +1444,16 @@ public class JPmanageBills2 extends JPanel {
 				t.start();
 			}
 			public void RightMove(){
+				customerTxt.setText("");
+				warehouseTxt.setText("");
+				totalText.setText("");
+				noteText.setText("");
+				couponText.setText("");
+				discountText.setText("");
+				finalTotalText.setText("");
+				billIDTxt.setText("");
+				output=null;
+				outputNotes=null;
 				Thread t=new Thread(new TreadOfRight());
 				t.start();
 			}
