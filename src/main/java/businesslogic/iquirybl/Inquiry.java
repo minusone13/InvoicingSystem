@@ -444,7 +444,6 @@ public class Inquiry {
 	public ArrayList<PaymentVO> getProcessPayment(InquiryProcessVO ipv) {
 		ArrayList<PaymentBill> payment = bp.getPaymentBill();
 		ArrayList<PaymentVO> paymentVO = new ArrayList<PaymentVO>();
-		
 			
 		int size = payment.size();
 		for(int i=0;i<size;i++) {
