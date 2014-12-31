@@ -285,42 +285,14 @@ public class JPpassBill2 extends JPanel {
 				break;	
 			case 3:
 				check.setIcon(checkIconR);
-			
-				break;
-			case 4:
-				delete.setIcon(deleteIconR);
-				
-				break;
-			case 5:
-				edit.setIcon(editIconR);
-				
-				break;
-			}
-		}
-
-		public void mouseReleased(MouseEvent e) {
-			// TODO Auto-generated method stub
-			switch(num){
-			case 1:
-			up.setIcon(upIconW);
-			//向上停止
-			billList.stop();
-				break;
-			case 2:
-			down.setIcon(downIconW);
-			//向上停止
-			billList.stop();
-				break;	
-			case 3:
-				check.setIcon(checkIconW);
 				billList.passChosen();
 				break;
 			case 4:
-				delete.setIcon(deleteIconW);
+				delete.setIcon(deleteIconR);
 				billList.removeChosen();
 				break;
 			case 5:
-				edit.setIcon(editIconW);
+				edit.setIcon(editIconR);
 				if(billList.getChosenNum()==1){
 					if(billList.stateOfChosen()==BillState.SUBMITED){
 						switch(style){
@@ -349,6 +321,31 @@ public class JPpassBill2 extends JPanel {
 					frame.getWarning().showWarning("只能同时修改一张单据");
 				}
 				
+				break;
+			}
+		}
+
+		public void mouseReleased(MouseEvent e) {
+			// TODO Auto-generated method stub
+			switch(num){
+			case 1:
+			up.setIcon(upIconW);
+			//向上停止
+			billList.stop();
+				break;
+			case 2:
+			down.setIcon(downIconW);
+			//向上停止
+			billList.stop();
+				break;	
+			case 3:
+				check.setIcon(checkIconW);
+				break;
+			case 4:
+				delete.setIcon(deleteIconW);
+				break;
+			case 5:
+				edit.setIcon(editIconW);
 				break;				
 			}
 		}

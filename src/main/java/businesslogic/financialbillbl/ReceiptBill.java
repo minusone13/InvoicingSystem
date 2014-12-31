@@ -109,7 +109,6 @@ public class ReceiptBill extends Bill implements GetVOandPO{
 			for(int i=0;i<size;i++) {
 				TransferAccount temp = transferlist.get(i);
 				String[] temp2 = customer.split(":");
-				
 				f.updateReceiptMoney(temp2[1], temp.getAccount(), temp.getMoney());
 			}
 		} 

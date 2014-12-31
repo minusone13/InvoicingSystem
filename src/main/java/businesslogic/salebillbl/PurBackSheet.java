@@ -9,12 +9,16 @@ import po.BillStyle;
 import po.PurBackSheetPO;
 import po.stockpo.CommodityPO;
 import vo.PurBackSheetVO;
+import vo.PurSheetVO;
 import vo.stockvo.CommodityVO;
 import businesslogic.GetVOandPO;
 import businesslogic.commoditybl.MockCommodity;
 import businesslogic.customerbl.Customer;
+import businesslogic.customerbl.CustomerList;
 import businesslogic.examinebl.Bill;
 import businesslogic.examinebl.StubBillPool;
+import businesslogic.stockmanagerbl.StubStockController;
+import businesslogic.stockservice.StockBlForSalesMen;
 
 public class PurBackSheet extends Bill implements GetVOandPO{
 	Customer customer;
@@ -69,6 +73,25 @@ public class PurBackSheet extends Bill implements GetVOandPO{
 	}
 	
 	public  void setState(BillState billstate){
+		StockBlForSalesMen stockservice = new StubStockController();
+		CustomerList list = new CustomerList();
+		PurBackSheetVO vo = this.getVO();
+		switch(billstate){
+			case SUBMITED : 
+				for(CommodityVO tempvo:vo.getsheet()){
+					stockservice.readyForOut(tempvo.getId(), tempvo.getName(), tempvo.getModel(), tempvo.getNumber(), tempvo.getOut());
+				}
+				break;
+			case EXAMINED : 
+				for(CommodityVO tempvo:vo.getsheet()){
+					stockservice.undoCheckOut(tempvo.getId(),  tempvo.getName(), tempvo.getModel(), tempvo.getNumber(), tempvo.getOut());
+				}
+				break;
+			case OVER     : 
+				list.changeShouldTake(this.getcustomer().getid(), -vo.getmoney1());
+				break;
+			
+		}
 		this.billstate= billstate;
 	}
 	

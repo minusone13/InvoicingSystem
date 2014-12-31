@@ -222,7 +222,7 @@ public class SaleTest extends TestCase{
 			tempvo = customerlist.findCustomer("00001");
 			System.out.println(tempvo.getname());
 			System.out.println(tempvo.getShouldTake());
-			tempvo.setShouldTake(100.0);
+			tempvo.setShouldTake(200.0);
 			System.out.println(tempvo.getShouldTake());
 			customerlist.updateCustomer(tempvo);
 			tempvo=customerlist.findCustomer("00001");
