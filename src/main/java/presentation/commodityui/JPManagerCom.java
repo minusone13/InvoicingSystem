@@ -146,6 +146,7 @@ public class JPManagerCom extends JPanel{
 		box.setForeground(Color.white);
 		box.setBackground(Color.black);
 		
+		if(versions==null) versions = new ArrayList<String>();
 		int size = versions.size();
 		for(int i=0;i<size;i++){
 			box.addItem(versions.get(i));
