@@ -730,7 +730,7 @@ public class JPBillList extends JPanel {
 						if(bst!=BillStyle.GiftBill && bst!=BillStyle.SpillsLossBill)//added by lhw
 							JPbillList.get(i).transformState(BillState.SUBMITED);
 						else
-						{
+						{//some special handle in stock
 							RM result=RM.done;
 							if(bst == BillStyle.GiftBill)
 								result = stockbl.submit(jpt.getGiftVO());
@@ -770,7 +770,30 @@ public class JPBillList extends JPanel {
 			if(isTheSameState()&&stateOfChosen()==BillState.EXAMINED){
 				for(int i=0;i<JPbillList.size();i++){
 					if(JPbillList.get(i).getChoose()){
-						JPbillList.get(i).transformState(BillState.OVER);
+						JPBill jpt = JPbillList.get(i);
+						BillStyle bst = jpt.getStyle();
+						if(bst!=BillStyle.GiftBill && bst!=BillStyle.SpillsLossBill)//added by lhw
+							JPbillList.get(i).transformState(BillState.OVER);
+						else
+						{//some special handle in stock
+							RM result=RM.done;
+							if(bst == BillStyle.GiftBill)
+								result = stockbl.over(jpt.getGiftVO());
+							else
+								result = stockbl.over(jpt.getSpillsLossVO());
+							if(result == RM.insufficient)
+								frame.getWarning().showWarning(WarningText.insufficient);
+							else if(result == RM.RMIError)
+								frame.getWarning().showWarning(WarningText.RMIError);
+							else if(result != RM.done)
+								frame.getWarning().showWarning("结果是："+result);
+							else if(result == RM.done)
+							{
+								jpt.setState(BillState.OVER);
+								//修改背景
+								jpt.setBillBg(bst,BillState.OVER,2);
+							}
+						}
 					}
 				}
 				frame.getWarning().showWarning("成功处理");
