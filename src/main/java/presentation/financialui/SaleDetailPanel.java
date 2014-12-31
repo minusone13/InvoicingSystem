@@ -664,9 +664,7 @@ public class SaleDetailPanel extends JPanel{
 			ArrayList<CustomerVO> customers = null;
 			customers = customerbl.getAllCustomer("Customer.txt");
 			for(int i=0;i<customers.size();i++){
-				if(customers.get(i).gettype()==0){
 					customerCombo.addItem(customers.get(i).getname()+":"+customers.get(i).getid());
-				}
 			}
 			Thread t=new Thread(new TreadOfLeft());
 			t.start();
