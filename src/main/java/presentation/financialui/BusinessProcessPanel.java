@@ -583,7 +583,7 @@ public class BusinessProcessPanel extends JPanel{
 			Object[][] dataOfPurAndBackSheet = new Object[sizeOfPurAndBackSheet][];
 	        for(int i=0;i<sizeOfPurSheet;i++){
 	        	PurSheetVO tempPurSheet= purSheet.get(i);
-	        	Object[] temp ={tempPurSheet.getid(),tempPurSheet.getcustomer(),
+	        	Object[] temp ={tempPurSheet.getid(),tempPurSheet.getcustomer().getname(),
 	        			tempPurSheet.getstock(),tempPurSheet.getop(),
 	        			tempPurSheet.getwords(),tempPurSheet.getmoney1(),
 	        			tempPurSheet.getState()};
@@ -591,7 +591,7 @@ public class BusinessProcessPanel extends JPanel{
 	        }
 	        for(int i=0;i<sizeOfPurBackSheet;i++){
 	        	PurBackSheetVO tempPurBackSheet= purBackSheet.get(i);
-	        	Object[] temp ={tempPurBackSheet.getid(),tempPurBackSheet.getcustomer(),
+	        	Object[] temp ={tempPurBackSheet.getid(),tempPurBackSheet.getcustomer().getname(),
 	        			tempPurBackSheet.getstock(),tempPurBackSheet.getop(),
 	        			tempPurBackSheet.getwords(),tempPurBackSheet.getmoney1(),
 	        			tempPurBackSheet.getState()};
