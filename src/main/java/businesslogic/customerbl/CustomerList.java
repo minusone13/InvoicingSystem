@@ -100,7 +100,7 @@ public class CustomerList implements CustomerForFinancial, CustomerBlService{
 			ArrayList<CustomerVO> listOfCustomerVO = new ArrayList<CustomerVO>();
 			try{
 				CustomerDataService customerdata = (CustomerDataService)Naming.lookup("rmi://"+entrance.Test.ipOfServer+"/CustomerData");
-				ArrayList<CustomerPO> listOfCustomerPO = customerdata.getAllCustomer("accountBuild\\customerInfo\\"+address+".ser");
+				ArrayList<CustomerPO> listOfCustomerPO = customerdata.getAllCustomer(address);
 				
 				if(listOfCustomerPO==null) return new ArrayList<CustomerVO>();
 				for(CustomerPO po: listOfCustomerPO){
@@ -117,7 +117,7 @@ public class CustomerList implements CustomerForFinancial, CustomerBlService{
 		}
 
 		public ArrayList<CustomerVO> getCustomer(String address) {
-			ArrayList<CustomerVO> listOfCustomerVO = this.getAllCustomer(address);
+			ArrayList<CustomerVO> listOfCustomerVO = this.getAllCustomer("accountBuild\\customerInfo\\"+address+".ser");
 			return listOfCustomerVO;
 		}
 		
