@@ -34,8 +34,8 @@ public class StubStockController implements StubCommodityBlService,
 	UserService us = new UserController();
 	static StubCommodityDataService comdata = null;
 	static StubBillPool pool = new StubBillPool();
-	static User user = new User("D0000", Role.ADMINISTRATOR, "Default", "password",
-			"Test");
+	static User user = new User("I0000", Role.STOCK_STAFF, "DefaultStock", "default",
+			"Liu");
 	static
 	{
 		connect();

@@ -39,6 +39,9 @@ public class salebillController implements SaleBillBlService,salebillForFinancia
 			StubBillPool pool = new StubBillPool();
 			if(vo==null) return false;
 			PurSheet pursheet = new PurSheet(vo);
+			for(MockCommodity temp : pursheet.getsheet()){
+					temp.setLastin(temp.getIn());
+			}
 			pool.add(pursheet);
 			return true;
 		}
@@ -55,6 +58,9 @@ public class salebillController implements SaleBillBlService,salebillForFinancia
 			StubBillPool pool = new StubBillPool();
 			if(vo==null) return false;
 			SaleSheet salesheet = new SaleSheet(vo);
+			for(MockCommodity temp : salesheet.getsheet()){
+				temp.setLastin(temp.getIn());
+		}
 			pool.add(salesheet);
 			return true;
 		}
