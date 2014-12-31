@@ -1004,13 +1004,7 @@ public class BusinessProcessPanel extends JPanel{
     		add(label_1);
     		
     		//客户下拉框
-    		ArrayList<CustomerVO> customers2 = null;
-    		customers2 = customerbl.getAllCustomer("Customer.txt");
-    		String[] customerS2=new String[customers2.size()];
-    		for(int i=0;i<customers2.size();i++){
-    			customerS2[i]=customers2.get(i).getname()+":"+customers2.get(i).getid();
-    		}
-    		customerCombo= new JComboBox(customerS2);
+    		customerCombo= new JComboBox();
     		customerCombo.setBounds(74, 145, 156, 20);
     		customerCombo.setBackground(Color.gray);
     		customerCombo.setForeground(Color.white);
@@ -1223,6 +1217,14 @@ public class BusinessProcessPanel extends JPanel{
     		
     	}
     	public void leftMove(){
+    		customerCombo.removeAllItems();
+			ArrayList<CustomerVO> customers = null;
+			customers = customerbl.getAllCustomer("Customer.txt");
+			for(int i=0;i<customers.size();i++){
+				if(customers.get(i).gettype()==0){
+					customerCombo.addItem(customers.get(i).getname()+":"+customers.get(i).getid());
+				}
+			}
     		Thread t=new Thread(new TreadOfLeft());
     		t.start();
     	}
