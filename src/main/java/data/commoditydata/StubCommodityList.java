@@ -243,7 +243,8 @@ public class StubCommodityList implements Serializable
 			return RM.unknownerror;
 		MockCommodityData com = new MockCommodityData(po);
 		RM result = temp.add(com);
-		flatlist.add(com);
+		if(result == RM.done)
+			flatlist.add(com);
 		return result;
 	}
 

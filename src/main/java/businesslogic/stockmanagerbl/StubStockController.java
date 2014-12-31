@@ -313,6 +313,7 @@ public class StubStockController implements StubCommodityBlService,
 				return RM.insufficient;
 		}
 		pool.transformState(vo.getBillstyle(), vo.getID(), BillState.SUBMITED);
+		us.addRecord(new OperationRecord(user, "submit:"+vo.getID(), RM.done));
 		return RM.done;
 	}
 
@@ -322,24 +323,28 @@ public class StubStockController implements StubCommodityBlService,
 		if (!isEnough(com.getName(), com.getModel(), com.getNumber()))
 			return RM.insufficient;
 		pool.transformState(vo.getBillstyle(), vo.getID(), BillState.SUBMITED);
+		us.addRecord(new OperationRecord(user, "submit:"+vo.getID(), RM.done));
 		return RM.done;
 	}
 
 	public RM submit(AlertBillVO vo)
 	{
 		pool.transformState(vo.getBillstyle(), vo.getID(), BillState.SUBMITED);
+		us.addRecord(new OperationRecord(user, "submit:"+vo.getID(), RM.done));
 		return RM.done;
 	}
 
 	public RM over(GiftBillVO vo)
 	{
 		pool.transformState(vo.getBillstyle(), vo.getID(), BillState.OVER);
+		us.addRecord(new OperationRecord(user, "over:"+vo.getID(), RM.done));
 		return RM.done;
 	}
 
 	public RM over(SpillsLossBillVO vo)
 	{
 		pool.transformState(vo.getBillstyle(), vo.getID(), BillState.OVER);
+		us.addRecord(new OperationRecord(user, "over:"+vo.getID(), RM.done));
 		return RM.done;
 	}
 
