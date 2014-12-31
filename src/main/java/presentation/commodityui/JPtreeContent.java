@@ -185,6 +185,10 @@ public class JPtreeContent extends JPanel {
         	if(rm==RM.done){
         		JPmanagerCom.getFrame().getWarning().showWarning("修改成功");
         	}
+        	else if(rm==RM.redundance){
+        		JPmanagerCom.getFrame().getWarning().showWarning("已有分类，修改失败");
+        		modifyNode.setUserObject(vo.getName());
+        	}
         	else if(rm==RM.unknownerror){ 
         		JPmanagerCom.getFrame().getWarning().showWarning(WarningText.unknownerror); 
         		modifyNode.setUserObject(vo.getName()); 
