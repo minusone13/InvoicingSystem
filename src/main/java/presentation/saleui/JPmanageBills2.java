@@ -23,6 +23,7 @@ import presentation.managerui.JPBillList;
 import presentation.managerui.JTableOfList;
 import presentation.managerui.MouseListenerGetXY;
 import presentation.userui.Login;
+import vo.BarginStrategyVO;
 import vo.CustomerVO;
 import vo.LevelStrategyVO;
 import vo.PurBackSheetVO;
@@ -703,7 +704,7 @@ public class JPmanageBills2 extends JPanel {
 					discount.setBounds(40,165, 60, 20);
 					finalTotal.setBounds(40,190, 60, 20);
 					note.setBounds(40,215, 40, 20);
-					
+					KeyAdapterOfSignIn KeyFindStrategy=new KeyAdapterOfSignIn();
 					//客户选择下拉框
 					ArrayList<CustomerVO> customers2 = null;
 					customers2 = customerbl.getAllCustomer("Customer.txt");
@@ -716,6 +717,7 @@ public class JPmanageBills2 extends JPanel {
 					customerCombo.setBounds(80,15, 150, 20);
 					customerCombo.setBackground(Color.gray);
 					customerCombo.setForeground(Color.white);
+					customerCombo.addKeyListener(KeyFindStrategy);
 					//仓库选择下拉框
 					String[] warehouseS2={"仓库1"};
 					warehouseCombo = new JComboBox(warehouseS2);
@@ -723,6 +725,7 @@ public class JPmanageBills2 extends JPanel {
 					warehouseCombo.setBounds(80,40, 150, 20);
 					warehouseCombo.setBackground(Color.gray);
 					warehouseCombo.setForeground(Color.white);
+					warehouseCombo.addKeyListener(KeyFindStrategy);
 					//增加条目按钮
 					addList.setIcon(add0);
 					addList.setBounds(105,63, 24, 24);
@@ -734,6 +737,7 @@ public class JPmanageBills2 extends JPanel {
 					strategyCombo.setBounds(80,140, 150, 20);
 					strategyCombo.setBackground(Color.gray);
 					strategyCombo.setForeground(Color.white);
+					strategyCombo.addKeyListener(KeyFindStrategy);
 					strategyCombo.addActionListener(new ActionListener() {
 					      public void actionPerformed(final ActionEvent e) {
 					    	  if(strategyCombo.getSelectedItem()!=null){
@@ -762,6 +766,9 @@ public class JPmanageBills2 extends JPanel {
 											else if(temp2[0].equals("MECL")){
 												vo=sbl.getCompletedSaleSheet(vo, mbl.findReachStrategy(strategyid));
 											}
+											else if(temp2[0].equals("TJBCL")){
+												vo=sbl.getCompletedSaleSheet(vo, mbl.findBarginStrategy(strategyid));
+											}
 											//显示剩余信息
 											discountText.setText(String.valueOf(vo.getdiscount()));
 											finalTotalText.setText(String.valueOf(vo.getpmoney()));
@@ -782,27 +789,31 @@ public class JPmanageBills2 extends JPanel {
 					totalText.setOpaque(false);//文本框透明
 					totalText.setForeground(Color.white);//前景色
 					totalText.setCaretColor(Color.white);
+					totalText.addKeyListener(KeyFindStrategy);
 					//使用代金券文本框
 					couponText.setBounds(125,115, 105, 20);
 					couponText.setOpaque(false);//文本框透明
 					couponText.setForeground(Color.white);//前景色
 					couponText.setCaretColor(Color.white);
-					couponText.addKeyListener(new KeyAdapterOfSignIn());
+					couponText.addKeyListener(KeyFindStrategy);
 					//折让文本框
 					discountText.setBounds(110,165, 120, 20);
 					discountText.setOpaque(false);//文本框透明
 					discountText.setForeground(Color.white);//前景色
 					discountText.setCaretColor(Color.white);
+					discountText.addKeyListener(KeyFindStrategy);
 					//最终总额文本框
 					finalTotalText.setBounds(110,190, 120, 20);
 					finalTotalText.setOpaque(false);//文本框透明
 					finalTotalText.setForeground(Color.white);//前景色
 					finalTotalText.setCaretColor(Color.white);
+					finalTotalText.addKeyListener(KeyFindStrategy);
 					//备注文本框
 					noteText.setBounds(80,215, 150, 20);
 					noteText.setOpaque(false);//文本框透明
 					noteText.setForeground(Color.white);//前景色
 					noteText.setCaretColor(Color.white);
+					noteText.addKeyListener(KeyFindStrategy);
 					
 					this.add(customer,0);
 					this.add(warehouse,1);
@@ -951,6 +962,7 @@ public class JPmanageBills2 extends JPanel {
 								//获取相应的策略信息
 								ArrayList<LevelStrategyVO> level=sbl.getSomeLevelStrategy(vo);
 								ArrayList<ReachStrategyVO> reach=sbl.getSomeReachStrategy(vo);
+								ArrayList<BarginStrategyVO> bargin=sbl.getSomeBarginStrategy(vo);
 								//将数组加到下拉框
 								strategyCombo.removeAllItems();
 								for(int i=0;i<level.size();i++){
@@ -959,7 +971,10 @@ public class JPmanageBills2 extends JPanel {
 								for(int i=0;i<reach.size();i++){
 									strategyCombo.addItem(reach.get(i).getID());
 								}
-								if(level.size()==0&&reach.size()==0){
+								for(int i=0;i<bargin.size();i++){
+									strategyCombo.addItem(bargin.get(i).getID());
+								}
+								if(level.size()==0&&reach.size()==0&&bargin.size()==0){
 									//没有优惠，显示其余信息
 									//显示剩余信息
 									discountText.setText("0");

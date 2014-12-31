@@ -141,6 +141,15 @@ public class Sale extends JPanel{
 
 			public void mouseReleased(MouseEvent e) {
 				// TODO Auto-generated method stub
+				//以下面板的编辑面板归位
+				switch(Sale.this.getPanelType()){
+					case JPmanageBills2:
+						Sale.this.getManageBills2().reHome();
+						break;
+					case JPmanageCustomer:
+						Sale.this.getCustomerManage().reHome();
+						break;
+				}
 				switch(num){
 				case 1:
 					home.setIcon(new ImageIcon("src/image/home1.png"));
@@ -188,9 +197,8 @@ public class Sale extends JPanel{
 					Sale.this.setVisible(false);
 					break;
 				}
-				//以下面板的编辑面板归位
-				Sale.this.getManageBills2().reHome();
-				Sale.this.getCustomerManage().reHome();
+				
+							
 			}
 
 			public void mouseEntered(MouseEvent e) {
