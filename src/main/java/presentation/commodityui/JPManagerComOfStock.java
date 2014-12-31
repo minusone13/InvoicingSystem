@@ -489,6 +489,12 @@ public class JPManagerComOfStock extends JPanel {
 								manageCom.getCommodities().changeChosen(modifyVO);
 								frame.getWarning().showWarning("修改商品成功");//added by lhw
 							}
+							else if(rm==RM.unknownerror){
+								frame.getWarning().showWarning(WarningText.unknownerror);
+							}
+							else if(rm==RM.RMIError){
+								frame.getWarning().showWarning(WarningText.RMIError);
+							}
 							else{
 								frame.getWarning().showWarning("修改结果是"+rm);
 							}
