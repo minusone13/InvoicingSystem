@@ -31,6 +31,7 @@ import vo.financialBillVO.CashPaymentVO;
 import vo.financialBillVO.PaymentVO;
 import vo.financialBillVO.ReceiptVO;
 import vo.uservo.UserVO;
+import businesslogic.commoditybl.StubCommodityList;
 import businesslogic.customerbl.CustomerList;
 import businesslogic.financialbl.Financial;
 import businesslogic.managerbl.StubManager;
@@ -43,7 +44,6 @@ import businesslogicservice.financialblservice.FinancialBlService;
 import businesslogicservice.managerblservice.StubManagerBlService;
 import businesslogicservice.salebillblservice.SaleBillBlService;
 import businesslogicservice.userblservice.StubUserBlService;
-import data.commoditydata.StubStockDataController;
 import dataservice.commoditydataservice.StubCommodityDataService;
 import entrance.Frame;
 
@@ -117,9 +117,14 @@ public class JPBillList extends JPanel {
 	/*单据面板数组根据状态重新排序*/
 	public ArrayList<JPBill> sortBillList(ArrayList<JPBill> bl){
 		ArrayList<JPBill> result=new ArrayList<JPBill>();
-		for(int i=0;i<bl.size();i++){
-			if(bl.get(i).getState()==BillState.DRAFT){
-				result.add(bl.get(i));
+		//如果是总经理在操作，把草稿状态单据过滤掉
+		if(StubCommodityList.user!=null){
+			if(StubCommodityList.user.getR()!=Role.MANAGER){
+				for(int i=0;i<bl.size();i++){
+					if(bl.get(i).getState()==BillState.DRAFT){
+						result.add(bl.get(i));
+					}
+				}
 			}
 		}
 		for(int i=0;i<bl.size();i++){
