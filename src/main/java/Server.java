@@ -30,6 +30,7 @@ public class Server
 		 try
 
 		 {
+			 
 			 	String ip = "127.0.0.1:1099";
 				CustomerDataService customerdataservice= new CustomerData();
 				AccountDataService accountdataservice = new AccountData();
