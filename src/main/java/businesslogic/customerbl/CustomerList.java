@@ -110,6 +110,7 @@ public class CustomerList implements CustomerForFinancial, CustomerBlService{
 				}
 			}catch(Exception e){
 				System.out.println("getAllCustomer 异常222"+e);
+				e.printStackTrace();
 			}
 			return listOfCustomerVO;
 		}
