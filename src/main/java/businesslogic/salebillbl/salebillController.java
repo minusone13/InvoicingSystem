@@ -173,8 +173,9 @@ public class salebillController implements SaleBillBlService,salebillForFinancia
 		public void changeState_PurSheet(String ID,BillState state) {
 			StubBillPool pool = new StubBillPool();
 			CustomerList list = new CustomerList();
-			String customerid = new String();
 			PurSheetVO vo = this.findPurSheet(ID);
+			CustomerVO customervo = vo.getcustomer();
+			System.out.println(customervo.getid());
 			StockBlForSalesMen stockservice = new StubStockController(); 
 			
 			switch(state){
@@ -190,10 +191,9 @@ public class salebillController implements SaleBillBlService,salebillForFinancia
 					}
 					break;
 				case OVER     : 
-					customerid = vo.getcustomer().getid();
-					list.changeShouldPay(ID, vo.getmoney1());
+					list.changeShouldPay(customervo.getid(), -vo.getmoney1());
+					//list.updateCustomer(customervo);
 					break;
-				
 			}
 			pool.transformState(BillStyle.PurSheet, ID, state);
 		}
@@ -201,8 +201,8 @@ public class salebillController implements SaleBillBlService,salebillForFinancia
 		public void changeState_PurBackSheet(String ID,BillState state) {
 			StubBillPool pool = new StubBillPool();
 			CustomerList list = new CustomerList();
-			String customerid = new String();
 			PurBackSheetVO vo = this.findPurBackSheet(ID);
+			CustomerVO customervo = vo.getcustomer();
 			StockBlForSalesMen stockservice = new StubStockController(); 
 			switch(state){
 				case SUBMITED : 
@@ -216,8 +216,8 @@ public class salebillController implements SaleBillBlService,salebillForFinancia
 					}
 					break;
 				case OVER     : 
-					customerid = vo.getcustomer().getid();
-					list.changeShouldTake(ID, vo.getmoney1());
+					list.changeShouldTake(customervo.getid(), -vo.getmoney1());
+					//list.updateCustomer(customervo);
 					break;
 				
 			}
@@ -227,8 +227,8 @@ public class salebillController implements SaleBillBlService,salebillForFinancia
 		public void changeState_Salesheet(String ID,BillState state) {
 			StubBillPool pool = new StubBillPool();
 			CustomerList list = new CustomerList();
-			String customerid = new String();
 			SaleSheetVO vo = this.findSaleSheet(ID);
+			CustomerVO customervo = vo.getcustomer();
 			StockBlForSalesMen stockservice = new StubStockController(); 
 			switch(state){
 				case SUBMITED : 
@@ -242,8 +242,8 @@ public class salebillController implements SaleBillBlService,salebillForFinancia
 					}
 					break;
 				case OVER     : 
-					customerid = vo.getcustomer().getid();
-					list.changeShouldTake(ID, vo.getmoney2());
+					list.changeShouldTake(customervo.getid(), -vo.getmoney1());
+					//list.updateCustomer(customervo);
 					break;
 				
 			}
@@ -253,8 +253,8 @@ public class salebillController implements SaleBillBlService,salebillForFinancia
 		public void changeState_SaleBackSheet(String ID,BillState state) {
 			StubBillPool pool = new StubBillPool();
 			CustomerList list = new CustomerList();
-			String customerid = new String();
 			SaleBackSheetVO vo = this.findSaleBackSheet(ID);
+			CustomerVO customervo = vo.getcustomer();
 			StockBlForSalesMen stockservice = new StubStockController(); 
 			switch(state){
 				case SUBMITED : 
@@ -268,8 +268,8 @@ public class salebillController implements SaleBillBlService,salebillForFinancia
 					}
 					break;
 				case OVER     : 
-					customerid = vo.getcustomer().getid();
-					list.changeShouldPay(ID, vo.getmoney2());
+					list.changeShouldPay(customervo.getid(), -vo.getmoney1());
+					//list.updateCustomer(customervo);
 					break;
 				
 			}

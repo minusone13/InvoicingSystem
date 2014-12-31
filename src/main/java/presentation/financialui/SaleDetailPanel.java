@@ -213,7 +213,7 @@ public class SaleDetailPanel extends JPanel{
 						 commodity.getNumber(), commodity.getOut(), total};
 				 data[i] = temp;
 			 }
-			 for(int i=size1;i<size;i++) {
+			 for(int i=0;i<size2;i++) {
 				 SaleBackSheetVO vo = saleBackSheet.get(i);
 				 ArrayList<CommodityVO> list = vo.getsheet();
 				 int sizeOfList = list.size();
@@ -225,7 +225,7 @@ public class SaleDetailPanel extends JPanel{
 				 double total =0 - commodity.getOut()*commodity.getNumber();
 				 Object[] temp ={vo.getdate(), commodity.getName(), commodity.getModel(), 
 						 0-commodity.getNumber(), commodity.getOut(), total};
-				 data[i] = temp;
+				 data[i+size1] = temp;
 			 }
 			 return data;
 		}	else {//如果没选商品名
@@ -238,14 +238,16 @@ public class SaleDetailPanel extends JPanel{
 				 
 			}//for
 			
-			for(int i=size1;i<size;i++) {
+			for(int i=0;i<size2;i++) {
 				SaleBackSheetVO vo = saleBackSheet.get(i);
 				 ArrayList<CommodityVO> list = vo.getsheet();
 				 int sizeOfList = list.size();
 				 len += sizeOfList;
 				 
 			}//for
+			
 			 Object[][] data = new Object[len][];
+			 int index=0;
 			 for(int i=0;i<size1;i++) {
 				 SaleSheetVO vo = saleSheet.get(i);
 				 ArrayList<CommodityVO> list = vo.getsheet();
@@ -257,11 +259,12 @@ public class SaleDetailPanel extends JPanel{
 					 double total = commodity.getOut()*commodity.getNumber();
 					 Object[] temp ={vo.getdate(), commodity.getName(), commodity.getModel(), 
 							 commodity.getNumber(), commodity.getOut(), total};
-					 data[i] = temp;
+					 data[index] = temp;
+					 index++;
 				 }
 				 
 			 }
-			 for(int i=size1;i<size;i++) {
+			 for(int i=0;i<size2;i++) {
 				 SaleBackSheetVO vo = saleBackSheet.get(i);
 				 ArrayList<CommodityVO> list = vo.getsheet();
 				 int sizeOfList = list.size();
@@ -271,7 +274,8 @@ public class SaleDetailPanel extends JPanel{
 					 double total =0 - commodity.getOut()*commodity.getNumber();
 					 Object[] temp ={vo.getdate(), commodity.getName(), commodity.getModel(), 
 							 0-commodity.getNumber(), commodity.getOut(), total};
-					 data[i] = temp;
+					 data[index] = temp;
+					 index++;
 				 }
 				 
 			 }
@@ -326,14 +330,7 @@ public class SaleDetailPanel extends JPanel{
 	    
 	    public void reHome(){
 	    	this.RightMove();
-	    	year1.setText("");
-	    	month1.setText("");
-	    	date1.setText("");
-	    	year2.setText("");
-	    	month2.setText("");
-	    	date2.setText("");
-	    	commodityName.setText("");
-	    	salemanTxt.setText("");
+	    	
 	    }
 		public JPeditForSaleDetail(){
 			//面板大小
@@ -469,13 +466,8 @@ public class SaleDetailPanel extends JPanel{
 			add(label_1);
 			
 			//客户下拉框
-			ArrayList<CustomerVO> customers2 = null;
-			customers2 = customerbl.getAllCustomer("Customer.txt");
-			String[] customerS2=new String[customers2.size()];
-			for(int i=0;i<customers2.size();i++){
-				customerS2[i]=customers2.get(i).getname()+":"+customers2.get(i).getid();
-			}
-			customerCombo = new JComboBox(customerS2);
+	
+			customerCombo = new JComboBox();
 			customerCombo.setBounds(74, 145, 156, 20);
 			customerCombo.setBackground(Color.gray);
 			customerCombo.setForeground(Color.white);
@@ -668,10 +660,24 @@ public class SaleDetailPanel extends JPanel{
 			
 		}
 		public void leftMove(){
+			customerCombo.removeAllItems();
+			ArrayList<CustomerVO> customers = null;
+			customers = customerbl.getAllCustomer("Customer.txt");
+			for(int i=0;i<customers.size();i++){
+					customerCombo.addItem(customers.get(i).getname()+":"+customers.get(i).getid());
+			}
 			Thread t=new Thread(new TreadOfLeft());
 			t.start();
 		}
 		public void RightMove(){
+			year1.setText("");
+	    	month1.setText("");
+	    	date1.setText("");
+	    	year2.setText("");
+	    	month2.setText("");
+	    	date2.setText("");
+	    	commodityName.setText("");
+	    	salemanTxt.setText("");
 			Thread t=new Thread(new TreadOfRight());
 			t.start();
 		}

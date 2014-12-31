@@ -303,7 +303,6 @@ public class JPmanagerStrategy2 extends JPanel {
 			private JLabel last=new JLabel("持续时间（天）");
 			private JLabel originalTotalPrice=new JLabel("原始总价");
 			private JLabel decreasePrice=new JLabel("降价金额");
-			private JLabel num=new JLabel("打包数量");
 			private JLabel addButton=new JLabel();//增加条目按钮
 			private JComboBox strategyTypeCombo;
 			private JComboBox levelCombo;
@@ -316,20 +315,9 @@ public class JPmanagerStrategy2 extends JPanel {
 			private JTextField lastText=new JTextField(10);
 			private JTextField originalTotalPriceText=new JTextField(10);
 			private JTextField decreasePriceText=new JTextField(10);
-			private JTextField numText=new JTextField(10);
 			public void reHome(){
 				this.RightMove();
-				limitText.setText("");
-				discountText.setText("");
-				couponText.setText("");
-				startText1.setText("");
-				startText2.setText("");
-				startText3.setText("");
-				lastText.setText("");
-				originalTotalPriceText.setText("");
-				decreasePriceText.setText("");
-				numText.setText("");
-				output.clear();
+			
 			}
 			public JPanelEdit(StrategyStyle style){
 				//面板大小
@@ -364,7 +352,6 @@ public class JPmanagerStrategy2 extends JPanel {
 				last.setFont(new Font("宋体",Font.BOLD,14));
 				originalTotalPrice.setFont(new Font("宋体",Font.BOLD,14));
 				decreasePrice.setFont(new Font("宋体",Font.BOLD,14));
-				num.setFont(new Font("宋体",Font.BOLD,14));
 				
 				//设置字体颜色
 				strategyType.setForeground(Color.white);
@@ -378,7 +365,6 @@ public class JPmanagerStrategy2 extends JPanel {
 				last.setForeground(Color.white);
 				originalTotalPrice.setForeground(Color.white);
 				decreasePrice.setForeground(Color.white);
-				num.setForeground(Color.white);
 				
 				switch(style){
 				case LevelStrategy:
@@ -505,9 +491,8 @@ public class JPmanagerStrategy2 extends JPanel {
 					commodity.setBounds(40, 30, 40, 20);
 					originalTotalPrice.setBounds(40, 60,60, 20);
 					decreasePrice.setBounds(40, 90, 60, 20);
-					num.setBounds(40, 120,60, 20);
-					start.setBounds(40, 150, 60, 20);
-					last.setBounds(40, 180,120, 20);
+					start.setBounds(40, 120, 60, 20);
+					last.setBounds(40, 150,120, 20);
 					
 					//浏览按钮
 					addButton.setIcon(add0);
@@ -523,28 +508,23 @@ public class JPmanagerStrategy2 extends JPanel {
 					decreasePriceText.setOpaque(false);//文本框透明
 					decreasePriceText.setForeground(Color.white);//前景色
 					decreasePriceText.setCaretColor(Color.white);
-					//打包数量文本框
-					numText.setBounds(105,120, 130, 20);
-					numText.setOpaque(false);//文本框透明
-					numText.setForeground(Color.white);//前景色
-					numText.setCaretColor(Color.white);
 					//起始时间文本框
-					startText1.setBounds(105,150, 40, 20);
+					startText1.setBounds(105,120, 40, 20);
 					startText1.setOpaque(false);//文本框透明
 					startText1.setForeground(Color.white);//前景色
 					startText1.setCaretColor(Color.white);
 					
-					startText2.setBounds(150,150, 40, 20);
+					startText2.setBounds(150,120, 40, 20);
 					startText2.setOpaque(false);//文本框透明
 					startText2.setForeground(Color.white);//前景色
 					startText2.setCaretColor(Color.white);
 					
-					startText3.setBounds(195,150, 40, 20);
+					startText3.setBounds(195,120, 40, 20);
 					startText3.setOpaque(false);//文本框透明
 					startText3.setForeground(Color.white);//前景色
 					startText3.setCaretColor(Color.white);
 					//持续时间文本框
-					lastText.setBounds(145,180, 90, 20);
+					lastText.setBounds(145,150, 90, 20);
 					lastText.setOpaque(false);//文本框透明
 					lastText.setForeground(Color.white);//前景色
 					lastText.setCaretColor(Color.white);
@@ -552,20 +532,18 @@ public class JPmanagerStrategy2 extends JPanel {
 					this.add(commodity,0);
 					this.add(originalTotalPrice,1);
 					this.add(decreasePrice,2);
-					this.add(num,3);
-					this.add(start,4);
-					this.add(last,5);
-					this.add(right,6);
-					this.add(addButton,7);
-					this.add(originalTotalPriceText,8);
-					this.add(decreasePriceText,9);
-					this.add(numText,10);
-					this.add(startText1,11);
-					this.add(startText2,12);
-					this.add(startText3,13);
-					this.add(lastText,14);
-					this.add(confirm,15);
-					this.add(back,16);
+					this.add(start,3);
+					this.add(last,4);
+					this.add(right,5);
+					this.add(addButton,6);
+					this.add(originalTotalPriceText,7);
+					this.add(decreasePriceText,8);
+					this.add(startText1,9);
+					this.add(startText2,10);
+					this.add(startText3,11);
+					this.add(lastText,12);
+					this.add(confirm,13);
+					this.add(back,14);
 					break;
 				case ReachStrategy:
 					//设置标签大小位置
@@ -659,6 +637,16 @@ public class JPmanagerStrategy2 extends JPanel {
 				t.start();
 			}
 			public void RightMove(){
+				limitText.setText("");
+				discountText.setText("");
+				couponText.setText("");
+				startText1.setText("");
+				startText2.setText("");
+				startText3.setText("");
+				lastText.setText("");
+				originalTotalPriceText.setText("");
+				decreasePriceText.setText("");
+				output.clear();
 				Thread t=new Thread(new TreadOfRight());
 				t.start();
 			}
@@ -759,7 +747,7 @@ public class JPmanagerStrategy2 extends JPanel {
 									newLevel.setLastTime(Integer.parseInt(lastText.getText()));
 									newLevel.setOperator(Login.user.getName()+":"+Login.user.getID());
 									billList.addLevelStrategy(newLevel);
-									
+									frame.getWarning().showWarning("创建策略成功");
 									//清空信息
 									limitText.setText("");
 									startText1.setText("");
@@ -817,7 +805,7 @@ public class JPmanagerStrategy2 extends JPanel {
 									newLevel.setLastTime(Integer.parseInt(lastText.getText()));
 									newLevel.setOperator(Login.user.getName()+":"+Login.user.getID());
 									billList.addLevelStrategy(newLevel);
-									
+									frame.getWarning().showWarning("创建策略成功");
 									//清空信息
 									startText1.setText("");
 									startText2.setText("");
@@ -874,7 +862,7 @@ public class JPmanagerStrategy2 extends JPanel {
 									newLevel.setLastTime(Integer.parseInt(lastText.getText()));
 									newLevel.setOperator(Login.user.getName()+":"+Login.user.getID());
 									billList.addLevelStrategy(newLevel);
-									
+									frame.getWarning().showWarning("创建策略成功");
 									//清空信息
 									startText1.setText("");
 									startText2.setText("");
@@ -891,7 +879,6 @@ public class JPmanagerStrategy2 extends JPanel {
 							if(
 									!originalTotalPriceText.getText().equals("")&&
 									!decreasePriceText.getText().equals("")&&
-									!numText.getText().equals("")&&
 									!startText1.getText().equals("")&&
 									!startText2.getText().equals("")&&
 									!startText3.getText().equals("")&&
@@ -904,9 +891,9 @@ public class JPmanagerStrategy2 extends JPanel {
 										||stringJg.judgestring(startText3.getText())!=3
 										||stringJg.judgestring(lastText.getText())!=3
 										||stringJg.judgestring(decreasePriceText.getText())!=3
-										||stringJg.judgestring(numText.getText())!=3){
+										){
 									Legal=false;
-									frame.getWarning().showWarning("价格、数量与时间必须为数字");
+									frame.getWarning().showWarning("价格与时间必须为数字");
 								}
 							}
 							else{
@@ -914,18 +901,16 @@ public class JPmanagerStrategy2 extends JPanel {
 							}
 							if(Legal){
 								BarginStrategyVO newBargin=new BarginStrategyVO();
-								newBargin.setNum(Integer.parseInt(numText.getText()));
 								newBargin.setDiscount(Double.parseDouble(decreasePriceText.getText()));
 								newBargin.setAlOfCommodity(output);
 								newBargin.setStartTime(startText1.getText()+"/"+startText2.getText()+"/"+startText3.getText());
 								newBargin.setLastTime(Integer.parseInt(lastText.getText()));
 								newBargin.setOperator(Login.user.getName()+":"+Login.user.getID());
 								billList.addBarginStrategy(newBargin);
-								
+								frame.getWarning().showWarning("创建策略成功");
 								//清空信息
 								originalTotalPriceText.setText("");
 								decreasePriceText.setText("");
-								numText.setText("");
 								startText1.setText("");
 								startText2.setText("");
 								startText3.setText("");
@@ -966,7 +951,7 @@ public class JPmanagerStrategy2 extends JPanel {
 									newReach.setLastTime(Integer.parseInt(lastText.getText()));
 									newReach.setOperator(Login.user.getName()+":"+Login.user.getID());
 									billList.addReachStrategy(newReach);
-									
+									frame.getWarning().showWarning("创建策略成功");
 									//清空信息
 									limitText.setText("");
 									startText1.setText("");
@@ -1010,7 +995,7 @@ public class JPmanagerStrategy2 extends JPanel {
 									newReach.setLastTime(Integer.parseInt(lastText.getText()));
 									newReach.setOperator(Login.user.getName()+":"+Login.user.getID());
 									billList.addReachStrategy(newReach);
-									
+									frame.getWarning().showWarning("创建策略成功");
 									//清空信息
 									limitText.setText("");
 									startText1.setText("");

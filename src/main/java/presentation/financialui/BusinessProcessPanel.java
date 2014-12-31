@@ -542,17 +542,17 @@ public class BusinessProcessPanel extends JPanel{
 	        	dataOfReAndPay[i] = temp;
 	        }
 	        
-	        for(int i=size1;i<size;i++){
+	        for(int i=0;i<size2;i++){
 	        	System.out.println("payment");
 	        	PaymentVO tempPayment = payment.get(i);
 	        	Object[] temp ={tempPayment.getID(),tempPayment.getCustomer(), 
 	        			tempPayment.getOp(), tempPayment.getTotal(), 
 	        			tempPayment.getBillState()};
-	        	dataOfReAndPay[i] = temp;
+	        	dataOfReAndPay[i+size1] = temp;
 	        }
 	        
 			 model1.setDataVector(dataOfReAndPay, columnNames1);
-	System.out.println("~~~~~~~~~~~");
+	
 			 table1.updateUI();
 			 model2.setDataVector(new Object[][]{}, columnNames1s);
 			 table2.updateUI();
@@ -583,19 +583,19 @@ public class BusinessProcessPanel extends JPanel{
 			Object[][] dataOfPurAndBackSheet = new Object[sizeOfPurAndBackSheet][];
 	        for(int i=0;i<sizeOfPurSheet;i++){
 	        	PurSheetVO tempPurSheet= purSheet.get(i);
-	        	Object[] temp ={tempPurSheet.getid(),tempPurSheet.getcustomer(),
+	        	Object[] temp ={tempPurSheet.getid(),tempPurSheet.getcustomer().getname(),
 	        			tempPurSheet.getstock(),tempPurSheet.getop(),
 	        			tempPurSheet.getwords(),tempPurSheet.getmoney1(),
 	        			tempPurSheet.getState()};
 	        	dataOfPurAndBackSheet[i] = temp;
 	        }
-	        for(int i=sizeOfPurSheet;i<sizeOfPurAndBackSheet;i++){
+	        for(int i=0;i<sizeOfPurBackSheet;i++){
 	        	PurBackSheetVO tempPurBackSheet= purBackSheet.get(i);
-	        	Object[] temp ={tempPurBackSheet.getid(),tempPurBackSheet.getcustomer(),
+	        	Object[] temp ={tempPurBackSheet.getid(),tempPurBackSheet.getcustomer().getname(),
 	        			tempPurBackSheet.getstock(),tempPurBackSheet.getop(),
 	        			tempPurBackSheet.getwords(),tempPurBackSheet.getmoney1(),
 	        			tempPurBackSheet.getState()};
-	        	dataOfPurAndBackSheet[i] = temp;
+	        	dataOfPurAndBackSheet[i+sizeOfPurSheet] = temp;
 	        }
 			  
 	        model1.setDataVector(dataOfPurAndBackSheet, columnNames3);
@@ -603,7 +603,7 @@ public class BusinessProcessPanel extends JPanel{
 			model2.setDataVector(new Object[][]{}, columnNames3s);
 			table2.updateUI();
 			break;
-//有问题，业务员=========================================
+
 		case 4:
 	    	saleSheet = financial.getProcessSaleSheet(ipv);
 	    	saleBackSheet = financial.getProcessSaleBackSheet(ipv);
@@ -611,26 +611,27 @@ public class BusinessProcessPanel extends JPanel{
 	    	int sizeOfSale = saleSheet.size();
 	    	int sizeOfSaleBack = saleBackSheet.size();
 	    	int sizeOfSaleAndBack = sizeOfSale+sizeOfSaleBack;
-	        Object[][] dataOfSaleAndBack = new Object[sizeOfSaleAndBack][];
+	    
+	    	Object[][] dataOfSaleAndBack = new Object[sizeOfSaleAndBack][];
 	        for(int i=0;i<sizeOfSale;i++){
 	        	SaleSheetVO saleVO = saleSheet.get(i);
-	        	Object[] temp ={saleVO.getid(),saleVO.getcustomer(),
-	        			saleVO.getop(), 
+	        	Object[] temp ={saleVO.getid(),saleVO.getcustomer().getname(),
+	        			saleVO.getcustomer().getdeSaler() ,saleVO.getop(), 
 	        			saleVO.getstock(),saleVO.getmoney1(),saleVO.getdiscount(),
 	        			saleVO.getmoney2(),saleVO.getpmoney(),saleVO.getwords(),
 	        			saleVO.getState()};
 	        	
 	        	dataOfSaleAndBack[i] = temp;
 	        }
-	        for(int i=sizeOfSale;i<sizeOfSaleAndBack;i++){
+	        for(int i=0;i<sizeOfSaleBack;i++){
 	        	SaleBackSheetVO saleBackVO = saleBackSheet.get(i);
-	        	Object[] temp ={saleBackVO.getid(),saleBackVO.getcustomer(),
-	        			saleBackVO.getop(), 
+	        	Object[] temp ={saleBackVO.getid(),saleBackVO.getcustomer().getname(),
+	        			saleBackVO.getcustomer().getdeSaler(), saleBackVO.getop(), 
 	        			saleBackVO.getstock(),saleBackVO.getmoney1(),saleBackVO.getdiscount(),
 	        			saleBackVO.getmoney2(),saleBackVO.getpmoney(),saleBackVO.getwords(),
 	        			saleBackVO.getState()};
 	        	
-	        	dataOfSaleAndBack[i] = temp;
+	        	dataOfSaleAndBack[i+sizeOfSale] = temp;
 	        }
 	        
 	        model1.setDataVector(dataOfSaleAndBack, columnNames4);
@@ -670,11 +671,11 @@ public class BusinessProcessPanel extends JPanel{
 						spillLossVO.getCom().getModel(), spillLossVO.getCom().getNumber()};
 				dataOfSpillLossAndAlert[i] = temp;
 			}
-			for(int i=sizeOfSpillLoss;i<sizeOfSpillLossAndAlert;i++) {
+			for(int i=0;i<sizeOfAlert;i++) {
 				AlertBillVO alertVO = alert.get(i);
 				Object[] temp ={alertVO.getID(), alertVO.getCom().getName(),
 						alertVO.getCom().getModel(), alertVO.getCom().getNumber()};
-				dataOfSpillLossAndAlert[i] = temp;
+				dataOfSpillLossAndAlert[i+sizeOfAlert] = temp;
 			}
 			 model1.setDataVector(dataOfSpillLossAndAlert, columnNames6);		  
 			 table1.updateUI();
@@ -868,13 +869,7 @@ public class BusinessProcessPanel extends JPanel{
         
         public void reHome(){
         	this.RightMove();
-        	year1.setText("");
-        	month1.setText("");
-        	date1.setText("");
-        	year2.setText("");
-        	month2.setText("");
-        	date2.setText("");
-        	salemanTxt.setText("");
+        
         }
     	public JPeditForBusinessProgress(){
     		//面板大小
@@ -1009,13 +1004,7 @@ public class BusinessProcessPanel extends JPanel{
     		add(label_1);
     		
     		//客户下拉框
-    		ArrayList<CustomerVO> customers2 = null;
-    		customers2 = customerbl.getAllCustomer("Customer.txt");
-    		String[] customerS2=new String[customers2.size()];
-    		for(int i=0;i<customers2.size();i++){
-    			customerS2[i]=customers2.get(i).getname()+":"+customers2.get(i).getid();
-    		}
-    		customerCombo= new JComboBox(customerS2);
+    		customerCombo= new JComboBox();
     		customerCombo.setBounds(74, 145, 156, 20);
     		customerCombo.setBackground(Color.gray);
     		customerCombo.setForeground(Color.white);
@@ -1228,10 +1217,23 @@ public class BusinessProcessPanel extends JPanel{
     		
     	}
     	public void leftMove(){
+    		customerCombo.removeAllItems();
+			ArrayList<CustomerVO> customers = null;
+			customers = customerbl.getAllCustomer("Customer.txt");
+			for(int i=0;i<customers.size();i++){
+					customerCombo.addItem(customers.get(i).getname()+":"+customers.get(i).getid());
+			}
     		Thread t=new Thread(new TreadOfLeft());
     		t.start();
     	}
     	public void RightMove(){
+    		year1.setText("");
+        	month1.setText("");
+        	date1.setText("");
+        	year2.setText("");
+        	month2.setText("");
+        	date2.setText("");
+        	salemanTxt.setText("");
     		Thread t=new Thread(new TreadOfRight());
     		t.start();
     	}

@@ -12,7 +12,7 @@ public class BarginStrategyPO extends PO{
 	private String ID;
 	private ArrayList<CommodityPO> alOfCommodity=new ArrayList<CommodityPO>();//赠品信息数组
 	private double discount;//降价金额
-	private int num;//特价包打包数量
+//	private int num;//特价包打包数量
 	
 	private String StartTime;//开始日期
 	private int LastTime;//策略持续时间（天）
@@ -25,12 +25,12 @@ public class BarginStrategyPO extends PO{
 	public void setDiscount(double discount) {
 		this.discount = discount;
 	}
-	public int getNum() {
-		return num;
-	}
-	public void setNum(int num) {
-		this.num = num;
-	}
+//	public int getNum() {
+//		return num;
+//	}
+//	public void setNum(int num) {
+//		this.num = num;
+//	}
 	public String getStartTime() {
 		return StartTime;
 	}

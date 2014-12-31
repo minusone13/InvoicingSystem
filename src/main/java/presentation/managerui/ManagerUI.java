@@ -198,6 +198,24 @@ public class ManagerUI extends JPanel {
 
 		public void mouseReleased(MouseEvent e) {
 			// TODO Auto-generated method stub
+			//以下面板的编辑面板归位
+			switch(ManagerUI.this.getPanelType()){
+				case JPmanagerStrategy2:
+					ManagerUI.this.getManagerStrategy2().reHome();
+					break;
+				case JPpassBill2:
+					ManagerUI.this.getPassbill2().reHome();
+					break;
+				case BusinessConditionPanel:
+					ManagerUI.this.getBusinessCondition().reHome();
+					break;
+				case BusinessProcessPanel:
+					ManagerUI.this.getBusinessProgress().reHome();
+					break;
+				case SaleDetailPanel:
+					ManagerUI.this.getSaleDetail().reHome();
+					break;
+			}
 			switch(num){
 			case 1:
 				home.setIcon(new ImageIcon("src/image/home1.png"));
@@ -289,12 +307,7 @@ public class ManagerUI extends JPanel {
 				ManagerUI.this.setVisible(false);
 				break;
 			}
-			//以下面板的编辑面板归位
-			ManagerUI.this.getManagerStrategy2().reHome();
-			ManagerUI.this.getPassbill2().reHome();
-			ManagerUI.this.getBusinessCondition().reHome();
-			ManagerUI.this.getBusinessProgress().reHome();
-			ManagerUI.this.getSaleDetail().reHome();
+			
 		}
 
 		public void mouseEntered(MouseEvent e) {

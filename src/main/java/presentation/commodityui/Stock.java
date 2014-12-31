@@ -169,6 +169,18 @@ public class Stock extends JPanel {
 
 		public void mouseReleased(MouseEvent e) {
 			// TODO Auto-generated method stub
+			//以下面板的编辑面板归位
+			switch(Stock.this.getPanelType()){
+				case JPmanageBills2:
+					Stock.this.getManageBills2().reHome();
+					break;
+				case JPManagerComOfStock:
+					Stock.this.getManagerComs().reHome();
+					break;
+				case StockCheckPanel:
+					Stock.this.getStockCheck().reHome();
+					break;
+			}
 			switch(num){
 			case 1:
 				home.setIcon(new ImageIcon("src/image/home1.png"));
@@ -238,10 +250,10 @@ public class Stock extends JPanel {
 				Stock.this.setVisible(false);
 				break;
 			}
-			//以下面板的编辑面板归位
-			Stock.this.getManageBills2().reHome();
-			Stock.this.getManagerComs().reHome();
-			Stock.this.getStockCheck().reHome();
+		
+			
+			
+			
 		}
 
 		public void mouseEntered(MouseEvent e) {

@@ -72,7 +72,8 @@ public class Inquiry {
 			
 			//客户
 			if(isv.getCustomer()!=null) {
-				if(sale.getcustomer().getname().equals(isv.getCustomer())){} 
+				String[] temp2 = isv.getCustomer().split(":");
+				if(sale.getcustomer().getid().equals(temp2[1])){} 
 				else continue;
 			}
 			
@@ -129,7 +130,8 @@ public class Inquiry {
 			
 			//客户
 			if(isv.getCustomer()!=null) {
-				if(saleback.getcustomer().getname().equals(isv.getCustomer())){} 
+				String[] temp2 = isv.getCustomer().split(":");
+				if(saleback.getcustomer().getid().equals(temp2[1])){} 
 				else continue;
 			}
 			//业务员
@@ -264,7 +266,8 @@ public class Inquiry {
 			
 			//客户
 			if(ipv.getCustomer()!=null) {
-				if(sale.getcustomer().getname().equals(ipv.getCustomer())){} 
+				String[] temp2 = ipv.getCustomer().split(":");
+				if(sale.getcustomer().getid().equals(temp2[1])){} 
 				else continue;
 			}
 			
@@ -307,7 +310,8 @@ public class Inquiry {
 				
 				//客户
 				if(ipv.getCustomer()!=null) {
-					if(saleBack.getcustomer().getname().equals(ipv.getCustomer())){} 
+					String[] temp2 = ipv.getCustomer().split(":");
+					if(saleBack.getcustomer().getid().equals(temp2[1])){} 
 					else continue;
 				}
 				
@@ -350,7 +354,8 @@ public class Inquiry {
 				
 				//客户
 				if(ipv.getCustomer()!=null) {
-					if(pur.getcustomer().getname().equals(ipv.getCustomer())){} 
+					String[] temp2 = ipv.getCustomer().split(":");
+					if(pur.getcustomer().getid().equals(temp2[1])){} 
 					else continue;
 				}
 				
@@ -388,7 +393,8 @@ public class Inquiry {
 				
 				//客户
 				if(ipv.getCustomer()!=null) {
-					if(purBack.getcustomer().getname().equals(ipv.getCustomer())){} 
+					String[] temp2 = ipv.getCustomer().split(":");
+					if(purBack.getcustomer().getid().equals(temp2[1])){} 
 					else continue;
 				}
 				

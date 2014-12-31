@@ -71,6 +71,7 @@ public class InitialInfoPanel extends JPanel{
 		box.setForeground(Color.white);
 		box.setBackground(Color.black);
 		
+		if(versions==null) versions = new ArrayList<String>();
 		int size = versions.size();
 		for(int i=0;i<size;i++){
 			box.addItem(versions.get(i));
@@ -84,6 +85,7 @@ public class InitialInfoPanel extends JPanel{
 	public void update(int t) {
 		this.type = t;
 		versions = financial.getVersions();
+		if(versions==null) versions = new ArrayList<String>();
 		int size = versions.size();
 		int num = box.getItemCount();
 		for(int i=0;i<num;i++) box.removeItemAt(0);
@@ -92,10 +94,21 @@ public class InitialInfoPanel extends JPanel{
 		}
 		Object[][] data;
 		switch(type) {
-		case 1: update(versions.get(size-1));
+			
+		case 1: 
+			if(size!=0) update(versions.get(size-1));
+			else {
+				model.setDataVector(new Object[][]{}, nameOfClent);
+				table.updateUI();
+			}
 		pane.setBounds(0, 50, 750, 250);	
 		break;
-		case 2: update(versions.get(size-1));
+		case 2: 
+			if(size!=0) update(versions.get(size-1));
+			else {
+				model.setDataVector(new Object[][]{}, nameOfAccount);
+				table.updateUI();
+			}
 		pane.setBounds(0, 50, 250, 250);
 				break;
 		}

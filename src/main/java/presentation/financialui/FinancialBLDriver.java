@@ -96,17 +96,17 @@ public class FinancialBLDriver {
 //		test.initial();
 //		test.testAlertBillID();
 		
-		testcreatReceipt();
-		testcreatPayment("MAJOR") ;
-		testcreatPayment("M");
-		testcreatCashPayment();
-		
-		testCreateSaleSheet();
-		testCreateSaleBackSheet();
-		testCreatePurSheet();
-		testCreatePurBackSheet();
-		
-		fbs.buildAccount();
+//		testcreatReceipt();
+//		testcreatPayment("MAJOR") ;
+//		testcreatPayment("M");
+//		testcreatCashPayment();
+//		
+//		testCreateSaleSheet();
+//		testCreateSaleBackSheet();
+//		testCreatePurSheet();
+//		testCreatePurBackSheet();
+//		
+		//fbs.buildAccount();
 		
 		/*
 		testgetReceipt();

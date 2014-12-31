@@ -101,6 +101,7 @@ public class CustomerList implements CustomerForFinancial, CustomerBlService{
 			try{
 				CustomerDataService customerdata = (CustomerDataService)Naming.lookup("rmi://"+entrance.Test.ipOfServer+"/CustomerData");
 				ArrayList<CustomerPO> listOfCustomerPO = customerdata.getAllCustomer(address);
+				
 				if(listOfCustomerPO==null) return new ArrayList<CustomerVO>();
 				for(CustomerPO po: listOfCustomerPO){
 					Customer customer = new Customer();
@@ -109,13 +110,14 @@ public class CustomerList implements CustomerForFinancial, CustomerBlService{
 					listOfCustomerVO.add(vo);
 				}
 			}catch(Exception e){
-				System.out.println("getAllCustomer 异常222"+e);
+				System.out.println("Class: CustomerList: line 112 , method: getAllCustomer"+e);
+				e.printStackTrace();
 			}
 			return listOfCustomerVO;
 		}
 
 		public ArrayList<CustomerVO> getCustomer(String address) {
-			ArrayList<CustomerVO> listOfCustomerVO = this.getAllCustomer(address);
+			ArrayList<CustomerVO> listOfCustomerVO = this.getAllCustomer("accountBuild\\customerInfo\\"+address+".ser");
 			return listOfCustomerVO;
 		}
 		
@@ -151,7 +153,8 @@ public class CustomerList implements CustomerForFinancial, CustomerBlService{
 		public void changeShouldPay(String id, double hadPay) {
 			CustomerVO vo = null;
 			vo = this.findCustomer(id);
-			vo.setShouldPay(vo.getShouldPay()-hadPay);
+			double temp =vo.getShouldPay();
+			vo.setShouldPay(temp-hadPay);
 			this.updateCustomer(vo);
 			
 		}//修改应付;对应于收款单;hadpay公司给了客户多少，对应于付款单;
@@ -159,7 +162,8 @@ public class CustomerList implements CustomerForFinancial, CustomerBlService{
 		public void changeShouldTake(String id, double hadGive) {
 			CustomerVO vo = null;
 			vo = this.findCustomer(id);
-			vo.setShouldTake(vo.getShouldTake()-hadGive);
+			double temp =vo.getShouldTake();
+			vo.setShouldTake(temp-hadGive);
 			this.updateCustomer(vo);
 			
 		}//修改应收;对应于收款单;hadtake公司收了客户多少，对应于收款单;

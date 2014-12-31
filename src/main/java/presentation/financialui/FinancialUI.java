@@ -196,6 +196,24 @@ public class FinancialUI extends JPanel {
 
 		public void mouseReleased(MouseEvent e) {
 			// TODO Auto-generated method stub
+			//一下面板的编辑面板归位
+			switch(FinancialUI.this.getPanelType()){
+				case JPmanageBills2:
+					FinancialUI.this.getManageBills2().reHome();
+					break;
+				case JPmanageAccount:
+					FinancialUI.this.getAccount().reHome();
+					break;
+				case BusinessConditionPanel:
+					FinancialUI.this.getBusinessCondition().reHome();
+					break;
+				case BusinessProcessPanel:
+					FinancialUI.this.getBusinessProgress().reHome();
+					break;
+				case SaleDetailPanel:
+					FinancialUI.this.getSaleDetail().reHome();
+					break;
+			}
 			switch(num){
 			case 1:
 				home.setIcon(new ImageIcon("src/image/home1.png"));
@@ -299,15 +317,6 @@ public class FinancialUI extends JPanel {
 				FinancialUI.this.setVisible(false);
 				break;
 			}
-			//一下面板的编辑面板归位
-			FinancialUI.this.getManageBills2().reHome();
-			FinancialUI.this.getAccount().reHome();
-			FinancialUI.this.getBusinessCondition().reHome();
-			FinancialUI.this.getBusinessProgress().reHome();
-			FinancialUI.this.getSaleDetail().reHome();
-			//如果是期初建账 商品界面退出 就把地址set回去
-	
-			
 		}
 
 		public void mouseEntered(MouseEvent e) {
