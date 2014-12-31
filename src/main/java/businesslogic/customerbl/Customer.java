@@ -9,7 +9,7 @@ public class Customer{
 	private int type;//客户类型
 	private String name;//客户的姓名
 	private int level;//客户级别
-	private String id;//客户编号；
+	private String id=null;//客户编号；
 	private String phonenumber;//电话号码
 	private String address;//地址
 	private String postcode;//邮编
@@ -22,12 +22,16 @@ public class Customer{
 	public Customer(){};
 	public Customer(String name){
 		this.name=name;
-		this.aotusetid();
+		//this.aotusetid();
 	}
 	public Customer(CustomerVO vo){
 		this.type=vo.gettype();
 		this.name=vo.getname();
-		this.aotusetid();
+		if(vo.getid()==null){
+			this.aotusetid();
+		}else{
+			this.setid(vo.getid());
+		}
 		this.address=vo.getaddress();
 		this.phonenumber=vo.getphonenumber();
 		this.postcode=vo.getpostcode();
@@ -54,9 +58,12 @@ public class Customer{
 	};
 	
 	public void aotusetid(){
-		CustomerList customerlist = new CustomerList();
-		int nowhas = customerlist.getAllCustomer("Customer.txt").size();
-		this.setid(String.format("%05d", nowhas+1));
+		
+			System.out.println("ID改变");
+			CustomerList customerlist = new CustomerList();
+			int nowhas = customerlist.getAllCustomer("Customer.txt").size();
+			this.setid(String.format("%05d", nowhas+1));
+		
 	}
 	
 	public int getlevel(){

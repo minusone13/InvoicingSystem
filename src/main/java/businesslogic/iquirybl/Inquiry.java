@@ -264,9 +264,7 @@ public class Inquiry {
 			
 			//客户
 			if(ipv.getCustomer()!=null) {
-				String[] temp = ipv.getCustomer().split(":");
-				System.out.println(sale.getcustomer().getid());
-				if(sale.getcustomer().getid().equals(temp[1])){} 
+				if(sale.getcustomer().getname().equals(ipv.getCustomer())){} 
 				else continue;
 			}
 			
@@ -309,9 +307,7 @@ public class Inquiry {
 				
 				//客户
 				if(ipv.getCustomer()!=null) {
-					String[] temp = ipv.getCustomer().split(":");
-					System.out.println(saleBack.getcustomer().getid());
-					if(saleBack.getcustomer().getid().equals(temp[1])){} 
+					if(saleBack.getcustomer().getname().equals(ipv.getCustomer())){} 
 					else continue;
 				}
 				
@@ -392,9 +388,7 @@ public class Inquiry {
 				
 				//客户
 				if(ipv.getCustomer()!=null) {
-					String[] temp = ipv.getCustomer().split(":");
-					System.out.println(purBack.getcustomer().getid());
-					if(purBack.getcustomer().getid().equals(temp[1])){} 
+					if(purBack.getcustomer().getname().equals(ipv.getCustomer())){} 
 					else continue;
 				}
 				

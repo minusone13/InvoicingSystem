@@ -1414,6 +1414,15 @@ public class JPmanageBills2 extends JPanel {
 				this.finalTotalText = finalTotalText;
 			}
 			public void leftMove(){
+				if(style==BillStyle.PurSheet||style==BillStyle.SaleSheet){
+					customerCombo.removeAllItems();
+					
+					ArrayList<CustomerVO> customers = null;
+					customers = customerbl.getAllCustomer("Customer.txt");
+					for(int i=0;i<customers.size();i++){
+						customerCombo.addItem(customers.get(i).getname()+":"+customers.get(i).getid());
+					}
+				}
 				Thread t=new Thread(new TreadOfLeft());
 				t.start();
 			}

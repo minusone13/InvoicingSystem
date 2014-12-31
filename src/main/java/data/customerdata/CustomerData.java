@@ -49,13 +49,11 @@ public class CustomerData extends UnicastRemoteObject implements CustomerDataSer
 	public boolean updateCustomer(CustomerPO po)throws RemoteException {
 		String address = "Customer.txt";
 		ArrayList<CustomerPO> listOfCustomerPO = new ArrayList<CustomerPO>();
-		listOfCustomerPO = this.getAllCustomer(address);
-		System.out.println(po.getid());
+		listOfCustomerPO = this.getAllCustomer(address); 
+		System.out.println("我曾有梦");
 		for(CustomerPO temppo:listOfCustomerPO){
 			if(temppo.getid().equals(po.getid())){
 				listOfCustomerPO.remove(temppo);
-				System.out.println(temppo.getShouldTake());
-				System.out.println(po.getShouldTake());
 				listOfCustomerPO.add(po);
 				this.saveAllCustomer(listOfCustomerPO, address);
 				return true;
