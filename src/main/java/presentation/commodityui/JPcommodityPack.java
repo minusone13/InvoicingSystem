@@ -180,6 +180,7 @@ public class JPcommodityPack extends JPanel {
 						//删除界面层
 						commodities.remove(commodities.get(i));
 						JPmanagerCom.getFrame().getWarning().showWarning("删除成功");//by lhw
+						i--;
 					}
 					else if(rm==RM.alreadyHaveUnremoveableContents){//modified by lhw
 						JPmanagerCom.getFrame().getWarning().showWarning("删除失败，已有进出记录");
@@ -193,9 +194,6 @@ public class JPcommodityPack extends JPanel {
 					else{
 						JPmanagerCom.getFrame().getWarning().showWarning(WarningText.unknownerror);
 					}//end of lhw's modify
-					
-				
-					i--;
 				}
 			}
 			update();

@@ -129,89 +129,94 @@ public class Login extends JPanel {
 		if(legal){
 			UserVO userVO=userService.login(userName,passWords);
 			if(userVO!=null){
-				System.out.println("登录的是："+userVO.getR());
-				//将当前操作员信息赋值给当前登录面板的静态变量
-				user=userVO;
-				//传给逻辑层
-				stockbl.setUser(userVO);
-				//切换面板
-				switch(userVO.getR()){
-				case ADMINISTRATOR:
-					Login.this.setVisible(false);
-					frame.getAdmin().getManageUser().getBillsList().getJPbillList().clear();
-					frame.getAdmin().getManageUser().getBillsList().reHome();
-					frame.getAdmin().getManageUser().getBillsList().addUserList(userService.showUsers());
-					frame.getAdmin().setVisible(true);
-					break;
-				case FINANCIAL_STAFF:
-				case FINANCIAL_MANAGER:
-					frame.getFinancial().getManageBills1().setVisible(false);
-					frame.getFinancial().getManageBills2().setVisible(false);
-					frame.getFinancial().getInquire().setVisible(false);
-					frame.getFinancial().getAccount().setVisible(false);
-					frame.getFinancial().getAccountBuild().setVisible(false);
-					frame.getFinancial().getBusinessCondition().setVisible(false);
-					frame.getFinancial().getBusinessProgress().setVisible(false);
-					frame.getFinancial().getSaleDetail().setVisible(false);
-					frame.getFinancial().getAccountInfomation().setVisible(false);
-					frame.getFinancial().getSystemRecord().setVisible(false);
-					frame.getFinancial().getAccountOfComs().setVisible(false);
-					frame.getFinancial().getFunction().setVisible(true);
-					Login.this.setVisible(false);
-					frame.getFinancial().setVisible(true);
-					//标记当前面板，用于后退按钮
-					frame.getFinancial().setPanelType(PanelType.JPfunction);
-					break;
-				case MANAGER:
-					frame.getManager().getPassbill1().setVisible(false);
-					frame.getManager().getPassbill2().setVisible(false);
-					frame.getManager().getManagerStrategy1().setVisible(false);
-					frame.getManager().getManagerStrategy2().setVisible(false);
-					frame.getManager().getInquire().setVisible(false);
-					frame.getManager().getBusinessCondition().setVisible(false);
-					frame.getManager().getBusinessProgress().setVisible(false);
-					frame.getManager().getSaleDetail().setVisible(false);
-					frame.getManager().getCommodityChoose().setVisible(false);
-					frame.getManager().getSystemRecord().setVisible(false);
-					frame.getManager().getFunction().setVisible(true);
-					Login.this.setVisible(false);
-					frame.getManager().setVisible(true);
-					//标记当前面板，用于后退按钮
-					frame.getManager().setPanelType(PanelType.JPfunction);
-					break;
-				case STOCK_STAFF:
-					
-					StubCommodityBlService stockbl = new StubStockController();//added by lhw
-					stockbl.setUser(user);//added by lhw
-					frame.getStock().getManageBills().setVisible(false);
-					frame.getStock().getManageBills2().setVisible(false);
-					frame.getStock().getManagerComs().setVisible(false);
-					frame.getStock().getChoseComs().setVisible(false);
-					frame.getStock().getStockShow().setVisible(false);
-					frame.getStock().getStockTack().setVisible(false);
-					frame.getStock().getStockCheck().setVisible(false);
-					frame.getStock().getFunction().setVisible(true);
-					frame.getStock().setVisible(true);
-					Login.this.setVisible(false);
-					//标记当前面板，用于后退按钮
-					frame.getStock().setPanelType(PanelType.JPfunction);
-					break;
-				case PURCHASE_SALE_STAFF:
-				case PURCHASE_SALE_MANAGER:
-					frame.getSale().getManageBills1().setVisible(false);
-					frame.getSale().getManageBills2().setVisible(false);
-					frame.getSale().getCustomerManage().setVisible(false);
-					frame.getSale().getChoseComs().setVisible(false);
-					frame.getSale().getFunction().setVisible(true);
-					frame.getSale().setVisible(true);
-					Login.this.setVisible(false);
-					//标记当前面板，用于后退按钮
-					frame.getSale().setPanelType(PanelType.JPfunction);
-					break;
+				if(userVO.isAuthorized()){//判断该用户是否被管理员授权
+					System.out.println("登录的是："+userVO.getR());
+					//将当前操作员信息赋值给当前登录面板的静态变量
+					user=userVO;
+					//传给逻辑层
+					stockbl.setUser(userVO);
+					//切换面板
+					switch(userVO.getR()){
+					case ADMINISTRATOR:
+						Login.this.setVisible(false);
+						frame.getAdmin().getManageUser().getBillsList().getJPbillList().clear();
+						frame.getAdmin().getManageUser().getBillsList().reHome();
+						frame.getAdmin().getManageUser().getBillsList().addUserList(userService.showUsers());
+						frame.getAdmin().setVisible(true);
+						break;
+					case FINANCIAL_STAFF:
+					case FINANCIAL_MANAGER:
+						frame.getFinancial().getManageBills1().setVisible(false);
+						frame.getFinancial().getManageBills2().setVisible(false);
+						frame.getFinancial().getInquire().setVisible(false);
+						frame.getFinancial().getAccount().setVisible(false);
+						frame.getFinancial().getAccountBuild().setVisible(false);
+						frame.getFinancial().getBusinessCondition().setVisible(false);
+						frame.getFinancial().getBusinessProgress().setVisible(false);
+						frame.getFinancial().getSaleDetail().setVisible(false);
+						frame.getFinancial().getAccountInfomation().setVisible(false);
+						frame.getFinancial().getSystemRecord().setVisible(false);
+						frame.getFinancial().getAccountOfComs().setVisible(false);
+						frame.getFinancial().getFunction().setVisible(true);
+						Login.this.setVisible(false);
+						frame.getFinancial().setVisible(true);
+						//标记当前面板，用于后退按钮
+						frame.getFinancial().setPanelType(PanelType.JPfunction);
+						break;
+					case MANAGER:
+						frame.getManager().getPassbill1().setVisible(false);
+						frame.getManager().getPassbill2().setVisible(false);
+						frame.getManager().getManagerStrategy1().setVisible(false);
+						frame.getManager().getManagerStrategy2().setVisible(false);
+						frame.getManager().getInquire().setVisible(false);
+						frame.getManager().getBusinessCondition().setVisible(false);
+						frame.getManager().getBusinessProgress().setVisible(false);
+						frame.getManager().getSaleDetail().setVisible(false);
+						frame.getManager().getCommodityChoose().setVisible(false);
+						frame.getManager().getSystemRecord().setVisible(false);
+						frame.getManager().getFunction().setVisible(true);
+						Login.this.setVisible(false);
+						frame.getManager().setVisible(true);
+						//标记当前面板，用于后退按钮
+						frame.getManager().setPanelType(PanelType.JPfunction);
+						break;
+					case STOCK_STAFF:
+						
+						StubCommodityBlService stockbl = new StubStockController();//added by lhw
+						stockbl.setUser(user);//added by lhw
+						frame.getStock().getManageBills().setVisible(false);
+						frame.getStock().getManageBills2().setVisible(false);
+						frame.getStock().getManagerComs().setVisible(false);
+						frame.getStock().getChoseComs().setVisible(false);
+						frame.getStock().getStockShow().setVisible(false);
+						frame.getStock().getStockTack().setVisible(false);
+						frame.getStock().getStockCheck().setVisible(false);
+						frame.getStock().getFunction().setVisible(true);
+						frame.getStock().setVisible(true);
+						Login.this.setVisible(false);
+						//标记当前面板，用于后退按钮
+						frame.getStock().setPanelType(PanelType.JPfunction);
+						break;
+					case PURCHASE_SALE_STAFF:
+					case PURCHASE_SALE_MANAGER:
+						frame.getSale().getManageBills1().setVisible(false);
+						frame.getSale().getManageBills2().setVisible(false);
+						frame.getSale().getCustomerManage().setVisible(false);
+						frame.getSale().getChoseComs().setVisible(false);
+						frame.getSale().getFunction().setVisible(true);
+						frame.getSale().setVisible(true);
+						Login.this.setVisible(false);
+						//标记当前面板，用于后退按钮
+						frame.getSale().setPanelType(PanelType.JPfunction);
+						break;
+					}
+					//清除文本框内容
+					username.setText("");
+					passwords.setText("");
 				}
-				//清除文本框内容
-				username.setText("");
-				passwords.setText("");
+				else{
+					frame.getWarning().showWarning("用户未授权");
+				}
 			}
 			else{
 				frame.getWarning().showWarning("用户名或密码错误，请重新输入");

@@ -87,7 +87,6 @@ public class JPtreeContent extends JPanel {
 				StubCommodityList.user.getR()!=Role.FINANCIAL_STAFF
 				&&StubCommodityList.user.getR()!=Role.FINANCIAL_MANAGER){
 			stockbl.setFilePath("Stock.ser");
-			System.out.println("还原");
 		}
         ArrayList<StockVO> stockList=stockbl.openCategory("1");
         if(stockList.size()!=0){
@@ -184,6 +183,10 @@ public class JPtreeContent extends JPanel {
         	RM rm=stockbl.updateCategory(vo,modifyNode.getUserObject().toString());
         	if(rm==RM.done){
         		JPmanagerCom.getFrame().getWarning().showWarning("修改成功");
+        	}
+        	else if(rm==RM.redundance){
+        		JPmanagerCom.getFrame().getWarning().showWarning("已有分类，修改失败");
+        		modifyNode.setUserObject(vo.getName());
         	}
         	else if(rm==RM.unknownerror){ 
         		JPmanagerCom.getFrame().getWarning().showWarning(WarningText.unknownerror); 
