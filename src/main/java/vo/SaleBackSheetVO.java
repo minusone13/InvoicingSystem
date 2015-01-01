@@ -6,7 +6,7 @@ import java.util.Date;
 import po.BillState;
 import po.BillStyle;
 import vo.stockvo.CommodityVO;
-import businesslogic.commoditybl.Commodity;
+import businesslogic.commoditybl.MockCommodity;
 import businesslogic.customerbl.Customer;
 
 

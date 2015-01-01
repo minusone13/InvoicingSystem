@@ -43,7 +43,8 @@ import businesslogicservice.financialblservice.FinancialBlService;
 import businesslogicservice.managerblservice.StubManagerBlService;
 import businesslogicservice.salebillblservice.SaleBillBlService;
 import businesslogicservice.userblservice.StubUserBlService;
-import dataservice.commoditydataservice.CommodityDataService;
+import data.commoditydata.StubStockDataController;
+import dataservice.commoditydataservice.StubCommodityDataService;
 import entrance.Frame;
 
 public class JPBillList extends JPanel {
@@ -86,7 +87,7 @@ public class JPBillList extends JPanel {
 		StockManagerDriver smd=new StockManagerDriver();
 		try
 		{
-			smd.start(stockbl,(CommodityDataService)Naming.lookup("rmi://"+entrance.Test.ipOfServer+"/StubStockDataController"));
+			smd.start(stockbl,(StubCommodityDataService)Naming.lookup("rmi://"+entrance.Test.ipOfServer+"/StubStockDataController"));
 		}
 		catch (MalformedURLException e)
 		{

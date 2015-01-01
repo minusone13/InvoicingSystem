@@ -8,7 +8,7 @@ import businesslogicservice.commodityblservice.*;
 public class StockManagerDriver {
 	StubCommodityBlService combl;
 	
-	public void start(StubCommodityBlService combl,CommodityDataService comdata){
+	public void start(StubCommodityBlService combl,StubCommodityDataService comdata){
 		this.combl=combl;
 		combl.setdataobject(comdata);
 	}

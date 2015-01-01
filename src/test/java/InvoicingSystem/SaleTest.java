@@ -12,7 +12,7 @@ import vo.PurSheetVO;
 import vo.SaleBackSheetVO;
 import vo.SaleSheetVO;
 import vo.stockvo.CommodityVO;
-import businesslogic.commoditybl.Commodity;
+import businesslogic.commoditybl.MockCommodity;
 import businesslogic.customerbl.Customer;
 import businesslogic.customerbl.CustomerList;
 import businesslogic.salebillbl.salebillController;

@@ -10,7 +10,7 @@ import po.Role;
 import po.stockpo.CategoryPO;
 import presentation.commodityui.StockManagerDriver;
 import presentation.userui.UserDriver;
-import data.commoditydata.StockDataController;
+import data.commoditydata.StubStockDataController;
 import data.initial.Initial;
 import data.userdata.UserDataController;
 import vo.stockvo.CategoryVO;

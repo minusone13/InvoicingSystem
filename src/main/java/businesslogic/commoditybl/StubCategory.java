@@ -3,7 +3,7 @@ package businesslogic.commoditybl;
 import po.stockpo.*;
 import vo.stockvo.*;
 
-public class Category
+public class StubCategory
 {
 	String id;
 	String parent;// the ID of parent Category
@@ -29,17 +29,17 @@ public class Category
 		this.name = name;
 	}
 
-	public Category()
+	public StubCategory()
 	{}
 
-	public Category(CategoryVO vo)
+	public StubCategory(CategoryVO vo)
 	{
 		parent = vo.getParent();
 		name = vo.getName();
 		id = parent + "\\" + name;
 	}
 
-	public Category(CategoryPO po)
+	public StubCategory(CategoryPO po)
 	{
 		parent = po.getParent();
 		name = po.getName();

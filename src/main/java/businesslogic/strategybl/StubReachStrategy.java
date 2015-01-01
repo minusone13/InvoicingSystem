@@ -12,7 +12,7 @@ import po.stockpo.CommodityPO;
 import vo.ReachStrategyVO;
 import vo.stockvo.CommodityVO;
 import businesslogic.GetVOandPO;
-import businesslogic.commoditybl.Commodity;
+import businesslogic.commoditybl.MockCommodity;
 
 public class StubReachStrategy implements GetVOandPO{
 
@@ -22,7 +22,7 @@ public class StubReachStrategy implements GetVOandPO{
 	private String ID;
 	private double Limit;//消费金额下限
 	
-	private ArrayList<Commodity> alOfCommodity=new ArrayList<Commodity>();//赠品信息数组
+	private ArrayList<MockCommodity> alOfCommodity=new ArrayList<MockCommodity>();//赠品信息数组
 	private double couponrate;//赠送代金券的比例
 	
 	private String StartTime;//开始日期
@@ -122,9 +122,9 @@ public class StubReachStrategy implements GetVOandPO{
 	}
 
 	public void setPO(ReachStrategyPO po){
-		ArrayList<Commodity> temp=new ArrayList<Commodity>();//用于临时转换
+		ArrayList<MockCommodity> temp=new ArrayList<MockCommodity>();//用于临时转换
 		for(int i=0;i<po.getAlOfCommodity().size();i++){
-			temp.add(new Commodity(po.getAlOfCommodity().get(i)));
+			temp.add(new MockCommodity(po.getAlOfCommodity().get(i)));
 		}
 		this.setID(po.getID());
 		this.setAlOfCommodity(temp);
@@ -144,11 +144,11 @@ public class StubReachStrategy implements GetVOandPO{
 		ID = iD;
 	}
 
-	public ArrayList<Commodity> getAlOfCommodity() {
+	public ArrayList<MockCommodity> getAlOfCommodity() {
 		return alOfCommodity;
 	}
 
-	public void setAlOfCommodity(ArrayList<Commodity> alOfCommodity) {
+	public void setAlOfCommodity(ArrayList<MockCommodity> alOfCommodity) {
 		this.alOfCommodity = alOfCommodity;
 	}
 

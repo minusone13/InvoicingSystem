@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import po.stockpo.CommodityPO;
-import businesslogic.commoditybl.Commodity;
+import businesslogic.commoditybl.MockCommodity;
 import businesslogic.customerbl.Customer;
 
 

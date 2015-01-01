@@ -34,7 +34,7 @@ public interface StubCommodityBlService
 
 	public RM updateCategory(CategoryVO vo, String newName);// 分类只可修改名称
 
-	public void setdataobject(CommodityDataService comdata);
+	public void setdataobject(StubCommodityDataService comdata);
 
 	public ArrayList<StockVO> openCategory(String id);// root category's ID
 														// is"1"。

@@ -15,7 +15,7 @@ import java.util.Date;
 
 import po.AccountPO;
 import po.Tool;
-import data.commoditydata.StockDataController;
+import data.commoditydata.StubStockDataController;
 import data.customerServiceForFinancial.customerServiceForFinancial;
 import data.customerdata.CustomerData;
 import data.stockservice.StockDataForFinancial;
@@ -47,7 +47,7 @@ public class AccountBuild extends UnicastRemoteObject implements AccountBuildSer
 		StockDataForFinancial sd = null;
 		try
 		{
-			sd = StockDataController.getInstance();
+			sd = StubStockDataController.getInstance();
 		}
 		catch (RemoteException e)
 		{

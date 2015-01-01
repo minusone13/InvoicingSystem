@@ -3,7 +3,7 @@ package po;
 import java.util.ArrayList;
 
 import po.stockpo.CommodityPO;
-import businesslogic.commoditybl.Commodity;
+import businesslogic.commoditybl.MockCommodity;
 
 public class BarginStrategyPO extends PO{
 

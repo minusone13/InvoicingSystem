@@ -13,8 +13,8 @@ import po.RM;
 import po.ReachStrategyPO;
 import po.ReachStrategyStyle;
 import presentation.userui.Login;
-import businesslogic.commoditybl.Commodity;
-import businesslogic.commoditybl.CommodityListbl;
+import businesslogic.commoditybl.MockCommodity;
+import businesslogic.commoditybl.StubCommodityList;
 import businesslogic.stockmanagerbl.StubStockController;
 import businesslogic.stockservice.StockBlForManager;
 import businesslogic.userbl.OperationRecord;
@@ -98,7 +98,7 @@ public class StubStrategyPool {
 		for(int i=0;i<alOfLevelStrategy.size();i++){
 			if(alOfLevelStrategy.get(i).getID().equals(ID)){
 				//保存记录
-				userService.addRecord(new OperationRecord(CommodityListbl.user,"删除客户策略:"+ID,RM.done));
+				userService.addRecord(new OperationRecord(StubCommodityList.user,"删除客户策略:"+ID,RM.done));
 				alOfLevelStrategy.remove(i);
 				break;
 			}
@@ -113,7 +113,7 @@ public class StubStrategyPool {
 		for(int i=0;i<alOfBarginStrategy.size();i++){
 			if(alOfBarginStrategy.get(i).getID().equals(ID)){
 				//保存记录
-				userService.addRecord(new OperationRecord(CommodityListbl.user,"删除特价包策略:"+ID,RM.done));
+				userService.addRecord(new OperationRecord(StubCommodityList.user,"删除特价包策略:"+ID,RM.done));
 				alOfBarginStrategy.remove(i);
 				break;
 			}
@@ -128,7 +128,7 @@ public class StubStrategyPool {
 		for(int i=0;i<alOfReachStrategy.size();i++){
 			if(alOfReachStrategy.get(i).getID().equals(ID)){
 				//保存记录
-				userService.addRecord(new OperationRecord(CommodityListbl.user,"删除满额促销策略:"+ID,RM.done));
+				userService.addRecord(new OperationRecord(StubCommodityList.user,"删除满额促销策略:"+ID,RM.done));
 				alOfReachStrategy.remove(i);
 				break;
 			}
@@ -138,7 +138,7 @@ public class StubStrategyPool {
 		this.save();
 	}
 	/*需要制定一个赠送赠品的客户分层策略*/
-	public void addGiftLevelStrategy (int level,double Limit,ArrayList<Commodity> gift,String StartTime,int LastTime){
+	public void addGiftLevelStrategy (int level,double Limit,ArrayList<MockCommodity> gift,String StartTime,int LastTime){
 		read();
 		StubLevelStrategy ls=new StubLevelStrategy();
 		ls.setLevel_strategy_style(LevelStrategyStyle.Gift);
@@ -149,7 +149,7 @@ public class StubStrategyPool {
 		ls.setLastTime(LastTime);
 		alOfLevelStrategy.add(ls);
 		//保存记录
-		userService.addRecord(new OperationRecord(CommodityListbl.user,"新增客户策略:"+ls.getID(),RM.done));
+		userService.addRecord(new OperationRecord(StubCommodityList.user,"新增客户策略:"+ls.getID(),RM.done));
 		//保存
 		this.save();
 	}
@@ -164,7 +164,7 @@ public class StubStrategyPool {
 		ls.setLastTime(LastTime);
 		alOfLevelStrategy.add(ls);
 		//保存记录
-		userService.addRecord(new OperationRecord(CommodityListbl.user,"新增客户策略:"+ls.getID(),RM.done));
+		userService.addRecord(new OperationRecord(StubCommodityList.user,"新增客户策略:"+ls.getID(),RM.done));
 		//保存
 		this.save();
 	}
@@ -179,12 +179,12 @@ public class StubStrategyPool {
 		ls.setLastTime(LastTime);
 		alOfLevelStrategy.add(ls);
 		//保存记录
-		userService.addRecord(new OperationRecord(CommodityListbl.user,"新增客户策略:"+ls.getID(),RM.done));
+		userService.addRecord(new OperationRecord(StubCommodityList.user,"新增客户策略:"+ls.getID(),RM.done));
 		//保存
 		this.save();
 	}
 	/*需要制定一条特价包促销策略*/
-	public void addBarginStrategy (ArrayList<Commodity> bargin,double discount,String StartTime,int LastTime){
+	public void addBarginStrategy (ArrayList<MockCommodity> bargin,double discount,String StartTime,int LastTime){
 		read();
 		StubBarginStrategy bs=new StubBarginStrategy();
 		bs.setAlOfCommodity(bargin);
@@ -194,14 +194,14 @@ public class StubStrategyPool {
 		bs.setLastTime(LastTime);
 		alOfBarginStrategy.add(bs);
 		//保存记录
-		userService.addRecord(new OperationRecord(CommodityListbl.user,"新增特价包策略:"+bs.getID(),RM.done));
+		userService.addRecord(new OperationRecord(StubCommodityList.user,"新增特价包策略:"+bs.getID(),RM.done));
 		//保存
 		this.save();
 //		//同时生成特价包
 //		stockbl.addPack(bargin, num, discount);
 	}
 	/*需要制定一条赠送赠品的满额促销策略*/
-	public void addReachStrategy (double Limit,ArrayList<Commodity> gift,String StartTime,int LastTime){
+	public void addReachStrategy (double Limit,ArrayList<MockCommodity> gift,String StartTime,int LastTime){
 		read();
 		StubReachStrategy rs=new StubReachStrategy();
 		rs.setReach_strategy_style(ReachStrategyStyle.Gift);
@@ -211,7 +211,7 @@ public class StubStrategyPool {
 		rs.setLastTime(LastTime);
 		alOfReachStrategy.add(rs);
 		//保存记录
-		userService.addRecord(new OperationRecord(CommodityListbl.user,"新增满额促销策略:"+rs.getID(),RM.done));
+		userService.addRecord(new OperationRecord(StubCommodityList.user,"新增满额促销策略:"+rs.getID(),RM.done));
 		//保存
 		this.save();
 	}
@@ -226,7 +226,7 @@ public class StubStrategyPool {
 		rs.setLastTime(LastTime);
 		alOfReachStrategy.add(rs);
 		//保存记录
-		userService.addRecord(new OperationRecord(CommodityListbl.user,"新增满额促销策略:"+rs.getID(),RM.done));
+		userService.addRecord(new OperationRecord(StubCommodityList.user,"新增满额促销策略:"+rs.getID(),RM.done));
 		//保存
 		this.save();
 	}

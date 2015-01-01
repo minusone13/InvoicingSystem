@@ -10,7 +10,7 @@ import java.util.Date;
 import po.BillState;
 import po.stockpo.CategoryPO;
 import presentation.commodityui.StockManagerDriver;
-import dataservice.commoditydataservice.CommodityDataService;
+import dataservice.commoditydataservice.StubCommodityDataService;
 import vo.PurBackSheetVO;
 import vo.PurSheetVO;
 import vo.SaleBackSheetVO;
@@ -48,10 +48,10 @@ public class FinancialBLDriver {
 		//initial.initialAll();
 		controller = new StubStockController();
 		pool = controller.getPool();
-		CommodityDataService data = null;
+		StubCommodityDataService data = null;
 		try
 		{
-			data = (CommodityDataService)Naming.lookup("rmi://127.0.0.1:1099/StubStockDataController");
+			data = (StubCommodityDataService)Naming.lookup("rmi://127.0.0.1:1099/StubStockDataController");
 		}
 		catch (MalformedURLException e)
 		{
@@ -120,10 +120,10 @@ public class FinancialBLDriver {
 	{
 		//Initial initial=new Initial();
 		//initial.initialAll();
-		CommodityDataService data = null;
+		StubCommodityDataService data = null;
 		try
 		{
-			data = (CommodityDataService)Naming.lookup("rmi://127.0.0.1:1099/StubStockDataController.getInstance()");
+			data = (StubCommodityDataService)Naming.lookup("rmi://127.0.0.1:1099/StubStockDataController.getInstance()");
 		}
 		catch (MalformedURLException e)
 		{

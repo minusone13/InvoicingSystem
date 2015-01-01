@@ -28,10 +28,10 @@ import vo.SpillsLossBillVO;
 import vo.financialBillVO.CashPaymentVO;
 import vo.financialBillVO.PaymentVO;
 import vo.financialBillVO.ReceiptVO;
-import businesslogic.commoditybillbl.AlertBill;
-import businesslogic.commoditybillbl.GiftBill;
-import businesslogic.commoditybillbl.SpillsLossBill;
-import businesslogic.commoditybl.Commodity;
+import businesslogic.commoditybillbl.StubAlertBill;
+import businesslogic.commoditybillbl.StubGiftBill;
+import businesslogic.commoditybillbl.StubSpillsLossBill;
+import businesslogic.commoditybl.MockCommodity;
 import businesslogic.customerbl.Customer;
 import businesslogic.financialbillbl.CashPaymentBill;
 import businesslogic.financialbillbl.Item;
@@ -50,9 +50,9 @@ public class StubBillPool {
 
 
 
-	private static ArrayList<GiftBill> alOfGiftBill=new ArrayList<GiftBill>();//change these 3 bill list to static to avoid a bug by lhw
-	private static ArrayList<SpillsLossBill> alOfSpillsLossBill=new ArrayList<SpillsLossBill>();
-	private static ArrayList<AlertBill> alOfAlertBill=new ArrayList<AlertBill>();
+	private static ArrayList<StubGiftBill> alOfGiftBill=new ArrayList<StubGiftBill>();//change these 3 bill list to static to avoid a bug by lhw
+	private static ArrayList<StubSpillsLossBill> alOfSpillsLossBill=new ArrayList<StubSpillsLossBill>();
+	private static ArrayList<StubAlertBill> alOfAlertBill=new ArrayList<StubAlertBill>();
 	private ArrayList<PurSheet> alOfPurSheet=new ArrayList<PurSheet>();
 	private ArrayList<PurBackSheet> alOfPurBackSheet=new ArrayList<PurBackSheet>();
 	private ArrayList<SaleSheet> alOfSaleSheet=new ArrayList<SaleSheet>();
@@ -77,21 +77,21 @@ public class StubBillPool {
 	}
 	
 	/*需要向单据池中加入一张库存赠送单*/
-	public void add (GiftBill gb){
+	public void add (StubGiftBill gb){
 		read();
 		alOfGiftBill.add(gb);
 		//保存
 		this.save();
 	}
 	/*需要向单据池中加入一张报溢/报损单*/
-	public void add (SpillsLossBill spb){
+	public void add (StubSpillsLossBill spb){
 		read();
 		alOfSpillsLossBill.add(spb);
 		//保存
 		this.save();
 	}
 	/*需要向单据池中加入一张库存报警单*/
-	public void add (AlertBill ab){
+	public void add (StubAlertBill ab){
 		//read();deleted by lhw
 		alOfAlertBill.add(ab);
 		//保存
@@ -147,11 +147,11 @@ public class StubBillPool {
 		this.save();
 	}
 	/*需要从单据池筛选指定状态的所有赠送单*/
-	public ArrayList<GiftBill> getGiftBill (BillState st){
+	public ArrayList<StubGiftBill> getGiftBill (BillState st){
 		read();
-		ArrayList<GiftBill> result=new ArrayList<GiftBill>();//用于储存返回的单据
+		ArrayList<StubGiftBill> result=new ArrayList<StubGiftBill>();//用于储存返回的单据
 		//遍历池中制定单据数组
-		for(GiftBill temp:alOfGiftBill){
+		for(StubGiftBill temp:alOfGiftBill){
 			if(temp.getState()==st){//如果单据状态符合筛选状态
 				result.add(temp);
 			}
@@ -159,11 +159,11 @@ public class StubBillPool {
 		return result;	
 	}
 	/*需要从单据池筛选指定状态的所有报溢/报损单*/
-	public ArrayList<SpillsLossBill> getSpillsLossBill (BillState st){
+	public ArrayList<StubSpillsLossBill> getSpillsLossBill (BillState st){
 		read();
-		ArrayList<SpillsLossBill> result=new ArrayList<SpillsLossBill>();//用于储存返回的单据
+		ArrayList<StubSpillsLossBill> result=new ArrayList<StubSpillsLossBill>();//用于储存返回的单据
 		//遍历池中制定单据数组
-		for(SpillsLossBill temp:alOfSpillsLossBill){
+		for(StubSpillsLossBill temp:alOfSpillsLossBill){
 			if(temp.getState()==st){//如果单据状态符合筛选状态
 				result.add(temp);
 			}
@@ -173,11 +173,11 @@ public class StubBillPool {
 		
 	}
 	/*需要从单据池筛选指定状态的所有库存报警单*/
-	public ArrayList<AlertBill> getAlertBill (BillState st){
+	public ArrayList<StubAlertBill> getAlertBill (BillState st){
 		read();
-		ArrayList<AlertBill> result=new ArrayList<AlertBill>();//用于储存返回的单据
+		ArrayList<StubAlertBill> result=new ArrayList<StubAlertBill>();//用于储存返回的单据
 		//遍历池中制定单据数组
-		for(AlertBill temp:alOfAlertBill){
+		for(StubAlertBill temp:alOfAlertBill){
 			if(temp.getState()==st){//如果单据状态符合筛选状态
 				result.add(temp);
 			}
@@ -280,17 +280,17 @@ public class StubBillPool {
 		return result;
 	}
 	/*获取单据池所有赠送单*/
-	public ArrayList<GiftBill> getGiftBill (){
+	public ArrayList<StubGiftBill> getGiftBill (){
 		read();
 		return alOfGiftBill;	
 	}
 	/*获取单据池的所有报溢/报损单*/
-	public ArrayList<SpillsLossBill> getSpillsLossBill (){
+	public ArrayList<StubSpillsLossBill> getSpillsLossBill (){
 		read();
 		return alOfSpillsLossBill;
 	}
 	/*获取单据池的所有库存报警单*/
-	public ArrayList<AlertBill> getAlertBill (){
+	public ArrayList<StubAlertBill> getAlertBill (){
 		//read();deleted by lhw
 		return alOfAlertBill;
 	}
@@ -337,9 +337,9 @@ public class StubBillPool {
 				//进行修改
 				//修改赠品
 				//转换vo成商品数组
-				ArrayList<Commodity> gift=new ArrayList<Commodity>();
+				ArrayList<MockCommodity> gift=new ArrayList<MockCommodity>();
 				for(int j=0;j<gb.getComs().size();j++){
-					gift.add(new Commodity(gb.getComs().get(j)));
+					gift.add(new MockCommodity(gb.getComs().get(j)));
 				}
 				//进行修改
 				alOfGiftBill.get(i).setComs(gift);
@@ -356,7 +356,7 @@ public class StubBillPool {
 			if(alOfSpillsLossBill.get(i).getID().equals(slb.getID())){//寻找相同编号
 				//进行修改
 				//修改报溢报损的商品数量
-				alOfSpillsLossBill.get(i).setCom(new Commodity(slb.getCom()));
+				alOfSpillsLossBill.get(i).setCom(new MockCommodity(slb.getCom()));
 				//修改操作员
 				alOfSpillsLossBill.get(i).setOperator(slb.getOperator());
 				//修改完毕
@@ -389,9 +389,9 @@ public class StubBillPool {
 				//修改操作员
 				alOfPurSheet.get(i).setop(ps.getop());
 				//修改商品清单
-				ArrayList<Commodity> temp=new ArrayList<Commodity>();
+				ArrayList<MockCommodity> temp=new ArrayList<MockCommodity>();
 				for(int j=0;j<ps.getsheet().size();j++){
-					temp.add(new Commodity(ps.getsheet().get(j)));
+					temp.add(new MockCommodity(ps.getsheet().get(j)));
 				}
 				alOfPurSheet.get(i).setsheet(temp);
 				//修改总金额
@@ -417,9 +417,9 @@ public class StubBillPool {
 				//修改操作员
 				alOfPurBackSheet.get(i).setop(pbs.getop());
 				//修改商品清单
-				ArrayList<Commodity> temp=new ArrayList<Commodity>();
+				ArrayList<MockCommodity> temp=new ArrayList<MockCommodity>();
 				for(int j=0;j<pbs.getsheet().size();j++){
-					temp.add(new Commodity(pbs.getsheet().get(j)));
+					temp.add(new MockCommodity(pbs.getsheet().get(j)));
 				}
 				alOfPurBackSheet.get(i).setsheet(temp);
 				//修改总金额
@@ -445,9 +445,9 @@ public class StubBillPool {
 				//修改操作员
 				alOfSaleSheet.get(i).setop(ss.getop());
 				//修改商品清单
-				ArrayList<Commodity> temp=new ArrayList<Commodity>();
+				ArrayList<MockCommodity> temp=new ArrayList<MockCommodity>();
 				for(int j=0;j<ss.getsheet().size();j++){
-					temp.add(new Commodity(ss.getsheet().get(j)));
+					temp.add(new MockCommodity(ss.getsheet().get(j)));
 				}
 				alOfSaleSheet.get(i).setsheet(temp);
 				//修改总金额
@@ -479,9 +479,9 @@ public class StubBillPool {
 				//修改操作员
 				alOfSaleBackSheet.get(i).setop(sbs.getop());
 				//修改商品清单
-				ArrayList<Commodity> temp=new ArrayList<Commodity>();
+				ArrayList<MockCommodity> temp=new ArrayList<MockCommodity>();
 				for(int j=0;j<sbs.getsheet().size();j++){
-					temp.add(new Commodity(sbs.getsheet().get(j)));
+					temp.add(new MockCommodity(sbs.getsheet().get(j)));
 				}
 				alOfSaleBackSheet.get(i).setsheet(temp);
 				//修改总金额
@@ -704,7 +704,7 @@ public class StubBillPool {
 		}
 		if(GiftBillListPO!=null){
 			for(GiftBillPO tempPO:GiftBillListPO){
-				GiftBill gb=new GiftBill();
+				StubGiftBill gb=new StubGiftBill();
 				gb.setPO(tempPO);
 				alOfGiftBill.add(gb);
 			}
@@ -731,7 +731,7 @@ public class StubBillPool {
 		}
 		if(AlertBillListPO!=null){
 			for(AlertBillPO tempPO:AlertBillListPO){
-				AlertBill ab=new AlertBill();
+				StubAlertBill ab=new StubAlertBill();
 				ab.setPO(tempPO);
 				alOfAlertBill.add(ab);
 			}
@@ -758,7 +758,7 @@ public class StubBillPool {
 		}
 		if(SpillsLossBillListPO!=null){
 			for(SpillsLossBillPO tempPO:SpillsLossBillListPO){
-				SpillsLossBill slb=new SpillsLossBill();
+				StubSpillsLossBill slb=new StubSpillsLossBill();
 				slb.setPO(tempPO);
 				alOfSpillsLossBill.add(slb);
 			}
@@ -1014,7 +1014,7 @@ public class StubBillPool {
 		
 		//赠送单
 		ArrayList<GiftBillPO> GiftBillPO=new ArrayList<GiftBillPO>();
-		for(GiftBill temp:alOfGiftBill){//遍历数组，将对应PO对象加到新数组中
+		for(StubGiftBill temp:alOfGiftBill){//遍历数组，将对应PO对象加到新数组中
 			GiftBillPO.add(temp.getPO());
 		}
 		try {
@@ -1024,7 +1024,7 @@ public class StubBillPool {
 		}//保存PO数组到txt
 		//报溢报损单
 		ArrayList<SpillsLossBillPO> SpillsLossBillPO=new ArrayList<SpillsLossBillPO>();
-		for(SpillsLossBill temp:alOfSpillsLossBill){//遍历数组，将对应PO对象加到新数组中
+		for(StubSpillsLossBill temp:alOfSpillsLossBill){//遍历数组，将对应PO对象加到新数组中
 			SpillsLossBillPO.add(temp.getPO());
 		}
 		try {
@@ -1034,7 +1034,7 @@ public class StubBillPool {
 		}//保存PO数组到txt
 		//报警单
 		ArrayList<AlertBillPO> AlertBillPO=new ArrayList<AlertBillPO>();
-		for(AlertBill temp:alOfAlertBill){//遍历数组，将对应PO对象加到新数组中
+		for(StubAlertBill temp:alOfAlertBill){//遍历数组，将对应PO对象加到新数组中
 			AlertBillPO.add(temp.getPO());
 		}
 		try {

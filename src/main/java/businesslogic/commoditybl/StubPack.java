@@ -6,9 +6,9 @@ import po.stockpo.*;
 import vo.PackVO;
 import vo.stockvo.CommodityVO;
 
-public class Pack
+public class StubPack
 {// 特价包类
-	public Pack(String ID, ArrayList<Commodity> coms, int quantity,
+	public StubPack(String ID, ArrayList<MockCommodity> coms, int quantity,
 			double price)
 	{
 		this.ID = ID;
@@ -17,35 +17,35 @@ public class Pack
 		this.price = price;
 	}
 
-	public Pack(ArrayList<Commodity> coms, int quantity, double price)
+	public StubPack(ArrayList<MockCommodity> coms, int quantity, double price)
 	{// 总经理请用
 		this.coms = coms;
 		this.quantity = quantity;
 		this.price = price;
 	}
 
-	public Pack(PackVO vo)
+	public StubPack(PackVO vo)
 	{
 		this.ID = vo.getID();
-		coms = new ArrayList<Commodity>();
+		coms = new ArrayList<MockCommodity>();
 		for (int i = 0; i < vo.getComs().size(); i++)
-			coms.add(new Commodity(vo.getComs().get(i)));
+			coms.add(new MockCommodity(vo.getComs().get(i)));
 		quantity = vo.getQuantity();
 		price = vo.getPrice();
-		Commodity com = new Commodity();
+		MockCommodity com = new MockCommodity();
 		record = com.vosToCom(vo.getRecord());
 		prepareRecord = com.vosToCom(vo.getPrepareRecord());
 	}
 
-	public Pack(PackPO po)
+	public StubPack(PackPO po)
 	{
 		this.ID = po.getID();
-		coms = new ArrayList<Commodity>();
+		coms = new ArrayList<MockCommodity>();
 		for (int i = 0; i < po.getComs().size(); i++)
-			coms.add(new Commodity(po.getComs().get(i)));
+			coms.add(new MockCommodity(po.getComs().get(i)));
 		quantity = po.getQuantity();
 		price = po.getPrice();
-		Commodity com = new Commodity();
+		MockCommodity com = new MockCommodity();
 		record = com.posToCom(po.getRecord());
 		prepareRecord = com.posToCom(po.getPrepareRecord());
 	}
@@ -53,7 +53,7 @@ public class Pack
 	public PackPO toPO()
 	{
 		ArrayList<CommodityPO> compos = new ArrayList<CommodityPO>();
-		Commodity com = new Commodity();
+		MockCommodity com = new MockCommodity();
 		for (int i = 0; i < coms.size(); i++)
 			compos.add(coms.get(i).toPO());
 		return new PackPO(ID, compos, quantity, price, com.toRecordPOs(record),
@@ -63,7 +63,7 @@ public class Pack
 	public PackVO toVO()
 	{
 		ArrayList<CommodityVO> comvos = new ArrayList<CommodityVO>();
-		Commodity com = new Commodity();
+		MockCommodity com = new MockCommodity();
 		for (int i = 0; i < coms.size(); i++)
 			comvos.add(coms.get(i).toVO());
 		return new PackVO(ID, comvos, quantity, price, com.toRecordVOs(record),
@@ -71,7 +71,7 @@ public class Pack
 	}
 
 	String ID;//特价包有ID，唯一确定确定一个特价包
-	ArrayList<Commodity> coms;//coms中的number是本类商品在特价包中的数量
+	ArrayList<MockCommodity> coms;//coms中的number是本类商品在特价包中的数量
 	int quantity;//下面几个参数类似businesslogic/commoditybl/Commodity.java
 	double price;// 总价，通过total-discount得出
 	ArrayList<CommodityRecord> record = new ArrayList<CommodityRecord>();
@@ -102,12 +102,12 @@ public class Pack
 		prepareRecord.add(r);
 	}
 
-	public ArrayList<Commodity> getComs()
+	public ArrayList<MockCommodity> getComs()
 	{
 		return coms;
 	}
 
-	public void setComs(ArrayList<Commodity> coms)
+	public void setComs(ArrayList<MockCommodity> coms)
 	{
 		this.coms = coms;
 	}

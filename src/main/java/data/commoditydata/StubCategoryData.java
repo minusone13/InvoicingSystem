@@ -7,26 +7,26 @@ import po.*;
 import po.stockpo.CategoryPO;
 import po.stockpo.StockPO;
 
-public class CategoryData implements Serializable
+public class StubCategoryData implements Serializable
 {
-	ArrayList<CategoryData> cats = new ArrayList<CategoryData>();
-	ArrayList<CommodityData> coms = new ArrayList<CommodityData>();
+	ArrayList<StubCategoryData> cats = new ArrayList<StubCategoryData>();
+	ArrayList<MockCommodityData> coms = new ArrayList<MockCommodityData>();
 	CategoryPO po;
 
-	public CategoryData()
+	public StubCategoryData()
 	{}
 
-	public CategoryData(CategoryPO po)
+	public StubCategoryData(CategoryPO po)
 	{
 		this.po = po;
 	}
 
-	public CategoryData(String parent, String name)
+	public StubCategoryData(String parent, String name)
 	{
 		po = new CategoryPO(parent, name);
 	}
 
-	public RM add(CommodityData com)
+	public RM add(MockCommodityData com)
 	{// 返回值参见RM中的说明
 		if (canAddCommodity())
 		{
@@ -37,7 +37,7 @@ public class CategoryData implements Serializable
 			return RM.treeerror;// 已有分类，不能添加商品
 	}
 
-	public RM add(CategoryData cat)
+	public RM add(StubCategoryData cat)
 	{// 返回值参见RM中的说明
 		if (canAddCategory())
 		{
@@ -105,7 +105,7 @@ public class CategoryData implements Serializable
 			return RM.treeerror;
 	}
 
-	public CommodityData findCommodity(String name, String model)
+	public MockCommodityData findCommodity(String name, String model)
 	{// 通过名称和型号（唯一确定一个商品）查找下一层的商品，没找到返回NULL
 		if (coms == null || coms.size() == 0)
 			return null;// does not have any sub category
@@ -118,7 +118,7 @@ public class CategoryData implements Serializable
 		return null;// not found
 	}
 
-	public CategoryData findSubCat(String name)
+	public StubCategoryData findSubCat(String name)
 	{// 通过分类名查找子分类
 		if (cats == null || cats.size() == 0)
 			return null;// does not have any sub category
@@ -130,12 +130,12 @@ public class CategoryData implements Serializable
 		return null;// not found
 	}
 
-	public ArrayList<CategoryData> getCats()
+	public ArrayList<StubCategoryData> getCats()
 	{
 		return cats;
 	}
 
-	public ArrayList<CommodityData> getComs()
+	public ArrayList<MockCommodityData> getComs()
 	{
 		return coms;
 	}
@@ -155,13 +155,13 @@ public class CategoryData implements Serializable
 		return po;
 	}
 
-	public CategoryData goThrow(String[] nameOfParent, int layer)
+	public StubCategoryData goThrow(String[] nameOfParent, int layer)
 	{// to gothrow all the parent directly to the last category
 		// this method is used when deleting or adding a commodity. and many
 		// other inner uses
 		if (nameOfParent.length <= layer)
 			return this;// 递归返回条件
-		CategoryData cat = findSubCat(nameOfParent[layer]);
+		StubCategoryData cat = findSubCat(nameOfParent[layer]);
 		if (cat == null)
 			return null;// not found;
 		// else if(++layer>=nameOfParent.length)
@@ -177,7 +177,7 @@ public class CategoryData implements Serializable
 		{
 			for (int i = 0; i < coms.size(); i++)
 			{
-				CommodityData com = coms.get(i);
+				MockCommodityData com = coms.get(i);
 				result.add(new StockPO(com.getPo().clone()));
 			}
 		}
@@ -185,7 +185,7 @@ public class CategoryData implements Serializable
 		{
 			for (int i = 0; i < cats.size(); i++)
 			{
-				CategoryData cat = cats.get(i);
+				StubCategoryData cat = cats.get(i);
 				result.add(new StockPO(cat.getPo().clone()));
 			}
 		}
@@ -212,12 +212,12 @@ public class CategoryData implements Serializable
 		return -1;
 	}
 
-	public void setCats(ArrayList<CategoryData> cats)
+	public void setCats(ArrayList<StubCategoryData> cats)
 	{
 		this.cats = cats;
 	}
 
-	public void setComs(ArrayList<CommodityData> coms)
+	public void setComs(ArrayList<MockCommodityData> coms)
 	{
 		this.coms = coms;
 	}
@@ -245,12 +245,12 @@ public class CategoryData implements Serializable
 		setName(name);
 		for (int i = 0; i < cats.size(); i++)
 		{// 更新子分类
-			CategoryData cat = cats.get(i);
+			StubCategoryData cat = cats.get(i);
 			cat.updateParent(po.getId());
 		}
 		for (int i = 0; i < coms.size(); i++)
 		{// 更新子商品
-			CommodityData com = coms.get(i);
+			MockCommodityData com = coms.get(i);
 			com.setParent(po.getId());
 		}
 	}
@@ -260,7 +260,7 @@ public class CategoryData implements Serializable
 		setParent(parent);
 		for (int i = 0; i < cats.size(); i++)
 		{
-			CategoryData cat = cats.get(i);
+			StubCategoryData cat = cats.get(i);
 			cat.updateParent(po.getId());
 		}
 	}

@@ -10,22 +10,22 @@ import dataservice.commoditydataservice.*;
 import po.*;
 import po.stockpo.*;
 
-public class StockDataController extends UnicastRemoteObject implements CommodityDataService,
+public class StubStockDataController extends UnicastRemoteObject implements StubCommodityDataService,
 		StockDataForFinancial
 {// 这是一个单体模式的类，因为这样读写文件方便些
-	public static StockDataController getInstance()throws RemoteException
+	public static StubStockDataController getInstance()throws RemoteException
 	{// 单体模式
 		if (instance == null)
-			instance = new StockDataController();
+			instance = new StubStockDataController();
 		return instance;
 	}
 
-	private static StockDataController instance = null;
-	CommodityList l;
+	private static StubStockDataController instance = null;
+	StubCommodityList l;
 
 	File f;
 
-	private StockDataController()throws RemoteException
+	private StubStockDataController()throws RemoteException
 	{
 		read();
 	}
@@ -50,7 +50,7 @@ public class StockDataController extends UnicastRemoteObject implements Commodit
 	public CategoryPO findCategory(String id)throws RemoteException
 	{
 		read();
-		CategoryData result = l.findCategory(id);
+		StubCategoryData result = l.findCategory(id);
 		if (result == null)
 			return null;
 		return result.getPo().clone();
@@ -65,7 +65,7 @@ public class StockDataController extends UnicastRemoteObject implements Commodit
 	public CommodityPO findCommodity(String name, String model)throws RemoteException
 	{
 		read();
-		CommodityData result = l.findCommodity(name, model);
+		MockCommodityData result = l.findCommodity(name, model);
 		if (result == null)
 			return null;
 		return result.getPo().clone();
@@ -116,7 +116,7 @@ public class StockDataController extends UnicastRemoteObject implements Commodit
 		return l.getCountNo();
 	}
 
-	public CommodityList getL()
+	public StubCommodityList getL()
 	{
 		read();
 		return l;
@@ -144,7 +144,7 @@ public class StockDataController extends UnicastRemoteObject implements Commodit
 		}
 		try
 		{
-			oos.writeObject(new CommodityList());
+			oos.writeObject(new StubCommodityList());
 		}
 		catch (IOException e1)
 		{
@@ -202,7 +202,7 @@ public class StockDataController extends UnicastRemoteObject implements Commodit
 	public ArrayList<StockPO> openCategory(String id)throws RemoteException
 	{
 		read();
-		CategoryData cat = l.findCategory(id);
+		StubCategoryData cat = l.findCategory(id);
 		if (cat == null)
 			return null;
 		return l.findCategory(id).open();
@@ -227,10 +227,10 @@ public class StockDataController extends UnicastRemoteObject implements Commodit
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		CommodityList temp = null;
+		StubCommodityList temp = null;
 		try
 		{
-			temp = (CommodityList) ois.readObject();
+			temp = (StubCommodityList) ois.readObject();
 		}
 		catch (ClassNotFoundException e)
 		{
@@ -298,7 +298,7 @@ public class StockDataController extends UnicastRemoteObject implements Commodit
 	public void setDefaultFile()throws RemoteException
 	{
 		Tool.stock = Tool.defaultstock;
-		instance = new StockDataController();
+		instance = new StubStockDataController();
 	}
 
 	public void setFilePath(String s) throws RemoteException
@@ -306,7 +306,7 @@ public class StockDataController extends UnicastRemoteObject implements Commodit
 		Tool.stock = s;
 		try
 		{
-			instance = new StockDataController();
+			instance = new StubStockDataController();
 		}
 		catch (RemoteException e)
 		{
@@ -315,7 +315,7 @@ public class StockDataController extends UnicastRemoteObject implements Commodit
 		}
 	}
 
-	public void setL(CommodityList l)
+	public void setL(StubCommodityList l)
 	{
 		read();
 		this.l = l;

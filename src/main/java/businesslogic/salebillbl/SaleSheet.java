@@ -12,7 +12,7 @@ import vo.PurBackSheetVO;
 import vo.SaleSheetVO;
 import vo.stockvo.CommodityVO;
 import businesslogic.GetVOandPO;
-import businesslogic.commoditybl.Commodity;
+import businesslogic.commoditybl.MockCommodity;
 import businesslogic.customerbl.Customer;
 import businesslogic.customerbl.CustomerList;
 import businesslogic.examinebl.Bill;
@@ -28,7 +28,7 @@ public class SaleSheet extends Bill implements GetVOandPO{
 		private BillState billstate=BillState.DRAFT;
 		Date date;
 		Customer customer;
-		ArrayList<Commodity> sheet=new ArrayList<Commodity>();//销售单据，商品名，数量，单价//ArrayList<>在写一个类；
+		ArrayList<MockCommodity> sheet=new ArrayList<MockCommodity>();//销售单据，商品名，数量，单价//ArrayList<>在写一个类；
 		double money1;//折前总金额
 		double money2;//代金券金额
 		String stock;//仓库；
@@ -60,9 +60,9 @@ public class SaleSheet extends Bill implements GetVOandPO{
 			this.ID = "XSD-"+currentTime+"-"+String.format("%05d", list.size()+1);
 			
 			
-			ArrayList<Commodity> temp=new ArrayList<Commodity>();
+			ArrayList<MockCommodity> temp=new ArrayList<MockCommodity>();
 			for(int i=0;i<vo.getsheet().size();i++){
-				temp.add(new Commodity(vo.getsheet().get(i)));
+				temp.add(new MockCommodity(vo.getsheet().get(i)));
 			}
 			this.sheet=temp;
 			this.stock=vo.getstock();
@@ -188,11 +188,11 @@ public class SaleSheet extends Bill implements GetVOandPO{
 			this.stock=stock;
 		}
 		
-		public ArrayList<Commodity> getsheet(){
+		public ArrayList<MockCommodity> getsheet(){
 			return sheet;
 		}
 		
-		public void setsheet(ArrayList<Commodity> sheet){
+		public void setsheet(ArrayList<MockCommodity> sheet){
 			this.sheet=sheet;
 		}
 		
@@ -264,9 +264,9 @@ public class SaleSheet extends Bill implements GetVOandPO{
 		public void setPO(SaleSheetPO po){
 			this.ID=po.getid();
 			this.customer=new Customer(po.getcustomer());
-			ArrayList<Commodity> temp=new ArrayList<Commodity>();
+			ArrayList<MockCommodity> temp=new ArrayList<MockCommodity>();
 			for(int i=0;i<po.getsheet().size();i++){
-				temp.add(new Commodity(po.getsheet().get(i)));
+				temp.add(new MockCommodity(po.getsheet().get(i)));
 			}
 			this.sheet=temp;
 			this.stock=po.getstock();

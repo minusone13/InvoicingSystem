@@ -11,14 +11,14 @@ import po.stockpo.CommodityPO;
 import vo.BarginStrategyVO;
 import vo.stockvo.CommodityVO;
 import businesslogic.GetVOandPO;
-import businesslogic.commoditybl.Commodity;
+import businesslogic.commoditybl.MockCommodity;
 
 public class StubBarginStrategy implements GetVOandPO{
 
 	private StrategyStyle strategystyle=StrategyStyle.BarginStrategy;
 	
 	private String ID;
-	private ArrayList<Commodity> alOfCommodity=new ArrayList<Commodity>();//赠品信息数组
+	private ArrayList<MockCommodity> alOfCommodity=new ArrayList<MockCommodity>();//赠品信息数组
 	private double discount;//降价金额
 //	private int num;//特价包打包数量
 	
@@ -99,9 +99,9 @@ public class StubBarginStrategy implements GetVOandPO{
 	public void setPO(BarginStrategyPO po){
 		this.setID(po.getID());
 		this.setDiscount(po.getDiscount());
-		ArrayList<Commodity> temp=new ArrayList<Commodity>();//用于临时转换
+		ArrayList<MockCommodity> temp=new ArrayList<MockCommodity>();//用于临时转换
 		for(int i=0;i<po.getAlOfCommodity().size();i++){
-			temp.add(new Commodity(po.getAlOfCommodity().get(i)));
+			temp.add(new MockCommodity(po.getAlOfCommodity().get(i)));
 		}
 		this.setAlOfCommodity(temp);
 //		this.setNum(po.getNum());
@@ -115,10 +115,10 @@ public class StubBarginStrategy implements GetVOandPO{
 	public void setID(String iD) {
 		ID = iD;
 	}
-	public ArrayList<Commodity> getAlOfCommodity() {
+	public ArrayList<MockCommodity> getAlOfCommodity() {
 		return alOfCommodity;
 	}
-	public void setAlOfCommodity(ArrayList<Commodity> alOfCommodity) {
+	public void setAlOfCommodity(ArrayList<MockCommodity> alOfCommodity) {
 		this.alOfCommodity = alOfCommodity;
 	}
 	public String getOperator()

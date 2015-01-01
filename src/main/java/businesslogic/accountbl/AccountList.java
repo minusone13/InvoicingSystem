@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 import dataservice.accountdataservice.AccountBuildService;
 import dataservice.accountdataservice.AccountDataService;
-import businesslogic.commoditybl.CommodityListbl;
+import businesslogic.commoditybl.StubCommodityList;
 import businesslogic.customerService.CustomerForFinancial;
 import businesslogic.customerbl.CustomerList;
 import businesslogic.stockmanagerbl.StubStockController;

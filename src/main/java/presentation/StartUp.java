@@ -6,7 +6,7 @@ import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
-import dataservice.commoditydataservice.CommodityDataService;
+import dataservice.commoditydataservice.StubCommodityDataService;
 import presentation.commodityui.StockManagerDriver;
 import presentation.financialui.FinancialBLDriver;
 import presentation.managerui.ManagerBLDriver;

@@ -16,8 +16,8 @@ import vo.ReachStrategyVO;
 import vo.SaleBackSheetVO;
 import vo.SaleSheetVO;
 import vo.stockvo.CommodityVO;
-import businesslogic.commoditybillbl.GiftBill;
-import businesslogic.commoditybl.Commodity;
+import businesslogic.commoditybillbl.StubGiftBill;
+import businesslogic.commoditybl.MockCommodity;
 import businesslogic.customerbl.CustomerList;
 import businesslogic.examinebl.StubBillPool;
 import businesslogic.managerbl.StubManager;
@@ -39,7 +39,7 @@ public class salebillController implements SaleBillBlService,salebillForFinancia
 			StubBillPool pool = new StubBillPool();
 			if(vo==null) return false;
 			PurSheet pursheet = new PurSheet(vo);
-			for(Commodity temp : pursheet.getsheet()){
+			for(MockCommodity temp : pursheet.getsheet()){
 					temp.setLastin(temp.getIn());
 			}
 			pool.add(pursheet);
@@ -58,7 +58,7 @@ public class salebillController implements SaleBillBlService,salebillForFinancia
 			StubBillPool pool = new StubBillPool();
 			if(vo==null) return false;
 			SaleSheet salesheet = new SaleSheet(vo);
-			for(Commodity temp : salesheet.getsheet()){
+			for(MockCommodity temp : salesheet.getsheet()){
 				temp.setLastin(temp.getIn());
 		}
 			pool.add(salesheet);
@@ -466,16 +466,16 @@ public class salebillController implements SaleBillBlService,salebillForFinancia
 							switch(style){
 								case Gift	 :givelist=tempvo.getAlOfCommodity();
 											 StubBillPool pool = new StubBillPool();
-										      GiftBill giftbill = new GiftBill();
+										      StubGiftBill giftbill = new StubGiftBill();
 										      giftbill.setDate(new Date());
-										      ArrayList<Commodity> coms = new ArrayList<Commodity>();
+										      ArrayList<MockCommodity> coms = new ArrayList<MockCommodity>();
 										      for(CommodityVO temp:givelist){
-										    	  coms.add(new Commodity(temp));
+										    	  coms.add(new MockCommodity(temp));
 										      }
 										      giftbill.setComs(coms);
 										      SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
 										      String currentTime = format.format(new Date());
-										      ArrayList<GiftBill> list=pool.getGiftBill();
+										      ArrayList<StubGiftBill> list=pool.getGiftBill();
 										      giftbill.setID("XJFYD-"+currentTime+"-"+String.format("%05d", list.size()+1));
 										      giftbill.setRemark(null);
 										      giftbill.setOperator(operatorid);
@@ -515,16 +515,16 @@ public class salebillController implements SaleBillBlService,salebillForFinancia
 						switch(style){
 							case Gift    :givelist=tempvo.getAlOfCommodity();
 										  StubBillPool pool = new StubBillPool();
-										  GiftBill giftbill = new GiftBill();
+										  StubGiftBill giftbill = new StubGiftBill();
 										  giftbill.setDate(new Date());
-										  ArrayList<Commodity> coms = new ArrayList<Commodity>();
+										  ArrayList<MockCommodity> coms = new ArrayList<MockCommodity>();
 										  for(CommodityVO temp:givelist){
-											  coms.add(new Commodity(temp));
+											  coms.add(new MockCommodity(temp));
 										  }
 										  giftbill.setComs(coms);
 										  SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
 										  String currentTime = format.format(new Date());
-										  ArrayList<GiftBill> list=pool.getGiftBill();
+										  ArrayList<StubGiftBill> list=pool.getGiftBill();
 										  giftbill.setID("XJFYD-"+currentTime+"-"+String.format("%05d", list.size()+1));
 										  giftbill.setRemark(null);
 										  giftbill.setOperator(operatorid);
@@ -617,16 +617,16 @@ public class salebillController implements SaleBillBlService,salebillForFinancia
 					ArrayList<CommodityVO> givelist =new ArrayList<CommodityVO>();
 					givelist=lsvo.getAlOfCommodity();
 					  StubBillPool pool = new StubBillPool();
-					  GiftBill giftbill = new GiftBill();
+					  StubGiftBill giftbill = new StubGiftBill();
 					  giftbill.setDate(new Date());
-					  ArrayList<Commodity> coms = new ArrayList<Commodity>();
+					  ArrayList<MockCommodity> coms = new ArrayList<MockCommodity>();
 					  for(CommodityVO temp:givelist){
-						  coms.add(new Commodity(temp));
+						  coms.add(new MockCommodity(temp));
 					  }
 					  giftbill.setComs(coms);
 					  SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
 					  String currentTime = format.format(new Date());
-					  ArrayList<GiftBill> list=pool.getGiftBill();
+					  ArrayList<StubGiftBill> list=pool.getGiftBill();
 					  giftbill.setID("XJFYD-"+currentTime+"-"+String.format("%05d", list.size()+1));
 					  String[] remark = new String[2];
 					  remark[0] = salesheetvo.getid();
@@ -670,16 +670,16 @@ public class salebillController implements SaleBillBlService,salebillForFinancia
 					ArrayList<CommodityVO> givelist =new ArrayList<CommodityVO>();
 					givelist=rsvo.getAlOfCommodity();
 					  StubBillPool pool = new StubBillPool();
-					  GiftBill giftbill = new GiftBill();
+					  StubGiftBill giftbill = new StubGiftBill();
 					  giftbill.setDate(new Date());
-					  ArrayList<Commodity> coms = new ArrayList<Commodity>();
+					  ArrayList<MockCommodity> coms = new ArrayList<MockCommodity>();
 					  for(CommodityVO temp:givelist){
-						  coms.add(new Commodity(temp));
+						  coms.add(new MockCommodity(temp));
 					  }
 					 giftbill.setComs(coms);
 					 SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
 					 String currentTime = format.format(new Date());
-					 ArrayList<GiftBill> list=pool.getGiftBill();
+					 ArrayList<StubGiftBill> list=pool.getGiftBill();
 					 giftbill.setID("XJFYD-"+currentTime+"-"+String.format("%05d", list.size()+1));
 					 String[] remark = new String[2];
 					 remark[0]=salesheetvo.getid();

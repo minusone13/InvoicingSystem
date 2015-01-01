@@ -11,7 +11,7 @@ import po.stockpo.CommodityPO;
 import vo.PurSheetVO;
 import vo.stockvo.CommodityVO;
 import businesslogic.GetVOandPO;
-import businesslogic.commoditybl.Commodity;
+import businesslogic.commoditybl.MockCommodity;
 import businesslogic.customerbl.Customer;
 import businesslogic.customerbl.CustomerList;
 import businesslogic.examinebl.Bill;
@@ -27,7 +27,7 @@ public class PurSheet extends Bill implements GetVOandPO{
 	private String ID;
 	private String userID;
 	String stock;//仓库？
-	ArrayList<Commodity> sheet;//是不是应该是个arraylist<>?
+	ArrayList<MockCommodity> sheet;//是不是应该是个arraylist<>?
 	double money1;//总金额
 	String words;//备注
 	String username;
@@ -56,9 +56,9 @@ public class PurSheet extends Bill implements GetVOandPO{
 		
 		this.stock=vo.getstock();
 
-		ArrayList<Commodity> temp=new ArrayList<Commodity>();
+		ArrayList<MockCommodity> temp=new ArrayList<MockCommodity>();
 		for(int i=0;i<vo.getsheet().size();i++){
-			temp.add(new Commodity(vo.getsheet().get(i)));
+			temp.add(new MockCommodity(vo.getsheet().get(i)));
 		}
 		this.sheet=temp;
 		this.money1=vo.getmoney1();
@@ -159,11 +159,11 @@ public class PurSheet extends Bill implements GetVOandPO{
 			this.stock=stock;
 		}
 		
-		public ArrayList<Commodity> getsheet(){
+		public ArrayList<MockCommodity> getsheet(){
 			return sheet;
 		}
 		
-		public void setsheet(ArrayList<Commodity> sheet){
+		public void setsheet(ArrayList<MockCommodity> sheet){
 			this.sheet=sheet;
 		}
 		
@@ -233,9 +233,9 @@ public class PurSheet extends Bill implements GetVOandPO{
 			this.date=po.getdate();
 			this.stock=po.getstock();
 			this.ID=po.getid();
-			ArrayList<Commodity> temp=new ArrayList<Commodity>();
+			ArrayList<MockCommodity> temp=new ArrayList<MockCommodity>();
 			for(int i=0;i<po.getsheet().size();i++){
-				temp.add(new Commodity(po.getsheet().get(i)));
+				temp.add(new MockCommodity(po.getsheet().get(i)));
 			}
 			this.sheet=temp;
 			this.money1=po.getmoney1();

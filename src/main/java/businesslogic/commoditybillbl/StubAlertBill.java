@@ -9,23 +9,23 @@ import businesslogic.*;
 import businesslogic.commoditybl.*;
 import businesslogic.examinebl.Bill;
 
-public class AlertBill extends Bill implements GetVOandPO
+public class StubAlertBill extends Bill implements GetVOandPO
 {// 报警单对象，统一进入单据池管理和存储
 	//参见大作业要求
 	Date date;
 	String ID;
 	String operator;
-	Commodity com;
+	MockCommodity com;
 	int shortage;
 	BillStyle style = BillStyle.AlertBill;
 	BillState state = BillState.DRAFT;
 
-	public AlertBill()
+	public StubAlertBill()
 	{
 		date = new Date();
 	}
 
-	public AlertBill(String userID, Commodity com, int shortage)
+	public StubAlertBill(String userID, MockCommodity com, int shortage)
 	{
 		date = new Date();
 		this.operator = userID;
@@ -53,7 +53,7 @@ public class AlertBill extends Bill implements GetVOandPO
 		}
 		date = po.getDate();
 		operator = po.getOperator();
-		com = new Commodity(po.getCommodity());
+		com = new MockCommodity(po.getCommodity());
 		shortage = po.getshortage();
 		ID = po.getID();
 		style = po.getStyle();
@@ -70,7 +70,7 @@ public class AlertBill extends Bill implements GetVOandPO
 		}
 		date = vo.getDate();
 		operator = vo.getOperator();
-		com = new Commodity(vo.getCommodity());
+		com = new MockCommodity(vo.getCommodity());
 		shortage = vo.getshortage();
 		ID = vo.getID();
 		style = vo.getBillstyle();
@@ -78,12 +78,12 @@ public class AlertBill extends Bill implements GetVOandPO
 		return true;
 	}
 
-	public Commodity getCom()
+	public MockCommodity getCom()
 	{
 		return com;
 	}
 
-	public void setCom(Commodity com)
+	public void setCom(MockCommodity com)
 	{
 		this.com = com;
 	}

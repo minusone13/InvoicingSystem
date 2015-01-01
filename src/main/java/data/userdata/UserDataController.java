@@ -10,7 +10,7 @@ import po.*;
 import po.userpo.OperationRecordPO;
 import po.userpo.UserPO;
 
-public class UserDataController extends UnicastRemoteObject implements UserDataService
+public class UserDataController extends UnicastRemoteObject implements StubUserDataService
 {
 	public static UserDataController getInstance()throws RemoteException
 	{// 单体模式

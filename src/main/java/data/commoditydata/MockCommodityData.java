@@ -3,11 +3,11 @@ package data.commoditydata;
 import java.io.Serializable;
 import po.stockpo.CommodityPO;
 
-public class CommodityData implements Serializable
+public class MockCommodityData implements Serializable
 {
 	CommodityPO po;// 详见PO中的注释
 
-	public CommodityData(CommodityPO po)
+	public MockCommodityData(CommodityPO po)
 	{
 		this.po = po;
 	}
@@ -23,7 +23,7 @@ public class CommodityData implements Serializable
 				.getModel().indexOf(s) != -1);
 	}
 
-	public boolean equals(CommodityData com)
+	public boolean equals(MockCommodityData com)
 	{
 		return (po.getName().equals(com.getName()) && po.getModel().equals(
 				com.getModel()));

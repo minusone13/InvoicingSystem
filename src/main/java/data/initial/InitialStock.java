@@ -3,17 +3,17 @@ package data.initial;
 import java.rmi.RemoteException;
 
 import po.Tool;
-import data.commoditydata.StockDataController;
+import data.commoditydata.StubStockDataController;
 
 public class InitialStock 
 {//初始化商品管理的文件 Stock.ser
 	public InitialStock()
 	{
 		Tool.Clean(Tool.stock);
-		StockDataController data = null;
+		StubStockDataController data = null;
 		try
 		{
-			data = StockDataController.getInstance();
+			data = StubStockDataController.getInstance();
 		}
 		catch (RemoteException e)
 		{

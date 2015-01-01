@@ -12,13 +12,13 @@ import businesslogic.*;
 import businesslogic.commoditybl.*;
 import businesslogic.examinebl.Bill;
 
-public class SpillsLossBill extends Bill implements GetVOandPO
+public class StubSpillsLossBill extends Bill implements GetVOandPO
 {// 报溢报损单，统一进入单据池管理和存储
 	//参见大作业要求
 	Date date;
 	String operator;
 	private BillStyle style = BillStyle.SpillsLossBill;
-	private Commodity com;
+	private MockCommodity com;
 	String ID;
 	Type t;
 	BillState state = BillState.DRAFT;
@@ -42,7 +42,7 @@ public class SpillsLossBill extends Bill implements GetVOandPO
 		}
 		date = po.getDate();
 		operator = po.getOperator();
-		com = new Commodity(po.getComPO());
+		com = new MockCommodity(po.getComPO());
 		style = BillStyle.SpillsLossBill;
 		t = po.getT();
 		ID = po.getID();
@@ -60,7 +60,7 @@ public class SpillsLossBill extends Bill implements GetVOandPO
 		}
 		date = vo.getDate();
 		operator = vo.getOperator();
-		com = new Commodity(vo.getCom());
+		com = new MockCommodity(vo.getCom());
 		style = BillStyle.SpillsLossBill;
 		t = vo.getT();
 		ID = vo.getID();
@@ -79,12 +79,12 @@ public class SpillsLossBill extends Bill implements GetVOandPO
 		this.style = style;
 	}
 
-	public Commodity getCom()
+	public MockCommodity getCom()
 	{
 		return com;
 	}
 
-	public void setCom(Commodity com)
+	public void setCom(MockCommodity com)
 	{
 		this.com = com;
 	}
@@ -116,7 +116,7 @@ public class SpillsLossBill extends Bill implements GetVOandPO
 
 	public void setState(BillState state)
 	{
-		CommodityListbl l = new CommodityListbl();
+		StubCommodityList l = new StubCommodityList();
 		if (this.state == BillState.DRAFT && state == BillState.SUBMITED)
 		{
 			if (t == Type.Loss)

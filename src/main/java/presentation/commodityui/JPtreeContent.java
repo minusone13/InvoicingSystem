@@ -29,7 +29,7 @@ import vo.stockvo.CategoryVO;
 import vo.stockvo.CommodityVO;
 import vo.stockvo.StockVO;
 import vo.stockvo.StockVO.Type;
-import businesslogic.commoditybl.CommodityListbl;
+import businesslogic.commoditybl.StubCommodityList;
 import businesslogic.stockmanagerbl.StubStockController;
 import businesslogicservice.commodityblservice.StubCommodityBlService;
 //import dataservice.commoditydataservice.StubCommodityDataService;
@@ -83,9 +83,9 @@ public class JPtreeContent extends JPanel {
 		  //根据逻辑层数据构建树
 		top.removeAllChildren();
 		//如果是在界面初始化和非财务人员操作时，要从stock读取商品信息
-		if(CommodityListbl.user==null||
-				CommodityListbl.user.getR()!=Role.FINANCIAL_STAFF
-				&&CommodityListbl.user.getR()!=Role.FINANCIAL_MANAGER){
+		if(StubCommodityList.user==null||
+				StubCommodityList.user.getR()!=Role.FINANCIAL_STAFF
+				&&StubCommodityList.user.getR()!=Role.FINANCIAL_MANAGER){
 			stockbl.setFilePath("Stock.ser");
 			System.out.println("还原");
 		}

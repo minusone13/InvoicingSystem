@@ -8,7 +8,7 @@ import po.stockpo.CommodityRecordPO;
 import vo.stockvo.CommodityRecordVO;
 import vo.stockvo.CommodityVO;
 
-public class Commodity
+public class MockCommodity
 {
 	String id;//id==parent+"\\"+name
 	String parent;// the ID of parent Category
@@ -76,10 +76,10 @@ public class Commodity
 		return temp;
 	}
 
-	public Commodity()
+	public MockCommodity()
 	{}
 
-	public Commodity(CommodityPO po)
+	public MockCommodity(CommodityPO po)
 	{
 		if (po != null)
 		{
@@ -98,7 +98,7 @@ public class Commodity
 		}
 	}
 
-	public Commodity(CommodityVO vo)
+	public MockCommodity(CommodityVO vo)
 	{
 		parent = vo.getParent();
 		name = vo.getName();
