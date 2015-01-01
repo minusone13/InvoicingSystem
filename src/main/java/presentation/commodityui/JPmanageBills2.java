@@ -589,7 +589,7 @@ public class JPmanageBills2 extends JPanel {
 									}
 									if(!numText.getText().equals("")){
 										if(stringJg.judgestring(numText.getText())==3){
-											temp.setNumber(chosenVO.getNumber());
+											temp.setNumber(Integer.parseInt(numText.getText()));//modified by lhw to reduce a bug
 										}
 										else{
 											frame.getWarning().showWarning("数量必须为数字");
