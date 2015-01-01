@@ -6,12 +6,14 @@ import java.awt.event.MouseListener;
 import javax.swing.*;
 
 import businesslogic.financialbl.Financial;
+import businesslogic.stockmanagerbl.StubStockController;
+import businesslogicservice.commodityblservice.StubCommodityBlService;
 import businesslogicservice.financialblservice.FinancialBlService;
 import presentation.PanelType;
 import entrance.Frame;
 
 public class AccountBuildIndexPanel extends JPanel{
-	FinancialBlService financial = new Financial();
+	
 	private JLabel clientInfo = new JLabel("New label");
 	private JLabel commodityInfo = new JLabel("New label");
 	private JLabel accountInfo = new JLabel("New label");
@@ -33,6 +35,9 @@ public class AccountBuildIndexPanel extends JPanel{
 	
 	//frame的引用
     Frame frame;
+	//逻辑层接口
+	private StubCommodityBlService stockbl=new StubStockController();
+	FinancialBlService financial = new Financial();
 	public AccountBuildIndexPanel() {
 		initial();
 	}
@@ -122,7 +127,10 @@ public class AccountBuildIndexPanel extends JPanel{
 				break;
 			case 24:
 				buildButton.setLocation(800,450);
-				financial.buildAccount();//建账
+				//将地址还原为当前商品版本
+				stockbl.setFilePath("Stock.ser");
+				//建账
+				financial.buildAccount();
 				//更新商品面板的version
 				frame.getFinancial().getAccountOfComs().getAccountOfComs().updateVersion();
 					break;

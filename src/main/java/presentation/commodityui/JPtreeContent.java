@@ -87,7 +87,6 @@ public class JPtreeContent extends JPanel {
 				StubCommodityList.user.getR()!=Role.FINANCIAL_STAFF
 				&&StubCommodityList.user.getR()!=Role.FINANCIAL_MANAGER){
 			stockbl.setFilePath("Stock.ser");
-			System.out.println("还原");
 		}
         ArrayList<StockVO> stockList=stockbl.openCategory("1");
         if(stockList.size()!=0){
