@@ -583,7 +583,7 @@ public class BusinessProcessPanel extends JPanel{
 			Object[][] dataOfPurAndBackSheet = new Object[sizeOfPurAndBackSheet][];
 	        for(int i=0;i<sizeOfPurSheet;i++){
 	        	PurSheetVO tempPurSheet= purSheet.get(i);
-	        	Object[] temp ={tempPurSheet.getid(),tempPurSheet.getcustomer(),
+	        	Object[] temp ={tempPurSheet.getid(),tempPurSheet.getcustomer().getname(),
 	        			tempPurSheet.getstock(),tempPurSheet.getop(),
 	        			tempPurSheet.getwords(),tempPurSheet.getmoney1(),
 	        			tempPurSheet.getState()};
@@ -591,7 +591,7 @@ public class BusinessProcessPanel extends JPanel{
 	        }
 	        for(int i=0;i<sizeOfPurBackSheet;i++){
 	        	PurBackSheetVO tempPurBackSheet= purBackSheet.get(i);
-	        	Object[] temp ={tempPurBackSheet.getid(),tempPurBackSheet.getcustomer(),
+	        	Object[] temp ={tempPurBackSheet.getid(),tempPurBackSheet.getcustomer().getname(),
 	        			tempPurBackSheet.getstock(),tempPurBackSheet.getop(),
 	        			tempPurBackSheet.getwords(),tempPurBackSheet.getmoney1(),
 	        			tempPurBackSheet.getState()};
@@ -1221,9 +1221,7 @@ public class BusinessProcessPanel extends JPanel{
 			ArrayList<CustomerVO> customers = null;
 			customers = customerbl.getAllCustomer("Customer.txt");
 			for(int i=0;i<customers.size();i++){
-				if(customers.get(i).gettype()==0){
 					customerCombo.addItem(customers.get(i).getname()+":"+customers.get(i).getid());
-				}
 			}
     		Thread t=new Thread(new TreadOfLeft());
     		t.start();

@@ -86,12 +86,13 @@ public class PurSheet extends Bill implements GetVOandPO{
 				}
 				break;
 			case EXAMINED : 
+				
+				break;
+			case OVER     : 
 				for(CommodityVO tempvo:vo.getsheet()){
 					stockservice.checkIn(tempvo.getId(),  tempvo.getName(), tempvo.getModel(), tempvo.getNumber(), tempvo.getIn());
 				}
-				break;
-			case OVER     : 
-				System.out.println(this.getcustomer().getid());
+				//System.out.println(this.getcustomer().getid());
 				list.changeShouldPay(this.getcustomer().getid(), -vo.getmoney1());
 				break;
 		}

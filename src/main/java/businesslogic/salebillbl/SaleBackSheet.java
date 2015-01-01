@@ -91,11 +91,12 @@ public class SaleBackSheet extends Bill implements GetVOandPO{
 				}
 				break;
 			case EXAMINED : 
+				
+				break;
+			case OVER     : 
 				for(CommodityVO tempvo:vo.getsheet()){
 					stockservice.undoCheckIn(tempvo.getId(),  tempvo.getName(), tempvo.getModel(), tempvo.getNumber(), tempvo.getIn());
 				}
-				break;
-			case OVER     : 
 				list.changeShouldPay(this.getcustomer().getid(), -vo.getmoney1());
 				break;
 			

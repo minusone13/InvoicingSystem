@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import po.BillState;
 import businesslogic.commoditybillbl.StubAlertBill;
 import businesslogic.commoditybillbl.StubGiftBill;
 import businesslogic.commoditybillbl.StubSpillsLossBill;
@@ -23,7 +24,6 @@ import businesslogic.stockmanagerbl.StubStockController;
 import businesslogic.stockservice.StockBlForFinancial;
 import vo.*;
 import vo.financialBillVO.*;
-
 import vo.inquiryVO.*;
 
 public class Inquiry {
@@ -31,7 +31,7 @@ public class Inquiry {
 	
 	//得到销售明细表中的销售单
 	public ArrayList<SaleSheetVO> getSaleSaleSheet(InquirySaleVO isv) {
-		ArrayList<SaleSheet> saleSheet = bp.getSaleSheet();
+		ArrayList<SaleSheet> saleSheet = bp.getSaleSheet(BillState.OVER);
 		ArrayList<SaleSheetVO> saleSheetVO = new ArrayList<SaleSheetVO>();
 		
 		
@@ -89,7 +89,7 @@ public class Inquiry {
 	
 	//销售明细表的销售退货单
 	public ArrayList<SaleBackSheetVO> getSaleSaleBackSheet(InquirySaleVO isv) {
-		ArrayList<SaleBackSheet> saleBackSheet = bp.getSaleBackSheet();
+		ArrayList<SaleBackSheet> saleBackSheet = bp.getSaleBackSheet(BillState.OVER);
 		ArrayList<SaleBackSheetVO> saleBackSheetVO = new ArrayList<SaleBackSheetVO>();
 		
 		
@@ -332,7 +332,7 @@ public class Inquiry {
 			ArrayList<PurSheet> purSheet = bp.getPurSheet();
 			ArrayList<PurSheetVO> purSheetVO = new ArrayList<PurSheetVO>();
 			
-			int size = purSheet.size();			
+			int size = purSheet.size();	
 			for(int i=0;i<size;i++) {
 				PurSheet pur = purSheet.get(i);
 				
@@ -444,7 +444,6 @@ public class Inquiry {
 	public ArrayList<PaymentVO> getProcessPayment(InquiryProcessVO ipv) {
 		ArrayList<PaymentBill> payment = bp.getPaymentBill();
 		ArrayList<PaymentVO> paymentVO = new ArrayList<PaymentVO>();
-		
 			
 		int size = payment.size();
 		for(int i=0;i<size;i++) {
@@ -556,10 +555,10 @@ public class Inquiry {
 		bsVO.setCost(cost);
 		
 		//总收入
-		double totalEarn =  adjustmentTotal+spillsTotal+bonusTotal+saleTotal;
+		double totalEarn =   adjustmentTotal + spillsTotal+bonusTotal+saleTotal;
 		bsVO.setTotalEarn(totalEarn);
 		//总支出
-		double totalPay = cost+lossTotal;
+		double totalPay = giftTotal +cost+lossTotal;
 		bsVO.setTotalPay(totalPay);
 		//利润
 		double profit = totalEarn-totalPay;

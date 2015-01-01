@@ -225,7 +225,7 @@ public class SaleDetailPanel extends JPanel{
 				 double total =0 - commodity.getOut()*commodity.getNumber();
 				 Object[] temp ={vo.getdate(), commodity.getName(), commodity.getModel(), 
 						 0-commodity.getNumber(), commodity.getOut(), total};
-				 data[i] = temp;
+				 data[i+size1] = temp;
 			 }
 			 return data;
 		}	else {//如果没选商品名
@@ -245,7 +245,9 @@ public class SaleDetailPanel extends JPanel{
 				 len += sizeOfList;
 				 
 			}//for
+			
 			 Object[][] data = new Object[len][];
+			 int index=0;
 			 for(int i=0;i<size1;i++) {
 				 SaleSheetVO vo = saleSheet.get(i);
 				 ArrayList<CommodityVO> list = vo.getsheet();
@@ -257,7 +259,8 @@ public class SaleDetailPanel extends JPanel{
 					 double total = commodity.getOut()*commodity.getNumber();
 					 Object[] temp ={vo.getdate(), commodity.getName(), commodity.getModel(), 
 							 commodity.getNumber(), commodity.getOut(), total};
-					 data[i] = temp;
+					 data[index] = temp;
+					 index++;
 				 }
 				 
 			 }
@@ -271,7 +274,8 @@ public class SaleDetailPanel extends JPanel{
 					 double total =0 - commodity.getOut()*commodity.getNumber();
 					 Object[] temp ={vo.getdate(), commodity.getName(), commodity.getModel(), 
 							 0-commodity.getNumber(), commodity.getOut(), total};
-					 data[i] = temp;
+					 data[index] = temp;
+					 index++;
 				 }
 				 
 			 }
@@ -660,9 +664,7 @@ public class SaleDetailPanel extends JPanel{
 			ArrayList<CustomerVO> customers = null;
 			customers = customerbl.getAllCustomer("Customer.txt");
 			for(int i=0;i<customers.size();i++){
-				if(customers.get(i).gettype()==0){
 					customerCombo.addItem(customers.get(i).getname()+":"+customers.get(i).getid());
-				}
 			}
 			Thread t=new Thread(new TreadOfLeft());
 			t.start();

@@ -84,7 +84,10 @@ public class GiftBillVO extends VO
 	{
 		return billstyle;
 	}
-
+	public BillStyle getBillStyle()
+	{
+		return billstyle;
+	}
 	public void setBillstyle(BillStyle billstyle)
 	{
 		this.billstyle = billstyle;
